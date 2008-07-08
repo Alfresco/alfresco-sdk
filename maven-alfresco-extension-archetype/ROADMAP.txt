@@ -1,0 +1,32 @@
+#    Licensed to the Apache Software Foundation (ASF) under one or more
+#    contributor license agreements.  See the NOTICE file distributed with
+#    this work for additional information regarding copyright ownership.
+#    The ASF licenses this file to You under the Apache License, Version 2.0
+#    (the "License"); you may not use this file except in compliance with
+#    the License.  You may obtain a copy of the License at
+#    
+#    http://www.apache.org/licenses/LICENSE-2.0
+#    
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
+   
+ISSUES:
+-------
+- tools/mysql folder scripts are copied over the classpath (because of the filtering feature, shall we remove it?). It's harmless anyways apart from the potential secuity issues (BTW credentials are deployed non encrypted anyways in application.properties)
+- fix commented library versions
+ 
+
+TODO (in order of priority):
+-----
+- AMP archetype
+- make jetty:run-inplace work for easy runtime editing
+- translate other TXT files into APT for maven site generation (as done for README)
+- Integration testing with selenium
+- unit testing suite
+- Configure class/contexts reloading for jetty run
+- add multimodule support (and extract release/deploy policies to a super POM for usage also by AMP archetype)
+- add amp dependency mgmt or let steer alfresco for a jar artifact (jsp loading from jar or pre extracted?)
+- move archetype documentation in mvn site

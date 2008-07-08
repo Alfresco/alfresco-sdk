@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>alfresco-extension-archetype</name>
+	<comment>This archetype developed within Sourcesense aims to provide a standardized approach to development, release and deployment of 			
+	Alfresco extensions (as opposed to AMP builds, to be released as a different artifact ). 
+    Using standard m2 lifecycle commands (mvn compile package deploy) and generally available 	
+	plugins (cargo, release, assembly) we are able to cover a very high percentage of Alfresco lifecycle common use cases.
+	It can be used both with Maven2 and Ant build systems, but it must be clear that *only* the Maven2 approach provides all the automation features we will 
+	describe in this website. 
+	In addition to that the m2 approach provides a zero-conf approach while ant requires (as usual) manual gathering and selection of required alfresco 
+	libraries and webapp (please refer to README-ant.txt for further info about the Ant build). Last but not the least, m2 build is more likely to be maintained
+	and improved (especially in the likely case Alfresco moves to maven2). 
+	For more details on the m2 apprach please refer instead to README Section (or directly and to README-m2.txt of the generated project.</comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.maven.ide.eclipse.maven2Builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.maven.ide.eclipse.maven2Nature</nature>
+	</natures>
+</projectDescription>

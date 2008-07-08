@@ -1,0 +1,43 @@
+ -----
+ Maven Alfresco Extension Archetype
+ -----
+ Sourcesense
+ -----
+
+
+
+Welcome to the Maven Alfresco Extension Archetype home
+
+ You've reached the Sourcesense ({{ ${site_pom_url} }}) Maven Alfresco Extension archetype home page (version: ${site_pom_version}) 
+
+
+
+Description
+
+	${site_pom_description}
+
+
+
+Quick Start (maven2)
+
+ For a quick start you can a maven alfresco extension project created by just running  <<(maven 2.0.6+ required)>>:
+
+--------------------------------------------
+mvn  org.apache.maven.plugins:maven-archetype-plugin:1.0-alpha-7:create  -DarchetypeGroupId=${site_pom_groupId} -DarchetypeVersion=${site_pom_version} \
+			-DarchetypeArtifactId=${site_pom_artifactId} \
+			-DgroupId=mycompany.com  -DartifactId=my-alfresco-customization -Dversion=0.1-SNAPSHOT \
+			-DremoteRepositories=http://repository.sourcesense.com/maven2 \
+			-DpomRemoteRepositories=http://repository.sourcesense.com/maven2
+--------------------------------------------
+
+Quick Start (Ant)
+
+ For a quick start you can a ant alfresco extension project created by running <<(Default target : package)>> :
+
+--------------------------------------------
+Download archetype - (On unix like you could : wget http://repository.sourcesense.com/maven2/com/sourcesense/alfresco/maven-alfresco-extension-archetype/1.0.0/maven-alfresco-extension-archetype-1.0.0.jar)
+Unzip maven-alfresco-extension-archetype-1.0.0.jar
+Rename mv archetype-resources folder into your desired project name - (On unix like you could : mv archetype-resources my-alfresco-customization)
+Enter my-alfresco-customization folder
+ant 
+-------------------------------------------

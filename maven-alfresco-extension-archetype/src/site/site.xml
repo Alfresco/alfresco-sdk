@@ -1,0 +1,34 @@
+<project>
+	<skin>
+    	<groupId>org.apache.maven.skins</groupId>
+	    <artifactId>maven-stylus-skin</artifactId>
+	    <version>1.0</version>
+	</skin>
+	<poweredBy>
+	    <logo name="Maven" href="http://maven.apache.org" img="http://maven.apache.org/images/logos/maven-feather.png"/>
+	    <logo name="Alfresco - Open source ECM" img="http://alfresco.com/assets/images/icons/powered_by_alfresco.gif" href="http://www.sourcesense.com" /> 
+	</poweredBy>
+	<publishDate position="navigation-bottom" format="MM-dd-yy"/>
+  <bannerLeft>
+    <name>Maven alfresco archetype - v. ${project.version}</name>
+    <href>${site_site_url}</href>
+    <src>images/logo_noclaim.png</src>
+  </bannerLeft>
+  <body>
+    <links>
+      <item name="Maven" href="http://maven.apache.org/"/>
+      <item name="Apache" href="http://www.apache.org/"/>
+    </links>
+
+    <menu name="M2 Alfresco Extension Archetype">
+	  <item name="Introduction" href="/index.html"/>
+	  <item name="README" href="/readme.html"/>
+      <item name="M2 Usage Guide" href="http://forge.alfresco.com/docman/view.php/90/1643/README-m2.txt"/>
+      <item name="Ant Usage Guide" href="http://forge.alfresco.com/docman/view.php/90/1644/README-ANT.txt"/>
+      <item name="Roadmap" href="http://forge.alfresco.com/docman/view.php/90/1645/ROADMAP.txt"/>
+	  <item name="FAQ" href="faq.html"/>
+    </menu>
+    <menu ref="reports"/>
+
+  </body>
+</project>

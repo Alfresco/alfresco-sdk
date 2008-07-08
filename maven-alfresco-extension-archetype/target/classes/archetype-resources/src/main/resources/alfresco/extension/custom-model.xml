@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+    
+    http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+    
+-->
+<!-- Custom Model -->
+
+<!-- Note: This model is pre-confissred to load at startup of the Repository.  So, all custom -->
+<!--       types and aspects added here will automatically be registered -->
+<model name="ss:customModel" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+	<!-- Optional meta-data about the model -->
+	<description>Custom Alfresco model</description>
+	<author>Sourcesense</author>
+	<version>1.0</version>
+
+	<imports>
+		<!-- Import Alfresco Dictionary Definitions -->
+		<import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+		<!-- Import Alfresco Content Domain Model Definitions -->
+		<import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+	</imports>
+
+	<!-- Introduction of new namespaces defined by this model -->
+	<!-- NOTE: The following namespace custom.model should be changed to reflect your own namespace -->
+	<namespaces>
+		<namespace uri="http://www.sourcesense.com/model/1.0" prefix="ss"/>
+	</namespaces>
+
+	<constraints>
+		<constraint name="ss:documentTypes" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value>Select a Document type...</value>
+					<value>Brief</value>
+					<value>E-mail</value>
+					<value>Fax</value>
+					<value>E-Form</value>
+				</list>
+			</parameter>
+		</constraint>
+		<constraint name="ss:statuses" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value>Select a status...</value>
+					<value>New</value>
+					<value>Draft</value>
+					<value>Proposal</value>
+					<value>Approved</value>
+					<value>Public</value>
+				</list>
+			</parameter>
+		</constraint>
+		<constraint name="ss:stringLength6" type="LENGTH">
+			<parameter name="minLength">
+				<value>0</value>
+			</parameter>
+			<parameter name="maxLength">
+				<value>6</value>
+			</parameter>
+		</constraint>
+		<constraint name="ss:stringLength30" type="LENGTH">
+			<parameter name="minLength">
+				<value>0</value>
+			</parameter>
+			<parameter name="maxLength">
+				<value>20</value>
+			</parameter>
+		</constraint>
+	</constraints>
+
+	<types>
+	
+		<!-- Incoming documents -->
+		<type name="ss:incoming">
+			<title>Incoming document</title>
+			<parent>cm:content</parent>
+			<properties>
+				<property name="ss:documentType">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<constraints>
+						<constraint ref="ss:documentTypes" />
+					</constraints>
+				</property>
+				<property name="ss:scanId">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint ref="ss:stringLength30" />
+					</constraints>
+				</property>
+				<property name="ss:status">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default>New</default>
+					<constraints>
+						<constraint ref="ss:statuses" />
+					</constraints>
+				</property>
+			</properties>
+			<mandatory-aspects>
+				<aspect>cm:dublincore</aspect>
+				<aspect>cm:versionable</aspect>
+				<aspect>ss:sendable</aspect>
+			</mandatory-aspects>
+		</type>
+		
+	</types>
+
+	<aspects>
+		
+		<aspect name="ss:sendable">
+			<properties>
+				<property name="ss:dateSent">
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="ss:senderName">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint ref="ss:stringLength30" />
+					</constraints>
+				</property>
+				<property name="ss:senderBsn">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint ref="ss:stringLength30" />
+					</constraints>
+				</property>
+				<property name="ss:senderAddress">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint ref="ss:stringLength30" />
+					</constraints>
+				</property>
+				<property name="ss:senderZipcode">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint ref="ss:stringLength6" />
+					</constraints>
+				</property>
+				<property name="ss:senderCity">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint ref="ss:stringLength30" />
+					</constraints>
+				</property>
+			</properties>
+		</aspect>
+
+
+	</aspects>
+
+</model>

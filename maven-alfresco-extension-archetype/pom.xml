@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Licensed to the Apache Software Foundation (ASF) under one or more
+	contributor license agreements.  See the NOTICE file distributed with
+	this work for additional information regarding copyright ownership.
+	The ASF licenses this file to You under the Apache License, Version 2.0
+	(the "License"); you may not use this file except in compliance with
+	the License.  You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+	
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sourcesense.alfresco</groupId>
+	<artifactId>maven-alfresco-extension-archetype</artifactId>
+	<version>1.0.0</version>
+	<packaging>maven-archetype</packaging>
+	<name>Maven alfresco Extension archetype</name>
+	<url>${site.url}</url>
+	<issueManagement>
+		<system>Jira</system>
+		<url>https://dev.sourcesense.com/jira/secure/BrowseProject.jspa?id=10130</url>
+	</issueManagement>
+	<organization>
+		<name>Sourcesense</name>
+		<url>http://www.sourcesense.com</url>
+	</organization>
+	<description>
+		This archetype developed within Sourcesense aims to provide a standardized approach to development, release and deployment of Alfresco extensions (as opposed to AMP builds, to be released as a different artifact ). 
+		Using standard m2 lifecycle commands (mvn compile package deploy) and generally available plugins (cargo, release, assembly) 
+		we are able to cover a very high percentage of Alfresco lifecycle common use cases. 
+		It can be used both with Maven2 and Ant build systems, but it must be clear that *only* the Maven2 approach provides all the
+		automation features we will describe in this website. 
+		In addition to that the m2 approach provides a zero-conf approach while ant requires (as usual) manual gathering and 
+		selection of required alfresco libraries and webapp (please refer to README-ant.txt for further info about the Ant
+		build). 
+		Last but not the least, m2 build is more likely to be maintained and improved (especially in the likely case Alfresco moves to
+		maven2). For more details on the m2 apprach please refer instead to README Section (or directly and to README-m2.txt of the generated project).
+	</description>
+	<properties>
+		<svn.url>https://dev.sourcesense.com/repos/dev/whiteboard/maven-alfresco-extension-archetype</svn.url>
+		<svn.tags.url>${svn.url}/tags</svn.tags.url>
+		<site.url>https://repository.sourcesense.com/maven2-sites/${pom.artifactId}-${pom.version}</site.url>
+		<!-- These redundancies are due to filtering issues of Maven. See here http://maven.apache.org/plugins/maven-site-plugin/usage.html -->
+		<site_pom_description>${pom.description}</site_pom_description>
+		<site_pom_url>${pom.organization.url}</site_pom_url>
+		<site_pom_groupId>${pom.groupId}</site_pom_groupId>
+		<site_pom_artifactId>${pom.artifactId}</site_pom_artifactId>
+		<site_pom_version>${pom.version}</site_pom_version>
+		<site_tags_url>${svn.tags.url}</site_tags_url>
+		<site_site_url>${site.url}</site_site_url>
+	</properties>
+	<repositories>
+		<repository>
+			<id>ss-public</id>
+			<url>http://repository.sourcesense.com/maven2</url>
+		</repository>
+		<!-- Enable in case of apache snapshot deps -->
+		<repository>
+			<id>snapshots.apache</id>
+			<url>http://people.apache.org/repo/m2-snapshot-repository</url>
+			<snapshots>
+				<enabled />
+				<updatePolicy>daily</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+	<scm>
+		<developerConnection>scm:svn:https://dev.sourcesense.com/repos/dev/whiteboard/maven-alfresco-extension-archetype/trunk</developerConnection>
+		<url>https://dev.sourcesense.com/repos/dev/whiteboard/maven-alfresco-extension-archetype/trunk</url>
+	</scm>
+	<developers>
+		<developer>
+			<id>g.columbro</id>
+			<name>Gabriele Columbro</name>
+			<email>g.columbro@sourcesense.com</email>
+			<roles>
+				<role>Alfresco Architect</role>
+				<role>Developer</role>
+			</roles>
+			<organization>Sourcesense</organization>
+			<organizationUrl>http://www.sourcesense.com</organizationUrl>
+		</developer>
+	</developers>
+	<mailingLists>
+		<mailingList>
+			<name>Sourcesense Alfresco Dev Mailing list</name>
+			<subscribe>alfresco-dev-subscribe@lists.sourcesense.com</subscribe>
+			<unsubscribe>alfresco-dev-unsubscribe@lists.sourcesense.com</unsubscribe>
+			<post>alfresco-dev@lists.sourcesense.com</post>
+			<!-- We need an archive!!! -->
+			<!--<archive>http://mail-archives.wakaleo.com/modmbox/dev/</archive>-->
+		</mailingList>
+	</mailingLists>
+	<build>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.archetype</groupId>
+				<artifactId>archetype-packaging</artifactId>
+				<version>2.0-alpha-2</version>
+			</extension>
+			<!-- Unreleased version of webdav wagon plugin which fixes a boring stacktrace logging from this provider. 
+				FIXME: Improve the fix and submit the patch 
+			-->
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav</artifactId>
+				<version>1.0-beta-3</version>
+			</extension>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh</artifactId>
+			</extension>
+		</extensions>
+		<plugins>
+		<!-- 
+			|
+			| TODO: Integrate mvn-gforge-plugin to release in gforge in the release process.
+			| 		See here http://wiki.evolvis.org/mvn-gf-plugin/index.php/Main_Page for more info
+			
+			<plugin>
+			<groupId>de.tarent.maven.plugins</groupId>
+			<artifactId>mvn-gforge-plugin</artifactId>
+			<configuration>
+			<gForgeAPIPort_address>http://evolvis.org/soap/index.php</gForgeAPIPort_address>
+			<fileTypes>
+			<type>javadoc</type>
+			<type>sources</type>
+			</fileTypes>
+			<processorType>i386</processorType>
+			</configuration>
+			</plugin>
+		-->
+		<plugin>
+			<artifactId>maven-archetype-plugin</artifactId>
+			<extensions>true</extensions>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-release-plugin</artifactId>
+			<configuration>
+				<!-- useEditMode>true</useEditMode>-->
+				<!--  dryRun>true</dryRun-->
+				<preparationGoals>clean package</preparationGoals>
+				<goals>deploy site:site site:deploy</goals>
+				<tagBase>${svn.tags.url}</tagBase>
+			</configuration>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-changes-plugin</artifactId>
+			<executions>
+				<execution>
+					<goals>
+						<goal>announcement-generate</goal>
+					</goals>
+					<id>announcement-generate</id>
+				</execution>
+				<execution>
+					<goals>
+						<goal>announcement-mail</goal>
+					</goals>
+					<id>announcement-mail</id>
+				</execution>
+				<execution>
+					<goals>
+						<goal>jira-report</goal>
+					</goals>
+					<id>jira-report</id>
+				</execution>
+			</executions>
+			<!--  Automatically notifies the list when release is done. Please supply username and password in the command line -->
+			<configuration>
+				<smtpHost>mail.sourcesense.com</smtpHost>
+				<smtpPort implementation="java.lang.Integer">25</smtpPort>
+				<toAddresses>
+					<toAddress implementation="java.lang.String">sysadmin@sourcesense.com</toAddress>
+					<toAddress implementation="java.lang.String">alfresco@sourcesense.com</toAddress>
+					<toAddress implementation="java.lang.String">g.columbro@sourcesense.com</toAddress>
+				</toAddresses>
+				<username>${smtp.username}</username>
+				<password>${smtp.password}</password>
+				<fromDeveloperId>g.columbro</fromDeveloperId>
+			</configuration>
+		</plugin>
+		</plugins>
+	</build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-javadoc-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jxr-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-clover-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-changes-plugin</artifactId>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>changes-report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>changelog-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>taglist-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>

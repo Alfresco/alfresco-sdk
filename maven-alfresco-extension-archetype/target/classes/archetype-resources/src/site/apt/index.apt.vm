@@ -1,0 +1,45 @@
+ -----
+ Maven Alfresco Extension Manual
+ -----
+ Sourcesense
+ -----
+
+
+
+Welcome to the Maven Alfresco Extension Archetype manual
+
+ You've reached the Sourcesense Maven Alfresco Extension archetype home page (version: ${site_pom_version}) . 
+
+
+
+Description
+
+	${site_pom_description}
+
+
+Full documentation
+
+	You can also download the full application manual {{{books/pdf/manual/manual.pdf} PDF}} or {{{books/rtf/manual/manual.rtf} RTF}} format.
+
+
+Quick Start (maven2)
+
+ For a quick start you can a run alfresco extension project by just running  <<(maven 2.0.6+ required)>>:
+
+--------------------------------------------
+
+mvn jetty:run-exploded
+
+--------------------------------------------
+
+Quick Start (Ant)
+
+ For a quick start you can package alfresco by running <<(Default target : package)>> :
+
+--------------------------------------------
+ant 
+--------------------------------------------
+
+
+
+
