@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Licensed to the Apache Software Foundation (ASF) under one or more
+	contributor license agreements.  See the NOTICE file distributed with
+	this work for additional information regarding copyright ownership.
+	The ASF licenses this file to You under the Apache License, Version 2.0
+	(the "License"); you may not use this file except in compliance with
+	the License.  You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+	
+-->
+<archetype>
+  <id>maven-alfresco-amp-archetype</id>
+  <sources>
+    <source>src/main/java/Demo.java</source>
+    <source>src/main/java/DemoComponent.java</source>
+  </sources>
+  <resources>
+    <resource>src/main/resources/alfresco/module/org.alfresco.module.demoamp/context/service-context.xml</resource>
+    <resource>src/main/resources/alfresco/module/org.alfresco.module.demoamp/log4j.properties</resource>
+    <resource>src/main/resources/alfresco/module/org.alfresco.module.demoamp/module-context.xml</resource>
+    <resource>src/main/webapp/css/demoamp.css</resource>
+    <resource>src/main/webapp/images/sourcesense.gif</resource>
+    <resource>src/main/webapp/jsp/demoamp.jsp</resource>
+    <resource>src/main/webapp/licenses/README-licenses.txt</resource>
+    <resource>src/main/webapp/scripts/demoamp.js</resource>
+    <resource>module.properties</resource>
+    <resource>README.txt</resource>
+    <resource>TODO.txt</resource>
+  </resources>
+  <testResources>
+    <resource>src/test/properties/local/application.properties</resource>
+    <resource>src/test/resources/alfresco/extension/custom-repository-context.xml</resource>
+    <resource>src/test/resources/alfresco/extension/file-servers-custom.xml</resource>
+    <resource>src/test/resources/log4j.properties</resource>
+  </testResources>
+</archetype>
