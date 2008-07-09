@@ -2,13 +2,195 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sourcesense.alfresco</groupId>
-	<artifactId>Maven Alfresco Archetypes support</artifactId>
+	<artifactId>maven-alfresco-archetypes</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>maven-alfresco-archetypes</name>
-	<url>http://maven.apache.org</url>
+	<name>Maven Alfresco Archetypes base project</name>
+	<url>${site.url}</url>
+	<issueManagement>
+		<system>Google Code</system>
+		<url>http://code.google.com/p/maven-alfresco-archetypes/issues/list</url>
+	</issueManagement>
+	<organization>
+		<name>Sourcesense</name>
+		<url>http://www.sourcesense.com</url>
+	</organization>
 	<modules>
 		<module>../maven-alfresco-amp-archetype</module>
 		<module>../maven-alfresco-extension-archetype</module>
-	</modules> 
+	</modules>
+	<properties>
+		<svn.base.url>https://maven-alfresco-archetypes.googlecode.com/svn</svn.base.url>
+		<svn.url>${svn.base.url}/trunk/${artifactId}</svn.url>
+		<svn.tags.url>${svn.base.url}/tags</svn.tags.url>
+		<site.url>https://repository.sourcesense.com/maven2-sites/${pom.artifactId}-${pom.version}</site.url>
+		<!-- These redundancies are due to filtering issues of Maven. See here http://maven.apache.org/plugins/maven-site-plugin/usage.html -->
+		<site_pom_description>${pom.description}</site_pom_description>
+		<site_pom_url>${pom.organization.url}</site_pom_url>
+		<site_pom_groupId>${pom.groupId}</site_pom_groupId>
+		<site_pom_artifactId>${pom.artifactId}</site_pom_artifactId>
+		<site_pom_version>${pom.version}</site_pom_version>
+		<site_tags_url>${svn.tags.url}</site_tags_url>
+		<site_site_url>${site.url}</site_site_url>
+	</properties>
+	<scm>
+		<developerConnection>scm:svn:${svn.url}</developerConnection>
+		<url>${svn.url}</url>
+	</scm>
+	<repositories>
+		<repository>
+			<id>ss-public</id>
+			<url>http://repository.sourcesense.com/maven2</url>
+		</repository>
+		<!-- Enable in case of apache snapshot deps -->
+		<repository>
+			<id>snapshots.apache</id>
+			<url>http://people.apache.org/repo/m2-snapshot-repository</url>
+			<snapshots>
+				<enabled />
+				<updatePolicy>daily</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+	<developers>
+		<developer>
+			<id>g.columbro</id>
+			<name>Gabriele Columbro</name>
+			<email>g.columbro@sourcesense.com</email>
+			<roles>
+				<role>Alfresco Architect</role>
+				<role>Developer</role>
+			</roles>
+			<organization>Sourcesense</organization>
+			<organizationUrl>http://www.sourcesense.com</organizationUrl>
+		</developer>
+	</developers>
+	<mailingLists>
+		<mailingList>
+			<name>Sourcesense Alfresco Dev Mailing list</name>
+			<subscribe>alfresco-dev-subscribe@lists.sourcesense.com</subscribe>
+			<unsubscribe>alfresco-dev-unsubscribe@lists.sourcesense.com</unsubscribe>
+			<post>alfresco-dev@lists.sourcesense.com</post>
+			<!-- We need an archive!!! -->
+			<!--<archive>http://mail-archives.wakaleo.com/modmbox/dev/</archive>-->
+		</mailingList>
+	</mailingLists>
+	<build>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav</artifactId>
+				<version>1.0-beta-3</version>
+			</extension>
+		</extensions>
+		<plugins>
+			<plugin>
+				<artifactId>maven-archetype-plugin</artifactId>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-changes-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>announcement-generate</goal>
+						</goals>
+						<id>announcement-generate</id>
+					</execution>
+					<execution>
+						<goals>
+							<goal>announcement-mail</goal>
+						</goals>
+						<id>announcement-mail</id>
+					</execution>
+					<execution>
+						<goals>
+							<goal>jira-report</goal>
+						</goals>
+						<id>jira-report</id>
+					</execution>
+				</executions>
+				<!--  Automatically notifies the list when release is done. Please supply username and password in the command line -->
+				<configuration>
+					<smtpHost>mail.sourcesense.com</smtpHost>
+					<smtpPort implementation="java.lang.Integer">25</smtpPort>
+					<toAddresses>
+						<!-- <toAddress implementation="java.lang.String">sysadmin@sourcesense.com</toAddress>
+							<toAddress implementation="java.lang.String">alfresco@sourcesense.com</toAddress>-->
+						<toAddress implementation="java.lang.String">g.columbro@sourcesense.com</toAddress>
+					</toAddresses>
+					<username>${smtp.username}</username>
+					<password>${smtp.password}</password>
+					<fromDeveloperId>g.columbro</fromDeveloperId>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<!-- useEditMode>true</useEditMode>-->
+					<!--  dryRun>true</dryRun-->
+					<preparationGoals>clean package</preparationGoals>
+					<goals>deploy site:site site:deploy</goals>
+					<tagBase>${svn.tags.url}</tagBase>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<!-- useEditMode>true</useEditMode>-->
+					<dryRun>true</dryRun>
+					<preparationGoals>clean package</preparationGoals>
+					<goals>deploy site:site site:deploy</goals>
+					<tagBase>${svn.tags.url}</tagBase>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-javadoc-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jxr-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-clover-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-changes-plugin</artifactId>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>changes-report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>changelog-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>taglist-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</reporting>
+
 </project>
