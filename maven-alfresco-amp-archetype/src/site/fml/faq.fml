@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<faqs id="Maven Alfresco Extension FAQ">
+	<part id="General">
+		<title>General</title>
+		<faq id="build">
+			<question>How do I build an AMP?</question>
+			<answer>
+			<p>
+				Just Run <verbatim> mvn clean package </verbatim>
+			</p>
+			</answer>
+		</faq>
+		<faq id="test">
+			<question>How do I test the AMP?</question>
+			<answer>
+				<p>
+					You can run Jetty embedded in maven by typing
+					<verbatim>mvn clean integration-test -P webapp</verbatim>
+				</p>
+			</answer>
+		</faq>
+		<faq id="transitive">
+			<question>Are AMP transitive dependencies supported?</question>
+			<answer>
+				<p>
+					Yes, they are, both from AMP and WAR packaging projects.
+					For AMP projects this  will turn out into having a final built AMP
+					which contains all the chain of AMPs the current AMP is depending upon.
+					For WAR projects all AMPs will be unpacked in the proper position
+					same as the MMT would do.
+				</p>
+			</answer>
+		</faq>
+		<faq id="mmt">
+			<question>Is MMT needed with maven?</question>
+			<answer>
+				<p>
+					No, it is not. The whole point of it is getting rid of the annoying
+					non integrated in the lifecycle MMT run.
+					We created the <a href="https://forge.alfresco.com/projects/maven4alfresco" target="_blank" >maven-amp-plugin</a> for 
+					managing and processing AMP lifecycle, making MMT obsolete.
+				</p>
+			</answer>
+		</faq>
+	</part>
+</faqs>
