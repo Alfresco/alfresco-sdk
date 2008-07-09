@@ -1,0 +1,33 @@
+{\rtf1\ansi\ansicpg1252
+\deff0{\fonttbl{\f0\froman\fcharset0 Times New Roman;}{\f1\fswiss\fcharset0 Arial;}{\f2\froman\fcharset2 Symbol;}}
+{\colortbl\red0\green0\blue0;\red255\green255\blue255;\red255\green0\blue0;}
+{\*\listtable
+{\list\listtemplateid247428345\hybrid
+{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelstartat1{\leveltext\'01\u-3913 ?;}{\levelnumbers;}\f2\fi0\li300\ri0\tx300}
+\listid658159304}
+}
+{\*\listoverridetable
+{\listoverride\listid658159304\listoverridecount0\ls1}
+}
+{\info{\operator iText by lowagie.com}{\creationdate \yr2008\mo3\dy1\hr19\min0\sec8}{\operator Doxia iText}{\creationdate \yr2008\mo3\dy1\hr19\min0\sec8}}
+\paperw11907\paperh16840\margl720\margr720\margt720\margb720
+{\footer }{\header }\pgwsxn11907\pghsxn16840\sectd{\footer }{\header }\pgwsxn11907\pghsxn16840\pard\li0\ri0\f1\fs48\cf2 1. \f1\fs48\cf2 Introduction\par\par\pard\li0\ri0\f1\fs44\cf0 1. \f1\fs44\cf0 Introduction \par\par\f0\fs20\cf0 \par \pard\li0\ri0\f0\fs20\cf0 \par \f1\fs20\cf0 Welcome to the Maven Alfresco Extension Archetype manual \par\par\pard\li0\ri0\f1\fs44\cf0 2. \f1\fs44\cf0 How to edit this manual \par\par\f0\fs20\cf0 \par \pard\li0\ri0\f0\fs20\cf0 \par \f1\fs20\cf0 This page is generated from $PROJECT_HOME/src/site/book-index.apt file. \f0\fs20\cf0 \par \f1\fs20\cf0 Book sections and chapters can be edited in the $PROJECT_HOME/src/site/manual.xml file. \f0\fs20\cf0 \par \f1\fs20\cf0 While related POM configuration snippet follows>\par\f1\fs20\cf0 \par\trowd
+\trftsWidth3\trwWidth10400\trkeep\trqc\trgaph10\trbrdrl\brdrs\brdrw20\brdrcf0
+\trbrdrt\brdrs\brdrw20\brdrcf0
+\trbrdrb\brdrs\brdrw20\brdrcf0
+\trbrdrr\brdrs\brdrw20\brdrcf0
+\trbrdrh\brdrs\brdrw20\brdrcf0
+\trbrdrv\brdrs\brdrw20\brdrcf0
+\trpaddl100\trpaddr100\trpaddfl3\trpaddfr3
+\clbrdrl\brdrs\brdrw10\brdrcf0
+\clbrdrt\brdrs\brdrw10\brdrcf0
+\clbrdrb\brdrs\brdrw10\brdrcf0
+\clbrdrr\brdrs\brdrw10\brdrcf0
+\clcbpat1
+\clftsWidth3
+\clwWidth10400
+\clpadl100\clpadt100\clpadr100\clpadb100\clpadfl3\clpadft3\clpadfr3\clpadfb3\cellx10400\intbl\pard\intbl\li0\ri0\f0\fs20\cf0 \par \f1\fs20\cf0  <!-- Adds support for books PDF and RTF generation for single sourced documentation -->\f0\fs20\cf0 \par \f1\fs20\cf0  <plugin>\f0\fs20\cf0 \par \f1\fs20\cf0          <groupId>org.apache.maven.doxia</groupId>\f0\fs20\cf0 \par \f1\fs20\cf0          <artifactId>doxia-maven-plugin</artifactId>\f0\fs20\cf0 \par \f1\fs20\cf0          <version>1.0-alpha-10</version>\f0\fs20\cf0 \par \f1\fs20\cf0          <executions>\f0\fs20\cf0 \par \f1\fs20\cf0                  <execution>\f0\fs20\cf0 \par \f1\fs20\cf0                          <phase>pre-site</phase>\f0\fs20\cf0 \par \f1\fs20\cf0                          <goals>\f0\fs20\cf0 \par \f1\fs20\cf0                                  <goal>render-books</goal>\f0\fs20\cf0 \par \f1\fs20\cf0                          </goals>\f0\fs20\cf0 \par \f1\fs20\cf0                  </execution>\f0\fs20\cf0 \par \f1\fs20\cf0          </executions>\f0\fs20\cf0 \par \f1\fs20\cf0          <configuration>\f0\fs20\cf0 \par \f1\fs20\cf0                  <!-- \f0\fs20\cf0 \par \f1\fs20\cf0                          \u124? Target books dir: within the site so it can be linked and deployed\f0\fs20\cf0 \par \f1\fs20\cf0                          \u124? TODO: Use $\u123?pom.target.dir\u125? or so similar property instead of \f0\fs20\cf0 \par \f1\fs20\cf0                          \u124?               hard wiring 'target'\f0\fs20\cf0 \par \f1\fs20\cf0                   -->\f0\fs20\cf0 \par \f1\fs20\cf0                  <generatedDocs>target/site/books</generatedDocs>\f0\fs20\cf0 \par \f1\fs20\cf0                  <books>\f0\fs20\cf0 \par \f1\fs20\cf0                          <book>\f0\fs20\cf0 \par \f1\fs20\cf0                                  <directory>src/site</directory>\f0\fs20\cf0 \par \f1\fs20\cf0                                  <descriptor>src/books/manual.xml</descriptor>\f0\fs20\cf0 \par \f1\fs20\cf0                                  <formats>\f0\fs20\cf0 \par \f1\fs20\cf0                                          <format>\f0\fs20\cf0 \par \f1\fs20\cf0                                                  <id>xdoc</id>\f0\fs20\cf0 \par \f1\fs20\cf0                                          </format>\f0\fs20\cf0 \par \f1\fs20\cf0                                          <format>\f0\fs20\cf0 \par \f1\fs20\cf0                                                  <id>pdf</id>\f0\fs20\cf0 \par \f1\fs20\cf0                                          </format>\f0\fs20\cf0 \par \f1\fs20\cf0                                          <format>\f0\fs20\cf0 \par \f1\fs20\cf0                                                  <id>rtf</id>\f0\fs20\cf0 \par \f1\fs20\cf0                                          </format>\f0\fs20\cf0 \par \f1\fs20\cf0                                  </formats>\f0\fs20\cf0 \par \f1\fs20\cf0                          </book>\f0\fs20\cf0 \par \f1\fs20\cf0                  </books>\f0\fs20\cf0 \par \f1\fs20\cf0          </configuration>\f0\fs20\cf0 \par \f1\fs20\cf0  </plugin>\f0\fs20\cf0 \par \cell \row
+\pard\par\qc\par\pard\li0\ri0\f1\fs44\cf0 3. \f1\fs44\cf0 Limitations \par\par\f0\fs20\cf0 \par \f1\fs20\cf0 \pard\ql\fi0\li300\ri0\fs20\ls1{{\listtext\pard\f2\fi0\li300\ri0 \'b7\tab}\f1\fs20\cf0 Book sections are matched on id, so a file named section.* must be found at any depth level withing the folder specified in the POM as book folder \par
+{\listtext\pard\f2\fi0\li300\ri0 \'b7\tab}\f1\fs20\cf0 Books cannot use property filtering \par
+{\listtext\pard\f2\fi0\li300\ri0 \'b7\tab}\f1\fs20\cf0 Books cannot use .vm files as filename cannot be specified, so this makes only static (no filtering needed) APT/XDOC/FML pages usable for both site and manual in a single sourcing fashion \par
+}\pard\par\sect}

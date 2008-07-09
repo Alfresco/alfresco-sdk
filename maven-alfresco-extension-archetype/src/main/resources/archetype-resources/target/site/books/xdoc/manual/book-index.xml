@@ -1,0 +1,93 @@
+<?xml version="1.0" ?>
+<document>
+<properties>
+<title>Maven Alfresco Extension Manual</title>
+<author>Sourcesense</author>
+</properties>
+<body>
+<!--Navigation Panel-->
+<table width="100%" align="center">
+<tr>
+<td><div align='left'>Previous: <a href='introduction.html'>Introduction</a></div></td>
+<td><div align='center'>Up: <a href='introduction.html'>Introduction</a></div></td>
+<td><div align='right'><i>End of book</i></div></td>
+</tr>
+</table>
+<!--End of Navigation Panel-->
+<hr />
+<section name="Introduction"><p>Welcome to the Maven Alfresco Extension
+Archetype manual</p>
+</section>
+<section name="How to edit this manual"><p>This page is generated from
+<tt>$PROJECT_HOME/src/site/book-index.apt</tt>
+file. <br />
+Book sections and chapters can be edited in the
+<tt>$PROJECT_HOME/src/site/manual.xml</tt>
+file. <br />
+While related POM configuration snippet follows&gt;</p>
+<source>
+&lt;!-- Adds support for books PDF and RTF generation for single sourced documentation --&gt;
+&lt;plugin&gt;
+        &lt;groupId&gt;org.apache.maven.doxia&lt;/groupId&gt;
+        &lt;artifactId&gt;doxia-maven-plugin&lt;/artifactId&gt;
+        &lt;version&gt;1.0-alpha-10&lt;/version&gt;
+        &lt;executions&gt;
+                &lt;execution&gt;
+                        &lt;phase&gt;pre-site&lt;/phase&gt;
+                        &lt;goals&gt;
+                                &lt;goal&gt;render-books&lt;/goal&gt;
+                        &lt;/goals&gt;
+                &lt;/execution&gt;
+        &lt;/executions&gt;
+        &lt;configuration&gt;
+                &lt;!-- 
+                        | Target books dir: within the site so it can be linked and deployed
+                        | TODO: Use ${pom.target.dir} or so similar property instead of 
+                        |               hard wiring 'target'
+                         --&gt;
+                &lt;generatedDocs&gt;target/site/books&lt;/generatedDocs&gt;
+                &lt;books&gt;
+                        &lt;book&gt;
+                                &lt;directory&gt;src/site&lt;/directory&gt;
+                                &lt;descriptor&gt;src/books/manual.xml&lt;/descriptor&gt;
+                                &lt;formats&gt;
+                                        &lt;format&gt;
+                                                &lt;id&gt;xdoc&lt;/id&gt;
+                                        &lt;/format&gt;
+                                        &lt;format&gt;
+                                                &lt;id&gt;pdf&lt;/id&gt;
+                                        &lt;/format&gt;
+                                        &lt;format&gt;
+                                                &lt;id&gt;rtf&lt;/id&gt;
+                                        &lt;/format&gt;
+                                &lt;/formats&gt;
+                        &lt;/book&gt;
+                &lt;/books&gt;
+        &lt;/configuration&gt;
+&lt;/plugin&gt;
+</source>
+</section>
+<section name="Limitations"><ul><li><p>Book sections are matched on id, so a
+file named section.* must be found at any depth level withing the folder
+specified in the POM as book folder</p>
+</li>
+<li><p>Books cannot use property filtering</p>
+</li>
+<li><p>Books cannot use .vm files as filename cannot be specified, so this
+makes only static (no filtering needed) APT/XDOC/FML pages usable for both
+site and manual in a single sourcing fashion</p>
+</li>
+</ul>
+</section>
+<hr />
+<!--Navigation Panel-->
+<table width="100%" align="center">
+<tr>
+<td><div align='left'>Previous: <a href='introduction.html'>Introduction</a></div></td>
+<td><div align='center'>Up: <a href='introduction.html'>Introduction</a></div></td>
+<td><div align='right'><i>End of book</i></div></td>
+</tr>
+</table>
+<!--End of Navigation Panel-->
+</body>
+</document>

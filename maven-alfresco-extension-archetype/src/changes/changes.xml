@@ -1,0 +1,13 @@
+<document>
+  <properties>
+    <title>Maven Alfresco AMP archetype</title>
+    <author email="g.columbro@sourcesense.com">Gabriele Columbro</author>
+  </properties>
+  <body>
+    <release version="1.0.0" date="2008-07-06" description="Public release">
+      <action dev="g.columbro" type="add">
+		Added full AMP lifecycle management
+      </action>
+    </release>
+  </body>
+</document>

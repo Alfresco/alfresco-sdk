@@ -1,0 +1,119 @@
+Maven-alfresco-archetype references
+-----------------------------------
+
+
+AMP Packaging - http://forge.alfresco.com/forum/forum.php?thread_id=662&forum_id=310
+
+Documentation site - http://repository.sourcesense.com/maven2-sites/maven-alfresco-extension-archetype-1.0.0/
+
+Library conventions - http://forums.alfresco.com/viewtopic.php?f=10&t=1017&p=39172#p39172
+
+Maven repositories - http://forums.alfresco.com/viewtopic.php?f=12&t=10210&p=39175#p39175
+
+Running outside a container - http://forums.alfresco.com/viewtopic.php?f=4&t=9317&p=39176#p39176
+
+Maven4alfresco - http://forums.alfresco.com/viewtopic.php?f=32&t=9268&p=39179#p39179
+
+Maven for building Alfresco - http://forums.alfresco.com/viewtopic.php?f=14&t=7619&p=39188#p39188
+
+Release gforge page - http://forge.alfresco.com/frs/?group_id=90
+
+
+
+
+
+Forum post - Maven for building Alfresco
+---------------------------
+
+Hi all, a bit delayed but wanted to leave my 2 cents on this *very interesting* topic.
+
+I believe that independently from the technology that is used, which hardly depends upon the context you plan to adopt and deploy Alfresco in,
+using Maven2 can be far more useful in structured enterprise environments where some of the mentioned requirements (strict dependency management and versioning or releasing policies / ownerships) which Ant is certainly the low key entry point for a test drive / evaluation or for very simple customizations for which maven would be overkill.
+
+ATM, as no real news have happened in one year on the Alfresco side on the mavenization of the Alfresco sources,
+we proceeded (in Sourcesense, http://www.sourcesense.com, alfresco partner) in using maven to build and customize Alfresco at our clients, typically big and potentially intricate enterprise environments.
+
+To be clear: we use maven ATM to build alfresco extensions (in the future also AMP should be supported) and that does not mandatorily mean that Alfresco itself should build with maven, even if how it works now (basically a maven-webapp-archetype with a war dependency on the alfresco war) is not completely neat as it flattens the whole transitive dependency resolving magic of m2.
+
+The process of improvement of this lifecycle management (more than just build) tool has been later on released on the alfresco forge (http://forge.alfresco.com/projects/m2alfresco/ and http://repository.sourcesense.com/maven ... ype-1.0.0/) and provides a number of interesting features (like jetty embedded run, clean property filtering management, documentation, jboss/tomcat local/remote deploy, maven release support etc.).
+For supporting this release, we made alfresco community artifacts (jar and war) available on Sourcesense repositories in order to have a zero conf startup for even junior developers (and to lower the maven learning curve). See http://repository.sourcesense.com/maven2/alfresco.
+
+For enterprise customization instead, we happily use internal repositories (Sourcesense or clients') with the same approach.
+
+About my 2 cents, it would be much better if Alfresco itself releases its artifacts on m2 repos (thus complete the m10n - mavenization - of source tree) for a number of reasons
+
+- standardization of the naming/versioning
+- easy startup
+- Alfresco declares itself a ECM systems, as we know 'E' stands for "enterprise", and as we all (sadly) know "enterprise" stands for processes, release policies, bureaucracy, ownerships, lifecycle, development vs. maintenance. A m2 structured approach will ease to me integration in highly complex environments (and with many enterprise applications) in which is not just a matter of "taking and xml file, dropping it in the shared folder, and restart the server" , because it's *simply* not possible
+- Having an archetype based approach can really gear community development and lower Alfresco "real" learning curve, as it's pretty much easier to have a list of properties to edit more than go-search-crawl-find on the wiki which is the Spring snippet to be modified. This is true for the extension projects (already in the forge) as well as AMP (let's say module build).
+- Alfresco grows faster and faster, to me it's the moment (especially with the 3.0 release) to provide a real neat basis for the even greater growth alfresco expects from the great improvements they are doing: Apache maven is basis for most open source projects, and even tough and complex frameworks (e.g. Apache Cocoon) have completed (not without hassles) the m10n process, towards a more integrated and documented open source vision. The bigger it grows the more difficult will be to do this change and to me it may really make it an outstanding example of "enterprise opensource"
+- I don't have to maintain a public m2 repository almost just for Alfresco ;)
+
+Ok, now you may think I'm a maven evangelist trying to find useful applications of that technology at all costs ;)
+
+On the other hand I believe that (especially being a partner) we should not impose technologies, while adapt the way we work to the open source (typically high) standards of development, and this is a characteristic that sometimes I see missing in Alfresco extension development: in this sense the archetype we've released builds *also* with Apache Ant (see http://forge.alfresco.com/forum/forum.php?forum_id=512), exploiting the tidy and standard maven project hierarchy and sharing the same property filtering policies.
+Of course all the nice m2 features (like jetty run, jboss and tomcat deploy, release management, etc.) are not supported by this build, but what you just need is to checkout the jar, unzip it, and run ant to have a properly packaged, environment aware alfresco WAR build.
+
+This was more a POC for the feasibility of this double approach, so I'm not planning to maintain the ant part while focusing on the interesting growth perspectives of the m2 part, but it can be useful to provide the double point of access I was mentioning before (enterprise vs. community).
+
+So wrapping up:
+I would be (and so my company Sourcesense) to see Alfresco move (and to help/support in this transition) to maven for building its source code, document and release it. But I understand it's a complex and risky process (but risks can be lowered supporting a bottom line Ant based build which provides continuity with current developments).
+
+So ATM I'd love to have some feedback on the possibility of building extension (and AMP in a while) using archetypes / prototype based approach (even before an Alfresco official move to maven) and hopefully some contributions to the project. I think that it's vitally important to have a (still agile but) sort of a process when developing and releasing and application.
+That's especially true/valuable for a partner but I think that will especially gear the professional open source community interest in Alfresco.
+
+Hope this helps,
+Gab
+
+PS:
+For some additional references on the maven topic you may be interested in (sorry for the spamming ;) :
+
+Library conventions - viewtopic.php?f=10&t=1017&p=39172#p39172
+Maven repositories - viewtopic.php?f=12&t=10210&p=39175#p39175
+Running outside a container - viewtopic.php?f=4&t=9317&p=39176#p39176
+Maven4alfresco - viewtopic.php?f=32&t=9268&p=39179#p39179
+
+
+
+Library conventions:
+--------------------
+
+have been working a lot with Maven and Alfresco, especially in enterprise environments where versioning, releasing and dependency management can be really important and tricky.
+That's why I've put my efforts in releasing a maven2 archetype which can be used for building Alfresco extensions (and soon AMP, I hope) and managing the artifact in its whole lifecycle as m2 prescribes, e.g providing features like:
+
+- Property filtering
+- Rapid prototyping (common properties already available to the - junior - developer rather than Spring conf files)
+- Releasing
+- Documentation site
+- LDAP configuration samples
+- Local/remote deploy on tomcat/jboss with cargo
+- jetty embedded run
+
+Results are in the m2alfresco forge project here
+
+http://forge.alfresco.com/projects/m2alfresco/,
+
+and the documentation site with the zero conf command to run are here:
+
+http://repository.sourcesense.com/maven ... ype-1.0.0/.
+
+
+Now the geek part ;)
+
+I used almost your same convention, but you can have a look at the public repo with only community artifacts available (for obvious redistribution rules):
+http://repository.sourcesense.com/maven2/alfresco/
+
+Basically the war build overlays the extension to the alfresco WAR dependency (that brings already all the dependencies inside WEB-INF/lib, so no real pom.xml for it). All the other dependencies are directly set by the extension pom.xml with scope="provided" so that they don't get included again in the overlay phase.
+I agree that a an Alfresco pom is the most correct approach but I want to have it released by Alfresco itself in order to have the support and all the stuff for my clients.
+
+Maybe you can join the project in the forge and contribute all the (advanced ;) pom studies you've done here in the main pom of the archetype.
+
+Every feedback would be really appreciated.
+
+Ciao!
+
+Gabriele
+
+
+PS:
+BTW, sources are still in Sourcesense private repos but I'm going to move to the forge soon. Sources are available anyways in the maven repo http://repository.sourcesense.com/maven ... archetype/ and in the forge http://forge.alfresco.com/frs/?group_id=90.
