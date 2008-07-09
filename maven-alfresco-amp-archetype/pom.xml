@@ -21,8 +21,13 @@
   <groupId>com.sourcesense.alfresco</groupId>
   <artifactId>maven-alfresco-amp-archetype</artifactId>
   <packaging>maven-archetype</packaging>
-  <name>demoamp</name>
+  <name>Maven Alfresco Amp Archetype</name>
   <version>1.0</version>
+  <parent>
+		<groupId>com.sourcesense.alfresco</groupId>
+		<artifactId>maven-alfresco-archetypes</artifactId>
+		<version>1.0-SNAPSHOT</version>
+  </parent>
   <build>
     <extensions>
       <extension>
