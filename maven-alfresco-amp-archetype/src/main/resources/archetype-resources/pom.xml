@@ -18,8 +18,8 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.sourcesense.alfresco</groupId>
-	<artifactId>demoamp</artifactId>
+	<groupId>${groupId}</groupId>
+	<artifactId>${artifactId}</artifactId>
 	<packaging>amp</packaging>
 	<name>Maven Alfresco AMP Packaging Sample</name>
 	<!-- No shapshot or beta version, as this is used for filtering module.properties
@@ -31,7 +31,7 @@
 	If you want to use (and I do) maven snapshot capabilities than you could
 	remove the filtering and maintaining versions (pom and module.properties) aligned manually
 	 -->
-	<version>1.0</version>
+	<version>${version}</version>
 	<description>Test AMP project</description>
 	<properties>
 		<!--Default for which src/main/properties/<env>/application.properties is loaded. NB: 
