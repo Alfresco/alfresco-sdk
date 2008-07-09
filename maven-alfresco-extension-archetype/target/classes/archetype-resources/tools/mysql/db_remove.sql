@@ -1,1 +1,0 @@
-drop database ${alfresco.db.name};

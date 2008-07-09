@@ -24,6 +24,11 @@
 	<packaging>maven-archetype</packaging>
 	<name>Maven alfresco Extension archetype</name>
 	<url>${site.url}</url>
+	<parent>
+		<groupId>com.sourcesense.alfresco</groupId>
+		<artifactId>maven-alfresco-archetypes</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
 	<issueManagement>
 		<system>Jira</system>
 		<url>https://dev.sourcesense.com/jira/secure/BrowseProject.jspa?id=10130</url>
@@ -113,10 +118,6 @@
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-webdav</artifactId>
 				<version>1.0-beta-3</version>
-			</extension>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ssh</artifactId>
 			</extension>
 		</extensions>
 		<plugins>
