@@ -10,7 +10,7 @@
 	</poweredBy>
 	<publishDate position="navigation-bottom" format="MM-dd-yy"/>
   <bannerLeft>
-    <name>Maven alfresco archetype - v. ${project.version}</name>
+    <name>Maven alfresco Extension archetype - v. ${project.version}</name>
     <href>${site_site_url}</href>
     <src>images/logo_noclaim.png</src>
   </bannerLeft>
@@ -20,11 +20,10 @@
       <item name="Apache" href="http://www.apache.org/"/>
     </links>
 
-    <menu name="M2 Alfresco Extension Archetype">
+    <menu name="M2 Alfresco AMP Archetype">
 	  <item name="Introduction" href="/index.html"/>
 	  <item name="README" href="/readme.html"/>
-      <item name="M2 Usage Guide" href="http://forge.alfresco.com/docman/view.php/90/1643/README-m2.txt"/>
-      <item name="Ant Usage Guide" href="http://forge.alfresco.com/docman/view.php/90/1644/README-ANT.txt"/>
+      <item name="How To" href="http://wiki.alfresco.com/wiki/Managing_Alfresco_Lifecyle_with_Maven"/>
       <item name="Roadmap" href="http://forge.alfresco.com/docman/view.php/90/1645/ROADMAP.txt"/>
 	  <item name="FAQ" href="faq.html"/>
     </menu>

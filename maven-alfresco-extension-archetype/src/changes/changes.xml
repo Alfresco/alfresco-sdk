@@ -1,31 +1,12 @@
 <document>
   <properties>
-    <title>Maven Alfresco extension archetype</title>
+    <title>Maven Alfresco AMP archetype</title>
     <author email="g.columbro@sourcesense.com">Gabriele Columbro</author>
   </properties>
   <body>
-    <release version="1.0.0" date="2008-03-27" description="Public release">
+    <release version="1.0.0" date="2008-07-06" description="Public release">
       <action dev="g.columbro" type="add">
-		Added support for doxia for both generated extension and archetype
-      </action>
-      <action dev="g.columbro" type="fix" issue="MVNALF-4">
-        Now there's a working command for zero conf creation of the project from
-        the remote archetype (deployed on public SS repos ATM)
-      </action>
-      <action dev="g.columbro" type="add">
-		Add support for announcement mail sending
-      </action>
-      <action dev="g.columbro" type="add" issue="MVNALF-3">
-		Added licensing to all files (apache 2) 
-      </action>
-      <action dev="g.columbro" type="add">
-		Added change log and improved documentation a lot
-      </action>
-    </release>
-
-    <release version="0.7" date="2008-03-20" description="First private release">
-      <action dev="g.columbro" type="update">
-        Merged all past projects in this archetype
+		Added full AMP lifecycle management
       </action>
     </release>
   </body>
