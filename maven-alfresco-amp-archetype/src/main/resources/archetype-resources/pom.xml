@@ -88,7 +88,7 @@
 			<version>0.1</version>
 		</dependency>
 		-->
-		<!-- Example AMP dependency:  will be properly overlayed in the resulting WAR
+		<!-- Example AMP dependency:  will be properly overlayed in the  WAR produced by the integration-test phase in profile 'webapp'
 		<dependency>
 			<groupId>org.alfresco.community</groupId>
 			<artifactId>recordsmanagement</artifactId>
@@ -125,23 +125,36 @@
 						<addMavenDescriptor>false</addMavenDescriptor>
 					</archive>
 					<overlays>
+						<!-- This sample adds records management module in the finally built AMP
 						<overlay>
 							<groupId>org.alfresco.community</groupId>
 							<artifactId>recordsmanagement</artifactId>
 							<version>2.1.0</version>
 							<type>amp</type>
 						</overlay>
-						<!-- The current AMP -->
+						-->
+						<!-- The current AMP is always last in order to overwrite other modules' modules.properties
 						<overlay></overlay>
+						-->
 					</overlays>
 				</configuration>
 			</plugin>
 		</plugins>
-		<!-- Copies and filters AMP config in build folder so maven-amp-plugin can pick them up  -->
+		<!-- Copies and filters resources in build folder so maven-amp-plugin can pick them up  -->
 		<resources>
 			<resource>
 				<filtering>true</filtering>
 				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>**README-*</exclude>
+				</excludes>
+			</resource>
+			<!-- Copies and filters AMP config in the proper package 'alfresco/module/${groupId}.${artifactId}' so to enforce 
+				 full module naming single sourcing from POM properties  -->
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/config</directory>
+				<targetPath>alfresco/modules/${groupId}.${artifactId}</targetPath>
 				<excludes>
 					<exclude>**README-*</exclude>
 				</excludes>
@@ -269,14 +282,16 @@
 						<filtering>true</filtering>
 						<directory>src/test/resources</directory>
 					</testResource>
-					
+					<!-- Includes default properties  for alfresco test war -->
 					<testResource>
 						<filtering>true</filtering>
 						<directory>src/test/properties/${env}</directory>
 						<targetPath>alfresco/extension</targetPath>
 					</testResource>
-					<!-- This works only if : src/main/resources/alfresco/module/<yourChoosenName> == src/main/resources/alfresco/module/${groupId}.${artifactId}
-						Best practice tacken from recordsmanagement.amp, is enforced troughout the whole archetype. This convention is also used for module.properties filtering.
+					<!-- src/main/config/ is copied into  ==> target/test-classes/alfresco/module/${groupId}.${artifactId} to
+						be picked up by the maven-war plugin
+						Best practice tacken from recordsmanagement.amp, is enforced troughout the whole archetype. 
+						This convention is also used for module.properties filtering.
 					-->
 					<testResource>
 						<filtering>true</filtering>
