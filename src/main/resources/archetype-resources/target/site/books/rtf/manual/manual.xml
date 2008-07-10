@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<itext creationdate="Apr 1, 2008 7:00:08 PM" producer="Doxia iText">
+  <chapter numberdepth="1" depth="1" indent="1">
+    <title leading="36.0" font="Helvetica" size="24.0" fontstyle="normal" red="255" green="0" blue="0">
+      <chunk font="Helvetica" size="24.0" fontstyle="normal" red="255" green="0" blue="0">Introduction</chunk>
+    </title>
+    <section numberdepth="1" depth="1" indent="0.0">
+      <newline/>
+      <title leading="24.0" font="Helvetica" size="22.0" fontstyle="bold" blue="0" green="0" red="0">
+        <chunk font="Helvetica" size="22.0" fontstyle="bold" blue="0" green="0" red="0">Introduction </chunk>
+      </title>
+      <paragraph>
+        <newline/>
+        <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0">Welcome to the Maven Alfresco Extension Archetype manual </chunk>
+      </paragraph>
+    </section>
+    <section numberdepth="1" depth="1" indent="0.0">
+      <newline/>
+      <title leading="24.0" font="Helvetica" size="22.0" fontstyle="bold" blue="0" green="0" red="0">
+        <chunk font="Helvetica" size="22.0" fontstyle="bold" blue="0" green="0" red="0">How to edit this manual </chunk>
+      </title>
+      <paragraph>
+        <newline/>
+        <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0">This page is generated from </chunk>
+        <chunk font="Courier" size="12.0" fontstyle="normal" blue="0" green="0" red="0">$PROJECT_HOME/src/site/book-index.apt </chunk>
+        <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0">file. </chunk>
+        <newline/>
+        <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0">Book sections and chapters can be edited in the </chunk>
+        <chunk font="Courier" size="12.0" fontstyle="normal" blue="0" green="0" red="0">$PROJECT_HOME/src/site/manual.xml </chunk>
+        <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0">file. </chunk>
+        <newline/>
+        <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0">While related POM configuration snippet follows&gt; </chunk>
+      </paragraph>
+      <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0">
+        <table columns="1" left="true" right="true" top="true" bottom="true" align="Center" tablefitspage="true" cellsfitpage="true" cellpadding="10" width="100.0%">
+          <row>
+            <cell left="true" right="true" top="true" bottom="true">
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[ ]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[ <!-- Adds support for books PDF and RTF generation for single sourced documentation -->]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[ <plugin>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[         <groupId>org.apache.maven.doxia</groupId>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[         <artifactId>doxia-maven-plugin</artifactId>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[         <version>1.0-alpha-10</version>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[         <executions>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                 <execution>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                         <phase>pre-site</phase>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                         <goals>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                                 <goal>render-books</goal>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                         </goals>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                 </execution>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[         </executions>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[         <configuration>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                 <!-- ]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                         | Target books dir: within the site so it can be linked and deployed]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                         | TODO: Use ${pom.target.dir} or so similar property instead of ]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                         |               hard wiring 'target']]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                          -->]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                 <generatedDocs>target/site/books</generatedDocs>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                 <books>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                         <book>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                                 <directory>src/site</directory>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                                 <descriptor>src/books/manual.xml</descriptor>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                                 <formats>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                                         <format>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                                                 <id>xdoc</id>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                                         </format>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                                         <format>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                                                 <id>pdf</id>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                                         </format>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                                         <format>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                                                 <id>rtf</id>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                                         </format>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                                 </formats>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                         </book>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[                 </books>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[         </configuration>]]> </chunk>
+              <newline/>
+              <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0"><![CDATA[ </plugin>]]> </chunk>
+              <newline/>
+            </cell>
+          </row>
+        </table>
+      </chunk>
+    </section>
+    <section numberdepth="1" depth="1" indent="0.0">
+      <newline/>
+      <title leading="24.0" font="Helvetica" size="22.0" fontstyle="bold" blue="0" green="0" red="0">
+        <chunk font="Helvetica" size="22.0" fontstyle="bold" blue="0" green="0" red="0">Limitations </chunk>
+      </title>
+      <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0">
+        <list numbered="false" symbolindent="15">
+          <listitem indentationleft="20.0">
+            <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0">Book sections are matched on id, so a file named section.* must be found at any depth level withing the folder specified in the POM as book folder </chunk>
+          </listitem>
+          <listitem indentationleft="20.0">
+            <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0">Books cannot use property filtering </chunk>
+          </listitem>
+          <listitem indentationleft="20.0">
+            <chunk font="Helvetica" size="12.0" fontstyle="normal" blue="0" green="0" red="0">Books cannot use .vm files as filename cannot be specified, so this makes only static (no filtering needed) APT/XDOC/FML pages usable for both site and manual in a single sourcing fashion </chunk>
+          </listitem>
+        </list>
+      </chunk>
+    </section>
+  </chapter>
+</itext>
