@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-  
-  http://www.apache.org/licenses/LICENSE-2.0
-  
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-  
+	Licensed to the Apache Software Foundation (ASF) under one or more
+	contributor license agreements.  See the NOTICE file distributed with
+	this work for additional information regarding copyright ownership.
+	The ASF licenses this file to You under the Apache License, Version 2.0
+	(the "License"); you may not use this file except in compliance with
+	the License.  You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+	
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>${groupId}</groupId>
 	<artifactId>${artifactId}</artifactId>
@@ -36,38 +37,38 @@
 		| -Dcustomization.name=<customizationName> - name of the jar artifact containing classes and resources for this extension
 		| -Dwebapp.name=<extensionName> -   name of the WAR artifact to be built (default: ${artifactId}-{version}.jar )
 		| -Denterprise   - Includes LDAP configuration as defined in application.properties
-		 -->
-	
+	-->
+
 	<!-- Default properties -->
 	<properties>
 		<!-- src/main/properties/<env>/application.properties is loaded -->
 		<env>local</env>
 		<webapp.name>alfresco</webapp.name>
-		  <!-- 
-			  | 
-			  | By default the src/main/properties/local/application.properties uses the property "alfresco.data.location" to  specify where
-			  | alf_data gets created.
-			  | For local jetty:run deployment default creation dir is under project root folder (as location is specified relatively to run 			
-			  | dir). Please add alf_data_jetty in svn/cvs ignores in order not to commit that. You can also specified a different (out of the 	
-			  | sproject) folder
-			  | by editing the following properties.
-			  | DB is also configurable here. Of course keep in sync these two values otherwise you'll get integrity errors.
-			  | 
-			  | Empty log dir creates file alfresco.log in appserver default dir. You can also specify a meaningful log directory for the server
-			  | (add a trailing slash, e.g. '/var/log/alfresco/' ) 
-			  |
-			  | Jetty embedded run logs by default in target/alfresco.log 
-			   -->
+		<!-- 
+			| 
+			| By default the src/main/properties/local/application.properties uses the property "alfresco.data.location" to  specify where
+			| alf_data gets created.
+			| For local jetty:run deployment default creation dir is under project root folder (as location is specified relatively to run 			
+			| dir). Please add alf_data_jetty in svn/cvs ignores in order not to commit that. You can also specified a different (out of the 	
+			| sproject) folder
+			| by editing the following properties.
+			| DB is also configurable here. Of course keep in sync these two values otherwise you'll get integrity errors.
+			| 
+			| Empty log dir creates file alfresco.log in appserver default dir. You can also specify a meaningful log directory for the server
+			| (add a trailing slash, e.g. '/var/log/alfresco/' ) 
+			|
+			| Jetty embedded run logs by default in target/alfresco.log 
+		-->
 		<alfresco.data.location>./alf_data_jetty</alfresco.data.location>
 		<alfresco.db.name>alf_jetty</alfresco.db.name>
 		<log.dir>${project.build.directory}/</log.dir>
 		<!-- Uncomment this property together with the <scm> section downwards
-		<svn.url>
-	      https://mycompany.com/repos/my-test-project
-	    </svn.url>
+			<svn.url>
+			https://mycompany.com/repos/my-test-project
+			</svn.url>
 		-->
 		<!-- Uncomment this property together with the maven-release-plugin <plugin><configuration><tagBase/></configuration></plugin> section downwards
-		<svn.tags.url>${svn.url}/tags</svn.tags.url>
+			<svn.tags.url>${svn.url}/tags</svn.tags.url>
 		-->
 		<!-- These redundancies are due to filtering issues of Maven. See here http://maven.apache.org/plugins/maven-site-plugin/usage.html -->
 		<site_pom_description>${pom.description}</site_pom_description>
@@ -89,36 +90,35 @@
 		</repository>
 	</repositories>
 	<pluginRepositories>
-		  <pluginRepository>
-		    <id>codehaus snapshot repository</id>
-		    <url>http://snapshots.repository.codehaus.org/</url>
-		    <releases>
-		      <enabled>true</enabled>
-		    </releases>
-		  </pluginRepository>
-			<pluginRepository>
-	      <id>Maven Snapshots</id>
-	      <url>http://snapshots.maven.codehaus.org/maven2/</url>
-	      <snapshots>
-	      </snapshots>
-	      <releases>
-	        <enabled>false</enabled>
-	      </releases>
-	    </pluginRepository>
-	  </pluginRepositories>
-	 <!-- Uncomment SCM definitions in order to have mvn release:perform to actually tag the code
-	 <scm>
-	    <developerConnection>scm:svn:${svn.url}</developerConnection>
-	    <url>${svn.url}</url>
-	  </scm>
+		<pluginRepository>
+			<id>codehaus snapshot repository</id>
+			<url>http://snapshots.repository.codehaus.org/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</pluginRepository>
+		<pluginRepository>
+			<id>Maven Snapshots</id>
+			<url>http://snapshots.maven.codehaus.org/maven2/</url>
+			<snapshots></snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
+	<!-- Uncomment SCM definitions in order to have mvn release:perform to actually tag the code
+		<scm>
+		<developerConnection>scm:svn:${svn.url}</developerConnection>
+		<url>${svn.url}</url>
+		</scm>
 	-->
-	
+
 	<!-- Alfresco dependencies -->
 	<dependencies>
 		<!-- Alfresco Dependencies
 			| NB: These files are not publicly available. Please vote for Alfresco to release them :)
 			| Jboss alfresco build (e.g. no log4j.properties and fix for myFaces) 
-			-->
+		-->
 		<dependency>
 			<groupId>alfresco.community</groupId>
 			<artifactId>alfresco</artifactId>
@@ -171,7 +171,7 @@
 			<version>2.0</version>
 			<scope>test</scope>
 			</dependency>
-			-->
+		-->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -334,12 +334,53 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.alfresco.maven.plugin</groupId>
+				<artifactId>maven-amp-plugin</artifactId>
+				<version>1.0.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack-amps</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<configuration>
+							<includeTypes>amp</includeTypes>
+							<outputDirectory>${build.directory}/${webapp.name}</outputDirectory>
+							<excludes>META*</excludes>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<!-- This is required to be re-defined explicitly at plugin level as otherwise the 'amp' extension
+						unArchiver won't be available to the maven-dependency-plugin  -->
+					<dependency>
+						<groupId>org.alfresco.maven.plugin</groupId>
+						<artifactId>maven-amp-plugin</artifactId>
+						<version>1.0.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<archiveClasses>false</archiveClasses>
 					<webappDirectory>target/${webapp.name}</webappDirectory>
-					<warSourceExcludes>**classes/tools</warSourceExcludes>
+					<warSourceExcludes>tools/**</warSourceExcludes>
+					<webResources>
+
+					</webResources>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -390,7 +431,7 @@
 						| Target books dir: within the site so it can be linked and deployed
 						| TODO: Use ${pom.target.dir} or so similar property instead of 
 						|		hard wiring 'target'
-						 -->
+					-->
 					<generatedDocs>target/site/books</generatedDocs>
 					<books>
 						<book>
@@ -437,10 +478,10 @@
 				<artifactId>maven-clover-plugin</artifactId>
 			</plugin>
 			<!-- Enable this plugin only after setting SCM connection, otherwise mvn site will fail
-			<plugin>
+				<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>changelog-maven-plugin</artifactId>
-			</plugin>
+				</plugin>
 			-->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -452,40 +493,40 @@
 		| Configured to deploy on SS public repository ATM.
 		| You'd need a valid uid/pwd in our repo
 		|
-		 -->
+	-->
 	<distributionManagement>
 		<!--
 			| 
 			| Enable this repo in case of publicly redistributable artifacts (Sourcesense public repositories via ssh + public key )
 			|
-		<repository>
+			<repository>
 			<id>ss-public</id>
 			<url>scp://repository.sourcesense.com/var/www/demo.sourcesense.com/maven2</url>
-		</repository>
-		  <distributionManagement>
-		<site>
+			</repository>
+			<distributionManagement>
+			<site>
 			<id>ss-site-public</id>
-		    <url>scp://repository.sourcesense.com/var/www/demo.sourcesense.com/maven2-sites</url>
-		</site>
+			<url>scp://repository.sourcesense.com/var/www/demo.sourcesense.com/maven2-sites</url>
+			</site>
 		-->
 		<!--
 			| 
 			| Enable this repo in case of non publicly redistributable artifacts (Sourcesense private repositories via webdav)
 			|
-			-->
+		-->
 		<repository>
 			<id>ss-private</id>
 			<url>dav:https://dev.sourcesense.com/repos/dev/maven2</url>
 		</repository>
 		<site>
-	      <id>ss-site-private</id>
-	      <url>dav:https://dev.sourcesense.com/cargo/maven2-sites</url>
-	    </site>
+			<id>ss-site-private</id>
+			<url>dav:https://dev.sourcesense.com/cargo/maven2-sites</url>
+		</site>
 	</distributionManagement>
 
 	<!-- 
 		| Build Profiles
-		 -->
+	-->
 	<profiles>
 		<!--
 			| Profile to automatically restore export files committed under
@@ -493,7 +534,7 @@
 			| Gets automatically activated specifiying a value for the property
 			| restoreVersion which maps to the name of the folder.
 			| NB: In order this to work you *MUST* export your full repo with "export" package name
-			 -->
+		-->
 		<profile>
 			<id>restore</id>
 			<activation>
@@ -523,7 +564,7 @@
 		<!--
 			| Profile to automatically include ldap configuration files
 			| (not included by default build)
-			 -->
+		-->
 		<profile>
 			<id>ldap</id>
 			<activation>
@@ -548,33 +589,33 @@
 			| FIXME: Add <dependencies> override in order to have jboss specific alfresco-*-jboss.war (e.g no log4j.properties and log4j jar) 
 			| being substituted as a depenendency, and avoid log4j classCasts
 			|
-			-->	
+		-->
 		<profile>
-		  <id>jboss</id>
-		  <!--  
-			  | By default the src/main/properties/local/application.properties uses the property "alfresco.data.location" to  specify where
-			  | alf_data gets created and "alfresco.db.name" for the database name.
-			  | For local jboss deployment default creation dir (alf_data) is under appserver $JBOSS_HOME/bin directory (as location is specified relatively to 
-			  | run dir)
-			  | 
-			  | Empty log dir creates file alfresco.log in appserver default dir. You can also specify a meaningful log directory for the server
-			  | (add a trailing slash, e.g. '/var/log/alfresco/' ) 
-			  |
-			  | NB: Remember to grant appropriate permissions on database you specify here by running the script found in tools/mysql/[jetty/tomcat/jboss]
-			  | sql scripts (after editing them), or run those you find in target/classes/tools/[db_remove,db_setup].sql which are already filtered according to
-			  | ' alfresco.db.name ' property.
-			  | 
-			   -->
-		  <properties>	
-	        <alfresco.data.location>./alf_data</alfresco.data.location>
-			<alfresco.db.name>alf_jboss</alfresco.db.name>
-			<log.dir></log.dir>
-	      </properties>
-	      <build>
-	        <defaultGoal>cargo:deploy</defaultGoal>
-			<resources>
-				<resource>
-					<directory>src/main/resources</directory>
+			<id>jboss</id>
+			<!--  
+				| By default the src/main/properties/local/application.properties uses the property "alfresco.data.location" to  specify where
+				| alf_data gets created and "alfresco.db.name" for the database name.
+				| For local jboss deployment default creation dir (alf_data) is under appserver $JBOSS_HOME/bin directory (as location is specified relatively to 
+				| run dir)
+				| 
+				| Empty log dir creates file alfresco.log in appserver default dir. You can also specify a meaningful log directory for the server
+				| (add a trailing slash, e.g. '/var/log/alfresco/' ) 
+				|
+				| NB: Remember to grant appropriate permissions on database you specify here by running the script found in tools/mysql/[jetty/tomcat/jboss]
+				| sql scripts (after editing them), or run those you find in target/classes/tools/[db_remove,db_setup].sql which are already filtered according to
+				| ' alfresco.db.name ' property.
+				| 
+			-->
+			<properties>
+				<alfresco.data.location>./alf_data</alfresco.data.location>
+				<alfresco.db.name>alf_jboss</alfresco.db.name>
+				<log.dir></log.dir>
+			</properties>
+			<build>
+				<defaultGoal>cargo:deploy</defaultGoal>
+				<resources>
+					<resource>
+						<directory>src/main/resources</directory>
 						<excludes>
 							<exclude>**/restore-context.xml</exclude>
 							<exclude>**/ldap-*.xml</exclude>
@@ -588,108 +629,108 @@
 						<filtering>true</filtering>
 					</resource>
 				</resources>
-	        <plugins>
-	          <plugin>
-	            <groupId>org.codehaus.cargo</groupId>
-	            <artifactId>cargo-maven2-plugin</artifactId>
-	            <configuration>
-	              <container>
-	                <containerId>jboss4x</containerId>
-	                <type>remote</type>
-	              </container>
-	              <configuration>
-	                <type>runtime</type>
-	                <properties>
-	                  <cargo.servlet.port>8080</cargo.servlet.port>
-	                </properties>
-	              </configuration>
-	              <deployer>
-	                <type>remote</type>
-	                <deployables>
-	                  <deployable>
-	                    <groupId>${pom.groupId}</groupId>
-	                    <artifactId>${pom.artifactId}</artifactId>
-	                    <type>war</type>
-	                  </deployable>
-	                </deployables>
-	              </deployer>
-	            </configuration>
-	          </plugin>
-			  <!-- log4j.properties is excluded from source and dependencies -->
-			  <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-						<archiveClasses>false</archiveClasses>
-						<webappDirectory>target/${webapp.name}</webappDirectory>
-						<dependentWarExcludes >**/log4j.properties,**/lib/log4j*.jar,log4j.properties</dependentWarExcludes >
-						<warSourceExcludes>**/log4j.properties,WEB-INF/classes/tools</warSourceExcludes>
-				</configuration>
-			</plugin>	
-	        </plugins>
-	      </build>
-	    </profile>	
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.cargo</groupId>
+						<artifactId>cargo-maven2-plugin</artifactId>
+						<configuration>
+							<container>
+								<containerId>jboss4x</containerId>
+								<type>remote</type>
+							</container>
+							<configuration>
+								<type>runtime</type>
+								<properties>
+									<cargo.servlet.port>8080</cargo.servlet.port>
+								</properties>
+							</configuration>
+							<deployer>
+								<type>remote</type>
+								<deployables>
+									<deployable>
+										<groupId>${pom.groupId}</groupId>
+										<artifactId>${pom.artifactId}</artifactId>
+										<type>war</type>
+									</deployable>
+								</deployables>
+							</deployer>
+						</configuration>
+					</plugin>
+					<!-- log4j.properties is excluded from source and dependencies -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<archiveClasses>false</archiveClasses>
+							<webappDirectory>target/${webapp.name}</webappDirectory>
+							<dependentWarExcludes>**/log4j.properties,**/lib/log4j*.jar,log4j.properties</dependentWarExcludes>
+							<warSourceExcludes>**/log4j.properties,WEB-INF/classes/tools</warSourceExcludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 		<!-- 
 			| Profile for deploying on tomcat 5.x
 			|
 			|
+		-->
+		<profile>
+			<id>tomcat</id>
+			<!--  
+				| By default the src/main/properties/local/application.properties uses the property "alfresco.data.location" to  specify where
+				| alf_data gets created.
+				| For tomcat deployment default creation dir (alf_data) is under appserver $CATALINA_HOME/bin directory (as location is specified relatively to 
+				| run dir) and db is configurable likewhise.
+				| Empty log dir creates file alfresco.log in appserver default dir. You can also specify a meaningful log directory for the server
+				| (add a trailing slash, e.g. '/var/log/alfresco/' ) 
+				|
+				| NB: Remember to grant appropriate permissions on database you specify here by running the script found in tools/mysql/[jetty/tomcat/jboss]
+				| mysql scripts (properly edited) or those you find in target/tools/[db_remove,db_setup].sql which are already filtered according to
+				| ' alfresco.db.name ' property 
+				|  
 			-->
-	    <profile>
-	      <id>tomcat</id>
-		  <!--  
-			  | By default the src/main/properties/local/application.properties uses the property "alfresco.data.location" to  specify where
-			  | alf_data gets created.
-			  | For tomcat deployment default creation dir (alf_data) is under appserver $CATALINA_HOME/bin directory (as location is specified relatively to 
-			  | run dir) and db is configurable likewhise.
-			  | Empty log dir creates file alfresco.log in appserver default dir. You can also specify a meaningful log directory for the server
-			  | (add a trailing slash, e.g. '/var/log/alfresco/' ) 
-			  |
-			  | NB: Remember to grant appropriate permissions on database you specify here by running the script found in tools/mysql/[jetty/tomcat/jboss]
-			  | mysql scripts (properly edited) or those you find in target/tools/[db_remove,db_setup].sql which are already filtered according to
-			  | ' alfresco.db.name ' property 
-			  |  
-			   -->
-		  <properties>	
-	        <alfresco.data.location>./alf_data</alfresco.data.location>
-			<alfresco.db.name>alf_tomcat</alfresco.db.name> 
-			<log.dir></log.dir>
-	      </properties>
-	      <build>
-	        <defaultGoal>package</defaultGoal>
-	        <plugins>
-	          <plugin>
-	            <groupId>org.codehaus.cargo</groupId>
-	            <artifactId>cargo-maven2-plugin</artifactId>
-	            <configuration>
-	              <container>
-	                <containerId>tomcat5x</containerId>
-	                <type>remote</type>
-	              </container>
-				  <!-- Configure here your Tomcat server manager credentials -->
-	              <configuration>
-	                <type>runtime</type>
-	                <properties>
-	                  <cargo.remote.username>tomcat</cargo.remote.username>
-	                  <cargo.remote.password>tomcat</cargo.remote.password>
-	                  <cargo.servlet.port>8080</cargo.servlet.port>
-	                </properties>
-	              </configuration>
-	              <deployer>
-	                <type>remote</type>
-	                <deployables>
-	                  <deployable>
-	                    <artifactId>${pom.artifactId}</artifactId>
-	                    <type>war</type>
-	                    <properties>
-	                      <context>/${webapp.name}</context>
-	                    </properties>
-	                  </deployable>
-	                </deployables>
-	              </deployer>
-	            </configuration>
-	          </plugin>
-	        </plugins>
-		  </build>
+			<properties>
+				<alfresco.data.location>./alf_data</alfresco.data.location>
+				<alfresco.db.name>alf_tomcat</alfresco.db.name>
+				<log.dir></log.dir>
+			</properties>
+			<build>
+				<defaultGoal>package</defaultGoal>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.cargo</groupId>
+						<artifactId>cargo-maven2-plugin</artifactId>
+						<configuration>
+							<container>
+								<containerId>tomcat5x</containerId>
+								<type>remote</type>
+							</container>
+							<!-- Configure here your Tomcat server manager credentials -->
+							<configuration>
+								<type>runtime</type>
+								<properties>
+									<cargo.remote.username>tomcat</cargo.remote.username>
+									<cargo.remote.password>tomcat</cargo.remote.password>
+									<cargo.servlet.port>8080</cargo.servlet.port>
+								</properties>
+							</configuration>
+							<deployer>
+								<type>remote</type>
+								<deployables>
+									<deployable>
+										<artifactId>${pom.artifactId}</artifactId>
+										<type>war</type>
+										<properties>
+											<context>/${webapp.name}</context>
+										</properties>
+									</deployable>
+								</deployables>
+							</deployer>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 </project>
