@@ -28,7 +28,7 @@
         <property name="name" value="exampleComponent" />
         <property name="description" value="A demonstration component" />
         <property name="sinceVersion" value="2.0" />
-        <property name="appliesFromVersion" value=".20x" />
+        <property name="appliesFromVersion" value="2.0" />
     </bean>
     
 </beans>
