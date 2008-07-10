@@ -38,6 +38,12 @@
 		<artifactId>maven-alfresco-archetypes-base</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
+	<repositories>
+		<repository>
+			<id>ss-public</id>
+			<url>http://repository.sourcesense.com/maven2</url>
+		</repository>
+	</repositories>
 	<properties>
 		<!--Default for which src/main/properties/<env>/application.properties is loaded. NB: 
 			used only for the 'test' profile (e.g. '-P test' on the mvn commandline)
