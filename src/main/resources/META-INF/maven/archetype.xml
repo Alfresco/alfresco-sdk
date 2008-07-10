@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?><archetype>
-  <id>test</id>
+  <id>maven-alfresco-amp-archetype</id>
   <sources>
     <source>src/main/java/com/sourcesense/demoamp/Demo.java</source>
     <source>src/main/java/com/sourcesense/demoamp/DemoComponent.java</source>
   </sources>
   <resources>
-    <resource>src/main/config/context/service-context.xml</resource>
-    <resource>src/main/config/log4j.properties</resource>
-    <resource>src/main/config/module-context.xml</resource>
-    <resource>src/main/webapp/css/demoamp.css</resource>
-    <resource>src/main/webapp/images/sourcesense.gif</resource>
-    <resource>src/main/webapp/jsp/demoamp.jsp</resource>
-    <resource>src/main/webapp/licenses/README-licenses.txt</resource>
-    <resource>src/main/webapp/scripts/demoamp.js</resource>
-    <resource>module.properties</resource>
-    <resource>README.txt</resource>
-    <resource>TODO.txt</resource>
+    <resource filtered="false">src/main/config/context/service-context.xml</resource>
+    <resource filtered="false">src/main/config/log4j.properties</resource>
+    <resource filtered="false">src/main/config/module-context.xml</resource>
+    <resource filtered="false">src/main/webapp/css/demoamp.css</resource>
+    <resource filtered="false">src/main/webapp/images/sourcesense.gif</resource>
+    <resource filtered="false">src/main/webapp/jsp/demoamp.jsp</resource>
+    <resource filtered="false">src/main/webapp/licenses/README-licenses.txt</resource>
+    <resource filtered="false">src/main/webapp/scripts/demoamp.js</resource>
+    <resource filtered="false">module.properties</resource>
+    <resource filtered="false">README.txt</resource>
+    <resource filtered="false">TODO.txt</resource>
   </resources>
   <testResources>
-    <resource>src/test/properties/local/application.properties</resource>
-    <resource>src/test/resources/alfresco/extension/custom-repository-context.xml</resource>
-    <resource>src/test/resources/alfresco/extension/file-servers-custom.xml</resource>
-    <resource>src/test/resources/log4j.properties</resource>
+    <resource filtered="false">src/test/properties/local/application.properties</resource>
+    <resource filtered="false">src/test/resources/alfresco/extension/custom-repository-context.xml</resource>
+    <resource filtered="false">src/test/resources/alfresco/extension/file-servers-custom.xml</resource>
+    <resource filtered="false">src/test/resources/log4j.properties</resource>
   </testResources>
 </archetype>
