@@ -108,12 +108,6 @@
 						</goals>
 						<id>announcement-mail</id>
 					</execution>
-					<execution>
-						<goals>
-							<goal>jira-report</goal>
-						</goals>
-						<id>jira-report</id>
-					</execution>
 				</executions>
 				<!--  Automatically notifies the list when release is done. Please supply username and password in the command line -->
 				<configuration>
@@ -193,6 +187,10 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>taglist-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-plugin-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</reporting>

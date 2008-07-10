@@ -19,6 +19,7 @@
       <item name="Maven" href="http://maven.apache.org/"/>
       <item name="Apache" href="http://www.apache.org/"/>
     </links>
+	
 
     <menu name="Modules">
 	  <item name="Maven Alfresco AMP Archetype" href="../maven-alfresco-amp-archetype"/>
