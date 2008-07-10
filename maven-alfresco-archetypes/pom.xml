@@ -7,11 +7,8 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<name>Maven Alfresco Archetypes base project</name>
 	<description>
-		This project is meant to gather all commons configurations
-		and settings between the two maven-alfresco-*-archetypes, i.e.
-		maven-alfresco-extension-archetype 
-		and
-		maven-alfresco-amp-archetype 		
+		This project is meant to gather all commons configurations and settings between the two maven-alfresco-*-archetypes, i.e.
+		maven-alfresco-extension-archetype and maven-alfresco-amp-archetype
 	</description>
 	<url>${site.url}</url>
 	<issueManagement>
@@ -199,5 +196,14 @@
 			</plugin>
 		</plugins>
 	</reporting>
-
+	<distributionManagement>
+		<repository>
+			<id>ss-public</id>
+			<url>scp://repository.sourcesense.com/var/www/demo.sourcesense.com/maven2</url>
+		</repository>
+		<site>
+			<id>ss-site-public</id>
+			<url>scp://repository.sourcesense.com/var/www/demo.sourcesense.com/maven2-sites/${pom.artifactId}</url>
+		</site>
+	</distributionManagement>
 </project>

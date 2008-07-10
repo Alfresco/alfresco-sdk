@@ -17,32 +17,49 @@
 	
 -->
 <project>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.sourcesense.alfresco</groupId>
-  <artifactId>maven-alfresco-amp-archetype</artifactId>
-  <packaging>maven-archetype</packaging>
-  <name>Maven Alfresco Amp Archetype</name>
-  <version>1.0.0-SNAPSHOT</version>
-  <description>
-		This archetype aims to provide a standardized approach to development, 
-		release and deployment of Alfresco AMPs (as opposed to Alfresco extensions, released as a different artifact ). 
-		Using standard m2 lifecycle commands (mvn compile package deploy) and generally available plugins (cargo, release, assembly) 
-		we are able to cover a very high percentage of Alfresco lifecycle common use cases. 
-		You are able within minutes to have a compatible AMP module built and its lifecycle supported by Maven, in a fully 
-		transparent way also with open source available AMPs.
-  </description>
-  <parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sourcesense.alfresco</groupId>
+	<artifactId>maven-alfresco-amp-archetype</artifactId>
+	<packaging>maven-archetype</packaging>
+	<name>Maven Alfresco Amp Archetype</name>
+	<version>1.0.0-SNAPSHOT</version>
+	<description>
+		This archetype aims to provide a standardized approach to development, release and deployment of Alfresco AMPs (as opposed to Alfresco
+		extensions, released as a different artifact ). Using standard m2 lifecycle commands (mvn compile package deploy) and generally available
+		plugins (cargo, release, assembly) we are able to cover a very high percentage of Alfresco lifecycle common use cases. You are able within
+		minutes to have a compatible AMP module built and its lifecycle supported by Maven, in a fully transparent way also with open source available
+		AMPs.
+	</description>
+	<properties>
+		<svn.url>${svn.base.url}/trunk/maven-alfresco-archetypes/${artifactId}</svn.url>
+		<site.url>https://repository.sourcesense.com/maven2-sites/maven-alfresco-archetypes/${pom.artifactId}</site.url>
+	</properties>
+	<scm>
+		<developerConnection>scm:svn:${svn.url}</developerConnection>
+		<url>${svn.url}</url>
+	</scm>
+	<parent>
 		<groupId>com.sourcesense.alfresco</groupId>
 		<artifactId>maven-alfresco-archetypes</artifactId>
 		<version>1.0-SNAPSHOT</version>
-  </parent>
-  <build>
-    <extensions>
-      <extension>
-        <groupId>org.apache.maven.archetype</groupId>
-        <artifactId>archetype-packaging</artifactId>
-        <version>2.0-alpha-3</version>
-      </extension>
-    </extensions>
-  </build>
+	</parent>
+	<build>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.archetype</groupId>
+				<artifactId>archetype-packaging</artifactId>
+				<version>2.0-alpha-3</version>
+			</extension>
+		</extensions>
+	</build>
+	<distributionManagement>
+		<repository>
+			<id>ss-public</id>
+			<url>scp://repository.sourcesense.com/var/www/demo.sourcesense.com/maven2</url>
+		</repository>
+		<site>
+			<id>ss-site-public</id>
+			<url>scp://repository.sourcesense.com/var/www/demo.sourcesense.com/maven2-sites/${pom.artifactId}</url>
+		</site>
+	</distributionManagement>
 </project>

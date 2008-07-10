@@ -16,7 +16,8 @@
 	limitations under the License.
 	
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sourcesense.alfresco</groupId>
 	<artifactId>maven-alfresco-extension-archetype</artifactId>
@@ -30,17 +31,23 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<description>
-		This archetype developed aims to provide a standardized approach to development, release and deployment of Alfresco extensions (as opposed to AMP builds, to be released as a different artifact ). 
-		Using standard m2 lifecycle commands (mvn compile package deploy) and generally available plugins (cargo, release, assembly) 
-		we are able to cover a very high percentage of Alfresco lifecycle common use cases. 
-		It can be used both with Maven2 and Ant build systems, but it must be clear that *only* the Maven2 approach provides all the
-		automation features we will describe in this website. 
-		In addition to that the m2 approach provides a zero-conf approach while ant requires (as usual) manual gathering and 
-		selection of required alfresco libraries and webapp (please refer to README-ant.txt for further info about the Ant
-		build). 
-		Last but not the least, m2 build is more likely to be maintained and improved (especially in the likely case Alfresco moves to
-		maven2). For more details on the m2 apprach please refer instead to README Section (or directly and to README-m2.txt of the generated project).
+		This archetype developed aims to provide a standardized approach to development, release and deployment of Alfresco extensions (as opposed to
+		AMP builds, to be released as a different artifact ). Using standard m2 lifecycle commands (mvn compile package deploy) and generally
+		available plugins (cargo, release, assembly) we are able to cover a very high percentage of Alfresco lifecycle common use cases. It can be
+		used both with Maven2 and Ant build systems, but it must be clear that *only* the Maven2 approach provides all the automation features we will
+		describe in this website. In addition to that the m2 approach provides a zero-conf approach while ant requires (as usual) manual gathering and
+		selection of required alfresco libraries and webapp (please refer to README-ant.txt for further info about the Ant build). Last but not the
+		least, m2 build is more likely to be maintained and improved (especially in the likely case Alfresco moves to maven2). For more details on the
+		m2 apprach please refer instead to README Section (or directly and to README-m2.txt of the generated project).
 	</description>
+	<properties>
+		<svn.url>${svn.base.url}/trunk/maven-alfresco-archetypes/${artifactId}</svn.url>
+		<site.url>https://repository.sourcesense.com/maven2-sites/maven-alfresco-archetypes/${pom.artifactId}</site.url>
+	</properties>
+	<scm>
+		<developerConnection>scm:svn:${svn.url}</developerConnection>
+		<url>${svn.url}</url>
+	</scm>
 	<build>
 		<extensions>
 			<extension>
@@ -51,7 +58,17 @@
 			<!-- Unreleased version of webdav wagon plugin which fixes a boring stacktrace logging from this provider. 
 				FIXME: Improve the fix and submit the patch 
 			-->
-			
+
 		</extensions>
 	</build>
+	<distributionManagement>
+		<repository>
+			<id>ss-public</id>
+			<url>scp://repository.sourcesense.com/var/www/demo.sourcesense.com/maven2</url>
+		</repository>
+		<site>
+			<id>ss-site-public</id>
+			<url>scp://repository.sourcesense.com/var/www/demo.sourcesense.com/maven2-sites/${pom.artifactId}</url>
+		</site>
+	</distributionManagement>
 </project>
