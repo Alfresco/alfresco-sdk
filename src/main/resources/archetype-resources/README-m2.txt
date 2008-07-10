@@ -65,7 +65,7 @@ Lifecycle HOWTO - Usage
 
 --- Fast one shot build and embedded jetty run-war|run-exploded  [and restore bootstrap] [and customize webappName] [and integrate LDAP]:
 
-' MAVEN_OPTS="-Xms256m -Xmx512m -XX:PermSize=128m mvn jetty:run-war|jetty:run-exploded [-Denv=yourEnv] [-DrestoreVersion=versionToRestore] [-DwebappName=yourCustomWebappName] [-Denterprise] ' 
+' MAVEN_OPTS="-Xms256m -Xmx512m -XX:PermSize=128m mvn integration-test [-Denv=yourEnv] [-DrestoreVersion=versionToRestore] [-DwebappName=yourCustomWebappName] [-Denterprise] ' 
 
 (default env=src/main/properties/local/application.properties)
 
