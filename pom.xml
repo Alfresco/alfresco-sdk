@@ -30,7 +30,7 @@
 		<svn.base.url>https://maven-alfresco-archetypes.googlecode.com/svn</svn.base.url>
 		<svn.url>${svn.base.url}/trunk/${artifactId}</svn.url>
 		<svn.tags.url>${svn.base.url}/tags</svn.tags.url>
-		<site.url>https://repository.sourcesense.com/maven2-sites/${pom.artifactId}-${pom.version}</site.url>
+		<site.url>https://repository.sourcesense.com/maven2-sites/${pom.artifactId}</site.url>
 		<!-- These redundancies are due to filtering issues of Maven. See here http://maven.apache.org/plugins/maven-site-plugin/usage.html -->
 		<site_pom_description>${pom.description}</site_pom_description>
 		<site_pom_url>${pom.organization.url}</site_pom_url>
