@@ -6,7 +6,7 @@
 
 
 
-Welcome to the Maven Alfresco Extension Archetype home
+Welcome to the Maven Alfresco AMP Archetype home
 
  You've reached the Sourcesense ({{ ${site_pom_url} }}) Maven Alfresco AMP archetype home page (version: ${site_pom_version}) 
 
@@ -25,7 +25,7 @@ Quick Start (maven2)
 --------------------------------------------
 mvn  org.apache.maven.plugins:maven-archetype-plugin:1.0-alpha-7:create  -DarchetypeGroupId=${site_pom_groupId} -DarchetypeVersion=${site_pom_version} \
 			-DarchetypeArtifactId=${site_pom_artifactId} \
-			-DgroupId=mycompany.com  -DartifactId=my-test-amp -Dversion=0.1-SNAPSHOT \
+			-DgroupId=mycompany.com  -DartifactId=mymodule -Dversion=0.1-SNAPSHOT \
 			-DremoteRepositories=http://repository.sourcesense.com/maven2 \
 			-DpomRemoteRepositories=http://repository.sourcesense.com/maven2
 --------------------------------------------
