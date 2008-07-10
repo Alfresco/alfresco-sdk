@@ -20,14 +20,14 @@
       <item name="Apache" href="http://www.apache.org/"/>
     </links>
 
-    <menu name="M2 Alfresco AMP Archetype">
+    <menu name="M2 Alfresco Extension Archetype">
 	  <item name="Introduction" href="/index.html"/>
 	  <item name="README" href="/readme.html"/>
       <item name="How To" href="http://wiki.alfresco.com/wiki/Managing_Alfresco_Lifecyle_with_Maven"/>
       <item name="Roadmap" href="http://forge.alfresco.com/docman/view.php/90/1645/ROADMAP.txt"/>
 	  <item name="FAQ" href="faq.html"/>
     </menu>
-    <menu ref="reports"/>
+    
 
   </body>
 </project>

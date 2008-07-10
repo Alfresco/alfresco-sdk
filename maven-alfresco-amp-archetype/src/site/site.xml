@@ -27,7 +27,6 @@
       <item name="Roadmap" href="http://forge.alfresco.com/docman/view.php/90/1645/ROADMAP.txt"/>
 	  <item name="FAQ" href="faq.html"/>
     </menu>
-    <menu ref="reports"/>
 
   </body>
 </project>

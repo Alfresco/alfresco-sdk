@@ -12,7 +12,7 @@
   <bannerLeft>
     <name>Maven alfresco archetypes - v. ${project.version}</name>
     <href>${site_site_url}</href>
-    <src>images/logo_noclaim.png</src>
+    <src>http://www.sourcesense.com/resources/images/top.gif</src>
   </bannerLeft>
   <body>
     <links>
