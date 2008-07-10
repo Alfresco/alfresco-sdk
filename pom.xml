@@ -22,6 +22,7 @@
 	<modules>
 		<module>maven-alfresco-amp-archetype</module>
 		<module>maven-alfresco-extension-archetype</module>
+		<module>maven-alfresco-archetypes-base</module>
 	</modules>
 	<properties>
 		<svn.base.url>https://maven-alfresco-archetypes.googlecode.com/svn</svn.base.url>
