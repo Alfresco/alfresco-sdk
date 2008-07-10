@@ -20,7 +20,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sourcesense.alfresco</groupId>
 	<artifactId>maven-alfresco-extension-archetype</artifactId>
-	<version>1.0.0</version>
+	<version>1.1.0-SNAPSHOT</version>
 	<packaging>maven-archetype</packaging>
 	<name>Maven alfresco Extension archetype</name>
 	<url>${site.url}</url>
@@ -30,7 +30,7 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<description>
-		This archetype developed within Sourcesense aims to provide a standardized approach to development, release and deployment of Alfresco extensions (as opposed to AMP builds, to be released as a different artifact ). 
+		This archetype developed aims to provide a standardized approach to development, release and deployment of Alfresco extensions (as opposed to AMP builds, to be released as a different artifact ). 
 		Using standard m2 lifecycle commands (mvn compile package deploy) and generally available plugins (cargo, release, assembly) 
 		we are able to cover a very high percentage of Alfresco lifecycle common use cases. 
 		It can be used both with Maven2 and Ant build systems, but it must be clear that *only* the Maven2 approach provides all the
