@@ -21,7 +21,6 @@ Known Issues:
 
 
 MAJOR:
-- maven-amp-plugin filtering broken
 
 
 MINOR:
@@ -30,13 +29,6 @@ file and not accepted by alfresco as valid module version number
 
 
 TRIVIAL:
-- Slighly different deployment for AMP and test WAR. In the test jetty
-war java classes are *not* packed in the war as in the AMP specification,
-but this *must* not have functional impacts on the application
 
 IMPROVEMENTS:
-- maven-amp-plugin is *heavily* redundant. must be simplified to package an 
-amp and process overlays
-- maven-amp-plugin could read maven dependencies and turn them into
-module dependencies in module.properties
 - maven-sql-plugin to autocreate jetty db
