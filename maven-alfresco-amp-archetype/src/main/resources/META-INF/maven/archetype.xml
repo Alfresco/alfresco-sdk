@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><archetype>
   <id>test</id>
   <sources>
-    <source>src/main/java/Demo.java</source>
-    <source>src/main/java/DemoComponent.java</source>
+    <source>src/main/java/com/sourcesense/demoamp/Demo.java</source>
+    <source>src/main/java/com/sourcesense/demoamp/DemoComponent.java</source>
   </sources>
   <resources>
     <resource>src/main/config/context/service-context.xml</resource>
