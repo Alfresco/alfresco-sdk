@@ -43,7 +43,12 @@
 		| -Dwebapp.name=<extensionName> -   name of the WAR artifact to be built (default: ${artifactId}-{version}.jar )
 		| -Denterprise   - Includes LDAP configuration as defined in application.properties
 	-->
-
+	<repositories>
+		<repository>
+			<id>ss-public</id>
+			<url>http://repository.sourcesense.com/maven2</url>
+		</repository>
+	</repositories>
 	<!-- Default properties -->
 	<properties>
 		<!-- src/main/properties/<env>/application.properties is loaded -->
@@ -155,6 +160,7 @@
 			<version>2.1.0</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<!-- Sample of AMP dependency that will be properly uncompressed in the Alfresco WAR (no more need for AMP): 
 		this can be either an AMP built with maven-amp-plugin and deployed on an accessible
 		maven repo or a generally available AMP previously deployed to a repo using mvn deploy:deploy-file
@@ -174,94 +180,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.0.3</version>
 		</dependency>
-
-		<!-- Other provided dependencies. Uncomment for development/test -->
-		<!-- dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring</artifactId>
-			<version>2.0</version>
-			<scope>provided</scope>
-			</dependency>
-			<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-mock</artifactId>
-			<version>2.0</version>
-			<scope>test</scope>
-			</dependency>
-		-->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- 
-			The following dependencies are possibly obsolete. Please check inside alfresco WAR lib folder which version you need to depend upon in case you
-			have classNotFoundException at runtime or you miss static linking for mvn eclipse:eclipse command.
-			Alfresco should adhere to a strict library naming policy or better build with maven ;)
-			
-			<dependency>
-			<groupId>javax.j2ee</groupId>
-			<artifactId>j2ee</artifactId>
-			<version>1.4</version>
-			<scope>provided</scope>
-			</dependency>
-			<dependency>
-			<groupId>xalan</groupId>
-			<artifactId>xalan</artifactId>
-			<version>2.7.0</version>
-			</dependency>
-			<dependency>
-			<groupId>org.apache.geronimo.specs</groupId>
-			<artifactId>geronimo-ejb_2.1_spec</artifactId>
-			<version>1.1</version>
-			</dependency>
-			<dependency>
-			<groupId>xerces</groupId>
-			<artifactId>xmlParserAPIs</artifactId>
-			<version>2.6.2</version>
-			<scope>test</scope>
-			</dependency>
-			<dependency>
-			<groupId>myfaces</groupId>
-			<artifactId>myfaces-api</artifactId>
-			<version>1.1.1</version>
-			<scope>provided</scope>
-			</dependency>
-			<dependency>
-			<groupId>javax.jcr</groupId>
-			<artifactId>jcr</artifactId>
-			<version>1.0</version>
-			<scope>provided</scope>
-			</dependency>
-			<dependency>
-			<groupId>portlet-api</groupId>
-			<artifactId>portlet-api</artifactId>
-			<version>1.0</version>
-			</dependency>
-			<dependency>
-			<groupId>jta</groupId>
-			<artifactId>jta</artifactId>
-			<version>1.0.1B</version>
-			</dependency>
-			<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging-api</artifactId>
-			<version>1.0.3</version>
-			<scope>provided</scope>
-			</dependency>
-			<dependency>
-			<groupId>dom4j</groupId>
-			<artifactId>dom4j</artifactId>
-			<version>1.6.1</version>
-			</dependency>
-			<dependency>
-			<groupId>commons-discovery</groupId>
-			<artifactId>commons-discovery</artifactId>
-			<version>20040218.194635</version>
-			<scope>provided</scope>
-			</dependency>
-		-->
 	</dependencies>
 
 	<build>
@@ -344,17 +268,6 @@
 				<artifactId>maven-site-plugin</artifactId>
 				<configuration>
 					<locales>en</locales>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.alfresco.maven.plugin</groupId>
-				<artifactId>maven-amp-plugin</artifactId>
-				<version>1.0.0</version>
-				<extensions>true</extensions>
-				<configuration>
-					<archive>
-						<addMavenDescriptor>false</addMavenDescriptor>
-					</archive>
 				</configuration>
 			</plugin>
 			<plugin>
