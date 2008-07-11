@@ -39,6 +39,12 @@
 			<url>http://repository.sourcesense.com/maven2</url>
 		</repository>
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>ss-public</id>
+			<url>http://repository.sourcesense.com/maven2</url>
+		</pluginRepository>
+	</pluginRepositories>
 	<properties>
 		<!--Default for which src/main/properties/<env>/application.properties is loaded. NB: 
 			used only for the 'test' profile (e.g. '-P test' on the mvn commandline)
