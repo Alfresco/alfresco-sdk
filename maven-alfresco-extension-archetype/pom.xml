@@ -20,14 +20,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sourcesense.alfresco</groupId>
 	<artifactId>maven-alfresco-extension-archetype</artifactId>
-	<version>1.1.1-SNAPSHOT</version>
+	<version>1.1.0-SNAPSHOT</version>
 	<packaging>maven-archetype</packaging>
 	<name>Maven alfresco Extension archetype</name>
 	<url>${site.url}</url>
 	<parent>
 		<groupId>com.sourcesense.alfresco</groupId>
 		<artifactId>maven-alfresco-archetypes</artifactId>
-		<version>1.0.1-SNAPSHOT</version>
+		<version>1.0.0</version>
 	</parent>
 	<description>
 		This archetype developed aims to provide a standardized approach to development, release and deployment of Alfresco extensions (as opposed to
