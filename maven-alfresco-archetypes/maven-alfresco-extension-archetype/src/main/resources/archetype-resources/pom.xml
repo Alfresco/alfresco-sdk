@@ -104,6 +104,10 @@
 				<enabled>false</enabled>
 			</releases>
 		</pluginRepository>
+		<pluginRepository>
+			<id>ss-public</id>
+			<url>http://repository.sourcesense.com/maven2</url>
+		</pluginRepository>
 	</pluginRepositories>
 	<!-- Uncomment SCM definitions in order to have mvn release:perform to actually tag the code
 		<scm>
@@ -151,16 +155,16 @@
 		</dependency>
 
 		<!-- Sample of AMP dependency that will be properly uncompressed in the Alfresco WAR (no more need for AMP): 
-		this can be either an AMP built with maven-amp-plugin and deployed on an accessible
-		maven repo or a generally available AMP previously deployed to a repo using mvn deploy:deploy-file
-		
-		<dependency>
+			this can be either an AMP built with maven-amp-plugin and deployed on an accessible
+			maven repo or a generally available AMP previously deployed to a repo using mvn deploy:deploy-file
+			
+			<dependency>
 			<scope>runtime</scope>
 			<type>amp</type>
 			<artifactId>recordsmanagement</artifactId>
 			<version>2.1.0</version>
 			<groupId>org.alfresco.community</groupId>
-		</dependency>
+			</dependency>
 		-->
 
 		<!-- Comment if you're not using mysql -->
