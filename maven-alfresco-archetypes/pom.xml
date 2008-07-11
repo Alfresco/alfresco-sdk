@@ -115,8 +115,13 @@
 					<smtpHost>mail.sourcesense.com</smtpHost>
 					<smtpPort implementation="java.lang.Integer">25</smtpPort>
 					<toAddresses>
-						<!-- <toAddress implementation="java.lang.String">sysadmin@sourcesense.com</toAddress>
-							<toAddress implementation="java.lang.String">alfresco@sourcesense.com</toAddress>-->
+						<!-- 
+						<toAddress implementation="java.lang.String">sysadmin@sourcesense.com</toAddress>
+						<toAddress implementation="java.lang.String">alfresco@sourcesense.com</toAddress>
+						<toAddress implementation="java.lang.String">alfresco-dev@lists.sourcesense.com</toAddress>
+						<toAddress implementation="java.lang.String">users@maven.apache.org</toAddress>
+						<toAddress implementation="java.lang.String">announce@maven.apache.org</toAddress>
+						-->
 						<toAddress implementation="java.lang.String">g.columbro@sourcesense.com</toAddress>
 					</toAddresses>
 					<username>${smtp.username}</username>
