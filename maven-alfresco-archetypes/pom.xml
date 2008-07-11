@@ -3,7 +3,7 @@
 	<groupId>com.sourcesense.alfresco</groupId>
 	<artifactId>maven-alfresco-archetypes</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>Maven Alfresco Archetypes base project</name>
 	<description>
 		This project is meant to gather all commons configurations and settings between the two maven-alfresco-*-archetypes, i.e.
@@ -37,8 +37,8 @@
 		<site_site_url>${site.url}</site_site_url>
 	</properties>
 	<scm>
-		<developerConnection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/tags/maven-alfresco-archetypes-1.0.0</developerConnection>
-		<url>https://maven-alfresco-archetypes.googlecode.com/svn/tags/maven-alfresco-archetypes-1.0.0</url>
+		<developerConnection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/trunk/maven-alfresco-archetypes</developerConnection>
+		<url>https://maven-alfresco-archetypes.googlecode.com/svn/trunk/maven-alfresco-archetypes</url>
 	</scm>
 	<repositories>
 		<repository>
