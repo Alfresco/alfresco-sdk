@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sourcesense.alfresco</groupId>
 	<artifactId>maven-alfresco-archetypes</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>Maven Alfresco Archetypes base project</name>
 	<description>
 		This project is meant to gather all commons configurations and settings between the two maven-alfresco-*-archetypes, i.e.
@@ -38,8 +37,8 @@
 		<site_site_url>${site.url}</site_site_url>
 	</properties>
 	<scm>
-		<developerConnection>scm:svn:${svn.url}</developerConnection>
-		<url>${svn.url}</url>
+		<developerConnection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/tags/maven-alfresco-archetypes-1.0.0</developerConnection>
+		<url>https://maven-alfresco-archetypes.googlecode.com/svn/tags/maven-alfresco-archetypes-1.0.0</url>
 	</scm>
 	<repositories>
 		<repository>
