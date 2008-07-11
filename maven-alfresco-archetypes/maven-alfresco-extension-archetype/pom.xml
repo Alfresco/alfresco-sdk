@@ -68,7 +68,7 @@
 					<!-- useEditMode>true</useEditMode>-->
 					<!--  dryRun>true</dryRun-->
 					<preparationGoals>clean package</preparationGoals>
-					<goals>deploy site:deploy</goals>
+					<goals>deploy site:site site:deploy</goals>
 					<tagBase>${svn.tags.url}</tagBase>
 				</configuration>
 			</plugin>
