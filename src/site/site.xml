@@ -23,10 +23,17 @@
     <menu name="M2 Alfresco AMP Archetype">
 	  <item name="Introduction" href="/index.html"/>
 	  <item name="README" href="/readme.html"/>
-      <item name="How to" href="http://wiki.alfresco.com/wiki/Managing_Alfresco_Lifecyle_with_Maven"/>
-      <item name="Roadmap" href="http://forge.alfresco.com/docman/view.php/90/1645/ROADMAP.txt"/>
+	  <item name="Generated Project Layout " href="layout.html"/>
 	  <item name="FAQ" href="faq.html"/>
     </menu>
-
+    
+    <menu name="See also">
+	  <item name="Maven Alfresco Extension Archetype" href="http://repository.sourcesense.com/maven2-sites/maven-alfresco-extension-archetype"/>    
+	  <item name="Maven AMP Plugin" href="http://repository.sourcesense.com/maven2-sites/maven-amp-plugin"/>    
+	  <item name="Alfresco AMP files" href="http://wiki.alfresco.com/wiki/AMP_Files" />
+    </menu>
+    
+	<menu ref="reports" />
+	
   </body>
 </project>
