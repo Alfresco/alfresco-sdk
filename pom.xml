@@ -22,7 +22,6 @@
 	<modules>
 		<module>maven-alfresco-amp-archetype</module>
 		<module>maven-alfresco-extension-archetype</module>
-		<module>maven-alfresco-archetypes-base</module>
 	</modules>
 	<properties>
 		<svn.base.url>https://maven-alfresco-archetypes.googlecode.com/svn</svn.base.url>
@@ -132,23 +131,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.0-beta-7</version>
-				<configuration>
-					<!-- useEditMode>true</useEditMode>-->
-					<!--  dryRun>true</dryRun-->
-					<preparationGoals>clean package</preparationGoals>
-					<goals>deploy site:site site:deploy</goals>
-					<tagBase>${svn.tags.url}</tagBase>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
 				<configuration>
 					<!-- useEditMode>true</useEditMode>-->
 					<dryRun>true</dryRun>
 					<preparationGoals>clean package</preparationGoals>
-					<goals>deploy site:site site:deploy</goals>
+					<goals>deploy</goals>
 					<tagBase>${svn.tags.url}</tagBase>
 				</configuration>
 			</plugin>
