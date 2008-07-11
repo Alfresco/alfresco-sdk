@@ -1,0 +1,44 @@
+ -----
+ Archetype Project Generated Layout
+ -----
+
+
+
+What do I have when I created the project?
+
+ You will encounter an AMP project structure, filtered with values you provided in creation phase,
+ which has the following layout:
+
+
+------------------------------------------------------------------
+ 
+ 
+src --------------------------------------------------------> (source folder)
+		|
+		|__ main ___ __ resources --------------------------> mapped in the classpath  
+		|			|			  |
+		|			|			  |__ alfresco/extension ---> alfresco overriding Spring contexts
+		|			|
+		|			|__ properties ------------------------->  environment aware application properties files  
+		|			|				|
+		|			|				|__ local  ------------->  default application.properties
+		|			|
+		|			|__ java ------------------------------->  customization java classes
+		|			|
+		|			|__ webapp -----------------------------> alfresco webapp overlay folder - this folder is overlayed (so may overwrite alfresco war)
+		|						|
+		|						|__ WEB-INF	----------------> drop in this folder WEB-INF custom / overwriting files (e.g. faces-config-custom.xml / web.xml)	
+		|			
+		|__ test
+
+tools --
+		|__ ant ---------------------------------------------> ant tools
+		|__ m2  ---------------------------------------------> maven2 tools
+		|__ export ------------------------------------------> support folder for automatic restore (drop acp+xml files here)
+		|__ mysql -------------------------------------------> mysql setup/remove scripts, filtered based on the profile into  
+
+target - Project build dir
+
+
+------------------------------------------------------------------
+

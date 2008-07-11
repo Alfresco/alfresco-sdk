@@ -63,16 +63,10 @@ Features (maven2 only):
 		Through Doxia also PDF and RTF output is supported from single sourced source files (apart from Doxia limitations) for easy enterprise integration. \
 		To test an example typing <<<mvn site:run>>> will run your site in jetty embedded on port 8080, with redeployment of site source files. 
 		To stage the site just type <<<mvn site:stage>>> and to deploy to remote site location, guess what, <<<mvn site:deploy>>>
-
-TODO:
-
-	See ${svn.url}/TODO.txt
-
-
-ROADMAP:
-
-	See ${svn.url}/ROADMAP.txt
-
+		
+	* <<Depenendency on AMP>>
+		Using the maven-amp-plugin as pre configured in the archetype we're able to handle 
+		AMP transitive dependencies and having them packaged in the WAR
 
 REFERENCES:
 
