@@ -64,20 +64,17 @@ all AMP and WAR dependencies specified) also with a sensible default 'alfresco/e
 default alfresco run. Find these test configuaration files in 'src/test/resources' and environment dependent properties in src/test/properties/<env>/application.properties
 
 
-SOON TO COME:
-------------
-
-- Shared configuration (site + release + plugin config) with maven-alfresco-extension-archetype via super POM 
-
-
 PROJECT LAYOUT
 --------------
 
 src --------------------------------------------------------> (source folder)
 		|
-		|__ main ___ __ resources --------------------------> mapped in the classpath  (alfresco module config goes here, as well as other classpath resources) 
-		|			|			  |							  NB: best practice groupId.artifactId=moduleId is used by the archetype and by the AMP unpacker
-		|			|			  |__ ex: alfresco/module/com.sourcesense.${artifactId} ---> Example Alfresco module config 
+		|__ main ___ __ resources --------------------------> mapped in the classpath. Add here classpath resources
+		|			|
+		|			|__ config-----   alfresco module config goes here.
+		|			|			  |	  Get's copied (by best practice) by build into package alfresco/module/groupId.artifactId.
+		|			|			  |   This convention is used by the archetype and by the AMP unpacker.
+		|			|			  |__ ex: alfresco/module/com.sourcesense.alfresco.mymodule ---> Example Alfresco module config 
 		|			|
 		|			|
 		|			|__ java ------------------------------->  customization java classes
@@ -92,38 +89,7 @@ src --------------------------------------------------------> (source folder)
 		|			|			  |
 		|			|			  |__ local  ------------->  default application.properties
 		|			|
+		|
+		target - Project build dir
 
-target - Project build dir
 
-
-FAQ:
-----
---- Eclipse configuration
--Run ' mvn eclipse:eclipse ' 
--hit "Refresh" on your Eclipse project
-
---- Db access problems:
-Remember to setup appropriate permissions for selected db / build profile.
-You can either edit accordingly and then run: mysql -u root < tools/mysql/db_setup.sql 
-
-or if you use POM property 'alfresco.db.name' you have sql files already filtered (after process-resources phase) in
-
-mysql -u root -p < target/classes/tools/[db_setup,db_remove].sql   
-
---- Out of memory errors:
-Run your build with :
-MAVEN_OPTS="-Xms256m -Xmx512m -XX:PermSize=128m" mvn ... ...
-
---- Content integrity errors on restore running with jetty embedded
-Did you remove also alf_data_jetty apart from the alf_jetty db ?
-
---- Release Problems with LC_ALL
-If underlying svn complains about LC_ALL variable please consider running your release prepending:
-LC_ALL="C"  (macosx environments, see http://svn.haxx.se/users/archive-2006-07/0320.shtml)
-
--- Deploy a generally available AMP into a maven repo for dependency usage
-
-mvn deploy:deploy-file -DrepositoryId=repo
--Dfile=/Users/youruser/projectz/alfresco/alfresco-recordsmanagement-2.1.0.amp 
--DgroupId=org.alfresco.community -DartifactId=recordsmanagement -Dversion=2.1.0 
--Dpackaging=amp -Durl=scp://...
