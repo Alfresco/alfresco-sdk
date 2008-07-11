@@ -33,11 +33,6 @@
 	 -->
 	<version>${version}</version>
 	<description>Test AMP project</description>
-	<parent>
-		<groupId>com.sourcesense.alfresco</groupId>
-		<artifactId>maven-alfresco-archetypes-base</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-	</parent>
 	<repositories>
 		<repository>
 			<id>ss-public</id>
