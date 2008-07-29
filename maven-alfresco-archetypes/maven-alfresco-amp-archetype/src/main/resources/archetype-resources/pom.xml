@@ -22,14 +22,13 @@
 	<artifactId>${artifactId}</artifactId>
 	<packaging>amp</packaging>
 	<name>Maven Alfresco AMP Packaging Sample</name>
-	<!-- No shapshot or beta version, as this is used for filtering module.properties
-	
-	As in http://wiki.alfresco.com/wiki/Developing_an_Alfresco_Module:
+	<!-- An Alfresco version number must be of the form 1.2.3.4. Using 1.0-SNAPSHOT as the AMP version 
+	     will create an exception. See http://wiki.alfresco.com/wiki/Developing_an_Alfresco_Module:
 	
 	"The version number must be made up of numeric values separated by dots. For example '2.1.56' is a valid version number, '2.3.4a' is not. "
-	
-	If you want to use (and I do) maven snapshot capabilities than you could
-	remove the filtering and maintaining versions (pom and module.properties) aligned manually
+
+  In order to be able to use Maven snapshots we cannot use the <version/> below as the AMP module
+  version. Instead we use the buildnumber-maven-plugin. This requires a scm connection.
 	 -->
 	<version>${version}</version>
 	<description>Test AMP project</description>
@@ -118,8 +117,31 @@
 		</dependency>
 		<!-- Don't add here amp dependencies as it will break amp packaging -->
 	</dependencies>
+	<!-- The scm is required for the buildnumber-maven-plugin which is required for AMP version numbering -->
+	<scm>
+				<connection>scm:svn:http://domain.com/svn/trunk/</connection>
+				<developerConnection>scm:svn:https://${maven.username}@domain.com/svn/trunk/</developerConnection>
+				<url>http://domain.com/svn/trunk/</url>
+	</scm>
 	<build>
 		<plugins>
+			<plugin>
+		        <groupId>org.codehaus.mojo</groupId>
+		        <artifactId>buildnumber-maven-plugin</artifactId>
+		        <executions>
+		          <execution>
+		            <phase>validate</phase>
+		            <goals>
+		              <goal>create</goal>
+		            </goals>
+		          </execution>
+		        </executions>
+		        <configuration>
+		          <doCheck>false</doCheck>
+		          <doUpdate>false</doUpdate>
+		        </configuration>
+		      </plugin>
+
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
