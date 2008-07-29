@@ -69,6 +69,8 @@
 		-->
 		<alfresco.data.location>./alf_data_jetty</alfresco.data.location>
 		<alfresco.db.name>alf_jetty</alfresco.db.name>
+		<alfresco.db.username>alfresco</alfresco.db.username>
+		<alfresco.db.password>alfresco</alfresco.db.password>		
 		<webapp.log.level>error</webapp.log.level>
 		<webapp.log.dir>${project.build.directory}/</webapp.log.dir>
 		<!--  End of testing webapp specific properties -->
