@@ -243,6 +243,9 @@
 								<goals>
 									<goal>exploded</goal>
 								</goals>
+								<configuration>
+									<archiveClasses>true</archiveClasses>
+								</configuration>
 							</execution>
 						</executions>
 						<configuration>
