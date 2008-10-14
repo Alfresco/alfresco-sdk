@@ -66,6 +66,8 @@
 		-->
 		<alfresco.data.location>./alf_data_jetty</alfresco.data.location>
 		<alfresco.db.name>alf_jetty</alfresco.db.name>
+		<alfresco.db.username>alfresco</alfresco.db.username>
+		<alfresco.db.password>alfresco</alfresco.db.password>
 		<log.dir></log.dir>
 		<!-- Uncomment this property together with the <scm> section downwards
 			<svn.url>
