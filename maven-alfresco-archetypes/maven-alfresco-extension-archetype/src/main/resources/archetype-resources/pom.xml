@@ -66,7 +66,7 @@
 		-->
 		<alfresco.data.location>./alf_data_jetty</alfresco.data.location>
 		<alfresco.db.name>alf_jetty</alfresco.db.name>
-		<log.dir>${project.build.directory}/</log.dir>
+		<log.dir></log.dir>
 		<!-- Uncomment this property together with the <scm> section downwards
 			<svn.url>
 			https://mycompany.com/repos/my-test-project

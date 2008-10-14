@@ -72,7 +72,7 @@
 		<alfresco.db.username>alfresco</alfresco.db.username>
 		<alfresco.db.password>alfresco</alfresco.db.password>		
 		<webapp.log.level>error</webapp.log.level>
-		<webapp.log.dir>${project.build.directory}/</webapp.log.dir>
+		<webapp.log.dir></webapp.log.dir>
 		<!--  End of testing webapp specific properties -->
 		<!--  Module specific build time properties -->
 		<module.log.level>debug</module.log.level>
