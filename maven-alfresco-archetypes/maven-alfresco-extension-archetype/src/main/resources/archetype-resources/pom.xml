@@ -68,6 +68,11 @@
 		<alfresco.db.name>alf_jetty</alfresco.db.name>
 		<alfresco.db.username>alfresco</alfresco.db.username>
 		<alfresco.db.password>alfresco</alfresco.db.password>
+		<alfresco.version>2.1.0</alfresco.version>
+		<!-- Used for 2.1.0 -->
+		<desktop.action.package>org.alfresco.filesys.smb.server.repo.desk</desktop.action.package>
+		<!-- Used for 2.9.0+ -->
+		<!--desktop.action.package>org.alfresco.filesys.repo.desk</desktop.action.package-->
 		<log.dir></log.dir>
 		<!-- Uncomment this property together with the <scm> section downwards
 			<svn.url>
@@ -127,32 +132,32 @@
 		<dependency>
 			<groupId>alfresco.community</groupId>
 			<artifactId>alfresco</artifactId>
-			<version>2.1.0</version>
+			<version>${alfresco.version}</version>
 			<type>war</type>
 		</dependency>
 		<!-- All provided libs (as contained in the war dependency) but useful for development (e.g. IDE configuration) -->
 		<dependency>
 			<groupId>alfresco.community</groupId>
 			<artifactId>alfresco-web-client</artifactId>
-			<version>2.1.0</version>
+			<version>${alfresco.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>alfresco.community</groupId>
 			<artifactId>alfresco-core</artifactId>
-			<version>2.1.0</version>
+			<version>${alfresco.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>alfresco.community</groupId>
 			<artifactId>alfresco-repository</artifactId>
-			<version>2.1.0</version>
+			<version>${alfresco.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>alfresco.community</groupId>
 			<artifactId>alfresco-remote-api</artifactId>
-			<version>2.1.0</version>
+			<version>${alfresco.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -164,7 +169,7 @@
 			<scope>runtime</scope>
 			<type>amp</type>
 			<artifactId>recordsmanagement</artifactId>
-			<version>2.1.0</version>
+			<version>${alfresco.version}</version>
 			<groupId>org.alfresco.community</groupId>
 			</dependency>
 		-->

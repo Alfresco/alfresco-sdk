@@ -117,12 +117,12 @@
                   <webpath>http://${localname}/</webpath>
                </global>
                <action>
-                  <class>org.alfresco.filesys.smb.server.repo.desk.CheckInOutDesktopAction</class>
+                  <class>${desktop.action.package}.CheckInOutDesktopAction</class>
                   <name>CheckInOut</name>
                   <filename>__CheckInOut.exe</filename>
                </action>
                <action>
-                  <class>org.alfresco.filesys.smb.server.repo.desk.JavaScriptDesktopAction</class>
+                  <class>${desktop.action.package}.JavaScriptDesktopAction</class>
                   <name>JavaScriptURL</name>
                   <filename>__ShowDetails.exe</filename>
                   <script>alfresco/desktop/showDetails.js</script>
