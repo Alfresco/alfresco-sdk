@@ -1,0 +1,55 @@
+ -----
+ Maven AMP Plugin
+ -----
+
+
+
+
+Welcome to the Maven Alfresco AMP plugin home
+
+ You've reached the ({{ ${site_pom_url} }}) Maven Alfresco Extension archetype home page (version: ${site_pom_version}) 
+
+
+
+Description
+
+	${site_pom_description}
+
+
+References
+
+	Deployed at: {{ http://repository.sourcesense.com/maven2/org/alfresco/maven/plugin }}
+	
+	Maven usage:
+	
+	
+------------------------------------------		
+
+			<dependency>
+				<groupId>${site_pom_groupId}</groupId>
+				<artifactId>${site_pom_artifactId}</artifactId>
+				<version>${site_pom_version}</version>
+				<!-- Used to have AMP lifecycle available -->
+				<extensions>true</extensions>
+			</dependency>
+
+-------------------------------------------
+
+
+	using repository (either in POM or settings.xml) :
+	
+	
+------------------------------------------		
+
+			 <repository>
+	            <id>ss-public</id>
+	            <url>http://repository.sourcesense.com/maven2</url>
+	          </repository>
+
+-------------------------------------------
+
+
+Quick usage
+
+ Create a project using the maven-alfresco-amp-archetype (see {{ http://repository.sourcesense.com/maven2-sites/maven-alfresco-amp-archetype }} ).
+ 

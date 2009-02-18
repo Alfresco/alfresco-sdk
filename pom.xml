@@ -1,0 +1,180 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<artifactId>maven-plugins</artifactId>
+		<groupId>org.apache.maven.plugins</groupId>
+		<version>8</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.alfresco.maven.plugin</groupId>
+	<artifactId>maven-amp-plugin</artifactId>
+	<packaging>maven-plugin</packaging>
+	<name>Alfresco AMP Plugin</name>
+	<version>2.0.2-SNAPSHOT</version>
+	<description>
+		This plugin defines a lifecycle for Alfresco ECM Modules packaging (.amp), handles AMP transitive dependencies from AMP and WAR projects,
+		providing a more enterprise oriented support alternative to the Alfresco MMT (module management tool) usage. It is used by
+		maven-alfresco-amp-archetype in order to package and test run an AMP and by the maven-alfresco-extension-archetype to depend transitively upon
+		AMPs and WARs. It is a modification of the org.apache.maven.plugins:maven-war-plugin of which it uses the whole core infrastructure. See
+		${site.url} for more info
+	</description>
+	<url>${site.url}</url>
+	<prerequisites>
+		<maven>2.0.1</maven>
+	</prerequisites>
+	<issueManagement>
+		<system>GForge</system>
+		<url>https://forge.alfresco.com/tracker/?group_id=121</url>
+	</issueManagement>
+	<properties>
+		<svn.url>https://forge.alfresco.com/svn/maven4alfresco/amp-plugin/branches/2.0.0</svn.url>
+		<svn.tags.url>https://forge.alfresco.com/svn/maven4alfresco/amp-plugin/tags</svn.tags.url>
+		<site.url>https://repository.sourcesense.com/maven2-sites/${pom.artifactId}</site.url>
+		<site_pom_description>${pom.description}</site_pom_description>
+		<site_pom_url>${pom.url}</site_pom_url>
+		<site_pom_groupId>${pom.groupId}</site_pom_groupId>
+		<site_pom_artifactId>${pom.artifactId}</site_pom_artifactId>
+		<site_pom_version>${pom.version}</site_pom_version>
+		<site_tags_url>${svn.tags.url}</site_tags_url>
+	</properties>
+	<developers>
+		<developer>
+			<id>mindthegab</id>
+			<name>Gabriele Columbro</name>
+			<email>g.columbro@sourcesense.com</email>
+			<roles />
+			<organization>Sourcesense</organization>
+			<organizationUrl>http://www.sourcesense.com</organizationUrl>
+		</developer>
+		<developer>
+			<id>rdanner</id>
+			<name>Russ Danner</name>
+			<roles />
+			<organization>Rivet Logic</organization>
+		</developer>
+	</developers>
+
+	<scm>
+		<developerConnection>scm:svn:https://forge.alfresco.com/svn/maven4alfresco/amp-plugin/tags/maven-amp-plugin-2.0.0</developerConnection>
+		<url>https://forge.alfresco.com/svn/maven4alfresco/amp-plugin/tags/maven-amp-plugin-2.0.0</url>
+		<connection>scm:svn:https://forge.alfresco.com/svn/maven4alfresco/amp-plugin/tags/maven-amp-plugin-2.0.0</connection>
+
+	</scm>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-changes-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>announcement-generate</goal>
+						</goals>
+						<id>announcement-generate</id>
+					</execution>
+					<execution>
+						<goals>
+							<goal>announcement-mail</goal>
+						</goals>
+						<id>announcement-mail</id>
+					</execution>
+				</executions>
+				<!--  Automatically notifies the list when release is done. Please supply username and password in the command line -->
+				<configuration>
+					<smtpHost>mail.sourcesense.com</smtpHost>
+					<smtpPort implementation="java.lang.Integer">25</smtpPort>
+					<toAddresses>
+						<toAddress implementation="java.lang.String">sysadmin@sourcesense.com</toAddress>
+						<toAddress implementation="java.lang.String">alfresco@sourcesense.com</toAddress>
+						<toAddress implementation="java.lang.String">alfresco-dev@lists.sourcesense.com</toAddress>
+						<toAddress implementation="java.lang.String">users@maven.apache.org</toAddress>
+						<toAddress implementation="java.lang.String">announce@maven.apache.org</toAddress>
+					</toAddresses>
+					<username>${smtp.username}</username>
+					<password>${smtp.password}</password>
+					<fromDeveloperId>mindthegab</fromDeveloperId>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.0-beta-5</version>
+				<configuration>
+					<!-- useEditMode>true</useEditMode>-->
+					<!--  dryRun>true</dryRun-->
+					<preparationGoals>clean package</preparationGoals>
+					<goals>deploy site:site site:deploy changes:announcement-mail</goals>
+					<tagBase>${svn.tags.url}</tagBase>
+					<arguments>-Dgpg.skip=true</arguments>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+			<version>2.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-artifact</artifactId>
+			<version>2.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-archiver</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-utils</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.shared</groupId>
+			<artifactId>maven-plugin-testing-harness</artifactId>
+			<version>1.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<distributionManagement>
+		<repository>
+			<id>ss-public</id>
+			<url>scp://repository.sourcesense.com/var/www/demo.sourcesense.com/maven2</url>
+		</repository>
+  		<snapshotRepository>
+			<id>ss-public</id>
+			<name>SS public repo</name>
+			<url>scp://repository.sourcesense.com/var/www/demo.sourcesense.com/maven2-snapshots</url>
+		</snapshotRepository>
+		<site>
+			<id>ss-site-public</id>
+			<url>scp://repository.sourcesense.com/var/www/demo.sourcesense.com/maven2-sites/${pom.artifactId}</url>
+		</site>
+	</distributionManagement>
+</project>
