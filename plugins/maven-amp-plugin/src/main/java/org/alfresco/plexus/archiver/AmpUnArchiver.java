@@ -35,6 +35,7 @@ public class AmpUnArchiver extends AbstractZipUnArchiver {
 
 	private static String fileSeparator = System.getProperty("file.separator");
 	
+	
 	public void setArchiveFilters( List filters )
 	{
 		filterSupport = new FilterSupport( filters, getLogger() );
@@ -126,7 +127,7 @@ public class AmpUnArchiver extends AbstractZipUnArchiver {
 
 
 	private String getAmpMapping(String name) {
-		if(name.startsWith("web"+ fileSeparator) && !name.startsWith("web"+ fileSeparator +"licenses"))
+		if(name.startsWith("web/") && !name.startsWith("web/licenses"))
 		{
 			return name.substring(4);
 		}
@@ -136,7 +137,7 @@ public class AmpUnArchiver extends AbstractZipUnArchiver {
 			{
 				String relativePath = "";
 				
-				if((name.startsWith("config"+fileSeparator)))
+				if((name.startsWith("config/")))
 				{
 					relativePath = name.substring(7);
 				}
@@ -186,8 +187,12 @@ public class AmpUnArchiver extends AbstractZipUnArchiver {
 			Date entryDate, boolean isDirectory )
 	throws IOException
 	{
-		File f = FileUtils.resolveFile( dir, entryName );
-
+		File f = null;
+		if (entryName != null && !"".equals(entryName))
+			f = FileUtils.resolveFile( dir, entryName );
+		else
+			return;
+		
 		try
 		{
 			if ( !isOverwrite() && f.exists() && f.lastModified() >= entryDate.getTime() )

@@ -7,8 +7,6 @@ import org.alfresco.maven.plugin.amp.Overlay;
 import org.codehaus.plexus.archiver.ArchiverException;
 import org.codehaus.plexus.archiver.jar.ManifestException;
 
-import sun.util.logging.resources.logging;
-
 import java.io.File;
 import java.io.IOException;
 
