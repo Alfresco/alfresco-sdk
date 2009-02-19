@@ -151,16 +151,16 @@
 	<distributionManagement>
 		<repository>
 			<id>ss-public</id>
-			<url>scp://repository.sourcesense.com/var/www/demo.sourcesense.com/maven2</url>
+			<url>scp://repository.sourcesense.com/var/www/repository.sourcesense.com/maven2</url>
 		</repository>
   		<snapshotRepository>
 			<id>ss-public</id>
 			<name>SS public repo</name>
-			<url>scp://repository.sourcesense.com/var/www/demo.sourcesense.com/maven2-snapshots</url>
+			<url>scp://repository.sourcesense.com/var/www/repository.sourcesense.com/maven2-snapshots</url>
 		</snapshotRepository>
 		<site>
 			<id>ss-site-public</id>
-			<url>scp://repository.sourcesense.com/var/www/demo.sourcesense.com/maven2-sites/${pom.artifactId}</url>
+			<url>scp://repository.sourcesense.com/var/www/repository.sourcesense.com/maven2-sites/${pom.artifactId}</url>
 		</site>
 	</distributionManagement>
 </project>
