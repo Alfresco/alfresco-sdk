@@ -19,7 +19,7 @@
 	</description>
 	<url>${site.url}</url>
 	<prerequisites>
-		<maven>2.0.9</maven>
+		<maven>2.0.8</maven>
 	</prerequisites>
 	<issueManagement>
 		<system>GForge</system>
@@ -71,20 +71,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-changes-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>announcement-generate</goal>
-						</goals>
-						<id>announcement-generate</id>
-					</execution>
-					<execution>
-						<goals>
-							<goal>announcement-mail</goal>
-						</goals>
-						<id>announcement-mail</id>
-					</execution>
-				</executions>
 				<!--  Automatically notifies the list when release is done. Please supply username and password in the command line -->
 				<configuration>
 					<smtpHost>mail.sourcesense.com</smtpHost>
