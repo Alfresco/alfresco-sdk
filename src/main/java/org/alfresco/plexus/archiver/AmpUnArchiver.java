@@ -141,6 +141,10 @@ public class AmpUnArchiver extends AbstractZipUnArchiver {
 				{
 					relativePath = name.substring(7);
 				}
+				else if((name.startsWith("lib/")))
+				{
+					relativePath = name.substring(4);
+				}
 				else
 					relativePath = FileUtils.removePath(name);
 
