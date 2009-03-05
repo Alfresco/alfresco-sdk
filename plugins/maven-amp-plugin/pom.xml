@@ -26,8 +26,8 @@
 		<url>https://forge.alfresco.com/tracker/?group_id=121</url>
 	</issueManagement>
 	<properties>
-		<svn.url>http://maven-alfresco-archetypes.googlecode.com/svn/trunk/plugins/maven-amp-plugin</svn.url>
-		<svn.tags.url>http://maven-alfresco-archetypes.googlecode.com/svn/tags</svn.tags.url>
+		<svn.url>https://maven-alfresco-archetypes.googlecode.com/svn/trunk/plugins/maven-amp-plugin</svn.url>
+		<svn.tags.url>https://maven-alfresco-archetypes.googlecode.com/svn/tags</svn.tags.url>
 		<site.url>https://repository.sourcesense.com/maven2-sites/${pom.artifactId}</site.url>
 		<site_pom_description>${pom.description}</site_pom_description>
 		<site_pom_url>${pom.url}</site_pom_url>
