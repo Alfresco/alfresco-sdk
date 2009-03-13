@@ -39,7 +39,6 @@
 					<goals>deploy</goals>
 					<tagBase>https://maven-alfresco-archetypes.googlecode.com/svn/tags</tagBase>
 					<useEditMode>true</useEditMode>
-					<username>g.columbro</username>
 				</configuration>
 			</plugin>
 		</plugins>
