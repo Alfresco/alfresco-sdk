@@ -7,8 +7,8 @@
 	<name>maven-nosnapshot-plugin Maven Mojo</name>
 	<url>http://maven.apache.org</url>
 	<scm>
-		<developerConnection>scm:svn:h https://maven-alfresco-archetypes.googlecode.com/svn/trunk/plugins/maven-nosnapshot-plugin</developerConnection>
-		<url> https://maven-alfresco-archetypes.googlecode.com/svn/trunk/plugins/maven-nosnapshot-plugin</url>
+		<developerConnection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/trunk/plugins/maven-nosnapshot-plugin</developerConnection>
+		<url>https://maven-alfresco-archetypes.googlecode.com/svn/trunk/plugins/maven-nosnapshot-plugin</url>
 	</scm>
 	<dependencies>
 		<dependency>
