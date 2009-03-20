@@ -17,6 +17,7 @@ package com.sourcesense.maven;
  */
 
 import java.text.MessageFormat;
+import java.util.regex.Pattern;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -49,9 +50,10 @@ public class NoSnapshotVersionMojo
     public void execute()
         throws MojoExecutionException
     {
-    	int indexOfDash = -1;
+    	int indexOfDash = version.indexOf("-");
+    	
     	String noSnapshotVersion = version;
-    	if((indexOfDash = version.indexOf("-SNAPSHOT")) != -1)
+    	if(Pattern.matches("[a-zA-Z]", version))
     	{
     		noSnapshotVersion = version.substring(0, indexOfDash);
     	}
