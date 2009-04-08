@@ -68,7 +68,7 @@
 		<alfresco.db.name>alf_jetty</alfresco.db.name>
 		<alfresco.db.username>alfresco</alfresco.db.username>
 		<alfresco.db.password>alfresco</alfresco.db.password>
-		<alfresco.version>2.1.0</alfresco.version>
+		<alfresco.version>3.0Stable</alfresco.version>
 		<!-- Used for 2.1.0 -->
 		<desktop.action.package>org.alfresco.filesys.smb.server.repo.desk</desktop.action.package>
 		<!-- Used for 2.9.0+ -->
@@ -130,35 +130,40 @@
 			| Jboss alfresco build (e.g. no log4j.properties and fix for myFaces) 
 		-->
 		<dependency>
-			<groupId>alfresco.community</groupId>
+			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco</artifactId>
 			<version>${alfresco.version}</version>
 			<type>war</type>
+			<classifier>labs</classifier>
 		</dependency>
 		<!-- All provided libs (as contained in the war dependency) but useful for development (e.g. IDE configuration) -->
 		<dependency>
-			<groupId>alfresco.community</groupId>
+			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-web-client</artifactId>
 			<version>${alfresco.version}</version>
 			<scope>provided</scope>
+			<classifier>labs</classifier>
 		</dependency>
 		<dependency>
-			<groupId>alfresco.community</groupId>
+			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-core</artifactId>
 			<version>${alfresco.version}</version>
 			<scope>provided</scope>
+			<classifier>labs</classifier>
 		</dependency>
 		<dependency>
-			<groupId>alfresco.community</groupId>
+			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-repository</artifactId>
 			<version>${alfresco.version}</version>
 			<scope>provided</scope>
+			<classifier>labs</classifier>
 		</dependency>
 		<dependency>
-			<groupId>alfresco.community</groupId>
+			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-remote-api</artifactId>
 			<version>${alfresco.version}</version>
 			<scope>provided</scope>
+			<classifier>labs</classifier>
 		</dependency>
 
 		<!-- Sample of AMP dependency that will be properly uncompressed in the Alfresco WAR (no more need for AMP): 
@@ -170,7 +175,7 @@
 			<type>amp</type>
 			<artifactId>recordsmanagement</artifactId>
 			<version>${alfresco.version}</version>
-			<groupId>org.alfresco.community</groupId>
+			<groupId>org.alfresco</groupId>
 			</dependency>
 		-->
 
@@ -192,13 +197,6 @@
 		<!-- Customize here your webapp name - default: alfresco.war -->
 		<finalName>${webapp.name}</finalName>
 		<!-- Used to access Sourcesense repository for writing. Public version not available, see README.txt -->
-		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-webdav</artifactId>
-				<version>1.0-beta-3</version>
-			</extension>
-		</extensions>
 		<!-- In certain cases we do build time filtering with the single sourcing application.properties -->
 		<filters>
 			<filter>src/main/properties/${env}/application.properties</filter>
