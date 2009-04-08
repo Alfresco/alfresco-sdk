@@ -22,7 +22,7 @@
 	<artifactId>maven-alfresco-amp-archetype</artifactId>
 	<packaging>maven-archetype</packaging>
 	<name>Maven Alfresco Amp Archetype</name>
-	<version>1.0.4-SNAPSHOT</version>
+	<version>1.0.4</version>
 	<description>
 		This archetype aims to provide a standardized approach to development, release and deployment of Alfresco AMPs (as opposed to Alfresco
 		extensions, released as a different artifact ). Using standard m2 lifecycle commands (mvn compile package deploy) and generally available
@@ -35,13 +35,13 @@
 		<site.url>https://repository.sourcesense.com/maven2-sites/maven-alfresco-archetypes/${pom.artifactId}</site.url>
 	</properties>
 	<scm>
-		<developerConnection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/trunk/maven-alfresco-archetypes/maven-alfresco-amp-archetype</developerConnection>
-		<url>https://maven-alfresco-archetypes.googlecode.com/svn/trunk/maven-alfresco-archetypes/maven-alfresco-amp-archetype</url>
+		<developerConnection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/tags/maven-alfresco-archetypes-1.0.4/maven-alfresco-amp-archetype</developerConnection>
+		<url>https://maven-alfresco-archetypes.googlecode.com/svn/tags/maven-alfresco-archetypes-1.0.4/maven-alfresco-amp-archetype</url>
 	</scm>
 	<parent>
 		<groupId>com.sourcesense.alfresco</groupId>
 		<artifactId>maven-alfresco-archetypes</artifactId>
-		<version>1.0.4-SNAPSHOT</version>
+		<version>1.0.4</version>
 	</parent>
 	<build>
 		<extensions>
