@@ -140,6 +140,7 @@
 		          </execution>
 		        </executions>
 		        <configuration>
+			  <revisionOnScmFailure>1</revisionOnScmFailure>
 		          <doCheck>false</doCheck>
 		          <doUpdate>false</doUpdate>
 		        </configuration>
