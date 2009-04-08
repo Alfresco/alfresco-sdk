@@ -134,7 +134,7 @@
 				<configuration>
 					<!-- useEditMode>true</useEditMode>-->
 					<preparationGoals>clean package</preparationGoals>
-					<goals>deploy</goals>
+					<goals>deploy site-deploy</goals>
 					<tagBase>${svn.tags.url}</tagBase>
 				</configuration>
 			</plugin>
