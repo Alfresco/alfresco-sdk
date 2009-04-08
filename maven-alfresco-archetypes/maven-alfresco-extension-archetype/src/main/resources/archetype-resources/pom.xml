@@ -70,7 +70,7 @@
 		<alfresco.db.password>alfresco</alfresco.db.password>
 		<alfresco.version>3.0Stable</alfresco.version>
 		<!-- Used for 2.1.0 -->
-		<desktop.action.package>org.alfresco.filesys.smb.server.repo.desk</desktop.action.package>
+		<desktop.action.package>org.alfresco.filesys.repo.desk</desktop.action.package>
 		<!-- Used for 2.9.0+ -->
 		<!--desktop.action.package>org.alfresco.filesys.repo.desk</desktop.action.package-->
 		<log.dir></log.dir>
