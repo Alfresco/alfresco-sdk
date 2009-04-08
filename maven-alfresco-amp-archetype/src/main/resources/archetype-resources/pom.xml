@@ -83,10 +83,11 @@
 	-->
 	<dependencies>
 		<dependency>
-			<groupId>alfresco.community</groupId>
+			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-repository</artifactId>
-			<version>2.1.0</version>
+			<version>3.0Stable</version>
 			<scope>provided</scope>
+			<classifier>labs</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -103,7 +104,7 @@
 		-->
 		<!-- Example AMP dependency:  will be properly overlayed in the  WAR produced by the integration-test phase in profile 'webapp'
 		<dependency>
-			<groupId>org.alfresco.community</groupId>
+			<groupId>org.alfresco</groupId>
 			<artifactId>recordsmanagement</artifactId>
 			<version>2.1.0</version>
 			<type>amp</type>
@@ -163,7 +164,7 @@
 					<overlays>
 						<!-- This sample adds records management module in the finally built AMP
 						<overlay>
-							<groupId>org.alfresco.community</groupId>
+							<groupId>org.org.alfresco</groupId>
 							<artifactId>recordsmanagement</artifactId>
 							<version>2.1.0</version>
 							<type>amp</type>
@@ -350,10 +351,11 @@
 			<dependencies>
 				<!-- This is the alfresco version you're testing the AMP against. Don't remove if you want jetty to be able to deploy a WAR :) -->
 				<dependency>
-					<groupId>alfresco.community</groupId>
+					<groupId>org.alfresco</groupId>
 					<artifactId>alfresco</artifactId>
-					<version>2.1.0</version>
+					<version>3.0Stable</version>
 					<type>war</type>
+					<classifier>labs</classifier>
 				</dependency>
 			</dependencies>
 		</profile>
