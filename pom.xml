@@ -1,9 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.alfresco</groupId>
 	<artifactId>maven-alfresco-lifecycle</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>Maven Alfresco Lifecycle support base project</name>
 	<parent>
 		<groupId>com.sourcesense.maven</groupId>
@@ -45,9 +46,9 @@
 		<site_site_url>${site.url}</site_site_url>
 	</properties>
 	<scm>
-		<connection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/trunk</connection>
-		<developerConnection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/trunk</developerConnection>
-		<url>https://maven-alfresco-archetypes.googlecode.com/svn/trunk</url>
+		<connection>scm:svn:${svn.url}</connection>
+		<developerConnection>scm:svn:${svn.url}</developerConnection>
+		<url>${svn.url}</url>
 	</scm>
 	<repositories>
 		<repository>
