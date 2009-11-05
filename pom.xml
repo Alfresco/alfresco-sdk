@@ -3,7 +3,7 @@
 	<groupId>org.alfresco</groupId>
 	<artifactId>maven-alfresco-lifecycle</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>Maven Alfresco Lifecycle support base project</name>
 	<parent>
 		<groupId>com.sourcesense.maven</groupId>
@@ -45,9 +45,9 @@
 		<site_site_url>${site.url}</site_site_url>
 	</properties>
 	<scm>
-		<connection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/tags/maven-alfresco-lifecycle-1.0.0</connection>
-		<developerConnection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/tags/maven-alfresco-lifecycle-1.0.0</developerConnection>
-		<url>https://maven-alfresco-archetypes.googlecode.com/svn/tags/maven-alfresco-lifecycle-1.0.0</url>
+		<connection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/trunk</connection>
+		<developerConnection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/trunk</developerConnection>
+		<url>https://maven-alfresco-archetypes.googlecode.com/svn/trunk</url>
 	</scm>
 	<repositories>
 		<repository>
