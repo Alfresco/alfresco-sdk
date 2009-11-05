@@ -18,16 +18,14 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.sourcesense.alfresco</groupId>
 	<artifactId>maven-alfresco-extension-archetype</artifactId>
-	<version>1.1.5-SNAPSHOT</version>
 	<packaging>maven-archetype</packaging>
 	<name>Maven alfresco Extension archetype</name>
-	<url>${site.url}</url>
+	<url>${project.artifactId}</url>
 	<parent>
 		<groupId>com.sourcesense.alfresco</groupId>
 		<artifactId>maven-alfresco-archetypes</artifactId>
-		<version>1.0.5-SNAPSHOT</version>
+		<version>1.9.0-SNAPSHOT</version>
 	</parent>
 	<description>
 		This archetype developed aims to provide a standardized approach to development, release and deployment of Alfresco extensions (as opposed to
@@ -39,14 +37,6 @@
 		least, m2 build is more likely to be maintained and improved (especially in the likely case Alfresco moves to maven2). For more details on the
 		m2 apprach please refer instead to README Section (or directly and to README-m2.txt of the generated project).
 	</description>
-	<properties>
-		<svn.url>${svn.base.url}/trunk/maven-alfresco-archetypes/${artifactId}</svn.url>
-		<site.url>https://repository.sourcesense.com/maven2-sites/maven-alfresco-archetypes/${pom.artifactId}</site.url>
-	</properties>
-	<scm>
-		<developerConnection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/trunk/maven-alfresco-archetypes/maven-alfresco-extension-archetype</developerConnection>
-		<url>https://maven-alfresco-archetypes.googlecode.com/svn/trunk/maven-alfresco-archetypes/maven-alfresco-extension-archetype</url>
-	</scm>
 	<build>
 		<extensions>
 			<extension>
@@ -57,31 +47,6 @@
 			<!-- Unreleased version of webdav wagon plugin which fixes a boring stacktrace logging from this provider. 
 				FIXME: Improve the fix and submit the patch 
 			-->
-
-		</extensions>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.0-beta-7</version>
-				<configuration>
-					<!-- useEditMode>true</useEditMode>-->
-					<!--  dryRun>true</dryRun-->
-					<preparationGoals>clean package</preparationGoals>
-					<goals>deploy site:site site:deploy</goals>
-					<tagBase>${svn.tags.url}</tagBase>
-				</configuration>
-			</plugin>
-		</plugins>
+		</extensions>	
 	</build>
-	<distributionManagement>
-		<repository>
-			<id>ss-public</id>
-			<url>scp://repository.sourcesense.com/var/www/repository.sourcesense.com/maven2</url>
-		</repository>
-		<site>
-			<id>ss-public</id>
-			<url>scp://repository.sourcesense.com/var/www/repository.sourcesense.com/maven2-sites/${pom.artifactId}</url>
-		</site>
-	</distributionManagement>
 </project>

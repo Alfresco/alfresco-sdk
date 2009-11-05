@@ -38,12 +38,6 @@
 		| -Dwebapp.name=<extensionName> -   name of the WAR artifact to be built (default: ${artifactId}-{version}.jar )
 		| -Denterprise   - Includes LDAP configuration as defined in application.properties
 	-->
-	<repositories>
-		<repository>
-			<id>ss-public</id>
-			<url>http://repository.sourcesense.com/maven2</url>
-		</repository>
-	</repositories>
 	<!-- Default properties -->
 	<properties>
 		<!-- src/main/properties/<env>/application.properties is loaded -->
@@ -95,25 +89,27 @@
 		| Alfresco Community dependencies are generally available in ss-public repo. 
 		| FIXME: Alfresco enterprise dependencies are only available on SS repo ATM. Alfresco *needs* to deliver their artifacts on (at least) partner repos
 		|-->
+	<repositories>
+		<repository>
+			<id>ss-public-mirror</id>
+			<url>http://repository.sourcesense.com/nexus/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>ss-public-snapshots-mirror</id>
+			<url>http://repository.sourcesense.com/nexus/content/groups/public-snapshots</url>
+		</repository>
+	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
-			<id>codehaus snapshot repository</id>
-			<url>http://snapshots.repository.codehaus.org/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</pluginRepository>
-		<pluginRepository>
-			<id>Maven Snapshots</id>
-			<url>http://snapshots.maven.codehaus.org/maven2/</url>
-			<snapshots></snapshots>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</pluginRepository>
-		<pluginRepository>
 			<id>ss-public</id>
-			<url>http://repository.sourcesense.com/maven2</url>
+			<url>http://repository.sourcesense.com/nexus/content/groups/public</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>ss-public-snapshots-mirror</id>
+			<url>http://repository.sourcesense.com/nexus/content/groups/public-snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
 	<!-- Uncomment SCM definitions in order to have mvn release:perform to actually tag the code
@@ -449,14 +445,6 @@
 			| Enable this repo in case of non publicly redistributable artifacts (Sourcesense private repositories via webdav)
 			|
 		-->
-		<repository>
-			<id>ss-private</id>
-			<url>dav:https://dev.sourcesense.com/repos/dev/maven2</url>
-		</repository>
-		<site>
-			<id>ss-site-private</id>
-			<url>dav:https://dev.sourcesense.com/cargo/maven2-sites</url>
-		</site>
 	</distributionManagement>
 
 	<!-- 

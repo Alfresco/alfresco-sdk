@@ -1,0 +1,24 @@
+<document>
+  <properties>
+    <title>Maven AMP plugin</title>
+  </properties>
+  <body>
+   <release version="3.0.0" date="2009-02-20" description="Alfresco 3.0 Reday  Public stable  release">
+    </release>
+
+    <release version="2.0.0" date="2008-07-06" description="Refactored Public release">
+      <action dev="mindthegab" type="add">
+			Now consistent maven plugin properties usage and support for AMP overlays and full AMP lifecycle
+      </action>
+       <action dev="mindthegab" type="add">
+			Added UnArchiver to mimic MMT behavior. Not needed anymore as AMPs gets properly unpacked into a WAR artifact. 
+      </action>
+      <action dev="mindthegab" type="add">
+            Added plugin site documentation
+      </action>
+      <action dev="mindthegab" type="add">
+       	 	Deployed on maven repository: http://repository.sourcesense.com/maven2/org/alfresco/maven/plugins
+      </action>
+    </release>
+  </body>
+</document>

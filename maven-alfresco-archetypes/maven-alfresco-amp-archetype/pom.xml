@@ -18,11 +18,9 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.sourcesense.alfresco</groupId>
 	<artifactId>maven-alfresco-amp-archetype</artifactId>
 	<packaging>maven-archetype</packaging>
 	<name>Maven Alfresco Amp Archetype</name>
-	<version>1.0.5-SNAPSHOT</version>
 	<description>
 		This archetype aims to provide a standardized approach to development, release and deployment of Alfresco AMPs (as opposed to Alfresco
 		extensions, released as a different artifact ). Using standard m2 lifecycle commands (mvn compile package deploy) and generally available
@@ -30,18 +28,11 @@
 		minutes to have a compatible AMP module built and its lifecycle supported by Maven, in a fully transparent way also with open source available
 		AMPs.
 	</description>
-	<properties>
-		<svn.url>${svn.base.url}/trunk/maven-alfresco-archetypes/${artifactId}</svn.url>
-		<site.url>https://repository.sourcesense.com/maven2-sites/maven-alfresco-archetypes/${pom.artifactId}</site.url>
-	</properties>
-	<scm>
-		<developerConnection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/trunk/maven-alfresco-archetypes/maven-alfresco-amp-archetype</developerConnection>
-		<url>https://maven-alfresco-archetypes.googlecode.com/svn/trunk/maven-alfresco-archetypes/maven-alfresco-amp-archetype</url>
-	</scm>
+	<url>${project.artifactId}</url>
 	<parent>
 		<groupId>com.sourcesense.alfresco</groupId>
 		<artifactId>maven-alfresco-archetypes</artifactId>
-		<version>1.0.5-SNAPSHOT</version>
+		<version>1.9.0-SNAPSHOT</version>
 	</parent>
 	<build>
 		<extensions>
@@ -51,29 +42,5 @@
 				<version>2.0-alpha-3</version>
 			</extension>
 		</extensions>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.0-beta-7</version>
-				<configuration>
-					<!-- useEditMode>true</useEditMode>-->
-					<!--  dryRun>true</dryRun-->
-					<preparationGoals>clean package</preparationGoals>
-					<goals>deploy site:site site:deploy</goals>
-					<tagBase>${svn.tags.url}</tagBase>
-				</configuration>
-			</plugin>
-		</plugins>
 	</build>
-	<distributionManagement>
-		<repository>
-			<id>ss-public</id>
-			<url>scp://repository.sourcesense.com/var/www/repository.sourcesense.com/maven2</url>
-		</repository>
-		<site>
-			<id>ss-public</id>
-			<url>scp://repository.sourcesense.com/var/www/repository.sourcesense.com/maven2-sites/${pom.artifactId}</url>
-		</site>
-	</distributionManagement>
 </project>
