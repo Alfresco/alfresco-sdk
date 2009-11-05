@@ -158,6 +158,7 @@
 					<goals>deploy site-deploy changes:announcement-generate
 						changes:announcement-mail site-deploy</goals>
 					<tagBase>${svn.tags.url}</tagBase>
+					<autoVersionSubmodules>false</autoVersionSubmodules>
 				</configuration>
 			</plugin>
 		</plugins>
