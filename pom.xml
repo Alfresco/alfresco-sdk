@@ -156,7 +156,7 @@
 					<!-- useEditMode>true</useEditMode>-->
 					<preparationGoals>clean package</preparationGoals>
 					<goals>deploy site-deploy changes:announcement-generate
-						changes:announcement-email site-deploy</goals>
+						changes:announcement-mail site-deploy</goals>
 					<tagBase>${svn.tags.url}</tagBase>
 				</configuration>
 			</plugin>
