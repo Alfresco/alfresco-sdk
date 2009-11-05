@@ -3,14 +3,14 @@
 	<groupId>com.sourcesense.maven</groupId>
 	<artifactId>maven-nosnapshot-plugin</artifactId>
 	<packaging>maven-plugin</packaging>
-	<version>0.0.5-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>Custom version manipulator Maven Plugin</name>
 	<description>It's non invasive and puts modified versions in configurable pom properties</description>
 	<url>${project.artifactId}</url>
 	<parent>
 		<groupId>org.alfresco</groupId>
 		<artifactId>maven-alfresco-lifecycle</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.0</version>
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 	<dependencies>
