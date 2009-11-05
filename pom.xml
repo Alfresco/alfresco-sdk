@@ -216,7 +216,7 @@
 		</snapshotRepository>
 		<site>
 			<id>ss-public-sites</id>
-			<url>http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/${project.artifactId}</url>
+			<url>dav:http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/${project.artifactId}</url>
 		</site>
 	</distributionManagement>
 </project>
