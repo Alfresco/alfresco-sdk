@@ -28,6 +28,10 @@
 	<description>Alfresco extension</description>
 	<!--
 		|
+		| Prerequisite:
+		| - Mysql local instance running and db alf_jetty created with permissions for alfresco/alfresco user.
+		|
+		| How it works:
 		| By default the project is overlayed to the alfresco war which depends upon and deployed as a WAR (local development and testing purposes)
 		| Available properties:
 		|
@@ -101,7 +105,7 @@
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
-			<id>ss-public</id>
+			<id>ss-public-mirror</id>
 			<url>http://repository.sourcesense.com/nexus/content/groups/public</url>
 		</pluginRepository>
 		<pluginRepository>
@@ -130,7 +134,7 @@
 			<artifactId>alfresco</artifactId>
 			<version>${alfresco.version}</version>
 			<type>war</type>
-			<classifier>labs</classifier>
+			<classifier>community</classifier>
 		</dependency>
 		<!-- All provided libs (as contained in the war dependency) but useful for development (e.g. IDE configuration) -->
 		<dependency>
@@ -138,28 +142,28 @@
 			<artifactId>alfresco-web-client</artifactId>
 			<version>${alfresco.version}</version>
 			<scope>provided</scope>
-			<classifier>labs</classifier>
+			<classifier>community</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-core</artifactId>
 			<version>${alfresco.version}</version>
 			<scope>provided</scope>
-			<classifier>labs</classifier>
+			<classifier>community</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-repository</artifactId>
 			<version>${alfresco.version}</version>
 			<scope>provided</scope>
-			<classifier>labs</classifier>
+			<classifier>community</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-remote-api</artifactId>
 			<version>${alfresco.version}</version>
 			<scope>provided</scope>
-			<classifier>labs</classifier>
+			<classifier>community</classifier>
 		</dependency>
 
 		<!-- Sample of AMP dependency that will be properly uncompressed in the Alfresco WAR (no more need for AMP): 
@@ -195,7 +199,7 @@
 		<!-- Used to access Sourcesense repository for writing. Public version not available, see README.txt -->
 		<!-- In certain cases we do build time filtering with the single sourcing application.properties -->
 		<filters>
-			<filter>src/main/properties/${env}/application.properties</filter>
+			<filter>src/main/properties/${env}/	application.properties</filter>
 		</filters>
 		<!-- Default profile to build as an Alfresco extension -  resources are copied into classpath-->
 		<resources>
@@ -229,7 +233,7 @@
 				<filtering>true</filtering>
 			</resource>
 			<resource>
-				<directory>tools/mysql</directory>
+				<directory>${project.basedire}tools/mysql</directory>
 				<includes>
 					<include>*.sql</include>
 				</includes>
@@ -287,7 +291,7 @@
 					<dependency>
 						<groupId>org.alfresco.maven.plugin</groupId>
 						<artifactId>maven-amp-plugin</artifactId>
-						<version>2.0.0</version>
+						<version>3.0.1-SNAPSHOT</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -306,6 +310,7 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.21</version>
 				<executions>
 					<!-- Runs jetty when 'integration-test' phase is called -->
 					<execution>
@@ -431,12 +436,12 @@
 			| Enable this repo in case of publicly redistributable artifacts (Sourcesense public repositories via ssh + public key )
 			|
 			<repository>
-			<id>ss-public</id>
+			<id>yourcompany</id>
 			<url>scp://yourcompany/var/maven2</url>
 			</repository>
 			<distributionManagement>
 			<site>
-			<id>ss-site-public</id>
+			<id>yourcompany-site</id>
 			<url>scp://yourcompany/var/maven2-sites</url>
 			</site>
 		-->

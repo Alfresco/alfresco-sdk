@@ -34,6 +34,7 @@
 		<resource>src/main/resources/alfresco/extension/web-client-config-custom.xml</resource>
 		<resource>src/main/resources/alfresco/extension/webclient.properties</resource>
 		<resource>src/main/resources/log4j.properties</resource>
+		<resource>src/main/webapp/WEB-INF/web.xml</resource>
 		<resource>src/main/webapp/WEB-INF/README-WEB-INF.txt</resource>
 		<resource>src/main/webapp/WEB-INF/faces-config-custom.xml</resource>
 		<resource>tools/ant/tasks/tomcat-tasks.properties</resource>

@@ -1,0 +1,645 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE web-app PUBLIC
+  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+  "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+   <display-name>Alfresco Web Client</display-name>
+
+   <description>Alfresco Web Client</description>
+
+   <context-param>
+      <param-name>org.jboss.jbossfaces.WAR_BUNDLES_JSF_IMPL</param-name>
+      <param-value>true</param-value>
+   </context-param>
+
+   <context-param>
+      <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+      <param-value>server</param-value>
+   </context-param>
+
+   <context-param>
+      <param-name>javax.faces.CONFIG_FILES</param-name>
+      <param-value>/WEB-INF/faces-config-app.xml,/WEB-INF/faces-config-beans.xml,/WEB-INF/faces-config-navigation.xml,/WEB-INF/faces-config-common.xml,/WEB-INF/faces-config-repo.xml,/WEB-INF/faces-config-wcm.xml,/WEB-INF/faces-config-custom.xml</param-value>
+   </context-param>
+
+   <context-param>
+      <param-name>org.apache.myfaces.ALLOW_JAVASCRIPT</param-name>
+      <param-value>true</param-value>
+   </context-param>
+
+   <context-param>
+      <param-name>org.apache.myfaces.DETECT_JAVASCRIPT</param-name>
+      <param-value>false</param-value>
+      <description>This is an EXPERIMENTAL feature, so leave it off for now!</description>
+   </context-param>
+
+   <context-param>
+      <param-name>org.apache.myfaces.SERIALIZE_STATE_IN_SESSION</param-name>
+      <param-value>false</param-value>
+      <description>Stop MyFaces from Serializing the state to the session</description>
+   </context-param>
+
+    <!-- TODO: Change this to false for production -->
+    <context-param>
+        <param-name>org.apache.myfaces.PRETTY_HTML</param-name>
+        <param-value>true</param-value>
+        <description>
+            If true, rendered HTML code will be formatted, so that it is "human readable".
+            i.e. additional line separators and whitespace will be written, that do not
+            influence the HTML code.
+            Default: "true"
+        </description>
+    </context-param>
+
+    <context-param>
+        <param-name>org.apache.myfaces.AUTO_SCROLL</param-name>
+        <param-value>false</param-value>
+        <description>
+            If true, a javascript function will be rendered that is able to restore the
+            former vertical scroll on every request. Convenient feature if you have pages
+            with long lists and you do not want the browser page to always jump to the top
+            if you trigger a link or button action that stays on the same page.
+            Default: "false"
+        </description>
+    </context-param>
+
+   <context-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/WEB-INF/web-application-context.xml</param-value>
+      <description>Spring config file location</description>
+   </context-param>
+   <context-param>
+      <param-name>contextClass</param-name>
+      <param-value>org.alfresco.config.JBossEnabledWebApplicationContext</param-value>
+      <description>Spring context class</description>
+   </context-param>
+   <context-param>
+      <param-name>log4jExposeWebAppRoot</param-name>
+      <param-value>false</param-value>
+      <description>Do not try to resolve web app root as file</description>
+   </context-param>
+
+	<!--  These were previously init params for the WebDAV servlet,
+	      but since they are also needed to MT-enable the 
+	      ExternalAccess servlet, I have made them context wide. -->
+   <context-param>
+         <param-name>store</param-name>
+         <param-value>workspace://SpacesStore</param-value>
+   </context-param>
+   <context-param>
+         <param-name>rootPath</param-name>
+         <param-value>/app:company_home</param-value>
+   </context-param>
+
+
+   <filter>
+      <filter-name>Authentication Filter</filter-name>
+      <description>Authentication filter mapped only to faces URLs. Other URLs generally use proprietary means to talk to the AuthenticationComponent</description>
+      <filter-class>org.alfresco.repo.web.filter.beans.BeanProxyFilter</filter-class>
+      <init-param>
+         <param-name>beanName</param-name>
+         <param-value>AuthenticationFilter</param-value>
+      </init-param>
+
+      <!-- For Novell IChain support use the following filter -->
+      <!--
+      <filter-class>org.alfresco.web.app.servlet.HTTPRequestAuthenticationFilter</filter-class>
+      <init-param>
+         <param-name>httpServletRequestAuthHeaderName</param-name>
+         <param-value>x-user</param-value>
+      </init-param>
+      <init-param>
+         <param-name>authPatternString</param-name>
+         <param-value>.*</param-value>
+      </init-param>
+      -->
+   </filter>
+   
+   <filter>
+      <filter-name>Global Authentication Filter</filter-name>
+      <description>Authentication filter mapped to all authenticated URLs (except web scripts). Mainly for NTLM support</description>
+      <filter-class>org.alfresco.repo.web.filter.beans.BeanProxyFilter</filter-class>
+      <init-param>
+         <param-name>beanName</param-name>
+         <param-value>GlobalAuthenticationFilter</param-value>
+      </init-param>
+   </filter>
+
+   <filter>
+      <filter-name>WebScript Authentication Filter</filter-name>
+      <description>Authentication filter mapped to web script URLs. Mainly for NTLM support</description>
+      <filter-class>org.alfresco.repo.web.filter.beans.BeanProxyFilter</filter-class>
+      <init-param>
+         <param-name>beanName</param-name>
+         <param-value>WebscriptAuthenticationFilter</param-value>
+      </init-param>
+   </filter>
+   
+   <filter>
+      <filter-name>WebDAV Authentication Filter</filter-name>
+      <filter-class>org.alfresco.repo.web.filter.beans.BeanProxyFilter</filter-class>
+      <init-param>
+         <param-name>beanName</param-name>
+         <param-value>WebDavAuthenticationFilter</param-value>
+      </init-param>
+   </filter>
+
+   <filter>
+      <filter-name>Admin Authentication Filter</filter-name>
+      <filter-class>org.alfresco.web.app.servlet.AdminAuthenticationFilter</filter-class>
+   </filter>
+
+   <filter-mapping>
+      <filter-name>Global Authentication Filter</filter-name>
+      <url-pattern>/navigate/*</url-pattern>
+   </filter-mapping>
+
+   <filter-mapping>
+      <filter-name>Global Authentication Filter</filter-name>
+      <url-pattern>/command/*</url-pattern>
+   </filter-mapping>
+
+   <filter-mapping>
+      <filter-name>Global Authentication Filter</filter-name>
+      <url-pattern>/download/*</url-pattern>
+   </filter-mapping>
+   
+   <filter-mapping>
+      <filter-name>Global Authentication Filter</filter-name>
+      <url-pattern>/template/*</url-pattern>
+   </filter-mapping>
+   
+   <filter-mapping>
+      <filter-name>Global Authentication Filter</filter-name>
+      <url-pattern>/n/*</url-pattern>
+   </filter-mapping>
+   
+   <filter-mapping>
+      <filter-name>Global Authentication Filter</filter-name>
+      <url-pattern>/c/*</url-pattern>
+   </filter-mapping>
+
+   <filter-mapping>
+      <filter-name>Global Authentication Filter</filter-name>
+      <url-pattern>/t/*</url-pattern>
+   </filter-mapping>
+   
+   <filter-mapping>
+      <filter-name>Global Authentication Filter</filter-name>
+      <url-pattern>/d/*</url-pattern>
+   </filter-mapping>
+   
+   <filter-mapping>
+      <filter-name>WebScript Authentication Filter</filter-name>
+      <url-pattern>/wcservice/*</url-pattern>
+   </filter-mapping>
+   
+   <filter-mapping>
+      <filter-name>WebScript Authentication Filter</filter-name>
+      <url-pattern>/wcs/*</url-pattern>
+   </filter-mapping>
+   
+   <filter-mapping>
+      <filter-name>Global Authentication Filter</filter-name>
+      <url-pattern>/ajax/*</url-pattern>
+   </filter-mapping>
+   
+   <filter-mapping>
+      <filter-name>Global Authentication Filter</filter-name>
+      <url-pattern>/faces/*</url-pattern>
+   </filter-mapping>
+
+   <filter-mapping>
+      <filter-name>Authentication Filter</filter-name>
+      <url-pattern>/faces/*</url-pattern>
+   </filter-mapping>
+
+   <filter-mapping>
+      <filter-name>WebDAV Authentication Filter</filter-name>
+      <url-pattern>/webdav/*</url-pattern>
+   </filter-mapping>
+
+   <filter-mapping>
+      <filter-name>Admin Authentication Filter</filter-name>
+      <url-pattern>/faces/jsp/admin/*</url-pattern>
+   </filter-mapping>
+
+   <filter-mapping>
+      <filter-name>Admin Authentication Filter</filter-name>
+      <url-pattern>/faces/jsp/categories/*</url-pattern>
+   </filter-mapping>
+
+   <filter-mapping>
+      <filter-name>Admin Authentication Filter</filter-name>
+      <url-pattern>/faces/jsp/groups/*</url-pattern>
+   </filter-mapping>
+
+   <filter-mapping>
+      <filter-name>Admin Authentication Filter</filter-name>
+      <url-pattern>/faces/jsp/users/delete-user.jsp</url-pattern>
+   </filter-mapping>
+
+   <filter-mapping>
+      <filter-name>Admin Authentication Filter</filter-name>
+      <url-pattern>/faces/jsp/users/users.jsp</url-pattern>
+   </filter-mapping>
+
+   <filter-mapping>
+      <filter-name>Admin Authentication Filter</filter-name>
+      <url-pattern>/faces/jsp/admin/system-info.jsp</url-pattern>
+   </filter-mapping>
+
+
+   <listener>
+      <listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
+   </listener>
+
+   <listener>
+      <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+   </listener>
+   
+   <listener>
+      <listener-class>org.alfresco.web.app.ContextLoaderListener</listener-class>
+   </listener>
+
+   <listener>
+      <listener-class>org.alfresco.web.app.ContextListener</listener-class>
+   </listener>
+
+   <!-- Faces Servlet -->
+   <servlet>
+      <servlet-name>Faces Servlet</servlet-name>
+      <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+      <load-on-startup>1</load-on-startup>
+   </servlet>
+
+   <servlet>
+      <servlet-name>uploadFile</servlet-name>
+      <servlet-class>org.alfresco.web.app.servlet.UploadFileServlet</servlet-class>
+   </servlet>
+
+   <servlet>
+      <servlet-name>uploadContent</servlet-name>
+      <servlet-class>org.alfresco.web.app.servlet.UploadContentServlet</servlet-class>
+   </servlet>
+
+   <servlet>
+      <servlet-name>downloadContent</servlet-name>
+      <servlet-class>org.alfresco.web.app.servlet.DownloadContentServlet</servlet-class>
+   </servlet>
+
+   <servlet>
+      <servlet-name>downloadRawContent</servlet-name>
+      <servlet-class>org.alfresco.web.app.servlet.DownloadRawContentServlet</servlet-class>
+   </servlet>
+
+   <servlet>
+      <servlet-name>guestDownloadContent</servlet-name>
+      <servlet-class>org.alfresco.web.app.servlet.GuestDownloadContentServlet</servlet-class>
+   </servlet>
+
+   <servlet>
+      <servlet-name>guestTemplateContent</servlet-name>
+      <servlet-class>org.alfresco.web.app.servlet.GuestTemplateContentServlet</servlet-class>
+   </servlet>
+
+   <servlet>
+      <servlet-name>externalAccess</servlet-name>
+      <servlet-class>org.alfresco.web.app.servlet.ExternalAccessServlet</servlet-class>
+   </servlet>
+
+   <servlet>
+      <servlet-name>templateContent</servlet-name>
+      <servlet-class>org.alfresco.web.app.servlet.TemplateContentServlet</servlet-class>
+   </servlet>
+
+   <servlet>
+      <servlet-name>commandServlet</servlet-name>
+      <servlet-class>org.alfresco.web.app.servlet.CommandServlet</servlet-class>
+   </servlet>
+
+   <servlet>
+      <servlet-name>ajaxServlet</servlet-name>
+      <servlet-class>org.alfresco.web.app.servlet.ajax.AjaxServlet</servlet-class>
+   </servlet>
+
+   <servlet>
+      <servlet-name>axis</servlet-name>
+      <servlet-class>org.apache.axis.transport.http.AxisServlet</servlet-class>
+      <load-on-startup>5</load-on-startup>
+   </servlet>
+
+   <servlet>
+      <servlet-name>CXFServlet</servlet-name>
+      <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+      <load-on-startup>6</load-on-startup>
+   </servlet>
+
+   <servlet>
+      <servlet-name>WebDAV</servlet-name>
+      <servlet-class>org.alfresco.repo.webdav.WebDAVServlet</servlet-class>
+      <load-on-startup>5</load-on-startup>
+   </servlet>
+
+   <servlet>
+      <servlet-name>apiServlet</servlet-name>
+      <servlet-class>org.alfresco.web.scripts.servlet.WebScriptServlet</servlet-class>
+      <init-param>
+         <param-name>authenticator</param-name>
+         <param-value>webscripts.authenticator.basic</param-value>
+      </init-param>
+   </servlet>
+
+   <servlet>
+      <servlet-name>wcapiServlet</servlet-name>
+      <servlet-class>org.alfresco.web.scripts.servlet.WebScriptServlet</servlet-class>
+      <init-param>
+         <param-name>authenticator</param-name>
+         <param-value>webscripts.authenticator.webclient</param-value>
+      </init-param>
+   </servlet>
+
+   <servlet>
+      <servlet-name>portalapiServlet</servlet-name>
+      <servlet-class>org.alfresco.web.scripts.servlet.WebScriptServlet</servlet-class>
+      <init-param>
+         <param-name>authenticator</param-name>
+         <param-value>webscripts.authenticator.webclient</param-value>
+      </init-param>
+   </servlet>
+
+   <servlet>
+      <servlet-name>facebookServlet</servlet-name>
+      <servlet-class>org.alfresco.web.scripts.facebook.FacebookServlet</servlet-class>
+      <init-param>
+         <param-name>authenticator</param-name>
+         <param-value>webscripts.authenticator.facebook</param-value>
+      </init-param>
+   </servlet>
+
+   <servlet>
+      <servlet-name>fbapiServlet</servlet-name>
+      <servlet-class>org.alfresco.web.scripts.facebook.FacebookAPIServlet</servlet-class>
+      <init-param>
+         <param-name>authenticator</param-name>
+         <param-value>webscripts.authenticator.facebook</param-value>
+      </init-param>
+   </servlet>
+
+   <servlet>
+      <servlet-name>proxyServlet</servlet-name>
+      <servlet-class>org.alfresco.web.scripts.servlet.HTTPProxyServlet</servlet-class>
+   </servlet>
+
+   <servlet>
+      <servlet-name>workflowDefinitionImageServlet</servlet-name>
+      <servlet-class>org.alfresco.web.app.servlet.WorkflowDefinitionImageServlet</servlet-class>
+   </servlet>
+
+   <servlet>
+      <servlet-name>JBPMDeployProcessServlet</servlet-name>
+      <servlet-class>org.alfresco.web.app.servlet.JBPMDeployProcessServlet</servlet-class>
+   </servlet>
+
+   <servlet-mapping>
+      <servlet-name>Faces Servlet</servlet-name>
+      <url-pattern>/faces/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>uploadFile</servlet-name>
+      <url-pattern>/uploadFileServlet</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>uploadContent</servlet-name>
+      <url-pattern>/upload/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>downloadContent</servlet-name>
+      <url-pattern>/download/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>downloadContent</servlet-name>
+      <url-pattern>/d/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>downloadRawContent</servlet-name>
+      <url-pattern>/dr</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>guestDownloadContent</servlet-name>
+      <url-pattern>/guestDownload/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>guestDownloadContent</servlet-name>
+      <url-pattern>/gd/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>templateContent</servlet-name>
+      <url-pattern>/template/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>templateContent</servlet-name>
+      <url-pattern>/t/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>guestTemplateContent</servlet-name>
+      <url-pattern>/guestTemplate/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>guestTemplateContent</servlet-name>
+      <url-pattern>/gt/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>externalAccess</servlet-name>
+      <url-pattern>/navigate/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>externalAccess</servlet-name>
+      <url-pattern>/n/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>commandServlet</servlet-name>
+      <url-pattern>/command/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>commandServlet</servlet-name>
+      <url-pattern>/c/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>ajaxServlet</servlet-name>
+      <url-pattern>/ajax/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>axis</servlet-name>
+      <url-pattern>/api/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>CXFServlet</servlet-name>
+      <url-pattern>/cmis/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+        <servlet-name>WebDAV</servlet-name>
+        <url-pattern>/webdav/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>apiServlet</servlet-name>
+      <url-pattern>/service/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>apiServlet</servlet-name>
+      <url-pattern>/s/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>wcapiServlet</servlet-name>
+      <url-pattern>/wcservice/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>wcapiServlet</servlet-name>
+      <url-pattern>/wcs/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>portalapiServlet</servlet-name>
+      <url-pattern>/168service/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>portalapiServlet</servlet-name>
+      <url-pattern>/168s/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>facebookServlet</servlet-name>
+      <url-pattern>/facebook/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>facebookServlet</servlet-name>
+      <url-pattern>/fb/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>fbapiServlet</servlet-name>
+      <url-pattern>/fbservice/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>fbapiServlet</servlet-name>
+      <url-pattern>/fbs/*</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>proxyServlet</servlet-name>
+      <url-pattern>/proxy</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>JBPMDeployProcessServlet</servlet-name>
+      <url-pattern>/jbpm/deployprocess</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>workflowDefinitionImageServlet</servlet-name>
+      <url-pattern>/workflowdefinitionimage/*</url-pattern>
+   </servlet-mapping>
+
+   <session-config>
+      <session-timeout>60</session-timeout>
+   </session-config>
+
+   <welcome-file-list>
+      <welcome-file>index.jsp</welcome-file>
+   </welcome-file-list>
+
+   <error-page>
+      <exception-type>java.lang.Exception</exception-type>
+      <location>/jsp/error.jsp</location>
+   </error-page>
+
+<!-- GC: Commented out for jetty running.  -->
+<!--   <resource-ref>-->
+<!--      <description>The Alfresco database connection</description>-->
+<!--      <res-ref-name>jdbc/dataSource</res-ref-name>-->
+<!--      <res-type>javax.sql.DataSource</res-type>-->
+<!--      <res-auth>Container</res-auth>-->
+<!--      <res-sharing-scope>Unshareable</res-sharing-scope>-->
+<!--   </resource-ref>-->
+
+   <env-entry>
+      <description>A flag that globally enables or disables startup of the major Alfresco subsystems.</description>
+      <env-entry-name>properties/startup.enable</env-entry-name>
+      <env-entry-value>true</env-entry-value>
+      <env-entry-type>java.lang.Boolean</env-entry-type>
+   </env-entry>
+
+   <env-entry>
+      <description>The filesystem directory below which content and index data is stored. Should be on a shared disk
+         if this is a clustered installation.</description>
+      <env-entry-name>properties/dir.root</env-entry-name>
+      <env-entry-value/> <!-- Empty value included for JBoss compatibility -->
+      <env-entry-type>java.lang.String</env-entry-type>
+   </env-entry>
+
+   <env-entry>
+      <description>The fully qualified name of a org.hibernate.dialect.Dialect subclass that allows Hibernate to
+         generate SQL optimized for a particular relational database. Choose from org.hibernate.dialect.DerbyDialect,
+         org.hibernate.dialect.MySQLInnoDBDialect,
+         org.alfresco.repo.domain.hibernate.dialect.AlfrescoOracle9Dialect,
+         org.alfresco.repo.domain.hibernate.dialect.AlfrescoSybaseAnywhereDialect,
+         org.alfresco.repo.domain.hibernate.dialect.AlfrescoSQLServerDialect, org.hibernate.dialect.PostgreSQLDialect</description>
+      <env-entry-name>properties/hibernate.dialect</env-entry-name>
+      <env-entry-value/> <!-- Empty value included for JBoss compatibility -->
+      <env-entry-type>java.lang.String</env-entry-type>
+   </env-entry>
+
+   <env-entry>
+      <description>Mapping from tokens in Hibernate queries to SQL tokens. For PostgreSQL, set this to "true
+         TRUE, false FALSE".</description>
+      <env-entry-name>properties/hibernate.query.substitutions</env-entry-name>
+      <env-entry-value/> <!-- Empty value included for JBoss compatibility -->
+      <env-entry-type>java.lang.String</env-entry-type>
+   </env-entry>
+
+   <env-entry>
+      <description>Enable use of JDBC3 PreparedStatement.getGeneratedKeys() to retrieve natively generated keys
+         after insert. Requires JDBC3+ driver. Set to false if your driver has problems with the Hibernate identifier
+         generators. By default, tries to determine the driver capabilities using connection metadata. </description>
+      <env-entry-name>properties/hibernate.jdbc.use_get_generated_keys</env-entry-name>
+      <env-entry-value/> <!-- Empty value included for JBoss compatibility -->
+      <env-entry-type>java.lang.String</env-entry-type>
+   </env-entry>
+
+   <env-entry>
+      <description>Qualify unqualified table names with the given schema/tablespace in generated SQL. It may be
+         necessary to set this when the target database has more than one schema.</description>
+      <env-entry-name>properties/hibernate.default_schema</env-entry-name>
+      <env-entry-value/> <!-- Empty value included for JBoss compatibility -->
+      <env-entry-type>java.lang.String</env-entry-type>
+   </env-entry>
+
+</web-app>

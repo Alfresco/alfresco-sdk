@@ -45,7 +45,7 @@
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
-			<id>ss-public</id>
+			<id>ss-public-mirror</id>
 			<url>http://repository.sourcesense.com/nexus/content/groups/public</url>
 		</pluginRepository>
 		<pluginRepository>
@@ -101,7 +101,7 @@
 			<artifactId>alfresco-repository</artifactId>
 			<version>3.2r</version>
 			<scope>provided</scope>
-			<classifier>labs</classifier>
+			<classifier>community</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -273,7 +273,7 @@
 							<dependency>
 								<groupId>org.alfresco.maven.plugin</groupId>
 								<artifactId>maven-amp-plugin</artifactId>
-								<version>2.0.0</version>
+								<version>3.0.1-SNAPSHOT</version>
 							</dependency>
 						</dependencies>
 					</plugin>
@@ -412,9 +412,9 @@
 				<dependency>
 					<groupId>org.alfresco</groupId>
 					<artifactId>alfresco</artifactId>
-					<version>3.0r</version>
+					<version>3.2r</version>
 					<type>war</type>
-					<classifier>labs</classifier>
+					<classifier>community</classifier>
 				</dependency>
 			</dependencies>
 		</profile>
