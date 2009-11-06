@@ -1,31 +1,46 @@
 <project>
 	<skin>
-    	<groupId>org.apache.maven.skins</groupId>
-	    <artifactId>maven-stylus-skin</artifactId>
-	    <version>1.0</version>
+		<groupId>org.apache.maven.skins</groupId>
+		<artifactId>maven-stylus-skin</artifactId>
+		<version>1.0</version>
 	</skin>
 	<poweredBy>
-	    <logo name="Maven" href="http://maven.apache.org" img="http://maven.apache.org/images/logos/maven-feather.png"/>
-	    <logo name="Alfresco - Open source ECM" img="http://alfresco.com/assets/images/icons/powered_by_alfresco.gif" href="http://www.sourcesense.com" /> 
+		<logo name="Maven" href="http://maven.apache.org" img="http://maven.apache.org/images/logos/maven-feather.png" />
+		<logo name="Alfresco - Open source ECM" img="http://alfresco.com/assets/images/icons/powered_by_alfresco.gif"
+			href="http://www.alfresco.com" />
 	</poweredBy>
-	<publishDate position="navigation-bottom" format="MM-dd-yy"/>
-  <bannerLeft>
-    <name>Maven Alfresco Lifecycle support - v. ${project.version}</name>
-    <href>${site_site_url}</href>
-    <src>images/logo_noclaim.png</src>
-  </bannerLeft>
-  <body>
-    <links>
-      <item name="Maven" href="http://maven.apache.org/"/>
-      <item name="Apache" href="http://www.apache.org/"/>
-      <item name="Alfresco" href="http://www.afresco.com/"/>
-    </links>
-      
+	<publishDate position="navigation-bottom" format="MM-dd-yy" />
+	<bannerLeft>
+		<name>Maven Alfresco Lifecycle Support  - v. ${project.version}</name>
+		<href>${site_site_url}</href>
+		<src>images/logo_noclaim.png</src>
+	</bannerLeft>
+	<body>
+		<links>
+			<item name="Maven" href="http://maven.apache.org/" />
+			<item name="Apache" href="http://www.apache.org/" />
+			<item name="Alfresco" href="http://www.alfresco.org/" />
+			<item name="Project founder" href="http://www.mindthegab.com/" />
+		</links>
 
-    <menu ref="modules">
-    </menu>
-    
-	<menu ref="reports" />
-	
-  </body>
+		<menu ref="modules" inherit="bottom"/>
+		<menu ref="parent" inherit="bottom"/>
+		
+		<menu name="Maven2 Lifecycle Alfresco Support Resources">
+			<item name="Enterprise use case" href="http://www.slideshare.net/guest67a9ba/maven-application-lifecycle-management-for-alfresco" />
+			<item name="Alfresco wiki Maven howto" href="http://wiki.alfresco.com/wiki/Managing_Alfresco_Lifecyle_with_Maven" />
+			<item name="Third party how to" href="http://www.cybermagic.co.nz/wiki/display/CM/Building+Alfresco+apps+with+Maven" />
+			<item name="FAQ" href="faq.html" />
+		</menu>
+
+		
+		
+		<menu name="See also">
+			<item name="Maven Alfresco AMP Archetype" href="http://repository.sourcesense.com/maven2-sites/maven-alfresco-amp-archetype" />
+			<item name="Maven AMP Plugin" href="http://repository.sourcesense.com/maven2-sites/maven-amp-plugin" />
+			<item name="Third party how to" href="http://www.cybermagic.co.nz/wiki/display/CM/Building+Alfresco+apps+with+Maven" />
+		</menu>
+		
+		<menu ref="reports" />
+	</body>
 </project>

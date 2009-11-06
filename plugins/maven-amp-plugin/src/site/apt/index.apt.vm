@@ -36,20 +36,19 @@ References
 -------------------------------------------
 
 
-	using repository (either in POM or settings.xml) :
+	using this pluginRepository (either in POM or settings.xml) :
 	
 	
 ------------------------------------------		
 
-			 <repository>
+			 <pluginRepository>
 	            <id>ss-public</id>
-	            <url>http://repository.sourcesense.com/maven2</url>
-	          </repository>
+	            <url>http://repository.sourcesense.com/nexus/content/groups/public</url>
+	          </pluginRepository>
 
 -------------------------------------------
 
 
 Quick usage
 
- Create a project using the maven-alfresco-amp-archetype (see {{ http://repository.sourcesense.com/maven2-sites/maven-alfresco-amp-archetype }} ).
- 
+ Create a project using the maven-alfresco-amp-archetype (see {{ http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/maven-alfresco-lifecycle/maven-alfresco-archetypes/maven-alfresco-amp-archetype/index.html }} ). 	

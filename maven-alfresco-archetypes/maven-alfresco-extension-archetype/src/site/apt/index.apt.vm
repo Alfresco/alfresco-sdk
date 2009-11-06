@@ -23,7 +23,7 @@ Quick Start (maven2)
  For a quick start you can a maven alfresco extension project created by just running  <<(maven 2.0.6+ required)>>:
 
 --------------------------------------------
-mvn archetype:generate -DarchetypeCatalog=http://repository.sourcesense.com/maven2/archetype-catalog.xml
+mvn archetype:generate -DarchetypeCatalog=http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.releases/archetype-catalog.xml
 --------------------------------------------
 
 and then choose the option 'maven-alfresco-extension-archetype'

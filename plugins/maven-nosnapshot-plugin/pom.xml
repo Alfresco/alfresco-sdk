@@ -6,7 +6,6 @@
 	<version>0.0.5-SNAPSHOT</version>
 	<name>Custom version manipulator Maven Plugin</name>
 	<description>It's non invasive and puts modified versions in configurable pom properties</description>
-	<url>${project.artifactId}</url>
 	<parent>
 		<groupId>org.alfresco</groupId>
 		<artifactId>maven-alfresco-lifecycle</artifactId>

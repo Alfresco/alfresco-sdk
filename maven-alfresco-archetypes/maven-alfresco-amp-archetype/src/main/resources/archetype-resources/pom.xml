@@ -99,7 +99,7 @@
 		<dependency>
 			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-repository</artifactId>
-			<version>3.0Stable</version>
+			<version>3.2r</version>
 			<scope>provided</scope>
 			<classifier>labs</classifier>
 		</dependency>
@@ -412,7 +412,7 @@
 				<dependency>
 					<groupId>org.alfresco</groupId>
 					<artifactId>alfresco</artifactId>
-					<version>3.0Stable</version>
+					<version>3.0r</version>
 					<type>war</type>
 					<classifier>labs</classifier>
 				</dependency>

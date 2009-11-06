@@ -28,8 +28,8 @@
     </menu>
     
     <menu name="See also">
-	  <item name="Maven Alfresco Extension Archetype" href="http://repository.sourcesense.com/maven2-sites/maven-alfresco-extension-archetype"/>    
-	  <item name="Maven AMP Plugin" href="http://repository.sourcesense.com/maven2-sites/maven-amp-plugin"/>    
+	  <item name="Maven Alfresco Extension Archetype" href="http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/maven-alfresco-lifecyle/maven-alfresco-archetypes/maven-alfresco-extension-archetype"/>    
+	  <item name="Maven AMP Plugin" href="http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/maven-alfresco-lifecyle/plugins/maven-amp-plugin"/>    
 	  <item name="Alfresco AMP files" href="http://wiki.alfresco.com/wiki/AMP_Files" />
     </menu>
     

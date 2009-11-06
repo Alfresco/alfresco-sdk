@@ -6,11 +6,7 @@
 	<packaging>pom</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>Maven Alfresco Lifecycle support base project</name>
-	<parent>
-		<groupId>com.sourcesense.maven</groupId>
-		<artifactId>maven-calm</artifactId>
-		<version>1.0-beta-21</version>
-	</parent>
+	<url>http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/maven-alfresco-lifecycle</url>
 	<description>
 		This project is meant to gather all commons configurations, plugins and archetypes
 		for the full Maven Alfresco lifecycle support
@@ -20,8 +16,8 @@
 		<url>http://code.google.com/p/maven-alfresco-archetypes/issues/list</url>
 	</issueManagement>
 	<organization>
-		<name>Sourcesense</name>
-		<url>http://www.sourcesense.com</url>
+		<name>Alfresco</name>
+		<url>http://www.alfresco.com</url>
 	</organization>
 	<modules>
 		<module>maven-alfresco-archetypes</module>
@@ -32,18 +28,17 @@
 		<svn.base.url>https://maven-alfresco-archetypes.googlecode.com/svn</svn.base.url>
 		<svn.url>${svn.base.url}/trunk</svn.url>
 		<svn.tags.url>${svn.base.url}/tags</svn.tags.url>
-		<site.url>http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/${pom.artifactId}</site.url>
 		<!--
 			These redundancies are due to filtering issues of Maven. See here
 			http://maven.apache.org/plugins/maven-site-plugin/usage.html
 		-->
 		<site_pom_description>${pom.description}</site_pom_description>
-		<site_pom_url>${pom.organization.url}</site_pom_url>
-		<site_pom_groupId>${pom.groupId}</site_pom_groupId>
-		<site_pom_artifactId>${pom.artifactId}</site_pom_artifactId>
-		<site_pom_version>${pom.version}</site_pom_version>
+		<site_pom_url>${project.url}</site_pom_url>
+		<site_pom_groupId>${project.groupId}</site_pom_groupId>
+		<site_pom_artifactId>${project.artifactId}</site_pom_artifactId>
+		<site_pom_version>${project.version}</site_pom_version>
 		<site_tags_url>${svn.tags.url}</site_tags_url>
-		<site_site_url>${site.url}</site_site_url>
+		<site_site_url>${project.url}</site_site_url>
 	</properties>
 	<scm>
 		<connection>scm:svn:${svn.url}</connection>
@@ -114,6 +109,17 @@
 	<build>
 		<plugins>
 			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>2.0.1</version>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-changes-plugin</artifactId>
 				<executions>
@@ -162,6 +168,13 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav-jackrabbit</artifactId>
+				<version>1.0-beta-6</version>
+			</extension>
+		</extensions>
 	</build>
 	<reporting>
 		<plugins>
@@ -199,10 +212,6 @@
 					</reportSet>
 				</reportSets>
 			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>changelog-maven-plugin</artifactId>
-			</plugin>
 		</plugins>
 	</reporting>
 	<distributionManagement>
@@ -216,7 +225,7 @@
 		</snapshotRepository>
 		<site>
 			<id>ss-public-sites</id>
-			<url>dav:http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/${project.artifactId}</url>
+			<url>dav:http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/maven-alfresco-lifecycle</url>
 		</site>
 	</distributionManagement>
 </project>
