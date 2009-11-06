@@ -3,6 +3,9 @@
     <title>Maven AMP plugin</title>
   </properties>
   <body>
+   <release version="3.0.1" date="2009-11-06" description="Alfresco 3.0.1 embedded in Maven Alfresco Lifecycle Release">
+    </release>
+  
    <release version="3.0.0" date="2009-02-20" description="Alfresco 3.0 Reday  Public stable  release">
     </release>
 

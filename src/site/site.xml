@@ -36,8 +36,8 @@
 		
 		
 		<menu name="See also">
-			<item name="Maven Alfresco AMP Archetype" href="http://repository.sourcesense.com/maven2-sites/maven-alfresco-amp-archetype" />
-			<item name="Maven AMP Plugin" href="http://repository.sourcesense.com/maven2-sites/maven-amp-plugin" />
+			<item name="Maven Alfresco AMP Archetype" href="http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/maven-alfresco-lifecycle/maven-alfresco-archetype/maven-alfresco-amp-archetype/index.html" />
+			<item name="Maven AMP Plugin" href="http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/maven-alfresco-lifecycle/plugins/maven-amp-plugin/index.html" />
 			<item name="Third party how to" href="http://www.cybermagic.co.nz/wiki/display/CM/Building+Alfresco+apps+with+Maven" />
 		</menu>
 		

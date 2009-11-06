@@ -432,12 +432,12 @@
 			|
 			<repository>
 			<id>ss-public</id>
-			<url>scp://repository.sourcesense.com/var/www/demo.sourcesense.com/maven2</url>
+			<url>scp://yourcompany/var/maven2</url>
 			</repository>
 			<distributionManagement>
 			<site>
 			<id>ss-site-public</id>
-			<url>scp://repository.sourcesense.com/var/www/demo.sourcesense.com/maven2-sites</url>
+			<url>scp://yourcompany/var/maven2-sites</url>
 			</site>
 		-->
 		<!--
