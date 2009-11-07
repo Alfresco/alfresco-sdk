@@ -25,11 +25,11 @@
     </menu>
     
     <menu name="Used by">
-	  <item name="Maven Alfresco AMP Archetype" href="http://repository.sourcesense.com/maven2-sites/maven-alfresco-amp-archetype"/>
+	  <item name="Maven Alfresco AMP Archetype" href="http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/maven-alfresco-lifecycle/maven-alfresco-archetypes/maven-alfresco-amp-archetype/index.html"/>
     </menu>
     
     <menu name="See also">
-	  <item name="Maven Alfresco Extension Archetype" href="http://repository.sourcesense.com/maven2-sites/maven-alfresco-extension-archetype"/>
+	  <item name="Maven Alfresco Extension Archetype" href="http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/maven-alfresco-lifecycle/maven-alfresco-archetypes/maven-alfresco-extension-archetype/index.html"/>
     </menu>
     
     <menu ref="reports"/>

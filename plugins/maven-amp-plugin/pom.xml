@@ -18,7 +18,6 @@
 		AMPs and WARs. It is a modification of the org.apache.maven.plugins:maven-war-plugin of which it uses the whole core infrastructure. See
 		${site.url} for more info
 	</description>
-	<url>${project.artifactId}</url>
 	<properties>
 		<site_pom_description>${pom.description}</site_pom_description>
 		<site_pom_url>${pom.url}</site_pom_url>

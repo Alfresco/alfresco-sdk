@@ -22,13 +22,16 @@ Full documentation
 	You can also download the full application manual {{{books/pdf/manual/manual.pdf} PDF}} or {{{books/rtf/manual/manual.rtf} RTF}} format.
 
 
+
 Quick Start (maven2)
 
+ Prerequisite: Mysql running locally with empty db.name = alf_jetty and permissions for user alfresco/alfresco.
+  
  For a quick start you can a run alfresco extension project by just running  <<(maven 2.0.6+ required)>>:
 
 --------------------------------------------
 
-mvn jetty:run-exploded
+mvn integration-test
 
 --------------------------------------------
 

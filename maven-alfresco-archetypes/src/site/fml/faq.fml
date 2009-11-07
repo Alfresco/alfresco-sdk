@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<faqs id="Maven Alfresco Lifecycle FAQ">
+	<part id="Project modules">
+		<title>Backward compatibility</title>
+		<faq id="project">
+			<question>I'm lost in versions and repositories. Which one I should use?</question>
+			<answer>
+				<ul>
+					<li>As the introduction of the parent project maven-alfresco-lifecycle you can refer to it as the latest working version of the full support</li>
+					<li>You might (optionally) want to tweak specific modules versions (archetypes, plugins) in order to match the latest features</li>
+				</ul>
+			</answer>
+		</faq>
+		<faq id="howmany">
+			<question>I see many project aroud Maven and Alfresco (m2alfresco, maven4alfresco, this project). Is there a reference one?</question>
+			<answer>
+				<p>
+					The maven-alfresco-lifecycle project gathers all efforts made in previous projects and gather them
+					under a common application lifecycle management suite.
+				</p>
+			</answer>
+		</faq>
+	</part>
+</faqs>

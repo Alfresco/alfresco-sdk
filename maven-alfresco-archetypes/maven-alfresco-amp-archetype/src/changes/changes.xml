@@ -4,6 +4,14 @@
     <author email="g.columbro@sourcesense.com">Gabriele Columbro</author>
   </properties>
   <body>
+  <release version="1.9.0" date="2009-11-07" description="Public release alfresco 3.2r based">
+  	  <action dev="g.columbro" type="add">
+		Updated to Alfresco 3.2r artifacts
+      </action>
+      <action dev="g.columbro" type="add">
+		Updated to new Sourcesense repository
+      </action>
+    </release>
     <release version="1.0.0" date="2008-07-06" description="Public release">
       <action dev="g.columbro" type="add">
 		Added full AMP lifecycle management
