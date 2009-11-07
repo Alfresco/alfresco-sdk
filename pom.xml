@@ -160,7 +160,7 @@ community contexts.
 				<configuration>
 					<!-- useEditMode>true</useEditMode>-->
 					<preparationGoals>clean package</preparationGoals>
-					<goals>deploy changes:announcement-generate site-deploy changes:announcement-mail</goals>
+					<goals>deploy site-deploy changes:announcement-generate changes:announcement-mail</goals>
 					<tagBase>${svn.tags.url}</tagBase>
 					<autoVersionSubmodules>false</autoVersionSubmodules>
 				</configuration>
