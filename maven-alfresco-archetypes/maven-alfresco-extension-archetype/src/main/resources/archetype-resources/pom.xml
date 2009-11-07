@@ -199,7 +199,7 @@
 		<!-- Used to access Sourcesense repository for writing. Public version not available, see README.txt -->
 		<!-- In certain cases we do build time filtering with the single sourcing application.properties -->
 		<filters>
-			<filter>src/main/properties/${env}/	application.properties</filter>
+			<filter>src/main/properties/${env}/application.properties</filter>
 		</filters>
 		<!-- Default profile to build as an Alfresco extension -  resources are copied into classpath-->
 		<resources>

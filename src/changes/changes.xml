@@ -1,10 +1,13 @@
 <document>
   <properties>
-    <title>Maven Alfresco Extension archetype</title>
-    <author email="g.columbro@sourcesense.com">Gabriele Columbro</author>
+    <title>Maven Alfresco Lifecycle</title>
+    <author email="gabriele.columbro@alfresco.com">Gabriele Columbro</author>
   </properties>
   <body>
     <release version="1.0.0" date="2009-11-03" description="Complete refactoring of the full support in one multimodule project (maven-alfresco-lifecycle)">
+      <action dev="columbro" type="add">
+		Linked all sub modules.
+      </action>
       <action dev="columbro" type="add">
 		Added this wrapper project to group all Maven Alfresco plugins and archetype useful for the Maven Alfresco Lifecycle support
       </action>

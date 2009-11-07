@@ -8,8 +8,9 @@
 	<name>Maven Alfresco Lifecycle support base project</name>
 	<url>http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/maven-alfresco-lifecycle</url>
 	<description>
-		This project is meant to gather all commons configurations, plugins and archetypes
-		for the full Maven Alfresco lifecycle support
+This project is meant to gather all commons configurations, plugins and archetypes for the full Maven Alfresco lifecycle support.
+It gathers the latest stable versions of the different components that are used to support Alfresco development on Maven in enterprise and 
+community contexts. 
 	</description>
 	<issueManagement>
 		<system>Google Code</system>
@@ -122,20 +123,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-changes-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>announcement-generate</goal>
-						</goals>
-						<id>announcement-generate</id>
-					</execution>
-					<execution>
-						<goals>
-							<goal>announcement-mail</goal>
-						</goals>
-						<id>announcement-mail</id>
-					</execution>
-				</executions>
+				<!-- Using patched version to overcome multimodule limitations during release
+					 See: http://jira.codehaus.org/browse/MCHANGES-145 
+				 -->
+				<version>2.2-patched</version>
 				<!--
 					Automatically notifies the list when release is done. Please supply
 					username and password in the command line
@@ -145,14 +136,22 @@
 					settings.xml
 				-->
 				<configuration>
+					<template>custom-announcement.vm</template>
+          			<templateDirectory>announcements</templateDirectory>
+					<!-- To have the announcement sent only for the root module (otherwise it breaks, workaround for http://jira.codehaus.org/browse/MCHANGES-145) -->
+					<aggregate>true</aggregate>
 					<smtpHost>${smtp.server}</smtpHost>
 					<smtpPort implementation="java.lang.Integer">${smtp.port}</smtpPort>
 					<toAddresses>
-						<toAddress implementation="java.lang.String">columbro@gmail.com</toAddress>
+						<toAddress implementation="java.lang.String">maven-alfresco@googlegroups.com</toAddress>
+						<toAddress implementation="java.lang.String">announce@maven.apache.org</toAddress>
+						<toAddress implementation="java.lang.String">alfresco-dev@lists.sourcesense.com</toAddress>
 					</toAddresses>
 					<username>${smtp.username}</username>
 					<password>${smtp.password}</password>
+					<sslMode>${smtp.sslMode}</sslMode>
 					<fromDeveloperId>columbro</fromDeveloperId>
+					<urlDownload>${project.url}/index.html</urlDownload>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -161,8 +160,7 @@
 				<configuration>
 					<!-- useEditMode>true</useEditMode>-->
 					<preparationGoals>clean package</preparationGoals>
-					<goals>deploy site-deploy changes:announcement-generate
-						changes:announcement-mail site-deploy</goals>
+					<goals>deploy changes:announcement-generate site-deploy changes:announcement-mail</goals>
 					<tagBase>${svn.tags.url}</tagBase>
 					<autoVersionSubmodules>false</autoVersionSubmodules>
 				</configuration>
