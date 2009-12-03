@@ -6,6 +6,7 @@
   <artifactId>alfresco-share-extension-archetype</artifactId>
   <packaging>maven-archetype</packaging>
   <name>alfresco-share-extension-archetype</name>
+  <description>Maven Archetype to develop Alfresco SHARE customizations</description>
   <parent>
     <groupId>com.sourcesense.alfresco</groupId>
     <artifactId>maven-alfresco-archetypes</artifactId>
