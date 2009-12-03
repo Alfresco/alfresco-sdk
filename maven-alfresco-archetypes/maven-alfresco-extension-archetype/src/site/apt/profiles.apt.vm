@@ -1,8 +1,15 @@
 What can this build do?
 
-  This Maven Alfresco build process allows you to develop, test, run, document and release your Alfresco extension project.
-  You can also depend on AMP files deployed on a Maven repository (either manually or using the Maven Alfresco AMP archetype),
-  by adding the following <<< <dependency> >>> snippet to your Extension pom.xml:
+  This Maven Alfresco build process allows you to :
+
+  * develop and package
+  
+  * test and run (on different platforms)
+  
+  * document and release your Alfresco extension project (site and PDF documentation)
+  
+  * You can also depend on AMP files deployed on a Maven repository (either manually or using the Maven Alfresco AMP archetype),
+  by adding the following <<< dependency >>> snippet to your Extension pom.xml:
     
 --------------------------------------------
    <dependency> 
@@ -14,7 +21,7 @@ What can this build do?
    </dependency>
 --------------------------------------------
   
-  This operation will result in automated AMP unpacking in your Extension WAR file during the normal build process (e.g. mvn package or mvn install).
+  This operation will result in automated AMP unpacking in your Extension WAR file during the normal build process (e.g. <<<mvn package>>>).
   
   
 
@@ -42,13 +49,13 @@ Available maven profiles:
 
 
 
+
 Configuration:
 
-  The project created from the extension archetype is very flexible. It uses a configuration mechanism (pre 3.2) which sigles sources
-  the all required properties in one single file (called <<<application.properties>>>) which is global to the whole Spring context.
-  This works also against 3.2, but activities are ongoing to converge to a proper usage of the new <<<alfresco-global.properties>>. 
+  The project created from the extension archetype is very flexible. It uses a configuration mechanism (pre 3.2) which sigles sources the all required properties in one single file (called <<<application.properties>>>) which is global to the whole Spring context.
+  This works also against 3.2, but activities are ongoing to converge to a proper usage of the new <<<alfresco-global.properties>>>. 
   
-  Properties are stored in the <<<src/main/properties/<env>>>> folders and env=local is considered by default. You can switch the environment
+  Properties are stored in the <<< src/main/properties/<env> >>> folders and env=local is considered by default. You can switch the environment
   you're building for (e.g. for a release) using the <<<-Denv=yourEnv>>> switch in the command line build.   
   
   Also a number of properties are also accepted via command line of your build to give more configurability (if you're using the <<<env=local>>>).

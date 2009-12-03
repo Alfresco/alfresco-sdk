@@ -13,20 +13,9 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
    
-ISSUES:
--------
-- tools/mysql folder scripts are copied over the classpath (because of the filtering feature, shall we remove it?). It's harmless anyways apart from the potential secuity issues (BTW credentials are deployed non encrypted anyways in application.properties)
-- fix commented library versions
- 
 
 TODO (in order of priority):
 -----
-- AMP archetype
 - make jetty:run-inplace work for easy runtime editing
-- translate other TXT files into APT for maven site generation (as done for README)
 - Integration testing with selenium
 - unit testing suite
-- Configure class/contexts reloading for jetty run
-- add multimodule support (and extract release/deploy policies to a super POM for usage also by AMP archetype)
-- add amp dependency mgmt or let steer alfresco for a jar artifact (jsp loading from jar or pre extracted?)
-- move archetype documentation in mvn site
