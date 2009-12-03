@@ -3,9 +3,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.alfresco.maven</groupId>
-  <artifactId>alfresco-share-extension-archetype</artifactId>
+  <artifactId>maven-alfresco-share-archetype</artifactId>
   <packaging>maven-archetype</packaging>
-  <name>alfresco-share-extension-archetype</name>
+  <name>Maven Alfresco Share extension Archetype</name>
   <description>Maven Archetype to develop Alfresco SHARE customizations</description>
   <parent>
     <groupId>com.sourcesense.alfresco</groupId>
