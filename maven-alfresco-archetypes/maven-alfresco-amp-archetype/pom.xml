@@ -31,7 +31,7 @@
 	<parent>
 		<groupId>com.sourcesense.alfresco</groupId>
 		<artifactId>maven-alfresco-archetypes</artifactId>
-		<version>1.9.2-SNAPSHOT</version>
+		<version>1.9.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<build>
