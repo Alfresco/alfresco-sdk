@@ -12,7 +12,7 @@
 			<action dev="columbro" type="fix">
 				Fixed version of maven-buildnumber-plugin (for compatibility issues with maven 2.2.1)
       </action>
-      <action dev="columbro" type="enhancement">
+      <action dev="columbro" type="update">
         Documented versioning scheme and maven-nosnapshot-plugin
       </action>
 		</release>

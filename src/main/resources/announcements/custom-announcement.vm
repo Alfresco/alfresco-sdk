@@ -118,6 +118,7 @@ See also specific modules changes for the latest release:
 
 maven-alfresco-amp-archetype: ${project.url}/maven-alfresco-archetypes/maven-alfresco-amp-archetype/changes-report.html
 maven-alfresco-extension-archetype: ${project.url}/maven-alfresco-archetypes/maven-alfresco-extension-archetype/changes-report.html
+maven-alfresco-share-archetype: ${project.url}/maven-alfresco-archetypes/maven-alfresco-share-archetype/changes-report.html
 maven-amp-plugin: ${project.url}/plugins/maven-amp-plugin/changes-report.html
 
 #if ($urlDownload)
@@ -125,7 +126,6 @@ maven-amp-plugin: ${project.url}/plugins/maven-amp-plugin/changes-report.html
 For a manual installation, you can download the ${finalName} here:
 ${urlDownload}
 #end
-(due to some issues with the sites repo, if you experience issues in accessing pages with Firefox you might just need to reload the page)
 
 Have fun!
 -${developmentTeam}

@@ -14,7 +14,7 @@
       <action dev="columbro" type="add">
     Updated all docs to Maven Alfresco repository
       </action>
-      <action dev="columbro" type="enhancement">
+      <action dev="columbro" type="update">
     Incapsulated jetty run in the -Prun profile, which runs by default jetty during the integration-test phase
       </action>
     </release>
