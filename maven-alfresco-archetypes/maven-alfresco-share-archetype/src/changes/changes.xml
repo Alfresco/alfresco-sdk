@@ -1,0 +1,28 @@
+<document>
+  <properties>
+    <title>Maven Alfresco Share Archetype</title>
+    <author email="gabriele.columbro@alfresco.com">Gabriele Columbro</author>
+  </properties>
+  <body>
+  <release version="1.9.1" date="2009-12-03" description="First public release working against Share 3.2r">
+      <action dev="columbro" type="add">
+    Addded 3.2r samples
+      </action>
+      <action dev="columbro" type="add">
+    Added base SHARE overlay structure
+      </action>
+      <action dev="columbro" type="add">
+    Tested against a non localhost Alfresco server
+      </action>
+      <action dev="columbro" type="add">
+    Added Share port configurability 
+      </action>
+      <action dev="columbro" type="enhancement">
+    Incapsulated jetty run in the -Prun profile, which runs by default jetty during the integration-test phase
+      </action>
+      <action dev="columbro" type="enhancement">
+    Added basic docs
+      </action>
+    </release>  
+  </body>
+</document>

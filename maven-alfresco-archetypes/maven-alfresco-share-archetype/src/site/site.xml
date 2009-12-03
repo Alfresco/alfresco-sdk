@@ -1,0 +1,44 @@
+<project>
+	<skin>
+		<groupId>org.apache.maven.skins</groupId>
+		<artifactId>maven-stylus-skin</artifactId>
+		<version>1.0</version>
+	</skin>
+	<poweredBy>
+		<logo name="Maven" href="http://maven.apache.org" img="http://maven.apache.org/images/logos/maven-feather.png" />
+		<logo name="Alfresco - Open source ECM" img="http://alfresco.com/assets/images/icons/powered_by_alfresco.gif"
+			href="http://www.alfresco.com" />
+	</poweredBy>
+	<publishDate position="navigation-bottom" format="MM-dd-yy" />
+
+	<bannerLeft>
+		<name>Maven alfresco Share archetype - v. ${project.version}</name>
+		<href>${site_site_url}</href>
+		<src>images/Alfresco-logo-transparent.gif</src>
+	</bannerLeft>
+	<body>
+		
+
+		<menu name="M2 Alfresco Share Archetype">
+			<item name="Introduction" href="index.html" />
+			<item name="Generated Project Layout " href="layout.html"/>			
+		</menu>
+
+		<menu name="See also">
+		  <item name="Maven Alfresco Extension Archetype" href="http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/maven-alfresco-archetypes/maven-alfresco-extension-archetype/index.html" />
+			<item name="Maven Alfresco AMP Archetype" href="http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/maven-alfresco-archetypes/maven-alfresco-amp-archetype/index.html" />
+		</menu>
+		
+		<links>
+      <item name="Maven" href="http://maven.apache.org/" />
+      <item name="Apache" href="http://www.apache.org/" />
+      <item name="Alfresco" href="http://www.alfresco.com/" />
+      <item name="Maven Alfresco Community Repository" href="http://maven.alfresco.com/" />
+    </links>
+    
+    <menu ref="parent" />
+    
+		<menu ref="reports" />
+		
+	</body>
+</project>

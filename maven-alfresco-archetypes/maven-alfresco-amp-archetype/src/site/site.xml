@@ -9,11 +9,6 @@
 	    <logo name="Alfresco - Open source ECM" img="http://alfresco.com/assets/images/icons/powered_by_alfresco.gif" href="http://www.sourcesense.com" /> 
 	</poweredBy>
 	<publishDate position="navigation-bottom" format="MM-dd-yy" />
-  <bannerLeft>
-    <name>Maven alfresco Extension archetype - v. ${project.version}</name>
-    <href>${site_site_url}</href>
-    <src>images/Alfresco-logo-transparent.gif</src>
-  </bannerLeft>
   <body>
     <links>
       <item name="Maven" href="http://maven.apache.org/"/>
@@ -24,6 +19,7 @@
 	  <item name="Introduction" href="/index.html"/>
 	  <item name="README" href="/readme.html"/>
 	  <item name="Generated Project Layout " href="layout.html"/>
+	  <item name="Versioning scheme" href="/versions.html"/>
 	  <item name="FAQ" href="faq.html"/>
     </menu>
     
@@ -33,7 +29,7 @@
 	  <item name="Alfresco AMP files" href="http://wiki.alfresco.com/wiki/AMP_Files" />
     </menu>
     
-	<menu ref="reports" />
+	 <menu ref="reports" />
 	
   </body>
 </project>

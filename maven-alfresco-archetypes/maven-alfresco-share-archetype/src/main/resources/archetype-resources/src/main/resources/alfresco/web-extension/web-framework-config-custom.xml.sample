@@ -1,0 +1,46 @@
+<alfresco-config>
+	
+	<!-- Disabling caches for components and pages - to allow share web-app clustering (web farm) -->
+	<!-- A load balancer may then be enabled between multiple web-app instances and the client browser -->
+	<!-- NOTE: the "sticky sessions" feature of your load balancer must be enabled -->
+	<!--
+   <config evaluator="string-compare" condition="WebFramework">
+		<web-framework>
+		
+			<model-type>
+				<id>component</id>
+				<version>1.0</version>
+				<name>Component</name>
+				<description>Component</description>
+				<namespace></namespace>
+				<class>org.alfresco.web.framework.model.Component</class>
+				<search-path-id>webframework.searchpath.component</search-path-id>
+				<default-store-id>webframework.remotestore.component</default-store-id>
+				<cache-enabled>false</cache-enabled>
+			</model-type>
+			<model-type>
+				<id>page</id>
+				<version>1.0</version>
+				<name>Page</name>
+				<description>Page</description>
+				<namespace></namespace>
+				<class>org.alfresco.web.framework.model.Page</class>
+				<search-path-id>webframework.searchpath.page</search-path-id>
+				<default-store-id>webframework.remotestore.page</default-store-id>
+				<cache-enabled>false</cache-enabled>
+			</model-type>
+			
+		</web-framework>
+	</config>
+	-->
+   <!-- Specify another theme as the default theme -->
+   <!--
+   <config evaluator="string-compare" condition="WebFramework">
+      <web-framework>   
+         <application-defaults>
+            <theme>default</theme>
+         </application-defaults>
+      </web-framework>
+   </config>
+	-->   
+</alfresco-config>

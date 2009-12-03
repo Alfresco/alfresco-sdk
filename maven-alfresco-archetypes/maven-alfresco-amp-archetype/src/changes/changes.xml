@@ -1,21 +1,39 @@
 <document>
-  <properties>
-    <title>Maven Alfresco AMP archetype</title>
-    <author email="g.columbro@sourcesense.com">Gabriele Columbro</author>
-  </properties>
-  <body>
-  <release version="1.9.0" date="2009-11-07" description="Public release alfresco 3.2r based">
-  	  <action dev="g.columbro" type="add">
-		Updated to Alfresco 3.2r artifacts
+	<properties>
+		<title>Maven Alfresco AMP archetype</title>
+		<author email="gabriele.columbro@alfresco.com">Gabriele Columbro</author>
+	</properties>
+	<body>
+		<release version="1.9.1" date="2009-12-07"
+			description="Moved to maven.alfresco.com">
+			<action dev="columbro" type="add">
+				Moved to http://maven.alfresco.com
       </action>
-      <action dev="g.columbro" type="add">
-		Updated to new Sourcesense repository
+			<action dev="columbro" type="fix">
+				Fixed version of maven-buildnumber-plugin (for compatibility issues with maven 2.2.1)
       </action>
-    </release>
-    <release version="1.0.0" date="2008-07-06" description="Public release">
-      <action dev="g.columbro" type="add">
-		Added full AMP lifecycle management
+      <action dev="columbro" type="enhancement">
+        Documented versioning scheme and maven-nosnapshot-plugin
       </action>
-    </release>
-  </body>
+		</release>
+		<release version="1.0.0" date="2008-07-06" description="Public release">
+			<action dev="g.columbro" type="add">
+				Added full AMP lifecycle management
+      </action>
+		</release>
+		<release version="1.9.0" date="2009-11-07"
+			description="Public release alfresco 3.2r based">
+			<action dev="g.columbro" type="add">
+				Updated to Alfresco 3.2r artifacts
+      </action>
+			<action dev="g.columbro" type="add">
+				Updated to new Sourcesense repository
+      </action>
+		</release>
+		<release version="1.0.0" date="2008-07-06" description="Public release">
+			<action dev="g.columbro" type="add">
+				Added full AMP lifecycle management
+      </action>
+		</release>
+	</body>
 </document>

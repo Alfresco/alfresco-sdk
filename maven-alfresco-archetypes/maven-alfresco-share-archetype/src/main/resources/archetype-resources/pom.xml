@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>${groupId}</groupId>
+	<artifactId>${artifactId}</artifactId>
+	<version>${version}</version>
+	<name>Alfresco Share client</name>
+	<packaging>war</packaging>
+	<description>SHARE customization meant to be the main Alfresco UI, which enables collaboration and easy ReST based remotable customization.</description>
+
+	<repositories>
+		<repository>
+			<id>alfresco-public</id>
+			<url>http://maven.lfresco.com/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
+
+  <!-- Configuration point for the build time properties -->
+	<properties>
+		<env>local</env>
+		<alfresco.version>3.2r</alfresco.version>
+		<share.log.level>info</share.log.level>
+		<share.servlet.port>8081</share.servlet.port>
+	</properties>
+
+	<!-- Alfresco dependencies -->
+	<dependencies>
+		<!--
+			Alfresco Dependencies. Use this dependency to switch SHARE version
+		-->
+		<dependency>
+			<groupId>org.alfresco</groupId>
+			<artifactId>share</artifactId>
+			<type>war</type>
+			<version>${alfresco.version}</version>
+			<classifier>community</classifier>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+    <!-- Runtime properties file which is used to configure your Share instance. It's multi-environment aware (-Denv=yourEnv) -->
+		<filters>
+			<filter>src/main/properties/${env}/application.properties</filter>
+		</filters>
+
+		<!--
+			Default profile to build as an Alfresco extension - resources are
+			copied into classpath
+		-->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<!--
+				| Include application properties file in classpath: this allows
+				Spring contexts to have customization properties available at |
+				classpath:alfresco/extension/application.properties
+			-->
+			<resource>
+				<directory>src/main/properties</directory>
+				<includes>
+					<include>application.properties</include>
+				</includes>
+				<!--
+					This gets loaded to be the filter for spring runtime placeholding,
+					so no need for build time filtering
+				-->
+				<targetPath>alfresco/web-extension</targetPath>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<archiveClasses>false</archiveClasses>
+					<filters>
+						<filter>src/main/properties/${env}/application.properties</filter>
+					</filters>
+					<webResources></webResources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<!-- Custom behaviors -->
+	<profiles>
+	  <!-- Invoke this with -Prun to run embedded jetty during your build -->
+		<profile>
+			<id>run</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.mortbay.jetty</groupId>
+						<artifactId>maven-jetty-plugin</artifactId>
+						<configuration>
+							<connectors>
+								<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+									<port>${share.servlet.port}</port>
+								</connector>
+							</connectors>
+						</configuration>
+						<executions>
+						  <execution>
+						    <id>run-jetty</id>
+						    <phase>pre-integration-test</phase>
+						    <goals>
+						      <goal>run-exploded</goal>
+						    </goals>
+						  </execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+	</profiles>
+
+</project>

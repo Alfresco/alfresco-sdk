@@ -1,0 +1,39 @@
+ -----
+ Archetype Project Generated Layout
+ -----
+
+
+What do I get when creating the project?
+
+ You will encounter an Share project structure, filtered with values you provided in creation phase,
+ which has the following layout:
+
+
+------------------------------------------------------------------
+ 
+ 
+src --------------------------------------------------------> (source folder)
+		|
+		|__ main ___ __ resources --------------------------> mapped in the classpath  
+		|			|			  |
+		|			|			  |__ alfresco/web-extension ---> alfresco overriding web Spring contexts
+		|			|                                  ---> sample alfresco share customizations 
+		|     |
+		|			|__ properties ------------------------->  environment aware application properties files  
+		|			|				|
+		|			|				|__ local  ------------->  default application.properties
+		|			|
+		|			|__ java ------------------------------->  customization java classes
+		|			|
+		|			|__ webapp -----------------------------> alfresco webapp overlay folder - this folder is overlayed (so may overwrite alfresco war)
+		|						|
+		|						|__ Any web customization to be overlayed to the SHARE webapp	(e.g. src/main/webapp/WEB-INF/web.xml) 
+		|			
+		|__ test
+
+
+target - Project build dir
+
+
+------------------------------------------------------------------
+

@@ -10,11 +10,12 @@
 			href="http://www.alfresco.com" />
 	</poweredBy>
 	<publishDate position="navigation-bottom" format="MM-dd-yy" />
-	<bannerLeft>
-		<name>Maven alfresco Extension archetype - v. ${project.version}</name>
-		<href>${site_site_url}</href>
-		<src>images/Alfresco-logo-transparent.gif</src>
-	</bannerLeft>
+	
+  <bannerLeft>
+    <name>Maven alfresco Share archetype - v. ${project.version}</name>
+    <href>${site_site_url}</href>
+    <src>images/Alfresco-logo-transparent.gif</src>
+  </bannerLeft>
 	<body>
 		
 

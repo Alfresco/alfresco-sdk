@@ -1,30 +1,33 @@
 <document>
   <properties>
     <title>Maven Alfresco Extension archetype</title>
-    <author email="g.columbro@sourcesense.com">Gabriele Columbro</author>
+    <author email="gabriele.columbro@alfresco.com">Gabriele Columbro</author>
   </properties>
   <body>
-  <release version="3.0.0-beta-1" date="2009-12-03" description="Consolidated release to maven.alfresco.com">
-      <action dev="g.columbro" type="add">
+  <release version="1.9.1" date="2009-12-03" description="Consolidated release to maven.alfresco.com">
+      <action dev="columbro" type="add">
+    Added -Prun profile to encapsulate jetty embedded running capabilities
+      </action>
+      <action dev="columbro" type="add">
     Added -Pinitialize profile to clean alf_data and drop/create DB within the build
       </action>
-      <action dev="g.columbro" type="add">
+      <action dev="columbro" type="add">
     Updated all docs to Maven Alfresco repository
       </action>
-      <action dev="g.columbro" type="enhancement">
+      <action dev="columbro" type="enhancement">
     Incapsulated jetty run in the -Prun profile, which runs by default jetty during the integration-test phase
       </action>
     </release>
   <release version="1.9.0" date="2009-11-07" description="Public release alfresco 3.2r based">
-  	  <action dev="g.columbro" type="add">
+  	  <action dev="columbro" type="add">
 		Updated to Alfresco 3.2r artifacts
       </action>
-      <action dev="g.columbro" type="add">
+      <action dev="columbro" type="add">
 		Updated to new Sourcesense repository
       </action>
     </release>
     <release version="1.1.0" date="2008-07-11" description="Public release">
-      <action dev="g.columbro" type="add">
+      <action dev="columbro" type="add">
 		Added full AMP lifecycle management.
       </action>
     </release>

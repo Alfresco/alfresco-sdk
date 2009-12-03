@@ -21,6 +21,7 @@
 	<modules>
 		<module>maven-alfresco-amp-archetype</module>
 		<module>maven-alfresco-extension-archetype</module>
+		<module>maven-alfresco-share-archetype</module>
 	</modules>
 	<build>
 		<extensions>
