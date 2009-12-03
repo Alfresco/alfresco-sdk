@@ -9,12 +9,11 @@
     Moved all the archetypes to work against http://maven.alfresco.com
       </action>
       <action dev="columbro" type="add">
-    Updated documentation to point to the new infrastructure
-      </action>
-      <action dev="columbro" type="add">
     Added support for Alfresco SHARE archetype
       </action>
-      
+      <action dev="columbro" type="add">
+    Updated documentation to point to the new infrastructure
+      </action>
     </release>
     <release version="1.0.0" date="2009-11-03" description="Complete refactoring of the full support in one multimodule project (maven-alfresco-lifecycle)">
       <action dev="columbro" type="add">

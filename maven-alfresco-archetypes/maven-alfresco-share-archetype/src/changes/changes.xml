@@ -5,8 +5,11 @@
   </properties>
   <body>
   <release version="1.9.1" date="2009-12-03" description="First public release working against Share 3.2r">
+    <action dev="columbro" type="add">
+     Support for Alfresco Share Closes issue 17 (http://code.google.com/p/maven-alfresco-archetypes/issues/detail?id=17")
+      </action>
       <action dev="columbro" type="add">
-    Addded 3.2r samples
+    Addded 3.2r sample SHARE web extension
       </action>
       <action dev="columbro" type="add">
     Added base SHARE overlay structure

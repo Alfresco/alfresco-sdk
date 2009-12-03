@@ -23,6 +23,7 @@ See all the different components at the following links:
 - maven-amp-plugin: ${project.url}/plugins/maven-amp-plugin/index.html
 - maven-nosnpashot-plugin: ${project.url}/plugins/maven-nosnapshot-plugin/index.html
 
+See also the Alfresco wiki documentation: http://wiki.alfresco.com/wiki/Managing_Alfresco_Lifecyle_with_Maven.
 
 #if ($release.getActions().size() == 0)
 No changes defined in this version.
@@ -125,6 +126,7 @@ maven-amp-plugin: ${project.url}/plugins/maven-amp-plugin/changes-report.html
 
 For a manual installation, you can download the ${finalName} here:
 ${urlDownload}
+
 #end
 
 Have fun!
