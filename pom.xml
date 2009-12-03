@@ -5,7 +5,7 @@
 	<packaging>pom</packaging>
 	<version>1.0.1-SNAPSHOT</version>
 	<name>Maven Alfresco Lifecycle support base project</name>
-	<url>http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/maven-alfresco-lifecycle</url>
+	<url>http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle</url>
 	<description>
 This project is meant to gather all commons configurations, plugins and archetypes for the full Maven Alfresco lifecycle support.
 It gathers the latest stable versions of the different components that are used to support Alfresco development on Maven in enterprise and 
@@ -45,14 +45,15 @@ community contexts.
 		<developerConnection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/trunk</developerConnection>
 		<url>https://maven-alfresco-archetypes.googlecode.com/svn/trunk</url>
 	</scm>
+	<!-- New Alfresco nexus instance -->
 	<repositories>
 		<repository>
-			<id>ss-public-mirror</id>
-			<url>http://repository.sourcesense.com/nexus/content/groups/public</url>
+			<id>alfresco-public</id>
+			<url>http://maven.alfresco.com/nexus/content/groups/public</url>
 		</repository>
 		<repository>
-			<id>ss-public-snapshots-mirror</id>
-			<url>http://repository.sourcesense.com/nexus/content/groups/public-snapshots</url>
+			<id>alfresco-public-snapshots</id>
+			<url>http://maven.alfresco.com/nexus/content/groups/public-snapshots</url>
 			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>daily</updatePolicy>
@@ -61,12 +62,12 @@ community contexts.
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
-			<id>ss-public-mirror</id>
-			<url>http://repository.sourcesense.com/nexus/content/groups/public</url>
+			<id>alfresco-public</id>
+      <url>http://maven.alfresco.com/nexus/content/groups/public</url>
 		</pluginRepository>
 		<pluginRepository>
-			<id>ss-public-snapshots-mirror</id>
-			<url>http://repository.sourcesense.com/nexus/content/groups/public-snapshots</url>
+			<id>alfresco-public-snapshots</id>
+      <url>http://maven.alfresco.com/nexus/content/groups/public-snapshots</url>
 			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>daily</updatePolicy>
@@ -98,6 +99,17 @@ community contexts.
 				<role>Maven Calm Expert</role>
 			</roles>
 		</developer>
+		<developer>
+      <id>carlo.sciolla</id>
+      <name>Carlo Sciolla</name>
+      <email>m.pillitu@sourcesense.com</email>
+      <organization>Sourcesense</organization>
+      <organizationUrl>http://www.sourcesense.com</organizationUrl>
+      <roles>
+        <role>Infra support</role>
+        <role>Developer</role>
+      </roles>
+    </developer>
 	</developers>
 	<mailingLists>
 		<mailingList>
@@ -213,16 +225,16 @@ community contexts.
 	</reporting>
 	<distributionManagement>
 		<repository>
-			<id>ss-public</id>
-			<url>http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.releases</url>
+			<id>alfresco-releases</id>
+			<url>http://maven.alfresco.com/nexus/content/repositories/releases</url>
 		</repository>
 		<snapshotRepository>
-			<id>ss-public-snapshots</id>
-			<url>http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.snapshots</url>
+			<id>alfresco-snapshots</id>
+			<url>http://maven.alfresco.com/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
 		<site>
-			<id>ss-public-sites</id>
-			<url>dav:http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/maven-alfresco-lifecycle</url>
+			<id>alfresco-docs</id>
+			<url>dav:http://maven.alfresco.com/nexus/content/repositories/alfresco-docs-staging/maven-alfresco-lifecycle</url>
 		</site>
 	</distributionManagement>
 </project>

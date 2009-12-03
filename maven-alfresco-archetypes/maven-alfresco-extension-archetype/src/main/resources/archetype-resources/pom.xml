@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-	Licensed to the Apache Software Foundation (ASF) under one or more
-	contributor license agreements.  See the NOTICE file distributed with
-	this work for additional information regarding copyright ownership.
-	The ASF licenses this file to You under the Apache License, Version 2.0
-	(the "License"); you may not use this file except in compliance with
-	the License.  You may obtain a copy of the License at
-	
-	http://www.apache.org/licenses/LICENSE-2.0
-	
-	Unless required by applicable law or agreed to in writing, software
-	distributed under the License is distributed on an "AS IS" BASIS,
-	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	See the License for the specific language governing permissions and
-	limitations under the License.
-	
--->
+	<!--
+		Licensed to the Apache Software Foundation (ASF) under one or more
+		contributor license agreements. See the NOTICE file distributed with
+		this work for additional information regarding copyright ownership.
+		The ASF licenses this file to You under the Apache License, Version
+		2.0 (the "License"); you may not use this file except in compliance
+		with the License. You may obtain a copy of the License at
+		http://www.apache.org/licenses/LICENSE-2.0 Unless required by
+		applicable law or agreed to in writing, software distributed under the
+		License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+		CONDITIONS OF ANY KIND, either express or implied. See the License for
+		the specific language governing permissions and limitations under the
+		License.
+	-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -27,40 +24,40 @@
 	<url></url>
 	<description>Alfresco extension</description>
 	<!--
-		|
-		| Prerequisite:
-		| - Mysql local instance running and db alf_jetty created with permissions for alfresco/alfresco user.
-		|
-		| How it works:
-		| By default the project is overlayed to the alfresco war which depends upon and deployed as a WAR (local development and testing purposes)
-		| Available properties:
-		|
-		| -Denv - toggles src/main/properties/<env>/application.properties files (default: local)
-		| -DrestoreVersion=<restoreVersion> - toggles profile "restore" in order to include tools/export/<restoreVersion>/restore/*.acp files in 	
-		| alfresco/extension/restore (default: no restore)
-		| -Dcustomization.name=<customizationName> - name of the jar artifact containing classes and resources for this extension
-		| -Dwebapp.name=<extensionName> -   name of the WAR artifact to be built (default: ${artifactId}-{version}.jar )
-		| -Denterprise   - Includes LDAP configuration as defined in application.properties
+		| | Prerequisite: | - Mysql local instance running and db alf_jetty
+		created with permissions for alfresco/alfresco user. | | How it works:
+		| By default the project is overlayed to the alfresco war which
+		depends upon and deployed as a WAR (local development and testing
+		purposes) | Available properties: | | -Denv - toggles
+		src/main/properties/<env>/application.properties files (default:
+		local) | -DrestoreVersion=<restoreVersion> - toggles profile "restore"
+		in order to include tools/export/<restoreVersion>/restore/*.acp files
+		in | alfresco/extension/restore (default: no restore) |
+		-Dcustomization.name=<customizationName> - name of the jar artifact
+		containing classes and resources for this extension |
+		-Dwebapp.name=<extensionName> - name of the WAR artifact to be built
+		(default: ${artifactId}-{version}.jar ) | -Denterprise - Includes LDAP
+		configuration as defined in application.properties
 	-->
 	<!-- Default properties -->
 	<properties>
 		<!-- src/main/properties/<env>/application.properties is loaded -->
 		<env>local</env>
 		<webapp.name>alfresco</webapp.name>
-		<!-- 
-			| 
-			| By default the src/main/properties/local/application.properties uses the property "alfresco.data.location" to  specify where
-			| alf_data gets created.
-			| For local jetty:run deployment default creation dir is under project root folder (as location is specified relatively to run 			
-			| dir). Please add alf_data_jetty in svn/cvs ignores in order not to commit that. You can also specified a different (out of the 	
-			| sproject) folder
-			| by editing the following properties.
-			| DB is also configurable here. Of course keep in sync these two values otherwise you'll get integrity errors.
-			| 
-			| Empty log dir creates file alfresco.log in appserver default dir. You can also specify a meaningful log directory for the server
-			| (add a trailing slash, e.g. '/var/log/alfresco/' ) 
-			|
-			| Jetty embedded run logs by default in target/alfresco.log 
+		<!--
+			| | By default the src/main/properties/local/application.properties
+			uses the property "alfresco.data.location" to specify where |
+			alf_data gets created. | For local jetty:run deployment default
+			creation dir is under project root folder (as location is specified
+			relatively to run | dir). Please add alf_data_jetty in svn/cvs
+			ignores in order not to commit that. You can also specified a
+			different (out of the | sproject) folder | by editing the following
+			properties. | DB is also configurable here. Of course keep in sync
+			these two values otherwise you'll get integrity errors. | | Empty log
+			dir creates file alfresco.log in appserver default dir. You can also
+			specify a meaningful log directory for the server | (add a trailing
+			slash, e.g. '/var/log/alfresco/' ) | | Jetty embedded run logs by
+			default in target/alfresco.log
 		-->
 		<alfresco.data.location>./alf_data_jetty</alfresco.data.location>
 		<alfresco.db.name>alf_jetty</alfresco.db.name>
@@ -70,17 +67,23 @@
 		<!-- Used for 2.1.0 -->
 		<desktop.action.package>org.alfresco.filesys.repo.desk</desktop.action.package>
 		<!-- Used for 2.9.0+ -->
-		<!--desktop.action.package>org.alfresco.filesys.repo.desk</desktop.action.package-->
+		<!--
+			desktop.action.package>org.alfresco.filesys.repo.desk</desktop.action.package
+		-->
 		<log.dir></log.dir>
-		<!-- Uncomment this property together with the <scm> section downwards
-			<svn.url>
-			https://mycompany.com/repos/my-test-project
-			</svn.url>
+		<!--
+			Uncomment this property together with the <scm> section downwards
+			<svn.url> https://mycompany.com/repos/my-test-project </svn.url>
 		-->
-		<!-- Uncomment this property together with the maven-release-plugin <plugin><configuration><tagBase/></configuration></plugin> section downwards
-			<svn.tags.url>${svn.url}/tags</svn.tags.url>
+		<!--
+			Uncomment this property together with the maven-release-plugin
+			<plugin><configuration><tagBase/></configuration></plugin> section
+			downwards <svn.tags.url>${svn.url}/tags</svn.tags.url>
 		-->
-		<!-- These redundancies are due to filtering issues of Maven. See here http://maven.apache.org/plugins/maven-site-plugin/usage.html -->
+		<!--
+			These redundancies are due to filtering issues of Maven. See here
+			http://maven.apache.org/plugins/maven-site-plugin/usage.html
+		-->
 		<site_pom_description>${pom.description}</site_pom_description>
 		<site_pom_url>${pom.organization.url}</site_pom_url>
 		<site_pom_groupId>${pom.groupId}</site_pom_groupId>
@@ -89,45 +92,48 @@
 		<site_tags_url>${svn.tags.url}</site_tags_url>
 		<site_site_url>${site.url}</site_site_url>
 	</properties>
-	<!-- 
-		| Alfresco Community dependencies are generally available in ss-public repo. 
-		| FIXME: Alfresco enterprise dependencies are only available on SS repo ATM. Alfresco *needs* to deliver their artifacts on (at least) partner repos
-		|-->
+	<!--
+		| Alfresco Community dependencies are generally available in ss-public
+		repo. | FIXME: Alfresco enterprise dependencies are only available on
+		SS repo ATM. Alfresco *needs* to deliver their artifacts on (at least)
+		partner repos |
+	-->
 	<repositories>
 		<repository>
-			<id>ss-public-mirror</id>
-			<url>http://repository.sourcesense.com/nexus/content/groups/public</url>
+			<id>alfresco-public</id>
+			<url>http://maven.alfresco.com/nexus/content/groups/public</url>
 		</repository>
 		<repository>
-			<id>ss-public-snapshots-mirror</id>
-			<url>http://repository.sourcesense.com/nexus/content/groups/public-snapshots</url>
+			<id>alfresco-public-snapshots</id>
+			<url>http://maven.alfresco.com/nexus/content/groups/public-snapshots</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
-			<id>ss-public-mirror</id>
-			<url>http://repository.sourcesense.com/nexus/content/groups/public</url>
+			<id>alfresco-public</id>
+			<url>http://maven.alfresco.com/nexus/content/groups/public</url>
 		</pluginRepository>
 		<pluginRepository>
-			<id>ss-public-snapshots-mirror</id>
-			<url>http://repository.sourcesense.com/nexus/content/groups/public-snapshots</url>
+			<id>alfresco-public-snapshots</id>
+			<url>http://maven.alfresco.com/nexus/content/groups/public-snapshots</url>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-	<!-- Uncomment SCM definitions in order to have mvn release:perform to actually tag the code
-		<scm>
+	<!--
+		Uncomment SCM definitions in order to have mvn release:perform to
+		actually tag the code <scm>
 		<developerConnection>scm:svn:${svn.url}</developerConnection>
-		<url>${svn.url}</url>
-		</scm>
+		<url>${svn.url}</url> </scm>
 	-->
 
 	<!-- Alfresco dependencies -->
 	<dependencies>
-		<!-- Alfresco Dependencies
-			| NB: These files are not publicly available. Please vote for Alfresco to release them :)
-			| Jboss alfresco build (e.g. no log4j.properties and fix for myFaces) 
+		<!--
+			Alfresco Dependencies | NB: These files are not publicly available.
+			Please vote for Alfresco to release them :) | Jboss alfresco build
+			(e.g. no log4j.properties and fix for myFaces)
 		-->
 		<dependency>
 			<groupId>org.alfresco</groupId>
@@ -136,7 +142,10 @@
 			<type>war</type>
 			<classifier>community</classifier>
 		</dependency>
-		<!-- All provided libs (as contained in the war dependency) but useful for development (e.g. IDE configuration) -->
+		<!--
+			All provided libs (as contained in the war dependency) but useful for
+			development (e.g. IDE configuration)
+		-->
 		<dependency>
 			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-web-client</artifactId>
@@ -166,17 +175,15 @@
 			<classifier>community</classifier>
 		</dependency>
 
-		<!-- Sample of AMP dependency that will be properly uncompressed in the Alfresco WAR (no more need for AMP): 
-			this can be either an AMP built with maven-amp-plugin and deployed on an accessible
-			maven repo or a generally available AMP previously deployed to a repo using mvn deploy:deploy-file
-			
-			<dependency>
-			<scope>runtime</scope>
-			<type>amp</type>
-			<artifactId>recordsmanagement</artifactId>
+		<!--
+			Sample of AMP dependency that will be properly uncompressed in the
+			Alfresco WAR (no more need for AMP): this can be either an AMP built
+			with maven-amp-plugin and deployed on an accessible maven repo or a
+			generally available AMP previously deployed to a repo using mvn
+			deploy:deploy-file <dependency> <scope>runtime</scope>
+			<type>amp</type> <artifactId>recordsmanagement</artifactId>
 			<version>${alfresco.version}</version>
-			<groupId>org.alfresco</groupId>
-			</dependency>
+			<groupId>org.alfresco</groupId> </dependency>
 		-->
 
 		<!-- Comment if you're not using mysql -->
@@ -196,12 +203,21 @@
 	<build>
 		<!-- Customize here your webapp name - default: alfresco.war -->
 		<finalName>${webapp.name}</finalName>
-		<!-- Used to access Sourcesense repository for writing. Public version not available, see README.txt -->
-		<!-- In certain cases we do build time filtering with the single sourcing application.properties -->
+		<!--
+			Used to access Sourcesense repository for writing. Public version not
+			available, see README.txt
+		-->
+		<!--
+			In certain cases we do build time filtering with the single sourcing
+			application.properties
+		-->
 		<filters>
 			<filter>src/main/properties/${env}/application.properties</filter>
 		</filters>
-		<!-- Default profile to build as an Alfresco extension -  resources are copied into classpath-->
+		<!--
+			Default profile to build as an Alfresco extension - resources are
+			copied into classpath
+		-->
 		<resources>
 			<!-- By default also no content is restored -->
 			<resource>
@@ -211,9 +227,10 @@
 					<exclude>**/ldap-*.xml</exclude>
 				</excludes>
 			</resource>
-			<!-- 
-				| Include application properties file in classpath: this allows Spring contexts to have customization properties available at 
-				| classpath:alfresco/extension/application.properties
+			<!--
+				| Include application properties file in classpath: this allows
+				Spring contexts to have customization properties available at |
+				classpath:alfresco/extension/application.properties
 			-->
 			<resource>
 				<directory>src/main/properties/${env}</directory>
@@ -227,7 +244,10 @@
 				<directory>src/main/resources</directory>
 				<includes>
 					<include>log4j.properties</include>
-					<!-- In this case we do build time filtering instead of runtime Spring property loading, as this is based on a CoC from Alfresco -->
+					<!--
+						In this case we do build time filtering instead of runtime Spring
+						property loading, as this is based on a CoC from Alfresco
+					-->
 					<include>alfresco/extension/file-servers-custom.xml</include>
 				</includes>
 				<filtering>true</filtering>
@@ -251,13 +271,15 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-			<!-- useful for eclipse project configuration. Run "mvn eclipse:eclipse" and hit "F5" on the project -->
+			<!--
+				useful for eclipse project configuration. Run "mvn eclipse:eclipse"
+				and hit "F5" on the project
+			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<!--
-					<configuration>
-					<downloadSources>true</downloadSources>
+					<configuration> <downloadSources>true</downloadSources>
 					</configuration>
 				-->
 			</plugin>
@@ -286,8 +308,11 @@
 					</execution>
 				</executions>
 				<dependencies>
-					<!-- This is required to be re-defined explicitly at plugin level as otherwise the 'amp' extension
-						unArchiver won't be available to the maven-dependency-plugin  -->
+					<!--
+						This is required to be re-defined explicitly at plugin level as
+						otherwise the 'amp' extension unArchiver won't be available to the
+						maven-dependency-plugin
+					-->
 					<dependency>
 						<groupId>org.alfresco.maven.plugin</groupId>
 						<artifactId>maven-amp-plugin</artifactId>
@@ -308,32 +333,6 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-				<version>6.1.21</version>
-				<executions>
-					<!-- Runs jetty when 'integration-test' phase is called -->
-					<execution>
-						<id>it</id>
-						<phase>integration-test</phase>
-						<goals>
-							<goal>run-exploded</goal>
-						</goals>
-						<configuration>
-							<contextPath>/${webapp.name}</contextPath>
-							<webApp>${pom.build.directory}/${webapp.name}</webApp>
-							<scanIntervalSeconds>10</scanIntervalSeconds>
-							<connectors>
-								<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-									<port>8080</port>
-									<maxIdleTime>60000</maxIdleTime>
-								</connector>
-							</connectors>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<groupId>org.codehaus.cargo</groupId>
 				<artifactId>cargo-maven2-plugin</artifactId>
 				<version>0.3-SNAPSHOT</version>
@@ -345,11 +344,15 @@
 					<!-- useEditMode>true</useEditMode> -->
 					<dryRun>true</dryRun>
 					<preparationGoals>clean package</preparationGoals>
-					<goals>install deploy cargo:undeploy cargo:deploy site:deploy</goals>
+					<goals>install deploy cargo:undeploy cargo:deploy
+						site:deploy</goals>
 					<!-- <tagBase>${svn.tags.url}</tagBase> -->
 				</configuration>
 			</plugin>
-			<!-- Adds support for books PDF and RTF generation for single sourced documentation -->
+			<!--
+				Adds support for books PDF and RTF generation for single sourced
+				documentation
+			-->
 			<plugin>
 				<groupId>org.apache.maven.doxia</groupId>
 				<artifactId>doxia-maven-plugin</artifactId>
@@ -363,10 +366,10 @@
 					</execution>
 				</executions>
 				<configuration>
-					<!-- 
-						| Target books dir: within the site so it can be linked and deployed
-						| TODO: Use ${pom.target.dir} or so similar property instead of 
-						|		hard wiring 'target'
+					<!--
+						| Target books dir: within the site so it can be linked and
+						deployed | TODO: Use ${pom.target.dir} or so similar property
+						instead of | hard wiring 'target'
 					-->
 					<generatedDocs>target/site/books</generatedDocs>
 					<books>
@@ -413,11 +416,10 @@
 			<plugin>
 				<artifactId>maven-clover-plugin</artifactId>
 			</plugin>
-			<!-- Enable this plugin only after setting SCM connection, otherwise mvn site will fail
-				<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>changelog-maven-plugin</artifactId>
-				</plugin>
+			<!--
+				Enable this plugin only after setting SCM connection, otherwise mvn
+				site will fail <plugin> <groupId>org.codehaus.mojo</groupId>
+				<artifactId>changelog-maven-plugin</artifactId> </plugin>
 			-->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -425,30 +427,22 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	<!-- 
-		| Configured to deploy on SS public repository ATM.
-		| You'd need a valid uid/pwd in our repo
-		|
+	<!--
+		| Configured to deploy on SS public repository ATM. | You'd need a
+		valid uid/pwd in our repo |
 	-->
 	<distributionManagement>
 		<!--
-			| 
-			| Enable this repo in case of publicly redistributable artifacts (Sourcesense public repositories via ssh + public key )
-			|
-			<repository>
-			<id>yourcompany</id>
-			<url>scp://yourcompany/var/maven2</url>
-			</repository>
-			<distributionManagement>
-			<site>
-			<id>yourcompany-site</id>
-			<url>scp://yourcompany/var/maven2-sites</url>
-			</site>
+			| | Enable this repo in case of publicly redistributable artifacts
+			(Sourcesense public repositories via ssh + public key ) |
+			<repository> <id>yourcompany</id>
+			<url>scp://yourcompany/var/maven2</url> </repository>
+			<distributionManagement> <site> <id>yourcompany-site</id>
+			<url>scp://yourcompany/var/maven2-sites</url> </site>
 		-->
 		<!--
-			| 
-			| Enable this repo in case of non publicly redistributable artifacts (Sourcesense private repositories via webdav)
-			|
+			| | Enable this repo in case of non publicly redistributable
+			artifacts (Sourcesense private repositories via webdav) |
 		-->
 	</distributionManagement>
 
@@ -457,11 +451,12 @@
 	-->
 	<profiles>
 		<!--
-			| Profile to automatically restore export files committed under
-			| "tools/export/<restoreVersion>/export_*.[acp,xml]" and the restore-context.xml.
-			| Gets automatically activated specifiying a value for the property
-			| restoreVersion which maps to the name of the folder.
-			| NB: In order this to work you *MUST* export your full repo with "export" package name
+			| Profile to automatically restore export files committed under |
+			"tools/export/<restoreVersion>/export_*.[acp,xml]" and the
+			restore-context.xml. | Gets automatically activated specifiying a
+			value for the property | restoreVersion which maps to the name of the
+			folder. | NB: In order this to work you *MUST* export your full repo
+			with "export" package name
 		-->
 		<profile>
 			<id>restore</id>
@@ -490,8 +485,8 @@
 			</build>
 		</profile>
 		<!--
-			| Profile to automatically include ldap configuration files
-			| (not included by default build)
+			| Profile to automatically include ldap configuration files | (not
+			included by default build)
 		-->
 		<profile>
 			<id>ldap</id>
@@ -512,27 +507,30 @@
 				</resources>
 			</build>
 		</profile>
-		<!-- Profile for deploying (only locally , due to http://jira.codehaus.org/browse/CARGO-416) on jboss. 
-			|
-			| FIXME: Add <dependencies> override in order to have jboss specific alfresco-*-jboss.war (e.g no log4j.properties and log4j jar) 
-			| being substituted as a depenendency, and avoid log4j classCasts
-			|
+		<!--
+			Profile for deploying (only locally , due to
+			http://jira.codehaus.org/browse/CARGO-416) on jboss. | | FIXME: Add
+			<dependencies> override in order to have jboss specific
+			alfresco-*-jboss.war (e.g no log4j.properties and log4j jar) | being
+			substituted as a depenendency, and avoid log4j classCasts |
 		-->
 		<profile>
 			<id>jboss</id>
-			<!--  
-				| By default the src/main/properties/local/application.properties uses the property "alfresco.data.location" to  specify where
-				| alf_data gets created and "alfresco.db.name" for the database name.
-				| For local jboss deployment default creation dir (alf_data) is under appserver $JBOSS_HOME/bin directory (as location is specified relatively to 
-				| run dir)
-				| 
-				| Empty log dir creates file alfresco.log in appserver default dir. You can also specify a meaningful log directory for the server
-				| (add a trailing slash, e.g. '/var/log/alfresco/' ) 
-				|
-				| NB: Remember to grant appropriate permissions on database you specify here by running the script found in tools/mysql/[jetty/tomcat/jboss]
-				| sql scripts (after editing them), or run those you find in target/classes/tools/[db_remove,db_setup].sql which are already filtered according to
-				| ' alfresco.db.name ' property.
-				| 
+			<!--
+				| By default the src/main/properties/local/application.properties
+				uses the property "alfresco.data.location" to specify where |
+				alf_data gets created and "alfresco.db.name" for the database name.
+				| For local jboss deployment default creation dir (alf_data) is
+				under appserver $JBOSS_HOME/bin directory (as location is specified
+				relatively to | run dir) | | Empty log dir creates file alfresco.log
+				in appserver default dir. You can also specify a meaningful log
+				directory for the server | (add a trailing slash, e.g.
+				'/var/log/alfresco/' ) | | NB: Remember to grant appropriate
+				permissions on database you specify here by running the script found
+				in tools/mysql/[jetty/tomcat/jboss] | sql scripts (after editing
+				them), or run those you find in
+				target/classes/tools/[db_remove,db_setup].sql which are already
+				filtered according to | ' alfresco.db.name ' property. |
 			-->
 			<properties>
 				<alfresco.data.location>./alf_data</alfresco.data.location>
@@ -605,18 +603,21 @@
 		-->
 		<profile>
 			<id>tomcat</id>
-			<!--  
-				| By default the src/main/properties/local/application.properties uses the property "alfresco.data.location" to  specify where
-				| alf_data gets created.
-				| For tomcat deployment default creation dir (alf_data) is under appserver $CATALINA_HOME/bin directory (as location is specified relatively to 
-				| run dir) and db is configurable likewhise.
-				| Empty log dir creates file alfresco.log in appserver default dir. You can also specify a meaningful log directory for the server
-				| (add a trailing slash, e.g. '/var/log/alfresco/' ) 
-				|
-				| NB: Remember to grant appropriate permissions on database you specify here by running the script found in tools/mysql/[jetty/tomcat/jboss]
-				| mysql scripts (properly edited) or those you find in target/tools/[db_remove,db_setup].sql which are already filtered according to
-				| ' alfresco.db.name ' property 
-				|  
+			<!--
+				| By default the src/main/properties/local/application.properties
+				uses the property "alfresco.data.location" to specify where |
+				alf_data gets created. | For tomcat deployment default creation dir
+				(alf_data) is under appserver $CATALINA_HOME/bin directory (as
+				location is specified relatively to | run dir) and db is
+				configurable likewhise. | Empty log dir creates file alfresco.log in
+				appserver default dir. You can also specify a meaningful log
+				directory for the server | (add a trailing slash, e.g.
+				'/var/log/alfresco/' ) | | NB: Remember to grant appropriate
+				permissions on database you specify here by running the script found
+				in tools/mysql/[jetty/tomcat/jboss] | mysql scripts (properly
+				edited) or those you find in target/tools/[db_remove,db_setup].sql
+				which are already filtered according to | ' alfresco.db.name '
+				property |
 			-->
 			<properties>
 				<alfresco.data.location>./alf_data</alfresco.data.location>
@@ -659,6 +660,122 @@
 					</plugin>
 				</plugins>
 			</build>
+		</profile>
+		<!-- -Pinitialize : boostraps the db (only to be used the 1st run)  -->
+		<profile>
+			<id>initialize</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>sql-maven-plugin</artifactId>
+						<version>1.1</version>
+						<dependencies>
+							<dependency>
+								<groupId>mysql</groupId>
+								<artifactId>mysql-connector-java</artifactId>
+								<version>5.0.3</version>
+							</dependency>
+						</dependencies>
+						<!-- common configuration shared by all executions -->
+						<configuration>
+							<driver>org.gjt.mm.mysql.Driver</driver>
+							<url>jdbc:mysql://localhost/</url>
+							<username>${alfresco.db.username}</username>
+							<password>${alfresco.db.password}</password>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>generate-resources</phase>
+								<id>drop-db</id>
+								<goals>
+									<goal>execute</goal>
+								</goals>
+								<!-- Bootstraps the DB -->
+								<configuration>
+									<onError>continue</onError>
+									<sqlCommand>drop database ${alfresco.db.name}</sqlCommand>
+								</configuration>
+							</execution>
+							<execution>
+								<phase>generate-resources</phase>
+								<id>create-db</id>
+								<goals>
+									<goal>execute</goal>
+								</goals>
+								<!-- Bootstraps the DB -->
+								<configuration>
+									<sqlCommand>create database ${alfresco.db.name}</sqlCommand>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- Cleans the alf_data folder and logs-->
+					<plugin>
+						<artifactId>maven-clean-plugin</artifactId>
+						<executions>
+							<execution>
+							  <id>clean-execution</id>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>clean</goal>
+								</goals>
+								<configuration>
+									<filesets>
+										<fileset>
+											<directory>${alfresco.data.location}</directory>
+											<includes>
+												<include>**/*</include>
+											</includes>
+										</fileset>
+										<fileset>
+											<directory>.</directory>
+											<includes>
+												<include>**/*.log</include>
+												<include>*.log</include>
+											</includes>
+										</fileset>
+									</filesets>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>run</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.mortbay.jetty</groupId>
+						<artifactId>maven-jetty-plugin</artifactId>
+						<version>6.1.21</version>
+						<executions>
+							<!-- Runs jetty when 'integration-test' phase is called -->
+							<execution>
+								<id>it</id>
+								<phase>integration-test</phase>
+								<goals>
+									<goal>run-exploded</goal>
+								</goals>
+								<configuration>
+									<contextPath>/${webapp.name}</contextPath>
+									<webApp>${pom.build.directory}/${webapp.name}</webApp>
+									<scanIntervalSeconds>10</scanIntervalSeconds>
+									<connectors>
+										<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+											<port>8080</port>
+											<maxIdleTime>60000</maxIdleTime>
+										</connector>
+									</connectors>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+
 		</profile>
 	</profiles>
 </project>

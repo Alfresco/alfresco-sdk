@@ -15,8 +15,8 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<organization>
-		<name>Sourcesense</name>
-		<url>http://www.sourcesense.com</url>
+		<name>Maven Alfresco Community</name>
+		<url>http://www.alfresco.com</url>
 	</organization>
 	<modules>
 		<module>maven-alfresco-amp-archetype</module>

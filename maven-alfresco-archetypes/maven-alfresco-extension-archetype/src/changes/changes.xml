@@ -4,6 +4,17 @@
     <author email="g.columbro@sourcesense.com">Gabriele Columbro</author>
   </properties>
   <body>
+  <release version="3.0.0-beta-1" date="2009-12-03" description="Consolidated release to maven.alfresco.com">
+      <action dev="g.columbro" type="add">
+    Added -Pinitialize profile to clean alf_data and drop/create DB within the build
+      </action>
+      <action dev="g.columbro" type="add">
+    Updated all docs to Maven Alfresco repository
+      </action>
+      <action dev="g.columbro" type="enhancement">
+    Incapsulated jetty run in the -Prun profile, which runs by default jetty during the integration-test phase
+      </action>
+    </release>
   <release version="1.9.0" date="2009-11-07" description="Public release alfresco 3.2r based">
   	  <action dev="g.columbro" type="add">
 		Updated to Alfresco 3.2r artifacts

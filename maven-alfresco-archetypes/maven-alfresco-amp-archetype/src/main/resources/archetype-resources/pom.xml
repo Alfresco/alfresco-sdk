@@ -35,25 +35,30 @@
 	<description>Test AMP project</description>
 	<repositories>
 		<repository>
-			<id>ss-public-mirror</id>
-			<url>http://repository.sourcesense.com/nexus/content/groups/public</url>
+			<id>alfresco-public-snapshots</id>
+      <url>http://maven.alfresco.com/nexus/content/groups/public-snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
 		</repository>
 		<repository>
-			<id>ss-public-snapshots-mirror</id>
-			<url>http://repository.sourcesense.com/nexus/content/groups/public-snapshots</url>
-		</repository>
+			<id>alfresco-public</id>
+      <url>http://maven.alfresco.com/nexus/content/groups/public</url>
+s		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
-			<id>ss-public-mirror</id>
-			<url>http://repository.sourcesense.com/nexus/content/groups/public</url>
+			<id>alfresco-public</id>
+      <url>http://maven.alfresco.com/nexus/content/groups/public</url>
 		</pluginRepository>
 		<pluginRepository>
-			<id>ss-public-snapshots-mirror</id>
+			<id>alfresco-public-snapshots</id>
 			<url>http://repository.sourcesense.com/nexus/content/groups/public-snapshots</url>
 			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
 		</pluginRepository>
 	</pluginRepositories>
 	<properties>
@@ -162,6 +167,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.0-beta-2</version>
 				<executions>
 					<execution>
 						<phase>validate</phase>

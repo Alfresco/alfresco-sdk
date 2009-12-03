@@ -8,11 +8,11 @@
 	    <logo name="Maven" href="http://maven.apache.org" img="http://maven.apache.org/images/logos/maven-feather.png"/>
 	    <logo name="Alfresco - Open source ECM" img="http://alfresco.com/assets/images/icons/powered_by_alfresco.gif" href="http://www.sourcesense.com" /> 
 	</poweredBy>
-	<publishDate position="navigation-bottom" format="MM-dd-yy"/>
+	<publishDate position="navigation-bottom" format="MM-dd-yy" />
   <bannerLeft>
-    <name>Maven alfresco AMP archetype - v. ${project.version}</name>
+    <name>Maven alfresco Extension archetype - v. ${project.version}</name>
     <href>${site_site_url}</href>
-    <src>images/logo_noclaim.png</src>
+    <src>images/Alfresco-logo-transparent.gif</src>
   </bannerLeft>
   <body>
     <links>

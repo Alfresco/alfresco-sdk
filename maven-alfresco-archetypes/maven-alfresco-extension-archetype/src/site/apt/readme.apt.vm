@@ -11,13 +11,16 @@ What is an Alfresco extension?
 	
 Introduction:
 
-	This archetype developed within Sourcesense (http://www.sourcesense.com) aims to provide a standardized approach to development, release and deployment of Alfresco extensions (as opposed to AMP builds). Using standard m2 lifecycle commands (mvn compile package deploy) and generally available plugins (cargo, release, assembly) we are able to cover a very high percentage of Alfresco lifecycle common use cases. \
+	This archetype was developed by Gabriele Columbro {{http://www.mindthegab.com}}, originally for Sourcesense {{http://www.sourcesense.com}} then for Alfresco Limited {{http://www.alfresco.com}}.
+	It aims to provide a standardized approach to development, release and deployment of Alfresco extensions (as opposed to AMP builds). Using standard m2 lifecycle commands (mvn compile package deploy) and generally available plugins (cargo, release, assembly) we are able to cover a very high percentage of Alfresco lifecycle common use cases. \
 	It can be used both with Maven2 and Ant  build systems, but it must be clear that *only* the Maven2 approach provides all the automation features we will describe in the next paragraphs. \
 	In addition to that the m2 approach provides a zero-conf approach while ant requires (as usual) manual gathering and selection of required alfresco libraries and webapp (please refer to README-ant.txt for further info about the Ant build). Last but not the least, m2 build is more likely to be maintained and improved (especially in the likely case Alfresco moves to maven2). \
 	For more details on the Ant apprach please refer instead to {{{${site_tags_url}/${site_pom_artifactId}-${site_pom_version}Úsrc/main/resources/archetype-resources/readme-ANT.txt} Ant Readme}}. 
 
 
 Features (maven2 only):
+   
+  For a detail of the Maven profiles to call please refer to the Usage page {{profiles.html}}, follows a high level description of the features:
 
    * <<Easy dependency management and upgrade testing>> \
 		Webapp WAR dependency on Alfresco community/enterprise wars (or even environment dependent builds, e.g. WAR without log4j for Jboss-4.0.X) can be easily switched and build
@@ -52,7 +55,7 @@ Features (maven2 only):
 		Database creation/remove scripts are filtered according to the build profile, so you can directly run them for the different environment they were 'built' for.
 
 	* <<Easy ide (Eclipse) integration>> \
-		As difficult as running mvn <<<eclipse:eclipse>>> and hitting "Refresh in your eclipse proje"
+    Using m2eclipse {{http://m2eclipse.sonatype.org}}
 
 	* <<Release process>> \
 		One command release deploy for this artifact and for the project generated from it. See README-m2.txt for more details.

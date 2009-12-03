@@ -4,6 +4,18 @@
     <author email="gabriele.columbro@alfresco.com">Gabriele Columbro</author>
   </properties>
   <body>
+    <release version="1.0.1" date="2009-12-03" description="Complete moving of the full infrastructure to Alfresco Community Maven Repository and Share Addon">
+      <action dev="columbro" type="add">
+    Moved all the archetypes to work against http://maven.alfresco.com
+      </action>
+      <action dev="columbro" type="add">
+    Updated documentation to point to the new infrastructure
+      </action>
+      <action dev="columbro" type="add">
+    Added support for Alfresco SHARE archetype
+      </action>
+      
+    </release>
     <release version="1.0.0" date="2009-11-03" description="Complete refactoring of the full support in one multimodule project (maven-alfresco-lifecycle)">
       <action dev="columbro" type="add">
 		Linked all sub modules.

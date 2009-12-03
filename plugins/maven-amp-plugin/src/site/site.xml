@@ -6,7 +6,7 @@
 	</skin>
 	<poweredBy>
 	    <logo name="Maven" href="http://maven.apache.org" img="http://maven.apache.org/images/logos/maven-feather.png"/>
-	    <logo name="Alfresco - Open source ECM" img="http://alfresco.com/assets/images/icons/powered_by_alfresco.gif" href="http://www.sourcesense.com" /> 
+	    <logo name="Alfresco - Open source ECM" img="http://alfresco.com/assets/images/icons/powered_by_alfresco.gif" href="http://www.alfresco.com" /> 
 	</poweredBy>
 	<publishDate position="navigation-bottom" format="MM-dd-yy"/>
   <bannerLeft>
@@ -25,11 +25,11 @@
     </menu>
     
     <menu name="Used by">
-	  <item name="Maven Alfresco AMP Archetype" href="http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/maven-alfresco-lifecycle/maven-alfresco-archetypes/maven-alfresco-amp-archetype/index.html"/>
+	  <item name="Maven Alfresco AMP Archetype" href="http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/maven-alfresco-archetypes/maven-alfresco-amp-archetype/index.html"/>
     </menu>
     
     <menu name="See also">
-	  <item name="Maven Alfresco Extension Archetype" href="http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/maven-alfresco-lifecycle/maven-alfresco-archetypes/maven-alfresco-extension-archetype/index.html"/>
+	  <item name="Maven Alfresco Extension Archetype" href="http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/maven-alfresco-archetypes/maven-alfresco-extension-archetype/index.html"/>
     </menu>
     
     <menu ref="reports"/>

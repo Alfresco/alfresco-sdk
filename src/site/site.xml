@@ -10,16 +10,16 @@
 			href="http://www.alfresco.com" />
 	</poweredBy>
 	<publishDate position="navigation-bottom" format="MM-dd-yy" />
-	<bannerLeft>
-		<name>Maven Alfresco Lifecycle Support  - v. ${project.version}</name>
-		<href>${site_site_url}</href>
-		<src>images/logo_noclaim.png</src>
-	</bannerLeft>
+  <bannerLeft>
+    <name>Maven alfresco Extension archetype - v. ${project.version}</name>
+    <href>http://www.alfresco.com</href>
+    <src>images/Alfresco-logo-transparent.gif</src>
+  </bannerLeft>
 	<body>
 		<links>
 			<item name="Maven" href="http://maven.apache.org/" />
 			<item name="Apache" href="http://www.apache.org/" />
-			<item name="Alfresco" href="http://www.alfresco.org/" />
+			<item name="Alfresco" href="http://www.alfresco.com/" />
 			<item name="Project founder" href="http://www.mindthegab.com/" />
 		</links>
 
@@ -33,12 +33,10 @@
 			<item name="FAQ" href="faq.html" />
 		</menu>
 
-		
-		
 		<menu name="See also">
-			<item name="Maven Alfresco AMP Archetype" href="http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/maven-alfresco-lifecycle/maven-alfresco-archetype/maven-alfresco-amp-archetype/index.html" />
-			<item name="Maven AMP Plugin" href="http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/maven-alfresco-lifecycle/plugins/maven-amp-plugin/index.html" />
-			<item name="Third party how to" href="http://www.cybermagic.co.nz/wiki/display/CM/Building+Alfresco+apps+with+Maven" />
+			<item name="Maven Alfresco AMP Archetype" href="http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/maven-alfresco-archetype/maven-alfresco-amp-archetype/index.html" />
+			<item name="Maven AMP Plugin" href="http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/plugins/maven-amp-plugin/index.html" />
+		
 		</menu>
 		
 		<menu ref="reports" />
