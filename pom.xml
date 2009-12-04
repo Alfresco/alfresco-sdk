@@ -234,7 +234,7 @@ community contexts.
 		</snapshotRepository>
 		<site>
 			<id>alfresco-docs</id>
-			<url>dav:http://maven.alfresco.com/nexus/content/repositories/alfresco-docs-staging/maven-alfresco-lifecycle</url>
+			<url>dav:http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle</url>
 		</site>
 	</distributionManagement>
 </project>

@@ -1,26 +1,23 @@
-#set( $symbol_pound = '#' )
-#set( $symbol_dollar = '$' )
-#set( $symbol_escape = '\' )
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
 <beans>
 
    <!-- Custom application properties loading -->
    
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="ignoreResourceNotFound" value="true" />
-		<property name="locations">
-			<list>
-				<value>classpath:alfresco/web-extension/application.properties</value>
-			</list>
-		</property>
-	</bean>
+  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="ignoreResourceNotFound" value="true" />
+    <property name="locations">
+      <list>
+        <value>classpath:alfresco/web-extension/application.properties</value>
+      </list>
+    </property>
+  </bean>
 
    <!-- uncomment this section (or override bean def in custom app context) for remote component deploy -->
    <!-- Override WebScripts searchpath - to include remote store -->
    <!--
    
-	<bean id="webframework.searchpath" class="org.alfresco.web.scripts.SearchPath">
+  <bean id="webframework.searchpath" class="org.alfresco.web.scripts.SearchPath">
       <property name="searchPath">
          <list>
             <ref bean="webframework.remotestore.webscripts" />
