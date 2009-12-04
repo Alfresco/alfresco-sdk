@@ -1,52 +1,93 @@
-#set( $symbol_pound = '#' )
-#set( $symbol_dollar = '$' )
-#set( $symbol_escape = '\' )
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
-<beans>
-
-   <!-- Custom application properties loading -->
-   
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="ignoreResourceNotFound" value="true" />
-		<property name="locations">
-			<list>
-				<value>classpath:alfresco/web-extension/application.properties</value>
-			</list>
-		</property>
-	</bean>
-
-   <!-- uncomment this section (or override bean def in custom app context) for remote component deploy -->
-   <!-- Override WebScripts searchpath - to include remote store -->
-   <!--
-   
-	<bean id="webframework.searchpath" class="org.alfresco.web.scripts.SearchPath">
-      <property name="searchPath">
-         <list>
-            <ref bean="webframework.remotestore.webscripts" />
-            <ref bean="webframework.store.webscripts.custom" />
-            <ref bean="webframework.store.webscripts" />
-            <ref bean="webscripts.store" />
-         </list>
-      </property>
-   </bean>
-   -->
-   
-   <!-- uncomment this section (or override bean def in custom app context) for remote component deploy -->
-   <!-- Override Templates and Scripts searchpath - to include remote store -->
-   <!--
-   <bean id="webframework.templates.searchpath" class="org.alfresco.web.scripts.SearchPath">
-      <property name="searchPath">
-         <list>
-            <ref bean="webframework.remotestore.webscripts" />
-            <ref bean="webframework.store.webscripts.custom" />
-            <ref bean="webframework.store.system-templates" />
-            <ref bean="webframework.store.templates" />
-            <ref bean="webframework.store.webscripts" />
-         </list>
-      </property>
-   </bean>
-   -->
+<alfresco-config>
    
 
-</beans>
+   <config evaluator="string-compare" condition="Server">
+      <server>
+         <!-- Enable and adjust the following settings to allow for external access URLs to the
+              WebScript Framework - to return an externally accessable address for absolute url generation.
+              -->
+         <scheme>${share.server.scheme}</scheme>
+         <hostname>${share.server.name}</hostname>
+         <port>${share.server.port}</port>
+      </server>
+   </config>
+
+
+   <!-- Overriding endpoints to reference a remote Alfresco server -->
+   
+   <config evaluator="string-compare" condition="Remote">
+    <remote>
+
+      <!-- Endpoints -->
+      <!-- Example of a 'declared' identity endpoint configuration
+      <endpoint>
+        <id>alfresco-system</id>
+        <name>Alfresco - System access</name>
+        <description>System account access to Alfresco</description>
+        <connector-id>alfresco</connector-id>
+        <endpoint-url>http://localhost:8080/alfresco/s</endpoint-url>
+        <identity>declared</identity>
+        <username>admin</username>
+        <password>admin</password>
+        <unsecure>true</unsecure>
+      </endpoint> -->
+
+      <endpoint>
+        <id>alfresco-noauth</id>
+        <name>Alfresco - unauthenticated access</name>
+        <description>Access to Alfresco Repository WebScripts that do not require authentication</description>
+        <connector-id>alfresco</connector-id>
+        <endpoint-url>${alfresco.server.scheme}://${alfresco.server.name}:${alfresco.server.port}/${alfresco.webapp.name}/s</endpoint-url>
+        <identity>none</identity>
+      </endpoint>
+
+      <endpoint>
+        <id>alfresco</id>
+        <name>Alfresco - user access</name>
+        <description>Access to Alfresco Repository WebScripts that require user authentication</description>
+        <connector-id>alfresco</connector-id>
+        <endpoint-url>${alfresco.server.scheme}://${alfresco.server.name}:${alfresco.server.port}/${alfresco.webapp.name}/s</endpoint-url>
+        <identity>user</identity>
+      </endpoint>
+
+    </remote>
+  </config>
+  
+  
+  
+   <!-- Overriding endpoints to reference an Alfresco server with external SSO or NTLM enabled -->
+   <!-- NOTE: For NTLM, the NTLM Authentication Filter must also be enabled in share web.xml -->
+   <!-- NOTE: if utilising a load balancer between web-tier and repository cluster, the "sticky -->
+   <!--       sessions" feature of your load balancer must be used -->
+   <!-- Uses SSL client certificate + trusted CAs. Optionally used to authenticate share to an external SSO system such as CAS
+   <config evaluator="string-compare" condition="Remote">
+        <remote>
+            <keystore>
+                <path>alfresco/web-extension/alfresco-system.p12</path>
+                <type>pkcs12</type>
+                <password>alfresco-system</password>
+            </keystore>
+         
+            <connector>
+                <id>alfrescoCookie</id>
+                <name>Alfresco Connector</name>
+                <description>Connects to an Alfresco instance using cookie-based authentication</description>
+                <class>org.alfresco.connector.AlfrescoConnector</class>
+            </connector>
+
+            <endpoint>
+                <id>alfresco</id>
+                <name>Alfresco - user access</name>
+                <description>Access to Alfresco Repository WebScripts that require user authentication</description>
+                <connector-id>alfrescoCookie</connector-id>
+                <endpoint-url>http://localhost/alfresco/wcs</endpoint-url>
+                <identity>user</identity>
+                <external-auth>true</external-auth>
+            </endpoint>
+        </remote>
+                
+    </config>
+    -->
+        
+
+</alfresco-config>

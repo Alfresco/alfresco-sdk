@@ -45,7 +45,7 @@
 		<repository>
 			<id>alfresco-public</id>
       <url>http://maven.alfresco.com/nexus/content/groups/public</url>
-s		</repository>
+		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>

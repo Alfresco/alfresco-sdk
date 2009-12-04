@@ -1,6 +1,3 @@
-#set( $symbol_pound = '#' )
-#set( $symbol_dollar = '$' )
-#set( $symbol_escape = '\' )
 <alfresco-config>
    
 
@@ -9,9 +6,9 @@
          <!-- Enable and adjust the following settings to allow for external access URLs to the
               WebScript Framework - to return an externally accessable address for absolute url generation.
               -->
-         <scheme>${symbol_dollar}{share.server.scheme}</scheme>
-         <hostname>${symbol_dollar}{share.server.name}</hostname>
-         <port>${symbol_dollar}{share.server.port}</port>
+         <scheme>${share.server.scheme}</scheme>
+         <hostname>${share.server.name}</hostname>
+         <port>${share.server.port}</port>
       </server>
    </config>
 
@@ -40,7 +37,7 @@
         <name>Alfresco - unauthenticated access</name>
         <description>Access to Alfresco Repository WebScripts that do not require authentication</description>
         <connector-id>alfresco</connector-id>
-        <endpoint-url>${symbol_dollar}{alfresco.server.scheme}://${symbol_dollar}{alfresco.server.name}:${symbol_dollar}{alfresco.server.port}/${symbol_dollar}{alfresco.webapp.name}/s</endpoint-url>
+        <endpoint-url>${alfresco.server.scheme}://${alfresco.server.name}:${alfresco.server.port}/${alfresco.webapp.name}/s</endpoint-url>
         <identity>none</identity>
       </endpoint>
 
@@ -49,15 +46,15 @@
         <name>Alfresco - user access</name>
         <description>Access to Alfresco Repository WebScripts that require user authentication</description>
         <connector-id>alfresco</connector-id>
-        <endpoint-url>${symbol_dollar}{alfresco.server.scheme}://${symbol_dollar}{alfresco.server.name}:${symbol_dollar}{alfresco.server.port}/${symbol_dollar}{alfresco.webapp.name}/s</endpoint-url>
+        <endpoint-url>${alfresco.server.scheme}://${alfresco.server.name}:${alfresco.server.port}/${alfresco.webapp.name}/s</endpoint-url>
         <identity>user</identity>
       </endpoint>
 
-		</remote>
-	</config>
-	
-	
-	
+    </remote>
+  </config>
+  
+  
+  
    <!-- Overriding endpoints to reference an Alfresco server with external SSO or NTLM enabled -->
    <!-- NOTE: For NTLM, the NTLM Authentication Filter must also be enabled in share web.xml -->
    <!-- NOTE: if utilising a load balancer between web-tier and repository cluster, the "sticky -->
