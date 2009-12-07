@@ -316,7 +316,7 @@
 					<dependency>
 						<groupId>org.alfresco.maven.plugin</groupId>
 						<artifactId>maven-amp-plugin</artifactId>
-						<version>3.0.1-SNAPSHOT</version>
+						<version>3.0.1</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -335,7 +335,7 @@
 			<plugin>
 				<groupId>org.codehaus.cargo</groupId>
 				<artifactId>cargo-maven2-plugin</artifactId>
-				<version>0.3-SNAPSHOT</version>
+				<version>0.3</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
