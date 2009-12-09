@@ -11,7 +11,7 @@
 	<repositories>
 		<repository>
 			<id>alfresco-public</id>
-			<url>http://maven.lfresco.com/nexus/content/groups/public/</url>
+			<url>http://maven.alfresco.com/nexus/content/groups/public/</url>
 		</repository>
 	</repositories>
 
