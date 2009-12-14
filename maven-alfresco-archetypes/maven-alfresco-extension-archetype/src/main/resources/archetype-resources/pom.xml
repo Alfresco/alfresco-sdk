@@ -253,7 +253,7 @@
 				<filtering>true</filtering>
 			</resource>
 			<resource>
-				<directory>${project.basedire}tools/mysql</directory>
+				<directory>${project.basedir}/tools/mysql</directory>
 				<includes>
 					<include>*.sql</include>
 				</includes>
