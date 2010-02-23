@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><archetype-descriptor name="maven-share-module">
+  <fileSets>
+    <fileSet filtered="false" encoding="UTF-8">
+      <directory>src/main/resources</directory>
+      <includes>
+        <include>**/*.xml</include>
+        <include>**/*.properties</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="false" encoding="UTF-8">
+      <directory>src/main/resources</directory>
+      <includes>
+        <include>**/*.js</include>
+        <include>**/*.ftl</include>
+        <include>**/*.css</include>
+        <include>**/*.png</include>
+      </includes>
+    </fileSet>    
+  </fileSets>
+</archetype-descriptor>

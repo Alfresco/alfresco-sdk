@@ -1,93 +1,83 @@
 <alfresco-config>
-   
-
-   <config evaluator="string-compare" condition="Server">
-      <server>
-         <!-- Enable and adjust the following settings to allow for external access URLs to the
-              WebScript Framework - to return an externally accessable address for absolute url generation.
-              -->
-         <scheme>${share.server.scheme}</scheme>
-         <hostname>${share.server.name}</hostname>
-         <port>${share.server.port}</port>
-      </server>
-   </config>
 
 
-   <!-- Overriding endpoints to reference a remote Alfresco server -->
-   
-   <config evaluator="string-compare" condition="Remote">
-    <remote>
+	<config evaluator="string-compare" condition="Server">
+		<server>
+			<!--
+				Enable and adjust the following settings to allow for external
+				access URLs to the WebScript Framework - to return an externally
+				accessable address for absolute url generation.
+			-->
+			<scheme>${share.server.scheme}</scheme>
+			<hostname>${share.server.name}</hostname>
+			<port>${share.server.port}</port>
+		</server>
+	</config>
 
-      <!-- Endpoints -->
-      <!-- Example of a 'declared' identity endpoint configuration
-      <endpoint>
-        <id>alfresco-system</id>
-        <name>Alfresco - System access</name>
-        <description>System account access to Alfresco</description>
-        <connector-id>alfresco</connector-id>
-        <endpoint-url>http://localhost:8080/alfresco/s</endpoint-url>
-        <identity>declared</identity>
-        <username>admin</username>
-        <password>admin</password>
-        <unsecure>true</unsecure>
-      </endpoint> -->
 
-      <endpoint>
-        <id>alfresco-noauth</id>
-        <name>Alfresco - unauthenticated access</name>
-        <description>Access to Alfresco Repository WebScripts that do not require authentication</description>
-        <connector-id>alfresco</connector-id>
-        <endpoint-url>${alfresco.server.scheme}://${alfresco.server.name}:${alfresco.server.port}/${alfresco.webapp.name}/s</endpoint-url>
-        <identity>none</identity>
-      </endpoint>
+	<!-- Overriding endpoints to reference a remote Alfresco server -->
 
-      <endpoint>
-        <id>alfresco</id>
-        <name>Alfresco - user access</name>
-        <description>Access to Alfresco Repository WebScripts that require user authentication</description>
-        <connector-id>alfresco</connector-id>
-        <endpoint-url>${alfresco.server.scheme}://${alfresco.server.name}:${alfresco.server.port}/${alfresco.webapp.name}/s</endpoint-url>
-        <identity>user</identity>
-      </endpoint>
+	<config evaluator="string-compare" condition="Remote">
+		<remote>
+			<endpoint>
+				<id>alfresco-noauth</id>
+				<name>Alfresco - unauthenticated access</name>
+				<description>Access to Alfresco Repository WebScripts that do not require authentication</description>
+				<connector-id>alfresco</connector-id>
+				<endpoint-url>
+					${alfresco.server.scheme}://${alfresco.server.name}:${alfresco.server.port}/${alfresco.webapp.name}/s
+				</endpoint-url>
+				<identity>none</identity>
+			</endpoint>
 
-    </remote>
-  </config>
-  
-  
-  
-   <!-- Overriding endpoints to reference an Alfresco server with external SSO or NTLM enabled -->
-   <!-- NOTE: For NTLM, the NTLM Authentication Filter must also be enabled in share web.xml -->
-   <!-- NOTE: if utilising a load balancer between web-tier and repository cluster, the "sticky -->
-   <!--       sessions" feature of your load balancer must be used -->
-   <!-- Uses SSL client certificate + trusted CAs. Optionally used to authenticate share to an external SSO system such as CAS
-   <config evaluator="string-compare" condition="Remote">
-        <remote>
-            <keystore>
-                <path>alfresco/web-extension/alfresco-system.p12</path>
-                <type>pkcs12</type>
-                <password>alfresco-system</password>
-            </keystore>
-         
-            <connector>
-                <id>alfrescoCookie</id>
-                <name>Alfresco Connector</name>
-                <description>Connects to an Alfresco instance using cookie-based authentication</description>
-                <class>org.alfresco.connector.AlfrescoConnector</class>
-            </connector>
+			<endpoint>
+				<id>alfresco</id>
+				<name>Alfresco - user access</name>
+				<description>Access to Alfresco Repository WebScripts that require user authentication</description>
+				<connector-id>alfresco</connector-id>
+				<endpoint-url>
+					${alfresco.server.scheme}://${alfresco.server.name}:${alfresco.server.port}/${alfresco.webapp.name}/s
+				</endpoint-url>
+				<identity>user</identity>
+			</endpoint>
+		</remote>
+	</config>
 
-            <endpoint>
-                <id>alfresco</id>
-                <name>Alfresco - user access</name>
-                <description>Access to Alfresco Repository WebScripts that require user authentication</description>
-                <connector-id>alfrescoCookie</connector-id>
-                <endpoint-url>http://localhost/alfresco/wcs</endpoint-url>
-                <identity>user</identity>
-                <external-auth>true</external-auth>
-            </endpoint>
-        </remote>
-                
-    </config>
-    -->
-        
+
+
+	<!--
+		Overriding endpoints to reference an Alfresco server with external SSO
+		or NTLM enabled
+	-->
+	<!--
+		NOTE: For NTLM, the NTLM Authentication Filter must also be enabled in
+		share web.xml
+	-->
+	<!--
+		NOTE: if utilising a load balancer between web-tier and repository
+		cluster, the "sticky
+	-->
+	<!--       sessions" feature of your load balancer must be used -->
+	<!--
+		Uses SSL client certificate + trusted CAs. Optionally used to
+		authenticate share to an external SSO system such as CAS <config
+		evaluator="string-compare" condition="Remote"> <remote> <keystore>
+		<path>alfresco/web-extension/alfresco-system.p12</path>
+		<type>pkcs12</type> <password>alfresco-system</password> </keystore>
+
+		<connector> <id>alfrescoCookie</id> <name>Alfresco Connector</name>
+		<description>Connects to an Alfresco instance using cookie-based
+		authentication</description>
+		<class>org.alfresco.connector.AlfrescoConnector</class> </connector>
+
+		<endpoint> <id>alfresco</id> <name>Alfresco - user access</name>
+		<description>Access to Alfresco Repository WebScripts that require
+		user authentication</description>
+		<connector-id>alfrescoCookie</connector-id>
+		<endpoint-url>http://localhost/alfresco/wcs</endpoint-url>
+		<identity>user</identity> <external-auth>true</external-auth>
+		</endpoint> </remote> </config>
+	-->
+
 
 </alfresco-config>

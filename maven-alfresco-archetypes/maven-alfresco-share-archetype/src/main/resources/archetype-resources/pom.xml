@@ -11,8 +11,12 @@
 	<repositories>
 		<repository>
 			<id>alfresco-public</id>
-			<url>http://maven.alfresco.com/nexus/content/groups/public/</url>
+			<url>http://maven.alfresco.com/nexus/content/groups/public</url>
 		</repository>
+		<repository>
+            <id>alfresco-public-snapshots</id>
+            <url>http://maven.alfresco.com/nexus/content/groups/public-snapshots</url>
+        </repository>
 	</repositories>
 
   <!-- Configuration point for the build time properties -->
@@ -35,7 +39,17 @@
 			<version>${alfresco.version}</version>
 			<classifier>community</classifier>
 		</dependency>
-
+        <!-- Share module dependencies 
+            | As of Alfresco 3.3 you can add here below Share Dashlets/Pages packaged as Jars (see http://blogs.alfresco.com/wp/kevinr/2010/01/28/alfresco-share-33-extensions-and-springsurf/)
+            | You can build them with Maven using the Maven Share Module Archetype, documentation can be found here: http://wiki.alfresco.com/wiki/Managing_Alfresco_Lifecyle_with_Maven)
+             
+        <dependency>
+            <groupId>org.alfresco</groupId>
+            <artifactId>my-share-module</artifactId>
+            <type>jar</type>
+            <version>0.0.1</version>
+        </dependency>
+        -->
 	</dependencies>
 
 	<build>
@@ -59,7 +73,7 @@
 				classpath:alfresco/extension/application.properties
 			-->
 			<resource>
-				<directory>src/main/properties</directory>
+				<directory>src/main/properties/${env}</directory>
 				<includes>
 					<include>application.properties</include>
 				</includes>
