@@ -227,13 +227,13 @@
 			</resource>
 			<!--
 				Copies and filters AMP config in the proper package
-				'alfresco/module/${groupId}.${artifactId}' so to enforce full module
+				'alfresco/module/${artifactId}' so to enforce full module
 				naming single sourcing from POM properties
 			-->
 			<resource>
 				<filtering>true</filtering>
 				<directory>src/main/config</directory>
-				<targetPath>alfresco/module/${groupId}.${artifactId}</targetPath>
+				<targetPath>alfresco/module/${artifactId}</targetPath>
 				<excludes>
 					<exclude>**README-*</exclude>
 				</excludes>
@@ -389,7 +389,7 @@
 					</testResource>
 					<!--
 						src/main/config/ is copied into ==>
-						target/test-classes/alfresco/module/${groupId}.${artifactId} to be
+						target/test-classes/alfresco/module/${artifactId} to be
 						picked up by the maven-war plugin Best practice tacken from
 						recordsmanagement.amp, is enforced troughout the whole archetype.
 						This convention is also used for module.properties filtering.
@@ -400,7 +400,7 @@
 						<includes>
 							<include>module.properties</include>
 						</includes>
-						<targetPath>alfresco/module/${groupId}.${artifactId}</targetPath>
+						<targetPath>alfresco/module/${artifactId}</targetPath>
 					</testResource>
 				</testResources>
 			</build>

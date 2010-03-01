@@ -72,9 +72,9 @@ src --------------------------------------------------------> (source folder)
 		|__ main ___ __ resources --------------------------> mapped in the classpath. Add here classpath resources
 		|			|
 		|			|__ config-----   alfresco module config goes here.
-		|			|			  |	  Get's copied (by best practice) by build into package alfresco/module/groupId.artifactId.
+		|			|			  |	  Get's copied (by best practice) by build into package alfresco/module/artifactId.
 		|			|			  |   This convention is used by the archetype and by the AMP unpacker.
-		|			|			  |__ ex: alfresco/module/com.sourcesense.alfresco.mymodule ---> Example Alfresco module config 
+		|			|			  |__ ex: alfresco/module/mymodule ---> Example Alfresco module config 
 		|			|
 		|			|
 		|			|__ java ------------------------------->  customization java classes

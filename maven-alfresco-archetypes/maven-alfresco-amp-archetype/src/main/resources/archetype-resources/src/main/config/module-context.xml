@@ -20,6 +20,6 @@
 
 <beans>
 	
-    <import resource="classpath:alfresco/module/${groupId}.${artifactId}/context/service-context.xml" />
+    <import resource="classpath:alfresco/module/${artifactId}/context/service-context.xml" />
     
 </beans>
