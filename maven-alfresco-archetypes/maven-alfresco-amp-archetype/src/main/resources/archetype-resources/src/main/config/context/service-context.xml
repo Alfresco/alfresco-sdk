@@ -24,7 +24,7 @@
     
     <!-- A simple module component that will be executed once -->
     <bean id="${artifactId}.exampleComponent" class="org.alfresco.demoamp.DemoComponent" parent="module.baseComponent" >
-        <property name="moduleId" value="${pom.groupId}.${pom.artifactId}" />  <!-- See module.properties -->
+        <property name="moduleId" value="${pom.artifactId}" />  <!-- See module.properties -->
         <property name="name" value="exampleComponent" />
         <property name="description" value="A demonstration component" />
         <property name="sinceVersion" value="2.0" />
