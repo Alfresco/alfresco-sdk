@@ -1,0 +1,8 @@
+<alfresco-config>
+	<!-- add French in languages list -->
+	<config evaluator="string-compare" condition="Languages">
+		<languages>
+			<language locale="fr_FR">Français</language>
+		</languages>
+	</config>
+</alfresco-config>
