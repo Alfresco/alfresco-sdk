@@ -6,8 +6,8 @@
 			<implementation>org.apache.maven.artifact.handler.DefaultArtifactHandler</implementation>
 			<configuration>
 				<extension>amp</extension>
-				<type>zip</type>
-				<packaging>zip</packaging>
+				<type>amp</type>
+				<packaging>amp</packaging>
 				<language>java</language>
 				<addedToClasspath>true</addedToClasspath>
 				<includesDependencies>true</includesDependencies>
