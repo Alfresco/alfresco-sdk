@@ -310,7 +310,6 @@
 								<addMavenDescriptor>false</addMavenDescriptor>
 							</archive>
 							<warSourceExcludes>licenses/**</warSourceExcludes>
-							<webResources></webResources>
 							<webResources>
 								<resource>
 									<directory>${build.testOutputDirectory}</directory>
@@ -329,6 +328,11 @@
 									</includes>
 									<filtering>false</filtering>
 								</resource>
+								<resource>
+                                    <directory>jetty</directory>
+                                    <targetPath>WEB-INF</targetPath>
+                                    <filtering>true</filtering>
+                                </resource>
 							</webResources>
 						</configuration>
 						<dependencies>
