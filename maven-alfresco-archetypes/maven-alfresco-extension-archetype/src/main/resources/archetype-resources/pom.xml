@@ -29,7 +29,7 @@
 		| By default the project is overlayed to the alfresco war which
 		depends upon and deployed as a WAR (local development and testing
 		purposes) | Available properties: | | -Denv - toggles
-		src/main/properties/<env>/application.properties files (default:
+		src/main/properties/<env>/alfresco-global.properties files (default:
 		local) | -DrestoreVersion=<restoreVersion> - toggles profile "restore"
 		in order to include tools/export/<restoreVersion>/restore/*.acp files
 		in | alfresco/extension/restore (default: no restore) |
@@ -37,15 +37,15 @@
 		containing classes and resources for this extension |
 		-Dwebapp.name=<extensionName> - name of the WAR artifact to be built
 		(default: ${artifactId}-{version}.jar ) | -Denterprise - Includes LDAP
-		configuration as defined in application.properties
+		configuration as defined in alfresco-global.properties
 	-->
 	<!-- Default properties -->
 	<properties>
-		<!-- src/main/properties/<env>/application.properties is loaded -->
+		<!-- src/main/properties/<env>/alfresco-global.properties is loaded -->
 		<env>local</env>
 		<webapp.name>alfresco</webapp.name>
 		<!--
-			| | By default the src/main/properties/local/application.properties
+			| | By default the src/main/properties/local/alfresco-global.properties
 			uses the property "alfresco.data.location" to specify where |
 			alf_data gets created. | For local jetty:run deployment default
 			creation dir is under project root folder (as location is specified
@@ -63,7 +63,7 @@
 		<alfresco.db.name>alf_jetty</alfresco.db.name>
 		<alfresco.db.username>alfresco</alfresco.db.username>
 		<alfresco.db.password>alfresco</alfresco.db.password>
-		<alfresco.version>3.2r</alfresco.version>
+		<alfresco.version>3.4.a</alfresco.version>
 		<!-- Used for 2.1.0 -->
 		<desktop.action.package>org.alfresco.filesys.repo.desk</desktop.action.package>
 		<!-- Used for 2.9.0+ -->
@@ -84,11 +84,11 @@
 			These redundancies are due to filtering issues of Maven. See here
 			http://maven.apache.org/plugins/maven-site-plugin/usage.html
 		-->
-		<site_pom_description>${pom.description}</site_pom_description>
-		<site_pom_url>${pom.organization.url}</site_pom_url>
-		<site_pom_groupId>${pom.groupId}</site_pom_groupId>
-		<site_pom_artifactId>${pom.artifactId}</site_pom_artifactId>
-		<site_pom_version>${pom.version}</site_pom_version>
+		<site_pom_description>${project.description}</site_pom_description>
+		<site_pom_url>${project.organization.url}</site_pom_url>
+		<site_pom_groupId>${project.groupId}</site_pom_groupId>
+		<site_pom_artifactId>${project.artifactId}</site_pom_artifactId>
+		<site_pom_version>${project.version}</site_pom_version>
 		<site_tags_url>${svn.tags.url}</site_tags_url>
 		<site_site_url>${site.url}</site_site_url>
 	</properties>
@@ -186,12 +186,6 @@
 			<groupId>org.alfresco</groupId> </dependency>
 		-->
 
-		<!-- Comment if you're not using mysql -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.0.3</version>
-		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -209,10 +203,10 @@
 		-->
 		<!--
 			In certain cases we do build time filtering with the single sourcing
-			application.properties
+			alfresco-global.properties
 		-->
 		<filters>
-			<filter>src/main/properties/${env}/application.properties</filter>
+			<filter>src/main/properties/${env}/alfresco-global.properties</filter>
 		</filters>
 		<!--
 			Default profile to build as an Alfresco extension - resources are
@@ -230,25 +224,19 @@
 			<!--
 				| Include application properties file in classpath: this allows
 				Spring contexts to have customization properties available at |
-				classpath:alfresco/extension/application.properties
+				classpath:alfresco-global.properties
 			-->
 			<resource>
 				<directory>src/main/properties/${env}</directory>
 				<includes>
-					<include>application.properties</include>
+					<include>alfresco-global.properties</include>
 				</includes>
 				<filtering>true</filtering>
-				<targetPath>alfresco/extension</targetPath>
 			</resource>
 			<resource>
 				<directory>src/main/resources</directory>
 				<includes>
 					<include>log4j.properties</include>
-					<!--
-						In this case we do build time filtering instead of runtime Spring
-						property loading, as this is based on a CoC from Alfresco
-					-->
-					<include>alfresco/extension/file-servers-custom.xml</include>
 				</includes>
 				<filtering>true</filtering>
 			</resource>
@@ -267,6 +255,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
 				<configuration>
 					<encoding>UTF-8</encoding>
 				</configuration>
@@ -278,7 +267,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>2.6</version>
+				<version>2.8</version>
 				<!--
 					<configuration> <downloadSources>true</downloadSources>
 					</configuration>
@@ -287,6 +276,7 @@
 			<!-- Add documentation locales here -->
 			<plugin>
 				<artifactId>maven-site-plugin</artifactId>
+                <version>3.0</version>
 				<configuration>
 					<locales>en</locales>
 				</configuration>
@@ -294,6 +284,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
+                <version>2.3</version>
 				<executions>
 					<execution>
 						<id>unpack-amps</id>
@@ -324,6 +315,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
 				<configuration>
 					<archiveClasses>false</archiveClasses>
 					<webappDirectory>target/${webapp.name}</webappDirectory>
@@ -336,7 +328,7 @@
 			<plugin>
 				<groupId>org.codehaus.cargo</groupId>
 				<artifactId>cargo-maven2-plugin</artifactId>
-				<version>0.3</version>
+				<version>1.1.1</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -357,7 +349,7 @@
 			<plugin>
 				<groupId>org.apache.maven.doxia</groupId>
 				<artifactId>doxia-maven-plugin</artifactId>
-				<version>1.0-alpha-10</version>
+				<version>1.2</version>
 				<executions>
 					<execution>
 						<phase>pre-site</phase>
@@ -369,7 +361,7 @@
 				<configuration>
 					<!--
 						| Target books dir: within the site so it can be linked and
-						deployed | TODO: Use ${pom.target.dir} or so similar property
+						deployed | TODO: Use ${project.target.dir} or so similar property
 						instead of | hard wiring 'target'
 					-->
 					<generatedDocs>target/site/books</generatedDocs>
@@ -396,26 +388,31 @@
 	</build>
 	<reporting>
 		<plugins>
-			<!-- Targeting 1.5 -->
+			<!-- Targeting 1.6 -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.6</source>
+					<target>1.6</target>
 				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
+                <version>2.9</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.8</version>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jxr-maven-plugin</artifactId>
+                <version>2.0-beta-1</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-clover-plugin</artifactId>
+                <version>2.4</version>
 			</plugin>
 			<!--
 				Enable this plugin only after setting SCM connection, otherwise mvn
@@ -425,6 +422,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>taglist-maven-plugin</artifactId>
+                <version>2.4</version>
 			</plugin>
 		</plugins>
 	</reporting>
@@ -486,29 +484,6 @@
 			</build>
 		</profile>
 		<!--
-			| Profile to automatically include ldap configuration files | (not
-			included by default build)
-		-->
-		<profile>
-			<id>ldap</id>
-			<activation>
-				<property>
-					<name>enterprise</name>
-				</property>
-			</activation>
-			<build>
-				<defaultGoal>package</defaultGoal>
-				<resources>
-					<resource>
-						<directory>src/main/resources</directory>
-						<includes>
-							<include>**/ldap-*-context.xml</include>
-						</includes>
-					</resource>
-				</resources>
-			</build>
-		</profile>
-		<!--
 			Profile for deploying (only locally , due to
 			http://jira.codehaus.org/browse/CARGO-416) on jboss. | | FIXME: Add
 			<dependencies> override in order to have jboss specific
@@ -518,7 +493,7 @@
 		<profile>
 			<id>jboss</id>
 			<!--
-				| By default the src/main/properties/local/application.properties
+				| By default the src/main/properties/local/alfresco-global.properties
 				uses the property "alfresco.data.location" to specify where |
 				alf_data gets created and "alfresco.db.name" for the database name.
 				| For local jboss deployment default creation dir (alf_data) is
@@ -545,7 +520,7 @@
 						<directory>src/main/resources</directory>
 						<excludes>
 							<exclude>**/restore-context.xml</exclude>
-							<exclude>**/ldap-*.xml</exclude>
+							<!--<exclude>**/ldap-*.xml</exclude>-->
 						</excludes>
 					</resource>
 					<resource>
@@ -575,8 +550,8 @@
 								<type>remote</type>
 								<deployables>
 									<deployable>
-										<groupId>${pom.groupId}</groupId>
-										<artifactId>${pom.artifactId}</artifactId>
+										<groupId>${project.groupId}</groupId>
+										<artifactId>${project.artifactId}</artifactId>
 										<type>war</type>
 									</deployable>
 								</deployables>
@@ -587,6 +562,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-war-plugin</artifactId>
+                        <version>2.1.1</version>
 						<configuration>
 							<archiveClasses>false</archiveClasses>
 							<webappDirectory>target/${webapp.name}</webappDirectory>
@@ -605,7 +581,7 @@
 		<profile>
 			<id>tomcat</id>
 			<!--
-				| By default the src/main/properties/local/application.properties
+				| By default the src/main/properties/local/alfresco-global.properties
 				uses the property "alfresco.data.location" to specify where |
 				alf_data gets created. | For tomcat deployment default creation dir
 				(alf_data) is under appserver $CATALINA_HOME/bin directory (as
@@ -649,7 +625,7 @@
 								<type>remote</type>
 								<deployables>
 									<deployable>
-										<artifactId>${pom.artifactId}</artifactId>
+										<artifactId>${project.artifactId}</artifactId>
 										<type>war</type>
 										<properties>
 											<context>/${webapp.name}</context>
@@ -667,50 +643,6 @@
 			<id>initialize</id>
 			<build>
 				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>sql-maven-plugin</artifactId>
-						<version>1.1</version>
-						<dependencies>
-							<dependency>
-								<groupId>mysql</groupId>
-								<artifactId>mysql-connector-java</artifactId>
-								<version>5.0.3</version>
-							</dependency>
-						</dependencies>
-						<!-- common configuration shared by all executions -->
-						<configuration>
-							<driver>org.gjt.mm.mysql.Driver</driver>
-							<url>jdbc:mysql://localhost/</url>
-							<username>${alfresco.db.username}</username>
-							<password>${alfresco.db.password}</password>
-						</configuration>
-						<executions>
-							<execution>
-								<phase>generate-resources</phase>
-								<id>drop-db</id>
-								<goals>
-									<goal>execute</goal>
-								</goals>
-								<!-- Bootstraps the DB -->
-								<configuration>
-									<onError>continue</onError>
-									<sqlCommand>drop database ${alfresco.db.name}</sqlCommand>
-								</configuration>
-							</execution>
-							<execution>
-								<phase>generate-resources</phase>
-								<id>create-db</id>
-								<goals>
-									<goal>execute</goal>
-								</goals>
-								<!-- Bootstraps the DB -->
-								<configuration>
-									<sqlCommand>create database ${alfresco.db.name}</sqlCommand>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
 					<!-- Cleans the alf_data folder and logs-->
 					<plugin>
 						<artifactId>maven-clean-plugin</artifactId>
@@ -747,9 +679,30 @@
 		<profile>
 			<id>run</id>
 			<build>
+                <resources>
+                    <resource>
+                        <directory>jetty</directory>
+                        <includes>
+                            <include>jetty-env.xml</include>
+                        </includes>
+                    </resource>
+                </resources>
 				<plugins>
-					<plugin>
-						<groupId>org.mortbay.jetty</groupId>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <configuration>
+                            <webResources>
+                                <resource>
+                                    <directory>jetty</directory>
+                                    <targetPath>WEB-INF</targetPath>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </webResources>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.mortbay.jetty</groupId>
 						<artifactId>maven-jetty-plugin</artifactId>
 						<version>6.1.21</version>
 						<executions>
@@ -762,7 +715,7 @@
 								</goals>
 								<configuration>
 									<contextPath>/${webapp.name}</contextPath>
-									<webApp>${pom.build.directory}/${webapp.name}</webApp>
+									<webApp>${project.build.directory}/${webapp.name}</webApp>
 									<scanIntervalSeconds>10</scanIntervalSeconds>
 									<connectors>
 										<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
@@ -776,7 +729,29 @@
 					</plugin>
 				</plugins>
 			</build>
-
+            <dependencies>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                    <version>1.3.158</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate</artifactId>
+                    <version>3.2.7.ga</version>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>net.sf.ehcache</groupId>
+                            <artifactId>ehcache</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+                <dependency>
+                    <groupId>it.sk.alfresco</groupId>
+                    <artifactId>h2-support</artifactId>
+                    <version>1.0</version>
+                </dependency>
+            </dependencies>
 		</profile>
 	</profiles>
 </project>

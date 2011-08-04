@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+
+<Configure class="org.mortbay.jetty.webapp.WebAppContext">
+
+    <New id="myDataSource"
+        class="org.mortbay.jetty.plus.naming.Resource">
+        <Arg>jdbc/dataSource</Arg>
+        <Arg>
+            <New class="org.h2.jdbcx.JdbcDataSource">
+                <Set name="URL">jdbc:h2:${alfresco.data.location}/h2_data/${alfresco.db.name}</Set>
+                <Set name="User">${alfresco.db.username}</Set>
+                <Set name="Password">${alfresco.db.password}</Set>
+            </New>
+        </Arg>
+    </New>
+
+</Configure>
