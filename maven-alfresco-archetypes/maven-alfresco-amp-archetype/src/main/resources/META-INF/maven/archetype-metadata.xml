@@ -55,6 +55,7 @@
         <include>module.properties</include>
         <include>README.txt</include>
         <include>TODO.txt</include>
+        <include>jetty/*.xml</include>
       </includes>
     </fileSet>
   </fileSets>
