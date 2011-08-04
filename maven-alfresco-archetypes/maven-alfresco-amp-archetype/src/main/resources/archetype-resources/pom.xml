@@ -63,7 +63,7 @@
 	</pluginRepositories>
 	<properties>
 		<!--
-			Default for which src/main/properties/<env>/application.properties is
+			Default for which src/main/properties/<env>/alfresco-global.properties is
 			loaded. NB: used only for the 'test' profile (e.g. '-P test' on the
 			mvn commandline) jetty run deployment, does not impact AMP behavior
 			which is typically environment independent
@@ -72,7 +72,7 @@
 		<!-- Webapp used to test/develop locally the AMP -->
 		<webapp.name>${artifactId}-webapp</webapp.name>
 		<!--
-			| | By default the src/test/properties/local/application.properties
+			| | By default the src/test/properties/local/alfresco-global.properties
 			uses the property "alfresco.data.location" to specify where |
 			alf_data gets created. | For local jetty:run deployment default
 			creation dir is under project root folder (as location is specified
@@ -86,6 +86,7 @@
 			slash, e.g. '/var/log/alfresco/' ) | | Jetty embedded run logs by
 			default in target/alfresco.log
 		-->
+        <alfresco.version>3.4.a</alfresco.version>
 		<alfresco.data.location>./alf_data_jetty</alfresco.data.location>
 		<alfresco.db.name>alf_jetty</alfresco.db.name>
 		<alfresco.db.username>alfresco</alfresco.db.username>
@@ -95,6 +96,7 @@
 		<!--  End of testing webapp specific properties -->
 		<!--  Module specific build time properties -->
 		<module.log.level>debug</module.log.level>
+        <spring.version>3.0.0.RELEASE</spring.version>
 	</properties>
 	<!--
 		need to list these as a provided so that Maven doesn't download them
@@ -104,16 +106,22 @@
 		<dependency>
 			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-repository</artifactId>
-			<version>3.2r</version>
+			<version>${alfresco.version}</version>
 			<scope>provided</scope>
 			<classifier>community</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring</artifactId>
-			<version>2.0</version>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
 			<scope>provided</scope>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+            <scope>provided</scope>
+        </dependency>
 		<!--
 			Example Jar dependency: will be properly packed into the AMP /lib
 			directory <dependency> <groupId>rome</groupId>
@@ -127,16 +135,6 @@
 			<artifactId>recordsmanagement</artifactId> <version>2.1.0</version>
 			<type>amp</type> </dependency>
 		-->
-		<!--
-			By default archetype assumes mysql for test webapp. Change
-			src/test/properties/<env>/application.properties FIXME: support in
-			memory db for cleaner and safer test runs
-		-->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.0.3</version>
-		</dependency>
 		<!-- Don't add here amp dependencies as it will break amp packaging -->
 	</dependencies>
 	<!--
@@ -145,7 +143,7 @@
 	-->
 	<scm>
 		<connection>scm:svn:http://domain.com/svn/trunk/</connection>
-		<developerConnection>scm:svn:https://${maven.username}@domain.com/svn/trunk/</developerConnection>
+		<developerConnection>scm:svn:https://${user.name}@domain.com/svn/trunk/</developerConnection>
 		<url>http://domain.com/svn/trunk/</url>
 	</scm>
 	<build>
@@ -185,8 +183,8 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.6</source>
+					<target>1.6</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -249,7 +247,7 @@
 			<id>webapp</id>
 			<build>
 				<filters>
-					<filter>src/test/properties/${env}/application.properties</filter>
+					<filter>src/test/properties/${env}/alfresco-global.properties</filter>
 				</filters>
 				<defaultGoal>jetty:run-exploded</defaultGoal>
 				<plugins>
@@ -265,7 +263,7 @@
 								</goals>
 								<configuration>
 									<includeTypes>amp</includeTypes>
-									<outputDirectory>${build.directory}/${webapp.name}</outputDirectory>
+									<outputDirectory>${project.build.directory}/${webapp.name}</outputDirectory>
 									<excludes>META*</excludes>
 								</configuration>
 							</execution>
@@ -305,14 +303,14 @@
 								Don't remove the following line otherwise WAR and AMP builds
 								will be done in the same folder, with unexpected results
 							-->
-							<webappDirectory>${build.directory}/${webapp.name}</webappDirectory>
+							<webappDirectory>${project.build.directory}/${webapp.name}</webappDirectory>
 							<archive>
 								<addMavenDescriptor>false</addMavenDescriptor>
 							</archive>
 							<warSourceExcludes>licenses/**</warSourceExcludes>
 							<webResources>
 								<resource>
-									<directory>${build.testOutputDirectory}</directory>
+									<directory>${project.build.testOutputDirectory}</directory>
 									<targetPath>WEB-INF/classes</targetPath>
 									<filtering>true</filtering>
 									<includes>
@@ -328,7 +326,7 @@
 									</includes>
 									<filtering>false</filtering>
 								</resource>
-								<resource>
+                                <resource>
                                     <directory>jetty</directory>
                                     <targetPath>WEB-INF</targetPath>
                                     <filtering>true</filtering>
@@ -351,6 +349,7 @@
 					<plugin>
 						<groupId>org.mortbay.jetty</groupId>
 						<artifactId>maven-jetty-plugin</artifactId>
+                        <version>6.1.26</version>
 						<executions>
 							<!-- Runs jetty when 'integration-test' phase is called -->
 							<execution>
@@ -361,7 +360,7 @@
 								</goals>
 								<configuration>
 									<contextPath>/${webapp.name}</contextPath>
-									<webApp>${pom.build.directory}/${webapp.name}</webApp>
+									<webApp>${project.build.directory}/${webapp.name}</webApp>
 									<scanIntervalSeconds>10</scanIntervalSeconds>
 									<connectors>
 										<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
@@ -372,12 +371,19 @@
 								</configuration>
 							</execution>
 						</executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>commons-dbcp</groupId>
+                                <artifactId>commons-dbcp</artifactId>
+                                <version>1.4</version>
+                            </dependency>
+                        </dependencies>
 					</plugin>
 				</plugins>
 				<!--
 					When invoking 'mvn integration-test', the following alf configs are
 					added to the test war in order to be able to run it seamlessly. NB:
-					the application.properties file is filtered with alfresco.db.name
+					the alfresco-global.properties file is filtered with alfresco.db.name
 					and alf.data.location POM properties as default configuration
 				-->
 				<testResources>
@@ -389,7 +395,6 @@
 					<testResource>
 						<filtering>true</filtering>
 						<directory>src/test/properties/${env}</directory>
-						<targetPath>alfresco/extension</targetPath>
 					</testResource>
 					<!--
 						src/main/config/ is copied into ==>
@@ -422,10 +427,31 @@
 				<dependency>
 					<groupId>org.alfresco</groupId>
 					<artifactId>alfresco</artifactId>
-					<version>3.2r</version>
+					<version>${alfresco.version}</version>
 					<type>war</type>
 					<classifier>community</classifier>
 				</dependency>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                    <version>1.3.158</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate</artifactId>
+                    <version>3.2.7.ga</version>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>net.sf.ehcache</groupId>
+                            <artifactId>ehcache</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+                <dependency>
+                    <groupId>it.sk.alfresco</groupId>
+                    <artifactId>h2-support</artifactId>
+                    <version>1.0</version>
+                </dependency>
 			</dependencies>
 		</profile>
 

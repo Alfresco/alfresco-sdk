@@ -23,10 +23,7 @@
 	<name>Maven Alfresco Amp Archetype</name>
 	<description>
 		This archetype aims to provide a standardized approach to development, release and deployment of Alfresco AMPs (as opposed to Alfresco
-		extensions, released as a different artifact ). Using standard m2 lifecycle commands (mvn compile package deploy) and generally available
-		plugins (cargo, release, assembly) we are able to cover a very high percentage of Alfresco lifecycle common use cases. You are able within
-		minutes to have a compatible AMP module built and its lifecycle supported by Maven, in a fully transparent way also with open source available
-		AMPs.
+		extensions, released as a different artifact )
 	</description>
 	<parent>
 		<groupId>com.sourcesense.alfresco</groupId>
@@ -39,7 +36,7 @@
 			<extension>
 				<groupId>org.apache.maven.archetype</groupId>
 				<artifactId>archetype-packaging</artifactId>
-				<version>2.0-alpha-3</version>
+				<version>2.0</version>
 			</extension>
 		</extensions>
 	</build>
