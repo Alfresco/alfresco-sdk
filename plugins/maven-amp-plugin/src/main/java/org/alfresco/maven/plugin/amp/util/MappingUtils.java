@@ -20,10 +20,12 @@ package org.alfresco.maven.plugin.amp.util;
  */
 
 import org.apache.maven.artifact.Artifact;
-import org.codehaus.plexus.util.interpolation.ObjectBasedValueSource;
-import org.codehaus.plexus.util.interpolation.RegexBasedInterpolator;
-import org.codehaus.plexus.util.interpolation.ValueSource;
+import org.codehaus.plexus.interpolation.InterpolationException;
+import org.codehaus.plexus.interpolation.RegexBasedInterpolator;
+import org.codehaus.plexus.interpolation.ObjectBasedValueSource;
+import org.codehaus.plexus.interpolation.ValueSource;
 
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -68,7 +70,11 @@ public class MappingUtils
 
         interpolator.addValueSource( new PropertiesInterpolationValueSource( classifierMask ) );
 
-        value = interpolator.interpolate( value, "__artifact" );
+        try {
+            value = interpolator.interpolate( value, "__artifact" );
+        } catch (InterpolationException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
 
         return value;
     }
@@ -88,6 +94,16 @@ public class MappingUtils
         public Object getValue( String key )
         {
             return properties.getProperty( key );
+        }
+
+        @Override
+        public List getFeedback() {
+            return null;  //To change body of implemented methods use File | Settings | File Templates.
+        }
+
+        @Override
+        public void clearFeedback() {
+            //To change body of implemented methods use File | Settings | File Templates.
         }
 
     }

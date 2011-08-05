@@ -22,7 +22,7 @@
   <!-- Configuration point for the build time properties -->
 	<properties>
 		<env>local</env>
-		<alfresco.version>3.2r</alfresco.version>
+		<alfresco.version>3.4.a</alfresco.version>
 		<share.log.level>info</share.log.level>
 		<share.servlet.port>8081</share.servlet.port>
 	</properties>

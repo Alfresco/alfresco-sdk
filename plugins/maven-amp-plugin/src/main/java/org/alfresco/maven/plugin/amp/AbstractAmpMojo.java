@@ -282,7 +282,7 @@ public abstract class AbstractAmpMojo extends AbstractMojo
     /**
      * The Jar archiver needed for archiving classes directory into jar file under WEB-INF/lib.
      *
-     * @parameter expression="${component.org.codehaus.plexus.archiver.Archiver#jar}"
+     * @component role="${component.org.codehaus.plexus.archiver.Archiver#jar}"
      * @required
      */
     private JarArchiver mJarArchiver;
@@ -374,7 +374,7 @@ public abstract class AbstractAmpMojo extends AbstractMojo
     /**
      * To look up Archiver/UnArchiver implementations
      *
-     * @parameter expression="${component.org.codehaus.plexus.archiver.manager.ArchiverManager}"
+     * @component role="${component.org.codehaus.plexus.archiver.manager.ArchiverManager}"
      * @required
      */
     protected ArchiverManager mArchiverManager;

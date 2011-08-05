@@ -28,7 +28,6 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProjectHelper;
 import org.codehaus.plexus.archiver.ArchiverException;
 import org.codehaus.plexus.archiver.jar.ManifestException;
-import org.codehaus.plexus.archiver.zip.ZipArchiver;
 
 import java.io.File;
 import java.io.IOException;
@@ -229,8 +228,8 @@ public class AmpMojo extends AbstractAmpMojo
      * composes the full file name for the AMP and gets a file handle for that file
      * TODO: what happens when nulls are passed in
      * TODO: what does a null response mean?
-     * @param pBaseDir  Base directory for AMP
-     * @param pFileName Final Name of AMP   
+     * @param pBasedir  Base directory for AMP
+     * @param pFinalName Final Name of AMP
      * @param pClassifier TODO: fill this in
      */
     protected static File getAmpFile( File pBasedir, String pFinalName, String pClassifier )
@@ -263,8 +262,8 @@ public class AmpMojo extends AbstractAmpMojo
     protected void performPackaging(File pAmpFile)
     throws IOException, 
            ArchiverException, 
-           ManifestException, 
-           DependencyResolutionRequiredException,
+           ManifestException,
+            DependencyResolutionRequiredException,
            MojoExecutionException, MojoFailureException
     {
         getLog().info( "Packaging Alfresco AMP (" + this.getAmpName() + ")" );
@@ -334,7 +333,7 @@ public class AmpMojo extends AbstractAmpMojo
 
     /**
      * The AMP archiver.
-     * @parameter expression="${component.org.codehaus.plexus.archiver.Archiver#amp}"
+     * @component role="${component.org.codehaus.plexus.archiver.Archiver}" roleHint="amp"
      * @required
      */
     private AmpArchiver mAmpArchiver;

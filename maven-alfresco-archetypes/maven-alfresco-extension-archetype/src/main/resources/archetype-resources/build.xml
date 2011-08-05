@@ -15,11 +15,11 @@
 	<property name="alfresco.dir" value=""/>
 	-->
 	
-	<!-- By default loads src/main/properties/local/application.properties -->
+	<!-- By default loads src/main/properties/local/alfresco-global.properties -->
 	<property name="env" value="local"/>
 	<property name="webapp.name" value="alfresco" />
 
-	<property file="${properties.dir}/${env}/application.properties" />
+	<property file="${properties.dir}/${env}/alfresco-global.properties" />
 
 	<!-- Import tomcat utility tasks -->
 	<import file="${tools.dir}/ant/tasks/tomcat-tasks.xml"/>
@@ -51,7 +51,7 @@
 				<exclude name="**/restore-context.xml" />
 			</fileset>
 		</copy>
-		<copy file="${properties.dir}/${env}/application.properties" tofile="${build.dir}/classes/alfresco/extension/application.properties"></copy>
+		<copy file="${properties.dir}/${env}/alfresco-global.properties" tofile="${build.dir}/classes/alfresco-global.properties"></copy>
 	</target>
 
 

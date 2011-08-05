@@ -1,85 +1,100 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.alfresco.maven.plugin</groupId>
-	<artifactId>maven-amp-plugin</artifactId>
-	<packaging>maven-plugin</packaging>
-	<name>Alfresco AMP Plugin</name>
-	<version>3.0.3-SNAPSHOT</version>
-	<parent>
-		<groupId>org.alfresco</groupId>
-		<artifactId>maven-alfresco-lifecycle</artifactId>
-		<version>1.1.1-SNAPSHOT</version>
-		<relativePath>../../pom.xml</relativePath>
-	</parent>
-	<description>
-		This plugin defines a lifecycle for Alfresco ECM Modules packaging (.amp), handles AMP transitive dependencies from AMP and WAR projects,
-		providing a more enterprise oriented support alternative to the Alfresco MMT (module management tool) usage. It is used by
-		maven-alfresco-amp-archetype in order to package and test run an AMP and by the maven-alfresco-extension-archetype to depend transitively upon
-		AMPs and WARs. It is a modification of the org.apache.maven.plugins:maven-war-plugin of which it uses the whole core infrastructure. See
-		${site.url} for more info
-	</description>
-	<properties>
-		<site_pom_description>${pom.description}</site_pom_description>
-		<site_pom_url>${pom.url}</site_pom_url>
-		<site_pom_groupId>${pom.groupId}</site_pom_groupId>
-		<site_pom_artifactId>${pom.artifactId}</site_pom_artifactId>
-		<site_pom_version>${pom.version}</site_pom_version>
-		<site_tags_url>${svn.tags.url}</site_tags_url>
-	</properties>
-	<developers>
-		<developer>
-			<id>columbro</id>
-			<name>Gabriele Columbro</name>
-			<email>gabriele.columbro@alfresco.com</email>
-			<roles />
-			<organization>Alfresco</organization>
-			<organizationUrl>http://www.alfresco.com</organizationUrl>
-		</developer>
-		<developer>
-			<id>rdanner</id>
-			<name>Russ Danner</name>
-			<roles />
-			<organization>Rivet Logic</organization>
-		</developer>
-	</developers>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.alfresco.maven.plugin</groupId>
+    <artifactId>maven-amp-plugin</artifactId>
+    <packaging>maven-plugin</packaging>
+    <name>Alfresco AMP Plugin</name>
+    <version>3.0.3-SNAPSHOT</version>
+    <parent>
+        <groupId>org.alfresco</groupId>
+        <artifactId>maven-alfresco-lifecycle</artifactId>
+        <version>1.1.1-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    <description>
+        This plugin defines a lifecycle for Alfresco ECM Modules packaging (.amp), handles AMP transitive dependencies
+        from AMP and WAR projects,
+        providing a more enterprise oriented support alternative to the Alfresco MMT (module management tool) usage. It
+        is used by
+        maven-alfresco-amp-archetype in order to package and test run an AMP and by the
+        maven-alfresco-extension-archetype to depend transitively upon
+        AMPs and WARs. It is a modification of the org.apache.maven.plugins:maven-war-plugin of which it uses the whole
+        core infrastructure. See
+        ${site.url} for more info
+    </description>
+    <properties>
+        <site_pom_description>${project.description}</site_pom_description>
+        <site_pom_url>${project.url}</site_pom_url>
+        <site_pom_groupId>${project.groupId}</site_pom_groupId>
+        <site_pom_artifactId>${project.artifactId}</site_pom_artifactId>
+        <site_pom_version>${project.version}</site_pom_version>
+        <site_tags_url>${svn.tags.url}</site_tags_url>
+    </properties>
+    <developers>
+        <developer>
+            <id>columbro</id>
+            <name>Gabriele Columbro</name>
+            <email>gabriele.columbro@alfresco.com</email>
+            <roles/>
+            <organization>Alfresco</organization>
+            <organizationUrl>http://www.alfresco.com</organizationUrl>
+        </developer>
+        <developer>
+            <id>rdanner</id>
+            <name>Russ Danner</name>
+            <roles/>
+            <organization>Rivet Logic</organization>
+        </developer>
+    </developers>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-plugin-api</artifactId>
-			<version>2.0.6</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-artifact</artifactId>
-			<version>2.0.6</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-archiver</artifactId>
-			<version>2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.plexus</groupId>
-			<artifactId>plexus-utils</artifactId>
-			<version>1.4.7</version>
-		</dependency>
-		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<version>1.2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.maven.shared</groupId>
-			<artifactId>maven-plugin-testing-harness</artifactId>
-			<version>1.1</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-compat</artifactId>
+            <version>3.0-alpha-4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-artifact</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-project</artifactId>
+            <version>3.0-alpha-2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-archiver</artifactId>
+            <version>2.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-interpolation</artifactId>
+            <version>1.13</version>
+        </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugin-testing</groupId>
+            <artifactId>maven-plugin-testing-harness</artifactId>
+            <version>2.0-alpha-1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>

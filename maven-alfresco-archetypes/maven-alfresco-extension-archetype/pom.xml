@@ -27,20 +27,14 @@
 	</parent>
 	<description>
 		This archetype developed aims to provide a standardized approach to development, release and deployment of Alfresco extensions (as opposed to
-		AMP builds, to be released as a different artifact ). Using standard m2 lifecycle commands (mvn compile package deploy) and generally
-		available plugins (cargo, release, assembly) we are able to cover a very high percentage of Alfresco lifecycle common use cases. It can be
-		used both with Maven2 and Ant build systems, but it must be clear that *only* the Maven2 approach provides all the automation features we will
-		describe in this website. In addition to that the m2 approach provides a zero-conf approach while ant requires (as usual) manual gathering and
-		selection of required alfresco libraries and webapp (please refer to README-ant.txt for further info about the Ant build). Last but not the
-		least, m2 build is more likely to be maintained and improved (especially in the likely case Alfresco moves to maven2). For more details on the
-		m2 apprach please refer instead to README Section (or directly and to README-m2.txt of the generated project).
+		AMP builds, to be released as a different artifact ).
 	</description>
 	<build>
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.archetype</groupId>
 				<artifactId>archetype-packaging</artifactId>
-				<version>2.0-alpha-2</version>
+				<version>2.0</version>
 			</extension>
 			<!--
 				Unreleased version of webdav wagon plugin which fixes a boring

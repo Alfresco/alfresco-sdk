@@ -32,13 +32,14 @@ community contexts.
 			These redundancies are due to filtering issues of Maven. See here
 			http://maven.apache.org/plugins/maven-site-plugin/usage.html
 		-->
-		<site_pom_description>${pom.description}</site_pom_description>
+		<site_pom_description>${project.description}</site_pom_description>
 		<site_pom_url>${project.url}</site_pom_url>
 		<site_pom_groupId>${project.groupId}</site_pom_groupId>
 		<site_pom_artifactId>${project.artifactId}</site_pom_artifactId>
 		<site_pom_version>${project.version}</site_pom_version>
 		<site_tags_url>${svn.tags.url}</site_tags_url>
 		<site_site_url>${project.url}</site_site_url>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<scm>
 		<connection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/trunk</connection>
@@ -122,22 +123,20 @@ community contexts.
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.6</source>
+					<target>1.6</target>
 				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>2.0.1</version>
+				<version>3.0</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-changes-plugin</artifactId>
-				<!-- Using patched version to overcome multimodule limitations during release
-					 See: http://jira.codehaus.org/browse/MCHANGES-145 
-				 -->
-				<version>2.2-patched</version>
+				<version>2.6</version>
 				<!--
 					Automatically notifies the list when release is done. Please supply
 					username and password in the command line
@@ -149,8 +148,6 @@ community contexts.
 				<configuration>
 					<template>custom-announcement.vm</template>
           			<templateDirectory>announcements</templateDirectory>
-					<!-- To have the announcement sent only for the root module (otherwise it breaks, workaround for http://jira.codehaus.org/browse/MCHANGES-145) -->
-					<aggregate>true</aggregate>
 					<smtpHost>${smtp.server}</smtpHost>
 					<smtpPort implementation="java.lang.Integer">${smtp.port}</smtpPort>
 					<toAddresses>
@@ -181,7 +178,7 @@ community contexts.
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-webdav-jackrabbit</artifactId>
-				<version>1.0-beta-6</version>
+				<version>1.0</version>
 			</extension>
 		</extensions>
 	</build>
@@ -189,13 +186,15 @@ community contexts.
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.6</source>
+					<target>1.6</target>
 				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
+                <version>2.9</version>
 				<reportSets>
 					<reportSet>
 						<reports>
@@ -206,13 +205,11 @@ community contexts.
 			</plugin>
 			<plugin>
 				<artifactId>maven-javadoc-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jxr-maven-plugin</artifactId>
+                <version>2.8</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-changes-plugin</artifactId>
+                <version>2.6</version>
 				<reportSets>
 					<reportSet>
 						<reports>

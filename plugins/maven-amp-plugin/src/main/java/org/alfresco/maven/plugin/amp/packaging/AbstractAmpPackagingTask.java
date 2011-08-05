@@ -263,11 +263,6 @@ public abstract class AbstractAmpPackagingTask
             unArchiver.setOverwrite( true );
             unArchiver.extract();
         }
-        catch ( IOException e )
-        {
-            throw new MojoExecutionException( "Error unpacking file[" + file.getAbsolutePath() + "]" + "to[" +
-                unpackDirectory.getAbsolutePath() + "]", e );
-        }
         catch ( ArchiverException e )
         {
             throw new MojoExecutionException( "Error unpacking file[" + file.getAbsolutePath() + "]" + "to[" +

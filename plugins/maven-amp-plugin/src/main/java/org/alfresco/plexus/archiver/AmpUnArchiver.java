@@ -61,7 +61,7 @@ public class AmpUnArchiver extends AbstractZipUnArchiver {
 
 	@Override
 	protected void execute()
-	throws ArchiverException, IOException
+	throws ArchiverException
 	{
 
 		getLogger().info( "Expanding: " + getSourceFile() + " into " + getDestDirectory() );
