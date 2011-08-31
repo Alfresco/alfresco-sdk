@@ -333,7 +333,7 @@ public class AmpMojo extends AbstractAmpMojo
 
     /**
      * The AMP archiver.
-     * @component role="${component.org.codehaus.plexus.archiver.Archiver}" roleHint="amp"
+     * @component role="org.codehaus.plexus.archiver.Archiver" role-hint="amp"
      * @required
      */
     private AmpArchiver mAmpArchiver;
