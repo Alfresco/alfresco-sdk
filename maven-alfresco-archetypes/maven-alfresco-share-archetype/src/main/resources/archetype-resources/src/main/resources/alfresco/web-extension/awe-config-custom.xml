@@ -1,0 +1,213 @@
+<alfresco-config>
+   <config evaluator="model-type" condition="ws:indexPage">
+      <forms>
+         <!-- Default form configuration for the ws:indexPage type -->
+         <form>
+            <field-visibility>
+               <show id="cm:name" />
+               <show id="cm:title" force="true" />
+               <show id="cm:description" force="true" />
+               <show id="cm:content" force="true" />
+               <show id="ws:templateName" force="true" />
+            </field-visibility>
+            <appearance>
+               <field id="cm:title">
+                  <control template="/org/alfresco/components/form/controls/textfield.ftl" />
+               </field>
+               <field id="cm:description">
+                  <control>
+                     <control-param name="activateLinks">true
+                     </control-param>
+                  </control>
+               </field>
+               <field id="cm:content">
+                  <control template="/org/alfresco/components/form/controls/content.ftl">
+                     <control-param name="forceEditor">true
+                     </control-param>
+                     <control-param name="editorHeight">400</control-param>
+                     <control-param name="editorWidth">600</control-param>
+                     <control-param name="richMimeTypes">text/html,text/xhtml</control-param>
+                     <control-param name="editorAppearance">custom</control-param>
+                     <control-param name="editorParameters">
+                        plugins: "fullscreen,paste",
+                        file_browser_callback :
+                        'shareFileBrowser',
+                        paste_create_paragraphs : false,
+                        paste_create_linebreaks : false,
+                        paste_use_dialog : true,
+                        paste_auto_cleanup_on_paste : true,
+                        paste_convert_middot_lists : false,
+                        paste_unindented_list_class : "unindentedList",
+                        paste_convert_headers_to_strong : true,
+                        theme_advanced_buttons1:
+                        "bold,italic,separator,formatselect,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,numlist,separator,link,unlink,separator,image,separator,undo,redo,separator,cut,copy,paste,pastetext,pasteword,image,help,code,fullscreen",
+                        theme_advanced_buttons2: "",
+                        theme_advanced_buttons3: "",
+                        theme_advanced_resizing: true
+                         </control-param>
+                  </control>
+               </field>
+            </appearance>
+         </form>
+      </forms>
+   </config>
+
+   <config evaluator="model-type" condition="ws:article">
+      <forms>
+         <!-- Default form configuration for the ws:article type -->
+         <form>
+            <field-visibility>
+               <show id="cm:name" />
+               <show id="cm:title" force="true" />
+               <show id="cm:description" force="true" />
+               <show id="cm:content" force="true" />
+               <show id="ws:templateName" force="true" />
+            </field-visibility>
+            <appearance>
+               <field id="cm:title">
+                  <control template="/org/alfresco/components/form/controls/textfield.ftl" />
+               </field>
+               <field id="cm:description">
+                  <control>
+                     <control-param name="activateLinks">true
+                     </control-param>
+                  </control>
+               </field>
+               <field id="cm:content">
+                  <control template="/org/alfresco/components/form/controls/content.ftl">
+                     <control-param name="forceEditor">true
+                     </control-param>
+                     <control-param name="editorHeight">400</control-param>
+                     <control-param name="editorWidth">600</control-param>
+                     <control-param name="richMimeTypes">text/html,text/xhtml</control-param>
+                     <control-param name="editorAppearance">custom</control-param>
+                     <control-param name="editorParameters">
+                        plugins: "fullscreen,paste",
+                        file_browser_callback :
+                        'shareFileBrowser',
+                        paste_create_paragraphs : false,
+                        paste_create_linebreaks : false,
+                        paste_use_dialog : true,
+                        paste_auto_cleanup_on_paste : true,
+                        paste_convert_middot_lists : false,
+                        paste_unindented_list_class : "unindentedList",
+                        paste_convert_headers_to_strong : true,
+                        theme_advanced_buttons1:
+                        "bold,italic,separator,formatselect,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,numlist,separator,link,unlink,separator,image,separator,undo,redo,separator,cut,copy,paste,pastetext,pasteword,image,help,code,fullscreen",
+                        theme_advanced_buttons2: "",
+                        theme_advanced_buttons3: "",
+                        theme_advanced_resizing: true
+                     </control-param>
+                  </control>
+               </field>
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   <config evaluator="node-type" condition="ws:indexPage">
+      <forms>
+         <!-- Default form configuration for the ws:indexPage type -->
+         <form>
+            <field-visibility>
+               <show id="cm:name" />
+               <show id="cm:title" force="true" />
+               <show id="cm:description" force="true" />
+               <show id="cm:content" force="true" />
+               <show id="ws:templateName" force="true" />
+            </field-visibility>
+            <appearance>
+               <field id="cm:title">
+                  <control template="/org/alfresco/components/form/controls/textfield.ftl" />
+               </field>
+               <field id="cm:description">
+                  <control>
+                     <control-param name="activateLinks">true
+                     </control-param>
+                  </control>
+               </field>
+               <field id="cm:content">
+                  <control template="/org/alfresco/components/form/controls/content.ftl">
+                     <control-param name="forceEditor">true
+                     </control-param>
+                     <control-param name="editorHeight">400</control-param>
+                     <control-param name="editorWidth">600</control-param>
+                     <control-param name="richMimeTypes">text/html,text/xhtml</control-param>
+                     <control-param name="editorAppearance">custom</control-param>
+                     <control-param name="editorParameters">
+                        plugins: "fullscreen,paste",
+                        file_browser_callback :
+                        'shareFileBrowser',
+                        paste_create_paragraphs : false,
+                        paste_create_linebreaks : false,
+                        paste_use_dialog : true,
+                        paste_auto_cleanup_on_paste : true,
+                        paste_convert_middot_lists : false,
+                        paste_unindented_list_class : "unindentedList",
+                        paste_convert_headers_to_strong : true,
+                        theme_advanced_buttons1:
+                        "bold,italic,separator,formatselect,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,numlist,separator,link,unlink,separator,image,separator,undo,redo,separator,cut,copy,paste,pastetext,pasteword,image,help,code,fullscreen",
+                        theme_advanced_buttons2: "",
+                        theme_advanced_buttons3: "",
+                        theme_advanced_resizing: true
+                     </control-param>
+                  </control>
+               </field>
+            </appearance>
+         </form>
+      </forms>
+   </config>
+
+   <config evaluator="node-type" condition="ws:article">
+      <forms>
+         <!-- Default form configuration for the ws:article type -->
+         <form>
+            <field-visibility>
+               <show id="cm:name" />
+               <show id="cm:title" force="true" />
+               <show id="cm:description" force="true" />
+               <show id="cm:content" force="true" />
+               <show id="ws:templateName" force="true" />
+            </field-visibility>
+            <appearance>
+               <field id="cm:title">
+                  <control template="/org/alfresco/components/form/controls/textfield.ftl" />
+               </field>
+               <field id="cm:description">
+                  <control>
+                     <control-param name="activateLinks">true
+                     </control-param>
+                  </control>
+               </field>
+               <field id="cm:content">
+                  <control template="/org/alfresco/components/form/controls/content.ftl">
+                     <control-param name="forceEditor">true
+                     </control-param>
+                     <control-param name="editorHeight">400</control-param>
+                     <control-param name="editorWidth">600</control-param>
+                     <control-param name="richMimeTypes">text/html,text/xhtml</control-param>
+                     <control-param name="editorAppearance">custom</control-param>
+                     <control-param name="editorParameters">
+                        plugins: "fullscreen,paste",
+                        file_browser_callback :
+                        'shareFileBrowser',
+                        paste_create_paragraphs : false,
+                        paste_create_linebreaks : false,
+                        paste_use_dialog : true,
+                        paste_auto_cleanup_on_paste : true,
+                        paste_convert_middot_lists : false,
+                        paste_unindented_list_class : "unindentedList",
+                        paste_convert_headers_to_strong : true,
+                        theme_advanced_buttons1:
+                        "bold,italic,separator,formatselect,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,numlist,separator,link,unlink,separator,image,separator,undo,redo,separator,cut,copy,paste,pastetext,pasteword,image,help,code,fullscreen",
+                        theme_advanced_buttons2: "",
+                        theme_advanced_buttons3: "",
+                        theme_advanced_resizing: true
+                         </control-param>
+                  </control>
+               </field>
+            </appearance>
+         </form>
+      </forms>
+   </config>
+
+</alfresco-config>

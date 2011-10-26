@@ -4,6 +4,11 @@
     <author email="gabriele.columbro@alfresco.com">Gabriele Columbro</author>
   </properties>
   <body>
+  <release version="1.9.2" date="2011-10-25" description="Tested against Share 4.0">
+      <action dev="columbro" type="add">
+      Updated samples and tested against 4.0 
+      </action>
+  </release>
   <release version="1.9.1" date="2009-12-03" description="First public release working against Share 3.2r">
     <action dev="columbro" type="add">
      Support for Alfresco Share Closes issue 17 (http://code.google.com/p/maven-alfresco-archetypes/issues/detail?id=17")

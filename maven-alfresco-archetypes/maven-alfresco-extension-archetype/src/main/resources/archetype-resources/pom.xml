@@ -15,6 +15,17 @@
 	-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <!--
+        | Prerequisites: Mysql installed. Just run mvn clean install -Prun to run Alfresco
+        | How it works:
+        | By default the project is overlayed to the alfresco war which depends upon and deployed as a WAR (local development and testing purposes)
+        | Available properties: 
+        |  -Denv ==> toggles  src/main/properties/<env>/alfresco-global.properties files (default local) 
+        |  -DrestoreVersion=<restoreVersion> - toggles profile "restore" in order to include tools/export/<restoreVersion>/restore/*.acp files in alfresco/extension/restore (default: no restore) 
+        | -Dcustomization.name=<customizationName> - name of the jar artifact containing classes and resources for this extension |
+        | -Dwebapp.name=<extensionName> - name of the WAR artifact to be built (default: ${artifactId}-{version}.jar ) 
+        |  DEPRECATED: -Denterprise - Includes LDAP configuration as defined in alfresco-global.properties  
+        -->
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>${groupId}</groupId>
 	<artifactId>${artifactId}</artifactId>
@@ -23,75 +34,59 @@
 	<packaging>war</packaging>
 	<url></url>
 	<description>Alfresco extension</description>
-	<!--
-		| | Prerequisite: | - Mysql local instance running and db alf_jetty
-		created with permissions for alfresco/alfresco user. | | How it works:
-		| By default the project is overlayed to the alfresco war which
-		depends upon and deployed as a WAR (local development and testing
-		purposes) | Available properties: | | -Denv - toggles
-		src/main/properties/<env>/alfresco-global.properties files (default:
-		local) | -DrestoreVersion=<restoreVersion> - toggles profile "restore"
-		in order to include tools/export/<restoreVersion>/restore/*.acp files
-		in | alfresco/extension/restore (default: no restore) |
-		-Dcustomization.name=<customizationName> - name of the jar artifact
-		containing classes and resources for this extension |
-		-Dwebapp.name=<extensionName> - name of the WAR artifact to be built
-		(default: ${artifactId}-{version}.jar ) | -Denterprise - Includes LDAP
-		configuration as defined in alfresco-global.properties
-	-->
-	<!-- Default properties -->
+    <!-- oOo SINGLE POINT OF CONFIGURATION FOR COMMON ALFRESCO PROPERTIES oOo -->
 	<properties>
-		<!-- src/main/properties/<env>/alfresco-global.properties is loaded -->
-		<env>local</env>
-		<webapp.name>alfresco</webapp.name>
-		<!--
-			| | By default the src/main/properties/local/alfresco-global.properties
-			uses the property "alfresco.data.location" to specify where |
-			alf_data gets created. | For local jetty:run deployment default
-			creation dir is under project root folder (as location is specified
-			relatively to run | dir). Please add alf_data_jetty in svn/cvs
-			ignores in order not to commit that. You can also specified a
-			different (out of the | sproject) folder | by editing the following
-			properties. | DB is also configurable here. Of course keep in sync
-			these two values otherwise you'll get integrity errors. | | Empty log
-			dir creates file alfresco.log in appserver default dir. You can also
-			specify a meaningful log directory for the server | (add a trailing
-			slash, e.g. '/var/log/alfresco/' ) | | Jetty embedded run logs by
-			default in target/alfresco.log
-		-->
-		<alfresco.data.location>./alf_data_jetty</alfresco.data.location>
-		<alfresco.db.name>alf_jetty</alfresco.db.name>
-		<alfresco.db.username>alfresco</alfresco.db.username>
-		<alfresco.db.password>alfresco</alfresco.db.password>
-		<alfresco.version>3.4.a</alfresco.version>
-		<!-- Used for 2.1.0 -->
-		<desktop.action.package>org.alfresco.filesys.repo.desk</desktop.action.package>
-		<!-- Used for 2.9.0+ -->
-		<!--
-			desktop.action.package>org.alfresco.filesys.repo.desk</desktop.action.package
-		-->
-		<log.dir></log.dir>
-		<!--
-			Uncomment this property together with the <scm> section downwards
-			<svn.url> https://mycompany.com/repos/my-test-project </svn.url>
-		-->
-		<!--
-			Uncomment this property together with the maven-release-plugin
-			<plugin><configuration><tagBase/></configuration></plugin> section
-			downwards <svn.tags.url>${svn.url}/tags</svn.tags.url>
-		-->
-		<!--
-			These redundancies are due to filtering issues of Maven. See here
-			http://maven.apache.org/plugins/maven-site-plugin/usage.html
-		-->
-		<site_pom_description>${project.description}</site_pom_description>
-		<site_pom_url>${project.organization.url}</site_pom_url>
-		<site_pom_groupId>${project.groupId}</site_pom_groupId>
-		<site_pom_artifactId>${project.artifactId}</site_pom_artifactId>
-		<site_pom_version>${project.version}</site_pom_version>
-		<site_tags_url>${svn.tags.url}</site_tags_url>
-		<site_site_url>${site.url}</site_site_url>
-	</properties>
+        <!-- Alfresco version/edition selection -->
+        <alfresco.version>4.0.b</alfresco.version>
+        <alfresco.edition>community</alfresco.edition>
+        <!-- Build environment ==> src/main/properties/<env>/alfresco-global.properties is loaded -->
+        <env>local</env>
+        <!-- Webapp packaged name -->
+        <webapp.name>alfresco</webapp.name>
+        <!--
+            | Empty log dir creates file alfresco.log in the current root folder.
+            | You can also specify a meaningful log directory for the server (add a trailing slash, e.g. '/var/log/alfresco/' ) 
+            | Jetty embedded run logs by default in ${project.basedir}/alfresco.log
+            -->
+        <log.dir></log.dir>
+        <!-- 
+         | By default the src/main/properties/local/alfresco-global.properties uses the property "alfresco.data.location" to specify where 
+         | alf_data gets created. For env=local you can use this shortcut property below, which gets filtered in the alfresco-global.properties file
+         | DEFAULT: alf_data_jetty relativel to run dir 
+         -->
+        <!-- For env=local DB is also configurable here. Of course keep in sync these two values otherwise you'll get integrity errors. Default Mysql-->
+        <alfresco.data.location>./alf_data_jetty</alfresco.data.location>
+        <alfresco.db.name>alf_jetty</alfresco.db.name>
+        <alfresco.db.url>jdbc:mysql://localhost:3306/${alfresco.db.name}</alfresco.db.url>
+        <alfresco.db.driver>org.gjt.mm.mysql.Driver</alfresco.db.driver>
+        <alfresco.db.datasource.class>com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource</alfresco.db.datasource.class>
+        <alfresco.db.username>alfresco</alfresco.db.username>
+        <alfresco.db.password>alfresco</alfresco.db.password>
+        <!-- H2 configuration: To be fixed <alfresco.db.url>jdbc:h2:${alfresco.data.location}/h2_data/${alfresco.db.name}</alfresco.db.url> -->
+        
+        <!-- DEPRECATED -->
+        <desktop.action.package>org.alfresco.filesys.repo.desk</desktop.action.package>
+        <!--
+            | Uncomment this property together with the <scm> section downwards
+            |
+            | <svn.url> https://mycompany.com/repos/my-test-project </svn.url>
+            -->
+        <!--
+            | Uncomment this property together with the maven-release-plugin <plugin><configuration><tagBase/></configuration></plugin> section downwards
+            |  <svn.tags.url>${svn.url}/tags</svn.tags.url>
+            -->
+        <!--
+            These redundancies are due to filtering issues of Maven. See here
+            http://maven.apache.org/plugins/maven-site-plugin/usage.html
+        -->
+        <site_pom_description>${project.description}</site_pom_description>
+        <site_pom_url>${project.organization.url}</site_pom_url>
+        <site_pom_groupId>${project.groupId}</site_pom_groupId>
+        <site_pom_artifactId>${project.artifactId}</site_pom_artifactId>
+        <site_pom_version>${project.version}</site_pom_version>
+        <site_tags_url>${svn.tags.url}</site_tags_url>
+        <site_site_url>${site.url}</site_site_url>
+    </properties>
 	<!--
 		| Alfresco Community dependencies are generally available in ss-public
 		repo. | FIXME: Alfresco enterprise dependencies are only available on
@@ -104,9 +99,19 @@
 			<url>http://maven.alfresco.com/nexus/content/groups/public</url>
 		</repository>
 		<repository>
-			<id>alfresco-public-snapshots</id>
-			<url>http://maven.alfresco.com/nexus/content/groups/public-snapshots</url>
+            <id>alfresco-public-snapshots</id>
+            <url>http://maven.alfresco.com/nexus/content/groups/public-snapshots</url>
+           <snapshots>
+                <enabled>true</enabled>
+           </snapshots>
 		</repository>
+        <repository>
+            <id>alfresco-maven-repo</id>
+            <url>http://maven.alfresco.com/nexus/content/groups/enterprise-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
@@ -121,26 +126,26 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-	<!--
-		Uncomment SCM definitions in order to have mvn release:perform to
-		actually tag the code <scm>
-		<developerConnection>scm:svn:${svn.url}</developerConnection>
-		<url>${svn.url}</url> </scm>
-	-->
+    
+    <!--
+        | Uncomment SCM definitions in order to have mvn release:perform to actually tag the code <scm>
+        | <developerConnection>scm:svn:${svn.url}</developerConnection>
+        | <url>${svn.url}</url> </scm>
+	    -->
 
 	<!-- Alfresco dependencies -->
 	<dependencies>
-		<!--
-			Alfresco Dependencies | NB: These files are not publicly available.
-			Please vote for Alfresco to release them :) | Jboss alfresco build
-			(e.g. no log4j.properties and fix for myFaces)
-		-->
+        <!--
+            | Alfresco Dependencies 
+            | NB: These files are not publicly available. Please vote for Alfresco to release them if you care :) 
+            | Jboss alfresco build (e.g. no log4j.properties and fix for myFaces)
+            -->
 		<dependency>
 			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco</artifactId>
 			<version>${alfresco.version}</version>
 			<type>war</type>
-			<classifier>community</classifier>
+			<classifier>${alfresco.edition}</classifier>
 		</dependency>
 		<!--
 			All provided libs (as contained in the war dependency) but useful for
@@ -151,28 +156,28 @@
 			<artifactId>alfresco-web-client</artifactId>
 			<version>${alfresco.version}</version>
 			<scope>provided</scope>
-			<classifier>community</classifier>
+			<classifier>${alfresco.edition}</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-core</artifactId>
 			<version>${alfresco.version}</version>
 			<scope>provided</scope>
-			<classifier>community</classifier>
+			<classifier>${alfresco.edition}</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-repository</artifactId>
 			<version>${alfresco.version}</version>
 			<scope>provided</scope>
-			<classifier>community</classifier>
+			<classifier>${alfresco.edition}</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-remote-api</artifactId>
 			<version>${alfresco.version}</version>
 			<scope>provided</scope>
-			<classifier>community</classifier>
+			<classifier>${alfresco.edition}</classifier>
 		</dependency>
 
 		<!--
@@ -180,10 +185,15 @@
 			Alfresco WAR (no more need for AMP): this can be either an AMP built
 			with maven-amp-plugin and deployed on an accessible maven repo or a
 			generally available AMP previously deployed to a repo using mvn
-			deploy:deploy-file <dependency> <scope>runtime</scope>
-			<type>amp</type> <artifactId>recordsmanagement</artifactId>
-			<version>${alfresco.version}</version>
-			<groupId>org.alfresco</groupId> </dependency>
+			deploy:deploy-file 
+            
+            <dependency> 
+                <scope>runtime</scope>
+			    <type>amp</type>
+                <artifactId>recordsmanagement</artifactId>
+			    <version>${alfresco.version}</version>
+			    <groupId>org.alfresco</groupId> 
+            </dependency>
 		-->
 
 		<dependency>
@@ -195,12 +205,7 @@
 	</dependencies>
 
 	<build>
-		<!-- Customize here your webapp name - default: alfresco.war -->
 		<finalName>${webapp.name}</finalName>
-		<!--
-			Used to access Sourcesense repository for writing. Public version not
-			available, see README.txt
-		-->
 		<!--
 			In certain cases we do build time filtering with the single sourcing
 			alfresco-global.properties
@@ -221,11 +226,10 @@
 					<exclude>**/ldap-*.xml</exclude>
 				</excludes>
 			</resource>
-			<!--
-				| Include application properties file in classpath: this allows
-				Spring contexts to have customization properties available at |
-				classpath:alfresco-global.properties
-			-->
+            <!--
+                | Include application properties file in classpath: this allows Spring contexts to have customization properties available at 
+                | classpath:alfresco-global.properties
+                -->
 			<resource>
 				<directory>src/main/properties/${env}</directory>
 				<includes>
@@ -433,7 +437,6 @@
 	<distributionManagement>
 		<!--
 			| | Enable this repo in case of publicly redistributable artifacts
-			(Sourcesense public repositories via ssh + public key ) |
 			<repository> <id>yourcompany</id>
 			<url>scp://yourcompany/var/maven2</url> </repository>
 			<distributionManagement> <site> <id>yourcompany-site</id>
@@ -731,25 +734,9 @@
 			</build>
             <dependencies>
                 <dependency>
-                    <groupId>com.h2database</groupId>
-                    <artifactId>h2</artifactId>
-                    <version>1.3.158</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.hibernate</groupId>
-                    <artifactId>hibernate</artifactId>
-                    <version>3.2.7.ga</version>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>net.sf.ehcache</groupId>
-                            <artifactId>ehcache</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-                <dependency>
-                    <groupId>it.sk.alfresco</groupId>
-                    <artifactId>h2-support</artifactId>
-                    <version>1.0</version>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                    <version>5.1.18</version>
                 </dependency>
             </dependencies>
 		</profile>
