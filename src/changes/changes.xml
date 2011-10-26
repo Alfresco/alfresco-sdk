@@ -4,6 +4,7 @@
     <author email="gabriele.columbro@alfresco.com">Gabriele Columbro</author>
   </properties>
   <body>
+    <release version="3.9.0" date="2011-10-25" description="Upgraded framework to work with Alfresco 4.x and started aligning version numbers to Alfresco"/>
     <release version="1.1.0" date="2009-12-03" description="Complete moving of the full infrastructure to Alfresco Community Maven Repository and Share Addon">
       <action dev="columbro" type="add">
     Moved all the archetypes to work against http://maven.alfresco.com
