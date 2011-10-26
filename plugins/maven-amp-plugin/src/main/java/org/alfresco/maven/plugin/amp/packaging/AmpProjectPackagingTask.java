@@ -11,9 +11,7 @@ import org.codehaus.plexus.util.DirectoryScanner;
 import org.codehaus.plexus.util.StringUtils;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 
 /**
  * Handles the project own resources, that is:
@@ -31,15 +29,10 @@ public class AmpProjectPackagingTask
     extends AbstractAmpPackagingTask
 {
     private static final String MODULE_PROPERTIES = "module.properties";
-    private static final String FILE_MAPPINGS     = "file-mappings.properties";
 
 	private static final String WEB_PATH = "web/";
 
 	private static final String CONFIG_PATH = "config/";
-	
-	private static final String FILE_MAPPINGS_CONTENT = "# Add mapping for /WEB-INF/, since MMT doesn't support it by default\n" +
-                                                        "/web/WEB-INF=/WEB-INF\n";
-
 
 	private Resource[] webResources = new Resource[0];
 
@@ -77,8 +70,6 @@ public class AmpProjectPackagingTask
         handeAmpConfigDirectory( context );
 
         handeWebAppSourceDirectory( context );
-        
-        synthesiseFileMappings(context);
         
         
         // Notice: this will work only in case we are copying only this AMP or this AMP is
@@ -153,46 +144,6 @@ public class AmpProjectPackagingTask
             }
         }
     }
-    
-    
-    /**
-     * Synthesizes (creates) a standard file-mappings.properties file so that resources in webapp/WEB-INF
-     * get written to the correct location by the MMT.
-     * 
-     * @param context The packaging context
-     * @throws MojoExecutionException if the file could not be created
-     */
-    protected void synthesiseFileMappings(final AmpPackagingContext context)
-        throws MojoExecutionException
-    {
-        try
-        {
-            File         fileMappings = new File(context.getAmpDirectory(), FILE_MAPPINGS);
-            OutputStream out          = null;
-            
-            fileMappings.createNewFile();  // Note: ignore if the file already exists - we simply overwrite its existing contents
-            
-            try
-            {
-                out = new FileOutputStream(fileMappings, false);
-                
-                out.write(FILE_MAPPINGS_CONTENT.getBytes());
-            }
-            finally
-            {
-                if (out != null)
-                {
-                    out.flush();
-                    out.close();
-                }
-            }
-        }
-        catch (final IOException ioe)
-        {
-            throw new MojoExecutionException("Could not create file-mappings.properties in [" + context.getAmpDirectory().getAbsolutePath() + "]", ioe);
-        }
-    }
-    
 
     /**
      * Handles the webapp sources.
