@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>org.alfresco</groupId>
 		<artifactId>maven-alfresco-lifecycle</artifactId>
-		<version>3.9.0-SNAPSHOT</version>
+		<version>3.9.0</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<organization>
