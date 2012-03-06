@@ -448,9 +448,9 @@
                     </exclusions>
                 </dependency>
                 <dependency>
-                    <groupId>it.sk.alfresco</groupId>
+                    <groupId>tk.skuro.alfresco</groupId>
                     <artifactId>h2-support</artifactId>
-                    <version>1.0</version>
+                    <version>1.1</version>
                 </dependency>
 			</dependencies>
 		</profile>
