@@ -230,7 +230,7 @@
          <!--
             Password for HTTP service account.
             The account name *must* be built from the HTTP server name, in the format :
-               HTTP/<server_name>@<realm>
+               HTTP/<server_name>[at]<realm>
             (NB this is because the web browser requests an ST for the
             HTTP/<server_name> principal in the current realm, so if we're to decode
             that ST, it has to match.)
