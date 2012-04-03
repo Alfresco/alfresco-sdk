@@ -48,7 +48,7 @@ public class AmpProjectPackagingTask
     private final String id;
 
 
-    public AmpProjectPackagingTask( Resource[] webResource, File moduleProperties)
+    public AmpProjectPackagingTask( Resource[] webResources, File moduleProperties)
     {
         if ( webResources != null )
         {
