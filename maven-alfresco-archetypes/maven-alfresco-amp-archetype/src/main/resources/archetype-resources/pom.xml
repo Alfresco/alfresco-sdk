@@ -247,7 +247,7 @@
 			<id>webapp</id>
 			<build>
 				<filters>
-					<filter>src/test/properties/${env}/alfresco-global.properties</filter>
+					<filter>${project.basedir}/src/test/properties/${env}/alfresco-global.properties</filter>
 				</filters>
 				<defaultGoal>jetty:run-exploded</defaultGoal>
 				<plugins>

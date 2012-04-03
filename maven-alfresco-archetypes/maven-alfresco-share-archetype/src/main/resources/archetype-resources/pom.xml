@@ -65,7 +65,7 @@
 	<build>
     <!-- Runtime properties file which is used to configure your Share instance. It's multi-environment aware (-Denv=yourEnv) -->
 		<filters>
-			<filter>src/main/properties/${env}/application.properties</filter>
+			<filter>${project.basedir}/src/main/properties/${env}/application.properties</filter>
 		</filters>
 
 		<!--
@@ -102,7 +102,7 @@
 				<configuration>
 					<archiveClasses>false</archiveClasses>
 					<filters>
-						<filter>src/main/properties/${env}/application.properties</filter>
+						<filter>${project.basedir}/src/main/properties/${env}/application.properties</filter>
 					</filters>
 					<webResources></webResources>
 				</configuration>

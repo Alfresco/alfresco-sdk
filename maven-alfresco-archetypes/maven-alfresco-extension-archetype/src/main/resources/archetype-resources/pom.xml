@@ -211,7 +211,7 @@
 			alfresco-global.properties
 		-->
 		<filters>
-			<filter>src/main/properties/${env}/alfresco-global.properties</filter>
+			<filter>${project.basedir}/src/main/properties/${env}/alfresco-global.properties</filter>
 		</filters>
 		<!--
 			Default profile to build as an Alfresco extension - resources are
