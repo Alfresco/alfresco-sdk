@@ -92,6 +92,7 @@
 		<alfresco.db.name>alf_jetty</alfresco.db.name>
 		<alfresco.db.username>alfresco</alfresco.db.username>
 		<alfresco.db.password>alfresco</alfresco.db.password>
+        <alfresco.db.params>MODE=PostgreSQL;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;MVCC=TRUE</alfresco.db.params>
 		<webapp.log.level>error</webapp.log.level>
 		<webapp.log.dir></webapp.log.dir>
 		<!--  End of testing webapp specific properties -->
