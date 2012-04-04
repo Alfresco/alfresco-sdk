@@ -26,6 +26,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<alfresco.version>3.4.a</alfresco.version>
+        <alfresco.edition>${alfresco-default-edition}</alfresco.edition>
 		<spring.version>3.0.0.RELEASE</spring.version>
 		<amp-plugin.version>3.0.3-SNAPSHOT</amp-plugin.version>
 		<alfresco.module.id>${project.artifactId}</alfresco.module.id>
@@ -37,7 +38,7 @@
 			<artifactId>alfresco-repository</artifactId>
 			<version>${alfresco.version}</version>
 			<scope>provided</scope>
-			<classifier>community</classifier>
+			<classifier>${alfresco.edition}</classifier>
 		</dependency>
         <dependency>
             <groupId>org.springframework</groupId>

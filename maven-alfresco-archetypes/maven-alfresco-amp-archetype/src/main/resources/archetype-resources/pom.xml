@@ -87,6 +87,7 @@
 			default in target/alfresco.log
 		-->
         <alfresco.version>3.4.a</alfresco.version>
+        <alfresco.edition>${alfresco-default-edition}</alfresco.edition>
 		<alfresco.data.location>./alf_data_jetty</alfresco.data.location>
 		<alfresco.db.name>alf_jetty</alfresco.db.name>
 		<alfresco.db.username>alfresco</alfresco.db.username>
@@ -108,14 +109,14 @@
             <artifactId>alfresco-core</artifactId>
             <version>${alfresco.version}</version>
             <scope>provided</scope>
-            <classifier>community</classifier>
+            <classifier>${alfresco.edition}</classifier>
         </dependency>
         <dependency>
 			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-repository</artifactId>
 			<version>${alfresco.version}</version>
 			<scope>provided</scope>
-			<classifier>community</classifier>
+			<classifier>${alfresco.edition}</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -436,7 +437,7 @@
 					<artifactId>alfresco</artifactId>
 					<version>${alfresco.version}</version>
 					<type>war</type>
-					<classifier>community</classifier>
+					<classifier>${alfresco.edition}</classifier>
 				</dependency>
                 <dependency>
                     <groupId>com.h2database</groupId>

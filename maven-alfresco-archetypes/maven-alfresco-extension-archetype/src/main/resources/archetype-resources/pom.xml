@@ -38,7 +38,7 @@
 	<properties>
         <!-- Alfresco version/edition selection -->
         <alfresco.version>4.0.b</alfresco.version>
-        <alfresco.edition>community</alfresco.edition>
+        <alfresco.edition>${alfresco-default-edition}</alfresco.edition>
         <!-- Build environment ==> src/main/properties/<env>/alfresco-global.properties is loaded -->
         <env>local</env>
         <!-- Webapp packaged name -->

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><archetype-descriptor name="maven-alfresco-extension-archetype">
   <fileSets>
-    <fileSet filtered="true" encoding="UTF-8">
+      <requiredProperties>
+          <requiredProperty key="alfresco-default-edition">
+              <defaultValue>community</defaultValue>
+          </requiredProperty>
+      </requiredProperties>
+      <fileSet filtered="true" encoding="UTF-8">
       <directory>src/main/java</directory>
       <includes>
         <include>**/*.java</include>
