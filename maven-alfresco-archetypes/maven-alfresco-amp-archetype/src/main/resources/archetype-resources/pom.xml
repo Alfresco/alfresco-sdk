@@ -87,7 +87,7 @@
 			default in target/alfresco.log
 		-->
         <alfresco.version>3.4.a</alfresco.version>
-        <alfresco.edition>${alfresco-default-edition}</alfresco.edition>
+        <alfresco.edition>community</alfresco.edition>
 		<alfresco.data.location>./alf_data_jetty</alfresco.data.location>
 		<alfresco.db.name>alf_jetty</alfresco.db.name>
 		<alfresco.db.username>alfresco</alfresco.db.username>

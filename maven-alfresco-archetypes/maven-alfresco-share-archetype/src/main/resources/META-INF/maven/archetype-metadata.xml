@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><archetype-descriptor name="alfresco-share-extension">
   <fileSets>
-      <requiredProperties>
-          <requiredProperty key="alfresco-default-edition">
-              <defaultValue>community</defaultValue>
-          </requiredProperty>
-      </requiredProperties>
       <fileSet filtered="false" encoding="UTF-8">
       <directory>src/main/properties</directory>
       <includes>

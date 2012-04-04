@@ -31,7 +31,7 @@
 	<properties>
 		<env>local</env>
 		<alfresco.version>4.0.b</alfresco.version>
-        <alfresco.edition>${alfresco-default-edition}</alfresco.edition>
+        <alfresco.edition>community</alfresco.edition>
 		<share.log.level>info</share.log.level>
 		<share.servlet.port>8081</share.servlet.port>
         <surf.wiring.mode>development</surf.wiring.mode><!-- "production" is the other allowed value -->

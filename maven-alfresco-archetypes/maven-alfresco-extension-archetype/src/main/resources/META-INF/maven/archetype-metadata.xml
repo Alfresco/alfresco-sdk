@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><archetype-descriptor name="maven-alfresco-extension-archetype">
   <fileSets>
-      <requiredProperties>
-          <requiredProperty key="alfresco-default-edition">
-              <defaultValue>community</defaultValue>
-          </requiredProperty>
-      </requiredProperties>
-      <fileSet filtered="true" encoding="UTF-8">
+    <fileSet filtered="true" encoding="UTF-8">
       <directory>src/main/java</directory>
       <includes>
         <include>**/*.java</include>
@@ -113,6 +108,7 @@
       <includes>
         <include>.classpath</include>
         <include>.project</include>
+        <include>pom.xml</include>
         <include>build.xml</include>
         <include>maven-eclipse.xml</include>
         <include>README-ANT.txt</include>
