@@ -103,7 +103,14 @@
 		and include them in the AMP, they are provided by Alfresco
 	-->
 	<dependencies>
-		<dependency>
+        <dependency>
+            <groupId>org.alfresco</groupId>
+            <artifactId>alfresco-core</artifactId>
+            <version>${alfresco.version}</version>
+            <scope>provided</scope>
+            <classifier>community</classifier>
+        </dependency>
+        <dependency>
 			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-repository</artifactId>
 			<version>${alfresco.version}</version>
