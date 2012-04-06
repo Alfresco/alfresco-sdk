@@ -161,7 +161,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-nosnapshot-plugin</artifactId>
-				<groupId>com.sourcesense.maven</groupId>
+				<groupId>org.alfresco.maven</groupId>
 				 <version>0.0.5</version>
 				<executions>
 					<execution>
@@ -272,7 +272,7 @@
                                 </pluginExecution>
                                 <pluginExecution>
                                     <pluginExecutionFilter>
-                                        <groupId>com.sourcesense.maven</groupId>
+                                        <groupId>org.alfresco.maven</groupId>
                                         <artifactId>maven-nosnapshot-plugin</artifactId>
                                         <versionRange>[0.0,)</versionRange>
                                         <goals>

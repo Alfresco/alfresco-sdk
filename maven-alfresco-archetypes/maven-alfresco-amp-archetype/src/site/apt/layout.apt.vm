@@ -20,7 +20,7 @@ src --------------------------------------------------------> (source folder)
 		|			|__ config-----   alfresco module config goes here.
 		|			|			  |	  Get's copied (by best practice) by build into package alfresco/module/groupId.artifactId.
 		|			|			  |   This convention is used by the archetype and by the AMP unpacker.
-		|			|			  |__ ex: alfresco/module/com.sourcesense.alfresco.mymodule ---> Example Alfresco module config 
+		|			|			  |__ ex: alfresco/module/org.alfresco.mymodule ---> Example Alfresco module config 
 		|			|
 		|			|
 		|			|__ java ------------------------------->  customization java classes

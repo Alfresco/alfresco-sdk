@@ -1,4 +1,4 @@
-package com.sourcesense.maven;
+package org.alfresco.maven;
 
 /*
  * Copyright 2001-2005 The Apache Software Foundation.
