@@ -18,7 +18,7 @@ Description
 
 References
 
-	Deployed at: {{ http://repository.sourcesense.com/maven2/org/alfresco/maven/plugin }}
+	Deployed at: {{ http://maven.alfresco.com/maven2/org/alfresco/maven/plugin }}
 	
 	Maven usage:
 	
@@ -43,7 +43,7 @@ References
 
 			 <pluginRepository>
 	            <id>ss-public</id>
-	            <url>http://repository.sourcesense.com/nexus/content/groups/public</url>
+	            <url>http://maven.alfresco.com/nexus/content/groups/public</url>
 	          </pluginRepository>
 
 -------------------------------------------
@@ -51,4 +51,4 @@ References
 
 Quick usage
 
- Create a project using the maven-alfresco-amp-archetype (see {{ http://repository.sourcesense.com/nexus/content/repositories/alfresco.public.sites/maven-alfresco-lifecycle/maven-alfresco-archetypes/maven-alfresco-amp-archetype/index.html }} ). 	
+ Create a project using the maven-alfresco-amp-archetype (see {{ http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/maven-alfresco-archetypes/maven-alfresco-amp-archetype/index.html }} ).
