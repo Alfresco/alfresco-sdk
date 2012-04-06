@@ -3,7 +3,7 @@
 	<groupId>org.alfresco</groupId>
 	<artifactId>maven-alfresco-lifecycle</artifactId>
 	<packaging>pom</packaging>
-	<version>4.0.0-SNAPSHOT</version>
+	<version>3.9.1</version>
 	<name>Maven Alfresco Lifecycle support base project</name>
 	<url>http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle</url>
 	<description>
@@ -42,9 +42,9 @@ community contexts.
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<scm>
-		<connection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/trunk</connection>
-		<developerConnection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/trunk</developerConnection>
-		<url>https://maven-alfresco-archetypes.googlecode.com/svn/trunk</url>
+		<connection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/tags/maven-alfresco-lifecycle-3.9.1</connection>
+		<developerConnection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn/tags/maven-alfresco-lifecycle-3.9.1</developerConnection>
+		<url>https://maven-alfresco-archetypes.googlecode.com/svn/tags/maven-alfresco-lifecycle-3.9.1</url>
 	</scm>
 	<!-- New Alfresco nexus instance -->
 	<repositories>
