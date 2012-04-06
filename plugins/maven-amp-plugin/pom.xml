@@ -6,9 +6,6 @@
     <packaging>maven-plugin</packaging>
     <name>Alfresco AMP Plugin</name>
     <version>3.0.4-SNAPSHOT</version>
-    <prerequisites>
-        <maven>3.0.3</maven>
-    </prerequisites>
     <parent>
         <groupId>org.alfresco</groupId>
         <artifactId>maven-alfresco-lifecycle</artifactId>

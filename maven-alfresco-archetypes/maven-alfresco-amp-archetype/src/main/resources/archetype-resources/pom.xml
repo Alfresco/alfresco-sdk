@@ -178,7 +178,7 @@
             <plugin>
 				<artifactId>maven-nosnapshot-plugin</artifactId>
 				<groupId>org.alfresco.maven</groupId>
-				 <version>0.0.5</version>
+				 <version>0.0.8-SNAPSHOT</version>
 				<executions>
 					<execution>
 						<id>default</id>
