@@ -38,7 +38,7 @@
 	<properties>
         <!-- Alfresco version/edition selection -->
         <alfresco.version>4.0.b</alfresco.version>
-        <alfresco.edition>${alfedition}</alfresco.edition>
+        <alfresco.edition>community</alfresco.edition>
         <!-- Build environment ==> src/main/properties/<env>/alfresco-global.properties is loaded -->
         <env>local</env>
         <!-- Webapp packaged name -->
@@ -57,13 +57,12 @@
         <!-- For env=local DB is also configurable here. Of course keep in sync these two values otherwise you'll get integrity errors. Default Mysql-->
         <alfresco.data.location>./alf_data_jetty</alfresco.data.location>
         <alfresco.db.name>alf_jetty</alfresco.db.name>
-        <alfresco.db.url>jdbc:mysql://localhost:3306/${alfresco.db.name}</alfresco.db.url>
-        <alfresco.db.driver>org.gjt.mm.mysql.Driver</alfresco.db.driver>
-        <alfresco.db.datasource.class>com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource</alfresco.db.datasource.class>
         <alfresco.db.username>alfresco</alfresco.db.username>
         <alfresco.db.password>alfresco</alfresco.db.password>
-        <!-- H2 configuration: To be fixed <alfresco.db.url>jdbc:h2:${alfresco.data.location}/h2_data/${alfresco.db.name}</alfresco.db.url> -->
-        
+        <alfresco.db.params>MODE=PostgreSQL;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;MVCC=TRUE</alfresco.db.params>
+        <alfresco.db.url>jdbc:h2:${alfresco.data.location}/h2_data/${alfresco.db.name};${alfresco.db.params}</alfresco.db.url>
+        <alfresco.db.datasource.class>org.h2.jdbcx.JdbcDataSource</alfresco.db.datasource.class>
+
         <!-- DEPRECATED -->
         <desktop.action.package>org.alfresco.filesys.repo.desk</desktop.action.package>
         <!--
@@ -734,9 +733,14 @@
 			</build>
             <dependencies>
                 <dependency>
-                    <groupId>mysql</groupId>
-                    <artifactId>mysql-connector-java</artifactId>
-                    <version>5.1.18</version>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                    <version>1.3.158</version>
+                </dependency>
+                <dependency>
+                    <groupId>tk.skuro.alfresco</groupId>
+                    <artifactId>h2-support</artifactId>
+                    <version>1.2</version>
                 </dependency>
             </dependencies>
 		</profile>
