@@ -107,6 +107,22 @@
 					<webResources></webResources>
 				</configuration>
 			</plugin>
+             <!-- Needed for cross OS compatibility in acp/zip encoding -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <!-- By default as per http://code.google.com/p/maven-alfresco-archetypes/issues/detail?id=7 FTL are not filtered to avoid corruption.
+                        | This behavior can be relaxed (in case filtering is needed in the FTLs) by selecting which files are filtered and which not as described 
+                        | here http://code.google.com/p/maven-alfresco-archetypes/issues/detail?id=7#c3
+                        -->
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>ftl</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 	
