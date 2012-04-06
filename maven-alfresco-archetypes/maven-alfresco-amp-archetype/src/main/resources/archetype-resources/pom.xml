@@ -86,19 +86,21 @@
 			slash, e.g. '/var/log/alfresco/' ) | | Jetty embedded run logs by
 			default in target/alfresco.log
 		-->
-        <alfresco.version>3.4.a</alfresco.version>
+        <alfresco.version>4.0.b</alfresco.version>
         <alfresco.edition>community</alfresco.edition>
 		<alfresco.data.location>./alf_data_jetty</alfresco.data.location>
 		<alfresco.db.name>alf_jetty</alfresco.db.name>
 		<alfresco.db.username>alfresco</alfresco.db.username>
 		<alfresco.db.password>alfresco</alfresco.db.password>
         <alfresco.db.params>MODE=PostgreSQL;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;MVCC=TRUE</alfresco.db.params>
-		<webapp.log.level>error</webapp.log.level>
+        <alfresco.db.url>jdbc:h2:${alfresco.data.location}/h2_data/${alfresco.db.name};${alfresco.db.params}</alfresco.db.url>
+        <alfresco.db.datasource.class>org.h2.jdbcx.JdbcDataSource</alfresco.db.datasource.class>
+        <webapp.log.level>error</webapp.log.level>
 		<webapp.log.dir></webapp.log.dir>
 		<!--  End of testing webapp specific properties -->
 		<!--  Module specific build time properties -->
 		<module.log.level>debug</module.log.level>
-        <spring.version>3.0.0.RELEASE</spring.version>
+        <spring.version>3.0.5.RELEASE</spring.version>
 	</properties>
 	<!--
 		need to list these as a provided so that Maven doesn't download them
@@ -490,6 +492,7 @@
                     <groupId>org.hibernate</groupId>
                     <artifactId>hibernate</artifactId>
                     <version>3.2.7.ga</version>
+                    <scope>provided</scope>
                     <exclusions>
                         <exclusion>
                             <groupId>net.sf.ehcache</groupId>
@@ -500,7 +503,7 @@
                 <dependency>
                     <groupId>tk.skuro.alfresco</groupId>
                     <artifactId>h2-support</artifactId>
-                    <version>1.1</version>
+                    <version>1.2</version>
                 </dependency>
 			</dependencies>
 		</profile>
