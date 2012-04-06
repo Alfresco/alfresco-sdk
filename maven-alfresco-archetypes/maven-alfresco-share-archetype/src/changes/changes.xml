@@ -4,6 +4,12 @@
     <author email="gabriele.columbro@alfresco.com">Gabriele Columbro</author>
   </properties>
   <body>
+      <release version="3.9.1" date="2012-04-06" description="Consolidated (removed all reported defects) and tested against Alfresco 4.0b">
+         <action dev="columbro" type="fix" issue="7">FTL content was destroyed</action>
+         <action dev="maurizio@session.it" type="fix" issue="67">Documentation update</action>
+         <action dev="columbro" type="fix" issue="74">Align groupId to org.alfresco</action>
+         <action dev="maurizio@session.it" type="fix" issue="36">application.properties not found when invoked from parent POM</action>
+      </release>
   <release version="1.9.2" date="2011-10-25" description="Tested against Share 4.0">
       <action dev="columbro" type="add">
       Updated samples and tested against 4.0 

@@ -4,7 +4,22 @@
 		<author email="gabriele.columbro@alfresco.com">Gabriele Columbro</author>
 	</properties>
 	<body>
-		<release version="1.9.1" date="2009-12-07"
+        <release version="3.9.1" date="2012-04-06" description="Consolidated (removed all reported defects) and tested against Alfresco 4.0b">
+                 <action dev="columbro" type="add" issue="5">Support for file-mappings.properties</action>
+                 <action dev="columbro" type="fix" issue="7">FTL content was destroyed</action>
+                 <action dev="columbro" type="fix" issue="19">META-INF not properly included</action>
+                 <action dev="maurizio@session.it" type="fix" issue="23">mAmpResources was ignored</action>
+                 <action dev="maurizio@session.it" type="fix" issue="46">Broken dependency</action>
+                 <action dev="maurizio@session.it" type="fix" issue="54">Cannot find amp-plugin anywhere</action>
+                 <action dev="maurizio@session.it" type="add" issue="55">h2 support</action>
+                 <action dev="maurizio@session.it" type="add" issue="63">Eclipse Support</action>
+                 <action dev="maurizio@session.it" type="add" issue="64">Add alfresco-core.jar provided</action>
+                 <action dev="maurizio@session.it" type="fix" issue="67">Documentation update</action>
+                 <action dev="maurizio@session.it" type="add" issue="72">Add h2 params to avoid DB locking at startup</action>
+                 <action dev="maurizio@session.it" type="add" issue="73">Update archetypes to use Alfresco 4.0b</action>
+                 <action dev="columbro" type="fix" issue="74">Align groupId to org.alfresco</action>
+        </release>
+        <release version="1.9.1" date="2009-12-07"
 			description="Moved to maven.alfresco.com">
 			<action dev="columbro" type="add">
 				Moved to http://maven.alfresco.com

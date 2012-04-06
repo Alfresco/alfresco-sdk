@@ -4,6 +4,13 @@
     <author email="gabriele.columbro@alfresco.com">Gabriele Columbro</author>
   </properties>
   <body>
+    <release version="3.9.1" date="2012-04-06" description="Cleaned all defects in the framework and tested with 4.0b">
+        <action dev="maurizio@session.it" type="fix">Fixed all existing defects to date in Google Code. See http://code.google.com/p/maven-alfresco-archetypes/issues/list?q=label:Milestone-Release391 for details</action>
+        <action dev="columbro" type="update">Updated and released maven-alfresco-lifecycle and maven-alfresco-archetypes to version 3.9.1</action>
+        <action dev="columbro" type="update">Updated and released maven-amp-plugin to version 3.0.4</action>
+        <action dev="columbro" type="update">Updated and released maven-nosnapshot-plugin to version 0.0.8</action>
+        <action dev="columbro" type="update">Removed all com.sourcesense references</action>
+    </release>
     <release version="3.9.0" date="2011-10-25" description="Upgraded framework to work with Alfresco 4.x and started aligning version numbers to Alfresco"/>
     <release version="1.1.0" date="2009-12-03" description="Complete moving of the full infrastructure to Alfresco Community Maven Repository and Share Addon">
       <action dev="columbro" type="add">

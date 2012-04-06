@@ -3,6 +3,12 @@
     <title>Maven AMP plugin</title>
   </properties>
   <body>
+    <release version="3.0.4" date="2012-04-06" description="Consolidated (removed all reported defects) and tested against Alfresco 4.0b">
+        <action dev="columbro" type="fix" issue="5">Support for file-mappings.properties</action>
+        <action dev="columbro" type="fix" issue="19">Proper inclusion of META-INF</action>
+        <action dev="maurizio@session.it" type="fix" issue="23">mAmpResources was ignored</action>
+        <action dev="columbro" type="fix" issue="74">Align groupId to org.alfresco</action>
+    </release>
    <release version="3.0.2" date="2009-12-07" description="Switched releases and documentation to Alfresco Community Maven repository">
    </release>
    <release version="3.0.1" date="2009-11-06" description="Alfresco 3.0.1 embedded in Maven Alfresco Lifecycle Release">

@@ -12,8 +12,8 @@ It gathers the latest stable versions of the different components that are used 
 community contexts. 
 	</description>
 	<issueManagement>
-		<system>Google Code</system>
-		<url>http://code.google.com/p/maven-alfresco-archetypes/issues/list</url>
+		<system>GoogleCode</system>
+		<url>http://code.google.com/p/maven-alfresco-archetypes/issues</url>
 	</issueManagement>
 	<organization>
 		<name>Alfresco</name>
@@ -82,7 +82,7 @@ community contexts.
 			<email>gabriele.columbro@alfresco.com</email>
 			<roles>
 				<role>Founder</role>
-				<role>Alfresco Solution Engineer</role>
+				<role>Alfresco Principal Architect</role>
 				<role>Developer</role>
 			</roles>
 			<organization>Alfresco</organization>
@@ -91,23 +91,19 @@ community contexts.
 		<developer>
 			<id>maurizio@session.it</id>
 			<name>Maurizio Pillitu</name>
-			<email>m.pillitu@sourcesense.com</email>
-			<organization>Sourcesense</organization>
-			<organizationUrl>http://www.sourcesense.com</organizationUrl>
+			<email>maurizio.pillitu@alfresco.com</email>
+			<organization>Alfresco</organization>
+			<organizationUrl>http://www.alfresco.com</organizationUrl>
 			<roles>
-				<role>Solution architect</role>
-				<role>Agile guru</role>
-				<role>Maven Calm Expert</role>
+				<role>Alfresco Technical Consultant</role>
+				<role>Agile Maestro</role>
 			</roles>
 		</developer>
 		<developer>
       <id>carlo.sciolla</id>
       <name>Carlo Sciolla</name>
-      <email>m.pillitu@sourcesense.com</email>
-      <organization>Sourcesense</organization>
-      <organizationUrl>http://www.sourcesense.com</organizationUrl>
+      <organization>Backbase</organization>
       <roles>
-        <role>Infra support</role>
         <role>Developer</role>
       </roles>
     </developer>
@@ -153,7 +149,6 @@ community contexts.
 					<toAddresses>
 						<toAddress implementation="java.lang.String">maven-alfresco@googlegroups.com</toAddress>
 						<toAddress implementation="java.lang.String">announce@maven.apache.org</toAddress>
-						<toAddress implementation="java.lang.String">alfresco-dev@lists.sourcesense.com</toAddress>
 					</toAddresses>
 					<username>${smtp.username}</username>
 					<password>${smtp.password}</password>
@@ -232,7 +227,7 @@ community contexts.
 		</snapshotRepository>
 		<site>
 			<id>alfresco-docs</id>
-			<url>dav:http://maven.alfresco.com/nexus/content/repositories/alfresco-docs-staging/maven-alfresco-lifecycle</url>
+			<url>dav:http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/${project.version}</url>
 		</site>
 	</distributionManagement>
 </project>

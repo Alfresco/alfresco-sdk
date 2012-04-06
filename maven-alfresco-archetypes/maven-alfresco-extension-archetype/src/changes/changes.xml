@@ -4,6 +4,13 @@
     <author email="gabriele.columbro@alfresco.com">Gabriele Columbro</author>
   </properties>
   <body>
+      <release version="3.9.1" date="2012-04-06" description="Consolidated (removed all reported defects) and tested against Alfresco 4.0b">
+          <action dev="columbro" type="fix" issue="7">FTL content was destroyed</action>
+          <action dev="maurizio@session.it" type="add" issue="55">Enable h2 support</action>
+          <action dev="maurizio@session.it" type="add" issue="67">Documentation update</action>
+          <action dev="maurizio@session.it" type="add" issue="72">Add h2 params to avoid DB locking at startup</action>
+          <action dev="columbro" type="fix" issue="74">Align groupId to org.alfresco</action>
+      </release>
   <release version="1.9.2" date="2011-10-25" description="Tested against Alfresco 4.0b community">
       <action dev="columbro" type="remove">
 		Removed support for H2 since alfresco does not work with it (even in PGSQL compatibility mode)
