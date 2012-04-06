@@ -163,7 +163,7 @@ community contexts.
 				<configuration>
 					<!-- useEditMode>true</useEditMode>-->
 					<preparationGoals>clean package</preparationGoals>
-					<goals>deploy site-deploy</goals>
+					<goals>deploy</goals>
 					<tagBase>${svn.tags.url}</tagBase>
 					<autoVersionSubmodules>false</autoVersionSubmodules>
 				</configuration>
