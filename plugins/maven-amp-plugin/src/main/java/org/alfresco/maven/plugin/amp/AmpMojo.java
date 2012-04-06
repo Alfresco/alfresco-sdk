@@ -277,7 +277,7 @@ public class AmpMojo extends AbstractAmpMojo
         vArchiver.setOutputFile(pAmpFile);
 
         /* setup amp Archiver */
-        this.getAmpArchiver().addDirectory(this.getAmpDirectory(), this.getIncludes(), this.getExcludes());
+        this.getAmpArchiver().addDirectory(this.getAmpDirectory(), null, null);
 
         // create archive
         vArchiver.createArchive(this.getProject(), archive );

@@ -213,7 +213,7 @@ public class AmpProjectPackagingTask
             {
                 final PathSet sources = getFilesToIncludes( context.getAmpConfigDirectory(),
                                                             new String[0],
-                                                            new String[] {"**/*.class"} );
+                                                            new String[] {"**/*.class","META-INF/**"} );
 
                 try
                 {

@@ -53,7 +53,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-public abstract class AbstractAmpMojo extends AbstractMojo
+public abstract class   AbstractAmpMojo extends AbstractMojo
 {
 
     /**
@@ -392,12 +392,12 @@ public abstract class AbstractAmpMojo extends AbstractMojo
      *
      * @parameter alias="includes"
      */
-    private String mAmpJarIncludes = "**";
+    private String mAmpJarIncludes = "**/*.class,META-INF/**";
 
     /**
-     * The comma separated list of tokens to exclude from the AMP created JAR file. By default module configuration is left outside jars.
+     * The comma separated list of tokens to exclude from the AMP created JAR file
      *
-     * @parameter alias="excludes" default-value="alfresco/module/**"
+     * @parameter alias="excludes" default-value=""
      */
     private String mAmpJarExcludes;
     
