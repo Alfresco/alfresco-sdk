@@ -1,9 +1,28 @@
 <project>
-	<skin>
-    	<groupId>org.apache.maven.skins</groupId>
-	    <artifactId>maven-stylus-skin</artifactId>
-	    <version>1.0</version>
-	</skin>
+    <skin>
+   		<groupId>org.apache.maven.skins</groupId>
+   		<artifactId>maven-fluido-skin</artifactId>
+   		<version>1.2.1</version>
+   	</skin>
+       <custom>
+           <fluidoSkin>
+             <topBarEnabled>true</topBarEnabled>
+             <sideBarEnabled>true</sideBarEnabled>
+             <topBarIcon>
+                     <name>Maven Alfresco Lifecycle</name>
+                     <alt>Maven Alfresco Lifecycle</alt>
+                     <src>/img/Alfresco-lofo-transparent.gir</src>
+                     <href>/index.html</href>
+             </topBarIcon>
+             <twitter>
+                   <user>mindthegabz</user>
+                   <showUser>true</showUser>
+                   <showFollowers>true</showFollowers>
+             </twitter>
+             <facebookLike />
+             <googlePlusOne />
+           </fluidoSkin>
+       </custom>
 	<poweredBy>
 	    <logo name="Maven" href="http://maven.apache.org" img="http://maven.apache.org/images/logos/maven-feather.png"/>
 	    <logo name="Alfresco - Open source ECM" img="http://alfresco.com/assets/images/icons/powered_by_alfresco.gif" href="http://www.alfresco.com" /> 

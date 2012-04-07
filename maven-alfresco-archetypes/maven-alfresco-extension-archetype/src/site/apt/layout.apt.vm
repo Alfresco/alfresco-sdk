@@ -16,16 +16,16 @@ What do I have when I created the project?
 src --------------------------------------------------------> (source folder)
 		|
 		|__ main ___ __ resources --------------------------> mapped in the classpath  
-		|			|			  |
-		|			|			  |__ alfresco/extension ---> alfresco overriding Spring contexts
-		|			|
-		|			|__ properties ------------------------->  environment aware application properties files  
-		|			|				|
-		|			|				|__ local  ------------->  default application.properties
-		|			|
-		|			|__ java ------------------------------->  customization java classes
-		|			|
-		|			|__ webapp -----------------------------> alfresco webapp overlay folder - this folder is overlayed (so may overwrite alfresco war)
+		|		|			  |
+		|		|			  |__ alfresco/extension ---> alfresco overriding Spring contexts
+		|		|
+		|		|__ properties ------------------------->  environment aware application properties files
+		|		|				|
+		|		|				|__ local  ------------->  default application.properties
+		|		|
+		|		|__ java ------------------------------->  customization java classes
+		|		|
+		|		|__ webapp -----------------------------> alfresco webapp overlay folder - this folder is overlayed (so may overwrite alfresco war)
 		|						|
 		|						|__ WEB-INF	----------------> drop in this folder WEB-INF custom / overwriting files (e.g. faces-config-custom.xml / web.xml)	
 		|			

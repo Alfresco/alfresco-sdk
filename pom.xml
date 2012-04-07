@@ -13,7 +13,7 @@ community contexts.
 	</description>
 	<issueManagement>
 		<system>GoogleCode</system>
-		<url>http://code.google.com/p/maven-alfresco-archetypes/issues</url>
+		<url>http://code.google.com/p/maven-alfresco-archetypes/issues/detail</url>
 	</issueManagement>
 	<organization>
 		<name>Alfresco</name>
@@ -163,7 +163,7 @@ community contexts.
 				<configuration>
 					<!-- useEditMode>true</useEditMode>-->
 					<preparationGoals>clean package</preparationGoals>
-					<goals>deploy</goals>
+					<goals>deploy site-deploy</goals>
 					<tagBase>${svn.tags.url}</tagBase>
 					<autoVersionSubmodules>false</autoVersionSubmodules>
 				</configuration>
@@ -227,7 +227,7 @@ community contexts.
 		</snapshotRepository>
 		<site>
 			<id>alfresco-docs</id>
-			<url>dav:http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/${project.version}</url>
+			<url>dav:http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/latest</url>
 		</site>
 	</distributionManagement>
 </project>

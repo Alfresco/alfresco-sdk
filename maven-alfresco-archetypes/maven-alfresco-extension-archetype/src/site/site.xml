@@ -1,9 +1,28 @@
 <project>
-	<skin>
-		<groupId>org.apache.maven.skins</groupId>
-		<artifactId>maven-stylus-skin</artifactId>
-		<version>1.0</version>
-	</skin>
+    <skin>
+   		<groupId>org.apache.maven.skins</groupId>
+   		<artifactId>maven-fluido-skin</artifactId>
+   		<version>1.2.1</version>
+   	</skin>
+       <custom>
+           <fluidoSkin>
+             <topBarEnabled>true</topBarEnabled>
+             <sideBarEnabled>true</sideBarEnabled>
+             <topBarIcon>
+                     <name>Maven Alfresco Lifecycle</name>
+                     <alt>Maven Alfresco Lifecycle</alt>
+                     <src>/img/Alfresco-lofo-transparent.gir</src>
+                     <href>/index.html</href>
+             </topBarIcon>
+             <twitter>
+                   <user>mindthegabz</user>
+                   <showUser>true</showUser>
+                   <showFollowers>true</showFollowers>
+             </twitter>
+             <facebookLike />
+             <googlePlusOne />
+           </fluidoSkin>
+       </custom>
 	<poweredBy>
 		<logo name="Maven" href="http://maven.apache.org" img="http://maven.apache.org/images/logos/maven-feather.png" />
 		<logo name="Alfresco - Open source ECM" img="http://alfresco.com/assets/images/icons/powered_by_alfresco.gif"
@@ -29,8 +48,8 @@
 		</menu>
 
 		<menu name="See also">
-			<item name="Maven Alfresco AMP Archetype" href="http://repository.sourcesense.com/maven2-sites/maven-alfresco-amp-archetype" />
-			<item name="Maven AMP Plugin" href="http://repository.sourcesense.com/maven2-sites/maven-amp-plugin" />
+			<item name="Maven Alfresco AMP Archetype" href="http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/latest/maven-alfresco-archetypes/maven-alfresco-amp-archetype/index.html" />
+			<item name="Maven AMP Plugin" href="http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/latest/plugins/maven-amp-plugin/" />
 			<item name="Third party how to" href="http://www.cybermagic.co.nz/wiki/display/CM/Building+Alfresco+apps+with+Maven" />
 		</menu>
 		

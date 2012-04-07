@@ -24,26 +24,18 @@ What is an Alfresco extension?
 We define an "Alfresco extension" (or customization) a custom build of Alfresco which does not impact on Alfresco source code (while depends on binary releases of the libraries and webapp).
 This is realized overriding (and in certain particular cases overwriting) Alfresco default configuration using Convention over Configuration hooks (e.g. classpath:alfresco/extension/*-context.xml autoloading), in order to ease integration in enterprise environments and to simplify full lifecycle management (from scratch-start to release and deploy) also for non experienced developers, resulting in a less error prone controlled process.
 Alternative to an "Alfresco extension" is the "Alfresco Module" (or AMP) which is meant to be deployed on an existing Alfresco instance and above all to coexist with other modules on top of this instance: as a general rule of thumb an extension is an exclusive customization while a module is one of many customizations which have a separate lifecycle (and owner).
-For an maven2 archetype of AMP Alfresco build please have a look at:
-
-https://dev.sourcesense.com/cargo/maven2-sites/maven-alfresco-extension-archetype
 
 
 Quick Start:
 ------------
 Wanna skip all the discussion (or you know already the thing) and want a zero conf maven2 alfresco customization project generation?
-Just run:
-
-mvn  org.apache.maven.plugins:maven-archetype-plugin:1.0-alpha-7:create -DarchetypeGroupId=${pom.groupId} -DarchetypeArtifactId=${pom.artifactId} -DarchetypeVersion=${pom.version} \
-  					  -DgroupId=mycompany.com  -DartifactId=my-alfresco-customization -Dversion=0.1-SNAPSHOT 
-					  -DremoteRepositories=http://repository.sourcesense.com/maven2 (archetype is deployed there)
-					  -DpomRemoteRepositories=http://repository.sourcesense.com/maven2 (wagon-dav ssh version patched is here)
+Just see https://wiki.alfresco.com/wiki/Maven_For_Dummies
 
 
 Introduction:
 -------------
 
-This archetype developed within Sourcesense (http://www.sourcesense.com) aims to provide a standardized approach to development, release and deployment of Alfresco extensions (as opposed to AMP builds). Using standard m2 lifecycle commands (mvn compile package deploy) and generally available plugins (cargo, release, assembly) we are able to cover a very high percentage of Alfresco lifecycle common use cases.
+This archetype was originally developed within Sourcesense (http://www.sourcesense.com) aims to provide a standardized approach to development, release and deployment of Alfresco extensions (as opposed to AMP builds). Using standard m2 lifecycle commands (mvn compile package deploy) and generally available plugins (cargo, release, assembly) we are able to cover a very high percentage of Alfresco lifecycle common use cases.
 It can be used both with Maven2 and Ant  build systems, but it must be clear that *only* the Maven2 approach provides all the automation features we will describe in the next paragraphs. 
 In addition to that the m2 approach provides a zero-conf approach while ant requires (as usual) manual gathering and selection of required alfresco libraries and webapp (please refer to README-ant.txt for further info about the Ant build). Last but not the least, m2 build is more likely to be maintained and improved (especially in the likely case Alfresco moves to maven2). 
 For more details on the m2 apprach please refer instead to README-m2.txt.
@@ -78,7 +70,7 @@ Using cargo we're able to provide (local) Jboss and (local/remote) Tomcat deploy
 
 -- Zero conf startup
 
-Community artifacts (alfresco 2.x) artifacts are available on Sourcesense public repository (http://repository.sourcesense.com/maven2) and allow all the default dependencies specified in this POM to be successfully retrieved with no additional configuration. If you want to use instead enterprise dependencies you either need to have a private access to Sourcesense private repositories or push alfresco for releasing this artifacts on public Alfresco maven repositories 
+Community artifacts (alfresco 2.x) artifacts are available on Alfresco public repository (http://maven.alfresco.com) and allow all the default dependencies specified in this POM to be successfully retrieved with no additional configuration.
 
 --- Configurable log location and easy database setup
 By editing the <log.dir> POM property in the appropriate profile you can have the setting applied where it makes sense (jboss configures everything centrally).

@@ -15,17 +15,17 @@ What do I have when I created the project?
  
 src --------------------------------------------------------> (source folder)
 		|
-		|__ main ___ __ resources --------------------------> mapped in the classpath. Add here classpath resources
-		|			|
-		|			|__ config-----   alfresco module config goes here.
-		|			|			  |	  Get's copied (by best practice) by build into package alfresco/module/groupId.artifactId.
-		|			|			  |   This convention is used by the archetype and by the AMP unpacker.
-		|			|			  |__ ex: alfresco/module/org.alfresco.mymodule ---> Example Alfresco module config 
-		|			|
-		|			|
-		|			|__ java ------------------------------->  customization java classes
-		|			|
-		|			|__ webapp -----------------------------> AMP overlay folder - this folder is overlayed (so may overwrite other dependent AMPs)
+		|__ main __ resources --------------------------> mapped in the classpath. Add here classpath resources
+		|		|
+		|		|__ config-----   alfresco module config goes here.
+		|		|			  |	  Get's copied (by best practice) by build into package alfresco/module/groupId.artifactId.
+		|		|			  |   This convention is used by the archetype and by the AMP unpacker.
+		|		|			  |__ ex: alfresco/module/org.alfresco.mymodule ---> Example Alfresco module config
+		|		|
+		|		|
+		|		|__ java ------------------------------->  customization java classes
+		|		|
+		|		|__ webapp -----------------------------> AMP overlay folder - this folder is overlayed (so may overwrite other dependent AMPs)
 
 		|			
 		|__ test __ __ resources _

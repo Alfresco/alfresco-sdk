@@ -44,7 +44,7 @@ FEATURES:
 		
 		* Install/deployment of Alfresco compatible AMPs on a m2 repo   <<< mvn install / deploy  [ params ] >>>
 		
-		* using the {{{http://repository.sourcesense.com/maven2-sites/maven-amp-plugin} maven-amp-plugin}} WAR can depend on AMP artifacts and have them overlayed within the maven lifecycle, avoiding the boring MMT run.
+		* using the {{{../maven-amp-plugin} maven-amp-plugin}} WAR can depend on AMP artifacts and have them overlayed within the maven lifecycle, avoiding the boring MMT run.
 		
 		* AMP dependencies management: 	<<<mvn clean package>>> can take care of overlay AMP deps
 		

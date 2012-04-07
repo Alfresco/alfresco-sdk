@@ -50,11 +50,11 @@
 	<pluginRepositories>
 		<pluginRepository>
 			<id>alfresco-public</id>
-      <url>http://maven.alfresco.com/nexus/content/groups/public</url>
+            <url>http://maven.alfresco.com/nexus/content/groups/public</url>
 		</pluginRepository>
 		<pluginRepository>
 			<id>alfresco-public-snapshots</id>
-			<url>http://repository.sourcesense.com/nexus/content/groups/public-snapshots</url>
+			<url>http://maven.alfresco.com/nexus/content/groups/public-snapshots</url>
 			<snapshots>
         <enabled>true</enabled>
         <updatePolicy>daily</updatePolicy>
@@ -217,7 +217,7 @@
 			<plugin>
 				<groupId>org.alfresco.maven.plugin</groupId>
 				<artifactId>maven-amp-plugin</artifactId>
-				<version>3.0.4-SNAPSHOT</version>
+				<version>3.0.4</version>
 				<extensions>true</extensions>
 				<configuration>
 					<archive>
@@ -345,7 +345,7 @@
 							<dependency>
 								<groupId>org.alfresco.maven.plugin</groupId>
 								<artifactId>maven-amp-plugin</artifactId>
-								<version>3.0.4-SNAPSHOT</version>
+								<version>3.0.4</version>
 							</dependency>
 						</dependencies>
 					</plugin>
@@ -410,7 +410,7 @@
 							<dependency>
 								<groupId>org.alfresco.maven.plugin</groupId>
 								<artifactId>maven-amp-plugin</artifactId>
-								<version>3.0.4-SNAPSHOT</version>
+								<version>3.0.4</version>
 							</dependency>
 						</dependencies>
 					</plugin>
