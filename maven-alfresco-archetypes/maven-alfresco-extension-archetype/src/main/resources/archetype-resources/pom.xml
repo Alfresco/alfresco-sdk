@@ -318,7 +318,7 @@
 					<dependency>
 						<groupId>org.alfresco.maven.plugin</groupId>
 						<artifactId>maven-amp-plugin</artifactId>
-						<version>3.0.4-SNAPSHOT</version>
+						<version>3.0.4</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -447,10 +447,6 @@
 			<url>scp://yourcompany/var/maven2</url> </repository>
 			<distributionManagement> <site> <id>yourcompany-site</id>
 			<url>scp://yourcompany/var/maven2-sites</url> </site>
-		-->
-		<!--
-			| | Enable this repo in case of non publicly redistributable
-			artifacts (Sourcesense private repositories via webdav) |
 		-->
 	</distributionManagement>
 

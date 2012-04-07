@@ -18,12 +18,11 @@ limitations under the License.
 
 ---------------------------------------
 Archetype Release: Archetype - maven-amp-archetype
-Author: g.columbro@sourcesense.com
+Author: gabriele.columbro@alfresco.com
 http://forge.alfresco.com/m2alfresco
 
 Contacts: 
-- alfresco-dev@lists.sourcesense.com (developer)
-- alfresco@sourcesense.com (commercial)
+- maven-alfresco@googlegroups.com (developer)
 
 See Also:
 http://wiki.alfresco.com/wiki/Module_Management_Tool
