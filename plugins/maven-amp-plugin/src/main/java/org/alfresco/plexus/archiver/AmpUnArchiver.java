@@ -161,8 +161,11 @@ public class AmpUnArchiver extends AbstractZipUnArchiver {
 
 		String ampName = zipFile.getName();
 		ampName = FileUtils.removeExtension(FileUtils.removePath(ampName));
-		ampName = ampName.substring(0, ampName.lastIndexOf('-'));
-		
+        int ampNameIndex = ampName.lastIndexOf('-');
+        if (ampNameIndex > 0) {
+            ampName = ampName.substring(0, ampNameIndex);
+        }
+
 		ampMapping.put("module.properties", "WEB-INF"+ fileSeparator +"classes" + fileSeparator +"alfresco" + fileSeparator +"module" + fileSeparator + moduleId + fileSeparator);
 		ampMapping.put("config", "WEB-INF"+fileSeparator+"classes"+ fileSeparator);
 		ampMapping.put("lib", "WEB-INF" + fileSeparator + "lib" +fileSeparator);
