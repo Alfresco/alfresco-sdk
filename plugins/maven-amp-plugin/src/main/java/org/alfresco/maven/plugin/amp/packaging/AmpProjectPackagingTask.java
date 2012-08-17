@@ -31,13 +31,13 @@ public class AmpProjectPackagingTask
     extends AbstractAmpPackagingTask
 {
     private static final String MODULE_PROPERTIES = "module.properties";
-    private static final String FILE_MAPPINGS     = "file-mappings.properties";
+    private static final String FILE_MAPPING     = "file-mapping.properties";
 
 	private static final String WEB_PATH = "web/";
 
 	private static final String CONFIG_PATH = "config/";
 	
-	private static final String FILE_MAPPINGS_CONTENT = "# Add mapping for /WEB-INF/, since MMT doesn't support it by default\n" +
+	private static final String FILE_MAPPING_CONTENT = "# Add mapping for /WEB-INF/, since MMT doesn't support it by default\n" +
                                                         "/web/WEB-INF=/WEB-INF\n";
 
 
@@ -78,7 +78,7 @@ public class AmpProjectPackagingTask
 
         handeWebAppSourceDirectory( context );
         
-        synthesiseFileMappings(context);
+        synthesiseFileMapping(context);
         
         
         // Notice: this will work only in case we are copying only this AMP or this AMP is
@@ -156,27 +156,27 @@ public class AmpProjectPackagingTask
     
     
     /**
-     * Synthesizes (creates) a standard file-mappings.properties file so that resources in webapp/WEB-INF
+     * Synthesizes (creates) a standard file-mapping.properties file so that resources in webapp/WEB-INF
      * get written to the correct location by the MMT.
      * 
      * @param context The packaging context
      * @throws MojoExecutionException if the file could not be created
      */
-    protected void synthesiseFileMappings(final AmpPackagingContext context)
+    protected void synthesiseFileMapping(final AmpPackagingContext context)
         throws MojoExecutionException
     {
         try
         {
-            File         fileMappings = new File(context.getAmpDirectory(), FILE_MAPPINGS);
+            File         fileMapping = new File(context.getAmpDirectory(), FILE_MAPPING);
             OutputStream out          = null;
             
-            fileMappings.createNewFile();  // Note: ignore if the file already exists - we simply overwrite its existing contents
+            fileMapping.createNewFile();  // Note: ignore if the file already exists - we simply overwrite its existing contents
             
             try
             {
-                out = new FileOutputStream(fileMappings, false);
+                out = new FileOutputStream(fileMapping, false);
                 
-                out.write(FILE_MAPPINGS_CONTENT.getBytes());
+                out.write(FILE_MAPPING_CONTENT.getBytes());
             }
             finally
             {
@@ -189,7 +189,7 @@ public class AmpProjectPackagingTask
         }
         catch (final IOException ioe)
         {
-            throw new MojoExecutionException("Could not create file-mappings.properties in [" + context.getAmpDirectory().getAbsolutePath() + "]", ioe);
+            throw new MojoExecutionException("Could not create file-mapping.properties in [" + context.getAmpDirectory().getAbsolutePath() + "]", ioe);
         }
     }
     
