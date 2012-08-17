@@ -50,11 +50,11 @@ community contexts.
 	<repositories>
 		<repository>
 			<id>alfresco-public</id>
-			<url>http://maven.alfresco.com/nexus/content/groups/public</url>
+			<url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
 		</repository>
 		<repository>
 			<id>alfresco-public-snapshots</id>
-			<url>http://maven.alfresco.com/nexus/content/groups/public-snapshots</url>
+			<url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
 			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>daily</updatePolicy>
@@ -64,11 +64,11 @@ community contexts.
 	<pluginRepositories>
 		<pluginRepository>
 			<id>alfresco-public</id>
-      <url>http://maven.alfresco.com/nexus/content/groups/public</url>
+      <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
 		</pluginRepository>
 		<pluginRepository>
 			<id>alfresco-public-snapshots</id>
-      <url>http://maven.alfresco.com/nexus/content/groups/public-snapshots</url>
+      <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
 			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>daily</updatePolicy>
