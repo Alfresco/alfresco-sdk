@@ -218,12 +218,12 @@ community contexts.
 	<distributionManagement>
 		<repository>
 			<id>alfresco-releases</id>
-			<url>http://maven.alfresco.com/nexus/content/repositories/releases</url>
+			<url>https://artifacts.alfresco.com/nexus/content/repositories/releases</url>
 		</repository>
 		<snapshotRepository>
 			<name>alfresco snapshots repository</name>
 			<id>alfresco-snapshots</id>
-			<url>http://maven.alfresco.com/nexus/content/repositories/snapshots</url>
+			<url>https://artifacts.alfresco.com/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
 		<site>
 			<id>alfresco-docs</id>
