@@ -5,7 +5,7 @@
 	<packaging>pom</packaging>
 	<version>4.0.0-SNAPSHOT</version>
 	<name>Maven Alfresco Lifecycle support base project</name>
-	<url>http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle</url>
+	<url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle</url>
 	<description>
 This project is meant to gather all commons configurations, plugins and archetypes for the full Maven Alfresco lifecycle support.
 It gathers the latest stable versions of the different components that are used to support Alfresco development on Maven in enterprise and 
@@ -227,7 +227,7 @@ community contexts.
 		</snapshotRepository>
 		<site>
 			<id>alfresco-docs</id>
-			<url>dav:http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/latest</url>
+			<url>dav:https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/latest</url>
 		</site>
 	</distributionManagement>
 </project>
