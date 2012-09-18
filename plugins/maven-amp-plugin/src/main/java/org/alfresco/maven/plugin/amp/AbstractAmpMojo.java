@@ -334,7 +334,7 @@ public abstract class   AbstractAmpMojo extends AbstractMojo
     private File mModuleProperties;
     
     /**
-     * The path to the web.xml file to use.
+     * The path to the file-mapping.properties file to use.
      *
      * @parameter expression="${maven.amp.fileMappingProperties}" default-value="${project.basedir}/file-mapping.properties"
      */
