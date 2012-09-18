@@ -45,16 +45,19 @@ public class AmpProjectPackagingTask
 
     private final File moduleProperties;
     
+    private final File fileMappingProperties;
+    
     private final String id;
 
 
-    public AmpProjectPackagingTask( Resource[] webResources, File moduleProperties)
+    public AmpProjectPackagingTask( Resource[] webResources, File moduleProperties, File fileMappingProperties)
     {
         if ( webResources != null )
         {
             this.webResources = webResources;
         }
         this.moduleProperties = moduleProperties;
+        this.fileMappingProperties = fileMappingProperties;
         this.id = Overlay.currentProjectInstance().getId();
     }
 
@@ -167,7 +170,17 @@ public class AmpProjectPackagingTask
     {
         try
         {
-            File         fileMapping = new File(context.getAmpDirectory(), FILE_MAPPING);
+            if ( fileMappingProperties != null && StringUtils.isNotEmpty( fileMappingProperties.getName() ) )
+            {
+                if ( fileMappingProperties.exists() )
+                {
+                    context.getLog().info("Existing " + FILE_MAPPING + " found, performing property expansion");
+                    copyFilteredFile(id, context, fileMappingProperties, FILE_MAPPING);
+                    return;
+                }
+            }
+            File fileMapping = new File(context.getAmpDirectory(), FILE_MAPPING);
+            context.getLog().info("No " + FILE_MAPPING + " found, synthesizing one");
             OutputStream out          = null;
             
             fileMapping.createNewFile();  // Note: ignore if the file already exists - we simply overwrite its existing contents

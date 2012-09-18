@@ -231,7 +231,7 @@ public abstract class   AbstractAmpMojo extends AbstractMojo
             Overlay overlay = (Overlay) it.next();
             if ( overlay.isCurrentProject() )
             {
-                packagingTasks.add( new AmpProjectPackagingTask( mAmpResources, mModuleProperties) );
+                packagingTasks.add( new AmpProjectPackagingTask( mAmpResources, mModuleProperties, mFileMappingProperties) );
             }
             else
             {
@@ -332,7 +332,13 @@ public abstract class   AbstractAmpMojo extends AbstractMojo
      * @parameter expression="${maven.amp.moduleProperties}" default-value="${project.basedir}/module.properties"
      */
     private File mModuleProperties;
-
+    
+    /**
+     * The path to the web.xml file to use.
+     *
+     * @parameter expression="${maven.amp.fileMappingProperties}" default-value="${project.basedir}/file-mapping.properties"
+     */
+    private File mFileMappingProperties;
 
     /**
      * Directory to unpack dependent AMPs into if needed
@@ -661,6 +667,16 @@ public abstract class   AbstractAmpMojo extends AbstractMojo
     }
 
    
+    public File getmFileMappingProperties()
+    {
+        return mFileMappingProperties;
+    }
+
+    public void setmFileMappingProperties(File mFileMappingProperties)
+    {
+        this.mFileMappingProperties = mFileMappingProperties;
+    }
+
     public String getOutputFileNameMapping()
     {
         return mOutputFileNameMapping;
