@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd" name="quickstart-allinone-archetype"
+    xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <requiredProperties>
+    <requiredProperty key="version">
+      <defaultValue>1.0-SNAPSHOT</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="alfresco_target_groupId">
+      <defaultValue>org.alfresco</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="alfresco_target_version">
+      <defaultValue>4.2.b</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="package">
+      <defaultValue>(not used)</defaultValue>
+    </requiredProperty>
+  </requiredProperties>
+  <modules>
+    <module id="amp" dir="amp" name="amp">
+      <fileSets>
+        <fileSet filtered="false" packaged="false" encoding="UTF-8">
+          <directory>src/main/java</directory>
+          <includes>
+            <include>**/*.java</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+          <directory>src/main/amp</directory>
+          <includes>
+            <include>**</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+          <directory>src/test/resources</directory>
+          <includes>
+            <include>**</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+          <directory>src/test/properties</directory>
+          <includes>
+            <include>**/*.properties</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+          <directory>jetty</directory>
+          <includes>
+            <include>**</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="alfresco" dir="alfresco" name="alfresco">
+      <fileSets>
+        <fileSet encoding="UTF-8" filtered="false">
+          <directory>src/main/webapp</directory>
+          <includes>
+            <include>**</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+          <directory>src/main/properties</directory>
+          <includes>
+            <include>**/*.properties</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="solr" dir="solr" name="solr" filtered="false">
+      <fileSets>
+        <fileSet encoding="UTF-8">
+          <directory>src/main/solr-properties</directory>
+          <includes>
+            <include>**</include>
+            <include>**</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+          <directory>src/main/webapp</directory>
+          <includes>
+            <include>**</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="share" dir="share" name="share" filtered="false">
+      <fileSets>
+        <fileSet encoding="UTF-8">
+          <directory>src/main/webapp</directory>
+          <includes>
+            <include>**</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8">
+          <directory>src/main/properties</directory>
+          <includes>
+            <include>**/*.properties</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="wcmqs" dir="wcmqs" name="share" filtered="false">
+      <fileSets>
+        <fileSet encoding="UTF-8">
+          <directory>src/main/webapp</directory>
+          <includes>
+            <include>**</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+          <directory>src/main/webapp</directory>
+          <includes>
+            <include>**</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="runner" dir="runner" name="runner" filtered="false">
+      <fileSets>
+        <fileSet encoding="UTF-8">
+          <directory>jetty</directory>
+          <includes>
+            <include>**</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+  </modules>
+</archetype-descriptor>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>${artifactId}</artifactId>
+    <name>Alfresco AMP Module</name>
+    <packaging>amp</packaging>
+    <description>This is a sample AMP project, depended upon by the alfresco WAR module</description>
+
+    <parent>
+        <groupId>${groupId}</groupId>
+        <artifactId>${rootArtifactId}</artifactId>
+        <version>${version}</version>
+    </parent>
+
+    <!--
+    Following dependencies are needed for compiling
+    Java code in src/main/java; <scope>provided</scope>
+    is inherited for each of the following; for more
+    info, please refer to alfresco-integration-parent
+    POM definition
+    @TODO - document
+    -->
+    <dependencies>
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>alfresco-repository</artifactId>
+        </dependency>
+    </dependencies>
+    
+    <properties>
+        <!-- This property allow to switch Repo AMP vs Share AMP. 
+             Set alfresco.client.war=share to run this AMP against Share
+         -->
+        <alfresco.client.war>alfresco</alfresco.client.war>
+    </properties>
+    
+</project>

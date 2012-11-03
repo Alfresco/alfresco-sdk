@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<project
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+    xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>${groupId}</groupId>
+        <artifactId>${rootArtifactId}</artifactId>
+        <version>${version}</version>
+    </parent>
+    <artifactId>wcmqs</artifactId>
+    <packaging>war</packaging>
+    <name>Alfresco Web Quick Start customization</name>
+    <description>This project allows you to customize and overlay Alfresco Web Quick Start</description>
+    <dependencies>
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>alfresco-wcm-quickstart</artifactId>
+            <version>${alfresco.version}</version>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <overlays>
+                        <!-- The current project customizations -->
+                        <overlay />
+                        <!-- The Alfresco WCMQS War -->
+                        <overlay>
+                            <artifactId>alfresco-wcm-quickstart</artifactId>
+                            <groupId>${alfresco.groupId}</groupId>
+                        </overlay>
+                    </overlays>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

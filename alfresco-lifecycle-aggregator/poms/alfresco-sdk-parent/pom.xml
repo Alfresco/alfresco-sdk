@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.alfresco.maven</groupId>
+  <artifactId>alfresco-sdk-parent</artifactId>
+  <name>Alfresco Maven SDK Parent POM</name>
+  <description>
+     The Alfresco Maven SDK Parent POM exposes the developer features of the Maven Alfresco SDK. 
+     Declare this POM as parent for your project and select the Alfresco version/edition by defining
+     the alfresco.groupId and alfresco.version in your POM. 
+  </description>
+  <packaging>pom</packaging>
+  
+  <!-- This defines the version of the SDK in terms of features -->
+  <version>1.0-SNAPSHOT</version>
+
+  <licenses>
+    <license>
+      <name>GNU Lesser General Public License v3.0 or later</name>
+      <url>http://www.gnu.org/licenses/lgpl-3.0-standalone.html</url>
+    </license>
+  </licenses>
+  
+  <prerequisites>
+    <maven>3.0.3</maven>
+  </prerequisites>
+
+  <properties>
+    <!--  Default Alfresco version this SDK version has been tested with:
+        |
+        | alfresco.groupId can be
+        | org.alfresco ==> Alfresco community 
+        | org.alfresco.enterprise ==> Alfresco Enterprise
+        |
+        | NOTE: You can / should override these properties in you POM to select the proper version
+        | 
+        | For available versions please search on https://artifacts.alfresco.com/nexus/index.html
+        -->
+    <alfresco.groupId>org.alfresco</alfresco.groupId>
+    <alfresco.version>4.2.b</alfresco.version>
+
+    <!--  Values can be "alfresco" or "share". Default value is 'alfresco' assuming you are developing a repository AMP, change to share for share AMPs 
+        | This impact (in AMP projects) the choice of the WAR project for embedded run
+         -->
+    <alfresco.client.war>alfresco</alfresco.client.war>
+
+    <!-- IMPORTANT! Override this only if you know what you're doing; it could break amp-to-war overlay -->
+    <alfresco.client.war.folder>${project.build.directory}/${project.build.finalName}-war</alfresco.client.war.folder>
+
+    <!-- Alfresco Repo disk storage folder (relative path) -->
+    <alfresco.data.location>alf_data_dev</alfresco.data.location>
+    <!-- Alfresco Repo configuration with embedded DB -->
+    <alfresco.db.name>alf_dev</alfresco.db.name>
+    <alfresco.db.username>alfresco</alfresco.db.username>
+    <alfresco.db.password>alfresco</alfresco.db.password>
+    <alfresco.db.params>MODE=PostgreSQL;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;MVCC=TRUE</alfresco.db.params>
+    <!-- By default the H2 embedded database datafile is created under the alfresco.data.location folder -->
+    <alfresco.db.url>jdbc:h2:./${alfresco.data.location}/h2_data/${alfresco.db.name};${alfresco.db.params}</alfresco.db.url>
+    <alfresco.db.datasource.class>org.h2.jdbcx.JdbcDataSource</alfresco.db.datasource.class>
+    
+    <!-- SDK Properties -->
+    <!--
+    Built-in multi-environment property placeholding support (also for testing); to enable it on your sub-modules
+    * create app.properties.folder (default=src/main/properties/${env}) folder structure
+    * place properties files in that folder with the correct name
+    Both 'alfresco' and 'share' sub-modules currently use it.
+    -->
+    <env>local</env>
+    <!--  Be default we assume to we load all properties files under ${app.properties.folder}
+        | and 
+        | This can be overridden your pom
+     -->
+    <app.amp.folder>src/main/amp</app.amp.folder>
+    <app.properties.folder>src/main/properties/${env}</app.properties.folder>
+    <app.properties.test.folder>src/test/properties/${env}</app.properties.test.folder>
+    <app.properties.include>**</app.properties.include>
+    <app.properties.test.include>**</app.properties.test.include>
+    
+    <!--  Turns on/off POM properties filtering globally. By default filtering is on. 
+        | This can be overridden in your POM, but do it at your own risk
+        | as it may break SDK functionalities
+         -->
+    <app.filtering.enabled>true</app.filtering.enabled>
+    <app.testing.jvm.args>-Xms256m -Xmx1524m -XX:MaxPermSize=256m -Duser.language=en</app.testing.jvm.args>
+    
+    <!--  Logging in project's target folder by default
+        | NOTE: Remember the trailing slash when overriding this. 
+         -->
+    <app.log.dir>${project.build.directory}/</app.log.dir>
+    <app.log.root.level>WARN</app.log.root.level>
+    
+    <!-- Maven Plugins Versions used by the SDK -->
+    <maven.compiler.version>2.3.2</maven.compiler.version>
+    <maven.clean.version>2.4.1</maven.clean.version>
+    <maven.dependency.version>2.4</maven.dependency.version>
+    <maven.enforcer.plugin>1.1.1</maven.enforcer.plugin>
+    <maven.resources.version>2.5</maven.resources.version>
+    <maven.surefire.version>2.12.4</maven.surefire.version>
+    <maven.install.version>2.3.1</maven.install.version>
+    <maven.jar.version>2.4</maven.jar.version>
+    <maven.war.version>2.2</maven.war.version>
+    <maven.release.version>2.2.2</maven.release.version>
+    <maven.buildhelper.version>1.7</maven.buildhelper.version>
+    <maven.jetty.version>6.1.26</maven.jetty.version>
+    <!-- Alfresco Maven plugin in use throughout the SDK -->
+    <maven.alfresco.version>1.0-SNAPSHOT</maven.alfresco.version>
+    <h2.version>1.3.158</h2.version>
+    <h2-support.version>1.5</h2-support.version>
+    
+  </properties>
+  
+  <repositories>
+      <repository>
+          <id>alfresco-public</id>
+          <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+      </repository>
+      <repository>
+          <id>alfresco-public-snapshots</id>
+          <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
+          <snapshots>
+              <enabled>true</enabled>
+              <updatePolicy>daily</updatePolicy>
+          </snapshots>
+      </repository>
+  </repositories>
+  
+  <distributionManagement>
+      <repository>
+          <id>alfresco-releases</id>
+          <url>https://artifacts.alfresco.com/nexus/content/repositories/releases</url>
+      </repository>
+      <snapshotRepository>
+          <name>alfresco snapshots repository</name>
+          <id>alfresco-snapshots</id>
+          <url>https://artifacts.alfresco.com/nexus/content/repositories/snapshots</url>
+      </snapshotRepository>
+  </distributionManagement>
+
+  <build>
+    <finalName>${project.artifactId}</finalName>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.alfresco.maven.plugin</groupId>
+          <artifactId>alfresco-maven-plugin</artifactId>
+          <version>${maven.alfresco.version}</version>
+          <extensions>true</extensions>
+          <configuration>
+              <snapshotToTimestamp>true</snapshotToTimestamp>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven.compiler.version}</version>
+          <configuration>
+            <source>1.6</source>
+            <target>1.6</target>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${maven.resources.version}</version>
+          <configuration>
+            <encoding>UTF-8</encoding>
+            <nonFilteredFileExtensions>
+              <nonFilteredFileExtension>ftl</nonFilteredFileExtension>
+              <nonFilteredFileExtension>acp</nonFilteredFileExtension>
+              <nonFilteredFileExtension>jpg</nonFilteredFileExtension>
+              <nonFilteredFileExtension>png</nonFilteredFileExtension>
+              <nonFilteredFileExtension>gif</nonFilteredFileExtension>
+              <nonFilteredFileExtension>pdf</nonFilteredFileExtension>
+              <nonFilteredFileExtension>doc</nonFilteredFileExtension>
+              <nonFilteredFileExtension>xls</nonFilteredFileExtension>
+              <nonFilteredFileExtension>ppt</nonFilteredFileExtension>
+              <nonFilteredFileExtension>bin</nonFilteredFileExtension>
+            </nonFilteredFileExtensions>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>${maven.war.version}</version>
+          <configuration>
+            <archiveClasses>false</archiveClasses>
+            <warSourceExcludes>tools/**</warSourceExcludes>
+            <archive>
+                <manifest>
+                    <addClasspath>true</addClasspath>
+                </manifest>
+            </archive>
+          </configuration>
+          <dependencies>
+                <dependency>
+                    <groupId>org.alfresco.maven.plugin</groupId>
+                    <artifactId>alfresco-maven-plugin</artifactId>
+                    <version>${maven.alfresco.version}</version>
+                </dependency>
+          </dependencies>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>${maven.clean.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${maven.dependency.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven.surefire.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>${maven.install.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${maven.release.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>${maven.jar.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.mortbay.jetty</groupId>
+          <artifactId>maven-jetty-plugin</artifactId>
+          <version>${maven.jetty.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    
+    <plugins>
+        <plugin>
+          <groupId>org.alfresco.maven.plugin</groupId>
+          <artifactId>alfresco-maven-plugin</artifactId>
+        </plugin>
+    </plugins>
+
+    <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>${app.filtering.enabled}</filtering>
+        </resource>
+        <resource>
+            <directory>${app.amp.folder}</directory>
+            <targetPath>../${project.build.finalName}</targetPath>
+            <filtering>${app.filtering.enabled}</filtering>
+        </resource>
+    </resources>
+    <testResources>
+        <testResource>
+            <directory>src/test/resources</directory>
+            <filtering>${app.filtering.enabled}</filtering>
+        </testResource>
+    </testResources>
+  </build>
+
+  <!-- Feature / behavioral profiles -->
+  <profiles>
+    <!-- Enable environment properties filtering based on the env property -->
+    <profile>
+        <id>enable-properties-filtering</id>
+        <activation>
+            <file>
+                <!-- No properties allowed here. Only hardcoded values are properly interpreted -->
+                <exists>src/main/properties</exists>
+            </file>
+        </activation>
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${maven.buildhelper.version}</version>
+                    <executions>
+                        <execution>
+                            <id>add-env-properties</id>
+                            <phase>generate-resources</phase>
+                            <goals>
+                                <goal>add-resource</goal>
+                            </goals>
+                            <configuration>
+                                <resources>
+                                    <resource>
+                                        <directory>${app.properties.folder}</directory>
+                                        <includes>
+                                            <include>${app.properties.include}</include>
+                                        </includes>
+                                        <filtering>${app.filtering.enabled}</filtering>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </build>
+    </profile>
+    
+    <!-- Enable environment test properties filtering based on the env property -->
+    <profile>
+        <id>enable-test-properties-filtering</id>
+        <activation>
+            <file>
+                <!-- No properties allowed here. Only hardcoded values are properly interpreted -->
+                <exists>src/test/properties</exists>
+            </file>
+        </activation>
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${maven.buildhelper.version}</version>
+                    <executions>
+                        <execution>
+                            <id>add-env-test-properties</id>
+                            <phase>generate-resources</phase>
+                            <goals>
+                                <goal>add-test-resource</goal>
+                            </goals>
+                            <configuration>
+                                <resources>
+                                    <resource>
+                                        <directory>${app.properties.test.folder}</directory>
+                                        <includes>
+                                            <include>${app.properties.test.include}</include>
+                                        </includes>
+                                        <filtering>${app.filtering.enabled}</filtering>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </build>
+    </profile>
+    <!-- Enable jetty running embedded if the jetty/jetty.xml file exists in the project -->
+    <profile>
+      <id>enable-jetty</id>
+      <activation>
+        <file>
+          <exists>jetty/jetty.xml</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>filter-jetty-conf</id>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <phase>process-resources</phase>
+                <configuration>
+                  <outputDirectory>target</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>${project.basedir}/jetty</directory>
+                      <filtering>${app.filtering.enabled}</filtering>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>maven-jetty-plugin</artifactId>
+            <configuration>
+              <jettyConfig>${project.build.directory}/jetty.xml</jettyConfig>
+            </configuration>
+            <dependencies>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                    <version>${h2.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>tk.skuro.alfresco</groupId>
+                    <artifactId>h2-support</artifactId>
+                    <version>${h2-support.version}</version>
+                </dependency>
+            </dependencies>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    
+    <!-- Enable AMP lifecycle if finds a module.properties, including unit testing support -->
+    <profile>
+      <id>enable-amp</id>
+      <activation>
+        <file>
+          <exists>src/main/amp/module.properties</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.alfresco.maven.plugin</groupId>
+            <artifactId>alfresco-maven-plugin</artifactId>
+          </plugin>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-plugin</artifactId>
+              <version>${maven.surefire.version}</version>
+              <configuration>
+                  <argLine>${app.testing.jvm.args}</argLine>
+                  <additionalClasspathElements>
+                      <!-- Adds the config directory to the test classpath for unit testing purposes -->
+                      <additionalClasspathElement>${project.build.directory}/${project.build.finalName}/config</additionalClasspathElement>
+                    <additionalClasspathElement>${project.build.directory}/${project.build.finalName}/module.properties</additionalClasspathElement>
+                  </additionalClasspathElements>
+              </configuration>
+            </plugin>
+        </plugins>
+      </build>
+      <dependencies>
+          <!-- SDK AMP Testing Dependencies -->
+          <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
+            <scope>test</scope>
+          </dependency>
+          <dependency>
+            <groupId>tk.skuro.alfresco</groupId>
+            <artifactId>h2-support</artifactId>
+            <version>${h2-support.version}</version>
+            <scope>test</scope>
+          </dependency>
+          <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>3.0.5.RELEASE</version>
+            <scope>test</scope>
+          </dependency>
+          <!-- Requires this explicit test dependency, for a Spring 3.0.5 bug 
+          |    See https://jira.springsource.org/browse/SPR-8527 
+          -->
+          <dependency>
+              <groupId>org.springframework</groupId>
+              <artifactId>spring-context</artifactId>
+              <version>3.0.6.RELEASE</version>
+              <scope>test</scope>
+          </dependency>
+          <dependency>
+              <groupId>${alfresco.groupId}</groupId>
+              <artifactId>alfresco-repository</artifactId>
+              <version>${alfresco.version}</version>
+              <classifier>config</classifier>
+              <scope>provided</scope>
+          </dependency>
+          <dependency>
+              <groupId>${alfresco.groupId}</groupId>
+              <artifactId>alfresco-data-model</artifactId>
+              <version>${alfresco.version}</version>
+              <classifier>config</classifier>
+              <scope>provided</scope>
+          </dependency>
+      </dependencies>
+    </profile>
+    
+    <!-- Enable AMP project packing on a WAR and run embedded in Jetty -->
+    <profile>
+      <id>amp-to-war</id>
+      <build>
+        <plugins>
+          <!-- Fetch and unpack Alfresco Repository / Share in the target / folder -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>unpack-alfresco</id>
+                <phase>prepare-package</phase>
+                <goals><goal>unpack</goal></goals>
+                <configuration>
+                  <outputDirectory>${alfresco.client.war.folder}</outputDirectory>
+                  <artifactItems>
+                    <artifactItem>
+                      <groupId>${alfresco.groupId}</groupId>
+                      <artifactId>${alfresco.client.war}</artifactId>
+                      <type>war</type>
+                      <version>${alfresco.version}</version>
+                    </artifactItem>
+                  </artifactItems>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <!-- When the AMP runs locally, src/test/webapp and src/test/resources will contain -->
+          <!-- the location of the configuration files -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>copy-alfresco-test-resources</id>
+                <phase>prepare-package</phase>
+                <goals><goal>copy-resources</goal></goals>
+                <configuration>
+                  <outputDirectory>${alfresco.client.war.folder}</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>src/test/webapp</directory>
+                    </resource>
+                    <resource>
+                      <directory>${project.build.testOutputDirectory}</directory>
+                      <targetPath>WEB-INF/classes</targetPath>
+                      <filtering>${app.filtering.enabled}</filtering>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+            </plugin>
+          <!-- The current AMP artifact is installed into the Alfresco
+          folder using alfresco-maven-plugin -->
+          <plugin>
+            <groupId>org.alfresco.maven.plugin</groupId>
+            <artifactId>alfresco-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>amps-to-war-overlay</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>install</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <!-- If the integration-test phase is called, the integrated WAR + AMP is actually ran in Jetty -->
+          <plugin>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>maven-jetty-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>run-amp-to-war</id>
+                    <goals>
+                        <goal>run-exploded</goal>
+                    </goals>
+                    <phase>pre-integration-test</phase>
+                </execution>
+            </executions>
+            <configuration>
+                <webApp>${alfresco.client.war.folder}</webApp>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <!-- Cleans Alfresco data folder, embedded DB and logs -->
+    <profile>
+        <id>purge</id>
+        <build>
+            <plugins>
+                  <!-- Cleaning Alfresco Repository storage/log folders/files -->
+                  <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <configuration>
+                      <filesets>
+                        <fileset>
+                          <directory>${project.basedir}/${alfresco.data.location}</directory>
+                        </fileset>
+                        <fileset>
+                          <directory>${app.log.dir}</directory>
+                          <includes>
+                            <include>*.log</include>
+                          </includes>
+                        </fileset>
+                      </filesets>
+                    </configuration>
+                  </plugin>
+            </plugins>
+        </build>
+    </profile>
+    <!-- Enforce SDK rules for clearer fast fail error messaging and safer usage  -->
+    <profile>
+        <id>enforce-sdk-rules</id>
+        <activation>
+            <activeByDefault>true</activeByDefault>
+        </activation>
+        <build>
+            <plugins>
+              <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven.enforcer.plugin}</version>
+                <executions>
+                  <execution>
+                    <id>enforce-sdk-requirements</id>
+                    <goals>
+                      <goal>enforce</goal>
+                    </goals>
+                    <configuration>
+                      <rules>
+                         <!-- At this time the SDK is supported only for Alfresco 4.2.b and above versions -->
+                         <requireProperty>
+                            <property>alfresco.version</property>
+                            <message>At this time the SDK is supported only for Alfresco 4.2.b and above versions</message>
+                            <regex>^(4\.[2-9]|[5-9]).*</regex>
+                         </requireProperty>
+                         <!-- At this time the SDK is supported only for Alfresco 4.2.b and above versions -->
+                         <requireProperty>
+                            <property>alfresco.groupId</property>
+                            <message>You need to select an Alfresco Edition (Community / Enterprise) by setting alfresco.groupId=org.alfresco|org.alfresco.enterprise</message>
+                            <regex>(org\.alfresco|org\.alfresco\.enterprise)</regex>
+                         </requireProperty>
+                         <!-- Alfresco 4.2+ runs on Java 7  -->
+                         <requireJavaVersion>
+                            <version>[1.7.0,)</version>
+                            <message>As the SDK works only with Alfresco 4.2+, and Alfresco 4.2+ requires Java 7, you need Java 7</message>
+                         </requireJavaVersion>
+                      </rules>
+                      <fail>true</fail>
+                    </configuration>
+                  </execution>
+                </executions>
+              </plugin>
+            </plugins>
+        </build>
+    </profile>
+  </profiles>
+</project>

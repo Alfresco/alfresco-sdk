@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+    license agreements. See the NOTICE file distributed with this work for additional 
+    information regarding copyright ownership. The ASF licenses this file to 
+    You under the Apache License, Version 2.0 (the "License"); you may not use 
+    this file except in compliance with the License. You may obtain a copy of 
+    the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+    by applicable law or agreed to in writing, software distributed under the 
+    License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+    OF ANY KIND, either express or implied. See the License for the specific 
+    language governing permissions and limitations under the License. -->
+    
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>${artifactId}</artifactId>
+    <name>Alfresco Repository and Explorer Client</name>
+    <packaging>war</packaging>
+    <description>Alfresco Repository and Explorer Client</description>
+
+    <parent>
+        <groupId>${groupId}</groupId>
+        <artifactId>${rootArtifactId}</artifactId>
+        <version>${version}</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>alfresco</artifactId>
+            <type>war</type>
+        </dependency>
+        <!-- Demonstrating the dependency on the AMP developed in the 'amp' project -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>amp</artifactId>
+            <version>${project.version}</version>
+            <type>amp</type>
+        </dependency>
+        <!-- Demonstrating the usage of a well known GA AMP (Web Quick Start Repository component) -->
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>alfresco-wcm-quickstart-repo</artifactId>
+            <version>${alfresco.version}</version>
+            <type>amp</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <!--  Here is can control the order of overlay of your (WAR, AMP, etc.) dependencies
+                        | NOTE: At least one WAR dependency must be uncompressed first
+                        | NOTE: In order to have a dependency effectively added to the WAR you need to 
+                        | explicitly mention it in the overlay section.
+                        | NOTE: First-win resource strategy is used by the WAR plugin
+                         -->
+                    <overlays>
+                        <!-- Current project customizations -->
+                        <overlay/>
+                        <!-- The Alfresco WAR -->
+                        <overlay>
+                            <groupId>${alfresco.groupId}</groupId>
+                            <artifactId>alfresco</artifactId>
+                            <type>war</type>
+                            <!-- To allow inclusion of META-INF -->
+                            <excludes/>
+                        </overlay>
+                        <!-- Add / order your AMPs here -->
+                        <overlay>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>amp</artifactId>
+                            <type>amp</type>
+                        </overlay>
+                        <overlay>
+                            <groupId>${alfresco.groupId}</groupId>
+                            <artifactId>alfresco-wcm-quickstart-repo</artifactId>
+                            <type>amp</type>
+                        </overlay>
+                    </overlays>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

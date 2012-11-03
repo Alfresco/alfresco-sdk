@@ -1,0 +1,61 @@
+<component-set>
+  <components>
+    <component>
+      <role>org.apache.maven.artifact.handler.ArtifactHandler</role>
+      <role-hint>amp</role-hint>
+      <implementation>org.apache.maven.artifact.handler.DefaultArtifactHandler</implementation>
+      <configuration>
+        <extension>amp</extension>
+        <type>amp</type>
+        <packaging>amp</packaging>
+        <language>java</language>
+        <addedToClasspath>true</addedToClasspath>
+        <includesDependencies>true</includesDependencies>
+      </configuration>
+    </component>
+
+    <component>
+      <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
+      <role-hint>amp</role-hint>
+      <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
+      <configuration>
+        <phases>
+          <initialize>org.alfresco.maven.plugin:alfresco-maven-plugin:set-version</initialize>
+          <process-resources>org.apache.maven.plugins:maven-resources-plugin:resources</process-resources>
+          <compile>org.apache.maven.plugins:maven-compiler-plugin:compile</compile>
+          <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources</process-test-resources>
+          <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
+          <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
+          <package>org.alfresco.maven.plugin:alfresco-maven-plugin:amp</package>
+          <install>org.apache.maven.plugins:maven-install-plugin:install</install>
+          <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
+        </phases>
+      </configuration>
+    </component>
+
+    <component>
+      <role>org.codehaus.plexus.archiver.Archiver</role>
+      <role-hint>amp</role-hint>
+      <implementation>org.alfresco.maven.plugin.archiver.AmpArchiver</implementation>
+      <instantiation-strategy>per-lookup</instantiation-strategy>
+    </component>
+    
+    
+    <!-- An AMP requires an MMT like behaviour when unpacked in a war. 
+        In the maven-war-plugin the default assumption is made on the choice of the unarchiver 
+        role-hint = file-extension  
+        so we use role-hint=amp here to seamlessly integrate with it    
+    -->
+    <component>
+        <role>org.codehaus.plexus.archiver.UnArchiver</role>
+        <role-hint>amp</role-hint>
+        <implementation>org.alfresco.maven.plugin.archiver.AmpUnArchiver</implementation>
+        <requirements>
+            <requirement>
+                <role>org.apache.maven.plugin.LegacySupport</role>
+            </requirement>
+        </requirements>
+    </component>
+    
+  </components>
+</component-set>

@@ -1,0 +1,59 @@
+<project>
+  <skin>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-fluido-skin</artifactId>
+    <version>1.2.1</version>
+  </skin>
+  <custom>
+    <fluidoSkin>
+      <topBarEnabled>true</topBarEnabled>
+      <sideBarEnabled>true</sideBarEnabled>
+      <topBarIcon>
+        <name>Maven Alfresco Lifecycle</name>
+        <alt>Maven Alfresco Lifecycle</alt>
+        <src>/img/Alfresco-logo-transparent.gif</src>
+        <href>/index.html</href>
+      </topBarIcon>
+      <twitter>
+        <user>mindthegabz</user>
+        <showUser>true</showUser>
+        <showFollowers>true</showFollowers>
+      </twitter>
+      <facebookLike />
+      <googlePlusOne />
+    </fluidoSkin>
+  </custom>
+  <poweredBy>
+    <logo name="Maven" href="http://maven.apache.org" img="http://maven.apache.org/images/logos/maven-feather.png"/>
+    <logo name="Alfresco - Open source ECM" img="http://alfresco.com/assets/images/icons/powered_by_alfresco.gif" href="http://www.alfresco.com" />
+  </poweredBy>
+  <publishDate position="navigation-bottom" format="MM-dd-yy"/>
+  <bannerLeft>
+    <name>Alfresco Maven Plugin - v. ${project.version}</name>
+    <href>${site_site_url}</href>
+  </bannerLeft>
+  <body>
+    <links>
+      <item name="Maven" href="http://maven.apache.org/"/>
+      <item name="Apache" href="http://www.apache.org/"/>
+    </links>
+
+    <menu name="Plugin info">
+      <item name="Goals" href="plugin-info.html"/>
+      <item name="Usage" href="upage.html"/>
+      <item name="Advanced Usage" href="components.html"/>
+    </menu>
+
+    <menu name="Used by">
+      <!-- @TODO update href -->
+      <item name="Maven Alfresco AMP Archetype" href="https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/maven-alfresco-archetypes/maven-alfresco-amp-archetype/index.html"/>
+      <item name="Maven Alfresco All In One Archetype" href="https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/maven-alfresco-archetypes/maven-alfresco-amp-archetype/index.html"/>
+    </menu>
+
+    <!--<menu name="See also">-->
+    <!--</menu>-->
+
+    <!--<menu ref="reports"/>-->
+
+  </body>
+</project>

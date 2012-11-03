@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.alfresco.maven</groupId>
+    <artifactId>alfresco-lifecycle-aggregator</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>Maven Alfresco SDK Lifecycle Aggregator</name>
+    <description>This aggregator Project builds all modules required for the Maven Alfresco SDK</description>
+    <packaging>pom</packaging>
+    
+    <prerequisites>
+        <maven>3.0.3</maven>
+    </prerequisites>
+    
+    <licenses>
+        <license>
+            <name>GNU Lesser General Public License v3.0 or later</name>
+            <url>http://www.gnu.org/licenses/lgpl-3.0-standalone.html</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>gabriele.columbro</id>
+            <name>Gabriele Columbro</name>
+            <email>gabriele.columbro@alfresco.com</email>
+            <url>http://mindthegab.com</url>
+            <organization>Alfresco Software</organization>
+            <organizationUrl>http://www.alfresco.com</organizationUrl>
+            <timezone>GMT+1</timezone>
+            <roles>
+                <role>Founder</role>
+                <role>Architect</role>
+                <role>Developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>maurizio.pillitu</id>
+            <name>Maurizio Pillitu</name>
+            <email>maurizio.pillitu@alfresco.com</email>
+            <url>http://session.it</url>
+            <organization>Alfresco Software</organization>
+            <organizationUrl>http://www.alfresco.com</organizationUrl>
+            <timezone>GMT+1</timezone>
+            <roles>
+                <role>Architect</role>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
+    
+    <contributors>
+        <contributor>
+            <name>Carlo Sciolla</name>
+            <email>carlo@backbase.com</email>
+            <organization>Backbase</organization>
+            <organizationUrl>http://www.backbase.com</organizationUrl>
+            <timezone>GMT+1</timezone>
+            <url>http://skuro.tk</url>
+        </contributor>
+    </contributors>
+
+    <!-- All the modules of the Mavne Alfresco SDK -->
+    <modules>
+        <!-- Plugins -->
+        <module>plugins/alfresco-maven-plugin</module>
+        <!-- POM files -->
+        <module>poms/alfresco-sdk-parent</module>
+        <!-- Archetypes -->
+        <module>archetypes/alfresco-amp-archetype</module>
+        <module>archetypes/alfresco-allinone-archetype</module>
+    </modules>
+
+    <distributionManagement>
+        <repository>
+            <id>alfresco-releases</id>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/releases
+            </url>
+        </repository>
+        <snapshotRepository>
+            <name>alfresco snapshots repository</name>
+            <id>alfresco-snapshots</id>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/snapshots
+            </url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <properties>
+        <maven.archetype.version>2.2</maven.archetype.version>
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-archetype-plugin</artifactId>
+                    <version>${maven.archetype.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.archetype</groupId>
+                <artifactId>archetype-packaging</artifactId>
+                <version>${maven.archetype.version}</version>
+            </extension>
+        </extensions>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>alfresco-public</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/public
+            </url>
+        </repository>
+        <repository>
+            <id>alfresco-public-snapshots</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots
+            </url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+</project>

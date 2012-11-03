@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>${artifactId}</artifactId>
+    <name>Alfresco and Share Runner</name>
+    <packaging>pom</packaging>
+    <description>Alfresco and Share Runner</description>
+
+    <parent>
+        <groupId>${groupId}</groupId>
+        <artifactId>${rootArtifactId}</artifactId>
+        <version>${version}</version>
+    </parent>
+
+    <profiles>
+        <profile>
+            <id>run</id>
+            <activation>
+                <property>
+                    <name>run</name>
+                </property>
+            </activation>
+            <properties>
+                <alfresco.solr.dir>${project.basedir}/../solr/solr_home</alfresco.solr.dir>
+                <runner.host>127.0.0.1</runner.host>
+                <runner.port>8080</runner.port>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.mortbay.jetty</groupId>
+                        <artifactId>maven-jetty-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>run</id>
+                                <goals><goal>run</goal></goals>
+                                <phase>integration-test</phase>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!-- Following 3 properties set an empty ROOT context,
+                            which is mandatory to run jetty:run plugin -->
+                            <contextPath>/</contextPath>
+                            <webAppSourceDirectory>.</webAppSourceDirectory>
+                            <webXml>jetty/root-web.xml</webXml>
+                            <contextHandlers>
+                                <contextHandler implementation="org.mortbay.jetty.webapp.WebAppContext">
+                                    <war>${project.basedir}/../alfresco/target/alfresco.war</war>
+                                    <contextPath>/alfresco</contextPath>
+                                </contextHandler>
+                                <contextHandler implementation="org.mortbay.jetty.webapp.WebAppContext">
+                                    <war>${alfresco.solr.dir}/apache-solr-1.4.1-overlay.war</war>
+                                    <contextPath>/solr</contextPath>
+                                </contextHandler>
+                                <contextHandler implementation="org.mortbay.jetty.webapp.WebAppContext">
+                                    <war>${project.basedir}/../share/target/share.war</war>
+                                    <contextPath>/share</contextPath>
+                                </contextHandler>
+                            </contextHandlers>
+                            <systemProperties>
+                                <systemProperty>
+                                    <name>solr.solr.home</name>
+                                    <value>${alfresco.solr.dir}</value>
+                                </systemProperty>
+                            </systemProperties>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

@@ -1,0 +1,22 @@
+SHORT TERM (TODO):
+* Review of the module.properties version replace. Can't it be just using resource filtering? 
+(i.e. a more similar approach to the buildnumber or nosnapshot plugin)
+* Review the amp-to-war profile. When ran from an AMP project abuses of
+  the project.build.directory/project.build.finalName folder (both AMP and WAR content in there)
+* Documentation
+* Full release
+    - Alfresco POMs
+    - Developer & Parent POMs
+    - Archetypes
+    - Test test test
+
+MID TERM
+* Validate module.properties : make sure all properties are there and version is correct; if not, fix it
+* Fail if module-context.xml is not present
+* Implement <alfresco.version> and <alfresco.edition> configurations; based on that, the alfresco WAR dependency will be
+included into the POM at runtime by the add-resources goal
+* Test coverage (unit first, use mocking)
+* Test AMP install with extensions from addons.alfresco.com
+* Release alfresco-maven-plugin (on git - maven-alfresco-archetypes on Google Code)
+* Finalize documentation and publish it (wiki.alfresco.com)
+* Evaluate running JMeter Maven plugin in order to launch Alfresco test suites

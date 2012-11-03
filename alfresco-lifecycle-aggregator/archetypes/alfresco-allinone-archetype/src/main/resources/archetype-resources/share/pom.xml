@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>${artifactId}</artifactId>
+    <name>Alfresco Share Client</name>
+    <packaging>war</packaging>
+    <description>Alfresco Share Client</description>
+
+    <parent>
+        <groupId>${groupId}</groupId>
+        <artifactId>${rootArtifactId}</artifactId>
+        <version>${version}</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>share</artifactId>
+            <type>war</type>
+        </dependency>
+        <!-- Demonstrating the usage of a well known GA AMP (Web Quick Start 
+            Share component) -->
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>alfresco-wcm-quickstart-share</artifactId>
+            <version>${alfresco.version}</version>
+            <type>amp</type>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <!-- Here is can control the order of overlay of your (WAR, AMP, etc.) dependencies
+                        | NOTE: At least one WAR dependency must be uncompressed first 
+                        | NOTE: In order to have a dependency effectively added to the WAR you need to 
+                        | explicitly mention it in the overlay section. 
+                        | NOTE: First-win resource strategy is used by the WAR plugin 
+                        -->
+                    <overlays>
+                        <!-- The current project customizations -->
+                        <overlay/>
+                        <!-- The Share WAR -->
+                        <overlay>
+                            <groupId>${alfresco.groupId}</groupId>
+                            <artifactId>share</artifactId>
+                            <type>war</type>
+                            <!-- To allow inclusion of META-INF -->
+                            <excludes/>
+                        </overlay>
+                        <!-- Add / order your AMPs here -->
+                        <overlay>
+                            <groupId>${alfresco.groupId}</groupId>
+                            <artifactId>alfresco-wcm-quickstart-share</artifactId>
+                            <type>amp</type>
+                        </overlay>
+                    </overlays>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
