@@ -72,6 +72,8 @@
         | This can be overridden your pom
      -->
     <app.amp.folder>src/main/amp</app.amp.folder>
+    <app.amp.output.folder>../${project.build.finalName}</app.amp.output.folder>
+    <app.amp.test.output.folder>${project.build.directory}/amp-test-classpath</app.amp.test.output.folder>
     <app.properties.folder>src/main/properties/${env}</app.properties.folder>
     <app.properties.test.folder>src/test/properties/${env}</app.properties.test.folder>
     <app.properties.include>**</app.properties.include>
@@ -252,7 +254,7 @@
         </resource>
         <resource>
             <directory>${app.amp.folder}</directory>
-            <targetPath>../${project.build.finalName}</targetPath>
+            <targetPath>${app.amp.output.folder}</targetPath>
             <filtering>${app.filtering.enabled}</filtering>
         </resource>
     </resources>
@@ -414,6 +416,46 @@
             <groupId>org.alfresco.maven.plugin</groupId>
             <artifactId>alfresco-maven-plugin</artifactId>
           </plugin>
+        </plugins>
+      </build>
+    </profile>
+    
+    <!-- Enable AMP lifecycle if finds a module.properties, including unit testing support -->
+    <profile>
+      <id>enable-alfresco-testing</id>
+      <activation>
+        <file>
+          <exists>src/test/java</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>prepare-amp-testing-classpath</id>
+                <phase>process-test-resources</phase>
+                <goals><goal>copy-resources</goal></goals>
+                <configuration>
+                  <outputDirectory>${app.amp.test.output.folder}</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>${app.amp.folder}/config</directory>
+                      <filtering>${app.filtering.enabled}</filtering>
+                    </resource>
+                    <resource>
+                      <directory>${app.amp.folder}</directory>
+                      <includes><include>module.properties</include></includes>
+                      <targetPath>alfresco/module/${project.artifactId}</targetPath>
+                      <filtering>${app.filtering.enabled}</filtering>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-surefire-plugin</artifactId>
@@ -421,9 +463,8 @@
               <configuration>
                   <argLine>${app.testing.jvm.args}</argLine>
                   <additionalClasspathElements>
-                      <!-- Adds the config directory to the test classpath for unit testing purposes -->
-                      <additionalClasspathElement>${project.build.directory}/${project.build.finalName}/config</additionalClasspathElement>
-                    <additionalClasspathElement>${project.build.directory}/${project.build.finalName}/module.properties</additionalClasspathElement>
+                      <!-- Adds the previously built ${app.amp.test.output.folder} to test classpath to enable module installation at test time -->
+                      <additionalClasspathElement>${app.amp.test.output.folder}</additionalClasspathElement>
                   </additionalClasspathElements>
               </configuration>
             </plugin>
@@ -528,7 +569,7 @@
                 </configuration>
               </execution>
             </executions>
-            </plugin>
+          </plugin>
           <!-- The current AMP artifact is installed into the Alfresco
           folder using alfresco-maven-plugin -->
           <plugin>
