@@ -56,6 +56,10 @@
                                     <war>${project.basedir}/../share/target/share.war</war>
                                     <contextPath>/share</contextPath>
                                 </contextHandler>
+                                <contextHandler implementation="org.mortbay.jetty.webapp.WebAppContext">
+                                    <war>${project.basedir}/../wcmqs/target/wcmqs.war</war>
+                                    <contextPath>/wcmqs</contextPath>
+                                </contextHandler>
                             </contextHandlers>
                             <systemProperties>
                                 <systemProperty>

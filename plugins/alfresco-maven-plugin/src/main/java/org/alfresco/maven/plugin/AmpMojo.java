@@ -36,6 +36,7 @@ import org.codehaus.plexus.archiver.jar.JarArchiver;
  * @phase package
  * @requiresProject
  * @threadSafe
+ * @since 1.0
  * @requiresDependencyResolution runtime
  * @description Packages an Alfresco AMP file in ${project.build.directory} using the content found in ${project.build.directory}/${project.build.finalName}
  */

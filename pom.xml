@@ -9,6 +9,8 @@
     <description>This aggregator Project builds all modules required for the Maven Alfresco SDK</description>
     <packaging>pom</packaging>
     
+    <url>${maven.site.url}</url>
+    
     <prerequisites>
         <maven>3.0.3</maven>
     </prerequisites>
@@ -28,7 +30,7 @@
             <url>http://mindthegab.com</url>
             <organization>Alfresco Software</organization>
             <organizationUrl>http://www.alfresco.com</organizationUrl>
-            <timezone>GMT+1</timezone>
+            <timezone>+1</timezone>
             <roles>
                 <role>Founder</role>
                 <role>Architect</role>
@@ -42,7 +44,7 @@
             <url>http://session.it</url>
             <organization>Alfresco Software</organization>
             <organizationUrl>http://www.alfresco.com</organizationUrl>
-            <timezone>GMT+1</timezone>
+            <timezone>+1</timezone>
             <roles>
                 <role>Architect</role>
                 <role>Developer</role>
@@ -56,7 +58,7 @@
             <email>carlo@backbase.com</email>
             <organization>Backbase</organization>
             <organizationUrl>http://www.backbase.com</organizationUrl>
-            <timezone>GMT+1</timezone>
+            <timezone>+1</timezone>
             <url>http://skuro.tk</url>
         </contributor>
     </contributors>
@@ -84,10 +86,15 @@
             <url>https://artifacts.alfresco.com/nexus/content/repositories/snapshots
             </url>
         </snapshotRepository>
+        <site>
+            <id>alfresco-docs</id>
+            <url>dav:${maven.site.url}</url>
+        </site>
     </distributionManagement>
 
     <properties>
         <maven.archetype.version>2.2</maven.archetype.version>
+        <maven.site.url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-sdk/latest</maven.site.url>
     </properties>
 
     <build>

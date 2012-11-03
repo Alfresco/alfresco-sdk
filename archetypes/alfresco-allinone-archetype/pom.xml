@@ -5,8 +5,8 @@
   <groupId>org.alfresco.maven.archetype</groupId>
   <artifactId>alfresco-allinone-archetype</artifactId>
   <packaging>maven-archetype</packaging>
-  <name>alfresco-allinone-archetype</name>
-  <description>Sample multi-module project for All-in-One development on the Alfresco plaftorm. Includes modules for: Repository, AMP, Share, Solr and embedded Jetty run</description>
+  <name>All-in-One Archetype from Maven Alfresco SDK</name>
+  <description>Sample multi-module project for All-in-One development on the Alfresco plaftorm. Includes modules for: Repository, AMP, Share, Solr, Web Quick Start and embedded Jetty run</description>
   
   <parent>
     <groupId>org.alfresco.maven</groupId>

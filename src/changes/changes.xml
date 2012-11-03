@@ -1,9 +1,21 @@
 <document>
   <properties>
-    <title>Maven Alfresco Lifecycle</title>
+    <title>Maven Alfresco SDK (former Maven Alfresco Lifecycle)</title>
     <author email="gabriele.columbro@alfresco.com">Gabriele Columbro</author>
   </properties>
   <body>
+    <release version="1.0" date="2012-11-03" description="Major feature release making the project to a fully fledged SDK, rebranded to Maven Alfresco SDK 1.0">
+        <action type="improvement">Complete re-write of alfresco-maven-plugin to embed Alfresco MMT, therefore maximize alignment / supportability of the build process</action>
+        <action type="add">Introduced a common SDK parent POM (alfresco-sdk-parent), single entry point to access SDK features</action>
+        <action type="add">Introduced a Alfresco platform distribution POM (alfresco-sdk-parent) describing Alfresco artifacts per every release</action>
+        <action type="add">Alfresco Artifacts Repository (https://artifacts.alfresco.com) now hosts Community and Enterprise artifacts with POMs</action>
+        <action type="update">Updated archetypes to provide samples to use the new SDK. An AMP and an All-in-One archetypes are available</action>
+        <action type="add">New support for customization / run of Repository, Share, Solr and Web Quick Start</action>
+        <action type="improvement">Support for rapid development with AMP unit testing and full embedded run and integration-test (NOTE: Jetty + H2 is NOT supported)</action>
+        <action type="improvement">Introduced a common SDK parent POM (alfresco-sdk-parent) to provide common SDK features</action>
+        <action type="update">Documentation clean up</action>
+        <action type="remove">Deprecated maven-amp-plugin and all old 3.9.1 maven-alfresco-* archetypes based on maven-amp-plugin</action>
+    </release>
     <release version="3.9.1" date="2012-04-06" description="Cleaned all defects in the framework and tested with 4.0b">
         <action dev="maurizio@session.it" type="fix">Fixed all existing defects to date in Google Code. See http://code.google.com/p/maven-alfresco-archetypes/issues/list?q=label:Milestone-Release391 for details</action>
         <action dev="columbro" type="update">Updated and released maven-alfresco-lifecycle and maven-alfresco-archetypes to version 3.9.1</action>

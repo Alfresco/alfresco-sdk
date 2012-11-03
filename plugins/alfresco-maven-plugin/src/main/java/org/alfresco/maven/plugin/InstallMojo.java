@@ -16,6 +16,7 @@ import org.apache.maven.plugin.MojoFailureException;
  * 
  * @version $Id:$
  * @requiresDependencyResolution
+ * @since 1.0
  * @goal install
  * @description Installs one or more AMPs onto an Alfresco / Share WAR (or
  *              exploded WAR folder)

@@ -20,6 +20,7 @@ import org.apache.maven.project.MavenProject;
  * @goal set-version
  * @phase initialize
  * @requiresProject
+ * @since 1.0
  * @threadSafe
  * @description Parses Maven version and removes literals as not allowed in AMP versions, making a noSnapshotVersion property available for POM filtering
  */
