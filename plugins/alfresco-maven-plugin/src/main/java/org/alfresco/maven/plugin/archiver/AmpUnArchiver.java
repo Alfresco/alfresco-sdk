@@ -10,7 +10,12 @@ import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.archiver.ArchiverException;
 import org.codehaus.plexus.archiver.zip.AbstractZipUnArchiver;
 import org.codehaus.plexus.component.annotations.Requirement;
-
+/**
+ * This class provides AMP unpacking support for projects depending on AMPs
+ * This allows for example AMPs to be specified as <overlay> in the maven-war-plugin
+ * @author mindthegab
+ *
+ */
 public class AmpUnArchiver extends AbstractZipUnArchiver {
 
     public AmpUnArchiver()
@@ -20,6 +25,9 @@ public class AmpUnArchiver extends AbstractZipUnArchiver {
     private LegacySupport legacySupport;
 
     @Override
+    /**
+     * By default the AMPs are unpacked in ${project.directory}/${project.build.finalName}
+     */
     public File getDestDirectory() {
         MavenSession session = legacySupport.getSession();
         MavenProject project = session.getCurrentProject();
@@ -34,7 +42,7 @@ public class AmpUnArchiver extends AbstractZipUnArchiver {
              * so far, no backup or force flags are enabled
              */
             ModuleManagementTool mmt = new ModuleManagementTool();
-            mmt.setVerbose(true);
+            mmt.setVerbose(false);
             getLogger().info("getDestFile ():" + getDestFile());
             getLogger().info("getDestFile ():" + getDestFile());
             getLogger().info("getDestDirectory ():" + getDestDirectory());

@@ -23,14 +23,12 @@ import org.apache.maven.project.MavenProjectHelper;
 import org.codehaus.plexus.archiver.jar.JarArchiver;
 
 /**
- * Builds an AMP archive of the current project's contents. By default,
- * the location of the AMP root contents is ${project.build.directory}/${project.build.finalName}
- * but it can be customised using <ampBuildDirectory> plugin's configuration.
- * Java resources (in src/main/java and src/main/resources) are packages in a separate JAR file
- * that is automatically bundled in the /lib folder of the AMP archive and it treated as build artifact
+ * Builds an AMP archive of the current project's contents. 
+ * The location of the AMP contents is ${project.build.directory}/${project.build.finalName}.
+ * Java resources (in src/main/java and src/main/resources) are packaged in a standard JAR file
+ * that is automatically bundled in the /lib folder of the AMP archive and it's treated as build artifact
  * (i.e. distributed on Maven repositories during deploy).
- * Optionally you can include Maven dependencies into the /lib folder of the AMP archive
- * and customise the classifier of both AMP and JAR archives being created
+ * Maven transitive dependencies are by default added into the /lib folder of the AMP archive
  *
  * @author Gabriele Columbro, Maurizio Pillitu
  * @version $Id:$
@@ -39,24 +37,25 @@ import org.codehaus.plexus.archiver.jar.JarArchiver;
  * @requiresProject
  * @threadSafe
  * @requiresDependencyResolution runtime
+ * @description Packages an Alfresco AMP file in ${project.build.directory} using the content found in ${project.build.directory}/${project.build.finalName}
  */
 public class AmpMojo extends AbstractMojo {
 
     /**
      * Name of the generated AMP and JAR artifacts
      *
-     * @parameter expression="${ampFinalName}" default-value="${project.build.finalName}"
+     * @parameter property="maven.alfresco.ampFinalName" default-value="${project.build.finalName}"
      * @required
      * @readonly
      */
     protected String ampFinalName;
 
     /**
-     * Root folder that is packaged into the AMP
+     * Target folder used to aggregate content then packaged into the AMP
      *
-     * @parameter default-value="${project.build.directory}/${project.build.finalName}"
+     * @parameter property="maven.alfresco.ampBuildDirectory" default-value="${project.build.directory}/${project.build.finalName}"
      * @required
-     * @
+     *
      */
     protected File ampBuildDirectory;
 
@@ -65,21 +64,21 @@ public class AmpMojo extends AbstractMojo {
      * If this is not given,it will merely be written to the output directory
      * according to the finalName.
      *
-     * @parameter
+     * @parameter property="maven.alfresco.classifier"
      */
     protected String classifier;
 
     /**
      * Whether (runtime scoped) JAR dependencies (including transitive) should be added or not to the generated AMP /lib folder. 
-     * By default it's true so all direct and transitive dependencies will be added
+     * By default it's true so all direct and transitive (runtime) dependencies will be added
      * 
-     * @parameter default-value="true"
+     * @parameter property="maven.alfresco.includeDependencies" default-value="true"
      * @required
      */
     protected boolean includeDependencies;
 
     /**
-     * ${project.basedir}/target directory
+     * Directory the build produces the AMP file in 
      *
      * @parameter default-value="${project.build.directory}"
      * @required

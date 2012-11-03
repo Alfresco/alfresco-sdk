@@ -40,7 +40,7 @@
 
     <menu name="Plugin info">
       <item name="Goals" href="plugin-info.html"/>
-      <item name="Usage" href="upage.html"/>
+      <item name="Usage" href="usage.html"/>
       <item name="Advanced Usage" href="components.html"/>
     </menu>
 

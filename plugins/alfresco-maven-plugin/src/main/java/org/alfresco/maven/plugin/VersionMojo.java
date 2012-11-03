@@ -21,6 +21,7 @@ import org.apache.maven.project.MavenProject;
  * @phase initialize
  * @requiresProject
  * @threadSafe
+ * @description Parses Maven version and removes literals as not allowed in AMP versions, making a noSnapshotVersion property available for POM filtering
  */
 public class VersionMojo extends AbstractMojo {
 	
@@ -30,7 +31,7 @@ public class VersionMojo extends AbstractMojo {
      * The snapshotSuffix used to identify and strip the -SNAPSHOT version suffix
      * See issue https://issues.alfresco.com/jira/browse/ENH-1232
      *
-     * @parameter expression="${snapshotSuffix}" default-value="-SNAPSHOT"
+     * @parameter property="maven.alfresco.snapshotSuffix" default-value="-SNAPSHOT"
      * @required
      */
     protected String snapshotSuffix;
@@ -40,7 +41,7 @@ public class VersionMojo extends AbstractMojo {
      * of the artifact creation
      * See issue https://issues.alfresco.com/jira/browse/ENH-1232
      *
-     * @parameter expression="${snapshotToTimestamp}" default-value="false"
+     * @parameter property="maven.alfresco.snapshotToTimestamp" default-value="false"
      * @required
      */
     protected boolean snapshotToTimestamp;
@@ -51,14 +52,14 @@ public class VersionMojo extends AbstractMojo {
      * <customVersionSuffix>${buildnumber}</customVersionSuffix> in the plugin
      * configuration.
      *
-     * @parameter expression="${customVersionSuffix}"
+     * @parameter property="maven.alfresco.customVersionSuffix"
      */
     protected String customVersionSuffix;
     
     /**
      * The Maven project property the stripped version is pushed into
      *
-     * @parameter expression="${propertyName}" default-value="noSnapshotVersion"
+     * @parameter property="maven.alfresco.propertyName" default-value="noSnapshotVersion"
      * @required
      */
     private String propertyName;
@@ -75,7 +76,7 @@ public class VersionMojo extends AbstractMojo {
     /**
      * [Read Only] Current version of the project
      *
-     * @parameter expression="${project.version}"
+     * @parameter default-value="${project.version}"
      * @required
      * @readonly
      */
