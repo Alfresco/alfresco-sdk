@@ -1,6 +1,0 @@
-<webscript>
-   <shortname>Tag Cloud</shortname>
-   <description>Displays a cloud of all the tags defined in this site</description>
-   <family>site-dashlet</family>
-   <url>/components/dashlets/site-tags</url>
-</webscript>
