@@ -128,7 +128,22 @@
           </snapshots>
       </repository>
   </repositories>
-  
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>alfresco-plugin-public</id>
+      <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>alfresco-plugin-public-snapshots</id>
+      <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
   <distributionManagement>
       <repository>
           <id>alfresco-releases</id>
