@@ -39,7 +39,23 @@ Full SDK properties reference
 
     The full reference of properties defined in the SDK can be obtained by looking
     at the <<<properties>>> section of the current version of the <<<alfresco-sdk-parent>>> in use.
-    Check the {{{${scm.tags.url}/poms/alfresco-sdk-parent/pom.xml} current POM version}} for this. 
+    Check the {{{https://artifacts.alfresco.com/nexus/index.html#nexus-search;gav~org.alfresco.maven~alfresco-sdk-parent~${project.version}~pom~}current POM version}} for this.
     
     While in certain cases it might be useful to override defaults, make sure you know what you're doing, 
     as you might be <<breaking>> SDK conventions and therefore <<your build>>>
+
+Example - Configuring custom DB
+
+    In order to configure a given JDBC database connection, you need to define some POM properties.
+
++---+
+<properties>
+  ...
+  <alfresco.db.name>alfresco</alfresco.db.name>
+  <alfresco.db.username>alfresco</alfresco.db.username>
+  <alfresco.db.password>alfresco</alfresco.db.password>
+  <alfresco.db.params></alfresco.db.params>
+  <alfresco.db.url>jdbc:mysql://${db.host}:${db.port}/${db.name}</alfresco.db.url>
+  <alfresco.db.datasource.class>org.gjt.mm.mysql.Driver</alfresco.db.datasource.class>
+</properties>
++---+

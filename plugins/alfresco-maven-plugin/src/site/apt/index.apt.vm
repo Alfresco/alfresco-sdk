@@ -6,7 +6,7 @@
   Nov 2012
   ------
 
-Alfresco Maven Plugin - Part of the Maven Alfresco SDK\x99
+Introduction
 
   The Alfresco Maven Plugin provides development features to manage {{{http://www.alfresco.com}Alfresco ECM}} WAR and {{{https://wiki.alfresco.com/wiki/AMP_Files}AMP}} project lifecycles.
 
@@ -18,7 +18,9 @@ Alfresco Maven Plugin - Part of the Maven Alfresco SDK\x99
 
   *{{{./install-mojo.html}alfresco:install}} Installs one or multiple AMPs into an Alfresco WAR / exploded WAR folder embedding {{{http://wiki.alfresco.com/wiki/Module_Management_Tool} Alfresco MMT}} 
   
-  *{{{./version-mojo.html}alfresco:version}} Parses ${project.version} removing literals (for AMP compatibility) and making the ${noSnapshot} property available in the POM  
+  *{{{./version-mojo.html}alfresco:version}} Parses ${project.version} removing literals (for AMP compatibility) and making the ${noSnapshot} property available in the POM
+
+  More info in the {{{./plugin-info.html}goals page}}.
 
 * Usage
 

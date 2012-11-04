@@ -1,5 +1,5 @@
   ------
-  Alfresco Maven AMP Archetype Usage
+  Alfresco Maven All-in-One Archetype Usage
   ------
   Gabriele Columbro
   ------
@@ -8,7 +8,7 @@
 
 Prerequisites
 
-   See {{{/prerequisites.html} SDK Pre-Requisites}} to successfully run this archetype.
+   See {{{../../prerequisites.html} SDK Pre-Requisites}} to successfully run this archetype.
 
 Project layout
 
@@ -58,7 +58,7 @@ Usage
         
         * release and distribution
 
-    for all the components of the Alfresco landscape. 
+    for all the components of the Alfresco landscape. For more information, check the See the {{{./advanced-usage.html}advanced usage page}} page.
     
     <<NOTE>>: AMPs produced with this project are fully compatible with Alfresco MMT,in fact the Alfresco Maven plugin - used to manage AMPs in this SDK - embeds the official Alfresco MMT to install depended AMPs. 
 
@@ -68,7 +68,7 @@ Commands
 
     Common Alfresco project lifecycle commands you want to run from the aggregator :
 
-    * <<<mvn package>>>: Runs unit tests and packages all customized modules in their respective \${project.build.directory}/\${project.build.finalName}.amp
+    * <<<mvn package>>>: Runs unit tests and packages all customized modules in their respective <<<$\{project.build.directory\}/$\{project.build.finalName\}.amp>>>
 
     * <<<mvn install>>>: Like <<<mvn package>>> but also installs all modules in local Maven repository to be depended upon
     
@@ -81,7 +81,3 @@ Commands
 * Commands from from the <<<runner>>> project
 
     * <<<mvn jetty:run -Prun'>>> or <<<'mvn integration-test -Prun'>>> to quickly run already packaged webapps
-    
-Advanced usage
-
-    See the {{{./advanced-usage.html}advanced usage page}}

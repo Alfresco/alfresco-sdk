@@ -6,7 +6,7 @@
   Nov 2012
   ------
 
-Alfresco All-in-One Archetype - Part of the Maven Alfresco SDK\x99
+Introduction
 
   The Alfresco All-in-One Archetype is a multi-module project,
   leveraging Maven Alfresco SDK\x99 powerful capabilities to customize and run the full Alfresco platform embedded and all it's components.
@@ -45,4 +45,4 @@ mvn archetype:generate -DarchetypeCatalog=https://artifacts.alfresco.com/nexus/c
 Usage
 
   Instructions on how to use the Alfresco AMP archetype can be found on the {{{./usage.html}usage page}}, while 
-  for more advanced use cases refer to the {{{./advanced-usage.html}usage page}}
+  for more advanced use cases refer to the {{{./advanced-usage.html}advanced usage page}}

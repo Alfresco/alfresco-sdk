@@ -7,17 +7,16 @@
             <item name="Usage" href="usage.html"/>
             <item name="Advanced Usage" href="advanced-usage.html"/>
         </menu>
-        
-        <menu name="Maven Alfresco SDK">
-            <item name="Home" href="/index.html" />
-            <item name="Maven Alfresco SDK Prerequisites" href="../../prerequisites.html" />
-            <item name="Maven Alfresco SDK Properties" href="/poms/alfresco-sdk-parent/sdk-properties.html" />
-            <item name="Why using SDK?" href="/why.html" />
-            <item name="Alfresco SDK Parent POM" href="https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest/poms/alfresco-sdk-parent/index.html" />
-            <item name="Alfresco Platform Distribution POM" href="https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-platform-distribution/latest/index.html" />
-            <item name="Maven AMP Plugin" href="http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/latest/plugins/maven-amp-plugin/index.html" />
+
+        <menu name="SDK components">
+          <item name="Maven Alfresco SDK" href="../../index.html" />
+          <item name="Alfresco AMP Archetype" href="./index.html" />
+          <item name="Alfresco All-in-One Archetype" href="../alfresco-allinone-archetype/index.html" />
+          <item name="Alfresco SDK Parent POM" href="../../poms/alfresco-sdk-parent/index.html" />
+          <item name="Alfresco Platform Distribution POM" href="https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-platform-distribution/latest/index.html" />
+          <item name="Alfresco Maven Plugin" href="../../plugins/alfresco-maven-plugin/index.html" />
         </menu>
-        
+
         <menu name="Maven Alfresco Community">
             <item name="Alfresco Maven Wiki Docs" href="http://wiki.alfresco.com/wiki/Maven_Alfresco_SDK" />
             <item name="Alfresco with Maven for Dummies" href="https://wiki.alfresco.com/wiki/Maven_For_Dummies" />
@@ -28,6 +27,7 @@
             <item name="Enterprise adoption" href="http://www.slideshare.net/guest67a9ba/maven-application-lifecycle-management-for-alfresco" />
         </menu>
 
+        <!-- maybe it's inherited? -->
         <!--<menu ref="reports"/>-->
 
   </body>

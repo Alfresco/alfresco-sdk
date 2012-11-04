@@ -95,6 +95,7 @@
     <!-- Maven Plugins Versions used by the SDK -->
     <maven.compiler.version>2.3.2</maven.compiler.version>
     <maven.clean.version>2.4.1</maven.clean.version>
+    <maven.site.version>3.2</maven.site.version>
     <maven.dependency.version>2.4</maven.dependency.version>
     <maven.enforcer.plugin>1.1.1</maven.enforcer.plugin>
     <maven.resources.version>2.5</maven.resources.version>
@@ -172,6 +173,11 @@
           <configuration>
               <snapshotToTimestamp>true</snapshotToTimestamp>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>${maven.site.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>

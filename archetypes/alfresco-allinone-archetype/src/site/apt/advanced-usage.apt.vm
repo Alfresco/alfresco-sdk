@@ -1,5 +1,5 @@
   ------
-  Alfresco Maven AMP Archetype Advanced Usage
+  Alfresco Maven All-in-One Archetype Advanced Usage
   ------
   Gabriele Columbro
   ------
@@ -23,7 +23,7 @@ All-in-One Archetype properties
         
             * <<<src/test/properties/<env>/alfresco-global.properties>>> (environment dependent <<<alfresco-global.properties>>> for test WAR run)
     
-    Build Environment (e.g. local, test, staging, prod) can be easily switched by setting the <<<<env>>>> property in yoru POM or 
+    Build Environment (e.g. local, test, staging, prod) can be easily switched by setting the <<<<env>>>> property in your POM or
     adding <<<-Denv=yourEnv>>> on the command line.
 
 * Common properties

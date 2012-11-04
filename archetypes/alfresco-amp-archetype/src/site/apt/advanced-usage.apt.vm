@@ -40,7 +40,10 @@ AMP Archetype properties
 <project>
     ...
     <properties>
-        <!-- Determines the target WAR for this AMP. Allowed values: alfresco | share . Defaults to an 'alfresco' AMP -->
+        <!--
+        Determines the target WAR for this AMP
+        Allowed values: alfresco (default) | share
+        -->
         <alfresco.client.war>alfresco</alfresco.client.war>
     </properties>
     ...
@@ -50,7 +53,7 @@ AMP Archetype properties
 Parent POM and behavior customization 
 
     To customize the behavior of your project, check out full set of the properties and plugin configurations defined in the 
-    {{{./poms/alfresco-sdk-parent/index.html}single entry point parent POM}}. 
+    {{{../../poms/alfresco-sdk-parent/index.html}single entry point parent POM}}.
     
     One quick way to do that is to use the <<<maven-help-plugin:effective-pom>>> to analyze your POM at runtime.
     

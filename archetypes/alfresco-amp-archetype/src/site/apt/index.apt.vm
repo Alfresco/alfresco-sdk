@@ -6,7 +6,7 @@
   Nov 2012
   ------
 
-Alfresco AMP Archetype - Part of the Maven Alfresco SDK\x99
+Introduction
 
   The Alfresco AMP Archetype is a sample fully featured project to manage AMP (Alfresco Module Package) projects. 
   This archetype can be used both for Alfresco Repository and Alfresco Share AMPs.
