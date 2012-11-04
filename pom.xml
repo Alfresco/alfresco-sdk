@@ -63,7 +63,7 @@
         </contributor>
     </contributors>
 
-    <!-- All the modules of the Mavne Alfresco SDK -->
+    <!-- All the modules of the Maven Alfresco SDK -->
     <modules>
         <!-- Plugins -->
         <module>plugins/alfresco-maven-plugin</module>
@@ -94,7 +94,7 @@
 
     <properties>
         <maven.archetype.version>2.2</maven.archetype.version>
-        <maven.site.url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-sdk/latest</maven.site.url>
+        <maven.site.url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest</maven.site.url>
     </properties>
 
     <build>

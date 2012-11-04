@@ -1,36 +1,99 @@
------
-Maven AMP Plugin Plexus Components
------
+  ------
+  Usage
+  ------
+  Gabriele Columbro
+  ------
+  Nov 2012
+  ------
 
+How to use this plugin?
 
+  There are fundamentally 3 methods to use this plugin:
+  
+  [[1]] Using Archetypes provided in the Maven Alfresco SDK
+    
+  [[2]] By using the Alfresco SDK Parent POM
+  
+  [[3]] Via direct configuration in your POM
+  
+* Method 1 - Using Maven Alfresco SDK Archetypes
 
-AMP Lifecycle Mapping
+  Two sample archetypes already use the plugin and provide best practice example on how to use it:
+  
+  [[1]] The {{{../../archetypes/alfresco-amp-archetype/index.html} Alfresco AMP Archetype}} provides a sample of AMP packaging
+  
+  [[2]] The {{{../../archetypes/alfresco-allinone-archetype/index.html} Alfresco All-in-One Archetype}} provides a sample using AMPs as dependencies and WAR overlay
+  
+  
+ This is the <<recommended>> and less error-prone way of using the plugin.
+ 
+* Method 2 - Using Maven Alfresco SDK Parent POM
 
-This plugin provides support for <packaging>amp</packaging> type of projects. \
-Lifecycle of an Alfresco modules is mapped in the file:
+  The {{{../../poms/alfresco-sdk-parent/index.html}Maven Alfresco SDK Parent POM}} provides a single entry point for all SDK features.
+  
+  By using it as parent as follows:
+  
++---+
+<project>
+     ...
+     <parent>
+        <groupId>org.alfresco.maven</groupId>
+        <artifactId>alfresco-sdk-parent</artifactId>
+        <version>1.0</version>
+    </parent>
+    ...
+</project>
++---+
 
-{{	${site_tags_url}/${site_pom_artifactId}-${site_pom_version}/src/main/resources/META-INF/plexus/components.xml }}
+  you will have automatic support for AMP packaging of your project (just add you sources in <<<src/main/amp>>>).
+  
+* Method 3 - Direct configuration in POM
 
-This build produces an Alfresco compatible AMP as main build product. It supports (being derived from maven-war-plugin)
-overlay of modules and transitive AMP dependency packing.
+   If you want more control over the plugin behavior you can use it directly in your POM.
+   
+   <<NOTE>>: The following configuration is not required when using the SDK parent, as it's already included there.  
+   
+   In order to manage AMP artifacts with the Alfresco Maven plugin you need to:
+   
+   * Declare the plugin in your POM with <<<<extensions>>>> enabled, to allow AMP packaging lifecycle:
+      
++---+
+<project>
+  [...]
+  <build>
+    <plugins>
+      ...
+      <plugin>
+          <groupId>org.alfresco.maven.plugin</groupId>
+          <artifactId>alfresco-maven-plugin</artifactId>
+          <version>${project.version}</version>
+          <extensions>true</extensions>
+        </plugin>
+        ...
+    </plugins>
+  </build>
+  [...]
+</project>
++---+
 
-An AMP depending on one ore more AMP will package those AMP in the final product of the build:
-overlays can be configured same as in {{ http://maven.apache.org/plugins/maven-war-plugin/overlays.html }}.
-A plain zip UnArchiver is used for this overlay.
-
-
-
-AMP -> WAR Unarchiver
-
-The default UnArchiver (role-hint="amp") used by the default maven infrastructure for .amp files is a custom UnArchiver
-which behaves as the MMT, unarchiving AMPs in the proper places as dictated by {{{http://wiki.alfresco.com/wiki/AMP_Files} Alfresco AMP convention}} .
-This little component allows any plugin to manage .amp dependencies in case the maven-amp-plugin is declared with <extensions>true</extensions> in
-the current POM, basically supporting AMPs in Maven with no need for custom external tools like MMT.
-
-See  {{	${site_tags_url}/${site_pom_artifactId}-${site_pom_version}/src/main/resources/META-INF/plexus/components.xml }}
-
-
-AMP Artifact Handler
-
-Instructs maven which type of Archive is the AMP, providing info about its inclusion in the classpath or the fact that already contains
-its dependencies.
+  * If you want to package an Alfresco Module Package from your <<<amp>>> packaging project you also need to make sure
+  your AMP content gets copied to <<<\${project.build.directory}/\${project.build.finalName}>>> so the plugin can pick them up.
+  Supposing your AMP sources are in <<<src/main/amp>>> you should configure the following <<<<resource>>>> block:
+  
++---+
+<project>
+  [...]
+  <build>
+    <resources>
+        ...
+        <resource>
+            <directory>src/main/amp</directory>
+            <!-- This is relative to \${project.build.outputDirectory} -->
+            <targetPath>../\${project.build.finalName}</targetPath>
+            <filtering>${app.filtering.enabled}</filtering>
+        </resource>
+    </resources>
+  </build>
+  [...]
+</project>
++---+ 

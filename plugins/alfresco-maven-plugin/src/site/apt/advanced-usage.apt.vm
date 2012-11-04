@@ -1,0 +1,166 @@
+  ------
+  Advanced Usage
+  ------
+  Gabriele Columbro
+  ------
+  Nov 2012
+  ------
+
+Managing AMP packaging projects
+
+  See {{{./usage.html} Usage page}} for the different approaches to AMP projects development with the Alfresco Maven Plugin. 
+  
+Overlay and installation of AMPs to WAR  
+ 
+  There are two ways you can install AMP artifacts (either GA or produced by your builds) on your Maven WAR projects:
+  
+  [[1]] By using standard {{{http://maven.apache.org/plugins/maven-war-plugin/overlays.html} Maven War Plugin Overlays}}
+  
+  [[2]] Manually invoking the <<<alfresco:install>>> goal in your POM
+ 
+* Method 1 - AMP to WAR Overlay
+
+  This method allows you specify artifacts of type <<<amp>>> as <<<dependencies>>> of your WAR project and have them
+  automatically installed in the current WAR project. Note that AMP can be installed either on Alfresco or Share.
+  
+  Follows an example which installs the Web Quick Start Repository AMP as overlay an <<<alfresco.war>>> extension project: 
+  
++---+
+<project>
+    <artifactId>my-alfresco-customization</artifactId>
+    <name>Alfresco Repository and Explorer Client Extension</name>
+    <packaging>war</packaging>
+    
+    ...
+
+    <dependencies>
+        <dependency>
+            <groupId>\${alfresco.groupId}</groupId>
+            <artifactId>alfresco</artifactId>
+            <type>war</type>
+        </dependency>
+        <!-- Add the depdendency on a well known GA AMP (Web Quick Start Repository component) -->
+        <dependency>
+            <groupId>\${alfresco.groupId}</groupId>
+            <artifactId>alfresco-wcm-quickstart-repo</artifactId>
+            <version>\${alfresco.version}</version>
+            <type>amp</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <!--  Here is can control the order of overlay of your (WAR, AMP, etc.) dependencies
+                        | NOTE: At least one WAR dependency must be uncompressed first
+                        | NOTE: In order to have a dependency effectively added to the WAR you need to 
+                        | explicitly mention it in the overlay section.
+                        | NOTE: First-win resource strategy is used by the WAR plugin
+                         -->
+                    <overlays>
+                        <!-- Current project customizations -->
+                        <overlay/>
+                        <!-- The Alfresco WAR -->
+                        <overlay>
+                            <groupId>\${alfresco.groupId}</groupId>
+                            <artifactId>alfresco</artifactId>
+                            <type>war</type>
+                            <!-- To allow inclusion of META-INF, needed for MMT WAR file validation-->
+                            <excludes/>
+                        </overlay>
+                        <!-- Add / order your AMPs here -->
+                        <overlay>
+                            <groupId>\${alfresco.groupId}</groupId>
+                            <artifactId>alfresco-wcm-quickstart-repo</artifactId>
+                            <type>amp</type>
+                        </overlay>
+                    </overlays>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
++---+
+
+ <<NOTE:>> the <<<overlay>>> mechanism allow to also control include/excludes for each module as well as the order of overlay. 
+ By default the Maven WAR plugin uses a <first-win> resource writing strategy.
+
+ The resulting WAR will have all the AMPs present in both <<<<dependency>>>> and <<<<overlay>>>> section installed.
+  
+* Method 2 - Custom invocation of install goal
+
+   The {{{./install-mojo.html}alfresco:install}} goal can be used to install AMPs directly, without using maven-war-plugin <<<<overlays>>>. 
+   
+   This goal allows to install a single AMP or a folder containing AMPs onto an Alfresco / Share WAR (or exploded WAR).
+
+** Multiple AMP installation
+    
+   The plugin is thoroughly documented in the {{{./install-mojo.html} mojo page}}, but we provide here an example of how to mimic the 
+   <<<apply_amps.sh>>> (Alfresco script), using the Alfresco Maven Plugin to install a full folder of AMPs (<<NOTE:>> The install goal
+   is bound in this case to the <<<package>>> phase, it's up to you to make sure an exploded WAR or WAR is present in warLocation
+   during that phase): 
+      
++---+
+<project>
+  [...]
+  <build>
+    <plugins>
+      ...
+      <plugin>
+          <groupId>org.alfresco.maven.plugin</groupId>
+          <artifactId>alfresco-maven-plugin</artifactId>
+          <version>${project.version}</version>
+          <extensions>true</extensions>
+          <execution>
+            <id>install-amps</id>
+            <goals>
+                <goal>install</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
+          <configuration>
+            <ampLocation>/my/folder/containing/amps</ampLocation>
+          </configuration>
+        </plugin>
+        ...
+    </plugins>
+  </build>
+  [...]
+</project>
++---+
+
+** Single AMP installation (with custom WAR location)
+
+ This example shows how to install instead a single amp onto a WAR file in a custom location (<<NOTE:>> <<<warLocation>>> could be an exploded WAR folder): 
+      
++---+
+<project>
+  [...]
+  <build>
+    <plugins>
+      ...
+      <plugin>
+          <groupId>org.alfresco.maven.plugin</groupId>
+          <artifactId>alfresco-maven-plugin</artifactId>
+          <version>${project.version}</version>
+          <extensions>true</extensions>
+          <execution>
+            <id>install-amps</id>
+            <goals>
+                <goal>install</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
+          <configuration>
+            <ampLocation>/my/custom/folder/containing/only/one/ampFile.amp</ampLocation>
+            <warLocation>/my/internal/or/external/alfresco/alfresco.war</warLocation>
+          </configuration>
+        </plugin>
+        ...
+    </plugins>
+  </build>
+  [...]
+</project>
++---+

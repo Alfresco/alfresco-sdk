@@ -8,13 +8,17 @@
         <fluidoSkin>
           <topBarIcon>
             <name>Alfresco Software</name>
-            <alt>Alfresco Software</alt>
+            <alt>Maven Fluido Skin</alt>
             <src>http://people.apache.org/~gabriele/Alfresco-logo-transparent-thin.png</src>
             <href>http://www.alfresco.com</href>
           </topBarIcon>
           <topBarEnabled>true</topBarEnabled>
-          <navBarStyle>navbar-inverse</navBarStyle
           <sideBarEnabled>false</sideBarEnabled>
+          <twitter>
+                <user>mindthegabz</user>
+                <showUser>true</showUser>
+                <showFollowers>true</showFollowers>
+          </twitter>
           <facebookLike />
           <googlePlusOne />
           <googleSearch>
@@ -43,7 +47,7 @@
             <item name="Maven AMP Plugin" href="http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/latest/plugins/maven-amp-plugin/index.html" />
         </menu>
         
-        <menu name="Community Docs">
+        <menu name="Maven Alfresco Community">
             <item name="Alfresco Maven Wiki Docs" href="http://wiki.alfresco.com/wiki/Maven_Alfresco_SDK" />
             <item name="Alfresco with Maven for Dummies" href="https://wiki.alfresco.com/wiki/Maven_For_Dummies" />
             <item name="Developer Access (Google Code)" href="http://code.google.com/p/maven-alfresco-archetypes/" />
@@ -55,6 +59,9 @@
         
         <menu ref="reports" />
         
-      
+        <links>
+            <item name="Alfresco" href="http://www.alfresco.com/" />
+            <item name="Apache Maven" href="http://maven.apache.org/" />
+        </links>        
     </body>
 </project>
