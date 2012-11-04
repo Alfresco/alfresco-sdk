@@ -1,0 +1,87 @@
+  ------
+  Alfresco Maven AMP Archetype Usage
+  ------
+  Gabriele Columbro
+  ------
+  Nov 2012
+  ------
+
+Prerequisites
+
+   See {{{/prerequisites.html} SDK Pre-Requisites}} to successfully run this archetype.
+
+Project layout
+
+    The archetype generated multi-module project should look like:
+
++---+
+    pom.xml
+    |-> amp
+    |-> alfresco
+    |-> share
+    |-> solr
+    |-> wcmqs (Alfresco Web Quick Start)
+    |-> runner (a Jetty embedded runner / integration test runner)
++---+
+
+* Modules 
+
+    The All-in-One Alfresco project is composed by the following modules:
+   
+    * <<<amp>>>: An Repository Tier AMP project, demonstrating sample project structure and demo component loading. It can be configured to work for Share
+     
+    * <<<alfresco>>>: An <<<alfresco.war>>> Repository Extension, overlaying the Alfresco WAR with custom resources / classes 
+    and depending on the <<<amp>>> project
+    
+    * <<<share>>>: A <<<share.war>>> extension, overlaying the Share WAR with custom resoruces / classes
+    
+    * <<<solr>>>: An Alfresco <<<alfresco-*-*-solr.zip>>> overlay / customization to configure {{{http://solr.apache.org}Apache Solr}} cores properties
+
+    * <<<wcmqs>>>: An Alfresco Web Quick Start overlay / customization. WQS Repository and Share AMPs are also installed on Alfresco and Share.
+    
+    * <<<runner>>>: A Jetty + H2 runner, capable of running all the aforementioned projects in embedded mode for demo / integration-testing purposes
+
+Usage 
+
+    The project provides support for typical development lifecycle use cases like
+
+        * AMP/WAR packaging
+        
+        * AMP Unit testing
+        
+        * run embedded in Jetty + H2 database. 
+          (<<NOTE>>: this is not a {{{http://www.alfresco.com/services/subscription/supported-platforms/} supported stack}} so use <<only for development purposes>>)
+        
+        * Integration testing
+        
+        * AMP to WAR installation and overlay (embedding {{{http://wiki.alfresco.com/wiki/Module_Management_Tool}Alfresco Module Managment Tool}})
+        
+        * release and distribution
+
+    for all the components of the Alfresco landscape. 
+    
+    <<NOTE>>: AMPs produced with this project are fully compatible with Alfresco MMT,in fact the Alfresco Maven plugin - used to manage AMPs in this SDK - embeds the official Alfresco MMT to install depended AMPs. 
+
+Commands
+
+* Commands from the root aggregator project
+
+    Common Alfresco project lifecycle commands you want to run from the aggregator :
+
+    * <<<mvn package>>>: Runs unit tests and packages all customized modules in their respective \${project.build.directory}/\${project.build.finalName}.amp
+
+    * <<<mvn install>>>: Like <<<mvn package>>> but also installs all modules in local Maven repository to be depended upon
+    
+    * <<<mvn install -Dmaven.test.skip=true>>>: Like <<<mvn install>>> but skips unit tests
+
+    * <<<mvn install -Prun>>>: Like <<<mvn install>>> but also trigger the <<<runner>>> project to run Alfresco, Share, Solr and Web Quick Start in Jetty  (with H2 embedded database)
+    
+    * <<<mvn clean -Ppurge>>>: Removes DB, alf_data and log files
+
+* Commands from from the <<<runner>>> project
+
+    * <<<mvn jetty:run -Prun'>>> or <<<'mvn integration-test -Prun'>>> to quickly run already packaged webapps
+    
+Advanced usage
+
+    See the {{{./advanced-usage.html}advanced usage page}}

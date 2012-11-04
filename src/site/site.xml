@@ -13,7 +13,7 @@
             <href>http://www.alfresco.com</href>
           </topBarIcon>
           <topBarEnabled>true</topBarEnabled>
-          <navBarStyle>navbar-inverse</navBarStyle
+          <navBarStyle>navbar-inverse</navBarStyle>
           <sideBarEnabled>false</sideBarEnabled>
           <facebookLike />
           <googlePlusOne />
@@ -32,16 +32,19 @@
   
     <body>
 
-        <menu ref="modules" inherit="bottom"/>
-        
         <menu ref="parent" inherit="bottom"/>
         
-        <menu name="SDK Resources">
-            <item name="FAQ" href="faq.html" />
-            <item name="Alfresco SDK POM" href="https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest/poms/alfresco-sdk-parent/index.html" />
+        <menu name="Maven Alfresco SDK">
+            <item name="Introduction" href="index.html"/>
+            <item name="Maven Alfresco SDK Prerequisites" href="prerequisites.html" />
+            <item name="Maven Alfresco SDK Properties" href="./poms/alfresco-sdk-parent/sdk-properties.html" />
+            <item name="Why using SDK?" href="./why.html" />
+            <item name="Alfresco SDK Parent POM" href="./poms/alfresco-sdk-parent/index.html" />
             <item name="Alfresco Platform Distribution POM" href="https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-platform-distribution/latest/index.html" />
             <item name="Maven AMP Plugin" href="http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/latest/plugins/maven-amp-plugin/index.html" />
         </menu>
+        
+        <menu ref="modules" inherit="bottom"/>
         
         <menu name="Community Docs">
             <item name="Alfresco Maven Wiki Docs" href="http://wiki.alfresco.com/wiki/Maven_Alfresco_SDK" />
@@ -52,9 +55,8 @@
             <item name="Carlo Sciolla's blog" href="http://skuro.tk/" />
             <item name="Enterprise adoption" href="http://www.slideshare.net/guest67a9ba/maven-application-lifecycle-management-for-alfresco" />
         </menu>
-        
+
         <menu ref="reports" />
-        
       
     </body>
 </project>

@@ -2,18 +2,10 @@
   <body>
         <menu ref="parent" inherit="bottom"/>
         
-        <menu name="Plugin info">
+        <menu name="Alfresco AMP Archetype">
             <item name="Introduction" href="index.html"/>
-            <item name="Goals" href="plugin-info.html"/>
             <item name="Usage" href="usage.html"/>
             <item name="Advanced Usage" href="advanced-usage.html"/>
-            <item name="Plexus Components" href="plexus-components.html"/>
-        </menu>
-        
-        <menu name="Archetypes using this plugin">
-          <!-- @TODO update href -->
-          <item name="Maven Alfresco AMP Archetype" href="https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest/archetypes/alfresco-amp-archetype/index.html"/>
-          <item name="Maven Alfresco All In One Archetype" href="https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest/archetypes/alfresco-allinone-archetype/index.html"/>
         </menu>
         
         <menu name="Maven Alfresco SDK">

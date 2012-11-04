@@ -4,21 +4,18 @@
         <artifactId>maven-fluido-skin</artifactId>
         <version>1.3.0</version>
     </skin>
+    
     <custom>
         <fluidoSkin>
           <topBarIcon>
             <name>Alfresco Software</name>
-            <alt>Maven Fluido Skin</alt>
+            <alt>Alfresco Software</alt>
             <src>http://people.apache.org/~gabriele/Alfresco-logo-transparent-thin.png</src>
             <href>http://www.alfresco.com</href>
           </topBarIcon>
           <topBarEnabled>true</topBarEnabled>
+          <navBarStyle>navbar-inverse</navBarStyle>
           <sideBarEnabled>false</sideBarEnabled>
-          <twitter>
-                <user>mindthegabz</user>
-                <showUser>true</showUser>
-                <showFollowers>true</showFollowers>
-          </twitter>
           <facebookLike />
           <googlePlusOne />
           <googleSearch>
@@ -40,9 +37,24 @@
         
         <menu ref="parent" inherit="bottom"/>
         
-        <menu name="SDK Resources">
-            <item name="FAQ" href="faq.html" />
-            <item name="Alfresco SDK POM" href="https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest/poms/alfresco-sdk-parent/index.html" />
+        <menu name="Maven Alfresco SDK Parent POM">
+            <item name="Introduction" href="./index.html" />
+            <item name="Maven Alfresco SDK Properties" href="./sdk-properties.html" />
+            <item name="Maven Alfresco SDK Profiles" href="./sdk-profiles.html" />
+        </menu>
+        
+        <menu name="Projects using this POM">
+            <item name="Alfresco AMP Archetype" href="../../archetypes/alfresco-amp-archetype/index.html" />
+            <item name="Alfresco All-in-One Archetype" href="../../archetypes/alfresco-allinone-archetype/index.html" />
+        </menu>
+        
+        
+        <menu name="Maven Alfresco SDK">
+            <item name="Home" href="/index.html" />
+            <item name="Maven Alfresco SDK Prerequisites" href="../../prerequisites.html" />
+            <item name="Maven Alfresco SDK Properties" href="../../poms/alfresco-sdk-parent/sdk-properties.html" />
+            <item name="Why using SDK?" href="../../why.html" />
+            <item name="Alfresco SDK Parent POM" href="https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest/poms/alfresco-sdk-parent/index.html" />
             <item name="Alfresco Platform Distribution POM" href="https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-platform-distribution/latest/index.html" />
             <item name="Maven AMP Plugin" href="http://maven.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/latest/plugins/maven-amp-plugin/index.html" />
         </menu>

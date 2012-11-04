@@ -16,7 +16,7 @@ Alfresco Maven Plugin - Part of the Maven Alfresco SDK\x99
 
   *{{{./amp-mojo.html}alfresco:amp}} Packages an AMP file
 
-  *{{{./install-mojo.html}alfresco:install}} Installs one or multiple AMPs into an Alfresco WAR / exploded WAR folder
+  *{{{./install-mojo.html}alfresco:install}} Installs one or multiple AMPs into an Alfresco WAR / exploded WAR folder embedding {{{http://wiki.alfresco.com/wiki/Module_Management_Tool} Alfresco MMT}} 
   
   *{{{./version-mojo.html}alfresco:version}} Parses ${project.version} removing literals (for AMP compatibility) and making the ${noSnapshot} property available in the POM  
 

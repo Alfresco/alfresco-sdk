@@ -22,6 +22,12 @@
         </license>
     </licenses>
 
+    <scm>
+        <connection>scm:svn:${scm.url.base}/trunk</connection>
+        <developerConnection>scm:svn:${scm.url.base}/trunk</developerConnection>
+        <url>${scm.url.base}/trunk</url>
+    </scm>
+
     <developers>
         <developer>
             <id>gabriele.columbro</id>
@@ -94,7 +100,10 @@
 
     <properties>
         <maven.archetype.version>2.2</maven.archetype.version>
+        <maven.release.version>2.3.2</maven.release.version>
         <maven.site.url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest</maven.site.url>
+        <scm.url.base>https://maven-alfresco-archetypes.googlecode.com/svn</scm.url.base>
+        <scm.tag.base>${scm.url.base}/tags</scm.tag.base>
     </properties>
 
     <build>
@@ -113,8 +122,24 @@
                 <artifactId>archetype-packaging</artifactId>
                 <version>${maven.archetype.version}</version>
             </extension>
+            <extension>
+                    <groupId>org.apache.maven.wagon</groupId>
+                    <artifactId>wagon-webdav-jackrabbit</artifactId>
+                    <version>2.2</version>
+            </extension>
         </extensions>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${maven.release.version}</version>
+                <configuration>
+                    <tagBase>${scm.tag.base}</tagBase>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
+    
 
     <repositories>
         <repository>

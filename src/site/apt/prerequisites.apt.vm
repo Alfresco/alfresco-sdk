@@ -1,0 +1,36 @@
+  ------
+  Maven Alfresco SDK Prerequisites
+  ------
+  Gabriele Columbro
+  ------
+  Nov 2012
+  ------
+
+
+Maven Alfresco SDK\x99 Pre-Requisites
+
+
+    The only real prerequisite of the Maven Alfresco SDK\x99 Apache Maven 3.0.3+ installed (and properly configured) on your machine; 
+    neither <<an IDE>> nor <<web container or database>> are required.
+    
+    Additional tips:
+    
+    * It is strongly advised to use the Apache Maven official binary distributions downloaded from the {{http://maven.apache.org}official mirrors}}; avoid OS-specific distributions as much as possible.
+
+    * add <<<MAVEN_OPTS="-Xms256m -Xmx1G -XX:PermSize=300m">>> to your environment if your plan to launch tests / run embedded in Jetty
+    
+    * Java 1.7 is <<required>> to run Alfresco 4.2.b+ 
+    
+    * <<No manual downloading>> of Alfresco distribution is required.
+     Alfresco platform is retrieved automatically from {{{https://artifacts.alfresco.com} the Alfresco Artifacts Repository}}
+     based on the <<<alfresco.groupId>>> and <<<alfresco.version>>> POM properties 
+
+     
+H2 Embedded Support Pre-Requisites
+
+    This SDK allows H2 embedded run of Alfresco (<<NOTE>>: this is an unsupported configuration for Alfresco Enterprise) leveraging 
+    the open source effort {{{https://github.com/skuro/alfresco-h2-support} Alfresco H2 Support}}. This bridge allows to emulate
+    Alfresco expected DB behavior and is therefore very specific to every Alfresco version.
+    
+    Maven Alfresco SDK\x99 ${project.version} uses version 1.5 of the Alfresco H2 Support. In case you experience
+    issues with the embedded DB support, please check the {{{https://github.com/skuro/alfresco-h2-support/wiki/H2-Database-support-for-Alfresco} H2 Support Compatibility matrix}}. 

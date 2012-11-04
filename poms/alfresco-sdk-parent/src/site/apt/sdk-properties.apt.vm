@@ -1,0 +1,45 @@
+  ------
+  Maven Alfresco SDK Properties
+  ------
+  Gabriele Columbro
+  ------
+  Nov 2012
+  ------
+   
+Common SDK properties
+   
+    Useful properties that can be fully controlled directly in the POM are:
+
++---+
+<project>
+    ...
+    <!-- 
+       | SDK properties have sensible defaults in the SDK parent,
+       | but you can override the properties below to use another version. 
+       | For more available properties see the alfresco-sdk-parent POM. 
+       -->
+    <properties>
+        <alfresco.groupId>org.alfresco</alfresco.groupId>
+        <alfresco.version>4.2.b</alfresco.version>
+        <!-- Defines root logger log level for testing and embedded run -->
+        <app.log.root.level>WARN</app.log.root.level>
+        <!-- Logging dir. Note the trailing slash is required -->
+        <app.log.dir>${project.build.directory}/</app.log.root.level>
+        <!-- The alf_data folder -->
+        <alfresco.data.location>alf_data_dev</alfresco.data.location>
+        <!-- This controls which properties will be picked in src/test/properties for embedded run -->
+        <env>local</env>
+    </properties>
+    ...
+</project>    
++---+
+
+
+Full SDK properties reference 
+
+    The full reference of properties defined in the SDK can be obtained by looking
+    at the <<<properties>>> section of the current version of the <<<alfresco-sdk-parent>>> in use.
+    Check the {{{${scm.tags.url}/poms/alfresco-sdk-parent/pom.xml} current POM version}} for this. 
+    
+    While in certain cases it might be useful to override defaults, make sure you know what you're doing, 
+    as you might be <<breaking>> SDK conventions and therefore <<your build>>>

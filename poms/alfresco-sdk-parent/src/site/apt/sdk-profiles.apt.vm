@@ -1,0 +1,37 @@
+  ------
+  Maven Alfresco SDK\x99 Profiles
+  ------
+  Gabriele Columbro
+  ------
+  Nov 2012
+  ------
+   
+SDK Available Profiles
+
+    The Maven Alfresco SDK\x99 defines common features required by different Alfresco projects.
+    While the <<<recommended>>> way is to use full working examples of usage of these profiles (e.g. the
+    {{{./archetypes/alfresco-amp-archetype/index.html}AMP}} and {{{./archetypes/alfresco-allinone-archetype/index.html}All-in-One}} archetypes),
+    you can also directly use this POM as a parent in your custom project.
+    
+    Here goes the list of common used profiles (with their activation conditions):     
+
+*-----------+--------------+-------------+-------------+
+|| Profile  || Description || Activation | |Phase       |
+*-----------+--------------+-------------+-------------+
+| amp-to-war         |  Allows AMP projects to be run embedded on a WAR      |  Manual: <<<-Pamp-to-war>>>       | integration-test |
+| purge              |  Cleans all alf_data and logs from Alfresco runs      |  Manual: <<<-Ppurge>>>            | clean |
+| enable-amp-testing |  Allows AMP unit testing                              |  Automatic if <<<src/test/java>>> is present   | test |
+| enable-amp         |  Activates AMP packaging                              |  Automatic if <<<src/main/amp/modules.properties>>> is present   | test |
+*-----------+--------------+-------------+-------------+
+    
+    The full list of available profiles (with their activation conditions) can be instead found in the <<<profiles>>> section of the
+    {{{${scm.tags.url}/poms/alfresco-sdk-parent/pom.xml} Ålfresco SDK POM}}.
+
+Full SDK properties reference 
+
+    The full reference of properties defined in the SDK can be obtained by looking
+    at the <<<properties>>> section of the current version of the <<<alfresco-sdk-parent>>> in use.
+    Check the {{{${scm.tags.url}/poms/alfresco-sdk-parent/pom.xml} current POM version}} for this. 
+    
+    While in certain cases it might be useful to override defaults, make sure you know what you're doing, 
+    as you might be <<breaking>> SDK conventions and therefore <<your build>>>

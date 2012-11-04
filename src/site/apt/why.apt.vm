@@ -1,0 +1,37 @@
+  ------
+  Why using this SDK might be a good idea?
+  ------
+  Gabriele Columbro
+  ------
+  Nov 2012
+  ------
+
+Why would you use the Maven Alfresco SDK\x99?
+
+  As a standard de facto, Maven allows you projects to be inherently more reusable and enables <process reuse> of your development practices,
+  and, in certain successful cases, Application Lifecycle Management process at large.
+  
+  Therefore Alfresco Community and Enterprise <developers>, <architects> and <project managers> are the main stakeholders of this tentative to simplify
+  Alfresco development. Hope this helps :)
+
+* Developer features
+    
+    * No manual downloading of Alfresco distribution. It's all retrieved from {{{https://artifacts.alfresco.com} the Alfresco Artifacts Repository}}
+
+    * <<IDE-independent SDK>>, features are provided by Apache Maven, which is the sole prerequisite to use this SDK 
+
+    * <<No IDE manual configuration>>, all modern IDEs offer advanced Maven integrations. So feel free to use Eclipse, IntelliJ, or any other IDE to write your code, while leveraging Maven to
+      standardize the way you work on Alfresco in your organization
+      
+    * Dependencies, POMs, Javadoc and Sources support - provided by {{{https://artifacts.alfresco.com} the Alfresco Artifacts Repository}} - for all Alfresco Artifacts; 
+      Sources / Javadocs are automatically downloaded on demand by your IDE Maven integration (e.g. see {{{http://www.sonatype.org/m2eclipse/} m2eclipse}}) 
+      
+    * <<Process ready>>, as it scales from quick start rapid application development, to be seamlessly integrated in enterprise devleopment processes like Continuous Integration and Release
+    
+    * <<Clean and readable>>, with a {{{./poms/alfresco-sdk-parent/index.html}single entry point}} for all SDK functionalities
+
+    * Advanced build functionality, inherited by your parent POMs you can use embedded databases and j2ee containers with a zero configuration approach
+    
+    * One mvn command to generate, one mvn command to run embedded, this is all you need to do to have a local Alfresco running on an empty laptop
+
+    * Supports community and enterprise seamlessly, allowing to switch one between versions / edition easily. 
