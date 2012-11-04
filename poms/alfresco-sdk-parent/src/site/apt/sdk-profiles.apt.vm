@@ -37,4 +37,4 @@ Full SDK properties reference
     Check the {{{https://artifacts.alfresco.com/nexus/index.html#nexus-search;gav~org.alfresco.maven~alfresco-sdk-parent~${project.version}~pom~}current POM version}} for this.
     
     While in certain cases it might be useful to override defaults, make sure you know what you're doing, 
-    as you might be <<breaking>> SDK conventions and therefore <<your build>>>
+    as you might be <<breaking>> SDK conventions and therefore <<your build>>
