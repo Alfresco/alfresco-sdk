@@ -101,6 +101,7 @@
     <properties>
         <maven.archetype.version>2.2</maven.archetype.version>
         <maven.release.version>2.3.2</maven.release.version>
+		<maven.site.version>3.2</maven.site.version>
         <maven.site.url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest</maven.site.url>
         <scm.url.base>https://maven-alfresco-archetypes.googlecode.com/svn</scm.url.base>
         <scm.tag.base>${scm.url.base}/tags</scm.tag.base>
@@ -113,6 +114,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-archetype-plugin</artifactId>
                     <version>${maven.archetype.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven.site.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
