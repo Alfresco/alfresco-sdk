@@ -16,6 +16,7 @@ Alfresco SDK Parent - Part of Maven Alfresco SDK\x99
 Usage
   
   You can reference Alfresco SDK POM in your POM adding the following snippet:
+  
 +---+
 <project>
      ...
@@ -27,8 +28,9 @@ Usage
     ...
 </project>
 +---+
-  
+
   This will reference the Alfresco SDK project as <<<parent>>> project, allowing you to inherit all SDK features.
+  Full dependency information for other build systems can be found in the {{{./dependency-info.html} Dependency Info page}}.
   
   Features are provided in terms of {{{./sdk-profiles.html} Maven profiles}}, and high configurability is provided with 
   {{{./sdk-properties}POM properties}} avaialble to sibling projects.  
