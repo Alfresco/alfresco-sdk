@@ -2,7 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.alfresco.maven</groupId>
   <artifactId>alfresco-sdk-parent</artifactId>
   <name>Alfresco Maven SDK Parent POM</name>
   <description>
@@ -12,19 +11,16 @@
   </description>
   <packaging>pom</packaging>
   
+  <!-- This parent is only needed for SDK release purposes. It does not add behaviors -->
+  <parent>
+    <groupId>org.alfresco.maven</groupId>
+    <artifactId>alfresco-lifecycle-aggregator</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+  
   <!-- This defines the version of the SDK in terms of features -->
   <version>1.0-SNAPSHOT</version>
-
-  <licenses>
-    <license>
-      <name>GNU Lesser General Public License v3.0 or later</name>
-      <url>http://www.gnu.org/licenses/lgpl-3.0-standalone.html</url>
-    </license>
-  </licenses>
-  
-  <prerequisites>
-    <maven>3.0.3</maven>
-  </prerequisites>
 
   <properties>
     <!--  Default Alfresco version this SDK version has been tested with:
@@ -95,7 +91,6 @@
     <!-- Maven Plugins Versions used by the SDK -->
     <maven.compiler.version>2.3.2</maven.compiler.version>
     <maven.clean.version>2.4.1</maven.clean.version>
-    <maven.site.version>3.2</maven.site.version>
     <maven.dependency.version>2.4</maven.dependency.version>
     <maven.enforcer.plugin>1.1.1</maven.enforcer.plugin>
     <maven.resources.version>2.5</maven.resources.version>
@@ -144,22 +139,6 @@
       </snapshots>
     </pluginRepository>
   </pluginRepositories>
-
-  <distributionManagement>
-      <repository>
-          <id>alfresco-releases</id>
-          <url>https://artifacts.alfresco.com/nexus/content/repositories/releases</url>
-      </repository>
-      <snapshotRepository>
-          <name>alfresco snapshots repository</name>
-          <id>alfresco-snapshots</id>
-          <url>https://artifacts.alfresco.com/nexus/content/repositories/snapshots</url>
-      </snapshotRepository>
-      <site>
-          <id>alfresco-docs</id>
-          <url>dav:https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest/poms/alfresco-sdk-parent/</url>
-      </site>
-  </distributionManagement>
   
   <build>
     <finalName>${project.artifactId}</finalName>
@@ -173,11 +152,6 @@
           <configuration>
               <snapshotToTimestamp>true</snapshotToTimestamp>
           </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>${maven.site.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -251,11 +225,6 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-release-plugin</artifactId>
-          <version>${maven.release.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
           <version>${maven.jar.version}</version>
         </plugin>
@@ -291,15 +260,6 @@
             <filtering>${app.filtering.enabled}</filtering>
         </testResource>
     </testResources>
-    
-    <extensions>
-        <extension>
-            <groupId>org.apache.maven.wagon</groupId>
-            <artifactId>wagon-webdav-jackrabbit</artifactId>
-            <version>2.2</version>
-        </extension>
-    </extensions>
-    
   </build>
 
   <!-- Feature / behavioral profiles -->
