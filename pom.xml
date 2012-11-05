@@ -147,6 +147,7 @@
                 <version>${maven.release.version}</version>
                 <configuration>
                     <tagBase>${scm.tag.base}</tagBase>
+                    <preparationGoals>clean install</preparationGoals>
                     <goals>deploy site-deploy</goals>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                 </configuration>
