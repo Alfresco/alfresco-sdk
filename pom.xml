@@ -148,7 +148,7 @@
                 <configuration>
                     <tagBase>${scm.tag.base}</tagBase>
                     <goals>deploy site-deploy</goals>
-                    <autoVersionSubModules>true</autoVersionSubModules>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
                 </configuration>
             </plugin>
         </plugins>
