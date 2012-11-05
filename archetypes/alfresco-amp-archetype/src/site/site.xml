@@ -1,6 +1,6 @@
 <project>
   <body>
-        <menu ref="parent" inherit="bottom"/>
+        <!--<menu ref="parent" inherit="bottom"/>-->
         
         <menu name="Alfresco AMP Archetype">
             <item name="Introduction" href="index.html"/>

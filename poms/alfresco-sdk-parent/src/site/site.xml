@@ -35,7 +35,7 @@
 
         <!--<menu ref="modules" inherit="bottom"/>-->
         
-        <menu ref="parent" inherit="bottom"/>
+        <!--<menu ref="parent" inherit="bottom"/>-->
         
         <menu name="SDK Parent POM">
             <item name="Introduction" href="./index.html" />
