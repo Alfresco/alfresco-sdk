@@ -18,7 +18,7 @@ Introduction
 
   The Maven Alfresco SDK\x99 is fully documented in the single components websites (links above) as well as updated on {{{https://wiki.alfresco.com/wiki/Maven_Alfresco_SDK}the Alfresco Wiki}}.
 
-  * Maven Alfresco SDK\x99 components
+* Maven Alfresco SDK\x99 components
 
   The Maven Alfresco SDK relies on a number of components:
 
