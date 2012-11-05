@@ -1,11 +1,11 @@
-    -----
-    Alfresco Maven Plugin Components
-    -----
-    The Alfresco Maven Plugin defines support components to manage AMP (Alfresco Module Package) lifecycle.
+  -----
+  Alfresco Maven Plugin Components
+  -----
+  The Alfresco Maven Plugin defines support components to manage AMP (Alfresco Module Package) lifecycle.
     
-    AMP Lifecycle
+AMP Lifecycle
     
-    This plugin provides support for <<<<packaging>amp</packaging>>>> type of projects. \
+    This plugin provides support for <<<<packaging>amp</packaging>>>> type of projects.
     
     The lifecycle of an <<<amp>>> follows:
 
@@ -30,16 +30,16 @@
     </component> 
 +---+
     
-    This build produces an Alfresco compatible AMP as main build product. 
-    
-    AMP -> WAR Unarchiver
+    This build produces an Alfresco compatible AMP as main build product.
+
+AMP -> WAR Unarchiver
     
     A Plexus UnArchiver (<<<role-hint="amp">>>) is configured to be used by default by Maven for AMP dependencies.
     This UnArchiver invokes the MMT therefore allowing proper AMP installation according to {{{http://wiki.alfresco.com/wiki/AMP_Files} convention}} .
     This component allows any plugin to manage <<<amp>>> dependencies and in particular enables AMPs to be used as part 
     of the standard maven-war-plugin <<<<overlay>>>> section.
-    
-    AMP Artifact Handler
+
+AMP Artifact Handler
     
     Instructs maven which type of Archive is the AMP, providing info about its inclusion in the classpath or the fact that already contains
     its dependencies. 

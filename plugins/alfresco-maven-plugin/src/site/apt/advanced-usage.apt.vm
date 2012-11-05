@@ -97,7 +97,7 @@ Overlay and installation of AMPs to WAR
 
 ** Multiple AMP installation
     
-   The plugin is thoroughly documented in the {{{./install-mojo.html} mojo page}}, but we provide here an example of how to mimic the 
+   The plugin installation goal is thoroughly documented in the {{{./install-mojo.html} alfresco:install mojo page}}, but we provide here an example of how to mimic the
    <<<apply_amps.sh>>> (Alfresco script), using the Alfresco Maven Plugin to install a full folder of AMPs (<<NOTE:>> The install goal
    is bound in this case to the <<<package>>> phase, it's up to you to make sure an exploded WAR or WAR is present in warLocation
    during that phase): 
