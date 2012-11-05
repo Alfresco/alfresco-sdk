@@ -20,7 +20,7 @@ Introduction
   
   *{{{./set-version-mojo.html}alfresco:version}} Parses ${project.version} removing literals (for AMP compatibility) and making the <<<$\{noSnapshotVersion\}>>> property available in the POM
 
-  More info in the {{{./plugin-info.html}goals page}}.
+ Full information is available at the {{{./plugin-info.html}goals page}}.
 
 * Usage
 
