@@ -1,5 +1,5 @@
   ------
-  Maven Alfresco SDK
+  Maven Alfresco SDK\x99 
   ------
   Gabriele Columbro
   ------
@@ -8,17 +8,23 @@
 
 Introduction
 
-  The Alfresco Maven SDK ${project.version} - formerly {{{https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/latest/index.html} Maven Alfresco Lifecycle 3.9.1}} -
+  The Maven Alfresco SDK\x99  - formerly {{{https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/latest/index.html} Maven Alfresco Lifecycle 3.9.1}} -
   provides a fully fledged Maven support for {{{http://www.alfresco.com}Alfresco ECM}} WAR and {{{https://wiki.alfresco.com/wiki/AMP_Files}AMP}} project development.
   Being fully integrated with Maven it allows to both leverage the vast number of Maven plugins for your Alfresco project as well as integrated your
   project easily in Open Source and Enterprise development processes.
 
-  The Alfresco Maven SDK introduces a new way of conceiving software development, deployment and release around Alfresco-related artifacts.
-  In contrast to the usual monolithic deployment approach of Tomcat installer and/or Alfresco WAR distribution(s), the new SDK grants access to an Artifact (jar,war,pom files) that can be accessed by Alfresco-specific Maven components and configurations, but also enables the development of very custom build behaviour and rapid development practices (i.e. TDD, FDD)
-
   The Maven Alfresco SDK\x99 is fully documented in the single components websites (links above) as well as updated on {{{https://wiki.alfresco.com/wiki/Maven_Alfresco_SDK}the Alfresco Wiki}}.
+  
+* Rationale
 
-* Maven Alfresco SDK\x99 components
+  The Alfresco Maven SDK introduces a new way of conceiving software development, deployment and release of Alfresco related projects and artifacts.
+  In contrast to the manual (and error prone) deployment approach based on an installer / Alfresco WAR distribution(s) and the <infamous> <<<${extensionRoot}>>>,
+  the Maven SDK provides a unified access to fine grained Artifacts (jar,war,pom files),] that can be easily integrated
+  in your project by the means of Alfresco-specific Maven components and configurations. The main goal of this SDK is to 
+  enable rapid development and prototyping of Alfresco projects, while enabling agile development practices (i.e. TDD, FDD)
+  and fostering process reuse due to standardization
+  
+Maven Alfresco SDK\x99 components
 
   The Maven Alfresco SDK relies on a number of components:
 
@@ -32,14 +38,14 @@ Introduction
 
   * The {{{https://artifacts.alfresco.com}Alfresco Artifacts Repository}} provides backing for this SDK. Check the {{{http://wiki.alfresco.com/wiki/Alfresco_Artifacts_Repository}Alfresco Wiki}} for Community / Enterprise access information. 
 
-* Pre-requisites
+Pre-requisites
 
-** System prerequisites
+* System prerequisites
 
     No manual Alfresco download, application server or database is required. 
     See details in the {{{./prerequisites.html} SDK pre-requisites page}}.
 
-** Alfresco Compatibility
+* Alfresco Compatibility
 
   Maven Alfresco SDK\x99 ${project.version} is compatible (for now) with Alfresco Community / Enterprise 4.2(.b)+.
   The majority of the features might still work when using lower Alfresco versions, but certain artifacts might not be 

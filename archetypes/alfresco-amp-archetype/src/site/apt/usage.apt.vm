@@ -29,7 +29,7 @@ Project layout
   src/main/resources //resources to the packaged in the AMP embedded JAR)
   src/test/java // Unit tests
   src/test/resources // Unit test resources
-  src/test/properties/<env> // <env>=local by default, environment aware alfresco-global.properties for embedded run  
+  src/test/properties/<env> //  Environment aware alfresco-global.properties. By default <env>=local 
 
 +---+
 
