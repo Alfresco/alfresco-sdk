@@ -12,11 +12,11 @@
 
         <menu name="SDK components">
             <item name="Maven Alfresco SDK" href="../../index.html" />
-            <item name="Alfresco AMP Archetype" href="../alfresco-amp-archetype/index.html" />
-            <item name="Alfresco All-in-One Archetype" href="./index.html" />
+            <item name="Alfresco AMP Archetype" href="../../archetypes/alfresco-amp-archetype/index.html" />
+            <item name="Alfresco All-in-One Archetype" href="../../archetypes/alfresco-allinone-archetype/index.html" />
             <item name="Alfresco SDK Parent POM" href="../../poms/alfresco-sdk-parent/index.html" />
             <item name="Alfresco Platform Distribution POM" href="https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-platform-distribution/latest/index.html" />
-            <item name="Alfresco Maven Plugin" href="../../plugins/alfresco-maven-plugin/index.html" />
+            <item name="Alfresco Maven Plugin" href="./index.html" />
         </menu>
 
         <menu name="Maven Alfresco Community">
@@ -29,7 +29,7 @@
             <item name="Enterprise adoption" href="http://www.slideshare.net/guest67a9ba/maven-application-lifecycle-management-for-alfresco" />
         </menu>
 
-        <!--<menu ref="reports"/>-->
+        <menu ref="reports"/>
 
   </body>
 </project>

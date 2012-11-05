@@ -31,8 +31,6 @@
     <publishDate position="navigation-bottom" format="MM-dd-yy" />
   
     <body>
-
-        <menu ref="parent" inherit="bottom"/>
         
         <menu name="Maven Alfresco SDK">
             <item name="Introduction" href="index.html"/>
