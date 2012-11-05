@@ -79,7 +79,7 @@
         <!-- Plugins -->
         <module>plugins/alfresco-maven-plugin</module>
         <!-- POM files -->
-        <module>poms/alfresco-sdk-parent</module>
+        <!-- <module>poms/alfresco-sdk-parent</module>-->
         <!-- Archetypes -->
         <module>archetypes/alfresco-amp-archetype</module>
         <module>archetypes/alfresco-allinone-archetype</module>
