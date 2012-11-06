@@ -1,7 +1,21 @@
 <project>
   <body>
         <!-- <menu ref="parent" inherit="bottom"/> -->
-        
+        <head>
+            <script type="text/javascript">
+            
+              var _gaq = _gaq || [];
+              _gaq.push(['_setAccount', '${gaTrackingId}']);
+              _gaq.push(['_trackPageview']);
+            
+              (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+              })();
+            
+            </script>
+        </head>
         <menu name="Alfresco All-in-One Archetype">
             <item name="Introduction" href="index.html"/>
             <item name="Usage" href="usage.html"/>
