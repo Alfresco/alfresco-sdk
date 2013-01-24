@@ -63,6 +63,13 @@ public class InstallMojo extends AbstractMojo {
      * @parameter property="maven.alfresco.backup" default-value="false"
      */
     private boolean backup;
+    
+    /**
+     * Whether or not to skip the check for a manifest file in the warLocation
+     * 
+     * @parameter property="maven.alfresco.skipWarManifestCheck" default-value="false"
+     */
+    private boolean skipWarManifestCheck;
 
     public InstallMojo() {
     }
@@ -113,7 +120,7 @@ public class InstallMojo extends AbstractMojo {
             throw new MojoExecutionException("No webapp found in " + descriptor.getAbsolutePath() + ". AMP installation cannot proceed. Are you binding amp:install to the right phase?");
         
         File manifest = new File(warLocation.getPath() + File.separator + WEBAPP_MANIFEST_PATH); 
-        if(warLocation.isDirectory() && !manifest.exists())
+        if(!skipWarManifestCheck && warLocation.isDirectory() && !manifest.exists())
             throw new MojoExecutionException("No MANIFEST.MF found in " + manifest.getAbsolutePath() + ". AMP installation cannot proceed. Are you binding amp:install to the right phase?");
     }
 }
