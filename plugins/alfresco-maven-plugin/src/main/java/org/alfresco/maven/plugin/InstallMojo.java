@@ -109,11 +109,11 @@ public class InstallMojo extends AbstractMojo {
         }
         
         File descriptor = new File(warLocation.getPath() + File.separator +  WEBAPP_DESCRIPTOR_PATH);
-        if(!descriptor.exists())
+        if(warLocation.isDirectory() && !descriptor.exists())
             throw new MojoExecutionException("No webapp found in " + descriptor.getAbsolutePath() + ". AMP installation cannot proceed. Are you binding amp:install to the right phase?");
         
         File manifest = new File(warLocation.getPath() + File.separator + WEBAPP_MANIFEST_PATH); 
-        if(!manifest.exists())
+        if(warLocation.isDirectory() && !manifest.exists())
             throw new MojoExecutionException("No MANIFEST.MF found in " + manifest.getAbsolutePath() + ". AMP installation cannot proceed. Are you binding amp:install to the right phase?");
     }
 }
