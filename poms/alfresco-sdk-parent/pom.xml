@@ -33,7 +33,7 @@
         | For available versions please search on https://artifacts.alfresco.com/nexus/index.html
         -->
     <alfresco.groupId>org.alfresco</alfresco.groupId>
-    <alfresco.version>4.2.b</alfresco.version>
+    <alfresco.version>4.2.c</alfresco.version>
 
     <!--  Values can be "alfresco" or "share". Default value is 'alfresco' assuming you are developing a repository AMP, change to share for share AMPs 
         | This impact (in AMP projects) the choice of the WAR project for embedded run
@@ -648,22 +648,22 @@
                     </goals>
                     <configuration>
                       <rules>
-                         <!-- At this time the SDK is supported only for Alfresco 4.2.b and above versions -->
+                         <!-- Test for Alfresco version -->
                          <requireProperty>
                             <property>alfresco.version</property>
-                            <message>At this time the SDK is supported only for Alfresco 4.2.b and above versions</message>
-                            <regex>^(4\.[2-9]|[5-9]).*</regex>
+                            <message>The SDK is supported only for Alfresco 4.1.2+ and 4.2+ versions</message>
+                            <regex>^(4\.1\.[2-9]|4\.[2-9]|[5-9]).*</regex>
                          </requireProperty>
-                         <!-- At this time the SDK is supported only for Alfresco 4.2.b and above versions -->
+                         <!-- Test for groupId value (Community / Enterprise) -->
                          <requireProperty>
                             <property>alfresco.groupId</property>
                             <message>You need to select an Alfresco Edition (Community / Enterprise) by setting alfresco.groupId=org.alfresco|org.alfresco.enterprise</message>
                             <regex>(org\.alfresco|org\.alfresco\.enterprise)</regex>
                          </requireProperty>
-                         <!-- Alfresco 4.2+ runs on Java 7  -->
+                         <!-- Test for JDK version -->
                          <requireJavaVersion>
-                            <version>[1.7.0,)</version>
-                            <message>As the SDK works only with Alfresco 4.2+, and Alfresco 4.2+ requires Java 7, you need Java 7</message>
+                            <version>[1.6.0,)</version>
+                            <message>Alfresco 4.1+ requires Java 6</message>
                          </requireJavaVersion>
                       </rules>
                       <fail>true</fail>
