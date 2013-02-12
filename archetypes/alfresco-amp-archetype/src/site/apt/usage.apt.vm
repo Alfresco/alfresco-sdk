@@ -21,7 +21,7 @@ Project layout
   pom.xml
   src/main/amp  
             |-> module.properties
-            |-> file-mappings.properties (optional)
+            |-> file-mapping.properties (optional)
             |-> config/
             |-> web/
             |-> licenses/

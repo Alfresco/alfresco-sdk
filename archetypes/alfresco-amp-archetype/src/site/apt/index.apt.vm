@@ -32,7 +32,7 @@ How to create a project:
   You can create the latest release archetype with the following command:
   
 +---+
-mvn archetype:generate -DarchetypeCatalog=https://artifacts.alfresco.com/nexus/content/groups/public/archetype-catalog.xml
+mvn archetype:generate -DarchetypeCatalog=https://artifacts.alfresco.com/nexus/content/groups/public/archetype-catalog.xml -Dfilter=org.alfresco.maven.archetype:
 +---+
   
   You should then:
@@ -41,7 +41,7 @@ mvn archetype:generate -DarchetypeCatalog=https://artifacts.alfresco.com/nexus/c
   
   [[2]] Specify the <<<groupId>>> and <<<artifactId>>> for the project you want to create
   
-  [[3]] (<Optionally>) Select Alfresco Version / Edition (current default is: Alfresco Community 4.2.b)
+  [[3]] (<Optionally>) Select Alfresco Version / Edition (current default is: Alfresco Community 4.2.c)
   
  You can find new Alfresco AMP project ready to go in the <<<artifactId>>> folder.
 
