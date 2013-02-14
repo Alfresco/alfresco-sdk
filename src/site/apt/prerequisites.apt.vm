@@ -18,6 +18,8 @@ Maven Alfresco SDK\x99 Pre-Requisites
     * It is strongly advised to use the Apache Maven official binary distributions downloaded from the {{{http://maven.apache.org}official mirrors}}; avoid OS-specific distributions as much as possible.
 
     * add <<<MAVEN_OPTS="-Xms256m -Xmx1G -XX:PermSize=300m">>> to your environment if your plan to launch tests / run embedded in Jetty
+   
+    * Alfresco compability: Communtiy 4.2+ | Enterprise 4.1.2+ 
     
     * Java 1.7 is <<required>> to run Alfresco 4.2.b+ 
     
