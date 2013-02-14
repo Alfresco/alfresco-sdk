@@ -47,7 +47,7 @@ Pre-requisites
 
 * Alfresco Compatibility
 
-  Maven Alfresco SDK\x99 ${project.version} is compatible (for now) with Alfresco Community / Enterprise 4.2(.b)+.
+  Maven Alfresco SDK\x99 ${project.version} is compatible (for now) with Alfresco Community (4.2b+) and Enterprise (4.1.2+).
   The majority of the features might still work when using lower Alfresco versions, but certain artifacts might not be 
   available in the {{{https://artifacts.alfresco.com}Alfresco Artifacts Repository}}. You can probably fix this with some
   Maven configuration, but use at your own risk.
