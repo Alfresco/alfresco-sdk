@@ -180,6 +180,7 @@
               <nonFilteredFileExtension>xls</nonFilteredFileExtension>
               <nonFilteredFileExtension>ppt</nonFilteredFileExtension>
               <nonFilteredFileExtension>bin</nonFilteredFileExtension>
+	      <nonFilteredFileExtension>lic</nonFilteredFileExtension>
             </nonFilteredFileExtensions>
           </configuration>
         </plugin>
