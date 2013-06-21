@@ -21,6 +21,10 @@
   <!-- This defines the version of the SDK in terms of features -->
   <version>1.0.2-SNAPSHOT</version>
 
+  <prerequisites>
+    <maven>3.0.3</maven>
+  </prerequisites>
+
   <properties>
     <!--  Default Alfresco version this SDK version has been tested with:
         |
