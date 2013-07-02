@@ -84,7 +84,7 @@
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-mmt</artifactId>
-      <version>4.2.d-20130514.020755-103</version>
+      <version>4.2.d-beta</version>
     </dependency>
   </dependencies>
 
