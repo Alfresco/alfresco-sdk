@@ -88,10 +88,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.archetype.version>2.2</maven.archetype.version>
-        <maven.release.version>2.4</maven.release.version>
-        <maven.release.goals>deploy site-deploy</maven.release.goals>
-        <maven.site.version>3.2</maven.site.version>
-        <maven.changes.version>2.8</maven.changes.version>
         <alfresco.sdk.parent.version>${project.version}</alfresco.sdk.parent.version>
       </properties>
 
@@ -141,8 +137,12 @@
             <id>release</id>
             <properties>
                 <maven.site.url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest</maven.site.url>
-                <scm.url.base>https://maven-alfresco-archetypes.googlecode.com/svn</scm.url.base>
-                <scm.tag.base>${scm.url.base}/tags</scm.tag.base>
+                <project.scm.connection>scm:svn:https://maven-alfresco-archetypes.googlecode.com/svn</project.scm.connection>
+                <project.scm.developer.connection>${project.scm.connection}</project.scm.developer.connection>
+                <maven.release.version>2.4</maven.release.version>
+                <maven.release.goals>deploy site-deploy</maven.release.goals>
+                <maven.site.version>3.2</maven.site.version>
+                <maven.changes.version>2.8</maven.changes.version>
             </properties>
             <build>
                 <plugins>
@@ -151,7 +151,6 @@
                         <artifactId>maven-release-plugin</artifactId>
                         <version>${maven.release.version}</version>
                         <configuration>
-                            <tagBase>${scm.tag.base}</tagBase>
                             <preparationGoals>clean install</preparationGoals>
                             <goals>${maven.release.goals}</goals>
                             <autoVersionSubmodules>true</autoVersionSubmodules>
