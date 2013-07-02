@@ -64,6 +64,6 @@ Project History
 
   * The {{{https://groups.google.com/forum/?fromgroups#!forum/maven-alfresco}Maven Alfresco Lifecycle Discussion Group}} reaches 100 members in August 2012
 
-  * In October 2012 Alfresco finalises the {{{https://issues.alfresco.com/jira/browse/ALF-14353}aMaven modularisation and dependency categorisation}}, delivering {{{https://artifacts.alfresco.com}artifacts and poms}}
+  * In October 2012 Alfresco finalises the {{{https://issues.alfresco.com/jira/browse/ALF-14353} Maven modularisation and dependency categorisation}}, delivering {{{https://artifacts.alfresco.com}artifacts and poms}}
 
   * The new Alfresco Maven SDK 1.0 is released and presented on Tuesday 7 November at {{{http://devcon.alfresco.com/}Alfresco DevCon}} in Berlin.
