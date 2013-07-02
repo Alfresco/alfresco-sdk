@@ -27,7 +27,7 @@
         <alfresco.data.location>alf_data_dev</alfresco.data.location>
         <!-- Defines the target WAR for this AMP. Allowed values: alfresco | share  -->
         <!-- Defaults to a repository AMP -->
-        <alfresco.client.war>alfresco</alfresco.client.war>
+        <alfresco.client.war>${alfresco_target_amp_client_war}</alfresco.client.war>
         <!-- This controls which properties will be picked in src/test/properties for embedded run -->
         <env>local</env>
     </properties>
