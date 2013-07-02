@@ -28,6 +28,8 @@
         <!-- Defines the target WAR for this AMP. Allowed values: alfresco | share  -->
         <!-- Defaults to a repository AMP -->
         <alfresco.client.war>${alfresco_target_amp_client_war}</alfresco.client.war>
+        <alfresco.client.war.groupId>${alfresco_target_amp_client_war_groupId}</alfresco.client.war.groupId>
+        <alfresco.client.war.version>${alfresco_target_amp_client_war_version}</alfresco.client.war.version>
         <!-- This controls which properties will be picked in src/test/properties for embedded run -->
         <env>local</env>
     </properties>
