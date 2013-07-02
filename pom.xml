@@ -5,22 +5,23 @@
     <artifactId>alfresco-lifecycle-aggregator</artifactId>
     <version>1.0.2-SNAPSHOT</version>
     <name>Maven Alfresco SDK</name>
-    <description>This aggregator Project builds all modules required for the Maven Alfresco SDK</description>
+    <description>This aggregator Project builds all modules required for
+        the Maven Alfresco SDK</description>
     <packaging>pom</packaging>
-    
+
     <url>${maven.site.url}</url>
-    
+
     <prerequisites>
         <maven>3.0.3</maven>
     </prerequisites>
-    
+
     <licenses>
         <license>
             <name>GNU Lesser General Public License v3.0 or later</name>
             <url>http://www.gnu.org/licenses/lgpl-3.0-standalone.html</url>
         </license>
     </licenses>
-    
+
     <issueManagement>
         <system>GoogleCode</system>
         <url>http://code.google.com/p/maven-alfresco-archetypes/issues/detail</url>
@@ -61,7 +62,7 @@
             </roles>
         </developer>
     </developers>
-    
+
     <contributors>
         <contributor>
             <name>Carlo Sciolla</name>
@@ -84,35 +85,15 @@
         <module>archetypes/alfresco-allinone-archetype</module>
     </modules>
 
-    <distributionManagement>
-        <repository>
-            <id>alfresco-internal</id>
-            <url>https://artifacts.alfresco.com/nexus/content/repositories/releases
-            </url>
-        </repository>
-        <snapshotRepository>
-            <name>alfresco snapshots repository</name>
-            <id>alfresco-internal-snapshots</id>
-            <url>https://artifacts.alfresco.com/nexus/content/repositories/snapshots
-            </url>
-        </snapshotRepository>
-        <site>
-            <id>alfresco-docs</id>
-            <url>dav:${maven.site.url}</url>
-        </site>
-    </distributionManagement>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.archetype.version>2.2</maven.archetype.version>
         <maven.release.version>2.4</maven.release.version>
-	<maven.release.goals>deploy site-deploy</maven.release.goals>
+        <maven.release.goals>deploy site-deploy</maven.release.goals>
         <maven.site.version>3.2</maven.site.version>
         <maven.changes.version>2.8</maven.changes.version>
-        <maven.site.url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest</maven.site.url>
-        <scm.url.base>https://maven-alfresco-archetypes.googlecode.com/svn</scm.url.base>
-        <scm.tag.base>${scm.url.base}/tags</scm.tag.base>
-    </properties>
+        <alfresco.sdk.parent.version>${project.version}</alfresco.sdk.parent.version>
+      </properties>
 
     <build>
         <pluginManagement>
@@ -121,11 +102,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-archetype-plugin</artifactId>
                     <version>${maven.archetype.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>${maven.site.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -141,38 +117,8 @@
                 <version>2.2</version>
             </extension>
         </extensions>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>${maven.release.version}</version>
-                <configuration>
-                    <tagBase>${scm.tag.base}</tagBase>
-                    <preparationGoals>clean install</preparationGoals>
-                    <goals>${maven.release.goals}</goals>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                </configuration>
-            </plugin>
-        </plugins>
     </build>
-    
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-changes-plugin</artifactId>
-                <version>${maven.changes.version}</version>
-                <reportSets>
-                  <reportSet>
-                    <reports>
-                      <report>changes-report</report>
-                    </reports>
-                  </reportSet>
-                </reportSets>
-            </plugin>
-        </plugins>
-    </reporting>
-    
+
 
     <repositories>
         <repository>
@@ -189,5 +135,73 @@
             </snapshots>
         </repository>
     </repositories>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <properties>
+                <maven.site.url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest</maven.site.url>
+                <scm.url.base>https://maven-alfresco-archetypes.googlecode.com/svn</scm.url.base>
+                <scm.tag.base>${scm.url.base}/tags</scm.tag.base>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-release-plugin</artifactId>
+                        <version>${maven.release.version}</version>
+                        <configuration>
+                            <tagBase>${scm.tag.base}</tagBase>
+                            <preparationGoals>clean install</preparationGoals>
+                            <goals>${maven.release.goals}</goals>
+                            <autoVersionSubmodules>true</autoVersionSubmodules>
+                        </configuration>
+                    </plugin>
+                </plugins>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-site-plugin</artifactId>
+                            <version>${maven.site.version}</version>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+            <reporting>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-changes-plugin</artifactId>
+                        <version>${maven.changes.version}</version>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>changes-report</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+                </plugins>
+            </reporting>
+            <distributionManagement>
+                <repository>
+                    <id>alfresco-internal</id>
+                    <url>https://artifacts.alfresco.com/nexus/content/repositories/releases
+                    </url>
+                </repository>
+                <snapshotRepository>
+                    <name>alfresco snapshots repository</name>
+                    <id>alfresco-internal-snapshots</id>
+                    <url>https://artifacts.alfresco.com/nexus/content/repositories/snapshots
+                    </url>
+                </snapshotRepository>
+                <site>
+                    <id>alfresco-docs</id>
+                    <url>dav:${maven.site.url}</url>
+                </site>
+            </distributionManagement>
+        </profile>
+    </profiles>
 
 </project>

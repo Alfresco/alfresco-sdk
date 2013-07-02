@@ -14,5 +14,35 @@
     <version>1.0.2-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
+  
+  <build>
+    <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <includes>
+                <include>archetype-resources/pom.xml</include>
+            </includes>
+            <filtering>true</filtering>
+        </resource>
+        <resource>
+            <directory>src/main/resources</directory>
+            <excludes>
+                <exclude>archetype-resources/pom.xml</exclude>
+            </excludes>
+            <filtering>false</filtering>
+        </resource>
+    </resources>
+     <plugins>
+        <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <configuration>
+                <useDefaultDelimiters>false</useDefaultDelimiters>
+                <delimiters>
+                    <delimiter>@@</delimiter>
+                </delimiters>
+            </configuration>
+        </plugin>
+      </plugins>
+  </build>
 
 </project>
