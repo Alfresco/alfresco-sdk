@@ -171,6 +171,10 @@ public class AmpMojo extends AbstractMojo {
         ampArchiver.setArchiver(new AmpArchiver());
         ampArchiver.setOutputFile(ampFile);
 
+//        JarArchiver.FilesetManifestConfig config = new JarArchiver.FilesetManifestConfig();
+//        config.setValue("skip");
+//        ampArchiver.getArchiver().setFilesetmanifest(config);
+
         if (!this.ampBuildDirectory.exists()) {
             getLog().warn("ampBuildDirectory does not exist - AMP will be empty");
         } else {
