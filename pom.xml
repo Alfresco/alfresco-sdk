@@ -27,6 +27,12 @@
         <url>http://code.google.com/p/maven-alfresco-archetypes/issues/detail</url>
     </issueManagement>
 
+    <scm>
+        <connection>scm:svn:${scm.url.base}/trunk</connection>
+        <developerConnection>scm:svn:${scm.url.base}/trunk</developerConnection>
+        <url>${scm.url.base}/trunk</url>
+    </scm>
+
     <developers>
         <developer>
             <id>gabriele.columbro</id>
@@ -83,6 +89,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.archetype.version>2.2</maven.archetype.version>
         <alfresco.sdk.parent.version>${project.version}</alfresco.sdk.parent.version>
+        <scm.url.base>https://maven-alfresco-archetypes.googlecode.com/svn</scm.url.base>
       </properties>
 
     <build>
@@ -131,9 +138,6 @@
             <id>release</id>
             <properties>
                 <maven.site.url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest</maven.site.url>
-                <project.scm.url>https://maven-alfresco-archetypes.googlecode.com/svn/trunk</project.scm.url>
-                <project.scm.connection>scm:svn:${project.scm.url}</project.scm.connection>
-                <project.scm.developer.connection>${project.scm.connection}</project.scm.developer.connection>
                 <maven.release.version>2.4</maven.release.version>
                 <maven.release.goals>deploy site-deploy</maven.release.goals>
                 <maven.site.version>3.2</maven.site.version>
