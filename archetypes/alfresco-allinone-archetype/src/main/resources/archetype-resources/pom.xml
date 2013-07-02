@@ -15,16 +15,21 @@
     </parent>
     
     <!-- 
-       | SDK properties have sensible defaults in the SDK parent,
-       | but you can override the properties below to use another version. 
+       | SDK properties have sensible defaults in the SDK parent, but you can override the properties below to use another version. 
        | For more available properties see the alfresco-sdk-parent POM. 
        -->
     <properties>
+        <!-- 
+            | Defines the Alfresco GroupId \ Edition to work against. Allowed values are: org.alfresco | org.alfresco.enterprise
+            | NOTE: Please Refer to Alfresco Support for access to Enterprise artifacts -->
         <alfresco.groupId>${alfresco_target_groupId}</alfresco.groupId>
+        <!-- Defines the Alfresco version to work against. Allowed values are: org.alfresco | org.alfresco.enterprise -->
         <alfresco.version>${alfresco_target_version}</alfresco.version>
+        <!-- This control the root logging level for all apps -->
         <app.log.root.level>WARN</app.log.root.level>
+        <!-- This controls the default data location for dir.root -->
         <alfresco.data.location>alf_data_dev</alfresco.data.location>
-        <!-- This controls which properties will be picked in src/test/properties for embedded run -->
+        <!-- This controls which properties will be picked in multi-enviromment build -->
         <env>local</env>
     </properties>
 
@@ -46,17 +51,21 @@
      </dependencies>
   </dependencyManagement>
   
-    <!--
-    No more repos are needed since they will be inherited by the parent POM. 
-    This is needed to download the alfresco-plaftorm POM.
-    -->
+    <!-- This repository is only needed to retrieve Alfresco parent POM. 
+        NOTE: This can be removed when/if Alfresco will be on Maven Central 
+        
+        NOTE: The repository to be used for Alfresco Enterprise artifacts is
+        https://artifacts.alfresco.com/nexus/content/groups/private/. Please check
+        with Alfresco Support to get credentials to add to your ~/.m2/settings.xml
+        if you are a Enterprise customer or Partner  
+        -->
     <repositories>
         <repository>
-            <id>alfresco-artifacts</id>
+            <id>alfresco-public</id>
             <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
         </repository>
         <repository>
-            <id>alfresco-artifacts-snapshots</id>
+            <id>alfresco-public-snapshots</id>
             <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
         </repository>
     </repositories>
