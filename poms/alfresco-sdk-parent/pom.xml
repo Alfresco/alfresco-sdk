@@ -43,6 +43,8 @@
         | This impact (in AMP projects) the choice of the WAR project for embedded run
          -->
     <alfresco.client.war>alfresco</alfresco.client.war>
+    <alfresco.client.war.groupId>${alfresco.groupId}</alfresco.client.war.groupId>
+    <alfresco.client.war.version>${alfresco.version}</alfresco.client.war.version>
 
     <!-- IMPORTANT! Override this only if you know what you're doing; it could break amp-to-war overlay -->
     <alfresco.client.war.folder>${project.build.directory}/${project.build.finalName}-war</alfresco.client.war.folder>
@@ -540,10 +542,10 @@
                   <outputDirectory>${alfresco.client.war.folder}</outputDirectory>
                   <artifactItems>
                     <artifactItem>
-                      <groupId>${alfresco.groupId}</groupId>
+                      <groupId>${alfresco.client.war.groupId}</groupId>
                       <artifactId>${alfresco.client.war}</artifactId>
                       <type>war</type>
-                      <version>${alfresco.version}</version>
+                      <version>${alfresco.client.war.version}</version>
                     </artifactItem>
                   </artifactItems>
                 </configuration>

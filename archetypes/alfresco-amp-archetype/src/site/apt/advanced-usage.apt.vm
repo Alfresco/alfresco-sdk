@@ -41,10 +41,12 @@ AMP Archetype properties
     ...
     <properties>
         <!--
-        Determines the target WAR for this AMP
+        Determines the coordinates of target WAR for this AMP
         Allowed values: alfresco (default) | share
         -->
         <alfresco.client.war>alfresco</alfresco.client.war>
+        <alfresco.client.war.groupId>${alfresco.groupId}</alfresco.client.war.groupId>
+        <alfresco.client.war.version>${alfresco.version}</alfresco.client.war.version>
     </properties>
     ...
 </project>    
