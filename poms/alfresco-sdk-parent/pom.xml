@@ -186,6 +186,7 @@
               <nonFilteredFileExtension>ppt</nonFilteredFileExtension>
               <nonFilteredFileExtension>bin</nonFilteredFileExtension>
               <nonFilteredFileExtension>lic</nonFilteredFileExtension>
+              <nonFilteredFileExtension>swf</nonFilteredFileExtension>
             </nonFilteredFileExtensions>
           </configuration>
         </plugin>
