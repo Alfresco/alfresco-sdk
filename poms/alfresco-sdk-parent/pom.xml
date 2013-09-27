@@ -45,6 +45,7 @@
     <alfresco.client.war>alfresco</alfresco.client.war>
     <alfresco.client.war.groupId>${alfresco.groupId}</alfresco.client.war.groupId>
     <alfresco.client.war.version>${alfresco.version}</alfresco.client.war.version>
+    <alfresco.client.contextPath>${project.build.finalName}</alfresco.client.contextPath>
 
     <!-- IMPORTANT! Override this only if you know what you're doing; it could break amp-to-war overlay -->
     <alfresco.client.war.folder>${project.build.directory}/${project.build.finalName}-war</alfresco.client.war.folder>
@@ -609,6 +610,7 @@
             </executions>
             <configuration>
                 <webApp>${alfresco.client.war.folder}</webApp>
+                <contextPath>${alfresco.client.contextPath}</contextPath>
             </configuration>
           </plugin>
         </plugins>
