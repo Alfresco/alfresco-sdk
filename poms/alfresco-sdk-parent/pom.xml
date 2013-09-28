@@ -507,7 +507,7 @@
               <groupId>org.springframework</groupId>
               <artifactId>spring-context</artifactId>
               <version>3.0.6.RELEASE</version>
-              <scope>test</scope>
+              <scope>provided</scope>
           </dependency>
           <dependency>
               <groupId>${alfresco.groupId}</groupId>
