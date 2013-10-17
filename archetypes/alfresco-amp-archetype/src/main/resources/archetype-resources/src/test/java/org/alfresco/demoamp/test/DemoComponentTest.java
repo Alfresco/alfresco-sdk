@@ -70,8 +70,8 @@ public class DemoComponentTest {
         NodeRef companyHome = demoComponent.getCompanyHome();
         int childNodeCount = demoComponent.childNodesCount(companyHome);
         assertNotNull(childNodeCount);
-        // There are 5 folders by default under Company Home
-        assertEquals(5, childNodeCount);
+        // There are 7 folders by default under Company Home
+        assertEquals(7, childNodeCount);
     }
 
 }

@@ -37,7 +37,7 @@
         | For available versions please search on https://artifacts.alfresco.com/nexus/index.html
         -->
     <alfresco.groupId>org.alfresco</alfresco.groupId>
-    <alfresco.version>4.2.c</alfresco.version>
+    <alfresco.version>4.2.e</alfresco.version>
 
     <!--  Values can be "alfresco" or "share". Default value is 'alfresco' assuming you are developing a repository AMP, change to share for share AMPs 
         | This impact (in AMP projects) the choice of the WAR project for embedded run
@@ -97,23 +97,23 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- Maven Plugins Versions used by the SDK -->
-    <maven.compiler.version>3.0</maven.compiler.version>
+    <maven.compiler.version>3.1</maven.compiler.version>
     <maven.clean.version>2.5</maven.clean.version>
     <maven.dependency.version>2.8</maven.dependency.version>
-    <maven.enforcer.plugin>1.2</maven.enforcer.plugin>
+    <maven.enforcer.plugin>1.3</maven.enforcer.plugin>
     <maven.resources.version>2.6</maven.resources.version>
-    <maven.surefire.version>2.13</maven.surefire.version>
-    <maven.install.version>2.4</maven.install.version>
+    <maven.surefire.version>2.16</maven.surefire.version>
+    <maven.install.version>2.5</maven.install.version>
     <maven.jar.version>2.4</maven.jar.version>
-    <maven.war.version>2.3</maven.war.version>
-    <maven.release.version>2.4</maven.release.version>
-    <maven.buildhelper.version>1.7</maven.buildhelper.version>
+    <maven.war.version>2.4</maven.war.version>
+    <maven.release.version>2.4.1</maven.release.version>
+    <maven.buildhelper.version>1.8</maven.buildhelper.version>
     <maven.jetty.version>6.1.26</maven.jetty.version>
     <!-- This is used for the site deployment procedure (override in your POM as needed) -->
     <stagingDirectory>../../target/staging/poms/alfresco-sdk-parent</stagingDirectory>
     <!-- Alfresco Maven plugin in use throughout the SDK -->
     <maven.alfresco.version>1.0.3-SNAPSHOT</maven.alfresco.version>
-    <h2.version>1.3.170</h2.version>
+    <h2.version>1.3.173</h2.version>
     <h2-support.version>1.5</h2-support.version>
   </properties>
   
