@@ -1,12 +1,7 @@
 package org.alfresco.maven.plugin;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Set;
 
 import org.alfresco.maven.plugin.archiver.AmpArchiver;
@@ -79,13 +74,12 @@ public class AmpMojo extends AbstractMojo {
     protected boolean includeDependencies;
 
     /**
-     * Directory the build produces the AMP file in 
+     * Directory of the final generated AMP
      *
-     * @parameter default-value="${project.build.directory}"
+     * @parameter property="maven.alfresco.ampFinalDir" default-value="${project.build.directory}"
      * @required
-     * @readonly
      */
-    protected File outputDirectory;
+    protected File ampFinalDir;
 
     /**
      * (Read Only) Directory containing the classes and resource files that should be packaged into the JAR.
@@ -157,7 +151,7 @@ public class AmpMojo extends AbstractMojo {
                 "jar");
 
         File ampFile = getFile(
-                this.outputDirectory,
+                this.ampFinalDir,
                 this.ampFinalName,
                 this.classifier,
                 "amp"
