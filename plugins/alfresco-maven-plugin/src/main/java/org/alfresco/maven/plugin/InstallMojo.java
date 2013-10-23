@@ -70,12 +70,22 @@ public class InstallMojo extends AbstractMojo {
      * @parameter property="maven.alfresco.skipWarManifestCheck" default-value="false"
      */
     private boolean skipWarManifestCheck;
+    
+    /**
+     * Whether or not to skip the attempt to install the AMP in the warLocation altogether
+     * 
+     * @parameter property="maven.alfresco.skipAmpInstallation" default-value="false"
+     */
+    private boolean skipAmpInstallation;
 
     public InstallMojo() {
     }
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
+        if (skipAmpInstallation) {
+            return;
+        }
         // Checks appropriate input params are in place
         checkParams();
         ModuleManagementTool mmt = new ModuleManagementTool();
