@@ -19,14 +19,8 @@
             <artifactId>share</artifactId>
             <type>war</type>
         </dependency>
-        <!-- Demonstrating the usage of a well known GA AMP (Web Quick Start 
-            Share component) -->
-        <dependency>
-            <groupId>${alfresco.groupId}</groupId>
-            <artifactId>alfresco-wcm-quickstart-share</artifactId>
-            <version>${alfresco.version}</version>
-            <type>amp</type>
-        </dependency>
+        <!-- Here you can add your Share AMP dependencies -->
+       
     </dependencies>
     <build>
         <plugins>
@@ -50,12 +44,7 @@
                             <!-- To allow inclusion of META-INF -->
                             <excludes/>
                         </overlay>
-                        <!-- Add / order your AMPs here -->
-                        <overlay>
-                            <groupId>${alfresco.groupId}</groupId>
-                            <artifactId>alfresco-wcm-quickstart-share</artifactId>
-                            <type>amp</type>
-                        </overlay>
+                        <!-- Add / order here the Share AMPs declared above -->
                     </overlays>
                 </configuration>
             </plugin>

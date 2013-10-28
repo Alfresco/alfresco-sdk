@@ -13,10 +13,8 @@
     </parent>
 
     <!--
-    Following dependencies are needed for compiling
-    Java code in src/main/java; <scope>provided</scope>
-    is inherited for each of the following; for more
-    info, please refer to alfresco-integration-parent
+    Following dependencies are needed for compiling Java code in src/main/java; <scope>provided</scope>
+    is inherited for each of the following; for more info, please refer to alfresco-integration-parent
     POM definition
     @TODO - document
     -->

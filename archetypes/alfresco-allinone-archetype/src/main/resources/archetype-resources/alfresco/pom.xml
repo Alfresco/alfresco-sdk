@@ -30,17 +30,17 @@
             <artifactId>alfresco</artifactId>
             <type>war</type>
         </dependency>
-        <!-- Demonstrating the dependency on the AMP developed in the 'amp' project -->
+        <!-- Demonstrating the dependency on the repo AMP developed in the 'amp' module -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>amp</artifactId>
             <version>${project.version}</version>
             <type>amp</type>
         </dependency>
-        <!-- Demonstrating the usage of a well known GA AMP (Web Quick Start Repository component) -->
+        <!-- Demonstrating the usage of a well known GA AMP (SharePoint Protocol Support) -->
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
-            <artifactId>alfresco-wcm-quickstart-repo</artifactId>
+            <artifactId>alfresco-spp</artifactId>
             <version>${alfresco.version}</version>
             <type>amp</type>
         </dependency>
@@ -76,7 +76,7 @@
                         </overlay>
                         <overlay>
                             <groupId>${alfresco.groupId}</groupId>
-                            <artifactId>alfresco-wcm-quickstart-repo</artifactId>
+                            <artifactId>alfresco-spp</artifactId>
                             <type>amp</type>
                         </overlay>
                     </overlays>
