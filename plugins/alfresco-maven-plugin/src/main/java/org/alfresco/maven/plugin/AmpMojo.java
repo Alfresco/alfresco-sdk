@@ -72,6 +72,20 @@ public class AmpMojo extends AbstractMojo {
      * @required
      */
     protected boolean includeDependencies;
+    
+    /**
+     * Whether the JAR produced should be attached as a separate 'classes' artifact.
+     * 
+     * @parameter property="maven.alfresco.attachClasses" default-value="false"
+     */
+    protected boolean attachClasses;
+    
+    /**
+     * Whether a config artifact should be produced should be attached as a separate 'config' artifact.
+     * 
+     * @parameter property="maven.alfresco.attachConfig" default-value="false"
+     */
+    protected boolean attachConfig;
 
     /**
      * Directory of the final generated AMP
@@ -127,6 +141,11 @@ public class AmpMojo extends AbstractMojo {
         if(includeDependencies) {
         	gatherDependencies();
         }
+        
+        File jarFile = createJarArchive();
+        if (this.attachClasses) {
+            this.projectHelper.attachArtifact(this.project, "jar", "classes", jarFile);
+        }
 
         File ampFile = createArchive();
         if (this.classifier != null) {
@@ -134,8 +153,41 @@ public class AmpMojo extends AbstractMojo {
         } else {
             this.project.getArtifact().setFile(ampFile);
         }
+        
+        if (attachConfig) {
+            File configFile = createConfigArchive();
+            this.projectHelper.attachArtifact(this.project, "jar", "config", configFile);
+        }
     }
 
+    /**
+     * Creates and returns the JAR archive, invoking the MavenArchiver
+     *
+     * @return a File pointing to the JAR, contained
+     *         in ${project.build.outputDirectory}
+     */
+    protected File createJarArchive()
+            throws MojoExecutionException {
+        File jarFile = getFile(
+                new File(this.ampBuildDirectory, AmpModel.AMP_FOLDER_LIB),
+                this.ampFinalName,
+                this.classifier,
+                "jar");
+        
+        MavenArchiver jarArchiver = new MavenArchiver();
+        jarArchiver.setArchiver(new JarArchiver());
+        jarArchiver.setOutputFile(jarFile);
+        
+        try {
+            jarArchiver.getArchiver().addDirectory(this.classesDirectory, new String[] {}, new String[] {});
+            jarArchiver.createArchive(this.session, this.project, this.archive);
+            return jarFile;
+        }
+        catch (Exception e) {
+            throw new MojoExecutionException("Error creating JAR", e);
+        }
+    }
+    
     /**
      * Creates and returns the AMP archive, invoking the AmpArchiver
      *
@@ -144,11 +196,6 @@ public class AmpMojo extends AbstractMojo {
      */
     protected File createArchive()
             throws MojoExecutionException {
-        File jarFile = getFile(
-                new File(this.ampBuildDirectory, AmpModel.AMP_FOLDER_LIB),
-                this.ampFinalName,
-                this.classifier,
-                "jar");
 
         File ampFile = getFile(
                 this.ampFinalDir,
@@ -156,10 +203,6 @@ public class AmpMojo extends AbstractMojo {
                 this.classifier,
                 "amp"
         );
-
-        MavenArchiver jarArchiver = new MavenArchiver();
-        jarArchiver.setArchiver(new JarArchiver());
-        jarArchiver.setOutputFile(jarFile);
 
         MavenArchiver ampArchiver = new MavenArchiver();
         ampArchiver.setArchiver(new AmpArchiver());
@@ -172,12 +215,6 @@ public class AmpMojo extends AbstractMojo {
         if (!this.ampBuildDirectory.exists()) {
             getLog().warn("ampBuildDirectory does not exist - AMP will be empty");
         } else {
-            try {
-                jarArchiver.getArchiver().addDirectory(this.classesDirectory, new String[]{}, new String[]{});
-                jarArchiver.createArchive(this.session, this.project, this.archive);
-              } catch (Exception e) {
-                    throw new MojoExecutionException("Error creating JAR", e);
-              }
               try {
                 ampArchiver.getArchiver().addDirectory(this.ampBuildDirectory, new String[]{"**"}, new String[]{});
                 ampArchiver.createArchive(this.session, this.project, this.archive);
@@ -187,6 +224,37 @@ public class AmpMojo extends AbstractMojo {
               }
         }
         return ampFile;
+    }
+    
+    /**
+     * Creates and returns the config archive, invoking the MavenArchiver
+     *
+     * @return a File pointing to the JAR, contained
+     *         in ${project.build.outputDirectory}
+     */
+    protected File createConfigArchive()
+            throws MojoExecutionException {
+        File configFile = getFile(
+                new File(this.project.getBuild().getDirectory()),
+                this.ampFinalName,
+                this.classifier,
+                "jar");
+        
+        MavenArchiver configArchiver = new MavenArchiver();
+        configArchiver.setArchiver(new JarArchiver());
+        configArchiver.setOutputFile(configFile);
+        
+        try {
+            configArchiver.getArchiver().addDirectory(
+                    new File(this.ampBuildDirectory, "config"), 
+                    new String[] { }, 
+                    new String[] { "**/*.class" });
+            configArchiver.createArchive(this.session, this.project, this.archive);
+            return configFile;
+        }
+        catch (Exception e) {
+            throw new MojoExecutionException("Error creating config artifact", e);
+        }
     }
 
     /**
