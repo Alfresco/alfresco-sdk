@@ -610,7 +610,7 @@
       
     </profile>
     
-    <!-- Cleans Alfresco data folder, embedded DB and logs -->
+    <!-- Cleans Alfresco data folder, embedded DB and any log file found -->
     <profile>
         <id>purge</id>
         <build>
@@ -625,9 +625,12 @@
                           <directory>${project.basedir}/${alfresco.data.location}</directory>
                         </fileset>
                         <fileset>
-                          <directory>${app.log.dir}</directory>
+                          <directory>${project.basedir}/solr_home</directory>
+                        </fileset>
+                        <fileset>
+                          <directory>${project.basedir}</directory>
                           <includes>
-                            <include>*.log</include>
+                            <include>**/*.log</include>
                           </includes>
                         </fileset>
                       </filesets>

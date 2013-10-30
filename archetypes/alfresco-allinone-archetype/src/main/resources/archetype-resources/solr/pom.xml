@@ -157,7 +157,6 @@
                 </executions>
             </plugin>
         </plugins>
-        
     </build>
 
     <dependencies>
@@ -169,25 +168,4 @@
         </dependency>
     </dependencies>
 
-    <profiles>
-        <!-- Cleans Alfresco data folder, embedded DB and logs -->
-        <profile>
-            <id>purge</id>
-            <build>
-                <plugins>
-                    <!-- Cleaning Alfresco Solr -->
-                    <plugin>
-                        <artifactId>maven-clean-plugin</artifactId>
-                        <configuration>
-                            <filesets>
-                                <fileset>
-                                    <directory>${project.basedir}/solr_home</directory>
-                                </fileset>
-                            </filesets>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>
