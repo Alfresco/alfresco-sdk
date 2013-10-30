@@ -24,7 +24,7 @@
 
     <issueManagement>
         <system>GoogleCode</system>
-        <url>http://code.google.com/p/maven-alfresco-archetypes/issues/detail</url>
+        <url>http://code.google.com/p/maven-alfresco-archetypes/issues</url>
     </issueManagement>
 
     <scm>
