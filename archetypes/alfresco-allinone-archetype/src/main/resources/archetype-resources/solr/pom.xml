@@ -73,12 +73,6 @@
                             <overwrite>true</overwrite>
                             <resources>
                                 <resource>
-                                    <directory>src/main/webapp/WEB-INF</directory>
-                                    <includes>
-                                        <include>web.xml</include>
-                                    </includes>
-                                </resource>
-                                <resource>
                                     <directory>src/main/resources</directory>
                                     <filtering>true</filtering>
                                     <targetPath>classes</targetPath>
@@ -87,6 +81,34 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <!-- Replaces web.xml where applicable, commenting out the security-constraints -->
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <executions>
+                    <execution>
+                        <id>disable-securecomms</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <ignoreErrors>true</ignoreErrors>
+                    <file>${alfresco.solr.war.overlay}/WEB-INF/web.xml</file>
+                    <replacements>
+                        <replacement>
+                            <token><![CDATA[<security-constraint>]]></token>
+                            <value><![CDATA[<!-- <security-constraint>]]></value>
+                        </replacement>
+                        <replacement>
+                            <token><![CDATA[</security-role>]]></token>
+                            <value><![CDATA[</security-role> -->]]></value>
+                        </replacement>
+                    </replacements>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -135,6 +157,7 @@
                 </executions>
             </plugin>
         </plugins>
+        
     </build>
 
     <dependencies>
@@ -145,4 +168,26 @@
             <type>zip</type>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <!-- Cleans Alfresco data folder, embedded DB and logs -->
+        <profile>
+            <id>purge</id>
+            <build>
+                <plugins>
+                    <!-- Cleaning Alfresco Solr -->
+                    <plugin>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>${project.basedir}/solr_home</directory>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

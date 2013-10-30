@@ -16,7 +16,7 @@
         <profile>
             <id>run</id>
             <properties>
-                <solr.project.dir>../solr</solr.project.dir>
+                <solr.project.dir>${project.basedir}/../solr</solr.project.dir>
             </properties>
             <build>
                 <plugins>

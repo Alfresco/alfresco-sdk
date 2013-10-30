@@ -128,7 +128,7 @@
      -->
     <!--<mergeScheduler class="org.apache.lucene.index.ConcurrentMergeScheduler"/>-->
 
-	  
+      
     <!--
       This option specifies which Lucene LockFactory implementation to use.
       
@@ -210,17 +210,17 @@
 
   </mainIndex>
 
-  <!--	Enables JMX if and only if an existing MBeanServer is found, use this
+  <!--  Enables JMX if and only if an existing MBeanServer is found, use this
     if you want to configure JMX through JVM parameters. Remove this to disable
     exposing Solr configuration and statistics to JMX.
 
-		If you want to connect to a particular server, specify the agentId
-		e.g. <jmx agentId="myAgent" />
+        If you want to connect to a particular server, specify the agentId
+        e.g. <jmx agentId="myAgent" />
 
-		If you want to start a new MBeanServer, specify the serviceUrl
-		e.g <jmx serviceUrl="service:jmx:rmi:///jndi/rmi://localhost:9999/solr"/>
+        If you want to start a new MBeanServer, specify the serviceUrl
+        e.g <jmx serviceUrl="service:jmx:rmi:///jndi/rmi://localhost:9999/solr"/>
 
-		For more details see http://wiki.apache.org/solr/SolrJmx
+        For more details see http://wiki.apache.org/solr/SolrJmx
   -->
   <jmx />
 
@@ -384,6 +384,11 @@
       initialSize="100"
       autowarmCount="0"
     />
+    
+    <cache name="alfrescoArrayListCache"
+      class="org.alfresco.solr.ArrayListCache"
+    />
+    
 
     <cache name="alfrescoAuthorityCache"
       class="solr.FastLRUCache"
@@ -399,6 +404,14 @@
       initialSize="${solr.pathCache.initialSize:512}"
       autowarmCount="${solr.pathCache.autowarmCount:128}"
       regenerator="org.alfresco.solr.FilterCacheRegenerator"
+    />
+
+   <!-- No regnerator or warming is required - this will be populated by the authority cache regenration -->
+   <cache name="alfrescoReaderToAclIdsCache"
+      class="solr.FastLRUCache"
+      size="${solr.readerToAclIdsCache.size:512}"
+      initialSize="${solr.readerToAclIdsCache.initialSize:512}"
+      autowarmCount="0"
     />
 
     <listener event="newSearcher" class="org.alfresco.solr.AlfrescoSolrEventListener">
