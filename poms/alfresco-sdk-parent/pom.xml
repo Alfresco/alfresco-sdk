@@ -596,7 +596,7 @@
                     <goals>
                         <goal>run-war-only</goal>
                     </goals>
-                    <phase>package-test</phase>
+                    <phase>integration-test</phase>
                     <configuration>
                         <contextFile>${alfresco.client.war.folder}/WEB-INF/context.xml</contextFile>
                         <!-- To run a non WAR project -->
