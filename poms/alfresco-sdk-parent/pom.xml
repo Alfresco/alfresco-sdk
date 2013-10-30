@@ -596,11 +596,11 @@
                     <goals>
                         <goal>run-war-only</goal>
                     </goals>
-                    <phase>integration-test</phase>
+                    <phase>package-test</phase>
                     <configuration>
                         <contextFile>${alfresco.client.war.folder}/WEB-INF/context.xml</contextFile>
                         <!-- To run a non WAR project -->
-                        <tomcat.ignorePackaging>true</tomcat.ignorePackaging>
+                        <ignorePackaging>true</ignorePackaging>
                     </configuration>
                 </execution>
             </executions>
