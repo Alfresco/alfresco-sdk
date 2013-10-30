@@ -381,31 +381,6 @@
         </build>
     </profile>
     
-    <profile>
-        <id>run</id>
-        <activation>
-            <property>
-                <name>run</name>
-            </property>
-        </activation>
-        <build>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.tomcat.maven</groupId>
-                    <artifactId>tomcat7-maven-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>run-wars</id>
-                            <goals>
-                                <goal>run-war-only</goal>
-                            </goals>
-                            <phase>integration-test</phase>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </build>
-    </profile>
     
     <!-- Enable AMP lifecycle if finds a module.properties, including unit testing support -->
     <profile>
@@ -521,7 +496,7 @@
       </dependencies>
     </profile>
     
-    <!-- Enable AMP project packing on a WAR and run embedded in Jetty -->
+    <!-- Enable AMP project packing on a WAR and run embedded in Tomcat -->
     <profile>
       <id>amp-to-war</id>
       <build>
@@ -611,14 +586,28 @@
               </execution>
             </executions>
           </plugin>
+          <!-- Configures tomcat to run against the overlaid WAR + AMP -->
+          <plugin>
+            <groupId>org.apache.tomcat.maven</groupId>
+            <artifactId>tomcat7-maven-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>run-wars</id>
+                    <goals>
+                        <goal>run-war-only</goal>
+                    </goals>
+                    <phase>integration-test</phase>
+                    <configuration>
+                        <contextFile>${alfresco.client.war.folder}/WEB-INF/context.xml</contextFile>
+                        <!-- To run a non WAR project -->
+                        <tomcat.ignorePackaging>true</tomcat.ignorePackaging>
+                    </configuration>
+                </execution>
+            </executions>
+          </plugin>
         </plugins>
       </build>
-      <!-- Configures tomcat to run against the overlaid WAR + AMP -->
-      <properties>
-        <maven.tomcat.contextFile>${alfresco.client.war.folder}/WEB-INF/context.xml</maven.tomcat.contextFile>
-        <!-- To run a non WAR project -->
-        <tomcat.ignorePackaging>true</tomcat.ignorePackaging>
-      </properties>
+      
     </profile>
     
     <!-- Cleans Alfresco data folder, embedded DB and logs -->

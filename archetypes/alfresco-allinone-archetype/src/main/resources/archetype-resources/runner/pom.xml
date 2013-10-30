@@ -23,6 +23,15 @@
                     <plugin>
                         <groupId>org.apache.tomcat.maven</groupId>
                         <artifactId>tomcat7-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>run-wars</id>
+                                <goals>
+                                    <goal>run-war-only</goal>
+                                </goals>
+                                <phase>integration-test</phase>
+                            </execution>
+                        </executions>
                         <configuration>
                             <!-- Runs Solr as the "fake" main webapp. This is useful due to the currently poor OOTB zip packaging of Alfresco Solr -->
                             <warDirectory>${solr.project.dir}/target/solr-overlay</warDirectory>
