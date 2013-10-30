@@ -45,7 +45,7 @@
     <alfresco.client.war>alfresco</alfresco.client.war>
     <alfresco.client.war.groupId>${alfresco.groupId}</alfresco.client.war.groupId>
     <alfresco.client.war.version>${alfresco.version}</alfresco.client.war.version>
-    <alfresco.client.contextPath>${project.build.finalName}</alfresco.client.contextPath>
+    <alfresco.client.contextPath>/${alfresco.client.war}</alfresco.client.contextPath>
 
     <!-- IMPORTANT! Override this only if you know what you're doing; it could break amp-to-war overlay -->
     <alfresco.client.war.folder>${project.build.directory}/${project.build.finalName}-war</alfresco.client.war.folder>
@@ -108,7 +108,7 @@
     <maven.war.version>2.4</maven.war.version>
     <maven.release.version>2.4.1</maven.release.version>
     <maven.buildhelper.version>1.8</maven.buildhelper.version>
-    <maven.jetty.version>6.1.26</maven.jetty.version>
+    <maven.tomcat.version>2.1</maven.tomcat.version>
     <!-- This is used for the site deployment procedure (override in your POM as needed) -->
     <stagingDirectory>../../target/staging/poms/alfresco-sdk-parent</stagingDirectory>
     <!-- Alfresco Maven plugin in use throughout the SDK -->
@@ -242,10 +242,33 @@
           <artifactId>maven-jar-plugin</artifactId>
           <version>${maven.jar.version}</version>
         </plugin>
+        <!-- Configures tomcat with proper deps and performance fixes -->
         <plugin>
-          <groupId>org.mortbay.jetty</groupId>
-          <artifactId>maven-jetty-plugin</artifactId>
-          <version>${maven.jetty.version}</version>
+            <groupId>org.apache.tomcat.maven</groupId>
+            <artifactId>tomcat7-maven-plugin</artifactId>
+            <version>${maven.tomcat.version}</version>
+            <configuration>
+                <useSeparateTomcatClassLoader>true</useSeparateTomcatClassLoader>
+            </configuration>
+            <dependencies>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                    <version>${h2.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>tk.skuro.alfresco</groupId>
+                    <artifactId>h2-support</artifactId>
+                    <version>${h2-support.version}</version>
+                </dependency>
+                <!-- Major performance improvement, 
+                see http://mindthegab.com/2013/06/20/maven-is-not-so-evil-plexus-archives-2-3-is-a-life-saver-for-the-speed-of-your-war-development-with-maven/ -->
+                <dependency>
+                    <groupId>org.codehaus.plexus</groupId>
+                    <artifactId>plexus-archiver</artifactId>
+                    <version>2.3</version>
+                </dependency>
+            </dependencies>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -357,59 +380,31 @@
             </plugins>
         </build>
     </profile>
-    <!-- Enable jetty running embedded if the jetty/jetty.xml file exists in the project -->
+    
     <profile>
-      <id>enable-jetty</id>
-      <activation>
-        <file>
-          <exists>jetty/jetty.xml</exists>
-        </file>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-resources-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>filter-jetty-conf</id>
-                <goals>
-                  <goal>copy-resources</goal>
-                </goals>
-                <phase>process-resources</phase>
-                <configuration>
-                  <outputDirectory>target</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>${project.basedir}/jetty</directory>
-                      <filtering>${app.filtering.enabled}</filtering>
-                    </resource>
-                  </resources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.mortbay.jetty</groupId>
-            <artifactId>maven-jetty-plugin</artifactId>
-            <configuration>
-              <jettyConfig>${project.build.directory}/jetty.xml</jettyConfig>
-            </configuration>
-            <dependencies>
-                <dependency>
-                    <groupId>com.h2database</groupId>
-                    <artifactId>h2</artifactId>
-                    <version>${h2.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>tk.skuro.alfresco</groupId>
-                    <artifactId>h2-support</artifactId>
-                    <version>${h2-support.version}</version>
-                </dependency>
-            </dependencies>
-          </plugin>
-        </plugins>
-      </build>
+        <id>run</id>
+        <activation>
+            <property>
+                <name>run</name>
+            </property>
+        </activation>
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>run-wars</id>
+                            <goals>
+                                <goal>run-war-only</goal>
+                            </goals>
+                            <phase>integration-test</phase>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </build>
     </profile>
     
     <!-- Enable AMP lifecycle if finds a module.properties, including unit testing support -->
@@ -554,13 +549,14 @@
               </execution>
             </executions>
           </plugin>
-          <!-- When the AMP runs locally, src/test/webapp and src/test/resources will contain -->
-          <!-- the location of the configuration files -->
+          <!-- Configure tomcat context.xml included in the webapp with proper filtering -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-resources-plugin</artifactId>
             <executions>
-              <execution>
+            <!-- When the AMP runs locally, src/test/webapp and src/test/resources will contain -->
+            <!-- the location of the configuration files -->
+            <execution>
                 <id>copy-alfresco-test-resources</id>
                 <phase>prepare-package</phase>
                 <goals><goal>copy-resources</goal></goals>
@@ -574,6 +570,26 @@
                       <directory>${project.build.testOutputDirectory}</directory>
                       <targetPath>WEB-INF/classes</targetPath>
                       <filtering>${app.filtering.enabled}</filtering>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+              <execution>
+                <id>copy-tomcat-context</id>
+                <phase>prepare-package</phase>
+                <goals><goal>copy-resources</goal></goals>
+                <configuration>
+                  <outputDirectory>${alfresco.client.war.folder}</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>tomcat</directory>
+                      <filtering>${app.filtering.enabled}</filtering>
+                      <targetPath>WEB-INF</targetPath>
+                    </resource>
+                    <resource>
+                      <directory>src/test/properties/${env}</directory>
+                      <filtering>${app.filtering.enabled}</filtering>
+                      <targetPath>WEB-INF/classes</targetPath>
                     </resource>
                   </resources>
                 </configuration>
@@ -595,27 +611,16 @@
               </execution>
             </executions>
           </plugin>
-          <!-- If the integration-test phase is called, the integrated WAR + AMP is actually ran in Jetty -->
-          <plugin>
-            <groupId>org.mortbay.jetty</groupId>
-            <artifactId>maven-jetty-plugin</artifactId>
-            <executions>
-                <execution>
-                    <id>run-amp-to-war</id>
-                    <goals>
-                        <goal>run-exploded</goal>
-                    </goals>
-                    <phase>pre-integration-test</phase>
-                </execution>
-            </executions>
-            <configuration>
-                <webApp>${alfresco.client.war.folder}</webApp>
-                <contextPath>${alfresco.client.contextPath}</contextPath>
-            </configuration>
-          </plugin>
         </plugins>
       </build>
+      <!-- Configures tomcat to run against the overlaid WAR + AMP -->
+      <properties>
+        <maven.tomcat.contextFile>${alfresco.client.war.folder}/WEB-INF/context.xml</maven.tomcat.contextFile>
+        <!-- To run a non WAR project -->
+        <tomcat.ignorePackaging>true</tomcat.ignorePackaging>
+      </properties>
     </profile>
+    
     <!-- Cleans Alfresco data folder, embedded DB and logs -->
     <profile>
         <id>purge</id>

@@ -26,10 +26,14 @@
     </dependencies>
     
     <properties>
-        <!-- This property allow to switch Repo AMP vs Share AMP. 
-             Set alfresco.client.war=share to run this AMP against Share
-         -->
-        <alfresco.client.war>alfresco</alfresco.client.war>
+        <!-- Defines the target WAR artifactId to run this amp, only used with the -Pamp-to-war switch
+        .    | Allowed values: alfresco | share. Defaults to a repository AMP, but could point to your custom corporate Alfresco WAR -->
+        <alfresco.client.war>${alfresco_target_amp_client_war}</alfresco.client.war>
+        <!-- Defines the target WAR groupId to run this amp, only used with the -Pamp-to-war switch
+        .    | Could be org.alfresco | org.alfresco.enterprise or your corporate groupId -->
+        <!-- <alfresco.client.war.groupId>org.alfresco</alfresco.client.war.groupId> -->
+        <!-- Defines the target WAR version to run this amp, only used with the -Pamp-to-war switch -->
+        <!-- <alfresco.client.war.version>${alfresco.version}</alfresco.client.war.version> -->
     </properties>
     
 </project>

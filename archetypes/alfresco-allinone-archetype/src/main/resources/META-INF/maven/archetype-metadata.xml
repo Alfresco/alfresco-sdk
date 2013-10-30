@@ -44,7 +44,7 @@
           </includes>
         </fileSet>
         <fileSet encoding="UTF-8" filtered="false">
-          <directory>jetty</directory>
+          <directory>tomcat</directory>
           <includes>
             <include>**</include>
           </includes>
@@ -119,14 +119,6 @@
       </fileSets>
     </module>
     <module id="runner" dir="runner" name="runner" filtered="false">
-      <fileSets>
-        <fileSet encoding="UTF-8">
-          <directory>jetty</directory>
-          <includes>
-            <include>**</include>
-          </includes>
-        </fileSet>
-      </fileSets>
     </module>
   </modules>
 </archetype-descriptor>

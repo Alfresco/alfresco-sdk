@@ -67,7 +67,7 @@
       </includes>
     </fileSet>
     <fileSet filtered="false" encoding="UTF-8">
-      <directory>jetty</directory>
+      <directory>tomcat</directory>
       <includes>
         <include>**/*.xml</include>
       </includes>

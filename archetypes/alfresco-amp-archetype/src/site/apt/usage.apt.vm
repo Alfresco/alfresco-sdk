@@ -61,10 +61,13 @@ Commands
     
     * <<<mvn install -Dmaven.test.skip=true>>>: Like <<<mvn install>>> but skips unit tests
     
-    * <<<mvn package -Pamp-to-war>>>: Like <<<mvn package>>> but also installs the AMP onto an Alfresco WAR. 
+    * <<<mvn install -Pamp-to-war>>>: Like <<<mvn install>>> but also installs the AMP onto an Alfresco WAR. 
     
-    * <<<mvn integration-test -Pamp-to-war>>> Like <<<mvn package -Pamp-to-war>>> 
-    but also runs the resulting WAR+AMP in Jetty + H2 embedded for integration testing
+    * <<<mvn install -Pamp-to-war,run>>> Like <<<mvn package -Pamp-to-war>>> 
+    but also runs the resulting WAR+AMP in Tomcat + H2 embedded for integration testing. 
+    When you run this command then you can access in your browser <<< {{{http://localhost:8080/alfresco}}} >>> or <<< {{{http://localhost:8080/share}}} >>>
+    depending on the value of the property <<<alfresco.client.war>>>
+    
     
     * <<<mvn integration-test -Pamp-to-war -Dalfresco.client.war=share>>>: Like <<<mvn integration-test -Pamp-to-war>>> but installs the AMP and runs on the Share WAR in Jetty embedded.
     
