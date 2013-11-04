@@ -76,6 +76,8 @@
 
     <!-- All the modules of the Maven Alfresco SDK -->
     <modules>
+        <!-- Modules -->
+        <module>modules/alfresco-rad</module>       
         <!-- Plugins -->
         <module>plugins/alfresco-maven-plugin</module>
         <!-- POM files -->

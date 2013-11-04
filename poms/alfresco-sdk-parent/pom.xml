@@ -419,17 +419,10 @@
                 <phase>process-test-resources</phase>
                 <goals><goal>copy-resources</goal></goals>
                 <configuration>
-                  <!-- <outputDirectory>${app.amp.test.output.folder}</outputDirectory> -->
                  <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
                   <resources>
                     <resource>
                       <directory>${app.amp.folder}/config</directory>
-                      <filtering>${app.filtering.enabled}</filtering>
-                    </resource>
-                    <resource>
-                      <directory>${app.amp.folder}</directory>
-                      <includes><include>module.properties</include></includes>
-                      <targetPath>alfresco/module/${project.artifactId}</targetPath>
                       <filtering>${app.filtering.enabled}</filtering>
                     </resource>
                   </resources>
@@ -452,11 +445,6 @@
         </plugins>
       </build>
       <dependencies>
-          <dependency>
-              <artifactId>junit-remote</artifactId>
-              <groupId>com.tradeshift</groupId>
-              <version>3</version>
-          </dependency>
           <!-- SDK AMP Testing Dependencies -->
           <dependency>
             <groupId>com.h2database</groupId>
@@ -470,14 +458,8 @@
             <version>${h2-support.version}</version>
             <scope>test</scope>
           </dependency>
-          <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>3.0.5.RELEASE</version>
-            <!-- To make remote testing working -->
-            <!--             <scope>test</scope> -->
-          </dependency>
-          <!-- Requires this explicit test dependency, for a Spring 3.0.5 bug 
+          <!-- 
+          |    Requires this explicit test dependency, for a Spring 3.0.5 bug 
           |    See https://jira.springsource.org/browse/SPR-8527 
           -->
           <dependency>
@@ -499,6 +481,12 @@
               <version>${alfresco.version}</version>
               <classifier>config</classifier>
               <scope>provided</scope>
+          </dependency>
+          <!-- Add RAD capabilities for remote JUnit test running -->
+          <dependency>
+              <groupId>org.alfresco.maven</groupId>
+              <artifactId>alfresco-rad</artifactId>
+              <version>${maven.alfresco.version}</version>
           </dependency>
       </dependencies>
     </profile>
@@ -556,6 +544,11 @@
                       <targetPath>WEB-INF/classes</targetPath>
                       <filtering>${app.filtering.enabled}</filtering>
                     </resource>
+                    <resource>
+                      <directory>src/test/properties/${env}</directory>
+                      <filtering>${app.filtering.enabled}</filtering>
+                      <targetPath>WEB-INF/classes</targetPath>
+                    </resource>
                   </resources>
                 </configuration>
               </execution>
@@ -573,24 +566,6 @@
                       <includes>
                         <include>context.xml</include>
                       </includes>
-                    </resource>
-                    <resource>
-                      <directory>tomcat</directory>
-                      <filtering>${app.filtering.enabled}</filtering>
-                      <targetPath>WEB-INF/classes/alfresco/extension</targetPath>
-                      <includes>
-                        <include>rad-context.xml</include>
-                      </includes>
-                    </resource>
-                    <resource>
-                      <directory>src/test/properties/${env}</directory>
-                      <filtering>${app.filtering.enabled}</filtering>
-                      <targetPath>WEB-INF/classes</targetPath>
-                    </resource>
-                    <resource>
-                      <directory>${project.build.testOutputDirectory}</directory>
-                      <filtering>${app.filtering.enabled}</filtering>
-                      <targetPath>WEB-INF/classes</targetPath>
                     </resource>
                   </resources>
                 </configuration>

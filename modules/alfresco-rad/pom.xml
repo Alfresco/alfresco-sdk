@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <artifactId>alfresco-rad</artifactId>
+  <packaging>jar</packaging>
+
+  <name>alfresco-rad</name>
+  
+  <parent>
+      <groupId>org.alfresco.maven</groupId>
+      <artifactId>alfresco-lifecycle-aggregator</artifactId>
+      <version>1.0.3-SNAPSHOT</version>
+      <relativePath>../../pom.xml</relativePath>
+  </parent>
+
+  <dependencies>
+       <!-- Enables JUnit remote testing (using JRebel) -->
+       <dependency>
+            <groupId>com.tradeshift</groupId>
+            <artifactId>junit-remote</artifactId>
+            <version>3</version>
+            <type>jar</type>
+       </dependency>
+       <!-- Required to have annotation based remote testing working -->
+       <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>3.0.6.RELEASE</version>
+            <type>jar</type>
+       </dependency>
+  </dependencies>
+
+</project>
