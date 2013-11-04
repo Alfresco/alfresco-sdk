@@ -1,7 +1,7 @@
 package org.alfresco.demoamp.test;
 
-import static org.junit.Assert.assertEquals;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.alfresco.demoamp.DemoComponent;
@@ -9,48 +9,56 @@ import org.alfresco.model.ContentModel;
 import org.alfresco.repo.security.authentication.AuthenticationUtil;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
-import org.alfresco.util.ApplicationContextHelper;
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.tradeshift.test.remote.Remote;
+import com.tradeshift.test.remote.RemoteTestRunner;
 
 /**
  * A simple class demonstrating how to run out-of-container tests 
- * loading Alfresco application context. 
+ * loading Alfresco application context.
  * 
- * @author columbro
+ * This class uses the RemoteTestRunner to try and connect to 
+ * localhost:4578 and send the test name and method to be executed on 
+ * a running Alfresco. One or more hostnames can be configured in the @Remote
+ * annotation.
+ * 
+ * If there is no available remote server to run the test, it falls 
+ * back on local running of JUnits.
+ * 
+ * For proper functioning the test class file must match exactly 
+ * the one deployed in the webapp (either via JRebel or static deployment)
+ * otherwise "incompatible magic value XXXXX" class error loading issues will arise.  
+ * 
+ * @author Gabriele Columbro 
+ * @author Maurizio Pillitu
  *
  */
+
+@RunWith(RemoteTestRunner.class)
+@Remote(runnerClass=SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:alfresco/application-context.xml")
 public class DemoComponentTest {
     
     private static final String ADMIN_USER_NAME = "admin";
 
     static Logger log = Logger.getLogger(DemoComponentTest.class);
 
-    protected static ApplicationContext applicationContext;
+    @Autowired
+    protected DemoComponent demoComponent;
     
-    protected static DemoComponent demoComponent;
+    @Autowired
+    @Qualifier("NodeService")
+    protected NodeService nodeService;
     
-    protected static NodeService nodeService;
-    
-    @BeforeClass
-    public static void initAppContext()
-    {
-        // TODO: Make testing properly working without need for helpers
-        // TODO: Provide this in an SDK base class
-        ApplicationContextHelper.setUseLazyLoading(false);
-        ApplicationContextHelper.setNoAutoStart(true);
-        applicationContext = ApplicationContextHelper.getApplicationContext(new String[] { "classpath:alfresco/application-context.xml" });
-        demoComponent = (DemoComponent) applicationContext.getBean("changeme.exampleComponent");
-        nodeService = (NodeService) applicationContext.getBean("NodeService");
-        AuthenticationUtil.setFullyAuthenticatedUser(ADMIN_USER_NAME);
-        log.debug("Sample test logging: If you see this message, means your unit test logging is properly configured. Change it in test-log4j.properties");
-        log.debug("Sample test logging: Application Context properly loaded");
-    }
-    
-
-
     @Test
     public void testWiring() {
         assertNotNull(demoComponent);
@@ -58,6 +66,7 @@ public class DemoComponentTest {
     
     @Test
     public void testGetCompanyHome() {
+    	AuthenticationUtil.setFullyAuthenticatedUser(ADMIN_USER_NAME);
         NodeRef companyHome = demoComponent.getCompanyHome();
         assertNotNull(companyHome);
         String companyHomeName = (String) nodeService.getProperty(companyHome, ContentModel.PROP_NAME);
@@ -67,6 +76,7 @@ public class DemoComponentTest {
     
     @Test
     public void testChildNodesCount() {
+    	AuthenticationUtil.setFullyAuthenticatedUser(ADMIN_USER_NAME);
         NodeRef companyHome = demoComponent.getCompanyHome();
         int childNodeCount = demoComponent.childNodesCount(companyHome);
         assertNotNull(childNodeCount);
