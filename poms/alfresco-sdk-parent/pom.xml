@@ -419,7 +419,8 @@
                 <phase>process-test-resources</phase>
                 <goals><goal>copy-resources</goal></goals>
                 <configuration>
-                  <outputDirectory>${app.amp.test.output.folder}</outputDirectory>
+                  <!-- <outputDirectory>${app.amp.test.output.folder}</outputDirectory> -->
+                 <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
                   <resources>
                     <resource>
                       <directory>${app.amp.folder}/config</directory>
@@ -444,13 +445,18 @@
                   <argLine>${app.testing.jvm.args}</argLine>
                   <additionalClasspathElements>
                       <!-- Adds the previously built ${app.amp.test.output.folder} to test classpath to enable module installation at test time -->
-                      <additionalClasspathElement>${app.amp.test.output.folder}</additionalClasspathElement>
+                      <!-- <additionalClasspathElement>${app.amp.test.output.folder}</additionalClasspathElement> -->
                   </additionalClasspathElements>
               </configuration>
             </plugin>
         </plugins>
       </build>
       <dependencies>
+          <dependency>
+              <artifactId>junit-remote</artifactId>
+              <groupId>com.tradeshift</groupId>
+              <version>3</version>
+          </dependency>
           <!-- SDK AMP Testing Dependencies -->
           <dependency>
             <groupId>com.h2database</groupId>
@@ -468,7 +474,8 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>3.0.5.RELEASE</version>
-            <scope>test</scope>
+            <!-- To make remote testing working -->
+            <!--             <scope>test</scope> -->
           </dependency>
           <!-- Requires this explicit test dependency, for a Spring 3.0.5 bug 
           |    See https://jira.springsource.org/browse/SPR-8527 
@@ -499,6 +506,9 @@
     <!-- Enable AMP project packing on a WAR and run embedded in Tomcat -->
     <profile>
       <id>amp-to-war</id>
+      <properties>
+        <skipTests>true</skipTests>
+      </properties>
       <build>
         <plugins>
           <!-- Fetch and unpack Alfresco Repository / Share in the target / folder -->
@@ -550,7 +560,7 @@
                 </configuration>
               </execution>
               <execution>
-                <id>copy-tomcat-context</id>
+                <id>copy-tomcat-resources</id>
                 <phase>prepare-package</phase>
                 <goals><goal>copy-resources</goal></goals>
                 <configuration>
@@ -560,9 +570,25 @@
                       <directory>tomcat</directory>
                       <filtering>${app.filtering.enabled}</filtering>
                       <targetPath>WEB-INF</targetPath>
+                      <includes>
+                        <include>context.xml</include>
+                      </includes>
+                    </resource>
+                    <resource>
+                      <directory>tomcat</directory>
+                      <filtering>${app.filtering.enabled}</filtering>
+                      <targetPath>WEB-INF/classes/alfresco/extension</targetPath>
+                      <includes>
+                        <include>rad-context.xml</include>
+                      </includes>
                     </resource>
                     <resource>
                       <directory>src/test/properties/${env}</directory>
+                      <filtering>${app.filtering.enabled}</filtering>
+                      <targetPath>WEB-INF/classes</targetPath>
+                    </resource>
+                    <resource>
+                      <directory>${project.build.testOutputDirectory}</directory>
                       <filtering>${app.filtering.enabled}</filtering>
                       <targetPath>WEB-INF/classes</targetPath>
                     </resource>

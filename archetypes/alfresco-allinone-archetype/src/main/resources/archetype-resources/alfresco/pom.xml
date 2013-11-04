@@ -84,4 +84,62 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <!-- Overrides the run profile to disable securecomms -->
+        <profile>
+            <id>run</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>prepare-exploded-war</id>
+                                <goals>
+                                    <goal>exploded</goal>
+                                </goals>
+                                <phase>prepare-package</phase>
+                            </execution>
+                            <execution>
+                                <id>default-war</id>
+                                <configuration>
+                                    <webXml>${project.build.directory}/${project.build.finalName}-nossl/WEB-INF/web.xml</webXml>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- Replaces web.xml where applicable, commenting out the security-constraints -->
+                    <plugin>
+                        <groupId>com.google.code.maven-replacer-plugin</groupId>
+                        <artifactId>replacer</artifactId>
+                        <executions>
+                            <execution>
+                                <id>disable-securecomms</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>replace</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <ignoreErrors>true</ignoreErrors>
+                            <file>${project.build.directory}/${project.build.finalName}/WEB-INF/web.xml</file>
+                            <outputDir>${project.build.directory}/${project.build.finalName}-nossl/WEB-INF/</outputDir>
+                            <preserveDir>false</preserveDir>
+                            <replacements>
+                                <replacement>
+                                    <token><![CDATA[<!-- Toggle securecomms placeholder start -->]]></token>
+                                    <value><![CDATA[<!--]]></value>
+                                </replacement>
+                                <replacement>
+                                    <token><![CDATA[<!-- Toggle securecomms placeholder end -->]]></token>
+                                    <value><![CDATA[-->]]></value>
+                                </replacement>
+                            </replacements>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
