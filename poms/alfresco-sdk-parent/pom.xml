@@ -458,6 +458,13 @@
             <version>${h2-support.version}</version>
             <scope>test</scope>
           </dependency>
+          <!-- Add RAD capabilities for remote JUnit test running (client) -->
+          <dependency>
+              <groupId>org.alfresco.maven</groupId>
+              <artifactId>alfresco-rad</artifactId>
+              <version>${maven.alfresco.version}</version>
+              <scope>test</scope>
+          </dependency>
           <!-- 
           |    Requires this explicit test dependency, for a Spring 3.0.5 bug 
           |    See https://jira.springsource.org/browse/SPR-8527 
@@ -482,13 +489,67 @@
               <classifier>config</classifier>
               <scope>provided</scope>
           </dependency>
-          <!-- Add RAD capabilities for remote JUnit test running -->
+      </dependencies>
+    </profile>
+    
+    <!-- Profile to enable rapid application development with JRebel 
+         and remote JUnit running, needs to be called explicitly 
+         with -Prad -->
+    <profile>
+      <id>rad</id>
+      <build>
+        <plugins>
+            <plugin>
+                <groupId>org.zeroturnaround</groupId>
+                <artifactId>jrebel-maven-plugin</artifactId>
+                <version>1.1.5</version>
+                <executions>
+                  <execution>
+                    <id>generate-rebel-xml</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                      <goal>generate</goal>
+                    </goals>
+                  </execution>
+                </executions>
+                <configuration>
+                    <packaging>war</packaging>
+                    <generateDefaultElements>false</generateDefaultElements>
+                    <classpath>
+                        <resources>
+                            <resource>
+                                <directory>${project.build.outputDirectory}</directory>
+                            </resource>
+                            <resource>
+                                <directory>${project.build.testOutputDirectory}</directory>
+                            </resource>
+                        </resources>
+                    </classpath>
+                    <web>
+                        <resources>
+                            <resource>
+                                <target>/</target>
+                                <directory>${project.build.directory}/${project.build.finalName}</directory>
+                            </resource>
+                            <resource>
+                                <target>/</target>
+                                <directory>${project.build.directory}/${project.build.finalName}-war</directory>
+                            </resource>
+                        </resources>
+                    </web>
+                </configuration>
+            </plugin>
+        </plugins>
+      </build>
+      <dependencies>
+          <!-- Add RAD capabilities for remote JUnit test running (client) -->
           <dependency>
               <groupId>org.alfresco.maven</groupId>
               <artifactId>alfresco-rad</artifactId>
               <version>${maven.alfresco.version}</version>
           </dependency>
       </dependencies>
+      
     </profile>
     
     <!-- Enable AMP project packing on a WAR and run embedded in Tomcat -->

@@ -21,6 +21,12 @@
             <artifactId>junit-remote</artifactId>
             <version>3</version>
             <type>jar</type>
+            <exclusions>
+                <exclusion>
+                    <artifactId>servlet-api</artifactId>
+                    <groupId>javax.servlet</groupId>
+                </exclusion>
+            </exclusions>
        </dependency>
        <!-- Required to have annotation based remote testing working -->
        <dependency>
