@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.alfresco.maven</groupId>
     <artifactId>alfresco-lifecycle-aggregator</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.1.0</version>
     <name>Maven Alfresco SDK</name>
     <description>This aggregator Project builds all modules required for
         the Maven Alfresco SDK</description>
@@ -28,9 +28,9 @@
     </issueManagement>
 
     <scm>
-        <connection>scm:svn:${scm.url.base}/trunk</connection>
-        <developerConnection>scm:svn:${scm.url.base}/trunk</developerConnection>
-        <url>${scm.url.base}/trunk</url>
+        <connection>scm:svn:${scm.url.base}/tags/1.1.0</connection>
+        <developerConnection>scm:svn:${scm.url.base}/tags/1.1.0</developerConnection>
+        <url>${scm.url.base}/tags/1.1.0</url>
     </scm>
 
     <developers>
