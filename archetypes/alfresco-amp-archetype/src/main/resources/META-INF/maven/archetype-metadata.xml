@@ -61,7 +61,7 @@
       </includes>
     </fileSet>
     <fileSet filtered="false" encoding="UTF-8">
-      <directory>src/test/resources</directory>
+      <directory>src/test/properties</directory>
       <includes>
         <include>**/*</include>
       </includes>
