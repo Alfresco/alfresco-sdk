@@ -140,7 +140,7 @@
             <id>release</id>
             <properties>
                 <maven.site.url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest</maven.site.url>
-                <maven.release.version>2.4.1</maven.release.version>
+                <maven.release.version>2.4.2</maven.release.version>
                 <maven.release.goals>deploy site-deploy</maven.release.goals>
                 <maven.site.version>3.3</maven.site.version>
                 <maven.changes.version>2.9</maven.changes.version>
