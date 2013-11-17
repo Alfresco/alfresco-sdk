@@ -183,11 +183,16 @@
               <nonFilteredFileExtension>gif</nonFilteredFileExtension>
               <nonFilteredFileExtension>pdf</nonFilteredFileExtension>
               <nonFilteredFileExtension>doc</nonFilteredFileExtension>
+              <nonFilteredFileExtension>docx</nonFilteredFileExtension>
               <nonFilteredFileExtension>xls</nonFilteredFileExtension>
+              <nonFilteredFileExtension>xlsx</nonFilteredFileExtension>
               <nonFilteredFileExtension>ppt</nonFilteredFileExtension>
+              <nonFilteredFileExtension>pptx</nonFilteredFileExtension>
               <nonFilteredFileExtension>bin</nonFilteredFileExtension>
               <nonFilteredFileExtension>lic</nonFilteredFileExtension>
               <nonFilteredFileExtension>swf</nonFilteredFileExtension>
+              <nonFilteredFileExtension>zip</nonFilteredFileExtension>
+              <nonFilteredFileExtension>msg</nonFilteredFileExtension>
             </nonFilteredFileExtensions>
           </configuration>
         </plugin>
