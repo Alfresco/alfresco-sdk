@@ -669,6 +669,14 @@
           </plugin>
         </plugins>
       </build>
+      <dependencies>
+        <!-- Needed to fix http://code.google.com/p/maven-alfresco-archetypes/issues/detail?id=150 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.5.11</version>
+        </dependency>
+      </dependencies>
     </profile>    
     
     <!-- Cleans Alfresco data folder, embedded DB and any log file found -->

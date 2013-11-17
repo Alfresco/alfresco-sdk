@@ -140,6 +140,14 @@
                     </plugin>
                 </plugins>
             </build>
+            <!-- Needed to fix http://code.google.com/p/maven-alfresco-archetypes/issues/detail?id=150 -->
+            <dependencies>
+                <dependency>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>jcl-over-slf4j</artifactId>
+                    <version>1.5.11</version>
+                </dependency>
+            </dependencies>
         </profile>
     </profiles>
 </project>
