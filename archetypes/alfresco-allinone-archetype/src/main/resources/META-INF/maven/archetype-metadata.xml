@@ -12,15 +12,6 @@
     <requiredProperty key="alfresco_target_version">
       <defaultValue>4.2.e</defaultValue>
     </requiredProperty>
-    <requiredProperty key="alfresco_target_amp_client_war">
-      <defaultValue>alfresco</defaultValue>
-    </requiredProperty>
-    <requiredProperty key="alfresco_target_amp_client_war_groupId">
-      <defaultValue>org.alfresco</defaultValue>
-    </requiredProperty>
-    <requiredProperty key="alfresco_target_amp_client_war_version">
-      <defaultValue>4.2.e</defaultValue>
-    </requiredProperty>
     <requiredProperty key="package">
       <defaultValue>(not used)</defaultValue>
     </requiredProperty>
