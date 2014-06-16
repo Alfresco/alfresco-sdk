@@ -37,7 +37,7 @@
         | For available versions please search on https://artifacts.alfresco.com/nexus/index.html
         -->
     <alfresco.groupId>org.alfresco</alfresco.groupId>
-    <alfresco.version>4.2.e</alfresco.version>
+    <alfresco.version>4.3.0-SNAPSHOT</alfresco.version>
 
     <!--  Values can be "alfresco" or "share". Default value is 'alfresco' assuming you are developing a repository AMP, change to share for share AMPs 
         | This impact (in AMP projects) the choice of the WAR project for embedded run
@@ -443,7 +443,7 @@
                   <argLine>${app.testing.jvm.args}</argLine>
                   <additionalClasspathElements>
                       <!-- Adds the previously built ${app.amp.test.output.folder} to test classpath to enable module installation at test time -->
-                      <additionalClasspathElement>${app.amp.test.output.folder}</additionalClasspathElement>
+                      <!-- <additionalClasspathElement>${app.amp.test.output.folder}</additionalClasspathElement> -->
                   </additionalClasspathElements>
               </configuration>
             </plugin>
@@ -478,20 +478,6 @@
               <groupId>org.springframework</groupId>
               <artifactId>spring-context</artifactId>
               <version>3.0.6.RELEASE</version>
-              <scope>provided</scope>
-          </dependency>
-          <dependency>
-              <groupId>${alfresco.groupId}</groupId>
-              <artifactId>alfresco-repository</artifactId>
-              <version>${alfresco.version}</version>
-              <classifier>config</classifier>
-              <scope>provided</scope>
-          </dependency>
-          <dependency>
-              <groupId>${alfresco.groupId}</groupId>
-              <artifactId>alfresco-data-model</artifactId>
-              <version>${alfresco.version}</version>
-              <classifier>config</classifier>
               <scope>provided</scope>
           </dependency>
       </dependencies>
@@ -679,6 +665,11 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.5.11</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
             <version>1.5.11</version>
         </dependency>
       </dependencies>

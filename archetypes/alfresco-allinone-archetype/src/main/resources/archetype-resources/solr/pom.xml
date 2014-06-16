@@ -32,34 +32,33 @@
                                 <artifactItem>
                                     <artifactId>alfresco-solr</artifactId>
                                     <groupId>${alfresco.groupId}</groupId>
+                                    <classifier>config</classifier>
                                     <version>${alfresco.version}</version>
-                                    <type>zip</type>
+                                    <type>jar</type>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
                     </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.7</version>
-                <executions>
                     <execution>
-                        <id>overlay-solr-war</id>
+                        <id>copy-alfresco-solr</id>
+                        <goals><goal>unpack</goal></goals>
                         <phase>generate-resources</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
                         <configuration>
-                            <tasks>
-                                <echo message="Unpacking Apache Solr for web.xml overlay" />
-                                <unzip src="${alfresco.solr.dir}/apache-solr-1.4.1.war" dest="${alfresco.solr.war.overlay}" />
-                            </tasks>
+                            <outputDirectory>${alfresco.solr.war.overlay}</outputDirectory>
+                            <artifactItems>
+                                <artifactItem>
+                                    <artifactId>alfresco-solr</artifactId>
+                                    <groupId>${alfresco.groupId}</groupId>
+                                    <version>${alfresco.version}</version>
+                                    <type>war</type>
+                                </artifactItem>
+                            </artifactItems>
                         </configuration>
                     </execution>
+
                 </executions>
             </plugin>
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -110,6 +109,7 @@
                     </replacements>
                 </configuration>
             </plugin>
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -130,6 +130,7 @@
                     </execution>
                 </executions>
             </plugin>
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -163,8 +164,9 @@
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
             <artifactId>alfresco-solr</artifactId>
+            <classifier>config</classifier>
             <version>${alfresco.version}</version>
-            <type>zip</type>
+            <type>jar</type>
         </dependency>
     </dependencies>
 

@@ -10,7 +10,7 @@
       <defaultValue>org.alfresco</defaultValue>
     </requiredProperty>
     <requiredProperty key="alfresco_target_version">
-      <defaultValue>4.2.e</defaultValue>
+      <defaultValue>4.3.0-SNAPSHOT</defaultValue>
     </requiredProperty>
     <requiredProperty key="package">
       <defaultValue>(not used)</defaultValue>
