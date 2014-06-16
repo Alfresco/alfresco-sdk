@@ -443,7 +443,7 @@
                   <argLine>${app.testing.jvm.args}</argLine>
                   <additionalClasspathElements>
                       <!-- Adds the previously built ${app.amp.test.output.folder} to test classpath to enable module installation at test time -->
-                      <!-- <additionalClasspathElement>${app.amp.test.output.folder}</additionalClasspathElement> -->
+                      <additionalClasspathElement>${app.amp.test.output.folder}</additionalClasspathElement>
                   </additionalClasspathElements>
               </configuration>
             </plugin>
