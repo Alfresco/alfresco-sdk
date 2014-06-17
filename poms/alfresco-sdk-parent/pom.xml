@@ -37,7 +37,7 @@
         | For available versions please search on https://artifacts.alfresco.com/nexus/index.html
         -->
     <alfresco.groupId>org.alfresco</alfresco.groupId>
-    <alfresco.version>4.3.0-SNAPSHOT</alfresco.version>
+    <alfresco.version>5.0.a-SNAPSHOT</alfresco.version>
 
     <!--  Values can be "alfresco" or "share". Default value is 'alfresco' assuming you are developing a repository AMP, change to share for share AMPs 
         | This impact (in AMP projects) the choice of the WAR project for embedded run
@@ -735,12 +735,12 @@
                          <requireProperty>
                             <property>alfresco.version</property>
                             <message>The SDK is supported only for Alfresco 4.1.2+ and 4.2+ versions</message>
-                            <regex>^4\.3\..*</regex>
+                            <regex>^5\..*</regex>
                          </requireProperty>
                          <!-- Test for JDK version -->
                          <requireJavaVersion>
                             <version>[1.7.0,)</version>
-                            <message>Alfresco 4.3+ requires Java 7</message>
+                            <message>Alfresco 5+ requires Java 7</message>
                          </requireJavaVersion>
                       </rules>
                       <fail>true</fail>
