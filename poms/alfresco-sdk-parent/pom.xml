@@ -115,6 +115,7 @@
     <maven.alfresco.version>1.1.2-SNAPSHOT</maven.alfresco.version>
     <h2.version>1.3.174</h2.version>
     <h2-support.version>1.5</h2-support.version>
+    <junit.version>4.11</junit.version>
   </properties>
 
   <repositories>
@@ -463,6 +464,12 @@
             <version>${h2-support.version}</version>
             <scope>test</scope>
           </dependency>
+          <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+          </dependency>
           <!-- Add RAD capabilities for remote JUnit test running (client) -->
           <dependency>
               <groupId>org.alfresco.maven</groupId>
@@ -728,18 +735,12 @@
                          <requireProperty>
                             <property>alfresco.version</property>
                             <message>The SDK is supported only for Alfresco 4.1.2+ and 4.2+ versions</message>
-                            <regex>^(4\.1\.[2-9]|4\.[2-9]|[5-9]).*</regex>
-                         </requireProperty>
-                         <!-- Test for groupId value (Community / Enterprise) -->
-                         <requireProperty>
-                            <property>alfresco.groupId</property>
-                            <message>You need to select an Alfresco Edition (Community / Enterprise) by setting alfresco.groupId=org.alfresco|org.alfresco.enterprise</message>
-                            <regex>(org\.alfresco|org\.alfresco\.enterprise)</regex>
+                            <regex>^4\.3\..*</regex>
                          </requireProperty>
                          <!-- Test for JDK version -->
                          <requireJavaVersion>
-                            <version>[1.6.0,)</version>
-                            <message>Alfresco 4.1+ requires Java 6</message>
+                            <version>[1.7.0,)</version>
+                            <message>Alfresco 4.3+ requires Java 7</message>
                          </requireJavaVersion>
                       </rules>
                       <fail>true</fail>
