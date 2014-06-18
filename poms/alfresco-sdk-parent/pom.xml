@@ -108,6 +108,7 @@
     <maven.war.version>2.4</maven.war.version>
     <maven.release.version>2.4.2</maven.release.version>
     <maven.buildhelper.version>1.8</maven.buildhelper.version>
+    <maven.replacer.version>1.5.3</maven.replacer.version>
     <maven.tomcat.version>2.1</maven.tomcat.version>
     <!-- This is used for the site deployment procedure (override in your POM as needed) -->
     <stagingDirectory>../../target/staging/poms/alfresco-sdk-parent</stagingDirectory>
@@ -247,6 +248,11 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
           <version>${maven.jar.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>com.google.code.maven-replacer-plugin</groupId>
+          <artifactId>replacer</artifactId>
+          <version>${maven.replacer.version}</version>
         </plugin>
         <!-- Configures tomcat with proper deps and performance fixes -->
         <plugin>

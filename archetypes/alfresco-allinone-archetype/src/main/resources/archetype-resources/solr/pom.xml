@@ -34,7 +34,7 @@
                                     <groupId>${alfresco.groupId}</groupId>
                                     <classifier>config</classifier>
                                     <version>${alfresco.version}</version>
-                                    <type>jar</type>
+                                    <type>zip</type>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
@@ -59,28 +59,6 @@
                 </executions>
             </plugin>
             
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>overlay-web-xml</id>
-                        <phase>process-resources</phase>
-                        <goals><goal>copy-resources</goal></goals>
-                        <configuration>
-                            <outputDirectory>${alfresco.solr.war.overlay}/WEB-INF</outputDirectory>
-                            <overwrite>true</overwrite>
-                            <resources>
-                                <resource>
-                                    <directory>src/main/resources</directory>
-                                    <filtering>true</filtering>
-                                    <targetPath>classes</targetPath>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <!-- Replaces web.xml where applicable, commenting out the security-constraints -->
             <plugin>
                 <groupId>com.google.code.maven-replacer-plugin</groupId>
@@ -136,6 +114,22 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
                     <execution>
+                        <id>overlay-web-xml</id>
+                        <phase>generate-resources</phase>
+                        <goals><goal>copy-resources</goal></goals>
+                        <configuration>
+                            <outputDirectory>${alfresco.solr.war.overlay}/WEB-INF</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                    <filtering>true</filtering>
+                                    <targetPath>classes</targetPath>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>copy-lib</id>
                         <phase>package</phase>
                         <goals><goal>copy-resources</goal></goals>
@@ -166,7 +160,7 @@
             <artifactId>alfresco-solr</artifactId>
             <classifier>config</classifier>
             <version>${alfresco.version}</version>
-            <type>jar</type>
+            <type>zip</type>
         </dependency>
     </dependencies>
 
