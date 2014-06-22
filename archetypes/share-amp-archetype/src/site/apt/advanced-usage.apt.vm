@@ -1,0 +1,61 @@
+  ------
+  Alfresco Maven AMP Archetype Advanced Usage
+  ------
+  Gabriele Columbro
+  ------
+  Nov 2012
+  ------
+
+AMP Unit Testing
+
+    Unit test your AMP customization is as easy as adding your tests in <<<src/test/java>>>. The current module in development
+    will be added to the test classpath together with all necessary Alfresco Spring contexts.
+    
+    Running <<<mvn test>>> will results in your unit tests to be run. You can skip this (<<<not recommended>>>) 
+    adding <<<-DskipTests>>> to your command line.
+
+AMP Archetype properties
+
+    In the AMP archetype (as in the whole Part of the Maven Alfresco SDK\x99) properties are configurable at many levels:
+    
+    * as POM properties
+    
+    * direclty in *.properties, particularly
+        
+        * <<<src/main/amp/module.properties>>> (filtered and packaged in the AMP)
+        
+        * <<<src/test/properties/<env>/alfresco-global.properties>>> (environment dependent properties for WAR run embedded)
+
+* Common properties
+
+    Archetype behavior can mostly be controlled directly in the POM, via common properties provided by the parent POM.
+    See {{{../../poms/alfresco-sdk-parent/sdk-properties.html} SDK properties reference}} for details.
+    
+    
+* AMP specific properties
+
+    In addition to the common properties, the following properties are specific of the AMP archetype:
+    
++---+
+<project>
+    ...
+    <properties>
+        <!--
+        Determines the coordinates of target WAR for this AMP
+        Allowed values: alfresco (default) | share
+        -->
+        <alfresco.client.war>alfresco</alfresco.client.war>
+        <alfresco.client.war.groupId>${alfresco.groupId}</alfresco.client.war.groupId>
+        <alfresco.client.war.version>${alfresco.version}</alfresco.client.war.version>
+    </properties>
+    ...
+</project>    
++---+
+
+Parent POM and behavior customization 
+
+    To customize the behavior of your project, check out full set of the properties and plugin configurations defined in the 
+    {{{../../poms/alfresco-sdk-parent/index.html}single entry point parent POM}}.
+    
+    One quick way to do that is to use the <<<maven-help-plugin:effective-pom>>> to analyze your POM at runtime.
+    

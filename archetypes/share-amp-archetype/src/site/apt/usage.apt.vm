@@ -1,0 +1,72 @@
+  ------
+  Alfresco Maven AMP Archetype Usage
+  ------
+  Gabriele Columbro
+  ------
+  Nov 2012
+  ------
+
+
+Prerequisites
+
+   See {{{../../prerequisites.html}SDK Pre-Requisites}} to successfully run this archetype.
+
+    
+Project layout
+
+    The archetype generated project should look like:
+
++---+
+
+  pom.xml
+  src/main/amp  
+            |-> module.properties
+            |-> file-mapping.properties (optional)
+            |-> config/
+            |-> web/
+            |-> licenses/
+  src/main/java //Java classes to be packaged in the AMP embedded JAR)
+  src/main/resources //resources to the packaged in the AMP embedded JAR)
+  src/test/java // Unit tests
+  src/test/resources // Unit test resources
+  src/test/properties/<env> //  Environment aware alfresco-global.properties. By default <env>=local 
+
++---+
+
+    Basically by default the folder <<<src/main/amp>>> maps the {{{https://wiki.alfresco.com/wiki/AMP_Files#The_structure_of_an_AMP_file}AMP structure}} and it's where you can build your module.
+
+Usage 
+
+    This project manages an AMP and provides support for typical development lifecycle use cases like:
+
+    * packaging
+    
+    * testing
+    
+    * run embedded 
+    
+    * integration testing
+    
+    * release and distribution of your AMP artifact.
+    
+    The AMPs produced with this project are fully compatible with Alfresco MMT, in fact the Alfresco Maven plugin used to manage AMPs in this SDK embeds the official Alfresco MMT to install depdended AMPs. 
+
+Commands
+
+    Common AMP project lifecycle commands you want to run are:
+
+    * <<<mvn package>>>: Runs unit tests and packages AMP in <<<$\{project.build.directory\}/$\{project.build.finalName\}.amp>>>
+    
+    * <<<mvn install>>>: Like <<<mvn package>>> but also installs AMP in local Maven repository to be depended upon
+    
+    * <<<mvn install -Dmaven.test.skip=true>>>: Like <<<mvn install>>> but skips unit tests
+    
+    * <<<mvn install -Pamp-to-war>>> Like <<<mvn package -Pamp-to-war>>> 
+    but also installs and runs the resulting WAR+AMP in Tomcat + H2 embedded for integration testing. 
+    When you run this command then you can access in your browser <<< {{{http://localhost:8080/alfresco}}} >>> or <<< {{{http://localhost:8080/share}}} >>>
+    depending on the value of the property <<<alfresco.client.war>>>
+    
+    * <<<mvn install -Pamp-to-war -Dalfresco.client.war=share>>>: Like <<<mvn install -Pamp-to-war>>> but installs the AMP and runs on the Share WAR in Tomcat embedded.
+    
+    * <<<mvn clean -Ppurge>>>: Removes DB, alf_data, indexes and log files. Useful to purge the development repo (by default self contained in <<<$\{project.basedir\}/alf_data_dev>>>
+  

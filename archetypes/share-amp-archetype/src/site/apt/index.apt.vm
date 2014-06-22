@@ -1,0 +1,51 @@
+  ------
+  Building AMPs (Alfresco Module Packages) with Maven
+  ------
+  Gabriele Columbro
+  ------
+  Nov 2012
+  ------
+
+Introduction
+
+  The Alfresco AMP Archetype is a sample fully featured project to manage AMP (Alfresco Module Package) projects. 
+  This archetype can be used both for Alfresco Repository and Alfresco Share AMPs.
+
+* Features
+  
+  Amongst other features, this archetype provides support for:
+  
+  * <<<amp>>> packaging support for your projects
+  
+  * AMP dependency management in Maven
+  
+  * Installation of AMPs in an Alfresco or Share WAR
+  
+  * AMP Unit Testing support. Just run the standard <<<mvn test>>> and see your <<<src/test/java>>> Alfresco unit tests run. 
+    An sample Unit Test is provided in this archetype.
+  
+  * Embedded run in Jetty and embedded H2 database for demo purposes, rapid application development and integration testing 
+  (<<NOTE>>: this is not a {{{http://www.alfresco.com/services/subscription/supported-platforms/} supported stack}} so use <<only for development purposes>>)
+
+How to create a project:
+
+  You can create the latest release archetype with the following command:
+  
++---+
+mvn archetype:generate -DarchetypeCatalog=https://artifacts.alfresco.com/nexus/content/groups/public/archetype-catalog.xml -Dfilter=org.alfresco.maven.archetype:
++---+
+  
+  You should then:
+  
+  [[1]] Select the <<<alfresco-amp-archetype>>> option
+  
+  [[2]] Specify the <<<groupId>>> and <<<artifactId>>> for the project you want to create
+  
+  [[3]] (<Optionally>) Select Alfresco Version / Edition (current default is: Alfresco Community 4.2.c)
+  
+ You can find new Alfresco AMP project ready to go in the <<<artifactId>>> folder.
+
+Usage
+
+  Instructions on how to use the Alfresco AMP archetype can be found on the {{{./usage.html}usage page}}, while 
+  for more advanced use cases refer to the {{{./advanced-usage.html}advanced usage page}}

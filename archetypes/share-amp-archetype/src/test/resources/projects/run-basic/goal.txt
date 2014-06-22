@@ -1,0 +1,1 @@
+verify -Pamp-to-war -Dmaven.tomcat.fork=true

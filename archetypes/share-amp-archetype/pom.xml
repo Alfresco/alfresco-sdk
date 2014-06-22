@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.alfresco.maven.archetype</groupId>
+  <artifactId>share-amp-archetype</artifactId>
+
+  <packaging>maven-archetype</packaging>
+  <name>Share AMP Archetype from Maven Alfresco SDK</name>
+  <description>Share project with full support for lifecycle and rapid development of AMPs (Alfresco Module Packages)</description>
+
+  <parent>
+    <groupId>org.alfresco.maven</groupId>
+    <artifactId>alfresco-lifecycle-aggregator</artifactId>
+    <version>1.1.2-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+
+  <build>
+      <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <includes>
+                <include>archetype-resources/pom.xml</include>
+            </includes>
+            <filtering>true</filtering>
+        </resource>
+        <resource>
+            <directory>src/main/resources</directory>
+            <excludes>
+                <exclude>archetype-resources/pom.xml</exclude>
+            </excludes>
+            <filtering>false</filtering>
+        </resource>
+      </resources>
+      <plugins>
+        <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>2.6</version>
+            <configuration>
+                <useDefaultDelimiters>false</useDefaultDelimiters>
+                <delimiters>
+                    <delimiter>@@</delimiter>
+                </delimiters>
+            </configuration>
+        </plugin>
+      </plugins>
+  </build>
+
+</project>

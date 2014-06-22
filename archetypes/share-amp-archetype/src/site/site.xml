@@ -1,0 +1,49 @@
+<project>
+  <body>
+        <!--<menu ref="parent" inherit="bottom"/>-->
+         <head>
+            <script type="text/javascript">
+            
+              var _gaq = _gaq || [];
+              _gaq.push(['_setAccount', '${gaTrackingId}']);
+              _gaq.push(['_trackPageview']);
+            
+              (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+              })();
+            
+            </script>
+        </head>
+        
+        <menu name="Alfresco AMP Archetype">
+            <item name="Introduction" href="index.html"/>
+            <item name="Usage" href="usage.html"/>
+            <item name="Advanced Usage" href="advanced-usage.html"/>
+        </menu>
+
+        <menu name="SDK components">
+          <item name="Maven Alfresco SDK" href="../../index.html" />
+          <item name="Alfresco AMP Archetype" href="./index.html" />
+          <item name="Alfresco All-in-One Archetype" href="../alfresco-allinone-archetype/index.html" />
+          <item name="Alfresco SDK Parent POM" href="../../poms/alfresco-sdk-parent/index.html" />
+          <item name="Alfresco Platform Distribution POM" href="https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-platform-distribution/latest/index.html" />
+          <item name="Alfresco Maven Plugin" href="../../plugins/alfresco-maven-plugin/index.html" />
+        </menu>
+
+        <menu name="Maven Alfresco Community">
+            <item name="Alfresco Maven Wiki Docs" href="http://wiki.alfresco.com/wiki/Maven_Alfresco_SDK" />
+            <item name="Alfresco with Maven for Dummies" href="https://wiki.alfresco.com/wiki/Maven_For_Dummies" />
+            <item name="Developer Access (Google Code)" href="http://code.google.com/p/maven-alfresco-archetypes/" />
+            <item name="Gabriele Columbro's blog" href="http://www.mindthegab.com/" />
+            <item name="Maurizio Pillitu's blog" href="http://www.session.it/" />
+            <item name="Carlo Sciolla's blog" href="http://skuro.tk/" />
+            <item name="Enterprise adoption" href="http://www.slideshare.net/guest67a9ba/maven-application-lifecycle-management-for-alfresco" />
+        </menu>
+
+        <!-- maybe it's inherited? -->
+        <!--<menu ref="reports"/>-->
+
+  </body>
+</project>

@@ -84,6 +84,7 @@
         <module>poms/alfresco-sdk-parent</module>
         <!-- Archetypes -->
         <module>archetypes/alfresco-amp-archetype</module>
+        <module>archetypes/share-amp-archetype</module>
         <module>archetypes/alfresco-allinone-archetype</module>
   </modules>
 

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd" name="quickstart-amp-archetype"
+    xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <requiredProperties>
+    <requiredProperty key="version">
+      <defaultValue>1.0-SNAPSHOT</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="alfresco_target_groupId">
+      <defaultValue>org.alfresco</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="alfresco_target_version">
+      <defaultValue>5.0.a-SNAPSHOT</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="alfresco_target_amp_client_war">
+      <defaultValue>share</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="alfresco_target_amp_client_war_groupId">
+      <defaultValue>org.alfresco</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="alfresco_target_amp_client_war_version">
+      <defaultValue>5.0.a-SNAPSHOT</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="package">
+      <defaultValue>(not used)</defaultValue>
+    </requiredProperty>
+  </requiredProperties>
+  <fileSets>
+    <fileSet filtered="true" packaged="false" encoding="UTF-8">
+      <directory>src/main/java</directory>
+      <includes>
+        <include>**/*.java</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="false" encoding="UTF-8">
+      <directory>src/main/amp</directory>
+      <includes>
+        <include>**/*.jsp</include>
+        <include>**/*.xml</include>
+        <include>**/*.properties</include>
+        <include>**/*.txt</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="false" encoding="UTF-8">
+      <directory>src/main/resources</directory>
+      <includes>
+        <include>**/*.xml</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory>src/main/amp</directory>
+      <includes>
+        <include>**/*.js</include>
+        <include>**/*.css</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+        <directory>src/main/amp/config/alfresco/module/__artifactId__</directory>
+    </fileSet>
+
+    <fileSet filtered="true" encoding="UTF-8">
+        <directory>src/main/amp/web</directory>
+    </fileSet>
+    
+    <fileSet filtered="false" packaged="false" encoding="UTF-8">
+      <directory>src/test/java</directory>
+      <includes>
+        <include>**/*.java</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="false" encoding="UTF-8">
+      <directory>src/test/resources</directory>
+      <includes>
+        <include>**/*.properties</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="false" encoding="UTF-8">
+      <directory>src/test/properties</directory>
+      <includes>
+        <include>**/*</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="false" encoding="UTF-8">
+      <directory>tomcat</directory>
+      <includes>
+        <include>**/*.xml</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+</archetype-descriptor>
