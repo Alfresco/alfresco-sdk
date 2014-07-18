@@ -29,10 +29,10 @@
         <!-- Defines the target WAR artifactId to run this amp, only used with the -Pamp-to-war switch
         .    | Allowed values: alfresco | share. Defaults to a repository AMP, but could point to your custom corporate Alfresco WAR -->
         <alfresco.client.war>alfresco</alfresco.client.war>
-        <!-- Defines the target WAR groupId to run this amp, only used with the -Pamp-to-war switch
-        .    | Could be org.alfresco | org.alfresco.enterprise or your corporate groupId -->
+        <!-- Defines the target WAR groupId to run this amp, only used with the -Pamp-to-war profile
+        .    | Could be org.alfresco or your corporate groupId -->
         <!-- <alfresco.client.war.groupId>org.alfresco</alfresco.client.war.groupId> -->
-        <!-- Defines the target WAR version to run this amp, only used with the -Pamp-to-war switch -->
+        <!-- Defines the target WAR version to run this amp, only used with the -Pamp-to-war profile -->
         <!-- <alfresco.client.war.version>${alfresco.version}</alfresco.client.war.version> -->
     </properties>
     

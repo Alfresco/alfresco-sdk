@@ -4,7 +4,7 @@
   <artifactId>alfresco-rad</artifactId>
   <packaging>jar</packaging>
 
-  <name>alfresco-rad</name>
+  <name>Rapid Application Development support</name>
   <description>SDK module for Rapid Deveopment support</description>  
   <parent>
       <groupId>org.alfresco.maven</groupId>

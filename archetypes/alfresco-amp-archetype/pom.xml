@@ -6,8 +6,8 @@
   <artifactId>alfresco-amp-archetype</artifactId>
 
   <packaging>maven-archetype</packaging>
-  <name>AMP Archetype from Maven Alfresco SDK</name>
-  <description>Sample project with full support for lifecycle and rapid development of AMPs (Alfresco Module Packages)</description>
+  <name>Repository AMP Archetype from Maven Alfresco SDK</name>
+  <description>Sample project with full support for lifecycle and rapid development of Repository AMPs (Alfresco Module Packages)</description>
 
   <parent>
     <groupId>org.alfresco.maven</groupId>

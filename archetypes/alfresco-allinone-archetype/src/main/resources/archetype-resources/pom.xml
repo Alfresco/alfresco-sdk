@@ -20,10 +20,13 @@
        -->
     <properties>
         <!-- 
-            | Defines the Alfresco GroupId \ Edition to work against. Allowed values are: org.alfresco | org.alfresco.enterprise
-            | NOTE: Please Refer to Alfresco Support for access to Enterprise artifacts -->
+            | Defines the groupId for the Alfresco Artifacts to work against. As of 4.2 the only allowed value is: org.alfresco
+            | NOTE: See http://docs.alfresco.com/4.2/concepts/dev-extensions-maven-sdk-tutorials-alfresco-enterprise.html for details
+        -->
         <alfresco.groupId>${alfresco_target_groupId}</alfresco.groupId>
-        <!-- Defines the Alfresco version to work against. Allowed values are: org.alfresco | org.alfresco.enterprise -->
+        <!-- Defines the Alfresco version to work against.
+             Community versions are typically identified by major.minor.character (4.2.a) while Enterprise versions are identified by major.minor.digit (4.2.0) 
+        -->
         <alfresco.version>${alfresco_target_version}</alfresco.version>
         <!-- This control the root logging level for all apps -->
         <app.log.root.level>WARN</app.log.root.level>

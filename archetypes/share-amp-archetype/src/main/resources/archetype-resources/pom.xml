@@ -21,9 +21,14 @@
        | For more available properties see the alfresco-sdk-parent POM. 
        -->
     <properties>
-        <!-- Defines the alfresco edition to compile against. Allowed values are [org.alfresco|org.alfresco.enterprise]--> 
+        <!--
+            | Defines the groupId for the Alfresco Artifacts to work against. As of 4.2 the only allowed value is: org.alfresco
+            | NOTE: See http://docs.alfresco.com/4.2/concepts/dev-extensions-maven-sdk-tutorials-alfresco-enterprise.html for details
+        -->
         <alfresco.groupId>${alfresco_target_groupId}</alfresco.groupId>
-        <!-- Defines the alfresco version to compile against -->
+        <!-- Defines the Alfresco version to work against.
+             Community versions are typically identified by major.minor.character (4.2.a) while Enterprise versions are identified by major.minor.digit (4.2.0)
+        -->
         <alfresco.version>${alfresco_target_version}</alfresco.version>
         <app.log.root.level>WARN</app.log.root.level>
         <alfresco.data.location>alf_data_dev</alfresco.data.location>
