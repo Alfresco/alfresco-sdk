@@ -28,9 +28,9 @@
     </issueManagement>
 
     <scm>
-        <connection>scm:svn:${scm.url.base}/trunk</connection>
-        <developerConnection>scm:svn:${scm.url.base}/trunk</developerConnection>
-        <url>${scm.url.base}/trunk</url>
+        <connection>scm:git:${scm.url.base}.git</connection>
+        <developerConnection>scm:git:${scm.url.base}</developerConnection>
+        <url>${scm.url.base}</url>
     </scm>
 
     <developers>
@@ -92,9 +92,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.archetype.version>2.2</maven.archetype.version>
         <alfresco.sdk.parent.version>${project.version}</alfresco.sdk.parent.version>
-        <scm.url.base>https://maven-alfresco-archetypes.googlecode.com/svn</scm.url.base>
-      </properties>
-
+        <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
+    </properties>
     <build>
         <pluginManagement>
             <plugins>
