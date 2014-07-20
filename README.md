@@ -22,6 +22,10 @@ Advanced sample projects are maintained by @ohej in the [Alfresco SDK Samples pr
 
 Report issues (and contribute!) [here](https://github.com/Alfresco/alfresco-sdk/issues?milestone=1&state=open). You can also join the [Maven Alfresco list on Google Groups](https://groups.google.com/forum/#!forum/maven-alfresco).
 
+## Alfresco Artifacts Repository
+The Alfresco Maven infrastructure is backed by the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/nexus/). Alfresco Community and SDK artifacts are publicly available.
+
+for Enterprise and Premiere licensed software access you need to get credential via the Alfresco Enterprise Support. See [public docs](http://docs.alfresco.com/4.2/concepts/dev-extensions-maven-sdk-tutorials-alfresco-enterprise.html) or [this KB (login required)](https://myalfresco.force.com/support/articles/en_US/Technical_Article/Where-can-I-find-the-repository-for-Enterprise-Maven-artifacts) for more details.
 
 ## News
 
