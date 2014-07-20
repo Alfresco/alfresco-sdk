@@ -1,4 +1,4 @@
-# Maven Alfresco SDK [![Maven Alfresco SDK logo](https://github.com/Alfresco/alfresco-sdk/raw/master/src/site/resources/img/alfresco-maven-logo.jpg)](#features)
+# [![Maven Alfresco SDK logo](https://github.com/Alfresco/alfresco-sdk/raw/master/src/site/resources/img/alfresco-maven-logo.jpg)](#features) Maven Alfresco SDK
 
 The Alfresco SDK based on Apache Maven, includes support for rapid and standard development, testing, packaging, versioning and release of your Alfresco integration and extension projects. 
 
