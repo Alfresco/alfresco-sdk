@@ -18,6 +18,8 @@ Full documentation is available at the [Maven Alfresco SDK site](https://artifac
 
 Additional documentation for Alfresco Community and Enterprise, tutorials and examples is available in the [Alfresco Docs](http://docs.alfresco.com/4.2/concepts/dev-extensions-maven-sdk-intro.html).
 
+Advanced sample projects are maintained by @ohej in the [Alfresco SDK Samples project](https://github.com/Alfresco/alfresco-sdk-samples/).
+
 Report issues (and contribute!) [here](https://github.com/Alfresco/alfresco-sdk/issues?milestone=1&state=open). You can also join the [Maven Alfresco list on Google Groups](https://groups.google.com/forum/#!forum/maven-alfresco).
 
 
