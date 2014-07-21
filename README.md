@@ -33,3 +33,4 @@ This project is released under the [Apache License, Version 2.0](http://www.apac
 ## News
 
 - Project fully migrated from [Google Code](https://code.google.com/p/maven-alfresco-archetypes), including tags, branches, issues. Allow a little time for a full cleanup of issue labels and to sort repository permissions. Please update obsolete references and bear with us as we update Alfresco Docs to this change.
+
