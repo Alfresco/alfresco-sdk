@@ -1,3 +1,10 @@
+**.idea
+**.classpath
+**.project
+**.ipr
+**.iml
+**.log
+**.log*
 target/
 pom.xml.tag
 pom.xml.releaseBackup
