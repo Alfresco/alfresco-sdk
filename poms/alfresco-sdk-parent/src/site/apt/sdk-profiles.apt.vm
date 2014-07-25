@@ -25,8 +25,10 @@ SDK Available Profiles
 | enable-amp-testing |  Allows AMP unit testing                              |  Automatic if <<<src/test/java>>> is present   | test |
 *-----------*--------------*-------------*-------------*
 | enable-amp         |  Activates AMP packaging                              |  Automatic if <<<src/main/amp/modules.properties>>> is present   | test |
+*-----------*--------------*-------------*-------------*
+| enterprise         |  Uses Alfresco Enterprise 4.2.2 version (check {{{http://docs.alfresco.com/4.2/tasks/dev-extensions-maven-sdk-tutorials-configure-maven-enterprise.html} configuration steps on Alfresco Docs}})               |  Manual: <<<-Penterprise>>>       |  |
 *-----------+--------------+-------------+-------------+
-    
+
     The full list of available profiles (with their activation conditions) can be instead found in the <<<profiles>>> section of the
     {{{https://artifacts.alfresco.com/nexus/index.html#nexus-search;gav~org.alfresco.maven~alfresco-sdk-parent~${project.version}~pom~}Alfresco SDK POM}}.
 
