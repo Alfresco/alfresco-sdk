@@ -470,12 +470,12 @@
             <version>${h2-support.version}</version>
             <scope>test</scope>
           </dependency>
-          <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-          </dependency>
+          <!--<dependency>-->
+            <!--<groupId>junit</groupId>-->
+            <!--<artifactId>junit</artifactId>-->
+            <!--<version>${junit.version}</version>-->
+            <!--<scope>test</scope>-->
+          <!--</dependency>-->
           <!-- Add RAD capabilities for remote JUnit test running (client) -->
           <dependency>
               <groupId>org.alfresco.maven</groupId>
@@ -756,6 +756,18 @@
               </plugin>
             </plugins>
         </build>
+    </profile>
+    <profile>
+        <id>enterprise</id>
+        <properties>
+            <alfresco.version>4.2.2</alfresco.version>
+        </properties>
+        <repositories>
+            <repository>
+                <id>alfresco-private</id>
+                <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
+            </repository>
+        </repositories>
     </profile>
   </profiles>
 </project>
