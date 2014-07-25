@@ -10,7 +10,7 @@
       <defaultValue>org.alfresco</defaultValue>
     </requiredProperty>
     <requiredProperty key="alfresco_target_version">
-      <defaultValue>5.0.a-SNAPSHOT</defaultValue>
+      <defaultValue>5.0.a</defaultValue>
     </requiredProperty>
     <requiredProperty key="alfresco_target_amp_client_war">
       <defaultValue>share</defaultValue>
@@ -19,7 +19,7 @@
       <defaultValue>org.alfresco</defaultValue>
     </requiredProperty>
     <requiredProperty key="alfresco_target_amp_client_war_version">
-      <defaultValue>5.0.a-SNAPSHOT</defaultValue>
+      <defaultValue>5.0.a</defaultValue>
     </requiredProperty>
     <requiredProperty key="package">
       <defaultValue>(not used)</defaultValue>
@@ -61,7 +61,7 @@
     <fileSet filtered="true" encoding="UTF-8">
         <directory>src/main/amp/web</directory>
     </fileSet>
-    
+
     <fileSet filtered="false" packaged="false" encoding="UTF-8">
       <directory>src/test/java</directory>
       <includes>

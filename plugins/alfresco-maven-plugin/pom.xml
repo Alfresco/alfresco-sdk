@@ -4,7 +4,7 @@
   <artifactId>alfresco-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
   <name>Alfresco Maven Plugin</name>
-  
+
   <parent>
       <groupId>org.alfresco.maven</groupId>
       <artifactId>alfresco-lifecycle-aggregator</artifactId>
@@ -79,7 +79,7 @@
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-mmt</artifactId>
-      <version>5.0.a-SNAPSHOT</version>
+      <version>5.0.a</version>
     </dependency>
   </dependencies>
 
