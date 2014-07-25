@@ -61,6 +61,15 @@
     <fileSet filtered="true" encoding="UTF-8">
         <directory>src/main/amp/web</directory>
     </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+        <directory>src/main/amp/web/themes</directory>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+        <directory>src/main/amp/web/js</directory>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+        <directory>src/main/amp/web/components</directory>
+    </fileSet>
 
     <fileSet filtered="false" packaged="false" encoding="UTF-8">
       <directory>src/test/java</directory>
