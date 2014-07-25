@@ -764,7 +764,7 @@
         </properties>
         <repositories>
             <repository>
-                <id>alfresco-private</id>
+                <id>alfresco-private-repository</id>
                 <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
             </repository>
         </repositories>
