@@ -511,17 +511,17 @@
                 </plugin>
                 <!-- Add RAD capabilities for remote JUnit test running. This is added to Tomcat classpath,
                 	 so the custom JUnit test receiver is found in the running webapp classpath -->
-                <plugin>
-					<groupId>org.apache.tomcat.maven</groupId>
-            		<artifactId>tomcat7-maven-plugin</artifactId>
-            		<dependencies>
-						<dependency>
-							<groupId>org.alfresco.maven</groupId>
-							<artifactId>alfresco-rad</artifactId>
-							<version>${maven.alfresco.version}</version>
-						</dependency>
-            		</dependencies>
-            	</plugin>
+<!--                 <plugin> -->
+<!-- 					<groupId>org.apache.tomcat.maven</groupId> -->
+<!--             		<artifactId>tomcat7-maven-plugin</artifactId> -->
+<!--             		<dependencies> -->
+<!-- 						<dependency> -->
+<!-- 							<groupId>org.alfresco.maven</groupId> -->
+<!-- 							<artifactId>alfresco-rad</artifactId> -->
+<!-- 							<version>${maven.alfresco.version}</version> -->
+<!-- 						</dependency> -->
+<!--             		</dependencies> -->
+<!--             	</plugin> -->
             </plugins>
         </build>
     	<dependencies>
@@ -705,6 +705,11 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.5.11</version>
         </dependency>
+		<dependency>
+			<groupId>org.alfresco.maven</groupId>
+			<artifactId>alfresco-rad</artifactId>
+			<version>${maven.alfresco.version}</version>
+		</dependency>
       </dependencies>
     </profile>
 
