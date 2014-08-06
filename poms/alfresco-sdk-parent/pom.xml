@@ -76,6 +76,8 @@
     <app.amp.folder>src/main/amp</app.amp.folder>
     <app.amp.output.folder>../${project.build.finalName}</app.amp.output.folder>
     <app.amp.test.output.folder>${project.build.directory}/amp-test-classpath</app.amp.test.output.folder>
+    <!-- Empty AMP source excludes by default, see the amp-to-war profile for usage example -->
+    <app.amp.excludes></app.amp.excludes>
     <app.properties.folder>src/main/properties/${env}</app.properties.folder>
     <app.properties.test.folder>src/test/properties/${env}</app.properties.test.folder>
     <app.properties.include>**</app.properties.include>
@@ -328,11 +330,11 @@
             <directory>src/main/resources</directory>
             <filtering>${app.filtering.enabled}</filtering>
         </resource>
-        <resource>
-            <directory>${app.amp.folder}</directory>
-            <targetPath>${app.amp.output.folder}</targetPath>
-            <filtering>${app.filtering.enabled}</filtering>
-        </resource>
+		<resource>
+			<directory>${app.amp.folder}</directory>
+			<targetPath>${app.amp.output.folder}</targetPath>
+			<filtering>${app.filtering.enabled}</filtering>
+		</resource>
     </resources>
     <testResources>
         <testResource>
@@ -473,7 +475,7 @@
                     </resource>
                     <!-- If exists, copies the module properties in the right classpath, to install it at test time -->
                     <resource>
-                      <directory>${app.amp.folder}/config</directory>
+                      <directory>${app.amp.folder}</directory>
                       <filtering>${app.filtering.enabled}</filtering>
                       <includes>
                           <include>module.properties</include>
@@ -507,6 +509,19 @@
                       <argLine>${app.testing.jvm.args}</argLine>
                   </configuration>
                 </plugin>
+                <!-- Add RAD capabilities for remote JUnit test running. This is added to Tomcat classpath,
+                	 so the custom JUnit test receiver is found in the running webapp classpath -->
+                <plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+            		<artifactId>tomcat7-maven-plugin</artifactId>
+            		<dependencies>
+						<dependency>
+							<groupId>org.alfresco.maven</groupId>
+							<artifactId>alfresco-rad</artifactId>
+							<version>${maven.alfresco.version}</version>
+						</dependency>
+            		</dependencies>
+            	</plugin>
             </plugins>
         </build>
     	<dependencies>
@@ -515,11 +530,12 @@
                 <artifactId>junit</artifactId>
                 <scope>test</scope>
               </dependency>
-              <!-- Add RAD capabilities for remote JUnit test running (scope=compile. So it will be available in the webapp (runtime) and in the test classpath (client) -->
+              <!-- Add RAD capabilities for remote JUnit test running. Scope=test so the custom JUnit remote runner is found in the Maven test classpath -->
               <dependency>
                   <groupId>org.alfresco.maven</groupId>
                   <artifactId>alfresco-rad</artifactId>
                   <version>${maven.alfresco.version}</version>
+                  <scope>test</scope>
               </dependency>
               <!--
               |    Requires this explicit test dependency, for a Spring 3.0.5 bug
@@ -642,6 +658,10 @@
                 </goals>
               </execution>
             </executions>
+            <configuration>
+                <!-- We need to selectively not install web resources so to enable rapid dev -->
+                <includeWebResources>false</includeWebResources>
+            </configuration>
           </plugin>
           <!-- Configures tomcat to run against the Alfresco WAR with Tomcat7 virtual webapp features. 
                (http://tomcat.apache.org/tomcat-7.0-doc/config/context.html#Virtual_webapp)	 	

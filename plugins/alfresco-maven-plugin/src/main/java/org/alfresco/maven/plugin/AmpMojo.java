@@ -73,6 +73,18 @@ public class AmpMojo extends AbstractMojo {
      */
     protected boolean includeDependencies;
     
+
+    /**
+     * Whether the AMP /web folder should be added or not to the generated AMP file. 
+     * By default it's true so all web resources are package in the war. Can be disabled to enable quick loading of web resources 
+     * from sources during development (e.g. in an IDE)
+     * 
+     * @parameter property="maven.alfresco.includeWebResources" default-value="true"
+     * @required
+     */
+    protected boolean includeWebResources;
+    
+    
     /**
      * Whether the JAR produced should be attached as a separate 'classes' artifact.
      * 
@@ -187,6 +199,19 @@ public class AmpMojo extends AbstractMojo {
             throw new MojoExecutionException("Error creating JAR", e);
         }
     }
+
+	private String[] getResourcesExcludes() {
+		/*
+        We might want to selectively exclude the /web folder to packaged in the AMP, since we want to "hot" load this directly from sources using tomcat7 virtual 
+        webapp features (from context.xml). While the "Loader" tag allows a searchVirtualFirst (so we can have both classes in the WAR and in a duplicate location which 
+		takes precedence, we can't do that for the "Resources" which either need to be in the webapp or outside.
+		In the default packaging it's not excluded so the excludes are empty, but this property is set to exclude the /web folder -->
+        */
+        if(!includeWebResources)
+        	return new String[] {AmpModel.EXCLUDE_WEB_RESOURCES};
+        else
+        	return new String[] {};
+	}
     
     /**
      * Creates and returns the AMP archive, invoking the AmpArchiver
@@ -216,7 +241,7 @@ public class AmpMojo extends AbstractMojo {
             getLog().warn("ampBuildDirectory does not exist - AMP will be empty");
         } else {
               try {
-                ampArchiver.getArchiver().addDirectory(this.ampBuildDirectory, new String[]{"**"}, new String[]{});
+                ampArchiver.getArchiver().addDirectory(this.ampBuildDirectory, new String[]{"**"}, getResourcesExcludes());
                 ampArchiver.createArchive(this.session, this.project, this.archive);
               }
               catch (Exception e) {

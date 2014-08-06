@@ -13,4 +13,6 @@ public class AmpModel {
     public static final String AMP_FOLDER_LIB = "lib";
 
     public static final List<String> EXTENSION_LIST = Arrays.asList(new String[] {"jar","ejb","ejb-client","test-jar"});
+
+	public static final String EXCLUDE_WEB_RESOURCES = "web/**";
 }

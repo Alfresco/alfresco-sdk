@@ -35,7 +35,7 @@
     <fileSet filtered="false" encoding="UTF-8">
       <directory>src/main/amp</directory>
       <includes>
-        <include>**/*.jsp</include>
+        <include>**/*</include>
         <include>**/*.xml</include>
         <include>**/*.properties</include>
         <include>**/*.txt</include>
@@ -54,20 +54,20 @@
         <include>**/*.css</include>
       </includes>
     </fileSet>
-    <fileSet filtered="true" encoding="UTF-8">
+    <fileSet filtered="false" encoding="UTF-8">
         <directory>src/main/amp/config/alfresco/module/__artifactId__</directory>
     </fileSet>
 
-    <fileSet filtered="true" encoding="UTF-8">
+    <fileSet filtered="false" encoding="UTF-8">
         <directory>src/main/amp/web</directory>
     </fileSet>
-    <fileSet filtered="true" encoding="UTF-8">
+    <fileSet filtered="false" encoding="UTF-8">
         <directory>src/main/amp/web/themes</directory>
     </fileSet>
-    <fileSet filtered="true" encoding="UTF-8">
+    <fileSet filtered="false" encoding="UTF-8">
         <directory>src/main/amp/web/js</directory>
     </fileSet>
-    <fileSet filtered="true" encoding="UTF-8">
+    <fileSet filtered="false" encoding="UTF-8">
         <directory>src/main/amp/web/components</directory>
     </fileSet>
 
@@ -80,7 +80,7 @@
     <fileSet filtered="false" encoding="UTF-8">
       <directory>src/test/resources</directory>
       <includes>
-        <include>**/*.properties</include>
+        <include>**/*</include>
       </includes>
     </fileSet>
     <fileSet filtered="false" encoding="UTF-8">
