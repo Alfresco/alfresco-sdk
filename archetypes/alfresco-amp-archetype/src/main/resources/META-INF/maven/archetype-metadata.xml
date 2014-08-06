@@ -57,7 +57,7 @@
     <fileSet filtered="false" encoding="UTF-8">
       <directory>src/test/resources</directory>
       <includes>
-        <include>**/*.properties</include>
+        <include>**/*</include>
       </includes>
     </fileSet>
     <fileSet filtered="false" encoding="UTF-8">
