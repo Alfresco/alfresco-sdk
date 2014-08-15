@@ -75,7 +75,6 @@
      -->
     <app.amp.folder>src/main/amp</app.amp.folder>
     <app.amp.output.folder>../${project.build.finalName}</app.amp.output.folder>
-    <app.amp.test.output.folder>${project.build.directory}/amp-test-classpath</app.amp.test.output.folder>
     <!-- Empty AMP source excludes by default, see the amp-to-war profile for usage example -->
     <app.amp.excludes></app.amp.excludes>
     <app.properties.folder>src/main/properties/${env}</app.properties.folder>
@@ -308,7 +307,10 @@
                                 </goals>
                             </pluginExecutionFilter>
                             <action>
-                                <ignore></ignore>
+                                <execute>
+                                    <runOnIncremental>true</runOnIncremental>
+                                    <runOnConfiguration>true</runOnConfiguration>
+                                </execute>
                             </action>
                         </pluginExecution>
                     </pluginExecutions>
@@ -439,56 +441,37 @@
           <plugin>
             <groupId>org.alfresco.maven.plugin</groupId>
             <artifactId>alfresco-maven-plugin</artifactId>
+            <extensions>true</extensions>
           </plugin>
-        </plugins>
-      </build>
-    </profile>
-
-    <!-- Enable AMP testing if finds a module.properties, including unit testing support -->
-    <profile>
-      <id>enable-amp-dev</id>
-      <activation>
-        <file>
-          <exists>src/main/amp/module.properties</exists>
-        </file>
-      </activation>
-      <!-- Basically copies AMP config and module.properties in target/test-classes so that they can be loaded at test time and the module can be installed -->
-      <build>
-        <plugins>
+          <!-- Copies module properties to the test classpath in the right location, so that it can be picked up by tests and tomcat embedded -->
           <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-resources-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>prepare-amp-testing-classpath</id>
-                <phase>process-test-resources</phase>
-                <goals><goal>copy-resources</goal></goals>
-                <configuration>
-                 <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>${app.amp.folder}/config</directory>
-                      <filtering>${app.filtering.enabled}</filtering>
-                      <excludes>
-                          <exclude>module.properties</exclude>
-                      </excludes>
-                    </resource>
-                    <!-- If exists, copies the module properties in the right classpath, to install it at test time -->
-                    <resource>
-                      <directory>${app.amp.folder}</directory>
-                      <filtering>${app.filtering.enabled}</filtering>
-                      <includes>
-                          <include>module.properties</include>
-                      </includes>
-                      <targetPath>alfresco/module/${project.artifactId}</targetPath>
-                    </resource>
-                  </resources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
+              <artifactId>maven-resources-plugin</artifactId>
+              <executions>
+                  <execution>
+                      <id>add-module-properties-to-test-classpath</id>
+                      <phase>process-test-resources</phase>
+                      <goals>
+                          <goal>copy-resources</goal>
+                      </goals>
+                      <configuration>
+                          <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+                          <resources>
+                              <resource>
+                                  <directory>${app.amp.folder}</directory>
+                                  <includes>
+                                      <include>module.properties</include>
+                                  </includes>
+                                  <filtering>${app.filtering.enabled}</filtering>
+                                  <targetPath>alfresco/module/${project.artifactId}</targetPath>
+                              </resource>
+                          </resources>
+                      </configuration>
+                  </execution>
+              </executions>
+            </plugin>
+        </plugins>        
       </build>
+      
     </profile>
     
     <!-- Enables alfresco testing dependencies if a src/test/java folder is found, by adding appropriate dependencies -->
@@ -507,21 +490,12 @@
                   <version>${maven.surefire.version}</version>
                   <configuration>
                       <argLine>${app.testing.jvm.args}</argLine>
+                      <additionalClasspathElements>
+                         <!-- Adds both the module config to test classpath --> 
+                         <additionalClasspathElement>${project.build.directory}/${project.build.finalName}/config</additionalClasspathElement>
+                      </additionalClasspathElements>
                   </configuration>
                 </plugin>
-                <!-- Add RAD capabilities for remote JUnit test running. This is added to Tomcat classpath,
-                	 so the custom JUnit test receiver is found in the running webapp classpath -->
-<!--                 <plugin> -->
-<!-- 					<groupId>org.apache.tomcat.maven</groupId> -->
-<!--             		<artifactId>tomcat7-maven-plugin</artifactId> -->
-<!--             		<dependencies> -->
-<!-- 						<dependency> -->
-<!-- 							<groupId>org.alfresco.maven</groupId> -->
-<!-- 							<artifactId>alfresco-rad</artifactId> -->
-<!-- 							<version>${maven.alfresco.version}</version> -->
-<!-- 						</dependency> -->
-<!--             		</dependencies> -->
-<!--             	</plugin> -->
             </plugins>
         </build>
     	<dependencies>
