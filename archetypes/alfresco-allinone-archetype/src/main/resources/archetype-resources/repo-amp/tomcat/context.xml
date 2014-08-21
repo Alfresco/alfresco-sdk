@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is included only when running this project with -Pamp-to-war -->
 <Context docBase="${alfresco.client.war.folder}" path="${alfresco.client.contextPath}">
 
 

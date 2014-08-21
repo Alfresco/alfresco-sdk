@@ -16,10 +16,33 @@
         <profile>
             <id>run</id>
             <properties>
+            	<!-- Location of the Solr project, which is loaded via filesystem. Change if your Solr customization project lives in a different folder. -->
                 <solr.project.dir>${project.basedir}/../solr</solr.project.dir>
             </properties>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-tomcat-resources</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/contexts</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>tomcat</directory>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
                     <plugin>
                         <groupId>org.apache.tomcat.maven</groupId>
                         <artifactId>tomcat7-maven-plugin</artifactId>
@@ -27,27 +50,31 @@
                             <execution>
                                 <id>run-wars</id>
                                 <goals>
-                                    <goal>run-war-only</goal>
+                                    <goal>run</goal>
                                 </goals>
                                 <phase>integration-test</phase>
                             </execution>
                         </executions>
                         <configuration>
-                            <!-- Runs Solr as the "fake" main webapp. This is useful due to the currently poor OOTB zip packaging of Alfresco Solr -->
-                            <warDirectory>${solr.project.dir}/target/solr-overlay</warDirectory>
+                            <warSourceDirectory>${project.parent.basedir}/solr/target/solr-overlay</warSourceDirectory>
                             <path>/solr</path>
+                            <useTestClasspath>false</useTestClasspath>
+                            <ignorePackaging>true</ignorePackaging>
+                            <useSeparateTomcatClassLoader>true</useSeparateTomcatClassLoader>
                             <systemProperties>
-                                <solr.solr.home>${solr.project.dir}/solr_home</solr.solr.home>
+                                <solr.solr.home>${project.parent.basedir}/solr/solr_home</solr.solr.home>
+                                <java.io.tmpdir>${project.build.directory}</java.io.tmpdir>
                             </systemProperties>
-                            <!-- Configures the custom Alfresco and Share to run as embedded webapps -->
+                            <delegate>true</delegate>
                             <webapps>
                                 <webapp>
                                     <groupId>${project.groupId}</groupId>
-                                    <artifactId>alfresco</artifactId>
+                                    <artifactId>repo</artifactId>
                                     <version>${project.version}</version>
                                     <type>war</type>
                                     <asWebapp>true</asWebapp>
-                                    <contextPath>alfresco</contextPath>
+                                    <contextPath>/alfresco</contextPath>
+                                    <contextFile>${project.build.directory}/contexts/context-repo.xml</contextFile>
                                 </webapp>
                                 <webapp>
                                     <groupId>${project.groupId}</groupId>
@@ -55,9 +82,10 @@
                                     <version>${project.version}</version>
                                     <type>war</type>
                                     <asWebapp>true</asWebapp>
-                                    <contextPath>share</contextPath>
+                                    <contextPath>/share</contextPath>
+                                    <contextFile>${project.build.directory}/contexts/context-share.xml</contextFile>
                                 </webapp>
-                            </webapps> 
+                            </webapps>
                         </configuration>
                     </plugin>
                 </plugins>

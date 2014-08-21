@@ -44,7 +44,7 @@
     <fileSet filtered="false" encoding="UTF-8">
       <directory>src/main/resources</directory>
       <includes>
-        <include>**/*.xml</include>
+        <include>**/*</include>
       </includes>
     </fileSet>
     <fileSet encoding="UTF-8">

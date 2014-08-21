@@ -130,7 +130,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>copy-lib</id>
+                        <id>copy-solr-resources</id>
                         <phase>package</phase>
                         <goals><goal>copy-resources</goal></goals>
                         <configuration>
@@ -145,6 +145,13 @@
                                     <directory>src/main/solr-properties/workspace</directory>
                                     <filtering>true</filtering>
                                     <targetPath>${alfresco.solr.dir}/workspace-SpacesStore/conf</targetPath>
+                                </resource>
+                                <resource>
+                                    <directory>src/main/solr-properties</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>log4j-solr.properties</include>
+                                    </includes>
                                 </resource>
                             </resources>
                         </configuration>

@@ -19,8 +19,13 @@
             <artifactId>share</artifactId>
             <type>war</type>
         </dependency>
-        <!-- Here you can add your Share AMP dependencies -->
-       
+        <!-- Demonstrating the dependency / installation of the share AMP developed in the 'share-amp' module -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>share-amp</artifactId>
+            <version>${project.version}</version>
+            <type>amp</type>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -44,7 +49,12 @@
                             <!-- To allow inclusion of META-INF -->
                             <excludes/>
                         </overlay>
-                        <!-- Add / order here the Share AMPs declared above -->
+                        <!-- Add / sort your AMPs here -->
+                        <overlay>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>share-amp</artifactId>
+                            <type>amp</type>
+                        </overlay>
                     </overlays>
                 </configuration>
             </plugin>

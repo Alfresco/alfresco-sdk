@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This context file is used only for rapid development, never installed released with the webapp -->
+<Context>
+    
+    <Resources className="org.apache.naming.resources.VirtualDirContext" extraResourcePaths="/=${project.parent.basedir}/repo-amp/target/repo-amp/web" />
+    <Loader className="org.apache.catalina.loader.VirtualWebappLoader"
+        searchVirtualFirst="true"
+        virtualClasspath="${project.parent.basedir}/repo-amp/target/classes;${project.parent.basedir}/repo-amp/target/test-classes;${project.parent.basedir}/repo-amp/target/repo-amp/config" />
+        
+    <!-- This enables hot reloading of web resources from uncompressed jars (while in prod they would be loaded from  WEB-INF/lib/{\*.jar}/META-INF/resources --> 
+    <JarScanner scanAllDirectories="true" />    
+</Context>
+    
+    

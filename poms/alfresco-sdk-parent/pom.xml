@@ -75,6 +75,8 @@
      -->
     <app.amp.folder>src/main/amp</app.amp.folder>
     <app.amp.output.folder>../${project.build.finalName}</app.amp.output.folder>
+    <!-- AMP excludes when installing into a WAR, by default empty (i.e. everything is included) -->
+    <app.amp.overlay.excludes></app.amp.overlay.excludes>
     <!-- Empty AMP source excludes by default, see the amp-to-war profile for usage example -->
     <app.amp.excludes></app.amp.excludes>
     <app.properties.folder>src/main/properties/${env}</app.properties.folder>

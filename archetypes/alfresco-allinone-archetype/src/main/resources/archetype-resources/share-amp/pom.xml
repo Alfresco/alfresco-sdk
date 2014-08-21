@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>${artifactId}</artifactId>
+    <name>Share AMP project</name>
+    <packaging>amp</packaging>
+    <description>This is a sample Share AMP project, depended upon by the share WAR module</description>
+
+    <parent>
+        <groupId>${groupId}</groupId>
+        <artifactId>${rootArtifactId}</artifactId>
+        <version>${version}</version>
+    </parent>
+
+    <!-- 
+       | SDK properties have sensible defaults in the SDK parent,
+       | but you can override the properties below to use another version. 
+       | For more available properties see the alfresco-sdk-parent POM. 
+       -->
+    <properties>
+        <!-- Defines the target WAR artifactId to run this amp, only used with the -Pamp-to-war switch
+        | Allowed values: alfresco | share. In this case it's configured to use OOTB share -->
+        <alfresco.client.war>share</alfresco.client.war>
+
+        <!-- Since Alfresco is already running on port 8080, we run Share on port 8081 -->
+        <maven.tomcat.port>8081</maven.tomcat.port>
+
+        <!-- Used in share-config-custom.xml. By default points to standard location of Alfresco -->
+        <alfresco.repo.url>http://localhost:8080/alfresco</alfresco.repo.url>
+
+        <!-- Defines the log level used in log4j.properties -->
+        <app.log.root.level>WARN</app.log.root.level>
+    </properties>
+
+   
+    <!-- Following dependencies are needed for compiling Java code in src/main/java; 
+         <scope>provided</scope> is inherited for each of the following; 
+         for more info, please refer to alfresco-platform-distribution POM -->
+    <dependencies>
+        <dependency>
+          <groupId>org.springframework.extensions.surf</groupId>
+          <artifactId>spring-surf-api</artifactId>
+          <scope>provided</scope>
+        </dependency>        
+    </dependencies>
+
+</project>

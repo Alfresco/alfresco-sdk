@@ -72,4 +72,20 @@
             <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
         </repository>
     </repositories>
+
+    <!-- Invoke your build with -Prun to run the multimodule project and enable rapid dev mode in your IDE. 
+         See 'run' profile in the sub modules pom.xml for further behavioral details.
+     -->
+    <profiles>
+        <profile>
+            <id>run</id>
+            <properties>
+                <!-- While running in rapid dev mode with -Prun, we don't want amp web resources 
+                    to be added to the war, so we can load them directly from the AMP project (see 
+                    runner/tomcat/context-*.xml for more details) -->
+                <maven.alfresco.includeWebResources>false</maven.alfresco.includeWebResources>
+            </properties>
+        </profile>
+    </profiles>
+    
 </project>
