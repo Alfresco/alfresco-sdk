@@ -35,17 +35,7 @@
     <fileSet filtered="false" encoding="UTF-8">
       <directory>src/main/amp</directory>
       <includes>
-        <include>**/*.jsp</include>
-        <include>**/*.xml</include>
-        <include>**/*.properties</include>
-        <include>**/*.txt</include>
-      </includes>
-    </fileSet>
-    <fileSet encoding="UTF-8">
-      <directory>src/main/amp</directory>
-      <includes>
-        <include>**/*.js</include>
-        <include>**/*.css</include>
+        <include>**/**</include>
       </includes>
     </fileSet>
     <fileSet filtered="false" packaged="false" encoding="UTF-8">
