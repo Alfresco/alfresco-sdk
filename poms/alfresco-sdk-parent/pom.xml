@@ -14,12 +14,12 @@
   <parent>
     <groupId>org.alfresco.maven</groupId>
     <artifactId>alfresco-sdk-aggregator</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>2.0.0-beta-1</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
   <!-- This defines the version of the SDK in terms of features -->
-  <version>2.0.0-SNAPSHOT</version>
+  <version>2.0.0-beta-1</version>
 
   <prerequisites>
     <maven>3.2.2</maven>
@@ -76,9 +76,9 @@
     <app.amp.folder>src/main/amp</app.amp.folder>
     <app.amp.output.folder>../${project.build.finalName}</app.amp.output.folder>
     <!-- AMP excludes when installing into a WAR, by default empty (i.e. everything is included) -->
-    <app.amp.overlay.excludes></app.amp.overlay.excludes>
+    <app.amp.overlay.excludes />
     <!-- Empty AMP source excludes by default, see the amp-to-war profile for usage example -->
-    <app.amp.excludes></app.amp.excludes>
+    <app.amp.excludes />
     <app.properties.folder>src/main/properties/${env}</app.properties.folder>
     <app.properties.test.folder>src/test/properties/${env}</app.properties.test.folder>
     <app.properties.include>**</app.properties.include>
@@ -116,7 +116,7 @@
     <!-- This is used for the site deployment procedure (override in your POM as needed) -->
     <stagingDirectory>../../target/staging/poms/alfresco-sdk-parent</stagingDirectory>
     <!-- Alfresco Maven plugin in use throughout the SDK -->
-    <maven.alfresco.version>2.0.0-SNAPSHOT</maven.alfresco.version>
+    <maven.alfresco.version>2.0.0-beta-1</maven.alfresco.version>
     <h2.version>1.3.174</h2.version>
     <h2-support.version>1.5</h2-support.version>
     <junit.version>4.11</junit.version>
