@@ -8,7 +8,7 @@
   <description>SDK module for Rapid Deveopment support</description>  
   <parent>
       <groupId>org.alfresco.maven</groupId>
-      <artifactId>alfresco-lifecycle-aggregator</artifactId>
+      <artifactId>alfresco-sdk-aggregator</artifactId>
       <version>2.0.0-SNAPSHOT</version>
       <relativePath>../../pom.xml</relativePath>
   </parent>

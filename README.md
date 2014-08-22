@@ -14,19 +14,30 @@ It is composed of:
 
 ## Resources 
 
-Full documentation is available at the [Maven Alfresco SDK site](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-lifecycle-aggregator/latest/index.html).
+### Developer docs
+
+**SDK 2.x**: Full documentation is available at the [Maven Alfresco SDK site](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-sdk-aggregator/latest/index.html).
+
+**SDK 1.x**: Full documentation is available at the [Maven Alfresco SDK site](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-lifecycle-aggregator/latest/index.html).
+
+### Alfresco Official docs
 
 Additional documentation for Alfresco Community and Enterprise, tutorials and examples is available in the [Alfresco Docs](http://docs.alfresco.com/4.2/concepts/dev-extensions-maven-sdk-intro.html).
 
+### Samples 
+
 Advanced sample projects are maintained by @ohej in the [Alfresco SDK Samples project](https://github.com/Alfresco/alfresco-sdk-samples/).
+
+
+### Contribute
 
 Report issues (and contribute!) [here](https://github.com/Alfresco/alfresco-sdk/issues?milestone=1&state=open). You can also join the [Maven Alfresco list on Google Groups](https://groups.google.com/forum/#!forum/maven-alfresco).
 
 ## Maven Repositories
 
-The Alfresco Maven SDK is released in Maven Central as of version 2.0-beta-1. The Alfresco (Community and Enterprise) artifacts are instead hosted in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/nexus/). 
+The Alfresco Maven SDK is released in Maven Central as of version 2.0-beta-1. Alfresco (Community and Enterprise) artifacts are instead hosted in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/nexus/). 
 
-Alfresco Community artifacts (JARs, WARs, AMPs, poms) and SDK artifacts are publicly available.
+Alfresco Community artifacts (JARs, WARs, AMPs, poms) and SDK artifacts are publicly available. 
 
 for Enterprise and Premiere licensed software access you need to get credential via the Alfresco Enterprise Support. See [public docs](http://docs.alfresco.com/4.2/concepts/dev-extensions-maven-sdk-tutorials-alfresco-enterprise.html) or [this KB (login required)](https://myalfresco.force.com/support/articles/en_US/Technical_Article/Where-can-I-find-the-repository-for-Enterprise-Maven-artifacts) for more details.
 
