@@ -23,8 +23,8 @@
     </licenses>
 
     <issueManagement>
-        <system>GoogleCode</system>
-        <url>http://code.google.com/p/maven-alfresco-archetypes/issues</url>
+        <system>GitHub</system>
+        <url>https://github.com/Alfresco/alfresco-sdk/issues</url>
     </issueManagement>
 
     <scm>
@@ -35,13 +35,13 @@
 
     <developers>
         <developer>
-            <id>gabriele.columbro</id>
+            <id>mindthegab</id>
             <name>Gabriele Columbro</name>
             <email>gabriele.columbro@alfresco.com</email>
             <url>http://mindthegab.com</url>
             <organization>Alfresco Software</organization>
             <organizationUrl>http://www.alfresco.com</organizationUrl>
-            <timezone>+1</timezone>
+            <timezone>-5</timezone>
             <roles>
                 <role>Founder</role>
                 <role>Architect</role>
@@ -49,7 +49,7 @@
             </roles>
         </developer>
         <developer>
-            <id>maurizio.pillitu</id>
+            <id>maoo</id>
             <name>Maurizio Pillitu</name>
             <email>maurizio.pillitu@alfresco.com</email>
             <url>http://session.it</url>
@@ -58,6 +58,18 @@
             <timezone>+1</timezone>
             <roles>
                 <role>Architect</role>
+                <role>Developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>ohej</id>
+            <name>Ole Hejlskov</name>
+            <email>ole@magenta-aps.dk</email>
+            <url>http://ohej.dk/</url>
+            <organization>Magenta</organization>
+            <organizationUrl>http://magenta.dk</organizationUrl>
+            <timezone>+1</timezone>
+            <roles>
                 <role>Developer</role>
             </roles>
         </developer>
@@ -71,6 +83,22 @@
             <organizationUrl>http://www.backbase.com</organizationUrl>
             <timezone>+1</timezone>
             <url>http://skuro.tk</url>
+        </contributor>
+        <contributor>
+            <name>Samuel Langlois</name>
+            <email>samuel.langlois@alfresco.com</email>
+            <organization>Alfresco Software</organization>
+            <organizationUrl>http://www.alfresco.com</organizationUrl>
+            <timezone>+0</timezone>
+            <url>https://twitter.com/samuel_langlois</url>
+        </contributor>
+        <contributor>
+            <name>Ray Gauss II</name>
+            <email>ray.gauss@alfresco.com</email>
+            <organization>Alfresco Software</organization>
+            <organizationUrl>http://www.alfresco.com</organizationUrl>
+            <timezone>-5</timezone>
+            <url>http://rgauss.com/</url>
         </contributor>
     </contributors>
 
@@ -142,8 +170,8 @@
                 <maven.site.url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest</maven.site.url>
                 <maven.release.version>2.4.2</maven.release.version>
                 <maven.release.goals>deploy site-deploy</maven.release.goals>
-                <maven.site.version>3.3</maven.site.version>
-                <maven.changes.version>2.9</maven.changes.version>
+                <maven.site.version>3.4</maven.site.version>
+                <maven.changes.version>2.10</maven.changes.version>
             </properties>
             <build>
                 <plugins>
@@ -177,10 +205,13 @@
                         <reportSets>
                             <reportSet>
                                 <reports>
-                                    <report>changes-report</report>
+                                    <report>github-report</report>
                                 </reports>
                             </reportSet>
                         </reportSets>
+                        <configuration>
+                            <onlyCurrentVersion>true</onlyCurrentVersion>
+                        </configuration>
                     </plugin>
                 </plugins>
             </reporting>
