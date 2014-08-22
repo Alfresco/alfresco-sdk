@@ -11,7 +11,7 @@ Introduction
   The Alfresco SDK Parent POM ${project.version} is the <<<single entry point>>> for all Maven Alfresco SDK\x99 features.
   It aggregates plugin configurations and dependencies to provide a set of profiles and properties to manage the full Alfresco projects Lifecycle on Maven.
   
-  The current version of the POM in use in the Maven Alfresco SDK\x99 ${project.version} is available {{{https://artifacts.alfresco.com/nexus/index.html#nexus-search;gav~org.alfresco.maven~alfresco-sdk-parent~${project.version}~pom~}on Alfresco Maven Repository}}.
+  The current version of the POM in use in the Maven Alfresco SDK\x99 ${project.version} is available {{{https://oss.sonatype.org/index.html#nexus-search;gav~org.alfresco.maven~alfresco-sdk-parent~${project.version}~pom~}on Maven Central}}.
     
 Usage
   

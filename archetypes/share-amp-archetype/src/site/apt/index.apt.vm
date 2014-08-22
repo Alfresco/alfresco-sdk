@@ -24,7 +24,7 @@ Introduction
   * AMP Unit Testing support. Just run the standard <<<mvn test>>> and see your <<<src/test/java>>> Alfresco unit tests run. 
     An sample Unit Test is provided in this archetype.
   
-  * Embedded run in Jetty and embedded H2 database for demo purposes, rapid application development and integration testing 
+  * Embedded run in Tomcat and embedded H2 database for demo purposes, rapid application development and integration testing 
   (<<NOTE>>: this is not a {{{http://www.alfresco.com/services/subscription/supported-platforms/} supported stack}} so use <<only for development purposes>>)
 
 How to create a project:
@@ -32,7 +32,7 @@ How to create a project:
   You can create the latest release archetype with the following command:
   
 +---+
-mvn archetype:generate -DarchetypeCatalog=https://artifacts.alfresco.com/nexus/content/groups/public/archetype-catalog.xml -Dfilter=org.alfresco.maven.archetype:
+mvn archetype:generate -Dfilter=org.alfresco.maven.archetype:
 +---+
   
   You should then:

@@ -1,5 +1,5 @@
   ------
-  Alfresco AMP Archetype Usage
+  Share AMP Archetype Usage
   ------
   Gabriele Columbro
   ------
@@ -27,6 +27,7 @@ Project layout
             |-> licenses/
   src/main/java //Java classes to be packaged in the AMP embedded JAR)
   src/main/resources //resources to the packaged in the AMP embedded JAR
+  src/main/resources/META-INF/resource //resources to the packaged in the AMP embedded JAR/META-INF and automatically mapped to the root of the webapp
   src/test/java // Unit tests
   src/test/resources // Unit test resources
   src/test/properties/<env> //  Environment aware alfresco-global.properties. By default <env>=local 
@@ -66,8 +67,7 @@ Commands
     * <<<mvn install -Pamp-to-war>>> Like <<<mvn package -Pamp-to-war>>> 
     but also installs and runs the resulting WAR+AMP in Tomcat + H2 embedded from running and development.
     This also enables rapid application development features, like hot reloading and remote JUnit running.
-    When you run this command then you can access in your browser <<< {{{http://localhost:8080/alfresco}}} >>>.
-    
+    When you run this command then you can access in your browser <<< {{{http://localhost:8081/share}}} >>>.
     
     * <<<mvn clean -Ppurge>>>: Removes DB, alf_data, indexes and log files. Useful to purge the development repo (by default self contained in <<<$\{project.basedir\}/alf_data_dev>>>
   

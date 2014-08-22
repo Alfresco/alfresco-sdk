@@ -1,9 +1,9 @@
   ------
-  Alfresco Maven AMP Archetype Advanced Usage
+  Share AMP Archetype Advanced Usage
   ------
   Gabriele Columbro
   ------
-  Nov 2012
+  Aug 2014
   ------
 
 AMP Unit Testing
@@ -14,7 +14,7 @@ AMP Unit Testing
     Running <<<mvn test>>> will results in your unit tests to be run. You can skip this (<<<not recommended>>>) 
     adding <<<-DskipTests>>> to your command line.
 
-AMP Archetype properties
+Share AMP Archetype properties
 
     In the AMP archetype (as in the whole Part of the Maven Alfresco SDK\x99) properties are configurable at many levels:
     

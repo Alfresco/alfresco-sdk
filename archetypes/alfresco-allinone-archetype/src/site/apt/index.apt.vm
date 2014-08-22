@@ -20,7 +20,7 @@ Introduction
   
   * AMP Dependency management and overlay in an Alfresco Repository or Share WAR
   
-  * Embedded run in Jetty and embedded H2 database of the full Alfresco suite, including Repository, Share, Solr and Web Quick Start
+  * Embedded run in Tomcat and embedded H2 database of the full Alfresco suite, including Repository, Share, Solr
   
   * Support for unit and integration testings
 
@@ -29,7 +29,7 @@ How to create a project:
   You can create the latest release archetype with the following command:
   
 +---+
-mvn archetype:generate -DarchetypeCatalog=https://artifacts.alfresco.com/nexus/content/groups/public/archetype-catalog.xml -Dfilter=org.alfresco.maven.archetype:
+mvn archetype:generate -Dfilter=org.alfresco.maven.archetype:
 +---+
   
   You should then:
@@ -38,11 +38,11 @@ mvn archetype:generate -DarchetypeCatalog=https://artifacts.alfresco.com/nexus/c
   
   [[2]] Specify the <<<groupId>>> and <<<artifactId>>> for the project you want to create
   
-  [[3]] (<Optionally>) Select Alfresco Version / Edition (current default is: Alfresco Community 4.2.c)
+  [[3]] (<Optionally>) Select Alfresco Version / Edition (current default is: Alfresco Community 5.0.a)
   
  You can find new Alfresco All-in-One project ready to go in the <<<artifactId>>> folder.
 
 Usage
 
-  Instructions on how to use the Alfresco AMP archetype can be found on the {{{./usage.html}usage page}}, while 
+  Instructions on how to use the Alfresco All in One archetype can be found on the {{{./usage.html}usage page}}, while 
   for more advanced use cases refer to the {{{./advanced-usage.html}advanced usage page}}

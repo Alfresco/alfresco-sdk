@@ -20,36 +20,37 @@ Project layout
     |-> alfresco
     |-> share
     |-> solr
-    |-> wcmqs (Alfresco Web Quick Start)
-    |-> runner (a Jetty embedded runner / integration test runner)
+    |-> runner (a Tomcat embedded runner / integration test runner)
 +---+
 
 * Modules 
 
     The All-in-One Alfresco project is composed by the following modules:
    
-    * <<<amp>>>: An Repository Tier AMP project, demonstrating sample project structure and demo component loading. It can be configured to work for Share
+    * <<<repo-amp>>>: An Repository Tier AMP project, demonstrating sample project structure and demo component loading
      
-    * <<<alfresco>>>: An <<<alfresco.war>>> Repository Extension, overlaying the Alfresco WAR with custom resources / classes 
+    * <<<repo>>>: An <<<alfresco.war>>> Repository Extension, overlaying the Alfresco WAR with custom resources / classes 
     and depending on the <<<amp>>> project
     
-    * <<<share>>>: A <<<share.war>>> extension, overlaying the Share WAR with custom resoruces / classes
+    * <<<share-amp>>>: A Share Tier AMP project, demonstrating sample project structure and demo component loading
+    
+    * <<<share>>>: A <<<share.war>>> extension, overlaying the Share WAR with the custom developed <<<share-amp>>>
     
     * <<<solr>>>: An Alfresco <<<alfresco-*-*-solr.zip>>> overlay / customization to configure {{{http://solr.apache.org}Apache Solr}} cores properties
-
-    * <<<wcmqs>>>: An Alfresco Web Quick Start overlay / customization. WQS Repository and Share AMPs are also installed on Alfresco and Share.
     
-    * <<<runner>>>: A Jetty + H2 runner, capable of running all the aforementioned projects in embedded mode for demo / integration-testing purposes
+    * <<<runner>>>: A Tomcat + H2 runner, capable of running all the aforementioned projects in embedded mode for demo / integration-testing purposes
 
 Usage 
 
     The project provides support for typical development lifecycle use cases like
 
+        * Rapid development, in full IDE integration, and with hot classes reloading (using spring-loaded, check {{{../../prerequisites.html}prerequisites}}).
+        
         * AMP/WAR packaging
         
         * AMP Unit testing
         
-        * run embedded in Jetty + H2 database. 
+        * run embedded in Tomcat + H2 database. 
           (<<NOTE>>: this is not a {{{http://www.alfresco.com/services/subscription/supported-platforms/} supported stack}} so use <<only for development purposes>>)
         
         * Integration testing

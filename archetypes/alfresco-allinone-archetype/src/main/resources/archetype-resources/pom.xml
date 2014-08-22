@@ -53,25 +53,6 @@
           </dependency>
      </dependencies>
   </dependencyManagement>
-  
-    <!-- This repository is only needed to retrieve Alfresco parent POM. 
-        NOTE: This can be removed when/if Alfresco will be on Maven Central 
-        
-        NOTE: The repository to be used for Alfresco Enterprise artifacts is
-        https://artifacts.alfresco.com/nexus/content/groups/private/. Please check
-        with Alfresco Support to get credentials to add to your ~/.m2/settings.xml
-        if you are a Enterprise customer or Partner  
-        -->
-    <repositories>
-        <repository>
-            <id>alfresco-public</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
-        </repository>
-        <repository>
-            <id>alfresco-public-snapshots</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
-        </repository>
-    </repositories>
 
     <!-- Invoke your build with -Prun to run the multimodule project and enable rapid dev mode in your IDE. 
          See 'run' profile in the sub modules pom.xml for further behavioral details.

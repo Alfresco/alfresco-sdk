@@ -137,7 +137,7 @@
 
     <profiles>
         <profile>
-            <id>release</id>
+            <id>sdk-release</id>
             <properties>
                 <maven.site.url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest</maven.site.url>
                 <maven.release.version>2.4.2</maven.release.version>
@@ -186,13 +186,12 @@
             </reporting>
             <distributionManagement>
                 <repository>
-                    <id>alfresco-internal</id>
-                    <url>https://artifacts.alfresco.com/nexus/content/repositories/releases</url>
+                    <id>central-releases-staging</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
                 </repository>
                 <snapshotRepository>
-                    <name>alfresco snapshots repository</name>
-                    <id>alfresco-internal-snapshots</id>
-                    <url>https://artifacts.alfresco.com/nexus/content/repositories/snapshots</url>
+                    <id>central-snapshots</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
                 </snapshotRepository>
                 <site>
                     <id>alfresco-docs</id>
