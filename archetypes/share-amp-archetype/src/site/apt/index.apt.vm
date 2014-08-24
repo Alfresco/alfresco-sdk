@@ -8,8 +8,8 @@
 
 Introduction
 
-  The Alfresco AMP Archetype is a sample fully featured project to manage AMP (Alfresco Module Package) projects. 
-  This archetype can be used both for Alfresco Repository and Alfresco Share AMPs.
+  The Share AMP Archetype is a sample fully featured project to manage AMP (Alfresco Module Package) projects. 
+  This archetype can be used for Alfresco Share AMPs.
 
 * Features
   
@@ -37,15 +37,15 @@ mvn archetype:generate -Dfilter=org.alfresco.maven.archetype:
   
   You should then:
   
-  [[1]] Select the <<<alfresco-amp-archetype>>> option
+  [[1]] Select the <<<share-amp-archetype>>> option
   
   [[2]] Specify the <<<groupId>>> and <<<artifactId>>> for the project you want to create
   
-  [[3]] (<Optionally>) Select Alfresco Version / Edition (current default is: Alfresco Community 4.2.c)
+  [[3]] (<Optionally>) Select Alfresco Version / Edition (current default is: Alfresco Community 5.0.a)
   
- You can find new Alfresco AMP project ready to go in the <<<artifactId>>> folder.
+ You can find new Share AMP project ready to go in the <<<artifactId>>> folder.
 
 Usage
 
-  Instructions on how to use the Alfresco AMP archetype can be found on the {{{./usage.html}usage page}}, while 
+  Instructions on how to use the Share AMP archetype can be found on the {{{./usage.html}usage page}}, while 
   for more advanced use cases refer to the {{{./advanced-usage.html}advanced usage page}}

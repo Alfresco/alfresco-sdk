@@ -28,7 +28,7 @@ SDK Versions
   As of version 2.0, releases for the Alfresco SDK are available in Maven Central. 
   
   Alfresco SDK 1.x versions rely on the {{{https://artifacts.alfresco.com/nexus/content/groups/public/}Alfresco Artifacts Repository}}. 
-  For documentation on the Maven Alfresco SDK\x99 1.x please refer to {{{https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/1.x/latest/index.html} Maven Alfresco SDK 1.x}}
+  For documentation on the Maven Alfresco SDK\x99 1.x please refer to {{{https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest/index.html} Maven Alfresco SDK 1.x}}
   
 SDK Alfresco Compatibility
 
