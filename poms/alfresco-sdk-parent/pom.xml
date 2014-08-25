@@ -303,15 +303,9 @@
                     <pluginExecutions>
                         <pluginExecution>
                             <pluginExecutionFilter>
-                                <groupId>
-                                    org.alfresco.maven.plugin
-                                </groupId>
-                                <artifactId>
-                                    alfresco-maven-plugin
-                                </artifactId>
-                                <versionRange>
-                                    [2.0.0-SNAPSHOT,)
-                                </versionRange>
+                                <groupId>org.alfresco.maven.plugin</groupId>
+                                <artifactId>alfresco-maven-plugin</artifactId>
+                                <versionRange>[0.0,)</versionRange>
                                 <goals>
                                     <goal>set-version</goal>
                                 </goals>
