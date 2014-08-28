@@ -4,7 +4,7 @@
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
-    <name>Quickstart of Alfresco and Share with DB and runner embedded</name>
+    <name>Alfresco Repository and Share Quickstart with database and an embedded runner.</name>
     <description>This All-in-One project allows to manage all the components involved in Alfresco development (Repo, Share, Solr, AMPs) in one project</description>
     <packaging>pom</packaging>    
 
