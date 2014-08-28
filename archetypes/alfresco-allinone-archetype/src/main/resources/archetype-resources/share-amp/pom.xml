@@ -39,6 +39,14 @@
          for more info, please refer to alfresco-platform-distribution POM -->
     <dependencies>
         <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>share</artifactId>
+            <version>${alfresco.version}</version>
+            <classifier>classes</classifier>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
           <groupId>org.springframework.extensions.surf</groupId>
           <artifactId>spring-surf-api</artifactId>
           <scope>provided</scope>
