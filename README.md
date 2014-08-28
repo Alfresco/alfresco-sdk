@@ -1,6 +1,6 @@
-# [![Alfresco SDK logo](https://github.com/Alfresco/alfresco-sdk/raw/master/src/site/resources/img/alfresco-maven-logo.jpg)](#features) Alfresco SDK
+# [![Maven Alfresco SDK logo](https://github.com/Alfresco/alfresco-sdk/raw/master/src/site/resources/img/alfresco-maven-logo.jpg)](#features) Maven Alfresco SDK
 
-Alfresco SDK based on Apache Maven. 
+Maven Alfresco SDK based on Apache Maven. 
 
 Includes support for rapid and standard development, testing, packaging, versioning and release of your Alfresco integration and extension projects. 
 
@@ -18,7 +18,7 @@ It is composed of:
 
 ### Developer Documentation
 
-**SDK 2.x**: Full documentation is available at the [Alfresco SDK site](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-sdk-aggregator/latest/index.html).
+**SDK 2.x**: Full documentation is available at the [Maven Alfresco SDK site](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-sdk-aggregator/latest/index.html).
 
 ### Alfresco Official Documentation
 
@@ -26,7 +26,7 @@ Additional documentation for Alfresco Community and Enterprise, tutorials and ex
 
 ### Samples 
 
-Advanced sample projects are maintained by @ohej in the [Alfresco SDK Samples project](https://github.com/Alfresco/alfresco-sdk-samples/).
+Advanced sample projects are maintained by @ohej in the [Maven Alfresco SDK Samples project](https://github.com/Alfresco/alfresco-sdk-samples/).
 
 
 ### Contribute
@@ -35,7 +35,7 @@ Report issues (and contribute!) [here](https://github.com/Alfresco/alfresco-sdk/
 
 ## Maven Repositories
 
-The Alfresco Maven SDK is released in Maven Central as of version 2.0-beta-1. Alfresco (Community and Enterprise) artifacts are instead hosted in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/nexus/). 
+The Maven Alfresco SDK is released in Maven Central as of version 2.0-beta-1. Alfresco (Community and Enterprise) artifacts are instead hosted in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/nexus/). 
 
 Alfresco Community artifacts (JARs, WARs, AMPs, poms) and SDK artifacts are publicly available. 
 

@@ -9,7 +9,7 @@
 Introduction
 
   The Alfresco All-in-One Archetype is a multi-module project,
-  leveraging Alfresco SDK\x99 powerful capabilities to customize and run the full Alfresco platform embedded and all it's components.
+  leveraging Maven Alfresco SDK\x99 powerful capabilities to customize and run the full Alfresco platform embedded and all it's components.
   The archetype does not require additional download and provides a perfect starting point for full-blown Alfresco projects.
 
 * Features

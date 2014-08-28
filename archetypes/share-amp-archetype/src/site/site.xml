@@ -24,17 +24,17 @@
         </menu>
 
         <menu name="SDK components">
-          <item name="Alfresco SDK" href="../../index.html" />
+          <item name="Maven Alfresco SDK" href="../../index.html" />
           <item name="Alfresco AMP Archetype" href="../alfresco-amp-archetype/index.html" />
           <item name="Share AMP Archetype" href="./index.html" />
           <item name="Alfresco All-in-One Archetype" href="../alfresco-allinone-archetype/index.html" />
-          <item name="Alfresco SDK Parent POM" href="../../poms/alfresco-sdk-parent/index.html" />
+          <item name="Maven Alfresco SDK Parent POM" href="../../poms/alfresco-sdk-parent/index.html" />
           <item name="Alfresco Platform Distribution POM" href="https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-platform-distribution/latest/index.html" />
-          <item name="Alfresco Maven Plugin" href="../../plugins/alfresco-maven-plugin/index.html" />
+          <item name="Maven Alfresco Plugin" href="../../plugins/alfresco-maven-plugin/index.html" />
         </menu>
 
         <menu name="Alfresco Community">
-            <item name="Alfresco Maven Wiki Documentation" href="http://wiki.alfresco.com/wiki/Maven_Alfresco_SDK" />
+            <item name="Maven Alfresco Wiki Documentation" href="http://wiki.alfresco.com/wiki/Maven_Alfresco_SDK" />
             <item name="Alfresco with Maven for Dummies" href="https://wiki.alfresco.com/wiki/Maven_For_Dummies" />
             <item name="Developer Access (Google Code)" href="http://code.google.com/p/maven-alfresco-archetypes/" />
             <item name="Gabriele Columbro's blog" href="http://www.mindthegab.com/" />

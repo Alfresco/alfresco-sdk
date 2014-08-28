@@ -8,7 +8,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * A basic component that will be started for this module.
- * This is a sample taken from Alfresco SDK
+ * This is a sample taken from Maven Alfresco SDK
  * 
  * @author Derek Hulley
  */
