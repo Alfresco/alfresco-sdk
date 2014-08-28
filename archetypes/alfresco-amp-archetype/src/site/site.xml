@@ -24,7 +24,7 @@
         </menu>
 
         <menu name="SDK components">
-          <item name="Maven Alfresco SDK" href="../../index.html" />
+          <item name="Alfresco SDK" href="../../index.html" />
           <item name="Alfresco AMP Archetype" href="./index.html" />
           <item name="Share AMP Archetype" href="../share-amp-archetype/index.html" />
           <item name="Alfresco All-in-One Archetype" href="../alfresco-allinone-archetype/index.html" />
@@ -33,7 +33,7 @@
           <item name="Alfresco Maven Plugin" href="../../plugins/alfresco-maven-plugin/index.html" />
         </menu>
 
-        <menu name="Maven Alfresco Community">
+        <menu name="Alfresco Community">
             <item name="Official Alfresco SDK docs" href="http://docs.alfresco.com/community/concepts/alfresco-sdk-intro.html" />
             <item name="Alfresco Maven Wiki Docs" href="http://wiki.alfresco.com/wiki/Maven_Alfresco_SDK" />
             <item name="Alfresco with Maven for Dummies" href="https://wiki.alfresco.com/wiki/Maven_For_Dummies" />

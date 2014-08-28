@@ -1,6 +1,8 @@
-# [![Maven Alfresco SDK logo](https://github.com/Alfresco/alfresco-sdk/raw/master/src/site/resources/img/alfresco-maven-logo.jpg)](#features) Maven Alfresco SDK
+# [![Alfresco SDK logo](https://github.com/Alfresco/alfresco-sdk/raw/master/src/site/resources/img/alfresco-maven-logo.jpg)](#features) Alfresco SDK
 
-The Alfresco SDK based on Apache Maven, includes support for rapid and standard development, testing, packaging, versioning and release of your Alfresco integration and extension projects. 
+Alfresco SDK based on Apache Maven. 
+
+Includes support for rapid and standard development, testing, packaging, versioning and release of your Alfresco integration and extension projects. 
 
 It is composed of:
 
@@ -14,13 +16,11 @@ It is composed of:
 
 ## Resources 
 
-### Developer docs
+### Developer Documentation
 
-**SDK 2.x**: Full documentation is available at the [Maven Alfresco SDK site](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-sdk-aggregator/latest/index.html).
+**SDK 2.x**: Full documentation is available at the [Alfresco SDK site](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-sdk-aggregator/latest/index.html).
 
-**SDK 1.x**: Full documentation is available at the [Maven Alfresco SDK site](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-lifecycle-aggregator/latest/index.html).
-
-### Alfresco Official docs
+### Alfresco Official Documentation
 
 Additional documentation for Alfresco Community and Enterprise, tutorials and examples is available in the [Alfresco Docs](http://docs.alfresco.com/4.2/concepts/dev-extensions-maven-sdk-intro.html).
 
@@ -31,7 +31,7 @@ Advanced sample projects are maintained by @ohej in the [Alfresco SDK Samples pr
 
 ### Contribute
 
-Report issues (and contribute!) [here](https://github.com/Alfresco/alfresco-sdk/issues?milestone=1&state=open). You can also join the [Maven Alfresco list on Google Groups](https://groups.google.com/forum/#!forum/maven-alfresco).
+Report issues (and contribute!) [here](https://github.com/Alfresco/alfresco-sdk/issues?milestone=1&state=open). You can also join the [Alfresco list on Google Groups](https://groups.google.com/forum/#!forum/maven-alfresco).
 
 ## Maven Repositories
 

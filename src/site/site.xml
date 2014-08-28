@@ -46,14 +46,14 @@
             
             </script>
         </head>
-        <menu name="Maven Alfresco SDK">
+        <menu name="Alfresco SDK">
             <item name="Introduction" href="index.html"/>
-            <item name="Maven Alfresco SDK Prerequisites" href="prerequisites.html" />
+            <item name="Alfresco SDK Prerequisites" href="prerequisites.html" />
             <item name="Why using SDK?" href="./why.html" />
         </menu>
 
         <menu name="SDK components">
-            <item name="Maven Alfresco SDK" href="./index.html" />
+            <item name="Alfresco SDK" href="./index.html" />
             <item name="Alfresco AMP Archetype" href="./archetypes/alfresco-amp-archetype/index.html" />
             <item name="Share AMP Archetype" href="./archetypes/alfresco-amp-archetype/index.html" />
             <item name="Alfresco All-in-One Archetype" href="./archetypes/alfresco-allinone-archetype/index.html" />

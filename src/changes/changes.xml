@@ -1,11 +1,11 @@
 <!-- This document is obsolete. Now release notes are generated via the github report -->
 <document>
   <properties>
-    <title>Maven Alfresco SDK (former Maven Alfresco Lifecycle)</title>
+    <title>Alfresco SDK (former Alfresco Lifecycle)</title>
     <author email="gabriele.columbro@alfresco.com">Gabriele Columbro</author>
   </properties>
   <body>
-    <release version="1.0" date="2012-11-03" description="Major feature release making the project to a fully fledged SDK, rebranded to Maven Alfresco SDK 1.0">
+    <release version="1.0" date="2012-11-03" description="Major feature release making the project to a fully fledged SDK, rebranded to Alfresco SDK 1.0">
         <action type="improvement">Complete re-write of alfresco-maven-plugin to embed Alfresco MMT, therefore maximize alignment / supportability of the build process</action>
         <action type="add">Introduced a common SDK parent POM (alfresco-sdk-parent), single entry point to access SDK features</action>
         <action type="add">Introduced a Alfresco platform distribution POM (alfresco-sdk-parent) describing Alfresco artifacts per every release</action>
@@ -41,7 +41,7 @@
 		Linked all sub modules.
       </action>
       <action dev="columbro" type="add">
-		Added this wrapper project to group all Maven Alfresco plugins and archetype useful for the Maven Alfresco Lifecycle support
+		Added this wrapper project to group all Alfresco plugins and archetype useful for the Alfresco Lifecycle support
       </action>
     </release>
   </body>

@@ -15,7 +15,7 @@ Rationale
   enable rapid development and prototyping of Alfresco projects, while enabling agile development practices (i.e. TDD, FDD)
   and fostering process reuse due to standardization
   
-Why would you use the Maven Alfresco SDK\x99?
+Why would you use the Alfresco SDK\x99?
 
   As a standard de facto, Maven allows you projects to be inherently more reusable and enables <process reuse> of your development practices,
   and, in certain successful cases, Application Lifecycle Management process at large.
