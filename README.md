@@ -1,6 +1,6 @@
 # [![Maven Alfresco SDK logo](https://github.com/Alfresco/alfresco-sdk/raw/master/src/site/resources/img/alfresco-maven-logo.jpg)](#features) Maven Alfresco SDK
 
-Maven Alfresco SDK based on Apache Maven. 
+Maven Alfresco SDK for Alfresco Development and Customizations based on Apache Maven. 
 
 Includes support for rapid and standard development, testing, packaging, versioning and release of your Alfresco integration and extension projects. 
 
@@ -8,7 +8,7 @@ It is composed of:
 
 - An [SDK Parent POM](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-lifecycle-aggregator/latest/poms/alfresco-sdk-parent/index.html) which you can use in your projects to enable rapid Alfresco development features
 - An [Alfresco Platform Distribution POM](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-platform-distribution/latest/index.html) which pre-configures versions of Alfresco and common 3rd party dependency libraries, for stability purposes
-- An Alfresco [Maven Plugin](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-lifecycle-aggregator/latest/plugins/alfresco-maven-plugin/index.html) which provides AMP packaging and installation facitilites (a la MMT) and other common goals for Alfresco development
+- A [Maven Alfresco Plugin](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-lifecycle-aggregator/latest/plugins/alfresco-maven-plugin/index.html) which provides AMP packaging and installation facilities (a la MMT) and other common goals for Alfresco development
 - A number of *Maven Archetypes* (sample projects) including:
 	1. [Alfresco Repository AMP Archetype](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-lifecycle-aggregator/latest/archetypes/alfresco-amp-archetype/index.html)
 	2. [Alfresco Share AMP Archetype](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-lifecycle-aggregator/latest/archetypes/share-amp-archetype/index.html)
@@ -35,7 +35,9 @@ Report issues (and contribute!) [here](https://github.com/Alfresco/alfresco-sdk/
 
 ## Maven Repositories
 
-The Maven Alfresco SDK is released in Maven Central as of version 2.0-beta-1. Alfresco (Community and Enterprise) artifacts are instead hosted in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/nexus/). 
+The Maven Alfresco SDK is released in Maven Central as of version 2.0-beta-1. 
+
+Alfresco (Community and Enterprise) artifacts are instead hosted in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/nexus/). 
 
 Alfresco Community artifacts (JARs, WARs, AMPs, poms) and SDK artifacts are publicly available. 
 
