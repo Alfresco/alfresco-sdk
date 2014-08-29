@@ -77,6 +77,14 @@
                     <file>${alfresco.solr.war.overlay}/WEB-INF/web.xml</file>
                     <replacements>
                         <replacement>
+                            <token><![CDATA[<!-- <security-constraint>]]></token>
+                            <value><![CDATA[<security-constraint>]]></value>
+                        </replacement>
+                        <replacement>
+                            <token><![CDATA[</security-role> -->]]></token>
+                            <value><![CDATA[</security-role>]]></value>
+                        </replacement>
+                        <replacement>
                             <token><![CDATA[<security-constraint>]]></token>
                             <value><![CDATA[<!-- <security-constraint>]]></value>
                         </replacement>
