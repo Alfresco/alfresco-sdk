@@ -73,7 +73,7 @@
              <properties>
                 <alfresco.rm.version>2.3.a.1</alfresco.rm.version>
                 <app.rm.amps.location>${project.build.directory}/rm-amps</app.rm.amps.location>
-                <app.rm.war.location>${project.build.directory}/${project.build.finalName}</app.rm.war.location>
+                <app.rm.war.location>${project.build.directory}/${project.build.finalName}.war</app.rm.war.location>
                 <app.rm.artifact>org.alfresco:${alfresco.rm.artifactId}:${alfresco.rm.version}:amp</app.rm.artifact>
              </properties>
         </profile>
