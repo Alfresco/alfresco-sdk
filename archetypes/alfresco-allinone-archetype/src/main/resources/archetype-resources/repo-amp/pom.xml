@@ -29,11 +29,20 @@
         <!-- Defines the target WAR artifactId to run this amp, only used with the -Pamp-to-war switch
         .    | Allowed values: alfresco | share. Defaults to a repository AMP, but could point to your custom corporate Alfresco WAR -->
         <alfresco.client.war>alfresco</alfresco.client.war>
-        <!-- Defines the target WAR groupId to run this amp, only used with the -Pamp-to-war profile
-        .    | Could be org.alfresco or your corporate groupId -->
-        <!-- <alfresco.client.war.groupId>org.alfresco</alfresco.client.war.groupId> -->
-        <!-- Defines the target WAR version to run this amp, only used with the -Pamp-to-war profile -->
-        <!-- <alfresco.client.war.version>${alfresco.version}</alfresco.client.war.version> -->
     </properties>
-    
+    <profiles>
+        <!-- RM profile, manually activated, automatically adds support for RM development (dependencies) and install the RM amps in the WARs -->
+        <profile>
+            <id>rm</id>
+            <dependencies>
+                <dependency>
+                    <groupId>${alfresco.groupId}</groupId>
+                    <artifactId>alfresco-rm</artifactId>
+                    <version>${alfresco.rm.version}</version>
+                    <type>jar</type>
+                    <classifier>classes</classifier>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 </project>

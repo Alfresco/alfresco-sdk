@@ -60,4 +60,52 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>rm</id>
+             <properties>
+                <alfresco.rm.artifactId>alfresco-rm-share</alfresco.rm.artifactId>
+            </properties>
+            <build>
+                <plugins>
+                    <!-- Fetch Alfresco RM repo AMP -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>get-rm-share</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <artifact>${app.rm.artifact}</artifact>
+                                    <outputDirectory>${app.rm.amps.location}</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- The current AMP artifact is installed into the Alfresco folder using alfresco-maven-plugin -->
+                    <plugin>
+                        <groupId>org.alfresco.maven.plugin</groupId>
+                        <artifactId>alfresco-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>install-rm-share</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>install</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <ampLocation>${app.rm.amps.location}</ampLocation>
+                            <warLocation>${app.rm.war.location}</warLocation>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

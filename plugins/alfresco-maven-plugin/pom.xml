@@ -81,6 +81,11 @@
       <artifactId>alfresco-mmt</artifactId>
       <version>5.0.a</version>
     </dependency>
+    <dependency>
+        <groupId>org.alfrescolabs.alfresco-technical-validation</groupId>
+        <artifactId>org.alfrescolabs.alfresco-technical-validation</artifactId>
+        <version>0.4.0</version>
+    </dependency>
   </dependencies>
 
   <reporting>
@@ -92,4 +97,12 @@
       </plugin>
     </plugins>
   </reporting>
+  
+  <repositories>
+    <!-- Used for the ATV donwload -->
+    <repository>
+      <id>clojars.org</id>
+      <url>http://clojars.org/repo</url>
+    </repository>
+  </repositories>
 </project>

@@ -67,6 +67,15 @@
                 <maven.alfresco.includeWebResources>false</maven.alfresco.includeWebResources>
             </properties>
         </profile>
+         <!-- RM profile, manually activated, automatically adds support for RM development (dependencies) and install the RM amps in the WARs -->
+        <profile>
+            <id>rm</id>
+             <properties>
+                <alfresco.rm.version>2.3.a.1</alfresco.rm.version>
+                <app.rm.amps.location>${project.build.directory}/rm-amps</app.rm.amps.location>
+                <app.rm.war.location>${project.build.directory}/${project.build.finalName}</app.rm.war.location>
+                <app.rm.artifact>org.alfresco:${alfresco.rm.artifactId}:${alfresco.rm.version}:amp</app.rm.artifact>
+             </properties>
+        </profile>
     </profiles>
-    
 </project>
