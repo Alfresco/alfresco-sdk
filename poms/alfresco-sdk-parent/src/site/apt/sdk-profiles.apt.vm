@@ -15,17 +15,19 @@ SDK Available Profiles
     
     Here goes the list of common used profiles (with their activation conditions):     
 
-*-----------+--------------+-------------+-------------+
-|| Profile  || Description || Activation || Phase      |
-*-----------+--------------+-------------+-------------+
-| amp-to-war         |  Allows AMP projects to be run embedded on a WAR      |  Manual: <<<-Pamp-to-war>>>       | integration-test |
-*-----------*--------------*-------------*-------------*
-| purge              |  Cleans all alf_data and logs from Alfresco runs      |  Manual: <<<-Ppurge>>>            | clean |
-*-----------*--------------*-------------*-------------*
-| enable-amp-testing |  Allows AMP unit testing                              |  Automatic if <<<src/test/java>>> is present   | test |
-*-----------*--------------*-------------*-------------*
-| enable-amp         |  Activates AMP packaging                              |  Automatic if <<<src/main/amp/modules.properties>>> is present   | test |
-*-----------+--------------+-------------+-------------+
+*-----------+--------------+-------------+-------------+-------------+
+|| Archetypes || Profile  || Description || Activation || Phase      |
+*-----------+--------------+-------------+-------------+-------------+
+| amp, share-amp | amp-to-war         |  Allows AMP projects to be run embedded on a WAR and in rapid dev mode    |  Manual: <<<-Pamp-to-war>>>       | pre-integration-test |
+*-----------*--------------*-------------*-------------*-------------+
+| any |purge              |  Cleans all alf_data and logs from Alfresco runs      |  Manual: <<<-Ppurge>>>            | clean |
+*-----------*--------------*-------------*-------------*-------------+
+| all-in-one |  run | Runs embedded Alfresco + Share + Solr in rapid dev mode                           | Manual: <<<-Prun>>>   | pre-integration-test |
+*-----------*--------------*-------------*-------------*-------------+
+| all-in-one | rm   |  Adds Records Management runtime and compile time dependencies                              |  Manual: <<<-Prm>>>   | package |
+*-----------+--------------+-------------+-------------+-------------+
+| amp, share-amp | atv   |  (Experimental) Invokes the {{{https://github.com/AlfrescoLabs/technical-validation/}Alfresco Technical Validation tool}} | Manual: <<<-Patv>>>   | validate |
+*-----------+--------------+-------------+-------------+-------------+
     
     The full list of available profiles (with their activation conditions) can be instead found in the <<<profiles>>> section of the
     {{{https://artifacts.alfresco.com/nexus/index.html#nexus-search;gav~org.alfresco.maven~alfresco-sdk-parent~${project.version}~pom~}Alfresco SDK POM}}.
