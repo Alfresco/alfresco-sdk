@@ -52,7 +52,7 @@
                                 <goals>
                                     <goal>run</goal>
                                 </goals>
-                                <phase>integration-test</phase>
+                                <phase>pre-integration-test</phase>
                             </execution>
                         </executions>
                         <configuration>
