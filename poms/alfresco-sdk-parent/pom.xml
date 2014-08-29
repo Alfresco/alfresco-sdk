@@ -56,7 +56,7 @@
     <alfresco.db.name>alf_dev</alfresco.db.name>
     <alfresco.db.username>alfresco</alfresco.db.username>
     <alfresco.db.password>alfresco</alfresco.db.password>
-    <alfresco.db.params>MODE=PostgreSQL;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;MVCC=TRUE</alfresco.db.params>
+    <alfresco.db.params>MODE=PostgreSQL;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;MVCC=FALSE;LOCK_MODE=0</alfresco.db.params>
     <!-- By default the H2 embedded database datafile is created under the alfresco.data.location folder -->
     <alfresco.db.url>jdbc:h2:./${alfresco.data.location}/h2_data/${alfresco.db.name};${alfresco.db.params}</alfresco.db.url>
     <alfresco.db.datasource.class>org.h2.jdbcx.JdbcDataSource</alfresco.db.datasource.class>
@@ -655,7 +655,7 @@
                     <goals>
                         <goal>run</goal>
                     </goals>
-                    <phase>integration-test</phase>
+                    <phase>pre-integration-test</phase>
                     <configuration>
                           <useTestClasspath>false</useTestClasspath>
                           <ignorePackaging>true</ignorePackaging>
@@ -760,14 +760,39 @@
             </plugins>
         </build>
     </profile>
-     <!-- Invokes the Alfresco Technical Validation tool at https://github.com/AlfrescoLabs/technical-validation  -->
+    <!-- Invokes the Alfresco Technical Validation tool at https://github.com/AlfrescoLabs/technical-validation  -->
     <profile>
         <id>atv</id>
         <properties>
-            <maven.alfresco.skipValidation>false</maven.alfresco.skipValidation>
+            <maven.alfresco.validation.skip>false</maven.alfresco.validation.skip>
+            <maven.alfresco.validation.sourceLocation>${project.build.directory}/${project.build.finalName}-src</maven.alfresco.validation.sourceLocation>
         </properties>
         <build>
             <plugins>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>isolate-project-src</id>
+                            <phase>generate-resources</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                              <outputDirectory>${maven.alfresco.validation.sourceLocation}</outputDirectory>
+                              <resources>
+                                  <resource>
+                                      <directory>${project.basedir}</directory>
+                                      <excludes>
+                                          <exclude>target</exclude>
+                                      </excludes>
+                                      <filtering>${app.filtering.enabled}</filtering>
+                                  </resource>
+                              </resources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
                 <plugin>
                     <groupId>org.alfresco.maven.plugin</groupId>
                     <artifactId>alfresco-maven-plugin</artifactId>

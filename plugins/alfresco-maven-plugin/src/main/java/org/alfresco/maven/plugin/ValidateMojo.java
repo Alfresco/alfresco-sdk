@@ -29,10 +29,35 @@ public class ValidateMojo extends AbstractMojo {
     /**
      * This parameter skips validation (the feature is experimental so disabled by default)
      *
-     * @parameter property="maven.alfresco.skipValidation" default-value="true"
+     * @parameter property="maven.alfresco.validation.skip" default-value="true"
      * @required
      */
     protected boolean skip;
+    //
+    
+    /**
+     * The directory where the source project is stored. Should not include /target otherwise checks will be duplicated.
+     *
+     * @parameter property="maven.alfresco.validation.sourceLocation" default-value="${project.build.directory}/${project.build.finalName}-src"
+     * @required
+     */
+    protected String sourceLocation;
+    
+    /**
+     * The directory where the binary AMP package is to be found
+     *
+     * @parameter property="maven.alfresco.validation.binaryLocation" default-value="${project.build.directory}/${project.build.finalName}.amp"
+     * @required
+     */
+    protected String binaryLocation;
+    
+    /**
+     * The directory where the binary AMP package is to be found
+     *
+     * @parameter property="maven.alfresco.validation.neo4jUrl" default-value="http://localhost:7474/db/data/"
+     * @required
+     */
+	protected String neo4jUrl;
 
     /**
      * [Read Only] The Maven project.
@@ -49,7 +74,7 @@ public class ValidateMojo extends AbstractMojo {
     	if(!skip)
     	{
     		AlfrescoTechnicalValidation atv = new AlfrescoTechnicalValidationImpl();
-    		atv.validate(project.getBuild().getSourceDirectory(), project.getBuild().getDirectory() + File.separator + project.getBuild().getFinalName() + ".amp", "http://localhost:7474/db/data");
+    		atv.validate(sourceLocation, binaryLocation, neo4jUrl);
     	}
     }
 }
