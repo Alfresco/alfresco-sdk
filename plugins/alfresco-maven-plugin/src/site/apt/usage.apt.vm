@@ -12,7 +12,7 @@ How to use this plugin?
   
   [[1]] Using Archetypes provided in the Maven Alfresco SDK
     
-  [[2]] By using the Alfresco SDK Parent POM
+  [[2]] By using the Maven Alfresco SDK Parent POM
   
   [[3]] Via direct configuration in your POM
   
@@ -53,7 +53,7 @@ How to use this plugin?
    
    <<NOTE>>: The following configuration is not required when using the SDK parent, as it's already included there.  
    
-   In order to manage AMP artifacts with the Alfresco Maven plugin you need to:
+   In order to manage AMP artifacts with the Maven Alfresco plugin you need to:
    
    * Declare the plugin in your POM with <<<<extensions>>>> enabled, to allow AMP packaging lifecycle:
       

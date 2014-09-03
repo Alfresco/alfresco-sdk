@@ -1,5 +1,5 @@
   ------
-  Alfresco Maven All-in-One Archetype Usage
+  Maven Alfresco All-in-One Archetype Usage
   ------
   Gabriele Columbro
   ------
@@ -61,7 +61,7 @@ Usage
 
     for all the components of the Alfresco landscape. For more information, check the See the {{{./advanced-usage.html}advanced usage page}} page.
     
-    <<NOTE>>: AMPs produced with this project are fully compatible with Alfresco MMT,in fact the Alfresco Maven plugin - used to manage AMPs in this SDK - embeds the official Alfresco MMT to install depended AMPs. 
+    <<NOTE>>: AMPs produced with this project are fully compatible with Alfresco MMT,in fact the Maven Alfresco plugin - used to manage AMPs in this SDK - embeds the official Alfresco MMT to install depended AMPs.
 
 Commands
 

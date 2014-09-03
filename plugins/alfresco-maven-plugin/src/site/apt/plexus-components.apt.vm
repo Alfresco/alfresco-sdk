@@ -1,7 +1,7 @@
   -----
-  Alfresco Maven Plugin Components
+  Maven Alfresco Plugin Components
   -----
-  The Alfresco Maven Plugin defines support components to manage AMP (Alfresco Module Package) lifecycle.
+  The Maven Alfresco Plugin defines support components to manage AMP (Alfresco Module Package) lifecycle.
     
 AMP Lifecycle
     
