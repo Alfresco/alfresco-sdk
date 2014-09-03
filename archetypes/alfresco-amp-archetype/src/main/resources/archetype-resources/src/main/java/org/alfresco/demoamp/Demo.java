@@ -31,8 +31,8 @@ package org.alfresco.demoamp;
  */
 public class Demo
 {
-	public void init()
-	{
-		System.out.println("SDK Demo AMP class has been loaded");
-	}
+    public void init()
+    {
+        System.out.println("SDK Demo AMP class has been loaded");
+    }
 }

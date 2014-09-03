@@ -39,11 +39,13 @@ public class DemoComponent extends AbstractModuleComponent
     
     private NodeLocatorService nodeLocatorService;
 
-    public void setNodeService(NodeService nodeService) {
+    public void setNodeService(NodeService nodeService) 
+    {
         this.nodeService = nodeService;
     }
     
-    public void setNodeLocatorService(NodeLocatorService nodeLocatorService) {
+    public void setNodeLocatorService(NodeLocatorService nodeLocatorService) 
+    {
         this.nodeLocatorService = nodeLocatorService;
     }
 
@@ -76,7 +78,6 @@ public class DemoComponent extends AbstractModuleComponent
      * @return
      */
     public NodeRef getCompanyHome()
-
     {
         return nodeLocatorService.getNode("companyhome", null, null);
     }
