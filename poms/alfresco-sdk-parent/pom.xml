@@ -337,19 +337,6 @@
             <filtering>${app.filtering.enabled}</filtering>
         </resource>
         <resource>
-            <directory>src/integration/java</directory>
-            <filtering>${app.filtering.enabled}</filtering>
-        </resource>
-        <resource>
-            <directory>src/integration/resources</directory>
-            <filtering>${app.filtering.enabled}</filtering>
-        </resource>
-        <resource>
-            <directory>src/integration/properties</directory>
-            <filtering>${app.filtering.enabled}</filtering>
-        </resource>
-
-        <resource>
     	    <directory>${app.amp.folder}</directory>
     		<targetPath>${app.amp.output.folder}</targetPath>
     		<filtering>${app.filtering.enabled}</filtering>
@@ -772,7 +759,124 @@
             </plugins>
         </build>
     </profile>
+    <profile>
+        <id>enable-integration-testing</id>
+        <properties>
+            <maven.tomcat.fork>true</maven.tomcat.fork>
+        </properties>
+        <activation>
+            <file>
+                <exists>src/integration/java</exists>
+            </file>
+        </activation>
+        <build>
+            <plugins>
+                <plugin>
+                    <!-- Separates the unit tests from the integration tests. -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <!-- Skip the default running of this plug-in (or everything is run twice...) -->
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>1.5</version>
+                    <executions>
+                    <execution>
+                      <id>add-test-source</id>
+                      <!--
+                          This will help m2eclipse to recognize the folder as source
+                          folder after update project configuration.
+                      -->
+                      <phase>process-resources</phase>
+                      <!-- <phase>generate-test-sources</phase>-->
+                      <goals>
+                        <goal>add-test-source</goal>
+                      </goals>
+                      <configuration>
+                        <sources>
+                          <source>src/integration/java</source>
+                          <source>src/integration/properties</source>
+                          <source>src/integration/resources</source>
+                        </sources>
+                      </configuration>
+                    </execution>
+                  </executions>
+                </plugin>
+                <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-failsafe-plugin</artifactId>
+                  <version>2.17</version>
+                  <executions>
+                      <execution>
+                          <id>integration-test</id>
+                          <goals>
+                              <goal>integration-test</goal>
+                          </goals>
+                      </execution>
+                      <execution>
+                          <id>verify</id>
+                          <goals>
+                              <goal>verify</goal>
+                          </goals>
+                      </execution>
+                  </executions>
+                  <configuration>
+                    <suiteXmlFiles>
+                      <suiteXmlFile>src/integration/resources/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                  </configuration>
+                </plugin>
+            </plugins>
+        </build>
+        <dependencies>
+          <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.3.1</version>
+            <scope>test</scope>
+          </dependency>
+          <dependency>
+                <groupId>${alfresco.groupId}</groupId>
+                <artifactId>share-po</artifactId>
+                <version>${alfresco.version}</version>
+                <scope>test</scope>
+          </dependency>
+            <!-- Add RAD capabilities for remote JUnit test running. Scope=test so the custom JUnit remote runner is found in the Maven test classpath -->
+            <dependency>
+                <groupId>org.alfresco.maven</groupId>
+                <artifactId>alfresco-rad</artifactId>
+                <version>${maven.alfresco.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!--
+            |    Requires this explicit test dependency, for a Spring 3.0.5 bug
+            |    See https://jira.springsource.org/browse/SPR-8527
+            -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>3.0.6.RELEASE</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- SDK AMP Testing Dependencies -->
+            <dependency>
+              <groupId>com.h2database</groupId>
+              <artifactId>h2</artifactId>
+              <version>${h2.version}</version>
+              <scope>test</scope>
+            </dependency>
+            <dependency>
+              <groupId>tk.skuro.alfresco</groupId>
+              <artifactId>h2-support</artifactId>
+              <version>${h2-support.version}</version>
+              <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </profile>
         <!-- Enables alfresco testing dependencies if a src/test/java folder is found, by adding appropriate dependencies -->
-    
   </profiles>
 </project>
