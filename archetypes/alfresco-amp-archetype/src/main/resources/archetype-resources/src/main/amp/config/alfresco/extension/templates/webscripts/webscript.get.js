@@ -1,1 +1,0 @@
-model["message"] = "Hello World!";

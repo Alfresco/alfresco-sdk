@@ -504,40 +504,40 @@
         </build>
     	<dependencies>
         	<dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <scope>test</scope>
-              </dependency>
-              <!-- Add RAD capabilities for remote JUnit test running. Scope=test so the custom JUnit remote runner is found in the Maven test classpath -->
-              <dependency>
-                  <groupId>org.alfresco.maven</groupId>
-                  <artifactId>alfresco-rad</artifactId>
-                  <version>${maven.alfresco.version}</version>
-                  <scope>test</scope>
-              </dependency>
-              <!--
-              |    Requires this explicit test dependency, for a Spring 3.0.5 bug
-              |    See https://jira.springsource.org/browse/SPR-8527
-              -->
-              <dependency>
-                  <groupId>org.springframework</groupId>
-                  <artifactId>spring-context</artifactId>
-                  <version>3.0.6.RELEASE</version>
-                  <scope>provided</scope>
-              </dependency>
-              <!-- SDK AMP Testing Dependencies -->
-              <dependency>
-                <groupId>com.h2database</groupId>
-                <artifactId>h2</artifactId>
-                <version>${h2.version}</version>
-                <scope>test</scope>
-              </dependency>
-              <dependency>
-                <groupId>tk.skuro.alfresco</groupId>
-                <artifactId>h2-support</artifactId>
-                <version>${h2-support.version}</version>
-                <scope>test</scope>
-              </dependency>
+              <groupId>junit</groupId>
+              <artifactId>junit</artifactId>
+              <scope>test</scope>
+          </dependency>
+          <!-- Add RAD capabilities for remote JUnit test running. Scope=test so the custom JUnit remote runner is found in the Maven test classpath -->
+          <dependency>
+              <groupId>org.alfresco.maven</groupId>
+              <artifactId>alfresco-rad</artifactId>
+              <version>${maven.alfresco.version}</version>
+              <scope>test</scope>
+          </dependency>
+          <!--
+          |    Requires this explicit test dependency, for a Spring 3.0.5 bug
+          |    See https://jira.springsource.org/browse/SPR-8527
+          -->
+          <dependency>
+              <groupId>org.springframework</groupId>
+              <artifactId>spring-context</artifactId>
+              <version>3.0.6.RELEASE</version>
+              <scope>provided</scope>
+          </dependency>
+          <!-- SDK AMP Testing Dependencies -->
+          <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
+            <scope>test</scope>
+          </dependency>
+          <dependency>
+            <groupId>tk.skuro.alfresco</groupId>
+            <artifactId>h2-support</artifactId>
+            <version>${h2-support.version}</version>
+            <scope>test</scope>
+          </dependency>
     	</dependencies>
     </profile>
 
@@ -760,5 +760,7 @@
             </plugins>
         </build>
     </profile>
+        <!-- Enables alfresco testing dependencies if a src/test/java folder is found, by adding appropriate dependencies -->
+    
   </profiles>
 </project>
