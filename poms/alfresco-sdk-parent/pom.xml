@@ -336,11 +336,24 @@
             <directory>src/main/resources</directory>
             <filtering>${app.filtering.enabled}</filtering>
         </resource>
-		<resource>
-			<directory>${app.amp.folder}</directory>
-			<targetPath>${app.amp.output.folder}</targetPath>
-			<filtering>${app.filtering.enabled}</filtering>
-		</resource>
+        <resource>
+            <directory>src/integration/java</directory>
+            <filtering>${app.filtering.enabled}</filtering>
+        </resource>
+        <resource>
+            <directory>src/integration/resources</directory>
+            <filtering>${app.filtering.enabled}</filtering>
+        </resource>
+        <resource>
+            <directory>src/integration/properties</directory>
+            <filtering>${app.filtering.enabled}</filtering>
+        </resource>
+
+        <resource>
+    	    <directory>${app.amp.folder}</directory>
+    		<targetPath>${app.amp.output.folder}</targetPath>
+    		<filtering>${app.filtering.enabled}</filtering>
+    	</resource>
     </resources>
     <testResources>
         <testResource>
@@ -475,7 +488,6 @@
             </plugin>
         </plugins>        
       </build>
-      
     </profile>
     
     <!-- Enables alfresco testing dependencies if a src/test/java folder is found, by adding appropriate dependencies -->
