@@ -19,12 +19,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.alfresco.model.ContentModel;
-import org.alfresco.repo.module.AbstractModuleComponent;
 import org.alfresco.repo.nodelocator.NodeLocatorService;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.extensions.webscripts.DeclarativeWebScript;
 import org.springframework.extensions.webscripts.Status;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 
@@ -38,12 +38,10 @@ import org.springframework.extensions.webscripts.WebScriptRequest;
  * @author Maurizio Pillitu
  * @author Michael Suzuki
  */
-public class DemoComponent extends AbstractModuleComponent
+public class DemoComponent extends DeclarativeWebScript
 {
     Log log = LogFactory.getLog(DemoComponent.class);
-    
     private NodeService nodeService;
-    
     private NodeLocatorService nodeLocatorService;
 
     public void setNodeService(NodeService nodeService) 
@@ -54,17 +52,6 @@ public class DemoComponent extends AbstractModuleComponent
     public void setNodeLocatorService(NodeLocatorService nodeLocatorService) 
     {
         this.nodeLocatorService = nodeLocatorService;
-    }
-
-    /**
-     * Bogus component execution 
-     */
-    @Override
-    protected void executeInternal() throws Throwable
-    {
-        System.out.println("DemoComponent has been executed");
-        log.debug("Test debug logging. Congratulation your AMP is working");
-        log.info("This is only for information purposed. Better remove me from the log in Production");
     }
     
     /**

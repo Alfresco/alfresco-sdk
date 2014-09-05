@@ -38,7 +38,7 @@ public class Demo
         WebElement ticket = driver.findElement(By.tagName("ticket"));
         String token =String.format("?alf_ticket=%s",ticket.getText());
         //Navigate to sample page with token
-        driver.get("http://localhost:8080/alfresco/service/summit/hello" + token);
+        driver.get("http://localhost:8080/alfresco/service/sample/helloworld" + token);
     }
     
     @AfterClass
