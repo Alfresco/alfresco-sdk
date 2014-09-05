@@ -17,6 +17,8 @@ package org.alfresco.demoamp;
 import org.alfresco.demoamp.HelloWorldMessage;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 
 /**s
@@ -25,6 +27,7 @@ import org.junit.Test;
  * @author Michael Suzuki
  *
  */
+@RunWith(JUnit4.class)
 public class HelloWorldMessageTest
 {
     @Test
