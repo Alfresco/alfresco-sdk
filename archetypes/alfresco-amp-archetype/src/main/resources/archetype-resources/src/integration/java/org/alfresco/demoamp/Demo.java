@@ -52,7 +52,7 @@ public class Demo
         HelloWorldPage page = new HelloWorldPage(driver);
         Assert.assertNotNull(page);
         Assert.assertTrue(page.isTitleVisible());
-        Assert.assertEquals("Welcome to Summit 2014", page.getTitle());
+        Assert.assertEquals("Welcome to Demoamp", page.getTitle());
     }
     /**
      * Message should include the directory name
