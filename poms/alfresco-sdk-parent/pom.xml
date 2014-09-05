@@ -760,123 +760,118 @@
         </build>
     </profile>
     <profile>
-        <id>enable-integration-testing</id>
+        <id>ui-test</id>
         <properties>
             <maven.tomcat.fork>true</maven.tomcat.fork>
         </properties>
-        <activation>
-            <file>
-                <exists>src/integration/java</exists>
-            </file>
-        </activation>
         <build>
             <plugins>
                 <plugin>
-                    <!-- Separates the unit tests from the integration tests. -->
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <configuration>
-                        <!-- Skip the default running of this plug-in (or everything is run twice...) -->
-                        <skip>true</skip>
-                    </configuration>
-                </plugin>
-                <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>1.5</version>
+                    <version>1.7</version>
                     <executions>
-                    <execution>
-                      <id>add-test-source</id>
-                      <!--
-                          This will help m2eclipse to recognize the folder as source
-                          folder after update project configuration.
-                      -->
-                      <phase>process-resources</phase>
-                      <!-- <phase>generate-test-sources</phase>-->
-                      <goals>
-                        <goal>add-test-source</goal>
-                      </goals>
-                      <configuration>
-                        <sources>
-                          <source>src/integration/java</source>
-                          <source>src/integration/properties</source>
-                          <source>src/integration/resources</source>
-                        </sources>
-                      </configuration>
-                    </execution>
-                  </executions>
+                        <execution>
+                            <id>add-integration-source</id>
+                            <phase>pre-integration-test</phase>
+                            <goals>
+                                <goal>add-test-source</goal>
+                            </goals>
+                            <configuration>
+                                <sources>
+                                    <source>src/integration/java</source>
+                                </sources>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-failsafe-plugin</artifactId>
-                  <version>2.17</version>
-                  <executions>
-                      <execution>
-                          <id>integration-test</id>
-                          <goals>
-                              <goal>integration-test</goal>
-                          </goals>
-                      </execution>
-                      <execution>
-                          <id>verify</id>
-                          <goals>
-                              <goal>verify</goal>
-                          </goals>
-                      </execution>
-                  </executions>
-                  <configuration>
-                    <suiteXmlFiles>
-                      <suiteXmlFile>src/integration/resources/testng.xml</suiteXmlFile>
-                    </suiteXmlFiles>
-                  </configuration>
-                </plugin>
-            </plugins>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.5</version>
+                    <executions>
+                        <execution>
+                            <id>add-integration-resources</id>
+                            <phase>pre-integration-test</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${project.build.directory}/integration-classes</outputDirectory>
+                                <resources>
+                                    <resource>
+                                        <directory>src/integration/resources</directory>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                  </plugin>
+                  <!-- In this case the maven-compiler-plugin must be located after the build-helper-maven-plugin -->
+                  <plugin>
+                      <groupId>org.apache.maven.plugins</groupId>
+                      <artifactId>maven-compiler-plugin</artifactId>
+                      <version>2.3.2</version>
+                      <executions>
+                          <execution>
+                              <id>compile-integration-test</id>
+                              <phase>pre-integration-test</phase>
+                              <goals>
+                                  <goal>testCompile</goal>
+                              </goals>
+                              <configuration>
+                                  <compilerArguments>
+                                      <d>${project.build.directory}/integration-classes</d>
+                                  </compilerArguments>
+                              </configuration>
+                          </execution>
+                      </executions>
+                  </plugin>
+                  <plugin>
+                      <groupId>org.apache.maven.plugins</groupId>
+                      <artifactId>maven-surefire-plugin</artifactId>
+                      <version>2.9</version>
+                  </plugin>
+                  <plugin>
+                      <groupId>org.apache.maven.plugins</groupId>
+                      <artifactId>maven-failsafe-plugin</artifactId>
+                      <version>2.9</version>
+                      <configuration>
+                          <testSourceDirectory>src/integration/java</testSourceDirectory>
+                          <testClassesDirectory>${project.build.directory}/integration-classes</testClassesDirectory>
+                          <test>**/*.java</test>
+                      </configuration>
+                      <executions>
+                          <execution>
+                              <id>integration-test</id>
+                              <goals>
+                                  <goal>integration-test</goal>
+                              </goals>
+                          </execution>
+                          <execution>
+                              <id>verify</id>
+                                  <goals>
+                                      <goal>verify</goal>
+                                  </goals>
+                          </execution>
+                      </executions>
+                  </plugin>
+              </plugins>
         </build>
         <dependencies>
-          <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.3.1</version>
-            <scope>test</scope>
-          </dependency>
-          <dependency>
-                <groupId>${alfresco.groupId}</groupId>
-                <artifactId>share-po</artifactId>
-                <version>${alfresco.version}</version>
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>6.8.8</version>
                 <scope>test</scope>
-          </dependency>
-            <!-- Add RAD capabilities for remote JUnit test running. Scope=test so the custom JUnit remote runner is found in the Maven test classpath -->
-            <dependency>
-                <groupId>org.alfresco.maven</groupId>
-                <artifactId>alfresco-rad</artifactId>
-                <version>${maven.alfresco.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <!--
-            |    Requires this explicit test dependency, for a Spring 3.0.5 bug
-            |    See https://jira.springsource.org/browse/SPR-8527
-            -->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>3.0.6.RELEASE</version>
-                <scope>provided</scope>
-            </dependency>
-            <!-- SDK AMP Testing Dependencies -->
-            <dependency>
-              <groupId>com.h2database</groupId>
-              <artifactId>h2</artifactId>
-              <version>${h2.version}</version>
-              <scope>test</scope>
-            </dependency>
-            <dependency>
-              <groupId>tk.skuro.alfresco</groupId>
-              <artifactId>h2-support</artifactId>
-              <version>${h2-support.version}</version>
-              <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.hamcrest</groupId>
+                        <artifactId>hamcrest-core</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
         </dependencies>
     </profile>
-        <!-- Enables alfresco testing dependencies if a src/test/java folder is found, by adding appropriate dependencies -->
   </profiles>
 </project>
