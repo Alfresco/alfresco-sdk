@@ -26,6 +26,8 @@ SDK Available Profiles
 *-----------*--------------*-------------*-------------*-------------+
 | all-in-one | rm   |  Adds Records Management runtime and compile time dependencies                              |  Manual: <<<-Prm>>>   | package |
 *-----------+--------------+-------------+-------------+-------------+
+| any | setup   | Sets up the sdk, e.g. grabs springloaded. | Manual: <<<-Psetup>>> (automated in the run.sh)   | initialize |
+*-----------+--------------+-------------+-------------+-------------+
 | amp, share-amp | atv   |  (Experimental) Invokes the {{{https://github.com/AlfrescoLabs/technical-validation/}Alfresco Technical Validation tool}} | Manual: <<<-Patv>>>   | validate |
 *-----------+--------------+-------------+-------------+-------------+
     

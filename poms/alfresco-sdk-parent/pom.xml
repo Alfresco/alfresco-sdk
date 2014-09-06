@@ -324,13 +324,6 @@
       </plugins>
     </pluginManagement>
 
-    <plugins>
-        <plugin>
-          <groupId>org.alfresco.maven.plugin</groupId>
-          <artifactId>alfresco-maven-plugin</artifactId>
-        </plugin>
-    </plugins>
-
     <resources>
         <resource>
             <directory>src/main/resources</directory>
@@ -759,6 +752,32 @@
               </plugin>
             </plugins>
         </build>
+    </profile>
+    <!-- Does any SDK dev environment preparation (e.g. spring-loaded download)  -->
+    <profile>
+        <id>setup</id>
+        <activation>
+            <activeByDefault>false</activeByDefault>
+        </activation>
+       <build>
+             <!-- This simply downloads the spring-loaded jar to ~/.m2/repository/org/springframework/spring-loaded/${springloaded.version}/spring-loaded-${springloaded.version}.jar -->
+            <plugins>
+              <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                  <execution>
+                    <id>get-spring-loaded</id>
+                    <phase>validate</phase>
+                    <goals><goal>get</goal></goals>
+                    <configuration>
+                      <artifact>org.springframework:springloaded:${springloaded.version}</artifact>
+                    </configuration>
+                  </execution>
+                </executions>
+              </plugin>
+            </plugins>
+       </build>
     </profile>
   </profiles>
 </project>

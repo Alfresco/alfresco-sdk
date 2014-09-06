@@ -62,5 +62,11 @@
         <include>**/*.xml</include>
       </includes>
     </fileSet>
+    <fileSet>
+        <directory></directory>
+        <includes>
+           <include>run.sh</include>
+        </includes>
+    </fileSet>
   </fileSets>
 </archetype-descriptor>

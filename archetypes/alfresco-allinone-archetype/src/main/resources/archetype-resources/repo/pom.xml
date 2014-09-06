@@ -14,9 +14,9 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>${artifactId}</artifactId>
-    <name>Alfresco Repository and Explorer Module</name>
+    <name>Alfresco Repository WAR Aggregator</name>
     <packaging>war</packaging>
-    <description>Alfresco Repository and Explorer Module, installs your AMPs in the Alfresco WAR for aggregation purposes</description>
+    <description>Alfresco Repository aggregator, installs your repository AMPs in the Alfresco WAR for aggregation and easy deployment purposes</description>
 
     <parent>
         <groupId>${groupId}</groupId>
