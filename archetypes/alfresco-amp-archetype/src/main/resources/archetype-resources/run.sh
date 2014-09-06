@@ -1,6 +1,6 @@
 #!/bin/bash
-# Downloads the spring-loaded lib if not existing and runs the repository AMP
-springloadedfile=~/.m2/repository/org/springframework/springloaded/${springloaded.version}/springloaded-${springloaded.version}.jar
+# Downloads the spring-loaded lib if not existing and runs repository AMP
+springloadedfile=~/.m2/repository/org/springframework/springloaded/@@springloaded.version@@/springloaded-@@springloaded.version@@.jar
 
 if [ ! -f $springloadedfile ]; then
 mvn validate -Psetup

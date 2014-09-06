@@ -95,7 +95,7 @@
         <include>**/*.xml</include>
       </includes>
     </fileSet>
-    <fileSet>
+    <fileSet encoding="UTF-8">
         <directory></directory>
         <includes>
            <include>run.sh</include>

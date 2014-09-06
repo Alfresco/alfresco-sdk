@@ -164,7 +164,7 @@
     </module>
   </modules>
   <fileSets>
-    <fileSet>
+    <fileSet encoding="UTF-8">
         <directory></directory>
         <includes>
            <include>run.sh</include>

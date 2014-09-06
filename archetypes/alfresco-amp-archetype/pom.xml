@@ -22,6 +22,7 @@
             <directory>src/main/resources</directory>
             <includes>
                 <include>archetype-resources/pom.xml</include>
+                <include>archetype-resources/run.sh</include>
             </includes>
             <filtering>true</filtering>
         </resource>
@@ -29,6 +30,7 @@
             <directory>src/main/resources</directory>
             <excludes>
                 <exclude>archetype-resources/pom.xml</exclude>
+                <exclude>archetype-resources/run.sh</exclude>
             </excludes>
             <filtering>false</filtering>
         </resource>
