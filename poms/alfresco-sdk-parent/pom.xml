@@ -761,6 +761,9 @@
     </profile>
     <profile>
       <id>integration</id>
+      <properties>
+        <maven.tomcat.fork>true</maven.tomcat.fork>
+      </properties>
       <activation>
         <file>
           <exists>src/integration/java</exists>
@@ -774,7 +777,19 @@
             <version>1.9.1</version>
             <executions>
               <execution>
-                <id>add-test-source</id>
+                <id>add-integration-source</id>
+                <phase>generate-sources</phase>
+                <goals>
+                  <goal>add-test-source</goal>
+                </goals>
+                <configuration>
+                  <sources>
+                    <source>src/integration/java</source>
+                  </sources>
+                </configuration>
+              </execution>
+              <execution>
+                <id>add-integration-resource</id>
                 <phase>generate-sources</phase>
                 <goals>
                   <goal>add-test-source</goal>
@@ -812,116 +827,27 @@
       <build>
         <plugins>
           <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-            <version>1.7</version>
-            <executions>
-              <execution>
-                <id>add-integration-source</id>
-                <phase>pre-integration-test</phase>
-                <goals>
-                  <goal>add-test-source</goal>
-                </goals>
-                <configuration>
-                  <sources>
-                    <source>src/integration/java</source>
-                  </sources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-resources-plugin</artifactId>
-            <version>2.5</version>
-            <executions>
-              <execution>
-                <id>add-integration-resources</id>
-                <phase>pre-integration-test</phase>
-                <goals>
-                  <goal>copy-resources</goal>
-                </goals>
-                <configuration>
-                  <outputDirectory>${project.build.directory}/integration-classes</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>src/integration/resources</directory>
-                    </resource>
-                  </resources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-            <!-- In this case the maven-compiler-plugin must be located after the build-helper-maven-plugin -->
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>2.3.2</version>
-            <executions>
-              <execution>
-                <id>compile-integration-test</id>
-                <phase>pre-integration-test</phase>
-                <goals>
-                  <goal>testCompile</goal>
-                </goals>
-                <configuration>
-                  <compilerArguments>
-                    <d>${project.build.directory}/integration-classes</d>
-                  </compilerArguments>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <version>2.17</version>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <version>2.17</version>
             <configuration>
-              <testSourceDirectory>src/integration/java</testSourceDirectory>
-              <testClassesDirectory>${project.build.directory}/integration-classes</testClassesDirectory>
-              <suiteXmlFiles>
-                <suiteXmlFile>src/integration/resources/testng.xml</suiteXmlFile>
-              </suiteXmlFiles>
+              <includes>
+                <include>%regex[.Test*[a-z|A-Z].class]</include>
+              </includes>
+              <excludes>
+                <exclude>**/*Test.java</exclude>
+              </excludes>
             </configuration>
-            <executions>
-              <execution>
-              <id>integration-test</id>
-                <goals>
-                  <goal>integration-test</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>verify</id>
-                <goals>
-                  <goal>verify</goal>
-                </goals>
-              </execution>
-            </executions>
           </plugin>
         </plugins>
       </build>
       <dependencies>
         <dependency>
-            <groupId>${alfresco.groupId}</groupId>
-            <artifactId>share-po</artifactId>
-            <version>${alfresco.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-context</artifactId>
-                </exclusion>    
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-beans</artifactId>
-                </exclusion>
-            </exclusions>
+          <groupId>org.seleniumhq.selenium</groupId>
+          <artifactId>selenium-java</artifactId>
+          <version>2.39.0</version>
         </dependency>
-      </dependencies>
+    </dependencies>
     </profile>
   </profiles>
 </project>
