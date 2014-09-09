@@ -120,6 +120,7 @@
     <h2.version>1.3.174</h2.version>
     <h2-support.version>1.5</h2-support.version>
     <junit.version>4.11</junit.version>
+    <skip.unit.test>false</skip.unit.test>    
   </properties>
 
   <!-- This repository is only needed to retrieve Alfresco parent POM. 
@@ -850,7 +851,7 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <version>2.17</version>
             <configuration>
-              <skipTests>true</skipTests>
+              <skipTests>${skip.unit.test}</skipTests>
             </configuration>
           </plugin>
           <!-- Run integration test with failsafe, with config to fail build if test failure -->
