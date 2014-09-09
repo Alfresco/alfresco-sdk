@@ -86,7 +86,7 @@ public class DemoComponent extends DeclarativeWebScript
         NodeRef companyHome = getCompanyHome();
         String companyHomeName = (String) nodeService.getProperty(companyHome, ContentModel.PROP_NAME);
         int directoryCount = childNodesCount(companyHome);
-        HelloWorldMessage msg = new HelloWorldMessage(companyHomeName, directoryCount);
+        String msg = Demo.generateMessage(companyHomeName, directoryCount);
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("demoMessage", msg);
         return model;

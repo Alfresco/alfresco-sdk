@@ -14,7 +14,6 @@
  */
 package org.alfresco.demoamp;
 
-import org.alfresco.demoamp.HelloWorldMessage;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,26 +27,32 @@ import org.junit.runners.JUnit4;
  *
  */
 @RunWith(JUnit4.class)
-public class HelloWorldMessageTest
+public class DemoTest
 {
     @Test
     public void init()
     {
-        HelloWorldMessage msg = new HelloWorldMessage("bla", 0);
-        Assert.assertNotNull(msg);
+        Demo demo = new Demo();
+        Assert.assertNotNull(demo);
     }
     
     @Test(expected = RuntimeException.class)
     public void initWithNull()
     {
-        new HelloWorldMessage(null, 0);
+        Demo.generateMessage(null, 10);
     }
     @Test
     public void toStringTest()
     {
-        HelloWorldMessage msg = new HelloWorldMessage("Home", 10);
+        String msg = Demo.generateMessage("Home", 10);
         Assert.assertNotNull(msg);
         Assert.assertEquals("Home has 10 folders",msg.toString());
     }
-    
+    @Test
+    public void negativeValue()
+    {
+        String msg = Demo.generateMessage("Home", -10);
+        Assert.assertNotNull(msg);
+        Assert.assertEquals("Home has -10 folders",msg.toString());
+    }
 }

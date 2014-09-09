@@ -14,7 +14,7 @@
  */
 package org.alfresco.demoamp;
 
-import org.alfresco.demoamp.po.HelloWorldPage;
+import org.alfresco.demoamp.po.DemoPage;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -44,16 +44,21 @@ public class DemoTestIT
     @AfterClass
     public static void teardown()
     {
-        driver.quit();
+        if(driver != null)
+        {
+            driver.quit();
+        }
     }
+
     @Test
     public void titleDisplayed()
     {
-        HelloWorldPage page = new HelloWorldPage(driver);
+        DemoPage page = new DemoPage(driver);
         Assert.assertNotNull(page);
         Assert.assertTrue(page.isTitleVisible());
         Assert.assertEquals("Welcome to Demoamp", page.getTitle());
     }
+    
     /**
      * Message should include the directory name
      * and number of folders currently in that directory.
@@ -61,9 +66,16 @@ public class DemoTestIT
     @Test
     public void messageIsDisplayed()
     {
-        HelloWorldPage page = new HelloWorldPage(driver);
+        DemoPage page = new DemoPage(driver);
         Assert.assertNotNull(page);
         Assert.assertTrue(page.isMessageVisible());
         Assert.assertEquals("Company Home has 7 folders", page.getMessage());
+    }
+
+    @Test
+    public void findLogo()
+    {
+        DemoPage page = new DemoPage(driver);
+        Assert.assertFalse(page.hasLogo());
     }
 }
