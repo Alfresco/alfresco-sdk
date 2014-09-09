@@ -3,7 +3,7 @@
   ------
   Gabriele Columbro
   ------
-  Nov 2012
+  Sept 2014
   ------
 
 Introduction
@@ -22,17 +22,27 @@ Introduction
   * Installation of AMPs in an Alfresco WAR
   
   * AMP Unit Testing support. Just run the standard <<<mvn test>>> and see your <<<src/test/java>>> Alfresco unit tests run. 
-    An sample Unit Test is provided in this archetype.
+    An sample Unit Test is provided in this archetype. 
   
   * Embedded run in Tomcat and embedded H2 database for demo purposes, rapid application development and integration testing 
   (<<NOTE>>: this is not a {{{http://www.alfresco.com/services/subscription/supported-platforms/} supported stack}} so use <<only for development purposes>>)
 
+  * Support for (remote) Junit and integration testing and rapid development (using spring-loaded, see run.sh)
+  
+  * Seamless IDE integration with Eclipse and Idea
+
 How to create a project:
 
-  You can create the latest release archetype with the following command:
+  As of version 2.0-beta-3, you can create a project with the latest released archetype with the following command directly from Maven Central:
   
 +---+
-mvn archetype:generate -Dfilter=org.alfresco.maven.archetype:
+mvn archetype:generate -Dfilter=org.alfresco.maven.archetype: -DarchetypeCatalog=http://repo1.maven.org/maven2/archetype-catalog.xml
++---+
+  
+  For previous versions, you need to use the Alfresco Artifacts repository:
+  
++---+
+mvn archetype:generate -Dfilter=org.alfresco.maven.archetype: -DarchetypeCatalog=https://artifacts.alfresco.com/nexus/content/groups/public/archetype-catalog.xml
 +---+
   
   You should then:
@@ -44,8 +54,20 @@ mvn archetype:generate -Dfilter=org.alfresco.maven.archetype:
   [[3]] (<Optionally>) Select Alfresco Version / Edition (current default is: Alfresco Community 4.2.c)
   
  You can find new Alfresco AMP project ready to go in the <<<artifactId>>> folder.
+ 
+Quickstart
+
+   Once your project is created:
+   
+   * Enter the project folder and run <<<./run.sh>>> (you might need to <<<chmod u+x run.sh>>> to make it executable). 
+     This will setup the SDK and the Alfresco repository (not Share or Solr).  
+    
+   * Wait for the startup of the webapp and then go <<<http://localhost:8080/alfresco0>>>.
+  
+   * Import the project in your favorite IDE (with Maven integration) and start developing right away.
+   
 
 Usage
 
-  Instructions on how to use the Alfresco AMP archetype can be found on the {{{./usage.html}usage page}}, while 
+  Full instructions on how to use the Alfresco AMP archetype can be found on the {{{./usage.html}usage page}}, while 
   for more advanced use cases refer to the {{{./advanced-usage.html}advanced usage page}}

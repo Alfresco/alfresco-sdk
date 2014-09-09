@@ -22,14 +22,22 @@ Introduction
   
   * Embedded run in Tomcat and embedded H2 database of the full Alfresco suite, including Repository, Share, Solr
   
-  * Support for unit and integration testings
+  * Support for unit and integration testing and rapid development (using spring-loaded, see run.sh)
+  
+  * Seamless IDE integration with Eclipse and Idea
 
 How to create a project:
 
-  You can create the latest release archetype with the following command:
+  As of version 2.0-beta-3, you can create a project with the latest released archetype with the following command directly from Maven Central:
   
 +---+
-mvn archetype:generate -Dfilter=org.alfresco.maven.archetype:
+mvn archetype:generate -Dfilter=org.alfresco.maven.archetype: -DarchetypeCatalog=http://repo1.maven.org/maven2/archetype-catalog.xml
++---+
+  
+  For previous versions, you need to use the Alfresco Artifacts repository:
+  
++---+
+mvn archetype:generate -Dfilter=org.alfresco.maven.archetype: -DarchetypeCatalog=https://artifacts.alfresco.com/nexus/content/groups/public/archetype-catalog.xml
 +---+
   
   You should then:
@@ -42,7 +50,18 @@ mvn archetype:generate -Dfilter=org.alfresco.maven.archetype:
   
  You can find new Alfresco All-in-One project ready to go in the <<<artifactId>>> folder.
 
+Quickstart
+
+   Once your project is created:
+   
+   * Enter the project folder and run <<<./run.sh>>> (you might need to <<<chmod u+x run.sh>>> to make it executable). This will setup the SDK and start Alfresco, Share and Solr in embedded mode.  
+    
+   * Wait for the startup of the webapps and then go <<<http://localhost:8080>>>.
+  
+   * Import the projects in your favorite IDE (with Maven integration) and start developing right away.
+   
 Usage
 
-  Instructions on how to use the Alfresco All in One archetype can be found on the {{{./usage.html}usage page}}, while 
+  
+  Full instructions on how to use the Alfresco All in One archetype can be found on the {{{./usage.html}usage page}}, while 
   for more advanced use cases refer to the {{{./advanced-usage.html}advanced usage page}}

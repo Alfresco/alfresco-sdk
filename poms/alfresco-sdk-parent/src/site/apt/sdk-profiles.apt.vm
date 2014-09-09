@@ -26,11 +26,13 @@ SDK Available Profiles
 *-----------*--------------*-------------*-------------*-------------+
 | all-in-one | rm   |  Adds Records Management runtime and compile time dependencies                              |  Manual: <<<-Prm>>>   | package |
 *-----------+--------------+-------------+-------------+-------------+
+| any | setup   | Sets up the sdk, e.g. grabs springloaded. | Manual: <<<-Psetup>>> (automated in the run.sh)   | initialize |
+*-----------+--------------+-------------+-------------+-------------+
 | amp, share-amp | atv   |  (Experimental) Invokes the {{{https://github.com/AlfrescoLabs/technical-validation/}Alfresco Technical Validation tool}} | Manual: <<<-Patv>>>   | validate |
 *-----------+--------------+-------------+-------------+-------------+
     
     The full list of available profiles (with their activation conditions) can be instead found in the <<<profiles>>> section of the
-    {{{https://artifacts.alfresco.com/nexus/index.html#nexus-search;gav~org.alfresco.maven~alfresco-sdk-parent~${project.version}~pom~}Alfresco SDK POM}}.
+    {{{https://artifacts.alfresco.com/nexus/index.html#nexus-search;gav~org.alfresco.maven~alfresco-sdk-parent~${project.version}~pom~}Maven Alfresco SDK POM}}.
 
 Full SDK properties reference 
 

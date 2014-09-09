@@ -1,9 +1,9 @@
   ------
-  Alfresco Maven All-in-One Archetype Usage
+  Maven Alfresco All-in-One Archetype Usage
   ------
   Gabriele Columbro
   ------
-  Nov 2012
+  Sep 2013
   ------
 
 Prerequisites
@@ -16,8 +16,9 @@ Project layout
 
 +---+
     pom.xml
-    |-> amp
-    |-> alfresco
+    |-> repo-amp
+    |-> repo
+    |-> share-amp
     |-> share
     |-> solr
     |-> runner (a Tomcat embedded runner / integration test runner)
@@ -48,7 +49,7 @@ Usage
         
         * AMP/WAR packaging
         
-        * AMP Unit testing
+        * AMP Unit testing and rapid development
         
         * run embedded in Tomcat + H2 database. 
           (<<NOTE>>: this is not a {{{http://www.alfresco.com/services/subscription/supported-platforms/} supported stack}} so use <<only for development purposes>>)
@@ -61,13 +62,13 @@ Usage
 
     for all the components of the Alfresco landscape. For more information, check the See the {{{./advanced-usage.html}advanced usage page}} page.
     
-    <<NOTE>>: AMPs produced with this project are fully compatible with Alfresco MMT,in fact the Alfresco Maven plugin - used to manage AMPs in this SDK - embeds the official Alfresco MMT to install depended AMPs. 
+    <<NOTE>>: AMPs produced with this project are fully compatible with Alfresco MMT,in fact the Maven Alfresco plugin - used to manage AMPs in this SDK - embeds the official Alfresco MMT to install depended AMPs.
 
 Commands
 
-* Commands from the root aggregator project
+    <<<run.sh>>> will automatically set up the SDK and run the webapps embedded to enable rapid development
 
-    Common Alfresco project lifecycle commands you want to run from the aggregator :
+    Additional common Maven lifecycle commands you want to run from the aggregator are:
 
     * <<<mvn package>>>: Runs unit tests and packages all customized modules in their respective <<<$\{project.build.directory\}/$\{project.build.finalName\}.amp>>>
 
@@ -81,4 +82,4 @@ Commands
 
 * Commands from from the <<<runner>>> project
 
-    * <<<mvn jetty:run -Prun'>>> or <<<'mvn integration-test -Prun'>>> to quickly run already packaged webapps
+    * <<<mvn install -Prun'>>> or <<<'mvn integration-test -Prun'>>> to quickly run already packaged webapps

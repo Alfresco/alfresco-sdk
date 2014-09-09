@@ -80,5 +80,11 @@
         <include>**/*</include>
       </includes>
     </fileSet>
-</fileSets>
+    <fileSet encoding="UTF-8">
+        <directory></directory>
+        <includes>
+           <include>run.sh</include>
+        </includes>
+    </fileSet>
+  </fileSets>
 </archetype-descriptor>

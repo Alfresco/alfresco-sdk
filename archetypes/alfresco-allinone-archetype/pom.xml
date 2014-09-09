@@ -5,7 +5,7 @@
   <groupId>org.alfresco.maven.archetype</groupId>
   <artifactId>alfresco-allinone-archetype</artifactId>
   <packaging>maven-archetype</packaging>
-  <name>All-in-One Archetype from Maven Alfresco SDK</name>
+  <name>Maven Alfresco SDK - All-in-One Archetype</name>
   <description>Sample multi-module project for All-in-One development on the Alfresco plaftorm. Includes modules for: Repository WAR overlay, Repository AMP, Share WAR overlay, Solr configuration, and embedded Tomcat runner</description>
   
   <parent>
@@ -21,6 +21,8 @@
             <directory>src/main/resources</directory>
             <includes>
                 <include>archetype-resources/pom.xml</include>
+                <include>archetype-resources/run.sh</include>
+                <include>archetype-resources/runner/src/main/webapp/index.html</include>
             </includes>
             <filtering>true</filtering>
         </resource>
@@ -28,6 +30,8 @@
             <directory>src/main/resources</directory>
             <excludes>
                 <exclude>archetype-resources/pom.xml</exclude>
+                <exclude>archetype-resources/run.sh</exclude>
+                <exclude>archetype-resources/runner/src/main/webapp/index.html</exclude>
             </excludes>
             <filtering>false</filtering>
         </resource>

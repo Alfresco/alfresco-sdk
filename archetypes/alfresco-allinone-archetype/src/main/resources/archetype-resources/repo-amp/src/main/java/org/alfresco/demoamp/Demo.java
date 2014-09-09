@@ -2,7 +2,7 @@ package org.alfresco.demoamp;
 
 /**
  * This class does nothing except dump some output to <i>system.out</i>.
- * This is a sample taken from Alfresco SDK
+ * This is a sample taken from Maven Alfresco SDK
  * 
  * @author Derek Hulley
  */

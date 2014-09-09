@@ -128,6 +128,12 @@
           </includes>
         </fileSet>
         <fileSet encoding="UTF-8" filtered="false">
+          <directory>src/assembly</directory>
+          <includes>
+            <include>**</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
           <directory>src/main/resources</directory>
           <includes>
             <include>**</include>
@@ -160,7 +166,21 @@
                 <include>**</include>
               </includes>
             </fileSet>
+			<fileSet encoding="UTF-8" filtered="false">
+				<directory>src/main/webapp</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+			</fileSet>
         </fileSets>
     </module>
   </modules>
+  <fileSets>
+    <fileSet encoding="UTF-8">
+        <directory></directory>
+        <includes>
+           <include>run.sh</include>
+        </includes>
+    </fileSet>
+  </fileSets>
 </archetype-descriptor>

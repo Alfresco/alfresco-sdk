@@ -10,7 +10,7 @@
 Maven Alfresco SDK\x99 Pre-Requisites
 
 
-    The only real prerequisite of the Maven Alfresco SDK\x99 Apache Maven 3.0.4 installed (and properly configured) on your machine; 
+    The only real prerequisite of the Maven Alfresco SDK\x99 Apache Maven 3.0.4 installed (and properly configured) on your machine;
     neither <<an IDE>> nor <<web container or database>> are required.
     
     Additional tips:

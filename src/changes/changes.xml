@@ -1,7 +1,7 @@
 <!-- This document is obsolete. Now release notes are generated via the github report -->
 <document>
   <properties>
-    <title>Maven Alfresco SDK (former Maven Alfresco Lifecycle)</title>
+    <title>Maven Alfresco SDK (former Alfresco Lifecycle)</title>
     <author email="gabriele.columbro@alfresco.com">Gabriele Columbro</author>
   </properties>
   <body>
@@ -41,7 +41,7 @@
 		Linked all sub modules.
       </action>
       <action dev="columbro" type="add">
-		Added this wrapper project to group all Maven Alfresco plugins and archetype useful for the Maven Alfresco Lifecycle support
+		Added this wrapper project to group all Alfresco plugins and archetype useful for the Alfresco Lifecycle support
       </action>
     </release>
   </body>
