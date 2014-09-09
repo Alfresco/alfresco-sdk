@@ -761,17 +761,14 @@
     </profile>
     <profile>
       <id>integration</id>
-      <properties>
-        <maven.tomcat.fork>true</maven.tomcat.fork>
-      </properties>
       <activation>
         <file>
           <exists>src/integration/java</exists>
         </file>
       </activation>
       <build>
-      <plugins>
-        <plugin>
+        <plugins>
+          <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>build-helper-maven-plugin</artifactId>
             <version>1.9.1</version>
@@ -811,19 +808,6 @@
                 </configuration>
               </execution>
             </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.17</version>
-            <configuration>
-              <includes>
-                <include>**/*Test.java</include>
-              </includes>
-              <excludes>
-                <exclude>%regex[.Test*[a-z|A-Z].class]</exclude>
-              </excludes>
-            </configuration>
           </plugin>
         </plugins>
       </build>
