@@ -27,6 +27,7 @@ Project layout
             |-> licenses/
   src/main/java //Java classes to be packaged in the AMP embedded JAR)
   src/main/resources //resources to the packaged in the AMP embedded JAR)
+  src/main/resources/META-INF/resources //web resources to the packaged in the AMP embedded JAR, mapped to the root of the webapp as of Servlet 3.0)
   src/test/java // Unit tests
   src/test/resources // Unit test resources
   src/test/properties/<env> //  Environment aware alfresco-global.properties. By default <env>=local 
@@ -43,17 +44,21 @@ Usage
     
     * testing
     
+    * rapid development
+    
     * run embedded 
     
     * integration testing
     
-    * release and distribution of your AMP artifact.
+    * release and distribution of your Share AMP artifact.
     
     The AMPs produced with this project are fully compatible with Alfresco MMT, in fact the Maven Alfresco plugin used to manage AMPs in this SDK embeds the official Alfresco MMT to install depdended AMPs.
 
 Commands
 
-    Common AMP project lifecycle commands you want to run are:
+    <<<run.sh>>> will automatically set up the SDK and run the AMP on Alfresco Share embedded to enable rapid development
+    
+    Other common Share AMP project lifecycle commands you want to run are:
 
     * <<<mvn package>>>: Runs unit tests and packages AMP in <<<$\{project.build.directory\}/$\{project.build.finalName\}.amp>>>
     

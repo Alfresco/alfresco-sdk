@@ -66,11 +66,9 @@ Usage
 
 Commands
 
-* Commands from the root aggregator project:
+    <<<run.sh>>> will automatically set up the SDK and run the webapps embedded to enable rapid development
 
-	* <<<run.sh>>> will automatically set up the SDK and run embedded to enable rapid development
-
-* Additional Common Maven lifecycle commands you want to run from the aggregator are:
+    Additional common Maven lifecycle commands you want to run from the aggregator are:
 
     * <<<mvn package>>>: Runs unit tests and packages all customized modules in their respective <<<$\{project.build.directory\}/$\{project.build.finalName\}.amp>>>
 

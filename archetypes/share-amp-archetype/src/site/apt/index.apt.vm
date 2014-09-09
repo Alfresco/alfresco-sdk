@@ -3,7 +3,7 @@
   ------
   Gabriele Columbro
   ------
-  Nov 2012
+  Sept 2014
   ------
 
 Introduction
@@ -49,6 +49,18 @@ mvn archetype:generate -Dfilter=org.alfresco.maven.archetype: -DarchetypeCatalog
   [[3]] (<Optionally>) Select Alfresco Version / Edition (current default is: Alfresco Community 5.0.a)
   
  You can find new Share AMP project ready to go in the <<<artifactId>>> folder.
+
+Quickstart
+
+   Once your project is created:
+   
+   * Enter the project folder and run <<<./run.sh>>> (you might need to <<<chmod u+x run.sh>>> to make it executable). 
+     This will setup the SDK and the Alfresco Share on port 8081 (not Alfresco Repository or Solr).  
+    
+   * Wait for the startup of the webapp and then go <<<http://localhost:8081/share>>>. <NOTE>: For this to work you need
+   to have an Alfresco previously running on port 8080, for example as provided by the {{{../alfresco-amp-archetype/index.html}Alfresco AMP archetype}}
+  
+   * Import the project in your favorite IDE (with Maven integration) and start developing right away.
 
 Usage
 
