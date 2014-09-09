@@ -2,9 +2,11 @@
 
 Maven Alfresco SDK for Alfresco Development and Customizations based on Apache Maven. 
 
-Includes support for rapid and standard development, testing, packaging, versioning and release of your Alfresco integration and extension projects. 
+Includes support for rapid and standard development, testing, packaging, versioning and release of your Alfresco integration and extension projects. For a teaser of the SDK potential check out this video:
 
-It is composed of:
+[![Alfresco SDK 2.x teaser](http://img.youtube.com/vi/vgbY9i4w0YU/0.jpg)](https://www.youtube.com/watch?v=vgbY9i4w0YU)
+
+The SDK is composed of:
 
 - An [SDK Parent POM](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-lifecycle-aggregator/latest/poms/alfresco-sdk-parent/index.html) which you can use in your projects to enable rapid Alfresco development features
 - An [Alfresco Platform Distribution POM](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-platform-distribution/latest/index.html) which pre-configures versions of Alfresco and common 3rd party dependency libraries, for stability purposes
@@ -48,6 +50,8 @@ This project is released under the [Apache License, Version 2.0](http://www.apac
 
 ## News
 
+- 2014-09-09: SDK 2.0.0-beta-3 released to Maven Central
+- 2014-08-30: SDK 2.0.0-beta-1 and 2.0.0-beta-2 available in [Maven Central](http://search.maven.org/#search|ga|1|org.alfresco.maven)
 - 2014-08-22: First SNAPSHOT of SDK 2.0.0 in the [OSS Sonatype Repository](https://oss.sonatype.org/content/repositories/snapshots/org/alfresco/maven/alfresco-sdk-parent/2.0.0-SNAPSHOT/)!
 - 2014-07: Project fully migrated from [Google Code](https://code.google.com/p/maven-alfresco-archetypes), including tags, branches, issues. Allow a little time for a full cleanup of issue labels and to sort repository permissions. Please update obsolete references and bear with us as we update Alfresco Documentation to this change.
 

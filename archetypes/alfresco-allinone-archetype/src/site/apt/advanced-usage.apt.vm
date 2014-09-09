@@ -1,9 +1,9 @@
   ------
-  Maven Alfresco All-in-One Archetype Advanced Usage
+  Alfresco All-in-One Archetype Advanced Usage
   ------
   Gabriele Columbro
   ------
-  Nov 2012
+  Aug 2014
   ------
 
 
@@ -15,9 +15,9 @@ All-in-One Archetype properties
     
     * direclty in *.properties, particularly
     
-        * For Alfresco WAR projects
+        * For the <<<repo>>> project
         
-            * <<<src/main/properties/<env>/alfresco-global.properties>>> (environment dependent <<<alfresco-global.properties>>> packaged in the WAR )
+            * <<<src/main/properties/<env>/alfresco-global.properties>>> (environment dependent <<<alfresco-global.properties>>> packaged in the WAR when running directly within the AMP project)
         
         * For Alfresco/Share AMP projects
         

@@ -3,7 +3,7 @@
   ------
   Gabriele Columbro
   ------
-  Nov 2012
+  Sep 2013
   ------
 
 Prerequisites
@@ -16,8 +16,9 @@ Project layout
 
 +---+
     pom.xml
-    |-> amp
-    |-> alfresco
+    |-> repo-amp
+    |-> repo
+    |-> share-amp
     |-> share
     |-> solr
     |-> runner (a Tomcat embedded runner / integration test runner)
@@ -48,7 +49,7 @@ Usage
         
         * AMP/WAR packaging
         
-        * AMP Unit testing
+        * AMP Unit testing and rapid development
         
         * run embedded in Tomcat + H2 database. 
           (<<NOTE>>: this is not a {{{http://www.alfresco.com/services/subscription/supported-platforms/} supported stack}} so use <<only for development purposes>>)
@@ -65,9 +66,11 @@ Usage
 
 Commands
 
-* Commands from the root aggregator project
+* Commands from the root aggregator project:
 
-    Common Alfresco project lifecycle commands you want to run from the aggregator :
+	* <<<run.sh>>> will automatically set up the SDK and run embedded to enable rapid development
+
+* Additional Common Maven lifecycle commands you want to run from the aggregator are:
 
     * <<<mvn package>>>: Runs unit tests and packages all customized modules in their respective <<<$\{project.build.directory\}/$\{project.build.finalName\}.amp>>>
 
@@ -81,4 +84,4 @@ Commands
 
 * Commands from from the <<<runner>>> project
 
-    * <<<mvn jetty:run -Prun'>>> or <<<'mvn integration-test -Prun'>>> to quickly run already packaged webapps
+    * <<<mvn install -Prun'>>> or <<<'mvn integration-test -Prun'>>> to quickly run already packaged webapps
