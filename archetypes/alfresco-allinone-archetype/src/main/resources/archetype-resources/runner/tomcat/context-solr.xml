@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This context file is used only for rapid development, never installed released with the webapp -->
+<Context docBase="${project.parent.basedir}/solr/target/solr">
+    
+    <Loader delegate="false" className="org.apache.catalina.loader.VirtualWebappLoader"
+        searchVirtualFirst="true"
+        virtualClasspath="${project.parent.basedir}/share-amp/target/classes;${project.parent.basedir}/solr/target/test-classes;${project.parent.basedir}/solr/target/share-amp/config" />
+        
+    <!-- This enables hot reloading of web resources from uncompressed jars (while in prod they would be loaded from  WEB-INF/lib/{\*.jar}/META-INF/resources --> 
+    <JarScanner scanAllDirectories="true" />
+     
+</Context>

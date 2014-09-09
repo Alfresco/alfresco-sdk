@@ -15,10 +15,6 @@
     <profiles>
         <profile>
             <id>run</id>
-            <properties>
-            	<!-- Location of the Solr project, which is loaded via filesystem. Change if your Solr customization project lives in a different folder. -->
-                <solr.project.dir>${project.basedir}/../solr</solr.project.dir>
-            </properties>
             <build>
                 <plugins>
                     <plugin>
@@ -56,17 +52,22 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <warSourceDirectory>${project.parent.basedir}/solr/target/solr-overlay</warSourceDirectory>
-                            <path>/solr</path>
-                            <useTestClasspath>false</useTestClasspath>
                             <ignorePackaging>true</ignorePackaging>
                             <useSeparateTomcatClassLoader>true</useSeparateTomcatClassLoader>
+                            <path>/</path>
                             <systemProperties>
                                 <solr.solr.home>${project.parent.basedir}/solr/solr_home</solr.solr.home>
-                                <java.io.tmpdir>${project.build.directory}</java.io.tmpdir>
                             </systemProperties>
-                            <delegate>true</delegate>
                             <webapps>
+								<webapp>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>solr</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>war</type>
+                                    <asWebapp>true</asWebapp>
+                                    <contextPath>/solr</contextPath>
+                                    <contextFile>${project.build.directory}/contexts/context-solr.xml</contextFile>
+                                </webapp>
                                 <webapp>
                                     <groupId>${project.groupId}</groupId>
                                     <artifactId>repo</artifactId>
@@ -92,4 +93,5 @@
             </build>
         </profile>
     </profiles>
+    
 </project>
