@@ -777,7 +777,7 @@
             <version>1.9.1</version>
             <executions>
               <execution>
-                <id>add-integration-source</id>
+                <id>add-integration-resource</id>
                 <phase>generate-sources</phase>
                 <goals>
                   <goal>add-test-source</goal>
@@ -788,16 +788,26 @@
                   </sources>
                 </configuration>
               </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>2.5</version>
+            <executions>
               <execution>
-                <id>add-integration-resource</id>
-                <phase>generate-sources</phase>
+                <id>add-integration-resources</id>
+                <phase>generate-resources</phase>
                 <goals>
-                  <goal>add-test-source</goal>
+                  <goal>copy-resources</goal>
                 </goals>
                 <configuration>
-                  <sources>
-                    <source>src/integration/java</source>
-                  </sources>
+                  <outputDirectory>${project.build.directory}/integration-classes</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>src/integration/resources</directory>
+                    </resource>
+                  </resources>
                 </configuration>
               </execution>
             </executions>
@@ -826,6 +836,26 @@
       </properties>
       <build>
         <plugins>
+          <!-- compile integration -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>2.3.2</version>
+            <executions>
+              <execution>
+                <id>compile-integration-test</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>testCompile</goal>
+                </goals>
+                <configuration>
+                  <compilerArguments>
+                    <d>${project.build.directory}/integration-classes</d>
+                  </compilerArguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
