@@ -1,10 +1,10 @@
 # [![Maven Alfresco SDK logo](https://github.com/Alfresco/alfresco-sdk/raw/master/src/site/resources/img/alfresco-maven-logo.jpg)](#features) Maven Alfresco SDK
 
-Maven Alfresco SDK for Alfresco Development and Customizations based on Apache Maven. 
+SDK for Alfresco Development, Testing, packaging and custom project lifecycle management based on Apache Maven. 
 
-Includes support for rapid and standard development, testing, packaging, versioning and release of your Alfresco integration and extension projects. For a teaser of the SDK potential check out this video:
+Includes support for rapid and standard development, testing, packaging, versioning and release of your Alfresco integration and extension projects. For an overview of the SDK potential check out this video:
 
-[![Alfresco SDK 2.x teaser](http://img.youtube.com/vi/vgbY9i4w0YU/0.jpg)](https://www.youtube.com/watch?v=vgbY9i4w0YU)
+[![Alfresco SDK 2.x howto](http://img.youtube.com/vi/utYZaVe9Nd0/0.jpg)](https://www.youtube.com/watch?v=utYZaVe9Nd0)
 
 The SDK is composed of:
 
@@ -50,6 +50,7 @@ This project is released under the [Apache License, Version 2.0](http://www.apac
 
 ## News
 
+- 2014-09-10: SDK 2.0.0-beta-4 released to Maven Central and in the [Archetype Catalog](http://repo1.maven.org/maven2/archetype-catalog.xml)!
 - 2014-09-09: SDK 2.0.0-beta-3 released to Maven Central
 - 2014-08-30: SDK 2.0.0-beta-1 and 2.0.0-beta-2 available in [Maven Central](http://search.maven.org/#search|ga|1|org.alfresco.maven)
 - 2014-08-22: First SNAPSHOT of SDK 2.0.0 in the [OSS Sonatype Repository](https://oss.sonatype.org/content/repositories/snapshots/org/alfresco/maven/alfresco-sdk-parent/2.0.0-SNAPSHOT/)!
