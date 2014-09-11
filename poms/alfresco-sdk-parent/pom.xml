@@ -48,8 +48,7 @@
     <alfresco.client.war>${alfresco.repo.artifactId}</alfresco.client.war>
     <alfresco.client.war.groupId>${alfresco.groupId}</alfresco.client.war.groupId>
     <alfresco.client.war.version>${alfresco.version}</alfresco.client.war.version>
-    <alfresco.client.contextPath>/${alfresco.client.war}</alfresco.client.contextPath>
-
+    
     <!-- IMPORTANT! Override this only if you know what you're doing; it could break amp-to-war overlay -->
     <alfresco.client.war.folder>${project.build.directory}/${project.build.finalName}-war</alfresco.client.war.folder>
 
