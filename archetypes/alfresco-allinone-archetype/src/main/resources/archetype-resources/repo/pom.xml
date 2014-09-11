@@ -27,7 +27,7 @@
     <dependencies>
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
-            <artifactId>alfresco</artifactId>
+            <artifactId>${alfresco.repo.artifactId}</artifactId>
             <type>war</type>
         </dependency>
         <!-- Demonstrating the dependency / installation of the repo AMP developed in the 'repo-amp' module -->
@@ -63,7 +63,7 @@
                         <!-- The Alfresco WAR -->
                         <overlay>
                             <groupId>${alfresco.groupId}</groupId>
-                            <artifactId>alfresco</artifactId>
+                            <artifactId>${alfresco.repo.artifactId}</artifactId>
                             <type>war</type>
                             <!-- To allow inclusion of META-INF -->
                             <excludes/>
@@ -140,15 +140,16 @@
                     </plugin>
                 </plugins>
             </build>
-            <!-- Needed to fix http://code.google.com/p/maven-alfresco-archetypes/issues/detail?id=150 -->
+            <!-- Needed to fix http://code.google.com/p/maven-alfresco-archetypes/issues/detail?id=150. 
+                 Only for community, scope controlled by dependencyManagement via sdk-parent -->
             <dependencies>
                 <dependency>
                     <groupId>org.slf4j</groupId>
                     <artifactId>jcl-over-slf4j</artifactId>
-                    <version>1.5.11</version>
                 </dependency>
             </dependencies>
         </profile>
+        <!-- Installs the needed runtime artifact for an RM (Records Management) project -->
         <profile>
             <id>rm</id>
              <properties>

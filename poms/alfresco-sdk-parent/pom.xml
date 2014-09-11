@@ -38,11 +38,14 @@
         -->
     <alfresco.groupId>org.alfresco</alfresco.groupId>
     <alfresco.version>5.0.a</alfresco.version>
+    <!-- By default uses community artifacts (alfresco|share). Overridden in the 'enterprise' profile, with 'alfresco-enterprise' and 'share-enterprise' -->
+    <alfresco.repo.artifactId>alfresco</alfresco.repo.artifactId>
+    <alfresco.share.artifactId>share</alfresco.share.artifactId>
 
     <!--  Values can be "alfresco" or "share". Default value is 'alfresco' assuming you are developing a repository AMP, change to share for share AMPs
         | This impact (in AMP projects) the choice of the WAR project for embedded run
          -->
-    <alfresco.client.war>alfresco</alfresco.client.war>
+    <alfresco.client.war>${alfresco.repo.artifactId}</alfresco.client.war>
     <alfresco.client.war.groupId>${alfresco.groupId}</alfresco.client.war.groupId>
     <alfresco.client.war.version>${alfresco.version}</alfresco.client.war.version>
     <alfresco.client.contextPath>/${alfresco.client.war}</alfresco.client.contextPath>
@@ -96,6 +99,10 @@
          -->
     <app.log.dir>${project.build.directory}/</app.log.dir>
     <app.log.root.level>WARN</app.log.root.level>
+    
+    <!-- Needed for community to avoid weird logging exceptions -->
+    <app.slf4j.scope>runtime</app.slf4j.scope>
+    <app.slf4j.version>1.5.11</app.slf4j.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -342,6 +349,19 @@
         </testResource>
     </testResources>
   </build>
+
+
+  <dependencyManagement>
+      <dependencies>
+          <dependency>
+              <groupId>org.slf4j</groupId>
+              <artifactId>jcl-over-slf4j</artifactId>
+              <version>${app.slf4j.version}</version>
+              <scope>${app.slf4j.scope}</scope>
+          </dependency>
+      </dependencies>
+  </dependencyManagement>
+  
 
   <!-- Feature / behavioral profiles -->
   <profiles>
@@ -669,12 +689,11 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>1.5.11</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.5.11</version>
+            <version>${app.slf4j.version}</version>
         </dependency>
 		<dependency>
 			<groupId>org.alfresco.maven</groupId>
@@ -778,6 +797,33 @@
               </plugin>
             </plugins>
        </build>
+    </profile>
+    <!-- NOTE: (Expertimental && Private) Alfresco 5 Enterprise is not released yet, this is used for internal testing
+    	 Enables working with Alfresco Enterprise latest version. You can then manually override the alfresco.version in your pom.xml 
+    -->
+    <profile>
+        <id>enterprise</id>
+        <properties>
+            <alfresco.version>5.0-BF-SNAPSHOT</alfresco.version>
+            <alfresco.repo.artifactId>alfresco-enterprise</alfresco.repo.artifactId>
+            <alfresco.share.artifactId>share-enterprise</alfresco.share.artifactId>
+            <!-- Not needed in the webapp for enterprise -->
+			<app.slf4j.scope>provided</app.slf4j.scope>                        
+        </properties>
+        <repositories>
+            <repository>
+                <id>alfresco-internal</id>
+                <url>https://artifacts.alfresco.com/nexus/content/groups/internal</url>
+            </repository>
+            <repository>
+                <id>alfresco-internal-snapshots</id>
+                <url>https://artifacts.alfresco.com/nexus/content/repositories/internal-snapshots/</url>
+                <snapshots>
+                    <enabled>true</enabled>
+                    <updatePolicy>daily</updatePolicy>
+                </snapshots>
+            </repository>
+        </repositories>
     </profile>
   </profiles>
 </project>

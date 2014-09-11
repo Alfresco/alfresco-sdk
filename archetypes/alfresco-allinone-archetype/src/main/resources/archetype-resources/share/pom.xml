@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
-            <artifactId>share</artifactId>
+            <artifactId>${alfresco.share.artifactId}</artifactId>
             <type>war</type>
         </dependency>
         <!-- Demonstrating the dependency / installation of the share AMP developed in the 'share-amp' module -->
@@ -44,7 +44,7 @@
                         <!-- The Share WAR -->
                         <overlay>
                             <groupId>${alfresco.groupId}</groupId>
-                            <artifactId>share</artifactId>
+                            <artifactId>${alfresco.share.artifactId}</artifactId>
                             <type>war</type>
                             <!-- To allow inclusion of META-INF -->
                             <excludes/>
@@ -61,6 +61,7 @@
         </plugins>
     </build>
     <profiles>
+    	<!-- Installs the needed runtime component for an Alfresco RM (Records Management) project -->
         <profile>
             <id>rm</id>
              <properties>

@@ -23,7 +23,7 @@
     <properties>
         <!-- Defines the target WAR artifactId to run this amp, only used with the -Pamp-to-war switch
         | Allowed values: alfresco | share. In this case it's configured to use OOTB share -->
-        <alfresco.client.war>share</alfresco.client.war>
+        <alfresco.client.war>${alfresco.share.artifactId}</alfresco.client.war>
 
         <!-- Since Alfresco is already running on port 8080, we run Share on port 8081 -->
         <maven.tomcat.port>8081</maven.tomcat.port>
@@ -35,7 +35,8 @@
              Community versions are typically identified by major.minor.character (4.2.a), 
              while Enterprise versions are identified by major.minor.digit (4.2.0)
         -->
-        <alfresco.version>${alfresco_target_version}</alfresco.version>
+		<!--<alfresco.version>${alfresco_target_version}</alfresco.version>-->
+        
         <!-- Defines the log level used in log4j.properties -->
         <app.log.root.level>WARN</app.log.root.level>
         
