@@ -16,6 +16,8 @@ package org.alfresco.demoamp.po;
 
 import java.util.concurrent.TimeUnit;
 
+import org.alfresco.webdrone.HtmlPage;
+import org.alfresco.webdrone.RenderTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
@@ -29,10 +31,11 @@ import com.google.common.base.Predicate;
  * @author Michael Suzuki
  *
  */
-public class DemoPage
+public class DemoPage implements HtmlPage
 {
     private static final By TITLE_LOCATOR = By.id("demo-title");
     private static final By MESSAGE_LOCATOR = By.id("demo-message");
+    private static final long DEFAULT_WAIT_TIME_MILLISECONDS = 6000;
     
     private WebDriver driver;
     /**
@@ -102,5 +105,48 @@ public class DemoPage
             }
         });
         return driver.findElement(by);
+    }
+
+    @Override
+    public void close()
+    {
+        driver.close();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public DemoPage render()
+    {
+        return render(DEFAULT_WAIT_TIME_MILLISECONDS);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public DemoPage render(RenderTime timer)
+    {
+        while (true)
+        {
+            timer.start();
+            try
+            {
+                if(isTitleVisible() && isMessageVisible())
+                {
+                    break;
+                }
+            }
+            catch (NoSuchElementException nse){ }
+            finally
+            {
+                timer.end();
+            }
+        }
+        return this;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public DemoPage render(long time)
+    {
+        return render(new RenderTime(time));
     }
 }

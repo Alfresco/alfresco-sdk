@@ -54,6 +54,8 @@ public class DemoTestIT
     public void titleDisplayed()
     {
         DemoPage page = new DemoPage(driver);
+        //Invoke render when ready to use page object.
+        page.render();
         Assert.assertNotNull(page);
         Assert.assertTrue(page.isTitleVisible());
         Assert.assertEquals("Welcome to Demoamp", page.getTitle());
@@ -66,7 +68,7 @@ public class DemoTestIT
     @Test
     public void messageIsDisplayed()
     {
-        DemoPage page = new DemoPage(driver);
+        DemoPage page = new DemoPage(driver).render();
         Assert.assertNotNull(page);
         Assert.assertTrue(page.isMessageVisible());
         Assert.assertEquals("Company Home has 7 folders", page.getMessage());
@@ -75,7 +77,7 @@ public class DemoTestIT
     @Test
     public void findLogo()
     {
-        DemoPage page = new DemoPage(driver);
+        DemoPage page = new DemoPage(driver).render();
         Assert.assertFalse(page.hasLogo());
     }
 }
