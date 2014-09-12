@@ -797,26 +797,22 @@
                   </sources>
                 </configuration>
               </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-resources-plugin</artifactId>
-            <version>2.5</version>
-            <executions>
               <execution>
-                <id>add-integration-resources</id>
+                <id>add-env-properties</id>
                 <phase>generate-resources</phase>
                 <goals>
-                  <goal>copy-resources</goal>
+                    <goal>add-resource</goal>
                 </goals>
                 <configuration>
-                  <outputDirectory>${project.build.directory}/integration-classes</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>src/integration/resources</directory>
-                    </resource>
-                  </resources>
+                    <resources>
+                        <resource>
+                            <directory>src/integration/resources</directory>
+                            <includes>
+                                <include>*.xml</include>
+                            </includes>
+                            <filtering>${app.filtering.enabled}</filtering>
+                        </resource>
+                    </resources>
                 </configuration>
               </execution>
             </executions>
@@ -871,9 +867,14 @@
             <artifactId>maven-failsafe-plugin</artifactId>
             <version>2.17</version>
             <configuration>
-              <testSourceDirectory>src/integration/java</testSourceDirectory>
+                <!--
+                     <testSourceDirectory>src/integration/java</testSourceDirectory>
               <testClassesDirectory>${project.build.directory}/integration-classes</testClassesDirectory>
-            </configuration>
+              -->
+              <suiteXmlFiles>
+                  <suiteXmlFile>src/integration/resources/testng.xml</suiteXmlFile>
+              </suiteXmlFiles>
+          </configuration>
             <executions>
               <execution>
               <id>integration-test</id>
@@ -891,6 +892,9 @@
           </plugin>
         </plugins>
       </build>
+      <dependencies>
+        
+      </dependencies>
     </profile>
     <!-- Does any SDK dev environment preparation (e.g. spring-loaded download)  -->
     <profile>
