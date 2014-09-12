@@ -126,7 +126,6 @@
     <h2.version>1.3.174</h2.version>
     <h2-support.version>1.5</h2-support.version>
     <junit.version>4.11</junit.version>
-    <skip.unit.test>false</skip.unit.test>    
   </properties>
 
   <!-- This repository is only needed to retrieve Alfresco parent POM. 
@@ -336,11 +335,11 @@
             <directory>src/main/resources</directory>
             <filtering>${app.filtering.enabled}</filtering>
         </resource>
-        <resource>
-    	    <directory>${app.amp.folder}</directory>
-    		<targetPath>${app.amp.output.folder}</targetPath>
-    		<filtering>${app.filtering.enabled}</filtering>
-    	</resource>
+		<resource>
+			<directory>${app.amp.folder}</directory>
+			<targetPath>${app.amp.output.folder}</targetPath>
+			<filtering>${app.filtering.enabled}</filtering>
+		</resource>
     </resources>
     <testResources>
         <testResource>
@@ -488,6 +487,7 @@
             </plugin>
         </plugins>        
       </build>
+      
     </profile>
     
     <!-- Enables alfresco testing dependencies if a src/test/java folder is found, by adding appropriate dependencies -->
@@ -516,40 +516,40 @@
         </build>
     	<dependencies>
         	<dependency>
-              <groupId>junit</groupId>
-              <artifactId>junit</artifactId>
-              <scope>test</scope>
-          </dependency>
-          <!-- Add RAD capabilities for remote JUnit test running. Scope=test so the custom JUnit remote runner is found in the Maven test classpath -->
-          <dependency>
-              <groupId>org.alfresco.maven</groupId>
-              <artifactId>alfresco-rad</artifactId>
-              <version>${maven.alfresco.version}</version>
-              <scope>test</scope>
-          </dependency>
-          <!--
-          |    Requires this explicit test dependency, for a Spring 3.0.5 bug
-          |    See https://jira.springsource.org/browse/SPR-8527
-          -->
-          <dependency>
-              <groupId>org.springframework</groupId>
-              <artifactId>spring-context</artifactId>
-              <version>3.0.6.RELEASE</version>
-              <scope>provided</scope>
-          </dependency>
-          <!-- SDK AMP Testing Dependencies -->
-          <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${h2.version}</version>
-            <scope>test</scope>
-          </dependency>
-          <dependency>
-            <groupId>tk.skuro.alfresco</groupId>
-            <artifactId>h2-support</artifactId>
-            <version>${h2-support.version}</version>
-            <scope>test</scope>
-          </dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <scope>test</scope>
+              </dependency>
+              <!-- Add RAD capabilities for remote JUnit test running. Scope=test so the custom JUnit remote runner is found in the Maven test classpath -->
+              <dependency>
+                  <groupId>org.alfresco.maven</groupId>
+                  <artifactId>alfresco-rad</artifactId>
+                  <version>${maven.alfresco.version}</version>
+                  <scope>test</scope>
+              </dependency>
+              <!--
+              |    Requires this explicit test dependency, for a Spring 3.0.5 bug
+              |    See https://jira.springsource.org/browse/SPR-8527
+              -->
+              <dependency>
+                  <groupId>org.springframework</groupId>
+                  <artifactId>spring-context</artifactId>
+                  <version>3.0.6.RELEASE</version>
+                  <scope>provided</scope>
+              </dependency>
+              <!-- SDK AMP Testing Dependencies -->
+              <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+                <scope>test</scope>
+              </dependency>
+              <dependency>
+                <groupId>tk.skuro.alfresco</groupId>
+                <artifactId>h2-support</artifactId>
+                <version>${h2-support.version}</version>
+                <scope>test</scope>
+              </dependency>
     	</dependencies>
     </profile>
 
@@ -694,11 +694,11 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>${app.slf4j.version}</version>
         </dependency>
-        <dependency>
-    			<groupId>org.alfresco.maven</groupId>
-    			<artifactId>alfresco-rad</artifactId>
-    			<version>${maven.alfresco.version}</version>
-    		</dependency>
+		<dependency>
+			<groupId>org.alfresco.maven</groupId>
+			<artifactId>alfresco-rad</artifactId>
+			<version>${maven.alfresco.version}</version>
+		</dependency>
       </dependencies>
     </profile>
 
@@ -770,127 +770,6 @@
               </plugin>
             </plugins>
         </build>
-    </profile>
-    <profile>
-      <id>integration</id>
-      <activation>
-        <file>
-          <exists>src/integration/java</exists>
-        </file>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-            <version>1.9.1</version>
-            <executions>
-              <execution>
-                <id>add-integration-resource</id>
-                <phase>generate-sources</phase>
-                <goals>
-                  <goal>add-test-source</goal>
-                </goals>
-                <configuration>
-                  <sources>
-                    <source>src/integration/java</source>
-                  </sources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-resources-plugin</artifactId>
-            <version>2.5</version>
-            <executions>
-              <execution>
-                <id>add-integration-resources</id>
-                <phase>generate-resources</phase>
-                <goals>
-                  <goal>copy-resources</goal>
-                </goals>
-                <configuration>
-                  <outputDirectory>${project.build.directory}/integration-classes</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>src/integration/resources</directory>
-                    </resource>
-                  </resources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>ui-test</id>
-      <properties>
-        <maven.tomcat.fork>true</maven.tomcat.fork>
-        <skipTests>false</skipTests>
-      </properties>
-      <build>
-        <plugins>
-          <!-- compile integration -->
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>2.3.2</version>
-            <executions>
-              <execution>
-                <id>compile-integration-test</id>
-                <!-- 
-                     Do not change the phase as it wont compile unless in the right phase so
-                     mvn install -Pui-test wont work.
-                 -->
-                <phase>compile</phase>
-                <goals>
-                  <goal>testCompile</goal>
-                </goals>
-                <configuration>
-                  <compilerArguments>
-                    <d>${project.build.directory}/integration-classes</d>
-                  </compilerArguments>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <!-- Force to skip unit test -->
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.17</version>
-            <configuration>
-              <skipTests>${skip.unit.test}</skipTests>
-            </configuration>
-          </plugin>
-          <!-- Run integration test with failsafe, with config to fail build if test failure -->
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <version>2.17</version>
-            <configuration>
-              <testSourceDirectory>src/integration/java</testSourceDirectory>
-              <testClassesDirectory>${project.build.directory}/integration-classes</testClassesDirectory>
-            </configuration>
-            <executions>
-              <execution>
-              <id>integration-test</id>
-                <goals>
-                  <goal>integration-test</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>verify</id>
-                <goals>
-                  <goal>verify</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
     </profile>
     <!-- Does any SDK dev environment preparation (e.g. spring-loaded download)  -->
     <profile>
