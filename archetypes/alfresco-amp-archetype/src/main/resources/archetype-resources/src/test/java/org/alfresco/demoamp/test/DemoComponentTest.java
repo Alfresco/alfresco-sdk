@@ -1,4 +1,4 @@
-package org.alfresco.demoamp;
+package org.alfresco.demoamp.test;
 
 
 import static org.junit.Assert.assertEquals;
@@ -45,8 +45,7 @@ import com.tradeshift.test.remote.RemoteTestRunner;
 @RunWith(RemoteTestRunner.class)
 @Remote(runnerClass=SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:alfresco/application-context.xml")
-public class DemoComponentTest 
-{
+public class DemoComponentTest {
     
     private static final String ADMIN_USER_NAME = "admin";
 
@@ -60,15 +59,13 @@ public class DemoComponentTest
     protected NodeService nodeService;
     
     @Test
-    public void testWiring() 
-    {
+    public void testWiring() {
         assertNotNull(demoComponent);
     }
     
     @Test
-    public void testGetCompanyHome() 
-    {
-        AuthenticationUtil.setFullyAuthenticatedUser(ADMIN_USER_NAME);
+    public void testGetCompanyHome() {
+    	AuthenticationUtil.setFullyAuthenticatedUser(ADMIN_USER_NAME);
         NodeRef companyHome = demoComponent.getCompanyHome();
         assertNotNull(companyHome);
         String companyHomeName = (String) nodeService.getProperty(companyHome, ContentModel.PROP_NAME);
@@ -77,9 +74,8 @@ public class DemoComponentTest
     }
     
     @Test
-    public void testChildNodesCount() 
-    {
-        AuthenticationUtil.setFullyAuthenticatedUser(ADMIN_USER_NAME);
+    public void testChildNodesCount() {
+    	AuthenticationUtil.setFullyAuthenticatedUser(ADMIN_USER_NAME);
         NodeRef companyHome = demoComponent.getCompanyHome();
         int childNodeCount = demoComponent.childNodesCount(companyHome);
         assertNotNull(childNodeCount);

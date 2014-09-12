@@ -25,30 +25,14 @@
 package org.alfresco.demoamp;
 
 /**
- * This is a simple class that generates a message for demo hello world,
- * and also outputs to <i>system.out</i> a message.
+ * This class does nothing except dump some output to <i>system.out</i>.
  * NB: This code is taken from Alfresco Eclipse SDK Samples 
  * @author Derek Hulley
- * @author Michael Suzuki
  */
 public class Demo
 {
-    public void init()
-    {
-        System.out.println("SDK Demo AMP class has been loaded");
-    }
-    /**
-     * Generates a message.
-     * @param directoryName String directory identifier
-     * @param folders int count of folders for that directory
-     * @return String message 
-     */
-    public static String generateMessage(final String directoryName, final int folders)
-    {
-        if(directoryName == null || directoryName.isEmpty())
-        {
-            throw new RuntimeException("Directory name is required");
-        }
-        return String.format("%s has %d folders", directoryName, folders);
-    }
+	public void init()
+	{
+		System.out.println("SDK Demo AMP class has been loaded");
+	}
 }
