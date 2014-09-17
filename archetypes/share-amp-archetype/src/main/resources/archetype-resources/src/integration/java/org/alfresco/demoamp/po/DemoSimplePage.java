@@ -28,7 +28,7 @@ import org.openqa.selenium.NoSuchElementException;
  */
 public class DemoSimplePage extends SharePage
 {
-    private By SIMPLE_DEMO_LOGO = By.id("demo-simple-logo");
+    private By SIMPLE_DEMO_LOGO = By.id("DEMO_SIMPLE_LOGO");
     private By SIMPLE_DEMO_MESSAGE = By.id("DEMO_SIMPLE_MSG");
     
     public DemoSimplePage(WebDrone drone)
