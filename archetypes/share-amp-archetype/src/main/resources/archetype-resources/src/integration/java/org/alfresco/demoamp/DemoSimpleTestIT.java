@@ -23,7 +23,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 /**
- * Functional test that demonstrates how write and
+ * Functional test that demonstrates how to write and
  * extend an alfresco share page object. 
  * This test shows the interaction with page objects
  * brought from share-po project along with newly created ones
