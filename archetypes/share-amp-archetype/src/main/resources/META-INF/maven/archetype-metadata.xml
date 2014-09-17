@@ -86,6 +86,24 @@
         <include>**/*.xml</include>
       </includes>
     </fileSet>
+    <fileSet filtered="false" packaged="false" encoding="UTF-8">
+      <directory>src/integration/java</directory>
+      <includes>
+        <include>**/*.java</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="false" encoding="UTF-8">
+      <directory>src/integration/resources</directory>
+      <includes>
+        <include>**/*</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="false" encoding="UTF-8">
+      <directory>src/integration/properties</directory>
+      <includes>
+        <include>**/*</include>
+      </includes>
+    </fileSet>
     <fileSet encoding="UTF-8">
         <directory></directory>
         <includes>
