@@ -510,47 +510,48 @@
                          <!-- Adds both the module config to test classpath --> 
                          <additionalClasspathElement>${project.build.directory}/${project.build.finalName}/config</additionalClasspathElement>
                       </additionalClasspathElements>
+                      <testNGArtifactName>none:none</testNGArtifactName>
                   </configuration>
                 </plugin>
             </plugins>
         </build>
-    	<dependencies>
-        	<dependency>
-              <groupId>junit</groupId>
-              <artifactId>junit</artifactId>
+      	<dependencies>
+          	<dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <scope>test</scope>
+            </dependency>
+            <!-- Add RAD capabilities for remote JUnit test running. Scope=test so the custom JUnit remote runner is found in the Maven test classpath -->
+            <dependency>
+                <groupId>org.alfresco.maven</groupId>
+                <artifactId>alfresco-rad</artifactId>
+                <version>${maven.alfresco.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!--
+            |    Requires this explicit test dependency, for a Spring 3.0.5 bug
+            |    See https://jira.springsource.org/browse/SPR-8527
+            -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>3.0.6.RELEASE</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- SDK AMP Testing Dependencies -->
+            <dependency>
+              <groupId>com.h2database</groupId>
+              <artifactId>h2</artifactId>
+              <version>${h2.version}</version>
               <scope>test</scope>
-          </dependency>
-          <!-- Add RAD capabilities for remote JUnit test running. Scope=test so the custom JUnit remote runner is found in the Maven test classpath -->
-          <dependency>
-              <groupId>org.alfresco.maven</groupId>
-              <artifactId>alfresco-rad</artifactId>
-              <version>${maven.alfresco.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>tk.skuro.alfresco</groupId>
+              <artifactId>h2-support</artifactId>
+              <version>${h2-support.version}</version>
               <scope>test</scope>
-          </dependency>
-          <!--
-          |    Requires this explicit test dependency, for a Spring 3.0.5 bug
-          |    See https://jira.springsource.org/browse/SPR-8527
-          -->
-          <dependency>
-              <groupId>org.springframework</groupId>
-              <artifactId>spring-context</artifactId>
-              <version>3.0.6.RELEASE</version>
-              <scope>provided</scope>
-          </dependency>
-          <!-- SDK AMP Testing Dependencies -->
-          <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${h2.version}</version>
-            <scope>test</scope>
-          </dependency>
-          <dependency>
-            <groupId>tk.skuro.alfresco</groupId>
-            <artifactId>h2-support</artifactId>
-            <version>${h2-support.version}</version>
-            <scope>test</scope>
-          </dependency>
-    	</dependencies>
+            </dependency>
+      	</dependencies>
     </profile>
 
     <!-- Profile to enable rapid application development with JRebel. Automatically generates rebel.xml files. 
@@ -868,6 +869,7 @@
     </profile>
     <profile>
       <id>ui-test</id>
+      <!-- Selenium based functional and integration test profile-->
       <build>
         <plugins>
           <!-- Force to skip unit test -->

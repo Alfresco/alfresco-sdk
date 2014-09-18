@@ -76,7 +76,7 @@ public class DemoSimpleTestIT extends AbstractTest
         //Invoke render when ready to use page object.
         page.render();
         Assert.assertNotNull(page);
-        Assert.assertEquals("Alfresco » This is a simple page", page.getTitle());
+        Assert.assertTrue(page.getTitle().contains("This is a simple page"));
     }
     @Test
     /**
