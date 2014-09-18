@@ -869,7 +869,6 @@
     </profile>
     <profile>
       <id>ui-test</id>
-      <!-- Selenium based functional and integration test profile-->
       <build>
         <plugins>
           <!-- Force to skip unit test -->
