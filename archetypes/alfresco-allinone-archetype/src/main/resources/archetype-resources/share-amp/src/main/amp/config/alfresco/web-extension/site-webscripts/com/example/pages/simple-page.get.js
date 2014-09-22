@@ -13,12 +13,14 @@ model.jsonModel = {
             widgetWidth: 50,
             widgets: [
                 {
+                    id:"DEMO_SIMPLE_LOGO",
                     name: "alfresco/logo/Logo",
                     config: {
                         logoClasses: "alfresco-logo-only"
                     }
                 },
                 {
+                  id:"DEMO_SIMPLE_MSG",
                   name: "example/widgets/TemplateWidget"
                 }
             ]
