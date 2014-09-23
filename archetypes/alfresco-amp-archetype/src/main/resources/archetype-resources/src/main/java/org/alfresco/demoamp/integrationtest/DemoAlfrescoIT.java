@@ -61,35 +61,19 @@ public class DemoAlfrescoIT extends AlfrescoIntegrationTestCase
     }
     
     /**
-     * Building on the previous tests, this uses the ActionService to run the
-     * DemoAction that is provided as part of the zia-alfresco-quickstart. It
-     * does this on the Company Home node which it obtains using the
-     * NodeLocatorService. As an added bonus this makes sure that the we receive
-     * a return value from the action when we execute it.
-     * 
-     * This test requires the example-alfresco-module. Enable the dependency in the pom to run.
+     * As we have extended AlfrescoIntegrationTestCase we have some 
+     * helpers for looking up the application context and the service
+     * registry. Additionally by extending this class we don't need to
+     * explicitly use the @RunWith annotation.
      */
-    /*@Test public void executeActionOnCompanyHome()
+    @Test public void executeActionOnCompanyHome()
     {
+    		ApplicationContext springApplicationContext = this.getSpringApplicationContext();
+    		assertThat(springApplicationContext, notNullValue());
+    		
         ServiceRegistry serviceRegistry = this.getAlfrescoServiceRegistry();
         assertThat(serviceRegistry, notNullValue());
-
-        ActionService actionService = serviceRegistry.getActionService();
-        assertThat(actionService, notNullValue());
-
-        NodeService nodeService = serviceRegistry.getNodeService();
-        assertThat(nodeService, notNullValue());
-
-        NodeRef nodeRef = serviceRegistry.getNodeLocatorService().getNode(CompanyHomeNodeLocator.NAME, null, null);
-        assertThat(nodeRef, notNullValue());
-
-        Action action = actionService.createAction("example-alfresco-module-demoAction");
-        assertThat(action, notNullValue());
-        actionService.executeAction(action, nodeRef);
-        Serializable result = action.getParameterValue("result");
-        assertThat(result, instanceOf(String.class));
-        assertThat((String)result, is("result"));
-    }*/
+    }
 
 }
 /*

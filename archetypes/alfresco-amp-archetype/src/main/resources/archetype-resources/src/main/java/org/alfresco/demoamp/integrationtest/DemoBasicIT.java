@@ -5,6 +5,8 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
+import org.alfresco.demoamp.Demo;
+import org.alfresco.maven.rad.testframework.AlfrescoTestRunner;
 import org.alfresco.repo.avm.util.RawServices;
 import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.dictionary.DictionaryService;
@@ -16,8 +18,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 import org.springframework.context.ApplicationContext;
-
-import org.alfresco.maven.rad.testframework.AlfrescoTestRunner;
 
 /**
  * This is a test class that does some very light testing to provide some examples
@@ -38,18 +38,16 @@ public class DemoBasicIT
     };
 
     /**
-     * This test makes a new instance of the DemoBean, it does not use spring to do this.
+     * This test makes a new instance of the Demo bean, it does not use spring to do this.
      * This could be interesting because the init method writes some output that you can
      * then look for in the Alfresco log files.
-     * 
-     * This test requires the example-alfresco-module. Enable the dependency in the pom to run.
      */
-    /*@Test public void bootstrapInitializingBean()
+    @Test public void bootstrapInitializingBean()
     {
-        DemoBean b = new DemoBean();
+        Demo b = new Demo();
         b.init();
         assertThat(b, notNullValue());
-    }*/
+    }
 
     /**
      * Alfresco provides a singleton called RawServices that provides access to the
@@ -89,48 +87,6 @@ public class DemoBasicIT
         Boolean haveAspects = (dictionaryService.getAllAspects().size() > 0);
         assertThat(haveAspects, is(Boolean.TRUE));
     }
-
-    /**
-     * Building on the previous tests, this uses the ActionService to run the
-     * DemoAction that is provided as part of the zia-alfresco-quickstart. It
-     * does this on the Company Home node which it obtains using the
-     * NodeLocatorService. As an added bonus this makes sure that the we receive
-     * a return value from the action when we execute it.
-     * 
-     * This test requires the example-alfresco-module. Enable the dependency in the pom to run.
-     */
-    /* @Test public void executeActionOnCompanyHome()
-    {
-        ApplicationContext ctx = RawServices.Instance().getContext();
-        assertThat(ctx, notNullValue());
-
-        ServiceRegistry serviceRegistry = (ServiceRegistry) ctx.getBean("ServiceRegistry");
-        assertThat(serviceRegistry, notNullValue());
-
-        ActionService actionService = serviceRegistry.getActionService();
-        assertThat(actionService, notNullValue());
-
-        NodeService nodeService = serviceRegistry.getNodeService();
-        assertThat(nodeService, notNullValue());
-
-        NodeRef nodeRef = serviceRegistry.getNodeLocatorService().getNode(CompanyHomeNodeLocator.NAME, null, null);
-        assertThat(nodeRef, notNullValue());
-
-        Action action = actionService.createAction("example-alfresco-module-demoAction");
-        assertThat(action, notNullValue());
-        actionService.executeAction(action, nodeRef);
-        Serializable result = action.getParameterValue("result");
-        assertThat(result, instanceOf(String.class));
-        assertThat((String)result, is("result"));
-    }*/
-
-    /* wanna see a test fail? uncomment this!
-    @Test public void failure()
-    {
-        System.out.println("Expect a failure");
-        assertThat("Bar", is("Foo"));
-    }
-    */
     
     // This is intentionally ignored to show that we honor this annotation
     @Ignore
