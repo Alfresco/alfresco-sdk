@@ -40,7 +40,7 @@ public class DemoSimpleTestIT extends AbstractTest
     public void prepare() throws Exception
     {
         //Login to share
-        drone.navigateTo("http://localhost:8081/share/page/hdp/ws/simple-page");
+        drone.navigateTo(shareUrl + "/page/hdp/ws/simple-page");
         LoginPage loginPage = new LoginPage(drone);
         loginPage.loginAs(username, password);
     }
@@ -49,7 +49,7 @@ public class DemoSimpleTestIT extends AbstractTest
     public void loadPage()
     {
         //Goto demo page
-        drone.navigateTo("http://localhost:8081/share/page/hdp/ws/simple-page");
+        drone.navigateTo(shareUrl + "/page/hdp/ws/simple-page");
         page = new DemoSimplePage(drone);
     }
     
