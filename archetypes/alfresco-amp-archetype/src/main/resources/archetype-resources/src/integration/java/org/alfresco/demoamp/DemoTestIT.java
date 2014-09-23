@@ -40,8 +40,8 @@ public class DemoTestIT
         //Navigate to sample page with token
         driver.get("http://localhost:8080/alfresco/service/sample/helloworld" + token);
     }
-    
-    @AfterClass
+
+    @AfterClass(alwaysRun = true)  
     public static void teardown()
     {
         if(driver != null)
