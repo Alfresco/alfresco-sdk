@@ -50,6 +50,30 @@
           <artifactId>spring-surf-api</artifactId>
           <scope>provided</scope>
         </dependency>        
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>share-po</artifactId>
+            <version>${alfresco.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>share-po</artifactId>
+            <version>${alfresco.version}</version>
+            <scope>test</scope>
+            <type>test-jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8.8</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hamcrest</groupId>
+                    <artifactId>hamcrest-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
-
 </project>
