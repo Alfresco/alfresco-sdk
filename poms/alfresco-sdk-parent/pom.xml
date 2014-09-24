@@ -895,7 +895,7 @@
                   <value>${maven.tomcat.port}</value>
                 </property>
               </systemProperties>
-            </configuration>
+          </configuration>
             <executions>
               <execution>
               <id>integration-test</id>
