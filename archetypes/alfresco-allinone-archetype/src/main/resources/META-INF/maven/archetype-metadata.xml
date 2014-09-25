@@ -180,6 +180,7 @@
         <directory></directory>
         <includes>
            <include>run.sh</include>
+           <include>debug.sh</include>
         </includes>
     </fileSet>
   </fileSets>
