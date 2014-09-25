@@ -1,8 +1,23 @@
 package org.alfresco.maven.rad.testframework;
 
-import com.google.common.io.BaseEncoding;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.io.StringReader;
+import java.lang.reflect.Method;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.alfresco.repo.avm.util.RawServices;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
@@ -16,18 +31,11 @@ import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
-import org.springframework.context.ApplicationContext;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.*;
-import java.net.URL;
 
 /**
  * This is a JUnit test runner that is designed to work with an Alfresco repository.
@@ -43,6 +51,8 @@ import java.net.URL;
  * capabilities. These can then be run from our IDEs with the associated visualizations,
  * support for re-running failed tests, etc.
  * 
+ * Integration testing framework donated by Zia Consulting
+ * 
  * @author Bindu Wavell <bindu@ziaconsulting.com>
  */
 public class AlfrescoTestRunner extends BlockJUnit4ClassRunner
@@ -52,6 +62,17 @@ public class AlfrescoTestRunner extends BlockJUnit4ClassRunner
 
     public AlfrescoTestRunner(Class<?> klass) throws InitializationError {
         super(klass);
+    }
+    
+    public static String serializableToString( Serializable serializable ) throws IOException
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream( baos );
+        oos.writeObject( serializable );
+        oos.close();
+        
+        String string =  Base64.encodeBase64URLSafeString(baos.toByteArray());
+        return string;
     }
 
     @Override
@@ -86,7 +107,7 @@ public class AlfrescoTestRunner extends BlockJUnit4ClassRunner
                 new AuthScope(targetHost.getHostName(), targetHost.getPort()),
                 new UsernamePasswordCredentials("admin", "admin"));
 
-        HttpGet get = new HttpGet("http://localhost:8080/alfresco/service/testing/test.xml?clazz=" + className.replace("#", "%23"));
+        HttpGet get = new HttpGet(getContextRoot(method) + "/service/testing/test.xml?clazz=" + className.replace("#", "%23"));
 
         try {
 
@@ -157,9 +178,9 @@ public class AlfrescoTestRunner extends BlockJUnit4ClassRunner
 
     }
 
-    public static Object objectFromString( String string ) throws IOException , ClassNotFoundException
+    protected static Object objectFromString( String string ) throws IOException , ClassNotFoundException
     {
-        byte[] buffer = BaseEncoding.base64Url().decode( string );
+        byte[] buffer = Base64.decodeBase64(string);
         ObjectInputStream ois = new ObjectInputStream(
                 new ByteArrayInputStream(  buffer ) );
         Object object  = ois.readObject();
@@ -167,25 +188,23 @@ public class AlfrescoTestRunner extends BlockJUnit4ClassRunner
         return object;
     }
 
-    public static String serializableToString( Serializable serializable ) throws IOException
-    {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream( baos );
-        oos.writeObject( serializable );
-        oos.close();
-        String string =  new String( BaseEncoding.base64Url().encode( baos.toByteArray() ) );
-        return string;
-    }
-
     protected boolean areWeRunningInAlfresco()
     {
-    	/* this detection model didn't work from STS so changing to a different strategy
-        URL u = this.getClass().getResource("/alfresco/application-context.xml");
-        return (null != u);
-        */
-        Object rawService = RawServices.Instance();
-        return (null != rawService);
+	    Object rawService = RawServices.Instance();
+	    return (null != rawService);
     }
+    
+    protected String getContextRoot(FrameworkMethod method)
+    {
+    		Class<?> declaringClass = method.getMethod().getDeclaringClass();
+    		boolean annotationPresent = declaringClass.isAnnotationPresent(Remote.class);
+    		if (annotationPresent) {
+    			Remote annotation = declaringClass.getAnnotation(Remote.class);
+    			return annotation.endpoint();
+    		}
+    		return "http://localhost:8080/alfresco";
+    }
+    
 }
 /*
 	Licensed to the Apache Software Foundation (ASF) under one or more

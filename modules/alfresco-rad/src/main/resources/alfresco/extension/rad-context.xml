@@ -3,23 +3,17 @@
 
 <beans>
      
-    <bean id="remoteRunnnerWrapper" class="org.alfresco.maven.rad.RemoteRunnerWrapper"/>
-    
-    <bean id="remoteRunnnerWrapperThread" class="java.lang.Thread" init-method="start" destroy-method="interrupt">
-        <constructor-arg ref="remoteRunnnerWrapper"/>
+    <!-- Integration testing framework donated by Zia Consulting -->
+    <bean id="webscript.org.alfresco.maven.rad.webscripts.runtest.get"
+          class="org.alfresco.maven.rad.webscripts.RunTest"
+          parent="webscript">
     </bean>
-
     <!--
     <bean id="webscript.org.alfresco.maven.rad.webscripts.listtests.get"
           class="org.alfresco.maven.rad.webscripts.ListTests"
           parent="webscript">
     </bean>
     -->
-
-    <bean id="webscript.org.alfresco.maven.rad.webscripts.runtest.get"
-          class="org.alfresco.maven.rad.webscripts.RunTest"
-          parent="webscript">
-    </bean>
 
 </beans>
 <!--
@@ -37,5 +31,4 @@
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-
 -->

@@ -9,6 +9,8 @@ import org.springframework.context.ApplicationContext;
  * This is a base class that can be extended in order to get the ZiaAlfrescoTestRunner,
  * Spring Context and Alfresco Service registry setup for a test class.
  *
+ * Integration testing framework donated by Zia Consulting
+ *
  * @author Bindu Wavell <bindu@ziaconsulting.com>
  */
 @RunWith(value = AlfrescoTestRunner.class)

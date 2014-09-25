@@ -22,6 +22,8 @@ import org.springframework.extensions.webscripts.WebScriptRequest;
  * the test and wraps the results up so that the test initiator can be fooled into thinking they are
  * running the tests locally.
  * 
+ * Integration testing framework donated by Zia Consulting
+ * 
  * @author Bindu Wavell <bindu@ziaconsulting.com>
  */
 public class RunTest extends DeclarativeWebScript

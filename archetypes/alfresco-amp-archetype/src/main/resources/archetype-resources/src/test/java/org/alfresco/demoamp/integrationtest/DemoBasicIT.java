@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 
 import org.alfresco.demoamp.Demo;
 import org.alfresco.maven.rad.testframework.AlfrescoTestRunner;
+import org.alfresco.maven.rad.testframework.Remote;
 import org.alfresco.repo.avm.util.RawServices;
 import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.dictionary.DictionaryService;
@@ -21,18 +22,25 @@ import org.springframework.context.ApplicationContext;
 
 /**
  * This is a test class that does some very light testing to provide some examples
- * of things that can be done with the ZiaAlfrescoTestRunner. It does not use the
- * ZiaAlfrescoTestCase.
+ * of things that can be done with the AlfrescoTestRunner. It does not use the
+ * AlfrescoTestCase.
+ * 
+ * Integration testing framework donated by Zia Consulting
  *
  * @author Bindu Wavell <bindu@ziaconsulting.com>
  */
 @RunWith(value = AlfrescoTestRunner.class)
+// Specifying the remote endpoint is not required it
+// will default to http://localhost:8080/alfresco if
+// not provided. This shows the syntax but simply
+// sets the value to back to the default value.
+@Remote(endpoint="http://localhost:8080/alfresco")
 public class DemoBasicIT
 {
     @Rule public MethodRule testAnnouncer = new MethodRule() {
         @Override
         public Statement apply(Statement base, FrameworkMethod method, Object target) {
-            System.out.println("Running IntegrationTest: " + method.getName() + "()");
+            System.out.println("Running DemoBasicIT IntegrationTest: " + method.getName() + "()");
             return base;
         }
     };
@@ -56,6 +64,10 @@ public class DemoBasicIT
      * this code in a @Before method and make the context and serviceRegistry
      * class members that can be used from your tests. Otherwise you are likely
      * to repeat this a bunch.
+     * 
+     * Alternatively look at DemoAlfrescoIT.java which extends
+     * AlfrescoIntegrationTestCase. This is a light weight base class that does
+     * this step for you.
      */
     @Test public void captureSpringContext()
     {
@@ -88,7 +100,7 @@ public class DemoBasicIT
         assertThat(haveAspects, is(Boolean.TRUE));
     }
     
-    // This is intentionally ignored to show that we honor this annotation
+    // This is intentionally ignored to show that we honor the @Ignore annotation
     @Ignore
     @Test public void ignored()
     {
