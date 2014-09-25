@@ -123,6 +123,7 @@
         <alfresco.sdk.parent.version>${project.version}</alfresco.sdk.parent.version>
         <springloaded.version>1.2.0.RELEASE</springloaded.version>
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
+        <alfresco.default.version>5.0.a</alfresco.default.version>
     </properties>
     <build>
         <pluginManagement>

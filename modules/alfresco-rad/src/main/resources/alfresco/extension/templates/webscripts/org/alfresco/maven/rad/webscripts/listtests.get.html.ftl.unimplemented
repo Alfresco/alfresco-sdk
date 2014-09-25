@@ -1,0 +1,10 @@
+<html>
+<body>
+    <h1>Integration Tests:</h1>
+    <ul>
+        <#list tests as test>
+            <li><a href="/alfresco/service/testing/test?clazz=${test?url}">${test?html}</a></li>
+        </#list>
+    </ul>
+</body>
+</html>
