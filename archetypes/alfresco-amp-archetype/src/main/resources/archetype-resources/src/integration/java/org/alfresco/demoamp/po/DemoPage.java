@@ -14,18 +14,12 @@
  */
 package org.alfresco.demoamp.po;
 
-import java.util.concurrent.TimeUnit;
-
 import org.alfresco.webdrone.HtmlPage;
 import org.alfresco.webdrone.RenderTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.FluentWait;
-
-import com.google.common.base.Predicate;
 /**
  * Demo page object that encapsulates the demo webscript hello world page.
  * @author Michael Suzuki
@@ -64,6 +58,7 @@ public class DemoPage implements HtmlPage
     {
         return driver.findElement(MESSAGE_LOCATOR).getText();
     }
+
     /**
      * Sample find with wait element to keep searching for a set time.
      * @return true if the logo is exists
@@ -72,47 +67,13 @@ public class DemoPage implements HtmlPage
     {
         try
         {
-            return findAndWait(By.id("logo"), 6000, 1000).isDisplayed();
-            
+            WebElement logo = driver.findElement(By.id("logo"));
+            return logo.isDisplayed();
         }
-        catch(TimeoutException te){ }
+        catch(NoSuchElementException te){ }
         return false;
     }
-    /**
-     * Mechanism to keep looking for an element on the page.
-     * @param by selector
-     * @param limit max time to wait in ms
-     * @param interval time to wait between calls in ms
-     * @return
-     */
-    public WebElement findAndWait(final By by, final long limit, final long interval)
-    {
-        FluentWait<By> fluentWait = new FluentWait<By>(by);
-        fluentWait.pollingEvery(interval, TimeUnit.MILLISECONDS);
-        fluentWait.withTimeout(limit, TimeUnit.MILLISECONDS);
-        fluentWait.until(new Predicate<By>()
-        {
-            public boolean apply(By by)
-            {
-                try
-                {
-                    return driver.findElement(by).isDisplayed();
-                }
-                catch (NoSuchElementException ex)
-                {
-                    return false;
-                }
-            }
-        });
-        return driver.findElement(by);
-    }
-
-    @Override
-    public void close()
-    {
-        driver.close();
-    }
-
+ 
     @SuppressWarnings("unchecked")
     @Override
     public DemoPage render()
@@ -148,5 +109,11 @@ public class DemoPage implements HtmlPage
     public DemoPage render(long time)
     {
         return render(new RenderTime(time));
+    }
+    
+    @Override
+    public void close()
+    {
+        driver.close();
     }
 }
