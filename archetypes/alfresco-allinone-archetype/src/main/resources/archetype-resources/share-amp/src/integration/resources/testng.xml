@@ -3,7 +3,7 @@
 <suite name="Suite" parallel="none">
   <test name="Test">
     <classes>
-      <class name="org.alfresco.demoamp.DemoSimpleTestIT"/>
+      <class name="org.alfresco.demoamp.DemoTestIT"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

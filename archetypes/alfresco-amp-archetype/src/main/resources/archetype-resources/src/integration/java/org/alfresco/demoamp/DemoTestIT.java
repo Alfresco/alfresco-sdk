@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2012 Alfresco Software Limited.
+ * Copyright (C) 2005-2014 Alfresco Software Limited.
  * This file is part of Alfresco
  * Alfresco is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -58,7 +58,7 @@ public class DemoTestIT
         page.render();
         Assert.assertNotNull(page);
         Assert.assertTrue(page.isTitleVisible());
-        Assert.assertEquals("Welcome to Demoamp", page.getTitle());
+        Assert.assertEquals(page.getTitle(), "Welcome to Demoamp");
     }
     
     /**
@@ -71,7 +71,7 @@ public class DemoTestIT
         DemoPage page = new DemoPage(driver).render();
         Assert.assertNotNull(page);
         Assert.assertTrue(page.isMessageVisible());
-        Assert.assertEquals("Company Home has 7 folders", page.getMessage());
+        Assert.assertEquals(page.getMessage(),"Company Home has 7 folders");
     }
 
     @Test

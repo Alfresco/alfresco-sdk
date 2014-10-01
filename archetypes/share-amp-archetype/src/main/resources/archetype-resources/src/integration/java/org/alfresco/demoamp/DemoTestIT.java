@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2012 Alfresco Software Limited.
+ * Copyright (C) 2005-2014 Alfresco Software Limited.
  * This file is part of Alfresco
  * Alfresco is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -39,8 +39,9 @@ public class DemoTestIT extends AbstractTest
     @BeforeClass(groups={"alfresco-one"})
     public void prepare() throws Exception
     {
-        //Login to share
+        //Navigate to share
         drone.navigateTo(shareUrl + "/page/hdp/ws/simple-page");
+        //Reuse Alfresco Share login page object from share-po lib.
         LoginPage loginPage = new LoginPage(drone);
         loginPage.loginAs(username, password);
     }
@@ -69,7 +70,7 @@ public class DemoTestIT extends AbstractTest
     
     @Test
     /**
-     * Example of test reusing abstract share page objects.
+     * Example of test reusing methods in abstract share page objects.
      */
     public void titleDisplayed()
     {
