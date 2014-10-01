@@ -89,6 +89,7 @@
             <scope>test</scope>
             <type>test-jar</type>
         </dependency>
+        
         <!--  Required by Integration Test -->
         <dependency>
           <groupId>org.springframework</groupId>
