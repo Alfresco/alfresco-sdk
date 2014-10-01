@@ -24,6 +24,14 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+/**
+ * Functional test that demonstrates how to write and use
+ * selenium to validated the Demo amp is running and working
+ * correctly.
+ * 
+ * @author Michael Suzuki
+ *
+ */
 public class DemoTestIT
 {
     private static WebDriver driver;
