@@ -130,6 +130,7 @@
     <app.integration.folder>src/integration</app.integration.folder>
     <app.integration.resource>${app.integration.folder}/resources</app.integration.resource>
     <app.integration.config>${app.integration.resource}/testng.xml</app.integration.config>
+    <app.integration.source>${app.integration.folder}/java</app.integration.source>
   </properties>
 
   <!-- This repository is only needed to retrieve Alfresco parent POM. 
@@ -796,7 +797,7 @@
                 </goals>
                 <configuration>
                   <sources>
-                    <source>src/integration/java</source>
+                    <source>${app.integration.source}</source>
                   </sources>
                 </configuration>
               </execution>
