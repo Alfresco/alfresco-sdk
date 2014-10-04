@@ -779,7 +779,7 @@
       <id>enable-integration-setup</id>
       <activation>
         <file>
-          <exists>src/integration/java</exists>
+          <exists>src/integration</exists>
         </file>
       </activation>
       <build>
@@ -810,7 +810,7 @@
                 <configuration>
                   <resources>
                     <resource>
-                      <directory>src/integration/resources</directory>
+                      <directory>${app.integration.resource}</directory>
                       <includes>
                         <include>*.xml</include>
                       </includes>
@@ -836,7 +836,7 @@
                   <outputDirectory>${project.build.directory}/integration-classes</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>src/integration/resources</directory>
+                      <directory>${app.integration.resource}</directory>
                     </resource>
                   </resources>
                 </configuration>
