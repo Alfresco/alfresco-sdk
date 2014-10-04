@@ -131,6 +131,7 @@
     <app.integration.resource>${app.integration.folder}/resources</app.integration.resource>
     <app.integration.config>${app.integration.resource}/testng.xml</app.integration.config>
     <app.integration.source>${app.integration.folder}/java</app.integration.source>
+    <app.integration.classes>target/test-classes</app.integration.classes>
   </properties>
 
   <!-- This repository is only needed to retrieve Alfresco parent POM. 
@@ -833,7 +834,7 @@
                   <goal>copy-resources</goal>
                 </goals>
                 <configuration>
-                  <outputDirectory>${project.build.directory}/integration-classes</outputDirectory>
+                  <outputDirectory>${app.integration.classes}</outputDirectory>
                   <resources>
                     <resource>
                       <directory>${app.integration.resource}</directory>
@@ -842,12 +843,13 @@
                 </configuration>
               </execution>
             </executions>
-          </plugin>
+          </plugin>   
           <!-- compile integration -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
             <version>2.3.2</version>
+               
             <executions>
               <execution>
                 <id>compile-integration-test</id>
@@ -855,13 +857,14 @@
                      Do not change the phase as it wont compile unless in the right phase so
                      mvn install -Pui-test wont work.
                 -->
+
                 <phase>pre-integration-test</phase>
                 <goals>
                   <goal>testCompile</goal>
                 </goals>
                 <configuration>
                   <compilerArguments>
-                    <d>${project.build.directory}/integration-classes</d>
+                    <d>${app.integration.classes}</d>
                   </compilerArguments>
                 </configuration>
               </execution>
@@ -892,6 +895,7 @@
               <suiteXmlFiles>
                 <suiteXmlFile>${app.integration.config}</suiteXmlFile>
               </suiteXmlFiles>
+              <testClassesDirectory>${app.integration.classes}</testClassesDirectory>
               <systemProperties>
                 <property>
                   <name>share.url.port</name>
