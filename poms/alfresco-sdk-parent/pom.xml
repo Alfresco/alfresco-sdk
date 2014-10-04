@@ -128,6 +128,8 @@
     <junit.version>4.11</junit.version>
     <skip.unit.test>true</skip.unit.test>
     <app.integration.folder>src/integration</app.integration.folder>
+    <app.integration.resource>${app.integration.folder}/resources</app.integration.resource>
+    <app.integration.config>${app.integration.resource}/testng.xml</app.integration.config>
   </properties>
 
   <!-- This repository is only needed to retrieve Alfresco parent POM. 
@@ -887,7 +889,7 @@
             <version>2.17</version>
             <configuration>
               <suiteXmlFiles>
-                <suiteXmlFile>src/integration/resources/testng.xml</suiteXmlFile>
+                <suiteXmlFile>${app.integration.config}</suiteXmlFile>
               </suiteXmlFiles>
               <systemProperties>
                 <property>
