@@ -132,7 +132,7 @@
     <app.integration.config>${app.integration.resource}/testng.xml</app.integration.config>
     <app.integration.source>${app.integration.folder}/java</app.integration.source>
     <!--app.integration.classes>target/test-classes</app.integration.classes -->
-    <app.integration.classes>${project.build.testOutputDirectory}</app.integration.classes>
+    <app.integration.classes>${project.build.directory}/integration-classes</app.integration.classes>
   </properties>
 
   <!-- This repository is only needed to retrieve Alfresco parent POM. 
