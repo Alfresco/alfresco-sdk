@@ -230,7 +230,7 @@
               <type>test-jar</type>
             </dependency> 
          </dependencies>
-        
+        </profile>        
     </profiles>
     
 </project>
