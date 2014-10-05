@@ -131,7 +131,8 @@
     <app.integration.resource>${app.integration.folder}/resources</app.integration.resource>
     <app.integration.config>${app.integration.resource}/testng.xml</app.integration.config>
     <app.integration.source>${app.integration.folder}/java</app.integration.source>
-    <app.integration.classes>target/integration-classes</app.integration.classes>
+    <!--app.integration.classes>target/test-classes</app.integration.classes -->
+    <app.integration.classes>${project.build.testOutputDirectory}</app.integration.classes>
   </properties>
 
   <!-- This repository is only needed to retrieve Alfresco parent POM. 
@@ -778,9 +779,6 @@
     </profile>
     <profile>
       <id>enable-integration-setup</id>
-      <properties>
-        <app.integration.classes>target/integration-classes</app.integration.classes>
-      </properties>
       <activation>
         <file>
           <exists>src/integration</exists>
@@ -788,7 +786,6 @@
       </activation>
       <build>
         <plugins>
-         
           <!-- Copy resource and properties folder to integration output folder -->
           <plugin>
             <artifactId>maven-resources-plugin</artifactId>
@@ -835,7 +832,6 @@
                   </sources>
                 </configuration>
               </execution>
-
               <execution>
                 <id>add-test-resources</id>
                 <phase>pre-integration-test</phase>
@@ -851,7 +847,6 @@
                   </resources>
                 </configuration>
               </execution>
-             
             </executions>
           </plugin>
 
@@ -875,7 +870,6 @@
                   <compilerArguments>
                     <d>${app.integration.classes}</d>
                   </compilerArguments>
-
                 </configuration>
               </execution>
             </executions>
