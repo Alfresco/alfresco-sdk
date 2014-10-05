@@ -131,7 +131,7 @@
     <app.integration.resource>${app.integration.folder}/resources</app.integration.resource>
     <app.integration.config>${app.integration.resource}/testng.xml</app.integration.config>
     <app.integration.source>${app.integration.folder}/java</app.integration.source>
-    <app.integration.classes>target/test-classes</app.integration.classes>
+    <app.integration.classes>target/integration-classes</app.integration.classes>
   </properties>
 
   <!-- This repository is only needed to retrieve Alfresco parent POM. 
@@ -778,6 +778,9 @@
     </profile>
     <profile>
       <id>enable-integration-setup</id>
+      <properties>
+        <app.integration.classes>target/integration-classes</app.integration.classes>
+      </properties>
       <activation>
         <file>
           <exists>src/integration</exists>
@@ -785,13 +788,43 @@
       </activation>
       <build>
         <plugins>
+         
+          <!-- Copy resource and properties folder to integration output folder -->
+          <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>2.5</version>
+            <executions>
+              <execution>
+                <id>add-integration-resources</id>
+                <phase>generate-sources</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${app.integration.classes}</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>${app.integration.folder}</directory>
+                      <includes>
+                        <include>**/*.xml</include>
+                        <include>**/*.properties</include>
+                      </includes>
+                      <filtering>${app.filtering.enabled}</filtering>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <!-- Add integration source folder -->
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>build-helper-maven-plugin</artifactId>
             <version>1.9.1</version>
             <executions>
               <execution>
-                <id>add-integration-resource</id>
+                <id>add-integration-source</id>
                 <phase>generate-sources</phase>
                 <goals>
                   <goal>add-test-source</goal>
@@ -802,54 +835,31 @@
                   </sources>
                 </configuration>
               </execution>
+
               <execution>
-                <id>add-env-properties</id>
-                <phase>generate-resources</phase>
+                <id>add-test-resources</id>
+                <phase>pre-integration-test</phase>
                 <goals>
-                  <goal>add-resource</goal>
+                  <goal>add-test-resource</goal>
                 </goals>
                 <configuration>
                   <resources>
                     <resource>
-                      <directory>${app.integration.resource}</directory>
-                      <includes>
-                        <include>*.xml</include>
-                      </includes>
-                      <filtering>${app.filtering.enabled}</filtering>
+                      <directory>${app.integration.source}</directory>
+                      <targetPath>${app.integration.classes}</targetPath>
                     </resource>
                   </resources>
                 </configuration>
               </execution>
+             
             </executions>
           </plugin>
-          <!-- Generate the integration-classes output folder in target -->
-          <plugin>
-            <artifactId>maven-resources-plugin</artifactId>
-            <version>2.5</version>
-            <executions>
-              <execution>
-                <id>add-integration-resources</id>
-                <phase>generate-resources</phase>
-                <goals>
-                  <goal>copy-resources</goal>
-                </goals>
-                <configuration>
-                  <outputDirectory>${app.integration.classes}</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>${app.integration.resource}</directory>
-                    </resource>
-                  </resources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>   
+
           <!-- compile integration -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
-            <version>2.3.2</version>
-               
+            <version>3.1</version>
             <executions>
               <execution>
                 <id>compile-integration-test</id>
@@ -857,7 +867,6 @@
                      Do not change the phase as it wont compile unless in the right phase so
                      mvn install -Pui-test wont work.
                 -->
-
                 <phase>pre-integration-test</phase>
                 <goals>
                   <goal>testCompile</goal>
@@ -866,6 +875,7 @@
                   <compilerArguments>
                     <d>${app.integration.classes}</d>
                   </compilerArguments>
+
                 </configuration>
               </execution>
             </executions>

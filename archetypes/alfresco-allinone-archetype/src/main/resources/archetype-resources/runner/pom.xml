@@ -196,7 +196,40 @@
                 </dependency>
             </dependencies>
         </profile>
-
+        <profile>
+          <id>ui-test</id>
+          <properties>
+            <app.integration.classes>../share-amp/target/integration-classes</app.integration.classes>
+            <app.integration.config>../share-amp/src/integration/resources/testng.xml</app.integration.config>
+            <app.integration.source>../share-amp/src/integration/java</app.integration.source>
+          </properties>
+          <dependencies>
+            <dependency>
+              <groupId>org.testng</groupId>
+              <artifactId>testng</artifactId>
+              <version>6.8.8</version>
+              <scope>test</scope>
+              <exclusions>
+                <exclusion>
+                  <groupId>org.hamcrest</groupId>
+                  <artifactId>hamcrest-core</artifactId>
+                </exclusion>
+              </exclusions>
+            </dependency>
+            <dependency>
+              <groupId>${alfresco.groupId}</groupId>
+              <artifactId>share-po</artifactId>
+              <version>5.0.b-SNAPSHOT</version>
+              <scope>test</scope>
+            </dependency>
+            <dependency>
+              <groupId>${alfresco.groupId}</groupId>
+              <artifactId>share-po</artifactId>
+              <version>5.0.b-SNAPSHOT</version>
+              <scope>test</scope>
+              <type>test-jar</type>
+            </dependency> 
+         </dependencies>
         
     </profiles>
     
