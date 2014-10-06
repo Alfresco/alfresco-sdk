@@ -527,16 +527,7 @@
                   <version>${maven.alfresco.version}</version>
                   <scope>test</scope>
               </dependency>
-              <!--
-              |    Requires this explicit test dependency, for a Spring 3.0.5 bug
-              |    See https://jira.springsource.org/browse/SPR-8527
-              -->
-              <dependency>
-                  <groupId>org.springframework</groupId>
-                  <artifactId>spring-context</artifactId>
-                  <version>3.0.6.RELEASE</version>
-                  <scope>provided</scope>
-              </dependency>
+
               <!-- SDK AMP Testing Dependencies -->
               <dependency>
                 <groupId>com.h2database</groupId>
