@@ -27,7 +27,8 @@
         <alfresco.client.contextPath>/share</alfresco.client.contextPath>
         <!-- Since Alfresco is already running on port 8080, we run Share on port 8081 -->
         <maven.tomcat.port>8081</maven.tomcat.port>
-
+        <!-- Change integration port to match Share -->
+        <app.share.port>${maven.tomcat.port}</app.share.port>
         <!-- Used in share-config-custom.xml. By default points to standard location of Alfresco -->
         <alfresco.repo.url>http://localhost:8080/alfresco</alfresco.repo.url>
         

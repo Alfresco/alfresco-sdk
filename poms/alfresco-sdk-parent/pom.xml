@@ -131,7 +131,7 @@
     <app.integration.resource>${app.integration.folder}/resources</app.integration.resource>
     <app.integration.config>${app.integration.resource}/testng.xml</app.integration.config>
     <app.integration.source>${app.integration.folder}/java</app.integration.source>
-    <!--app.integration.classes>target/test-classes</app.integration.classes -->
+    <app.share.port>8080</app.share.port>
     <app.integration.classes>${project.build.directory}/integration-classes</app.integration.classes>
   </properties>
 
@@ -900,12 +900,9 @@
                 <suiteXmlFile>${app.integration.config}</suiteXmlFile>
               </suiteXmlFiles>
               <testClassesDirectory>${app.integration.classes}</testClassesDirectory>
-              <systemProperties>
-                <property>
-                  <name>share.url.port</name>
-                  <value>${maven.tomcat.port}</value>
-                </property>
-              </systemProperties>
+              <systemPropertyVariables>
+                <share.url.port>${app.share.port}</share.url.port>
+              </systemPropertyVariables>
             </configuration>
             <executions>
               <execution>

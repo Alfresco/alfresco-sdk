@@ -24,7 +24,6 @@
         <alfresco.client.war>share</alfresco.client.war>
         <!-- This property is used by selenium to determine the port which runs alfresco share. -->
         <maven.tomcat.port>8080</maven.tomcat.port>
-
         <!-- Used in share-config-custom.xml. By default points to standard location of Alfresco -->
         <alfresco.repo.url>http://localhost:8080/alfresco</alfresco.repo.url>
 
