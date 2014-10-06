@@ -879,6 +879,10 @@
     </profile>
     <profile>
       <id>ui-test</id>
+      <properties>
+        <skipTests>false</skipTests>
+        <maven.tomcat.fork>true</maven.tomcat.fork>
+      </properties>
       <build>
         <plugins>
           <!-- Force to skip unit test -->
@@ -890,6 +894,7 @@
               <skipTests>${skip.unit.test}</skipTests>
             </configuration>
           </plugin>
+
           <!-- Run integration test with failsafe, with config to fail build if test failure -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
