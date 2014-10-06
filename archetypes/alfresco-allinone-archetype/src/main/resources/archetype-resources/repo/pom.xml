@@ -140,14 +140,6 @@
                     </plugin>
                 </plugins>
             </build>
-            <!-- Needed to fix http://code.google.com/p/maven-alfresco-archetypes/issues/detail?id=150. 
-                 Only for community, scope controlled by dependencyManagement via sdk-parent -->
-            <dependencies>
-                <dependency>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>jcl-over-slf4j</artifactId>
-                </dependency>
-            </dependencies>
         </profile>
         <!-- Installs the needed runtime artifact for an RM (Records Management) project -->
         <profile>
