@@ -137,6 +137,7 @@
         <id>regression</id>
         <properties>
           <maven.tomcat.fork>true</maven.tomcat.fork>
+          <skipTests>false</skipTests>
           <!-- The URL Under Test -->
           <app.share.url>http://localhost:8080/share</app.share.url>
         </properties>
