@@ -65,15 +65,32 @@
     <dependencies>
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
-            <artifactId>alfresco-repository</artifactId>
+            <artifactId>share</artifactId>
+            <version>${alfresco.version}</version>
+            <classifier>classes</classifier>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>${alfresco.groupId}</groupId>
+                    <artifactId>alfresco-web-framework-commons</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
-          <groupId>org.springframework.extensions.surf</groupId>
-          <artifactId>spring-surf-api</artifactId>
-          <scope>provided</scope>
+            <groupId>org.springframework.extensions.surf</groupId>
+            <artifactId>spring-surf-api</artifactId>
+            <scope>provided</scope>
+            <version>1.2.0-M14</version>
         </dependency>
-        
+
+        <dependency>
+            <groupId>org.alfresco</groupId>
+            <artifactId>alfresco-web-framework-commons</artifactId>
+            <version>${alfresco.version}</version>
+            <type>jar</type>
+        </dependency>
+
     </dependencies>
     
 </project>

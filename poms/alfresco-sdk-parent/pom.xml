@@ -37,7 +37,7 @@
         | For available versions please search on https://artifacts.alfresco.com/nexus/index.html
         -->
     <alfresco.groupId>org.alfresco</alfresco.groupId>
-    <alfresco.version>5.0.a</alfresco.version>
+    <alfresco.version>4.2.f</alfresco.version>
     <!-- By default uses community artifacts (alfresco|share). Overridden in the 'enterprise' profile, with 'alfresco-enterprise' and 'share-enterprise' -->
     <alfresco.repo.artifactId>alfresco</alfresco.repo.artifactId>
     <alfresco.share.artifactId>share</alfresco.share.artifactId>
@@ -745,13 +745,13 @@
                          <!-- Test for Alfresco version -->
                          <requireProperty>
                             <property>alfresco.version</property>
-                            <message>The SDK 2.x is supported only for Alfresco 5.x Community and Enterprise versions</message>
-                            <regex>^5\..*</regex>
+                            <message>The SDK 1.1.x is supported only for Alfresco 4.2.x Community and Enterprise versions</message>
+                            <regex>^4\..*</regex>
                          </requireProperty>
                          <!-- Test for JDK version -->
                          <requireJavaVersion>
-                            <version>[1.7.0,)</version>
-                            <message>Alfresco 5+ requires Java 7</message>
+                            <version>[1.6.0,)</version>
+                            <message>Alfresco 4+ requires Java 7</message>
                          </requireJavaVersion>
                       </rules>
                       <fail>true</fail>
