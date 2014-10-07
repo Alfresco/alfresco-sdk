@@ -35,7 +35,7 @@
                                          <version>${alfresco.version}</version>
                                      </artifactItem>
                                  </artifactItems>
-                                 <includes>alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/ibatis/org.hibernat
+                                 <includes>alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect/*</includes>
                                  <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
                              </configuration>
                           </execution>
@@ -53,8 +53,8 @@
                              <configuration>
                                  <target>
                                      <move verbose="true"
-                                        file="${project.build.testOutputDirectory}/alfresco/dbscripts/create/org.hibernate.dialect.PostgreS
-                                        tofile="${project.build.testOutputDirectory}/alfresco/dbscripts/create/org.hibernate.dialect.H2Dial
+                                        file="${project.build.testOutputDirectory}/alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect"
+                                        tofile="${project.build.testOutputDirectory}/alfresco/dbscripts/create/org.hibernate.dialect.H2Dialect" />
                                      <move verbose="true"
                                         file="${project.build.testOutputDirectory}/alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect"
                                         tofile="${project.build.testOutputDirectory}/alfresco/ibatis/org.hibernate.dialect.H2Dialect" />
