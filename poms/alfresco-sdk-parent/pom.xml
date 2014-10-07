@@ -860,7 +860,7 @@
                 <id>compile-integration-test</id>
                 <!-- 
                      Do not change the phase as it wont compile unless in the right phase so
-                     mvn install -Pui-test wont work.
+                     mvn install -Pfunctional wont work.
                 -->
                 <phase>pre-integration-test</phase>
                 <goals>
@@ -878,7 +878,7 @@
       </build>
     </profile>
     <profile>
-      <id>ui-test</id>
+      <id>functional</id>
       <properties>
         <skipTests>false</skipTests>
         <maven.tomcat.fork>true</maven.tomcat.fork>
