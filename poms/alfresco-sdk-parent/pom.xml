@@ -115,6 +115,7 @@
     <maven.install.version>2.5.1</maven.install.version>
     <maven.jar.version>2.4</maven.jar.version>
     <maven.war.version>2.4</maven.war.version>
+    <maven.antrun.version>1.7</maven.antrun.version>
     <maven.release.version>2.4.2</maven.release.version>
     <maven.buildhelper.version>1.8</maven.buildhelper.version>
     <maven.replacer.version>1.5.3</maven.replacer.version>
@@ -266,6 +267,11 @@
           <version>${maven.jar.version}</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>${maven.antrun.version}</version>
+        </plugin>
+        <plugin>
           <groupId>com.google.code.maven-replacer-plugin</groupId>
           <artifactId>replacer</artifactId>
           <version>${maven.replacer.version}</version>
@@ -283,11 +289,6 @@
                     <groupId>com.h2database</groupId>
                     <artifactId>h2</artifactId>
                     <version>${h2.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>tk.skuro.alfresco</groupId>
-                    <artifactId>h2-support</artifactId>
-                    <version>${h2-support.version}</version>
                 </dependency>
                 <!-- Major performance improvement,
                 see http://mindthegab.com/2013/06/20/maven-is-not-so-evil-plexus-archives-2-3-is-a-life-saver-for-the-speed-of-your-war-development-with-maven/ -->
@@ -521,12 +522,6 @@
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>${h2.version}</version>
-                <scope>test</scope>
-              </dependency>
-              <dependency>
-                <groupId>tk.skuro.alfresco</groupId>
-                <artifactId>h2-support</artifactId>
-                <version>${h2-support.version}</version>
                 <scope>test</scope>
               </dependency>
     	</dependencies>
