@@ -17,6 +17,53 @@
             <id>run</id>
             <build>
                 <plugins>
+                    <!-- Copied PostgreSQL dialect files to generate H2 dialect files on-the-fly -->
+                    <plugin>
+                       <artifactId>maven-dependency-plugin</artifactId>
+                       <executions>
+                          <execution>
+                             <id>get-postgres-dialect</id>
+                             <phase>generate-test-resources</phase>
+                             <goals>
+                                 <goal>unpack</goal>
+                             </goals>
+                             <configuration>
+                                 <artifactItems>
+                                     <artifactItem>
+                                         <groupId>${alfresco.groupId}</groupId>
+                                         <artifactId>alfresco-repository</artifactId>
+                                         <version>${alfresco.version}</version>
+                                     </artifactItem>
+                                 </artifactItems>
+                                 <includes>alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect/*</includes>
+                                 <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+                             </configuration>
+                          </execution>
+                       </executions>
+                    </plugin>
+                    <plugin>
+                       <artifactId>maven-antrun-plugin</artifactId>
+                       <executions>
+                          <execution>
+                             <id>config-h2-dialect</id>
+                             <phase>generate-test-resources</phase>
+                             <goals>
+                                 <goal>run</goal>
+                             </goals>
+                             <configuration>
+                                 <target>
+                                     <move verbose="true"
+                                        file="${project.build.testOutputDirectory}/alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect"
+                                        tofile="${project.build.testOutputDirectory}/alfresco/dbscripts/create/org.hibernate.dialect.H2Dialect" />
+                                     <move verbose="true"
+                                        file="${project.build.testOutputDirectory}/alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect"
+                                        tofile="${project.build.testOutputDirectory}/alfresco/ibatis/org.hibernate.dialect.H2Dialect" />
+                                 </target>
+                             </configuration>
+                          </execution>
+                       </executions>
+                    </plugin>  
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-resources-plugin</artifactId>
@@ -219,13 +266,13 @@
             <dependency>
               <groupId>${alfresco.groupId}</groupId>
               <artifactId>share-po</artifactId>
-              <version>5.0.b-SNAPSHOT</version>
+              <version>${alfresco.version}</version>
               <scope>test</scope>
             </dependency>
             <dependency>
               <groupId>${alfresco.groupId}</groupId>
               <artifactId>share-po</artifactId>
-              <version>5.0.b-SNAPSHOT</version>
+              <version>${alfresco.version}</version>
               <scope>test</scope>
               <type>test-jar</type>
             </dependency> 

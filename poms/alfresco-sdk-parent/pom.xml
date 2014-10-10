@@ -37,7 +37,7 @@
         | For available versions please search on https://artifacts.alfresco.com/nexus/index.html
         -->
     <alfresco.groupId>org.alfresco</alfresco.groupId>
-    <alfresco.version>5.0.a</alfresco.version>
+    <alfresco.version>5.0.b</alfresco.version>
     <!-- By default uses community artifacts (alfresco|share). Overridden in the 'enterprise' profile, with 'alfresco-enterprise' and 'share-enterprise' -->
     <alfresco.repo.artifactId>alfresco</alfresco.repo.artifactId>
     <alfresco.share.artifactId>share</alfresco.share.artifactId>
@@ -115,6 +115,7 @@
     <maven.install.version>2.5.1</maven.install.version>
     <maven.jar.version>2.4</maven.jar.version>
     <maven.war.version>2.4</maven.war.version>
+    <maven.antrun.version>1.7</maven.antrun.version>
     <maven.release.version>2.4.2</maven.release.version>
     <maven.buildhelper.version>1.8</maven.buildhelper.version>
     <maven.replacer.version>1.5.3</maven.replacer.version>
@@ -124,7 +125,7 @@
     <!-- Maven Alfresco plugin in use throughout the SDK -->
     <maven.alfresco.version>2.0.0-SNAPSHOT</maven.alfresco.version>
     <h2.version>1.3.174</h2.version>
-    <h2-support.version>1.5</h2-support.version>
+    <h2-support.version>5.0.0</h2-support.version>
     <junit.version>4.11</junit.version>
     <skip.unit.test>true</skip.unit.test>
     <app.integration.folder>src/integration</app.integration.folder>
@@ -273,6 +274,11 @@
           <version>${maven.jar.version}</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>${maven.antrun.version}</version>
+        </plugin>
+        <plugin>
           <groupId>com.google.code.maven-replacer-plugin</groupId>
           <artifactId>replacer</artifactId>
           <version>${maven.replacer.version}</version>
@@ -291,19 +297,15 @@
               <artifactId>h2</artifactId>
               <version>${h2.version}</version>
             </dependency>
-            <dependency>
-              <groupId>tk.skuro.alfresco</groupId>
-              <artifactId>h2-support</artifactId>
-              <version>${h2-support.version}</version>
-            </dependency>
             <!-- Major performance improvement,
                  see http://mindthegab.com/2013/06/20/maven-is-not-so-evil-plexus-archives-2-3-is-a-life-saver-for-the-speed-of-your-war-development-with-maven/ -->
             <dependency>
               <groupId>org.codehaus.plexus</groupId>
-              <artifactId>plexus-archiver</artifactId>
-              <version>2.3</version>
+                    <artifactId>plexus-archiver</artifactId>
+                    <version>2.3</version>
             </dependency>
           </dependencies>
+
         </plugin>
         <!--m2e configuration only to prevent errors in import.
             NOTE: This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
@@ -347,6 +349,7 @@
         <targetPath>${app.amp.output.folder}</targetPath>
         <filtering>${app.filtering.enabled}</filtering>
       </resource>
+      
     </resources>
     <testResources>
       <testResource>
@@ -355,19 +358,6 @@
       </testResource>
     </testResources>
   </build>
-  
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>jcl-over-slf4j</artifactId>
-        <version>${app.slf4j.version}</version>
-        <scope>${app.slf4j.scope}</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-  
-  
   <!-- Feature / behavioral profiles -->
   <profiles>
     <!-- Enable environment properties filtering based on the env property -->
@@ -493,70 +483,55 @@
           </plugin>
         </plugins>        
       </build>
+      
     </profile>
     
     <!-- Enables alfresco testing dependencies if a src/test/java folder is found, by adding appropriate dependencies -->
     <profile>
-      <id>enable-alfresco-testing</id>
-      <activation>
-        <file>
-          <exists>src/test/java</exists>
-        </file>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>${maven.surefire.version}</version>
-            <configuration>
-              <argLine>${app.testing.jvm.args}</argLine>
-              <additionalClasspathElements>
-                <!-- Adds both the module config to test classpath --> 
-                <additionalClasspathElement>${project.build.directory}/${project.build.finalName}/config</additionalClasspathElement>
-              </additionalClasspathElements>
-              <testNGArtifactName>none:none</testNGArtifactName>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-      <dependencies>
-        <dependency>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-          <scope>test</scope>
-        </dependency>
-        <!-- Add RAD capabilities for remote JUnit test running. Scope=test so the custom JUnit remote runner is found in the Maven test classpath -->
-        <dependency>
-          <groupId>org.alfresco.maven</groupId>
-          <artifactId>alfresco-rad</artifactId>
-          <version>${maven.alfresco.version}</version>
-          <scope>test</scope>
-        </dependency>
-        <!--
-            |    Requires this explicit test dependency, for a Spring 3.0.5 bug
-            |    See https://jira.springsource.org/browse/SPR-8527
-        -->
-        <dependency>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-context</artifactId>
-          <version>3.0.6.RELEASE</version>
-          <scope>provided</scope>
-        </dependency>
-        <!-- SDK AMP Testing Dependencies -->
-        <dependency>
-          <groupId>com.h2database</groupId>
-          <artifactId>h2</artifactId>
-          <version>${h2.version}</version>
-          <scope>test</scope>
-        </dependency>
-        <dependency>
-          <groupId>tk.skuro.alfresco</groupId>
-          <artifactId>h2-support</artifactId>
-          <version>${h2-support.version}</version>
-          <scope>test</scope>
-        </dependency>
-      </dependencies>
+    	<id>enable-alfresco-testing</id>
+        <activation>
+            <file>
+                <exists>src/test/java</exists>
+            </file>
+        </activation>
+        <build>
+            <plugins>
+                <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-surefire-plugin</artifactId>
+                  <version>${maven.surefire.version}</version>
+                  <configuration>
+                      <argLine>${app.testing.jvm.args}</argLine>
+                      <additionalClasspathElements>
+                         <!-- Adds both the module config to test classpath --> 
+                         <additionalClasspathElement>${project.build.directory}/${project.build.finalName}/config</additionalClasspathElement>
+                      </additionalClasspathElements>
+                  </configuration>
+                </plugin>
+            </plugins>
+        </build>
+    	<dependencies>
+        	<dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <scope>test</scope>
+              </dependency>
+              <!-- Add RAD capabilities for remote JUnit test running. Scope=test so the custom JUnit remote runner is found in the Maven test classpath -->
+              <dependency>
+                  <groupId>org.alfresco.maven</groupId>
+                  <artifactId>alfresco-rad</artifactId>
+                  <version>${maven.alfresco.version}</version>
+                  <scope>test</scope>
+              </dependency>
+
+              <!-- SDK AMP Testing Dependencies -->
+              <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+                <scope>test</scope>
+              </dependency>
+    	</dependencies>
     </profile>
     
     <!-- Profile to enable rapid application development with JRebel. Automatically generates rebel.xml files. 
@@ -690,21 +665,13 @@
         </plugins>
       </build>
       <dependencies>
-        <!-- Needed to fix http://code.google.com/p/maven-alfresco-archetypes/issues/detail?id=150 -->
-        <dependency>
-          <groupId>org.slf4j</groupId>
-          <artifactId>jcl-over-slf4j</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-log4j12</artifactId>
-          <version>${app.slf4j.version}</version>
-        </dependency>
+
         <dependency>
           <groupId>org.alfresco.maven</groupId>
           <artifactId>alfresco-rad</artifactId>
           <version>${maven.alfresco.version}</version>
         </dependency>
+        
       </dependencies>
     </profile>
 
@@ -777,6 +744,7 @@
         </plugins>
       </build>
     </profile>
+
     <profile>
       <id>enable-integration-setup</id>
       <activation>
@@ -980,6 +948,79 @@
           </snapshots>
         </repository>
       </repositories>
+    </profile>
+    <!-- EXPERIMENTAL: Invokes the Alfresco Technical Validation tool at https://github.com/AlfrescoLabs/technical-validation -->
+    <profile>
+        <id>atv</id>
+        <properties>
+            <maven.alfresco.validation.skip>false</maven.alfresco.validation.skip>
+            <maven.alfresco.validation.sourceLocation>${project.build.directory}/${project.build.finalName}-src</maven.alfresco.validation.sourceLocation>
+        </properties>
+        <build>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>isolate-project-src</id>
+                            <phase>generate-resources</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${maven.alfresco.validation.sourceLocation}</outputDirectory>
+                                <resources>
+                                    <resource>
+                                        <directory>${project.basedir}</directory>
+                                        <excludes>
+                                            <exclude>target</exclude>
+                                        </excludes>
+                                        <filtering>${app.filtering.enabled}</filtering>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.alfresco.maven.plugin</groupId>
+                    <artifactId>alfresco-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>run-atv</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>validate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>de.herschke</groupId>
+                    <artifactId>neo4j-maven-plugin</artifactId>
+                    <version>2.0.2-20140827</version>
+                    <executions>
+                        <execution>
+                            <id>start-neo4j-server</id>
+                            <phase>post-integration-test</phase>
+                            <goals>
+                                <goal>start-server</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>stop-neo4j-server</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>stop-server</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <port>7474</port>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </build>
     </profile>
   </profiles>
 </project>
