@@ -73,7 +73,6 @@
             <groupId>${alfresco.groupId}</groupId>
             <artifactId>alfresco-repository</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.alfresco</groupId>
             <artifactId>webdrone</artifactId>
@@ -92,9 +91,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
     </dependencies>
-
     <build>
         <plugins>  
             <!-- Copied PostgreSQL dialect files to generate H2 dialect files on-the-fly -->

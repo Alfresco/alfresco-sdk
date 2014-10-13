@@ -285,22 +285,22 @@
         </plugin>
         <!-- Configures tomcat with proper deps and performance fixes -->
         <plugin>
-          <groupId>org.apache.tomcat.maven</groupId>
-          <artifactId>tomcat7-maven-plugin</artifactId>
-          <version>${maven.tomcat.version}</version>
-          <configuration>
-            <useSeparateTomcatClassLoader>true</useSeparateTomcatClassLoader>
-          </configuration>
-          <dependencies>
-            <dependency>
-              <groupId>com.h2database</groupId>
-              <artifactId>h2</artifactId>
-              <version>${h2.version}</version>
-            </dependency>
-            <!-- Major performance improvement,
-                 see http://mindthegab.com/2013/06/20/maven-is-not-so-evil-plexus-archives-2-3-is-a-life-saver-for-the-speed-of-your-war-development-with-maven/ -->
-            <dependency>
-              <groupId>org.codehaus.plexus</groupId>
+            <groupId>org.apache.tomcat.maven</groupId>
+            <artifactId>tomcat7-maven-plugin</artifactId>
+            <version>${maven.tomcat.version}</version>
+            <configuration>
+                <useSeparateTomcatClassLoader>true</useSeparateTomcatClassLoader>
+            </configuration>
+            <dependencies>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                    <version>${h2.version}</version>
+                </dependency>
+                <!-- Major performance improvement,
+                see http://mindthegab.com/2013/06/20/maven-is-not-so-evil-plexus-archives-2-3-is-a-life-saver-for-the-speed-of-your-war-development-with-maven/ -->
+                <dependency>
+                    <groupId>org.codehaus.plexus</groupId>
                     <artifactId>plexus-archiver</artifactId>
                     <version>2.3</version>
             </dependency>
@@ -340,16 +340,15 @@
     </pluginManagement>
     
     <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <filtering>${app.filtering.enabled}</filtering>
-      </resource>
-      <resource>
-        <directory>${app.amp.folder}</directory>
-        <targetPath>${app.amp.output.folder}</targetPath>
-        <filtering>${app.filtering.enabled}</filtering>
-      </resource>
-      
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>${app.filtering.enabled}</filtering>
+        </resource>
+		<resource>
+			<directory>${app.amp.folder}</directory>
+			<targetPath>${app.amp.output.folder}</targetPath>
+			<filtering>${app.filtering.enabled}</filtering>
+		</resource>
     </resources>
     <testResources>
       <testResource>
@@ -665,13 +664,11 @@
         </plugins>
       </build>
       <dependencies>
-
-        <dependency>
-          <groupId>org.alfresco.maven</groupId>
-          <artifactId>alfresco-rad</artifactId>
-          <version>${maven.alfresco.version}</version>
-        </dependency>
-        
+		<dependency>
+			<groupId>org.alfresco.maven</groupId>
+			<artifactId>alfresco-rad</artifactId>
+			<version>${maven.alfresco.version}</version>
+		</dependency>
       </dependencies>
     </profile>
 
@@ -744,7 +741,6 @@
         </plugins>
       </build>
     </profile>
-
     <profile>
       <id>enable-integration-setup</id>
       <activation>

@@ -106,7 +106,7 @@
                                 <solr.solr.home>${project.parent.basedir}/solr/solr_home</solr.solr.home>
                             </systemProperties>
                             <webapps>
-								<webapp>
+                              <webapp>
                                     <groupId>${project.groupId}</groupId>
                                     <artifactId>solr</artifactId>
                                     <version>${project.version}</version>
@@ -244,7 +244,7 @@
             </dependencies>
         </profile>
         <profile>
-          <id>ui-test</id>
+          <id>functional</id>
           <properties>
             <app.integration.classes>../share-amp/target/integration-classes</app.integration.classes>
             <app.integration.config>../share-amp/src/integration/resources/testng.xml</app.integration.config>
