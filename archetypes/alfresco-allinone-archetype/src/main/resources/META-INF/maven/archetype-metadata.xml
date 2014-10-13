@@ -46,6 +46,8 @@
             <include>**/*.properties</include>
           </includes>
         </fileSet>
+        
+
         <fileSet encoding="UTF-8" filtered="false">
           <directory>tomcat</directory>
           <includes>
@@ -80,6 +82,25 @@
             <include>**</include>
           </includes>
         </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+          <directory>src/integration/java</directory>
+          <includes>
+              <include>**/*.java</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+          <directory>src/integration/resources</directory>
+          <includes>
+            <include>**</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+          <directory>src/integration/properties</directory>
+          <includes>
+            <include>**</include>
+          </includes>
+        </fileSet>
+
         <fileSet encoding="UTF-8" filtered="false">
           <directory>src/test/properties</directory>
           <includes>

@@ -22,10 +22,8 @@
         <!-- Defines the target WAR artifactId to run this amp, only used with the -Pamp-to-war switch
         | Allowed values: alfresco | share. In this case it's configured to use OOTB share -->
         <alfresco.client.war>share</alfresco.client.war>
-
-        <!-- Since Alfresco is already running on port 8080, we run Share on port 8081 -->
-        <maven.tomcat.port>8081</maven.tomcat.port>
-
+        <!-- This property is used by selenium to determine the port which runs alfresco share. -->
+        <maven.tomcat.port>8080</maven.tomcat.port>
         <!-- Used in share-config-custom.xml. By default points to standard location of Alfresco -->
         <alfresco.repo.url>http://localhost:8080/alfresco</alfresco.repo.url>
 
@@ -51,6 +49,59 @@
           <artifactId>spring-surf-api</artifactId>
           <scope>provided</scope>
         </dependency>        
-    </dependencies>
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>share-po</artifactId>
+            <version>${alfresco.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>share-po</artifactId>
+            <version>${alfresco.version}</version>
+            <scope>test</scope>
+            <type>test-jar</type>
+        </dependency>
 
+                <!--  Required by Integration Test -->
+        <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-beans</artifactId>
+          <version>3.1.1.RELEASE</version>
+          <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-beans</artifactId>
+          <version>3.1.1.RELEASE</version>
+          <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-context</artifactId>
+          <version>3.1.1.RELEASE</version> 
+          <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava</artifactId>
+          <version>18.0</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8.8</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hamcrest</groupId>
+                    <artifactId>hamcrest-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
 </project>

@@ -14,4 +14,4 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
  -->
- Test jsp. Change me! 
+ This is a demo JSP. When running with -Pamp-to-war, just change this text and it will be automatically reloaded! 

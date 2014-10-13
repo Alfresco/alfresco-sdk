@@ -2,17 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>${groupId}</groupId>
-    <artifactId>${artifactId}</artifactId>
-    <version>${version}</version>
-    <name>${artifactId} AMP project</name>
+    <groupId>org.demo.summit</groupId>
+    <artifactId>share-amp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>share-amp AMP project</name>
     <packaging>amp</packaging>
-    <description>Manages the lifecycle of the ${artifactId} AMP (Alfresco Module Package)</description>
+    <description>Manages the lifecycle of the share-amp AMP (Alfresco Module Package)</description>
 
     <parent>
         <groupId>org.alfresco.maven</groupId>
         <artifactId>alfresco-sdk-parent</artifactId>
-        <version>@@alfresco.sdk.parent.version@@</version>
+        <version>2.0.0-SNAPSHOT</version>
     </parent>
 
     <!-- 
@@ -27,7 +27,8 @@
         <alfresco.client.contextPath>/share</alfresco.client.contextPath>
         <!-- Since Alfresco is already running on port 8080, we run Share on port 8081 -->
         <maven.tomcat.port>8081</maven.tomcat.port>
-
+        <!-- Change integration port to match Share -->
+        <app.share.port>${maven.tomcat.port}</app.share.port>
         <!-- Used in share-config-custom.xml. By default points to standard location of Alfresco -->
         <alfresco.repo.url>http://localhost:8080/alfresco</alfresco.repo.url>
         
@@ -35,7 +36,7 @@
              Community versions are typically identified by major.minor.character (4.2.a), 
              while Enterprise versions are identified by major.minor.digit (4.2.0)
         -->
-		<!--<alfresco.version>${alfresco_target_version}</alfresco.version>-->
+        <!--<alfresco.version>5.0.a</alfresco.version>-->
         
         <!-- Defines the log level used in log4j.properties -->
         <app.log.root.level>WARN</app.log.root.level>
@@ -63,17 +64,135 @@
          <scope>provided</scope> is inherited for each of the following; 
          for more info, please refer to alfresco-platform-distribution POM -->
     <dependencies>
+        
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
             <artifactId>alfresco-repository</artifactId>
         </dependency>
-
+        
         <dependency>
-          <groupId>org.springframework.extensions.surf</groupId>
-          <artifactId>spring-surf-api</artifactId>
-          <scope>provided</scope>
+            <groupId>org.springframework.extensions.surf</groupId>
+            <artifactId>spring-surf-api</artifactId>
+            <scope>provided</scope>
         </dependency>
         
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>share-po</artifactId>
+            <version>${alfresco.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>share-po</artifactId>
+            <version>${alfresco.version}</version>
+            <scope>test</scope>
+            <type>test-jar</type>
+        </dependency>
+        
+        <!--  Required by Integration Test -->
+        <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-beans</artifactId>
+          <version>3.1.1.RELEASE</version>
+          <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-beans</artifactId>
+          <version>3.1.1.RELEASE</version>
+          <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-context</artifactId>
+          <version>3.1.1.RELEASE</version> 
+          <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava</artifactId>
+          <version>18.0</version>
+        </dependency>
+        
+        <dependency>
+             <groupId>org.testng</groupId>
+             <artifactId>testng</artifactId>
+             <version>6.8.8</version>
+             <scope>test</scope>
+             <exclusions>
+                 <exclusion>
+                     <groupId>org.hamcrest</groupId>
+                     <artifactId>hamcrest-core</artifactId>
+                 </exclusion>
+             </exclusions>
+        </dependency>
     </dependencies>
-    
+    <profiles>
+      <profile>
+        <id>regression</id>
+        <properties>
+          <maven.tomcat.fork>true</maven.tomcat.fork>
+          <skipTests>false</skipTests>
+          <!-- The URL Under Test -->
+          <app.share.url>http://localhost:8080/share</app.share.url>
+        </properties>
+        <build>
+          <plugins>
+            <!-- Workaround for classloading issue in share-po (need to unpack it) -->
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-dependency-plugin</artifactId>
+              <executions>
+                <execution>
+                  <id>prepare-regression-test-resources</id>
+                  <phase>pre-integration-test</phase>
+                  <goals>
+                    <goal>unpack</goal>
+                  </goals>
+                  <configuration>
+                    <artifact>${alfresco.groupId}:share-po:${alfresco.version}:jar:tests</artifact>
+                    <outputDirectory>${project.build.directory}/testng-resources</outputDirectory>
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
+            
+            <!-- Run integration test with failsafe, with config to fail build if test failure -->
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-failsafe-plugin</artifactId>
+              <version>2.17</version>
+              <configuration>
+                <suiteXmlFiles>
+                  <suiteXmlFile>${project.build.directory}/testng-resources/testng.xml</suiteXmlFile>
+                </suiteXmlFiles>
+                <systemPropertyVariables>
+                  <share.url.port>${app.share.port}</share.url.port>
+                </systemPropertyVariables>
+              </configuration>
+              <executions>
+                <execution>
+                  <id>integration-test</id>
+                  <goals>
+                    <goal>integration-test</goal>
+                  </goals>
+                </execution>
+                <execution>
+                  <id>verify</id>
+                  <goals>
+                    <goal>verify</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+          </plugins>
+        </build>  
+      </profile>         
+    </profiles>
 </project>
+  
