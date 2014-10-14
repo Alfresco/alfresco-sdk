@@ -541,6 +541,21 @@
                 <version>${h2-support.version}</version>
                 <scope>test</scope>
               </dependency>
+          <dependency>
+              <groupId>${alfresco.groupId}</groupId>
+              <artifactId>alfresco-repository</artifactId>
+              <version>${alfresco.version}</version>
+              <classifier>config</classifier>
+              <scope>provided</scope>
+          </dependency>
+          <dependency>
+              <groupId>${alfresco.groupId}</groupId>
+              <artifactId>alfresco-data-model</artifactId>
+              <version>${alfresco.version}</version>
+              <classifier>config</classifier>
+              <scope>provided</scope>
+          </dependency>
+
     	</dependencies>
     </profile>
 

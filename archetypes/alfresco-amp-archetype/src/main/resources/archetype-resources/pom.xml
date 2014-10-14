@@ -86,6 +86,7 @@
           <groupId>org.slf4j</groupId>
           <artifactId>jcl-over-slf4j</artifactId>
           <version>1.5.11</version>
+          <scope>test</scope>
         </dependency>
 
     </dependencies>
