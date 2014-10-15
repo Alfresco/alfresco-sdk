@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>${artifactId}</artifactId>
+    <artifactId>solr</artifactId>
     <name>Alfresco Apache Solr customization</name>
-    <packaging>pom</packaging>
+    <packaging>war</packaging>
     <description>Alfresco Apache Solr Customization</description>
 
     <parent>
@@ -11,10 +11,10 @@
         <artifactId>${rootArtifactId}</artifactId>
         <version>${version}</version>
     </parent>
-
+    
     <properties>
         <alfresco.solr.dir>${project.basedir}/solr_home</alfresco.solr.dir>
-        <alfresco.solr.war.overlay>${project.build.directory}/${project.artifactId}-overlay</alfresco.solr.war.overlay>
+        <alfresco.solr.war.overlay>${project.build.directory}/${project.build.finalName}</alfresco.solr.war.overlay>
     </properties>
     <build>
         <plugins>
@@ -82,6 +82,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <!-- Replaces web.xml where applicable, commenting out the security-constraints -->
             <plugin>
                 <groupId>com.google.code.maven-replacer-plugin</groupId>
@@ -89,16 +90,25 @@
                 <executions>
                     <execution>
                         <id>disable-securecomms</id>
-                        <phase>process-resources</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>replace</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <ignoreErrors>true</ignoreErrors>
-                    <file>${alfresco.solr.war.overlay}/WEB-INF/web.xml</file>
+                    <file>${project.build.directory}/${project.build.finalName}/WEB-INF/web.xml</file>
+                    <outputDir>${project.build.directory}/${project.build.finalName}/WEB-INF</outputDir>
+                    <preserveDir>false</preserveDir>
                     <replacements>
+                        <replacement>
+                            <token><![CDATA[<!-- <security-constraint>]]></token>
+                            <value><![CDATA[<security-constraint>]]></value>
+                        </replacement>
+                        <replacement>
+                            <token><![CDATA[</security-role> -->]]></token>
+                            <value><![CDATA[</security-role>]]></value>
+                        </replacement>
                         <replacement>
                             <token><![CDATA[<security-constraint>]]></token>
                             <value><![CDATA[<!-- <security-constraint>]]></value>
@@ -109,6 +119,25 @@
                         </replacement>
                     </replacements>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-solr-war</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>exploded</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-war</id>
+                        <configuration>
+                            <webXml>${alfresco.solr.war.overlay}/WEB-INF/web.xml</webXml>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
