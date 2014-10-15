@@ -105,6 +105,8 @@
                     <artifactId>js</artifactId>
                 </exclusion>
             </exclusions>
+            <scope>provided</scope>
+
         </dependency>
 
         <!-- Test dependencies -->
