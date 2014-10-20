@@ -201,6 +201,7 @@
               <nonFilteredFileExtension>jpg</nonFilteredFileExtension>
               <nonFilteredFileExtension>png</nonFilteredFileExtension>
               <nonFilteredFileExtension>gif</nonFilteredFileExtension>
+              <nonFilteredFileExtension>svg</nonFilteredFileExtension>
               <nonFilteredFileExtension>pdf</nonFilteredFileExtension>
               <nonFilteredFileExtension>doc</nonFilteredFileExtension>
               <nonFilteredFileExtension>docx</nonFilteredFileExtension>
@@ -213,6 +214,11 @@
               <nonFilteredFileExtension>swf</nonFilteredFileExtension>
               <nonFilteredFileExtension>zip</nonFilteredFileExtension>
               <nonFilteredFileExtension>msg</nonFilteredFileExtension>
+              <nonFilteredFileExtension>jar</nonFilteredFileExtension>
+              <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+              <nonFilteredFileExtension>eot</nonFilteredFileExtension>
+              <nonFilteredFileExtension>woff</nonFilteredFileExtension>
+              <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
             </nonFilteredFileExtensions>
           </configuration>
         </plugin>
