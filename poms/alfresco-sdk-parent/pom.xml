@@ -164,6 +164,14 @@
         <updatePolicy>daily</updatePolicy>
       </snapshots>
     </pluginRepository>
+    <pluginRepository>
+      <id>sonatype-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </pluginRepository>
   </pluginRepositories>
 
   <build>
