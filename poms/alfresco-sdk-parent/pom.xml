@@ -887,7 +887,7 @@
                                         <groupId>${alfresco.groupId}</groupId>
                                         <artifactId>alfresco-repository</artifactId>
                                         <version>${alfresco.version}</version>
-                                        <includes>alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect/*</includes>
+                                        <includes>alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/dbscripts/upgrade/*/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect/*</includes>
                                         <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
                                     </artifactItem>
                                 </artifactItems>
@@ -920,6 +920,28 @@
                                             <include>*</include>
                                         </includes>
                                         <targetPath>alfresco/ibatis//org.hibernate.dialect.H2Dialect</targetPath>
+                                    </resource>
+                                    <!-- Upgrade scripts -->
+                                    <resource>
+                                        <directory>${project.build.testOutputDirectory}/alfresco/dbscripts/upgrade/4.1/org.hibernate.dialect.PostgreSQLDialect</directory>
+                                        <includes>
+                                            <include>*</include>
+                                        </includes>
+                                        <targetPath>alfresco/dbscripts/upgrade/4.1/org.hibernate.dialect.H2Dialect</targetPath>
+                                    </resource>
+                                    <resource>
+                                        <directory>${project.build.testOutputDirectory}/alfresco/dbscripts/upgrade/4.2/org.hibernate.dialect.PostgreSQLDialect</directory>
+                                        <includes>
+                                            <include>*</include>
+                                        </includes>
+                                        <targetPath>alfresco/dbscripts/upgrade/4.2/org.hibernate.dialect.H2Dialect</targetPath>
+                                    </resource>
+                                    <resource>
+                                        <directory>${project.build.testOutputDirectory}/alfresco/dbscripts/upgrade/5.0/org.hibernate.dialect.PostgreSQLDialect</directory>
+                                        <includes>
+                                            <include>*</include>
+                                        </includes>
+                                        <targetPath>alfresco/dbscripts/upgrade/5.0/org.hibernate.dialect.H2Dialect</targetPath>
                                     </resource>
                                 </resources>
                             </configuration>
