@@ -142,6 +142,7 @@
             <id>alfresco-public</id>
             <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
         </repository>
+<!-- 2014/11/09 - Tried commenting these out to fix the plugin resolution failure
         <repository>
             <id>alfresco-public-snapshots</id>
             <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
@@ -150,6 +151,7 @@
                 <updatePolicy>daily</updatePolicy>
             </snapshots>
         </repository>
+-->
     </repositories>
 
   <pluginRepositories>
@@ -161,6 +163,7 @@
         <updatePolicy>daily</updatePolicy>
       </snapshots>
     </pluginRepository>
+<!-- 2014/11/09 - Tried commenting these out to fix the plugin resolution failure
     <pluginRepository>
       <id>alfresco-plugin-public</id>
       <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
@@ -173,6 +176,7 @@
         <updatePolicy>daily</updatePolicy>
       </snapshots>
     </pluginRepository>
+-->
   </pluginRepositories>
 
   <build>
