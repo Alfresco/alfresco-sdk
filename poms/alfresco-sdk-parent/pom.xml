@@ -106,25 +106,25 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- Maven Plugins Versions used by the SDK -->
-    <maven.compiler.version>3.1</maven.compiler.version>
-    <maven.clean.version>2.5</maven.clean.version>
-    <maven.dependency.version>2.8</maven.dependency.version>
+    <maven.compiler.version>3.2</maven.compiler.version>
+    <maven.clean.version>2.6.1</maven.clean.version>
+    <maven.dependency.version>2.9</maven.dependency.version>
     <maven.enforcer.plugin>1.3.1</maven.enforcer.plugin>
-    <maven.resources.version>2.6</maven.resources.version>
-    <maven.surefire.version>2.16</maven.surefire.version>
-    <maven.install.version>2.5.1</maven.install.version>
-    <maven.jar.version>2.4</maven.jar.version>
-    <maven.war.version>2.4</maven.war.version>
+    <maven.resources.version>2.7</maven.resources.version>
+    <maven.surefire.version>2.18</maven.surefire.version>
+    <maven.install.version>2.5.2</maven.install.version>
+    <maven.jar.version>2.5</maven.jar.version>
+    <maven.war.version>2.5</maven.war.version>
     <maven.antrun.version>1.7</maven.antrun.version>
-    <maven.release.version>2.4.2</maven.release.version>
-    <maven.buildhelper.version>1.8</maven.buildhelper.version>
+    <maven.release.version>2.5.1</maven.release.version>
+    <maven.buildhelper.version>1.9.1</maven.buildhelper.version>
     <maven.replacer.version>1.5.3</maven.replacer.version>
-    <maven.tomcat.version>2.1</maven.tomcat.version>
+    <maven.tomcat.version>2.2</maven.tomcat.version>
     <!-- This is used for the site deployment procedure (override in your POM as needed) -->
     <stagingDirectory>../../target/staging/poms/alfresco-sdk-parent</stagingDirectory>
     <!-- Maven Alfresco plugin in use throughout the SDK -->
     <maven.alfresco.version>2.0.0-SNAPSHOT</maven.alfresco.version>
-    <h2.version>1.3.174</h2.version>
+    <h2.version>1.4.182</h2.version>
     <h2-support.version>5.0.0</h2-support.version>
     <junit.version>4.11</junit.version>
   </properties>
