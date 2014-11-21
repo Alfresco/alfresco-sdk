@@ -28,6 +28,7 @@
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
             <artifactId>${alfresco.repo.artifactId}</artifactId>
+            <version>${alfresco.version}</version>
             <type>war</type>
         </dependency>
         <!-- Demonstrating the dependency / installation of the repo AMP developed in the 'repo-amp' module -->

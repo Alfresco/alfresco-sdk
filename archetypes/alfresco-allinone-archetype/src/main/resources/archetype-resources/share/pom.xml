@@ -17,6 +17,7 @@
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
             <artifactId>${alfresco.share.artifactId}</artifactId>
+            <version>${alfresco.version}</version>
             <type>war</type>
         </dependency>
         <!-- Demonstrating the dependency / installation of the share AMP developed in the 'share-amp' module -->

@@ -1,0 +1,1 @@
+verify -Prun -Penterprise -Dmaven.tomcat.fork=true
