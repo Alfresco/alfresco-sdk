@@ -42,7 +42,7 @@ mvn archetype:generate -DarchetypeCatalog=https://artifacts.alfresco.com/nexus/c
   
   [[2]] Specify the <<<groupId>>> and <<<artifactId>>> for the project you want to create
   
-  [[3]] (<Optionally>) Select Alfresco Version / Edition (current default is: Alfresco Community 5.0.b)
+  [[3]] (<Optionally>) Select Alfresco Version / Edition (current default is: Alfresco Community 5.0.c)
   
  You can find new Share AMP project ready to go in the <<<artifactId>>> folder.
 

@@ -37,7 +37,7 @@
         | For available versions please search on https://artifacts.alfresco.com/nexus/index.html
         -->
     <alfresco.groupId>org.alfresco</alfresco.groupId>
-    <alfresco.version>5.0.b</alfresco.version>
+    <alfresco.version>5.0.c</alfresco.version>
     <!-- By default uses community artifacts (alfresco|share). Overridden in the 'enterprise' profile, with 'alfresco-enterprise' and 'share-enterprise' -->
     <alfresco.repo.artifactId>alfresco</alfresco.repo.artifactId>
     <alfresco.share.artifactId>share</alfresco.share.artifactId>
