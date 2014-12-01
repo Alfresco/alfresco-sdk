@@ -131,6 +131,9 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-archetype-plugin</artifactId>
                     <version>${maven.archetype.version}</version>
+                    <configuration>
+                        <skip>${skipTests}</skip>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
