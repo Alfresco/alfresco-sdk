@@ -780,13 +780,13 @@
        </build>
     </profile>
     
-    <!-- NOTE: (Expertimental && Private) Alfresco 5 Enterprise is not released yet, this is used for internal testing
+    <!--
     	 Enables working with Alfresco Enterprise latest version. You can then manually override the alfresco.version in your pom.xml 
     -->
     <profile>
         <id>enterprise</id>
         <properties>
-            <alfresco.version>5.0.0-SNAPSHOT</alfresco.version>
+            <alfresco.version>5.0</alfresco.version>
             <alfresco.repo.artifactId>alfresco-enterprise</alfresco.repo.artifactId>
             <alfresco.share.artifactId>share-enterprise</alfresco.share.artifactId>
             <!-- Not needed in the webapp for enterprise -->
@@ -795,15 +795,7 @@
         <repositories>
             <repository>
                 <id>alfresco-internal</id>
-                <url>https://artifacts.alfresco.com/nexus/content/groups/internal</url>
-            </repository>
-            <repository>
-                <id>alfresco-internal-snapshots</id>
-                <url>https://artifacts.alfresco.com/nexus/content/repositories/internal-snapshots/</url>
-                <snapshots>
-                    <enabled>true</enabled>
-                    <updatePolicy>daily</updatePolicy>
-                </snapshots>
+                <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
             </repository>
         </repositories>
     </profile>
