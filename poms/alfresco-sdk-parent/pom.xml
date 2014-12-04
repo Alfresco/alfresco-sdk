@@ -127,6 +127,7 @@
     <h2.version>1.4.182</h2.version>
     <h2-support.version>5.0.0</h2-support.version>
     <junit.version>4.11</junit.version>
+    <maven.jetty.version>7.4.0.v20110414</maven.jetty.version>
   </properties>
 
   <!-- This repository is only needed to retrieve Alfresco parent POM. 
@@ -681,6 +682,12 @@
 			<artifactId>alfresco-rad</artifactId>
 			<version>${maven.alfresco.version}</version>
 		</dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${maven.jetty.version}</version>
+        </dependency>
+
       </dependencies>
     </profile>
 
