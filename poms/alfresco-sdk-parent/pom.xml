@@ -526,6 +526,7 @@
         	<dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
                 <scope>test</scope>
               </dependency>
               <!-- Add RAD capabilities for remote JUnit test running. Scope=test so the custom JUnit remote runner is found in the Maven test classpath -->
