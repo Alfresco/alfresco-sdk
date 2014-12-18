@@ -9,7 +9,7 @@
 
 All-in-One Archetype properties
 
-    In each of the modules of the archetype (as in the whole Maven Alfresco SDK\x99) properties are configurable at many levels:
+    In each of the modules of the archetype (as in the whole Alfresco SDK\x99) properties are configurable at many levels:
     
     * as POM properties
     

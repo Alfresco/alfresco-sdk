@@ -9,7 +9,7 @@
 Introduction
 
   The Alfresco All-in-One Archetype is a multi-module project,
-  leveraging Maven Alfresco SDK\x99 powerful capabilities to customize and run the full Alfresco platform embedded and all it's components.
+  leveraging Alfresco SDK\x99 powerful capabilities to customize and run the full Alfresco platform embedded and all it's components.
   The archetype does not require additional download and provides a perfect starting point for full-blown Alfresco projects.
 
 * Features
@@ -31,18 +31,18 @@ How to create a project:
   As of version 2.0-beta-3, you can create a project with the latest released archetype with the following command directly from Maven Central:
   
 +---+
-mvn archetype:generate -Dfilter=org.alfresco.maven.archetype: -DarchetypeCatalog=http://repo1.maven.org/maven2/archetype-catalog.xml
+mvn archetype:generate -Dfilter=org.alfresco.maven.archetype:alfresco-allinone-archetype
 +---+
   
   For previous versions, you need to use the Alfresco Artifacts repository:
   
 +---+
-mvn archetype:generate -Dfilter=org.alfresco.maven.archetype: -DarchetypeCatalog=https://artifacts.alfresco.com/nexus/content/groups/public/archetype-catalog.xml
+mvn archetype:generate -Dfilter=org.alfresco.maven.archetype:alfresco-allinone-archetype -DarchetypeCatalog=https://artifacts.alfresco.com/nexus/content/groups/public/archetype-catalog.xml
 +---+
   
   You should then:
   
-  [[1]] Select the <<<alfresco-allinone-archetype>>> option
+  [[1]] Select the <<<alfresco-allinone-archetype>>> version
   
   [[2]] Specify the <<<groupId>>> and <<<artifactId>>> for the project you want to create
   

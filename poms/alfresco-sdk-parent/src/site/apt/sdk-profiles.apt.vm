@@ -1,5 +1,5 @@
   ------
-  Maven Alfresco SDK\x99 Profiles
+  Alfresco SDK\x99 Profiles
   ------
   Gabriele Columbro
   ------
@@ -8,7 +8,7 @@
    
 SDK Available Profiles
 
-    The Maven Alfresco SDK\x99 defines common features required by different Alfresco projects.
+    The Alfresco SDK\x99 defines common features required by different Alfresco projects.
     While the <<<recommended>>> way is to use full working examples of usage of these profiles (e.g. the
     {{{../../archetypes/alfresco-amp-archetype/index.html}Repo AMP}},     {{{../../archetypes/share-amp-archetype/index.html}Share AMP} and {{{../../archetypes/alfresco-allinone-archetype/index.html}All-in-One}} archetypes),
     you can also directly use this POM as a parent in your custom project.
@@ -38,7 +38,7 @@ SDK Available Profiles
 
 
     The full list of available profiles (with their activation conditions) can be instead found in the <<<profiles>>> section of the
-    {{{https://artifacts.alfresco.com/nexus/index.html#nexus-search;gav~org.alfresco.maven~alfresco-sdk-parent~${project.version}~pom~}Maven Alfresco SDK POM}}.
+    {{{https://artifacts.alfresco.com/nexus/index.html#nexus-search;gav~org.alfresco.maven~alfresco-sdk-parent~${project.version}~pom~}Alfresco SDK POM}}.
 
 Full SDK properties reference 
 

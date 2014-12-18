@@ -1,4 +1,4 @@
-# [![Maven Alfresco SDK logo](https://github.com/Alfresco/alfresco-sdk/raw/master/src/site/resources/img/alfresco-maven-logo.jpg)](#features) Maven Alfresco SDK
+# [![Alfresco SDK logo](https://github.com/Alfresco/alfresco-sdk/raw/master/src/site/resources/img/alfresco-maven-logo.jpg)](#features) Alfresco SDK
 
 SDK for Alfresco Development, Testing, packaging and custom project lifecycle management based on Apache Maven. 
 
@@ -20,15 +20,15 @@ The SDK is composed of:
 
 ### Developer Documentation
 
-**SDK 2.x**: Full documentation is available at the [Maven Alfresco SDK site](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-sdk-aggregator/latest/index.html).
+**SDK 2.x**: Full documentation is available at the [Alfresco SDK site](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-sdk-aggregator/latest/index.html).
 
 ### Alfresco Official Documentation
 
-Additional documentation for Alfresco Community and Enterprise, tutorials and examples is available in the [Alfresco Documentation](http://docs.alfresco.com/4.2/concepts/dev-extensions-maven-sdk-intro.html).
+Additional documentation for Alfresco Community and Enterprise, tutorials and examples is available in the [Alfresco Documentation](http://docs.alfresco.com/community/concepts/alfresco-sdk-intro.html).
 
 ### Samples 
 
-Advanced sample projects are maintained by @ohej in the [Maven Alfresco SDK Samples project](https://github.com/Alfresco/alfresco-sdk-samples/).
+Advanced sample projects are maintained by @ohej in the [Alfresco SDK Samples project](https://github.com/Alfresco/alfresco-sdk-samples/).
 
 
 ### Contribute
@@ -37,7 +37,7 @@ Report issues (and contribute!) [here](https://github.com/Alfresco/alfresco-sdk/
 
 ## Maven Repositories
 
-The Maven Alfresco SDK is released in Maven Central as of version 2.0-beta-1. 
+The Alfresco SDK is released in Maven Central as of version 2.0-beta-1. 
 
 Alfresco (Community and Enterprise) artifacts are instead hosted in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/nexus/). 
 
@@ -46,7 +46,7 @@ Alfresco Community artifacts (JARs, WARs, AMPs, poms) and SDK artifacts are publ
 for Enterprise and Premiere licensed software access you need to get credential via the Alfresco Enterprise Support. See [public docs](http://docs.alfresco.com/4.2/concepts/dev-extensions-maven-sdk-tutorials-alfresco-enterprise.html) or [this KB (login required)](https://myalfresco.force.com/support/articles/en_US/Technical_Article/Where-can-I-find-the-repository-for-Enterprise-Maven-artifacts) for more details.
 
 ## License and Support
-This project is released under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html). It's a community driven project which is supported for Alfresco Development (please refere to the official [Alfresco Documentation](http://docs.alfresco.com/4.2/concepts/dev-extensions-maven-sdk-intro.html) for supported features.
+This project is released under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html). It's a community driven project which is supported for Alfresco Development (please refere to the official [Alfresco Documentation](http://docs.alfresco.com/community/concepts/alfresco-sdk-intro.html) for supported features.
 
 ## News
 

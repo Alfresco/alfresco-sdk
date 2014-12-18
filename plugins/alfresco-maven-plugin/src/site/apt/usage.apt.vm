@@ -10,13 +10,13 @@ How to use this plugin?
 
   There are fundamentally 3 methods to use this plugin:
   
-  [[1]] Using Archetypes provided in the Maven Alfresco SDK
+  [[1]] Using Archetypes provided in the Alfresco SDK
     
-  [[2]] By using the Maven Alfresco SDK Parent POM
+  [[2]] By using the Alfresco SDK Parent POM
   
   [[3]] Via direct configuration in your POM
   
-* Method 1 - Using Maven Alfresco SDK Archetypes
+* Method 1 - Using Alfresco SDK Archetypes
 
   Two sample archetypes already use the plugin and provide best practice example on how to use it:
   
@@ -27,9 +27,9 @@ How to use this plugin?
   
  This is the <<recommended>> and less error-prone way of using the plugin.
  
-* Method 2 - Using Maven Alfresco SDK Parent POM
+* Method 2 - Using Alfresco SDK Parent POM
 
-  The {{{../../poms/alfresco-sdk-parent/index.html}Maven Alfresco SDK Parent POM}} provides a single entry point for all SDK features.
+  The {{{../../poms/alfresco-sdk-parent/index.html}Alfresco SDK Parent POM}} provides a single entry point for all SDK features.
   
   By using it as parent as follows:
   

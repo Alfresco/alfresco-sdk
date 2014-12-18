@@ -16,7 +16,7 @@ AMP Unit Testing
 
 Share AMP Archetype properties
 
-    In the AMP archetype (as in the whole Part of the Maven Alfresco SDK\x99) properties are configurable at many levels:
+    In the AMP archetype (as in the whole Part of the Alfresco SDK\x99) properties are configurable at many levels:
     
     * as POM properties
     

@@ -8,14 +8,14 @@
 
 Rationale
 
-  The Maven Alfresco SDK introduces a new way of conceiving software development, deployment and release of Alfresco related projects and artifacts.
+  The Alfresco SDK introduces a new way of conceiving software development, deployment and release of Alfresco related projects and artifacts.
   In contrast to the manual (and error prone) deployment approach based on an installer / Alfresco WAR distribution(s) and the <infamous> <<<${extensionRoot}>>>,
-  the Maven Alfresco SDK provides a unified access to fine grained Artifacts (jar,war,pom files),] that can be easily integrated
+  the Alfresco SDK provides a unified access to fine grained Artifacts (jar,war,pom files),] that can be easily integrated
   in your project by the means of Alfresco-specific Maven components and configurations. The main goal of this SDK is to 
   enable rapid development and prototyping of Alfresco projects, while enabling agile development practices (i.e. TDD, FDD)
   and fostering process reuse due to standardization
   
-Why would you use the Maven Alfresco SDK\x99?
+Why would you use the Alfresco SDK\x99?
 
   As a standard de facto, Maven allows you projects to be inherently more reusable and enables <process reuse> of your development practices,
   and, in certain successful cases, Application Lifecycle Management process at large.

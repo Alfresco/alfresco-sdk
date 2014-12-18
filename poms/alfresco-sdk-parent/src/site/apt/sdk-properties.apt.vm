@@ -1,5 +1,5 @@
   ------
-  Maven Alfresco SDK Properties
+  Alfresco SDK Properties
   ------
   Gabriele Columbro
   ------
@@ -20,7 +20,7 @@ Common SDK properties
        -->
     <properties>
         <alfresco.groupId>org.alfresco</alfresco.groupId>
-        <alfresco.version>4.2.b</alfresco.version>
+        <alfresco.version>5.0.c</alfresco.version>
         <!-- Defines root logger log level for testing and embedded run -->
         <app.log.root.level>WARN</app.log.root.level>
         <!-- Logging dir. Note the trailing slash is required -->
