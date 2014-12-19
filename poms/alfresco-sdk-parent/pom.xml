@@ -29,8 +29,8 @@
     <!--  Default Alfresco version this SDK version has been tested with:
         |
         | alfresco.groupId can be
-        | org.alfresco ==> Alfresco community
-        | org.alfresco.enterprise ==> Alfresco Enterprise
+        | org.alfresco ==> Alfresco Community/Enterprise (post alfresco 4.2)
+        | org.alfresco.enterprise ==> Alfresco Enterprise (pre Alfresco 4.2)
         |
         | NOTE: You can / should override these properties in you POM to select the proper version
         |
