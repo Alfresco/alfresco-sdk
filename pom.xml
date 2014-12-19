@@ -102,7 +102,7 @@
         </contributor>
     </contributors>
 
-    <!-- All the modules of the Maven Alfresco SDK -->
+    <!-- All the modules of the Alfresco SDK -->
     <modules>
         <!-- Modules -->
         <module>modules/alfresco-rad</module>
