@@ -4,9 +4,8 @@
     <groupId>org.alfresco.maven</groupId>
     <artifactId>alfresco-sdk-aggregator</artifactId>
     <version>2.0.1-SNAPSHOT</version>
-    <name>Maven Alfresco SDK</name>
-    <description>This aggregator Project builds all modules required for
-        the Maven Alfresco SDK</description>
+    <name>Alfresco SDK</name>
+    <description>This aggregator Project builds all modules required for the Alfresco SDK</description>
     <packaging>pom</packaging>
 
     <url>${maven.site.url}</url>
