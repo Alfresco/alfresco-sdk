@@ -59,7 +59,7 @@ for Enterprise and Premiere licensed software access you need to get credential 
 This project is released under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html). It's a community driven project which is supported for Alfresco Development (please refere to the official [Alfresco Documentation](http://docs.alfresco.com/community/concepts/alfresco-sdk-intro.html) for supported features.
 
 ## News
-
+- 2014-12-20: SDK 2.0.0 in staging. If you want early access to the release candidate build and want to participate to the testing process check [this page](https://github.com/Alfresco/alfresco-sdk/wiki/SDK-Supported-Features-and-Test-plan) and report issues [here](https://github.com/Alfresco/alfresco-sdk/issues).
 - 2014-09-10: SDK 2.0.0-beta-4 released to Maven Central and in the [Archetype Catalog](http://repo1.maven.org/maven2/archetype-catalog.xml)!
 - 2014-09-09: SDK 2.0.0-beta-3 released to Maven Central
 - 2014-08-30: SDK 2.0.0-beta-1 and 2.0.0-beta-2 available in [Maven Central](http://search.maven.org/#search|ga|1|org.alfresco.maven)
