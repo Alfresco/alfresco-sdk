@@ -8,7 +8,7 @@ public class RemoteRunnerWrapper implements Runnable {
 		try {
 	        RemoteServer.main(new String []{});
         } catch (Exception e) {
-	        System.out.println("Could not start JUnit remoteServer");
+	        System.out.println("Could not start JUnit remoteServer because of: " + e.getMessage());
         }
 
 	}
