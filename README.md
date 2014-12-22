@@ -4,7 +4,7 @@ SDK for Alfresco Development, Testing, packaging and custom project lifecycle ma
 
 Includes support for rapid and standard development, testing, packaging, versioning and release of your Alfresco integration and extension projects. 
 
-# SDK 2.0.0 release candidate in  staging, undergoing vote for Maven Central release
+## SDK 2.0.0 release candidate now in staging!
 
 We are approaching the final 2.0.0 release of the SDK (compatible with Alfresco Community 5.0.c and Enterprise 5.0). If you want early access to the release candidate build and want to participate to the testing process check [this page](https://github.com/Alfresco/alfresco-sdk/wiki/SDK-Supported-Features-and-Test-plan) and report issues [here](https://github.com/Alfresco/alfresco-sdk/issues).
 
