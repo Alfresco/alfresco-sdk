@@ -5,6 +5,7 @@
                <autowire>
                    <mode>development</mode>
                </autowire>
+               <disable-resource-caching>true</disable-resource-caching>
            </web-framework>
        </config>
 
