@@ -62,7 +62,7 @@ Quickstart
    * Enter the project folder and run <<<./run.sh>>> (you might need to <<<chmod u+x run.sh>>> to make it executable). 
      This will setup the SDK and the Alfresco repository (not Share or Solr).  
     
-   * Wait for the startup of the webapp and then go <<<http://localhost:8080/alfresco0>>>.
+   * Wait for the startup of the webapp and then go <<<http://localhost:8080/alfresco>>>.
   
    * Import the project in your favorite IDE (with Maven integration) and start developing right away.
    
