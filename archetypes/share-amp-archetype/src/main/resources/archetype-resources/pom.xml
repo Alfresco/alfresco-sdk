@@ -59,21 +59,35 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    <!-- Following dependencies are needed for compiling Java code in src/main/java; 
-         <scope>provided</scope> is inherited for each of the following; 
-         for more info, please refer to alfresco-platform-distribution POM -->
+    <!-- Following dependencies are needed for compiling Java code in src/main/java;  -->
     <dependencies>
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
-            <artifactId>alfresco-repository</artifactId>
+            <artifactId>share</artifactId>
+            <version>${alfresco.version}</version>
+            <classifier>classes</classifier>
+            <scope>provided</scope>
         </dependency>
-
         <dependency>
           <groupId>org.springframework.extensions.surf</groupId>
           <artifactId>spring-surf-api</artifactId>
           <scope>provided</scope>
-        </dependency>
-        
+        </dependency>        
     </dependencies>
-    
+
+    <profiles>
+    	<!-- Enterprise profile, manually activated, automatically adds support for Enterprise edition development (dependencies) -->
+        <profile>
+            <id>enterprise</id>
+            <dependencies>
+                <dependency>
+                    <groupId>${alfresco.groupId}</groupId>
+                    <artifactId>share-enterprise</artifactId>
+                    <version>${alfresco.version}</version>
+                    <classifier>classes</classifier>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 </project>

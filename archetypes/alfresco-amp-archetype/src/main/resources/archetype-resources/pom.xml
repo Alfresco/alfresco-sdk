@@ -74,4 +74,18 @@
             <artifactId>alfresco-repository</artifactId>
         </dependency>
     </dependencies>
+    <profiles>
+    	<!-- Enterprise profile, manually activated, automatically adds support for Enterprise edition development (dependencies) -->
+        <profile>
+            <id>enterprise</id>
+            <dependencies>
+                <dependency>
+                    <groupId>${alfresco.groupId}</groupId>
+                    <artifactId>alfresco-enterprise-repository</artifactId>
+                    <version>${alfresco.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 </project>
