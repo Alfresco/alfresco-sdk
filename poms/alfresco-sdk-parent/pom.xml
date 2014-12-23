@@ -884,7 +884,7 @@
         <id>config-h2-support</id>
         <activation>
             <file>
-                <exists>${app.properties.test.folder}/alfresco-global.properties</exists>
+                <exists>src/test/properties/local/alfresco-global.properties</exists>
             </file>
         </activation>
         <build>
