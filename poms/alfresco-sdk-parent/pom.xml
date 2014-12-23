@@ -125,7 +125,6 @@
     <!-- Maven Alfresco plugin in use throughout the SDK -->
     <maven.alfresco.version>2.0.1-SNAPSHOT</maven.alfresco.version>
     <h2.version>1.4.182</h2.version>
-    <h2-support.version>5.0.0</h2-support.version>
     <junit.version>4.11</junit.version>
     <maven.jetty.version>7.4.0.v20110414</maven.jetty.version>
   </properties>
@@ -879,12 +878,13 @@
             </plugins>
         </build>
     </profile>
-    <!-- Configures automatic embedded H2 database support for repository amps (if a test    alfresco-global.properties is found) -->
+    <!-- Configures automatic embedded H2 database support for repository amps (if a test alfresco-global.properties is found) -->
+    <!-- TODO: Improve this, either by producing this dialect upstream or consolidating behavior in a parent pom (current only activation clause changes) -->
     <profile>
         <id>config-h2-support</id>
         <activation>
             <file>
-                <exists>src/test/properties/local/alfresco-global.properties</exists>
+                <exists>${app.properties.test.folder}/alfresco-global.properties</exists>
             </file>
         </activation>
         <build>
@@ -937,7 +937,7 @@
                                         <includes>
                                             <include>*</include>
                                         </includes>
-                                        <targetPath>alfresco/ibatis//org.hibernate.dialect.H2Dialect</targetPath>
+                                        <targetPath>alfresco/ibatis/org.hibernate.dialect.H2Dialect</targetPath>
                                     </resource>
                                     <!-- Upgrade scripts -->
                                     <resource>
