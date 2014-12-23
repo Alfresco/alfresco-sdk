@@ -25,6 +25,12 @@
             <include>**/*.java</include>
           </includes>
         </fileSet>
+        <fileSet filtered="false" packaged="false" encoding="UTF-8">
+          <directory>src/test/java</directory>
+          <includes>
+            <include>**/*.java</include>
+          </includes>
+        </fileSet>
         <fileSet encoding="UTF-8" filtered="false">
           <directory>src/main/amp</directory>
           <includes>

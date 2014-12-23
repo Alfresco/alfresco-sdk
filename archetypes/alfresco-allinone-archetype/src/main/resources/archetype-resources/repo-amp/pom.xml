@@ -45,5 +45,11 @@
                 </dependency>
             </dependencies>
         </profile>
+        <profile>
+            <id>run</id>
+            <properties>
+            	<skipTests>true</skipTests>
+            </properties>
+        </profile>
     </profiles>
 </project>
