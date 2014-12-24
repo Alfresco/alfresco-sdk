@@ -14,12 +14,12 @@
   <parent>
     <groupId>org.alfresco.maven</groupId>
     <artifactId>alfresco-sdk-aggregator</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>2.0.0</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
   <!-- This defines the version of the SDK in terms of features -->
-  <version>2.0.1-SNAPSHOT</version>
+  <version>2.0.0</version>
 
   <prerequisites>
     <maven>3.2.2</maven>
@@ -123,7 +123,7 @@
     <!-- This is used for the site deployment procedure (override in your POM as needed) -->
     <stagingDirectory>../../target/staging/poms/alfresco-sdk-parent</stagingDirectory>
     <!-- Maven Alfresco plugin in use throughout the SDK -->
-    <maven.alfresco.version>2.0.1-SNAPSHOT</maven.alfresco.version>
+    <maven.alfresco.version>2.0.0</maven.alfresco.version>
     <h2.version>1.4.182</h2.version>
     <junit.version>4.11</junit.version>
     <maven.jetty.version>7.4.0.v20110414</maven.jetty.version>
