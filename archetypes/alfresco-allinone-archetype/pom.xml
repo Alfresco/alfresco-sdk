@@ -23,6 +23,7 @@
                 <include>archetype-resources/pom.xml</include>
                 <include>archetype-resources/run.sh</include>
                 <include>archetype-resources/runner/src/main/webapp/index.html</include>
+                <include>META-INF/maven/archetype-metadata.xml</include>
             </includes>
             <filtering>true</filtering>
         </resource>
@@ -32,6 +33,7 @@
                 <exclude>archetype-resources/pom.xml</exclude>
                 <exclude>archetype-resources/run.sh</exclude>
                 <exclude>archetype-resources/runner/src/main/webapp/index.html</exclude>
+                <exclude>META-INF/maven/archetype-metadata.xml</exclude>
             </excludes>
             <filtering>false</filtering>
         </resource>
