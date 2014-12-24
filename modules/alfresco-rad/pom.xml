@@ -13,6 +13,9 @@
       <relativePath>../../pom.xml</relativePath>
   </parent>
 
+  <properties>
+     <pgsql.dialect.folder>${project.build.directory}/pg-dialect-tmp</pgsql.dialect.folder>
+  </properties>
   <dependencies>
        <!-- Enables JUnit remote testing (using JRebel) -->
        <dependency>
@@ -35,5 +38,88 @@
             <type>jar</type>
        </dependency>
   </dependencies>
+  
+  <build>
+  	<plugins>
+  	   <!-- Copied PostgreSQL dialect files to generate H2 dialect files on-the-fly -->
+       <plugin>
+           <artifactId>maven-dependency-plugin</artifactId>
+           <executions>
+               <execution>
+                   <id>extract-postgres-dialect</id>
+                   <phase>generate-test-resources</phase>
+                   <goals>
+                       <goal>unpack</goal>
+                   </goals>
+                   <configuration>
+                       <artifactItems>
+                           <artifactItem>
+                               <groupId>org.alfresco</groupId>
+                               <artifactId>alfresco-repository</artifactId>
+                               <version>${alfresco.community.default.version}</version>
+                               <includes>alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/dbscripts/upgrade/*/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect/*</includes>
+                               <outputDirectory>${pgsql.dialect.folder}</outputDirectory>
+                           </artifactItem>
+                       </artifactItems>
+                   </configuration>
+               </execution>
+           </executions>
+       </plugin>
+       <plugin>
+           <artifactId>maven-resources-plugin</artifactId>
+           <executions>
+               <execution>
+                   <id>generate-h2-dialect</id>
+                   <phase>generate-test-resources</phase>
+                   <goals>
+                       <goal>copy-resources</goal>
+                   </goals>
+                   <configuration>
+                       <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                       <resources>
+                           <resource>
+                               <directory>${pgsql.dialect.folder}/alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect</directory>
+                               <includes>
+                                   <include>*</include>
+                               </includes>
+                               <targetPath>alfresco/dbscripts/create/org.hibernate.dialect.H2Dialect</targetPath>
+                           </resource>
+                           <resource>
+                               <directory>${pgsql.dialect.folder}/alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect</directory>
+                               <includes>
+                                   <include>*</include>
+                               </includes>
+                               <targetPath>alfresco/ibatis/org.hibernate.dialect.H2Dialect</targetPath>
+                           </resource>
+                           <!-- Upgrade scripts -->
+                           <resource>
+                               <directory>${pgsql.dialect.folder}/alfresco/dbscripts/upgrade/4.1/org.hibernate.dialect.PostgreSQLDialect</directory>
+                               <includes>
+                                   <include>*</include>
+                               </includes>
+                               <targetPath>alfresco/dbscripts/upgrade/4.1/org.hibernate.dialect.H2Dialect</targetPath>
+                           </resource>
+                           <resource>
+                               <directory>${pgsql.dialect.folder}/alfresco/dbscripts/upgrade/4.2/org.hibernate.dialect.PostgreSQLDialect</directory>
+                               <includes>
+                                   <include>*</include>
+                               </includes>
+                               <targetPath>alfresco/dbscripts/upgrade/4.2/org.hibernate.dialect.H2Dialect</targetPath>
+                           </resource>
+                           <resource>
+                               <directory>${pgsql.dialect.folder}/alfresco/dbscripts/upgrade/5.0/org.hibernate.dialect.PostgreSQLDialect</directory>
+                               <includes>
+                                   <include>*</include>
+                               </includes>
+                               <targetPath>alfresco/dbscripts/upgrade/5.0/org.hibernate.dialect.H2Dialect</targetPath>
+                           </resource>
+                       </resources>
+                   </configuration>
+               </execution>
+           </executions>
+       </plugin>
+  	</plugins>
+  
+  </build>
 
 </project>
