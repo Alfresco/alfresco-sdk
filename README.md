@@ -10,7 +10,13 @@ The SDK 2.0.0 is available in Maven Central.
 
 You can:
 
-1. *To create a new Alfresco project*: Run a 'mvn archetype:generate -Dfilter=org.alfresco:' and use one of the available archetypes (AMP, Share AMP, All in One)
+1. *To create a new Alfresco project*: Run a 
+
+```bash
+mvn archetype:generate -Dfilter=org.alfresco:
+```
+
+and use one of the available archetypes (AMP, Share AMP, All in One)
 2. *To use the SDK in your project:*  Add the below parent reference snippet to the existing project (*NOTE*: you might need folder layout changes) to inherit features
 3. from Alfresco SDK POM:
 
