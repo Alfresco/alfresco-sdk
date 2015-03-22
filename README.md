@@ -4,9 +4,32 @@ SDK for Alfresco Development, Testing, packaging and custom project lifecycle ma
 
 Includes support for rapid and standard development, testing, packaging, versioning and release of your Alfresco integration and extension projects. 
 
-## SDK 2.0.0 release candidate now in staging!
+## SDK 2.0.0 available in Maven Central
 
-We are approaching the final 2.0.0 release of the SDK (compatible with Alfresco Community 5.0.c and Enterprise 5.0). If you want early access to the release candidate build and want to participate to the testing process check [this page](https://github.com/Alfresco/alfresco-sdk/wiki/SDK-Supported-Features-and-Test-plan) and report issues [here](https://github.com/Alfresco/alfresco-sdk/issues).
+The SDK 2.0.0 is available in Maven Central. 
+
+You can:
+
+- *To create a new Alfresco project*: Run a 
+
+```bash
+mvn archetype:generate -Dfilter=org.alfresco:
+```
+
+and use one of the available archetypes (AMP, Share AMP, All in One)
+
+- *To use the SDK in your project:*  Add the below parent reference snippet to the existing project (*NOTE*: you might need folder layout changes) to inherit features from Alfresco SDK POM:
+
+```xml
+<parent>
+   <groupId>org.alfresco.maven</groupId>
+   <artifactId>alfresco-sdk-parent</artifactId>
+   <version>2.0.0</version>
+</parent>
+
+```
+
+
 
 Once the vote is closed the SDK will be available in Maven Central. 
 
