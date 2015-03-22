@@ -55,7 +55,7 @@
     <alfresco.db.name>alf_dev</alfresco.db.name>
     <alfresco.db.username>alfresco</alfresco.db.username>
     <alfresco.db.password>alfresco</alfresco.db.password>
-    <alfresco.db.params>MODE=PostgreSQL;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;MVCC=FALSE;LOCK_MODE=0</alfresco.db.params>
+    <alfresco.db.params>AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;MVCC=FALSE;LOCK_MODE=0</alfresco.db.params>
     <!-- By default the H2 embedded database datafile is created under the alfresco.data.location folder -->
     <alfresco.db.url>jdbc:h2:./${alfresco.data.location}/h2_data/${alfresco.db.name};${alfresco.db.params}</alfresco.db.url>
     <alfresco.db.datasource.class>org.h2.jdbcx.JdbcDataSource</alfresco.db.datasource.class>
@@ -121,7 +121,7 @@
     <stagingDirectory>../../target/staging/poms/alfresco-sdk-parent</stagingDirectory>
     <!-- Maven Alfresco plugin in use throughout the SDK -->
     <maven.alfresco.version>2.0.1-SNAPSHOT</maven.alfresco.version>
-    <h2.version>1.4.182</h2.version>
+    <h2.version>1.4.186</h2.version>
     <junit.version>4.11</junit.version>
     <maven.jetty.version>7.4.0.v20110414</maven.jetty.version>
   </properties>

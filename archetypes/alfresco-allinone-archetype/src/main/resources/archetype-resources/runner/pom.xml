@@ -15,6 +15,14 @@
     <profiles>
         <profile>
             <id>run</id>
+
+            <!-- TODO: figure out a way to define these properties in a parent POM, they are now also duplicated
+                       in the solr-config/pom.xml -->
+            <properties>
+                <alfresco.solr.dir>${project.parent.basedir}/${alfresco.data.location}/solr4</alfresco.solr.dir>
+                <alfresco.solr.home.dir>${alfresco.solr.dir}/config</alfresco.solr.home.dir>
+            </properties>
+
             <build>
                 <plugins>
                     <plugin>
@@ -39,6 +47,11 @@
                             </execution>
                         </executions>
                     </plugin>
+
+                    <!-- Run Tomcat 7 embedded with Alfresco.war and Share.war contexts.
+                         The solr4.war is fetched directly from the Maven repo, it is not built like the other WARs.
+                         Plugin version is picked up from alfresco-sdk-parent.pom pluginManagement definition,
+                         which also brings in the H2 database lib -->
                     <plugin>
                         <groupId>org.apache.tomcat.maven</groupId>
                         <artifactId>tomcat7-maven-plugin</artifactId>
@@ -53,26 +66,25 @@
                         </executions>
                         <configuration>
                             <ignorePackaging>true</ignorePackaging>
+                            <!-- Make sure Catalina classes are picked up when we got virtual webapp contexts with classpaths -->
                             <useSeparateTomcatClassLoader>true</useSeparateTomcatClassLoader>
                             <path>/</path>
                             <systemProperties>
-                                <solr.solr.home>${project.parent.basedir}/solr/solr_home</solr.solr.home>
+                                <solr.solr.home>${alfresco.solr.home.dir}</solr.solr.home>
                             </systemProperties>
+                            <!-- Prevent classloader delegation, each webapp loads.
+                                 If set to true then you will get a truckload of Solr logging as
+                                 the alf_data_dev/solr4/config/log4j-solr.properties file is not picked up.
+                                 This also fixes issues with the Google Guava Library, which this tomcat plugin uses
+                                 version 10.0.1 of but Solr uses 14.0.1 -->
+                            <delegate>false</delegate>
                             <webapps>
-                              <webapp>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>solr</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>war</type>
-                                    <asWebapp>true</asWebapp>
-                                    <contextPath>/solr</contextPath>
-                                    <contextFile>${project.build.directory}/contexts/context-solr.xml</contextFile>
-                                </webapp>
                                 <webapp>
                                     <groupId>${project.groupId}</groupId>
                                     <artifactId>repo</artifactId>
                                     <version>${project.version}</version>
                                     <type>war</type>
+                                    <!-- Make sure webapp is loaded as webapp and not as just context -->
                                     <asWebapp>true</asWebapp>
                                     <contextPath>/alfresco</contextPath>
                                     <contextFile>${project.build.directory}/contexts/context-repo.xml</contextFile>
@@ -85,6 +97,15 @@
                                     <asWebapp>true</asWebapp>
                                     <contextPath>/share</contextPath>
                                     <contextFile>${project.build.directory}/contexts/context-share.xml</contextFile>
+                                </webapp>
+                                <webapp>
+                                    <groupId>${alfresco.groupId}</groupId>
+                                    <artifactId>alfresco-solr4</artifactId>
+                                    <version>${alfresco.version}</version>
+                                    <type>war</type>
+                                    <asWebapp>true</asWebapp>
+                                    <contextPath>/solr4</contextPath>
+                                    <contextFile>${alfresco.solr.home.dir}/context.xml</contextFile>
                                 </webapp>
                             </webapps>
                         </configuration>

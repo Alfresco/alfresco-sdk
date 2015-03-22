@@ -60,6 +60,7 @@
         </fileSet>
       </fileSets>
     </module>
+
     <module id="share-amp" dir="share-amp" name="share-amp">
       <fileSets>
         <fileSet filtered="false" packaged="false" encoding="UTF-8">
@@ -118,34 +119,7 @@
       </fileSets>
     </module>
     
-    <module id="solr" dir="solr" name="solr" filtered="false">
-      <fileSets>
-        <fileSet encoding="UTF-8">
-          <directory>src/main/solr-properties</directory>
-          <includes>
-            <include>**</include>
-            <include>**</include>
-          </includes>
-        </fileSet>
-        <fileSet encoding="UTF-8" filtered="false">
-          <directory>src/main/webapp</directory>
-          <includes>
-            <include>**</include>
-          </includes>
-        </fileSet>
-        <fileSet encoding="UTF-8" filtered="false">
-          <directory>src/assembly</directory>
-          <includes>
-            <include>**</include>
-          </includes>
-        </fileSet>
-        <fileSet encoding="UTF-8" filtered="false">
-          <directory>src/main/resources</directory>
-          <includes>
-            <include>**</include>
-          </includes>
-        </fileSet>
-      </fileSets>
+    <module id="solr4" dir="solr-config" name="solr4" filtered="false">
     </module>
     
     <module id="share" dir="share" name="share" filtered="false">
@@ -164,6 +138,7 @@
         </fileSet>
       </fileSets>
     </module>
+
     <module id="runner" dir="runner" name="runner" filtered="false">
         <fileSets>
             <fileSet encoding="UTF-8" filtered="false">
@@ -181,6 +156,7 @@
         </fileSets>
     </module>
   </modules>
+
   <fileSets>
     <fileSet encoding="UTF-8">
         <directory></directory>

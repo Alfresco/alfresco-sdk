@@ -91,7 +91,7 @@
                                </includes>
                                <targetPath>alfresco/ibatis/org.hibernate.dialect.H2Dialect</targetPath>
                            </resource>
-                           <!-- Upgrade scripts -->
+                           <!-- Upgrade scripts
                            <resource>
                                <directory>${pgsql.dialect.folder}/alfresco/dbscripts/upgrade/4.1/org.hibernate.dialect.PostgreSQLDialect</directory>
                                <includes>
@@ -113,6 +113,7 @@
                                </includes>
                                <targetPath>alfresco/dbscripts/upgrade/5.0/org.hibernate.dialect.H2Dialect</targetPath>
                            </resource>
+                           -->
                        </resources>
                    </configuration>
                </execution>
