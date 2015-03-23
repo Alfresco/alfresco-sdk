@@ -28,12 +28,22 @@ and use one of the available archetypes (AMP, Share AMP, All in One)
 </parent>
 
 ```
+## Resources 
+
+### Developer Documentation
+
+### Alfresco Official Documentation
+
+- Documentation for the SDK on Alfresco Community (latest) is available [here](http://docs.alfresco.com/community/concepts/alfresco-sdk-intro.html)
+
+- Documentation for the SDK on Alfresco Enterprise (5.0) is available [here](http://docs.alfresco.com/5.0/concepts/alfresco-sdk-intro.html)
+
+
+**SDK 2.x**: Full documentation is available at the [Alfresco SDK site](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-sdk-aggregator/latest/index.html).
 
 
 
-Once the vote is closed the SDK will be available in Maven Central. 
-
-# Check the SDK out!
+# Check the SDK in action!
 
 For an overview of the SDK potential check out this video:
 
@@ -49,15 +59,6 @@ The SDK is composed of:
 	2. [Alfresco Share AMP Archetype](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-lifecycle-aggregator/latest/archetypes/share-amp-archetype/index.html)
 	3. [Alfresco All-in-One Archetype](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-lifecycle-aggregator/latest/archetypes/alfresco-allinone-archetype/index.html)
 
-## Resources 
-
-### Developer Documentation
-
-**SDK 2.x**: Full documentation is available at the [Alfresco SDK site](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-sdk-aggregator/latest/index.html).
-
-### Alfresco Official Documentation
-
-Additional documentation for Alfresco Community and Enterprise, tutorials and examples is available in the [Alfresco Documentation](http://docs.alfresco.com/community/concepts/alfresco-sdk-intro.html).
 
 ### Samples 
 
