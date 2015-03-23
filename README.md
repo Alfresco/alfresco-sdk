@@ -6,9 +6,7 @@ Includes support for rapid and standard development, testing, packaging, version
 
 ## SDK 2.0.0 available in Maven Central
 
-The SDK 2.0.0 is available in Maven Central. 
-
-You can:
+The SDK 2.0.0 is finally [released in Maven Central](http://search.maven.org/#search|ga|1|alfresco%20sdk). 
 
 - *To create a new Alfresco project*: Run a 
 
@@ -30,16 +28,15 @@ and use one of the available archetypes (AMP, Share AMP, All in One)
 ```
 ## Resources 
 
-### Developer Documentation
-
-### Alfresco Official Documentation
+### Alfresco Official Docs
 
 - Documentation for the SDK on Alfresco Community (latest) is available [here](http://docs.alfresco.com/community/concepts/alfresco-sdk-intro.html)
 
 - Documentation for the SDK on Alfresco Enterprise (5.0) is available [here](http://docs.alfresco.com/5.0/concepts/alfresco-sdk-intro.html)
 
+### Developer Documentation
 
-**SDK 2.x**: Full documentation is available at the [Alfresco SDK site](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-sdk-aggregator/latest/index.html).
+**SDK 2.x**: Full developer (Maven) documentation is available at the [Alfresco SDK site](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-sdk-aggregator/latest/index.html).
 
 
 
