@@ -73,6 +73,19 @@
                 <role>Developer</role>
             </roles>
         </developer>
+        <developer>
+            <id>gravitonian</id>
+            <name>Martin Bergljung</name>
+            <email>martin.bergljung@alfresco.com</email>
+            <url>http://www.marversolutions.com</url>
+            <organization>Alfresco Software</organization>
+            <organizationUrl>http://www.alfresco.com</organizationUrl>
+            <timezone>+0</timezone>
+            <roles>
+                <role>Architect</role>
+                <role>Developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <contributors>
@@ -120,9 +133,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.archetype.version>2.2</maven.archetype.version>
         <alfresco.sdk.parent.version>${project.version}</alfresco.sdk.parent.version>
-        <alfresco.community.default.version>5.0.c</alfresco.community.default.version>
-        <alfresco.enterprise.default.version>5.0</alfresco.enterprise.default.version>
-        <springloaded.version>1.2.0.RELEASE</springloaded.version>
+        <alfresco.community.default.version>5.0.d</alfresco.community.default.version>
+        <alfresco.enterprise.default.version>5.0.0.5</alfresco.enterprise.default.version>
+        <springloaded.version>1.2.3.RELEASE</springloaded.version>
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
     </properties>
     <build>

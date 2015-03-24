@@ -51,12 +51,35 @@
 
     <!-- Alfresco Repo disk storage folder (relative path) -->
     <alfresco.data.location>alf_data_dev</alfresco.data.location>
+
     <!-- Alfresco Repo configuration with embedded DB -->
     <alfresco.db.name>alf_dev</alfresco.db.name>
     <alfresco.db.username>alfresco</alfresco.db.username>
     <alfresco.db.password>alfresco</alfresco.db.password>
+      <!--
+      AUTO_SERVER=TRUE: Multiple processes can access the same database without having to start the server manually.
+                        Such as multiple internal Alfresco connections and for example SQuirreL externally,
+
+                        If you don't use it you will see errors such as:
+                        "java.util.concurrent.ExecutionException: java.lang.RuntimeException: org.h2.jdbc.JdbcSQLException:
+                         Database may be already in use: "all-in-one-test/alf_data_dev/h2_data/alf_dev.mv.db".
+                         Possible solutions: close all other connection(s); use the server mode [90020-186]"
+
+      DB_CLOSE_ON_EXIT=FALSE: Don't manually close the database when the JVM exists.
+
+                        If you don't use it you will see errors such as:
+                        "[factory.support.DisposableBeanAdapter] [localhost-startStop-2] Invocation of destroy method
+                        'close' failed on bean with name 'repoSqlSessionTemplate': java.lang.UnsupportedOperationException:
+                        Manual close is not allowed over a Spring managed SqlSession"
+
+
+      The following 2 properties are needed to avoid cryptic node not found exceptions:
+        MVCC=FALSE: Multi-Version Concurrency Control disabled, enabling it means LOCK_MODE has no effect.
+        LOCK_MODE=0: Read Uncommitted, this level means that transaction isolation is disabled.
+      -->
     <alfresco.db.params>AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;MVCC=FALSE;LOCK_MODE=0</alfresco.db.params>
-    <!-- By default the H2 embedded database datafile is created under the alfresco.data.location folder -->
+
+    <!-- H2 flat file database will be created in a relative path, such as alf_data_dev/h2_data/alf_dev-->
     <alfresco.db.url>jdbc:h2:./${alfresco.data.location}/h2_data/${alfresco.db.name};${alfresco.db.params}</alfresco.db.url>
     <alfresco.db.datasource.class>org.h2.jdbcx.JdbcDataSource</alfresco.db.datasource.class>
 
@@ -117,11 +140,16 @@
     <maven.buildhelper.version>1.9.1</maven.buildhelper.version>
     <maven.replacer.version>1.5.3</maven.replacer.version>
     <maven.tomcat.version>2.2</maven.tomcat.version>
+
     <!-- This is used for the site deployment procedure (override in your POM as needed) -->
     <stagingDirectory>../../target/staging/poms/alfresco-sdk-parent</stagingDirectory>
+
     <!-- Maven Alfresco plugin in use throughout the SDK -->
     <maven.alfresco.version>2.0.1-SNAPSHOT</maven.alfresco.version>
-    <h2.version>1.4.186</h2.version>
+
+    <!-- Note. Upgrading to 1.4.186 did not work, on second start (after initial db creation etc) it will not connect... -->
+    <h2.version>1.4.185</h2.version>
+
     <junit.version>4.11</junit.version>
     <maven.jetty.version>7.4.0.v20110414</maven.jetty.version>
   </properties>
