@@ -20,5 +20,6 @@
 <beans>
 	<!-- This is filtered by Maven at build time, so that module name is single sourced. -->
     <import resource="classpath:alfresco/module/${project.artifactId}/context/service-context.xml" />
+    <import resource="classpath:alfresco/module/${project.artifactId}/context/bootstrap-context.xml" />
     
 </beans>

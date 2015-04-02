@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- This context file is used only for rapid development, never installed released with the webapp -->
-<Context docBase="../share/target/share">
-    
-    <Resources className="org.apache.naming.resources.VirtualDirContext" extraResourcePaths="/=${project.parent.basedir}/share-amp/target/share-amp/web" />
+<!-- ===================================================================================================================
+    This context file is used only in a development IDE for rapid development,
+    it is never released with the Share.war
+
+    IMPORTANT: If an AMP or JAR extension is added to the Share WAR,
+               then you need to add the paths below for this new extension.
+=================================================================================================================-->
+<Context>
+    <!-- Pick up static resource files from any Share extensions, being it a JAR or an AMP
+         (this should not include docBase) -->
+    <Resources className="org.apache.naming.resources.VirtualDirContext"
+               extraResourcePaths="/=${project.parent.basedir}/share-amp/target/share-amp/web" />
+
+    <!-- Configure where the Share (share.war) web application can load classes, test classes, and config -->
     <Loader className="org.apache.catalina.loader.VirtualWebappLoader"
-        searchVirtualFirst="true"
-        virtualClasspath="${project.parent.basedir}/share-amp/target/classes;${project.parent.basedir}/share-amp/target/test-classes;${project.parent.basedir}/share-amp/target/share-amp/config" />
-        
-    <!-- This enables hot reloading of web resources from uncompressed jars (while in prod they would be loaded from  WEB-INF/lib/{\*.jar}/META-INF/resources --> 
+            searchVirtualFirst="true"
+            virtualClasspath="${project.parent.basedir}/share-amp/target/classes;${project.parent.basedir}/share-amp/target/test-classes;${project.parent.basedir}/share-amp/target/share-amp/config" />
+
+    <!-- Load from all directories, not just when the META-INF directory is found in exploded JAR -->
     <JarScanner scanAllDirectories="true" />
-     
 </Context>
+
+
+

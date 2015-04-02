@@ -1,12 +1,18 @@
+<!-- Alfresco 5.0.d custom-slingshot-application-context.xml sample
+
+     Note. Any configuration related to a specific Share extension
+           (such as evaluator bean and message resource bean) should be
+            placed in the specific extension config file, such as for example
+            alfresco-allinone/share-amp/src/main/amp/config/alfresco/web-extension/custom-slingshot-application-context.xml
+-->
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- This is a sample configuration file from Alfresco Community 4.2.b - Please adapt to your version -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:hz="http://www.hazelcast.com/schema/config"
+       xmlns:hz="http://www.hazelcast.com/schema/spring"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-                http://www.hazelcast.com/schema/config
-                http://www.hazelcast.com/schema/config/hazelcast-spring.xsd">
+                http://www.hazelcast.com/schema/spring
+                http://www.hazelcast.com/schema/spring/hazelcast-spring-2.4.xsd">
    
    <!--
         Hazelcast distributed messaging configuration - Share web-tier cluster config (3.4.8 and 4.0.1)
@@ -47,6 +53,7 @@
    <bean id="webframework.factory.requestcontext.servlet" class="org.alfresco.web.site.ClusterAwareRequestContextFactory" parent="webframework.factory.base">
       <property name="linkBuilderFactory" ref="webframework.factory.linkbuilder.servlet" />
       <property name="extensibilityModuleHandler" ref="webscripts.extensibility.handler" />
+      <property name="dependencyHandler" ref="dependency.handler" />
       <property name="clusterObjectPersister" ref="webframework.slingshot.persister.remote" />
    </bean>
    -->

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
@@ -16,30 +16,34 @@
     </parent>
 
     <!-- 
-       | SDK properties have sensible defaults in the SDK parent,
-       | but you can override the properties below to use another version. 
-       | For more available properties see the alfresco-sdk-parent POM. 
+        SDK properties have sensible defaults in the SDK parent,
+        but you can override the properties below to use another version.
+        For more available properties see the alfresco-sdk-parent POM.
        -->
     <properties>
-        <!-- Defines the target WAR artifactId to run this amp, only used with the -Pamp-to-war switch
-        | Allowed values: alfresco | share. In this case it's configured to use OOTB share -->
-        <alfresco.client.war>${alfresco.share.artifactId}</alfresco.client.war>
-        <alfresco.client.contextPath>/share</alfresco.client.contextPath>
+        <!-- If you want to change the default Alfresco version, uncomment the following property:
+               <alfresco.version>specify version number here</alfresco.version>
+               -->
+
+        <!-- This control the root logging level for all apps uncomment and change, defaults to WARN
+            <app.log.root.level>WARN</app.log.root.level>
+        -->
+
+        <!-- Set the enviroment to use, this controls which properties will be picked in src/test/properties
+             for embedded run, defaults to the 'local' environment.
+        <env>other environment name</env>
+        -->
+
+        <!-- The Maven artifact ID to use when loading the Share.WAR that the AMP should be applied to,
+                    defaults to the alfresco.war artifact ID, so we need to override here. -->
+        <app.amp.client.war.artifactId>${alfresco.share.artifactId}</app.amp.client.war.artifactId>
+
         <!-- Since Alfresco is already running on port 8080, we run Share on port 8081 -->
         <maven.tomcat.port>8081</maven.tomcat.port>
 
         <!-- Used in share-config-custom.xml. By default points to standard location of Alfresco -->
         <alfresco.repo.url>http://localhost:8080/alfresco</alfresco.repo.url>
-        
-        <!-- Defines the Alfresco version to work against.
-             Community versions are typically identified by major.minor.character (4.2.a), 
-             while Enterprise versions are identified by major.minor.digit (4.2.0)
-        -->
-		<!--<alfresco.version>${alfresco_target_version}</alfresco.version>-->
-        
-        <!-- Defines the log level used in log4j.properties -->
-        <app.log.root.level>WARN</app.log.root.level>
-        
+
     </properties>
 
     <!-- Here we realize the connection with the Alfresco selected platform 
@@ -59,6 +63,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <!-- Following dependencies are needed for compiling Java code in src/main/java;  -->
     <dependencies>
         <dependency>
@@ -69,14 +74,43 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-          <groupId>org.springframework.extensions.surf</groupId>
-          <artifactId>spring-surf-api</artifactId>
-          <scope>provided</scope>
-        </dependency>        
+            <groupId>org.springframework.extensions.surf</groupId>
+            <artifactId>spring-surf-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <!-- Compress JavaScript files and store as *-min.js -->
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>yuicompressor-maven-plugin</artifactId>
+                <version>1.5.1</version>
+                <configuration>
+                    <excludes>
+                        <exclude>alfresco/**/*.*</exclude>
+                        <exclude>**/*-min.js</exclude>
+                        <exclude>**/*.css</exclude>
+                    </excludes>
+                    <resources/>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>compress-js</id>
+                        <goals>
+                            <goal>compress</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
     <profiles>
-    	<!-- Enterprise profile, manually activated, automatically adds support for Enterprise edition development (dependencies) -->
+        <!--
+            Brings in the extra Enterprise specific share classes,
+            if the 'enterprise' profile has been activated, needs to be activated manually. -->
         <profile>
             <id>enterprise</id>
             <dependencies>

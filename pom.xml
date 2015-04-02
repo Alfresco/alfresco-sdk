@@ -138,6 +138,7 @@
         <springloaded.version>1.2.3.RELEASE</springloaded.version>
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
     </properties>
+
     <build>
         <pluginManagement>
             <plugins>
@@ -164,7 +165,6 @@
             </extension>
         </extensions>
     </build>
-
 
     <repositories>
         <repository>

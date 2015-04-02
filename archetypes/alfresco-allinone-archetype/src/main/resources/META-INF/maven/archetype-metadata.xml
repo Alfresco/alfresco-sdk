@@ -52,12 +52,6 @@
             <include>**/*.properties</include>
           </includes>
         </fileSet>
-        <fileSet encoding="UTF-8" filtered="false">
-          <directory>tomcat</directory>
-          <includes>
-            <include>**</include>
-          </includes>
-        </fileSet>
       </fileSets>
     </module>
 
@@ -87,18 +81,6 @@
             <include>**</include>
           </includes>
         </fileSet>
-        <fileSet encoding="UTF-8" filtered="false">
-          <directory>src/test/properties</directory>
-          <includes>
-            <include>**/*.properties</include>
-          </includes>
-        </fileSet>
-        <fileSet encoding="UTF-8" filtered="false">
-          <directory>tomcat</directory>
-          <includes>
-            <include>**</include>
-          </includes>
-        </fileSet>
       </fileSets>
     </module>
     
@@ -124,12 +106,6 @@
     
     <module id="share" dir="share" name="share" filtered="false">
       <fileSets>
-        <fileSet encoding="UTF-8">
-          <directory>src/main/properties</directory>
-          <includes>
-            <include>**/*.properties</include>
-          </includes>
-        </fileSet>
         <fileSet encoding="UTF-8" filtered="false">
           <directory>src/main/resources</directory>
           <includes>

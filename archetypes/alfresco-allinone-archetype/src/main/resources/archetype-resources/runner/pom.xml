@@ -113,6 +113,7 @@
                 </plugins>
             </build>
         </profile>
+
         <!-- Runs regression tests using Alfresco Share PO (Page Object) vanilla Selenium / Webdrone driven functional test, during integration-test phase. 
              NOTE: Assumes an already running Alfresco + Share at the default location ${app.share.url} (e.g. by invoking -Prun,regression) -->
         <profile>
