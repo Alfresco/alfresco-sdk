@@ -1,4 +1,11 @@
-<!-- This is a sample configuration file from Alfresco Community 4.2.b - Please adapt to your version -->
+<!-- Alfresco 5.0.d share-config-custom.xml sample.
+
+     Note:
+     Any configuration related to a specific Share AMP extension
+     (such as doclib action config and form config)
+     should be added to that extension's custom config
+     (i.e. into the share-amp/src/main/resources/META-INF/share-config-custom.xml)
+     -->
 <alfresco-config>
 
    <!-- Global config section -->
@@ -37,6 +44,62 @@
       </web-framework>
    </config>
 
+   <!-- Disable the CSRF Token Filter -->
+   <!--
+   <config evaluator="string-compare" condition="CSRFPolicy" replace="true">
+      <filter/>
+   </config>
+   -->
+
+   <!--
+      To run the CSRF Token Filter behind 1 or more proxies that do not rewrite the Origin or Referere headers:
+
+      1. Copy the "CSRFPolicy" default config in share-security-config.xml and paste it into this file.
+      2. Replace the old config by setting the <config> element's "replace" attribute to "true" like below:
+         <config evaluator="string-compare" condition="CSRFPolicy" replace="true">
+      3. To every <action name="assertReferer"> element add the following child element
+         <param name="referer">http://www.proxy1.com/.*|http://www.proxy2.com/.*</param>
+      4. To every <action name="assertOrigin"> element add the following child element
+         <param name="origin">http://www.proxy1.com|http://www.proxy2.com</param>
+   -->
+
+   <!--
+      Remove the default wildcard setting and use instead a strict whitelist of the only domains that shall be allowed
+      to be used inside iframes (i.e. in the WebView dashlet on the dashboards)
+   -->
+   <!--
+   <config evaluator="string-compare" condition="IFramePolicy" replace="true">
+      <cross-domain>
+         <url>http://www.trusted-domain-1.com/</url>
+         <url>http://www.trusted-domain-2.com/</url>
+      </cross-domain>
+   </config>
+   -->
+
+   <!-- Turn off header that stops Share from being displayed in iframes on pages from other domains -->
+   <!--
+   <config evaluator="string-compare" condition="SecurityHeadersPolicy">
+      <headers>
+         <header>
+            <name>X-Frame-Options</name>
+            <enabled>false</enabled>
+         </header>
+      </headers>
+   </config>
+   -->
+
+   <!-- Prevent browser communication over HTTP (for HTTPS servers) -->
+   <!--
+   <config evaluator="string-compare" condition="SecurityHeadersPolicy">
+      <headers>
+         <header>
+            <name>Strict-Transport-Security</name>
+            <value>max-age=31536000</value>
+         </header>
+      </headers>
+   </config>
+   -->
+
    <config evaluator="string-compare" condition="Replication">
       <share-urls>
          <!--
@@ -63,7 +126,12 @@
          <!--
             Optionally limit the number of folders shown in treeview throughout Share.
          -->
-         <maximum-folder-count>-1</maximum-folder-count>
+         <maximum-folder-count>1000</maximum-folder-count>
+         
+         <!--  
+            Default timeout in milliseconds for folder Tree component to recieve response from Repository
+         -->
+         <timeout>7000</timeout>
       </tree>
 
       <!--
@@ -86,9 +154,11 @@
             <aspect name="emailserver:aliasable" />
             <aspect name="cm:taggable" />
             <aspect name="app:inlineeditable" />
-            <aspect name="gd:googleEditable" />
             <aspect name="cm:geographic" />
             <aspect name="exif:exif" />
+            <aspect name="audio:audio" />
+            <aspect name="cm:indexControl" />
+            <aspect name="dp:restrictable" />
          </visible>
 
          <!-- Aspects that a user can add. Same as "visible" if left empty -->
@@ -117,6 +187,10 @@
 
          <type name="cm:folder">
          </type>
+
+         <type name="trx:transferTarget">
+            <subtype name="trx:fileTransferTarget" />
+         </type>
       </types>
 
       <!--
@@ -139,8 +213,8 @@
             The I18N label is created from the "type" attribute, e.g. google-docs.doc=Google Docs&trade; Document
          -->
          <creatable-types>
-            <creatable type="doc">application/msword</creatable>
-            <creatable type="xls">application/vnd.ms-excel</creatable>
+            <creatable type="doc">application/vnd.openxmlformats-officedocument.wordprocessingml.document</creatable>
+            <creatable type="xls">application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</creatable>
             <creatable type="ppt">application/vnd.ms-powerpoint</creatable>
          </creatable-types>
       </google-docs>
@@ -209,14 +283,19 @@
             This is a relatively expensive operation, so should be set to "false" for Repositories with broad folder structures.
          -->
          <evaluate-child-folders>false</evaluate-child-folders>
-         
+
          <!--
             Optionally limit the number of folders shown in treeview throughout Share.
          -->
          <maximum-folder-count>500</maximum-folder-count>
       </tree>
+
+      <!--
+         Whether the link to the Repository Library appears in the header component or not.
+      -->
+      <visible>true</visible>
    </config>
-   
+
    <!-- Kerberos settings -->
    <!-- To enable kerberos rename this condition to "Kerberos" -->
    <config evaluator="string-compare" condition="KerberosDisabled" replace="true">
@@ -243,11 +322,21 @@
             JAAS login configuration entry name.
          -->
          <config-entry>ShareHTTP</config-entry>
+        <!--
+           A Boolean which when true strips the @domain sufix from Kerberos authenticated usernames.
+           Use together with stripUsernameSuffix property in alfresco-global.properties file.
+        -->
+        <stripUserNameSuffix>true</stripUserNameSuffix>
       </kerberos>
    </config>
 
-	<!-- example port config used to access remote Alfresco server (default is 8080) -->
+   <!-- Uncomment and modify the URL to Activiti Admin Console if required. -->
    <!--
+   <config evaluator="string-compare" condition="ActivitiAdmin" replace="true">
+      <activiti-admin-url>http://localhost:8080/alfresco/activiti-admin</activiti-admin-url>
+   </config>
+   -->
+
    <config evaluator="string-compare" condition="Remote">
       <remote>
          <endpoint>
@@ -277,20 +366,21 @@
             <basic-auth>true</basic-auth>
             <identity>user</identity>
          </endpoint>
-         
+
          <endpoint>
-            <id>activiti-admin</id>
-            <name>Activiti Admin UI - user access</name>
-            <description>Access to Activiti Admin UI, that requires user authentication</description>
-            <connector-id>activiti-admin-connector</connector-id>
-            <endpoint-url>http://localhost:8080/alfresco/activiti-admin</endpoint-url>
+            <id>alfresco-api</id>
+            <parent-id>alfresco</parent-id>
+            <name>Alfresco Public API - user access</name>
+            <description>Access to Alfresco Repository Public API that require user authentication.
+                         This makes use of the authentication that is provided by parent 'alfresco' endpoint.</description>
+            <connector-id>alfresco</connector-id>
+            <endpoint-url>http://localhost:8080/alfresco/api</endpoint-url>
             <identity>user</identity>
          </endpoint>
       </remote>
    </config>
-	-->
 
-   <!-- 
+   <!--
         Overriding endpoints to reference an Alfresco server with external SSO enabled
         NOTE: If utilising a load balancer between web-tier and repository cluster, the "sticky
               sessions" feature of your load balancer must be used.
@@ -299,12 +389,23 @@
         *Optional* keystore contains SSL client certificate + trusted CAs.
         Used to authenticate share to an external SSO system such as CAS
         Remove the keystore section if not required i.e. for NTLM.
-        
+
         NOTE: For Kerberos SSO rename the "KerberosDisabled" condition above to "Kerberos"
-        
-        NOTE: For external SSO, switch the endpoint connector to "AlfrescoHeader" and set
-              the userHeader to the name of the HTTP header that the external SSO
+
+        NOTE: For external SSO, switch the endpoint connector to "alfrescoHeader" and set
+              the userHeader value to the name of the HTTP header that the external SSO
               uses to provide the authenticated user name.
+        NOTE: For external SSO, Share now supports the "userIdPattern" mechanism as is available
+              on the repository config for External Authentication sub-system. Add the following
+              element to your "alfrescoHeader" connector config:
+              <userIdPattern>^ignore-(\w+)-ignore</userIdPattern>
+              This is an example, ensure the Id pattern matches your repository config.
+        NOTE: For external SSO, Share now supports stateless (no Http Session or sticky session)
+              connection to the repository when using the alfrescoHeader remote user connector.
+              e.g. You can change endpoint config to use the faster /service URL instead of the
+              /wcs URL if you are using External Authentication and then remove sticky session config
+              from your proxy between Share and Alfresco. Note that this is also faster because Share
+              will no longer call the /touch REST API before every remote call to the repository.
    -->
    <!--
    <config evaluator="string-compare" condition="Remote">
@@ -314,14 +415,14 @@
              <type>pkcs12</type>
              <password>alfresco-system</password>
          </keystore>
-         
+
          <connector>
             <id>alfrescoCookie</id>
             <name>Alfresco Connector</name>
             <description>Connects to an Alfresco instance using cookie-based authentication</description>
             <class>org.alfresco.web.site.servlet.SlingshotAlfrescoConnector</class>
          </connector>
-         
+
          <connector>
             <id>alfrescoHeader</id>
             <name>Alfresco Connector</name>
@@ -339,8 +440,50 @@
             <identity>user</identity>
             <external-auth>true</external-auth>
          </endpoint>
+
+         <endpoint>
+            <id>alfresco-feed</id>
+            <parent-id>alfresco</parent-id>
+            <name>Alfresco Feed</name>
+            <description>Alfresco Feed - supports basic HTTP authentication via the EndPointProxyServlet</description>
+            <connector-id>alfrescoHeader</connector-id>
+            <endpoint-url>http://localhost:8080/alfresco/wcs</endpoint-url>
+            <identity>user</identity>
+            <external-auth>true</external-auth>
+         </endpoint>
+
+         <endpoint>
+            <id>alfresco-api</id>
+            <parent-id>alfresco</parent-id>
+            <name>Alfresco Public API - user access</name>
+            <description>Access to Alfresco Repository Public API that require user authentication.
+                         This makes use of the authentication that is provided by parent 'alfresco' endpoint.</description>
+            <connector-id>alfrescoHeader</connector-id>
+            <endpoint-url>http://localhost:8080/alfresco/api</endpoint-url>
+            <identity>user</identity>
+            <external-auth>true</external-auth>
+         </endpoint>
       </remote>
    </config>
    -->
-   
+
+   <!-- Cookie settings -->
+   <!-- To disable alfUsername2 cookie set enableCookie value to "false" -->
+   <!--
+   <plug-ins>
+      <element-readers>
+         <element-reader element-name="cookie" class="org.alfresco.web.config.cookie.CookieElementReader"/>
+      </element-readers>
+   </plug-ins>
+
+   <config evaluator="string-compare" condition="Cookie" replace="true">
+      <cookie>
+         <enableCookie>false</enableCookie>
+         <cookies-to-remove>
+            <cookie-to-remove>alfUsername3</cookie-to-remove>
+            <cookie-to-remove>alfLogin</cookie-to-remove>
+         </cookies-to-remove>
+      </cookie>
+   </config>
+   -->
 </alfresco-config>

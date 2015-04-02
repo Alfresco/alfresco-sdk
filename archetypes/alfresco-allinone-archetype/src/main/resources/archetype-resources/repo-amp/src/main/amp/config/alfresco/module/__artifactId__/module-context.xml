@@ -19,7 +19,9 @@
 <!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
 
 <beans>
-	
-    <import resource="classpath:alfresco/module/${artifactId}/context/service-context.xml" />
-    
+
+    <!-- This is filtered by Maven at build time, so that module name is single sourced. -->
+    <import resource="classpath:alfresco/module/${project.artifactId}/context/service-context.xml" />
+    <import resource="classpath:alfresco/module/${project.artifactId}/context/bootstrap-context.xml" />
+
 </beans>

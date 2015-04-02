@@ -1,54 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.alfresco.maven.archetype</groupId>
-  <artifactId>share-amp-archetype</artifactId>
+    <groupId>org.alfresco.maven.archetype</groupId>
+    <artifactId>share-amp-archetype</artifactId>
 
-  <packaging>maven-archetype</packaging>
-  <name>Maven Alfresco SDK - Share AMP Archetype</name>
-  <description>Share project with full support for lifecycle and rapid development of AMPs (Alfresco Module Packages)</description>
+    <packaging>maven-archetype</packaging>
+    <name>Maven Alfresco SDK - Share AMP Archetype</name>
+    <description>Share project with full support for lifecycle and rapid development of AMPs (Alfresco Module
+        Packages)
+    </description>
 
-  <parent>
-    <groupId>org.alfresco.maven</groupId>
-    <artifactId>alfresco-sdk-aggregator</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
-    <relativePath>../../pom.xml</relativePath>
-  </parent>
+    <parent>
+        <groupId>org.alfresco.maven</groupId>
+        <artifactId>alfresco-sdk-aggregator</artifactId>
+        <version>2.0.1-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
 
-  <build>
-      <resources>
-        <resource>
-            <directory>src/main/resources</directory>
-            <includes>
-                <include>archetype-resources/pom.xml</include>
-                <include>archetype-resources/run.sh</include>
-                <include>META-INF/maven/archetype-metadata.xml</include>
-            </includes>
-            <filtering>true</filtering>
-        </resource>
-        <resource>
-            <directory>src/main/resources</directory>
-            <excludes>
-                <exclude>archetype-resources/pom.xml</exclude>
-                <exclude>archetype-resources/run.sh</exclude>
-                <exclude>META-INF/maven/archetype-metadata.xml</exclude>
-            </excludes>
-            <filtering>false</filtering>
-        </resource>
-      </resources>
-      <plugins>
-        <plugin>
-            <artifactId>maven-resources-plugin</artifactId>
-            <version>2.7</version>
-            <configuration>
-                <useDefaultDelimiters>false</useDefaultDelimiters>
-                <delimiters>
-                    <delimiter>@@</delimiter>
-                </delimiters>
-            </configuration>
-        </plugin>
-      </plugins>
-  </build>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>archetype-resources/pom.xml</include>
+                    <include>archetype-resources/run.sh</include>
+                    <include>META-INF/maven/archetype-metadata.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>archetype-resources/pom.xml</exclude>
+                    <exclude>archetype-resources/run.sh</exclude>
+                    <exclude>META-INF/maven/archetype-metadata.xml</exclude>
+                </excludes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <useDefaultDelimiters>false</useDefaultDelimiters>
+                    <delimiters>
+                        <delimiter>@@</delimiter>
+                    </delimiters>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

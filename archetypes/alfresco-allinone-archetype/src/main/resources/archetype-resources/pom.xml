@@ -1,60 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
     <name>Alfresco Repository and Share Quickstart with database and an embedded runner.</name>
-    <description>This All-in-One project allows to manage all the components involved in Alfresco development (Repo, Share, Solr, AMPs) in one project</description>
-    <packaging>pom</packaging>    
+    <description>This All-in-One project allows to manage all the components involved in Alfresco development (Repo,
+        Share, Solr4, AMPs) in one project
+    </description>
+    <packaging>pom</packaging>
 
     <parent>
         <groupId>org.alfresco.maven</groupId>
         <artifactId>alfresco-sdk-parent</artifactId>
         <version>@@alfresco.sdk.parent.version@@</version>
     </parent>
-    
+
     <!-- 
-       | SDK properties have sensible defaults in the SDK parent, but you can override the properties below to use another version. 
-       | For more available properties see the alfresco-sdk-parent POM. 
+       SDK properties have sensible defaults in the SDK parent,
+       but you can override the properties below to use another version.
+       For more available properties see the alfresco-sdk-parent POM.
        -->
     <properties>
-        <!-- 
-            | Defines the groupId for the Alfresco Artifacts to work against. As of 4.2 the only allowed value is: org.alfresco
-            | NOTE: See http://docs.alfresco.com/4.2/concepts/dev-extensions-maven-sdk-tutorials-alfresco-enterprise.html for details
-        -->
-        <!-- <alfresco.groupId>${alfresco_target_groupId}</alfresco.groupId> -->
-        <!-- Defines the Alfresco version to work against.
-             Community versions are typically identified by major.minor.character (4.2.a) while Enterprise versions are identified by major.minor.digit (4.2.0) 
-        -->
-        <!--<alfresco.version>${alfresco_target_version}</alfresco.version>-->
+        <!-- The following are default values for data location and Alfresco version.
+             Uncomment if you need to change -->
+        <!-- <alfresco.version>${alfresco_target_version}</alfresco.version>-->
+        <!-- <alfresco.data.location>${alfresco.data.location}</alfresco.data.location> -->
+
         <!-- This control the root logging level for all apps -->
         <app.log.root.level>WARN</app.log.root.level>
-        <!-- This controls the default data location for dir.root -->
-        <alfresco.data.location>alf_data_dev</alfresco.data.location>
+
         <!-- This controls which properties will be picked in multi-enviromment build -->
         <env>local</env>
     </properties>
 
-   <!-- Here we realize the connection with the Alfresco selected platform (e.g.version and edition) -->
-   <dependencyManagement>
-     <dependencies>
-          <!-- This will import the dependencyManagement for all artifacts in the selected Alfresco plaftorm
-               (see http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Importing_Dependencies)
-               NOTE: You still need to define dependencies in your POM, but you can omit version as it's enforced by this dependencyManagement.
-               NOTE: It defaults to the latest version this SDK pom has been tested with, but alfresco version can/should be overridden in your project's pom   
-           -->
-          <dependency>
-              <groupId>${alfresco.groupId}</groupId>
-              <artifactId>alfresco-platform-distribution</artifactId>
-              <version>${alfresco.version}</version>
-              <type>pom</type>
-              <scope>import</scope>
-          </dependency>
-     </dependencies>
-  </dependencyManagement>
+    <!-- Here we realize the connection with the Alfresco selected platform (e.g.version and edition) -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- This will import the dependencyManagement for all artifacts in the selected Alfresco plaftorm
+                 (see http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Importing_Dependencies)
+                 NOTE: You still need to define dependencies in your POM, but you can omit version as it's enforced by this dependencyManagement.
+                 NOTE: It defaults to the latest version this SDK pom has been tested with, but alfresco version can/should be overridden in your project's pom
+             -->
+            <dependency>
+                <groupId>${alfresco.groupId}</groupId>
+                <artifactId>alfresco-platform-distribution</artifactId>
+                <version>${alfresco.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-    <!-- Invoke your build with -Prun to run the multimodule project and enable rapid dev mode in your IDE. 
+    <build>
+        <plugins>
+            <!-- Compress JavaScript files and store as *-min.js -->
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>yuicompressor-maven-plugin</artifactId>
+                <version>1.5.1</version>
+                <configuration>
+                    <excludes>
+                        <exclude>alfresco/**/*.*</exclude>
+                        <exclude>**/*-min.js</exclude>
+                        <exclude>**/*.css</exclude>
+                    </excludes>
+                    <resources/>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>compress-js</id>
+                        <goals>
+                            <goal>compress</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- Invoke your build with -Prun to run the multimodule project and enable rapid dev mode in your IDE.
          See 'run' profile in the sub modules pom.xml for further behavioral details.
      -->
     <profiles>
@@ -67,15 +93,15 @@
                 <maven.alfresco.includeWebResources>false</maven.alfresco.includeWebResources>
             </properties>
         </profile>
-         <!-- RM profile, manually activated, automatically adds support for RM development (dependencies) and install the RM amps in the WARs -->
+        <!-- RM profile, manually activated, automatically adds support for RM development (dependencies) and install the RM amps in the WARs -->
         <profile>
             <id>rm</id>
-             <properties>
+            <properties>
                 <alfresco.rm.version>2.3.a.1</alfresco.rm.version>
                 <app.rm.amps.location>${project.build.directory}/rm-amps</app.rm.amps.location>
                 <app.rm.war.location>${project.build.directory}/${project.build.finalName}.war</app.rm.war.location>
                 <app.rm.artifact>org.alfresco:${alfresco.rm.artifactId}:${alfresco.rm.version}:amp</app.rm.artifact>
-             </properties>
+            </properties>
         </profile>
     </profiles>
 </project>

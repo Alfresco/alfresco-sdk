@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>solr-config</artifactId>
+    <packaging>pom</packaging>
+    <name>Alfresco Solr 4 Configuration</name>
+    <description>Apache Solr 4 Configuration Customization</description>
+
+    <!-- Setup the parent extension project, which contain all the Alfresco Maven SDK stuff -->
+    <parent>
+        <groupId>${groupId}</groupId>
+        <artifactId>${rootArtifactId}</artifactId>
+        <version>${version}</version>
+    </parent>
+
+    <!-- Build Solr Configuration only when we run an embedded Tomcat (i.e. profile run is enabled).
+         We assume that there is no need to customize Apache Solr 4 itself. -->
+    <profiles>
+        <profile>
+            <id>run</id>
+
+            <properties>
+                <alfresco.solr.dir>${project.parent.basedir}/${alfresco.data.location}/solr4</alfresco.solr.dir>
+                <alfresco.solr.home.dir>${alfresco.solr.dir}/config</alfresco.solr.home.dir>
+                <alfresco.solr.data.dir>${alfresco.solr.dir}/data</alfresco.solr.data.dir>
+            </properties>
+
+            <dependencies>
+                <!-- Download the default Solr4-config.zip Configuration files,
+                     they will be updated so we can run locally over HTTP -->
+                <dependency>
+                    <groupId>${alfresco.groupId}</groupId>
+                    <artifactId>alfresco-solr4</artifactId>
+                    <version>${alfresco.version}</version>
+                    <classifier>config</classifier>
+                    <type>zip</type>
+                </dependency>
+            </dependencies>
+
+            <build>
+                <plugins>
+                    <!-- Run goal unpack and unzip the content of the downloaded default solr-config.zip file into the
+                         alfresco-maven-sdk2-test/alf_data_dev/solr4/config directory
+                         (The solr-config.zip is brought in via the dependency section) -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>unpack-alfresco-config</id>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <phase>generate-resources</phase>
+                                <configuration>
+                                    <outputDirectory>${alfresco.solr.home.dir}</outputDirectory>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>${alfresco.groupId}</groupId>
+                                            <artifactId>alfresco-solr4</artifactId>
+                                            <version>${alfresco.version}</version>
+                                            <classifier>config</classifier>
+                                            <type>zip</type>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- Run the goal replace and update configuration files for the
+                         Solr cores to reflect our build structure -->
+                    <plugin>
+                        <groupId>com.google.code.maven-replacer-plugin</groupId>
+                        <artifactId>replacer</artifactId>
+                        <executions>
+                            <execution>
+                                <id>setup-solr-config</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>replace</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <regex>false</regex>
+                            <includes>
+                                <include>${alfresco.solr.home.dir}/context.xml</include>
+                                <include>${alfresco.solr.home.dir}/archive-SpacesStore/conf/solrcore.properties</include>
+                                <include>${alfresco.solr.home.dir}/workspace-SpacesStore/conf/solrcore.properties</include>
+                            </includes>
+                            <replacements>
+                                <replacement>
+                                    <token>@@ALFRESCO_SOLR4_DIR@@</token>
+                                    <value>${alfresco.solr.home.dir}/</value>
+                                </replacement>
+                                <replacement>
+                                    <token>@@ALFRESCO_SOLR4_MODEL_DIR@@</token>
+                                    <value>${alfresco.solr.home.dir}/alfrescoModels/</value>
+                                </replacement>
+                                <replacement>
+                                    <token>@@ALFRESCO_SOLR4_CONTENT_DIR@@</token>
+                                    <value>${alfresco.solr.data.dir}/content/</value>
+                                </replacement>
+                                <replacement>
+                                    <token>@@ALFRESCO_SOLR4_DATA_DIR@@</token>
+                                    <value>${alfresco.solr.data.dir}/index</value>
+                                </replacement>
+                            </replacements>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>
