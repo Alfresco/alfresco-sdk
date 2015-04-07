@@ -13,9 +13,16 @@
                extraResourcePaths="/=${project.parent.basedir}/share-amp/target/share-amp/web" />
 
     <!-- Configure where the Share (share.war) web application can load classes, test classes, and config -->
+    <!-- Setup the virtual class path like this:
+         1) target/classes
+         2) target/${project.build.finalName}/config
+         3) target/test-classes
+
+         This way mvn compile can be invoked and all changes will be picked up
+    -->
     <Loader className="org.apache.catalina.loader.VirtualWebappLoader"
             searchVirtualFirst="true"
-            virtualClasspath="${project.parent.basedir}/share-amp/target/classes;${project.parent.basedir}/share-amp/target/test-classes;${project.parent.basedir}/share-amp/target/share-amp/config" />
+            virtualClasspath="${project.parent.basedir}/share-amp/target/classes;${project.parent.basedir}/share-amp/target/share-amp/config;${project.parent.basedir}/share-amp/target/test-classes" />
 
     <!-- Load from all directories, not just when the META-INF directory is found in exploded JAR -->
     <JarScanner scanAllDirectories="true" />

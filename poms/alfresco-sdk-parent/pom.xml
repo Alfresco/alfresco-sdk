@@ -492,6 +492,9 @@
                         <version>1.0</version>
                         <executions>
                             <execution>
+                                <!-- Important to do this in the compile phase, otherwise the files will be copied
+                                     after this and the web script refresh will not be recognized
+                                -->
                                 <phase>compile</phase>
                                 <goals>
                                     <goal>execute</goal>
