@@ -492,7 +492,7 @@
                         <version>1.0</version>
                         <executions>
                             <execution>
-                                <phase>generate-resources</phase>
+                                <phase>compile</phase>
                                 <goals>
                                     <goal>execute</goal>
                                 </goals>
@@ -509,7 +509,7 @@
                                             // Refresh Alfresco Repo Web Scripts
                                             def refreshWebScriptsPath = 's/index'
                                             alfresco.auth.basic 'admin', 'admin'
-                                            def resp = alfresco.post(path: refreshWebScriptsPath, body: [reset: 'on'], requestContentType: URLENC)
+                                            def resp = alfresco.post(path: refreshWebScriptsPath, body: [reset: 'on', submit: 'Refresh Web Scripts'], requestContentType: URLENC)
                                             log.info "\nRequest: Alfresco Repo Refresh Web Scripts. Response status: ${resp.status}"
 
                                             def share = new RESTClient('http://localhost:8080/share/')
@@ -523,7 +523,7 @@
                                             // Refresh Share Web Scripts
                                             refreshWebScriptsPath = 'page/index'
                                             share.auth.basic 'admin', 'admin'
-                                            resp = share.post(path: refreshWebScriptsPath, body: [reset: 'on'], requestContentType: URLENC)
+                                            resp = share.post(path: refreshWebScriptsPath, body: [reset: 'on', submit: 'Refresh Web Scripts'], requestContentType: URLENC)
                                             log.info "\nRequest: Alfresco Share Refresh Web Scripts. Response status: ${resp.status}"
                                         } catch (HttpResponseException ex) {
                                             println "Unexpected response error: ${ex.statusCode}"
