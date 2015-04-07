@@ -5,9 +5,8 @@
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
-    <name>Alfresco Repository and Share Quickstart with database and an embedded runner.</name>
-    <description>This All-in-One project allows to manage all the components involved in Alfresco development (Repo,
-        Share, Solr4, AMPs) in one project
+    <name>Alfresco Repository and Share Quickstart with database and an embedded Tomcat runner.</name>
+    <description>This All-in-One project allows to manage all the components involved in Alfresco development (Repo, Share, Solr4, AMPs) in one project
     </description>
     <packaging>pom</packaging>
 
@@ -24,15 +23,18 @@
        -->
     <properties>
         <!-- The following are default values for data location and Alfresco version.
-             Uncomment if you need to change -->
-        <!-- <alfresco.version>${alfresco_target_version}</alfresco.version>-->
-        <!-- <alfresco.data.location>${alfresco.data.location}</alfresco.data.location> -->
+             Uncomment if you need to change
+          <alfresco.version>${alfresco.community.default.version}</alfresco.version>
+          <alfresco.data.location>${alfresco.data.location}</alfresco.data.location> -->
 
-        <!-- This control the root logging level for all apps -->
-        <app.log.root.level>WARN</app.log.root.level>
+        <!-- This control the root logging level for all apps uncomment and change, defaults to WARN
+            <app.log.root.level>WARN</app.log.root.level>
+        -->
 
-        <!-- This controls which properties will be picked in multi-enviromment build -->
+        <!-- Set the enviroment to use, this controls which properties will be picked in src/test/properties
+             for embedded run, defaults to the 'local' environment. See SDK Parent POM for more info.
         <env>local</env>
+        -->
     </properties>
 
     <!-- Here we realize the connection with the Alfresco selected platform (e.g.version and edition) -->

@@ -21,17 +21,18 @@
         For more available properties see the alfresco-sdk-parent POM.
        -->
     <properties>
-        <!-- If you want to change the default data location and Alfresco version, uncomment the following 2 properties:
-               <alfresco.version>specify version number here</alfresco.version>
-               <alfresco.data.location>specify folder name here</alfresco.data.location> -->
+        <!-- The following are default values for data location and Alfresco version.
+             Uncomment if you need to change
+          <alfresco.version>${alfresco.community.default.version}</alfresco.version>
+          <alfresco.data.location>${alfresco.data.location}</alfresco.data.location> -->
 
         <!-- This control the root logging level for all apps uncomment and change, defaults to WARN
             <app.log.root.level>WARN</app.log.root.level>
         -->
 
         <!-- Set the enviroment to use, this controls which properties will be picked in src/test/properties
-             for embedded run, defaults to the 'local' environment.
-        <env>other environment name</env>
+             for embedded run, defaults to the 'local' environment. See SDK Parent POM for more info.
+        <env>local</env>
         -->
     </properties>
 

@@ -1,11 +1,12 @@
-package org.alfresco.demoamp.test;
-
+#set($symbol_pound='#')
+#set($symbol_dollar='$')
+#set($symbol_escape='\' )
+package ${package}.demoamp.test;
 
 import static org.junit.Assert.assertEquals;
-
 import static org.junit.Assert.assertNotNull;
 
-import org.alfresco.demoamp.DemoComponent;
+import ${package}.demoamp.DemoComponent;
 import org.alfresco.model.ContentModel;
 import org.alfresco.repo.security.authentication.AuthenticationUtil;
 import org.alfresco.service.cmr.repository.NodeRef;
@@ -41,7 +42,6 @@ import com.tradeshift.test.remote.RemoteTestRunner;
  * @author Maurizio Pillitu
  *
  */
-
 @RunWith(RemoteTestRunner.class)
 @Remote(runnerClass=SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:alfresco/application-context.xml")

@@ -1,3 +1,6 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
 <!--
@@ -17,12 +20,12 @@
     limitations under the License.
 -->
 <beans>
-    
+
     <!-- A simple class that is initialized by Spring -->
-    <bean id="changeme.exampleBean" class="org.alfresco.demoamp.Demo" init-method="init" />
-    
+    <bean id="${package}.exampleBean" class="${package}.demoamp.Demo" init-method="init" />
+
     <!-- A simple module component that will be executed once -->
-    <bean id="changeme.exampleComponent" class="org.alfresco.demoamp.DemoComponent" parent="module.baseComponent" >
+    <bean id="${package}.exampleComponent" class="${package}.demoamp.DemoComponent" parent="module.baseComponent" >
         <property name="moduleId" value="${project.artifactId}" />  <!-- See module.properties -->
         <property name="name" value="exampleComponent" />
         <property name="description" value="A demonstration component" />

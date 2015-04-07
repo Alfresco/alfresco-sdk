@@ -1,4 +1,7 @@
-package org.alfresco.demoamp;
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+package ${package}.demoamp;
 
 /**
  * This class does nothing except dump some output to <i>system.out</i>.

@@ -21,16 +21,16 @@
         For more available properties see the alfresco-sdk-parent POM.
        -->
     <properties>
-        <!-- If you want to change the default Alfresco version, uncomment the following property:
-               <alfresco.version>specify version number here</alfresco.version>
-               -->
+        <!-- The following are default values for data location and Alfresco version.
+             Uncomment if you need to change
+        <alfresco.version>${alfresco.community.default.version}</alfresco.version> -->
 
         <!-- This control the root logging level for all apps uncomment and change, defaults to WARN
             <app.log.root.level>WARN</app.log.root.level>
         -->
 
         <!-- Set the enviroment to use, this controls which properties will be picked in src/test/properties
-             for embedded run, defaults to the 'local' environment.
+             for embedded run, defaults to the 'local' environment. See SDK Parent POM for more info.
         <env>other environment name</env>
         -->
 
@@ -38,10 +38,10 @@
                     defaults to the alfresco.war artifact ID, so we need to override here. -->
         <app.amp.client.war.artifactId>${alfresco.share.artifactId}</app.amp.client.war.artifactId>
 
-        <!-- Since Alfresco is already running on port 8080, we run Share on port 8081 -->
+        <!-- Since Alfresco.WAR (i.e. the Repository) is already running on port 8080, we run Share.WAR on port 8081 -->
         <maven.tomcat.port>8081</maven.tomcat.port>
 
-        <!-- Used in share-config-custom.xml. By default points to standard location of Alfresco -->
+        <!-- Used in share-config-custom.xml. By default points to local installation of Alfresco Repo -->
         <alfresco.repo.url>http://localhost:8080/alfresco</alfresco.repo.url>
 
     </properties>
