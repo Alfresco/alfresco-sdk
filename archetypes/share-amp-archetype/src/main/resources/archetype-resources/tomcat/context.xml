@@ -3,7 +3,6 @@
     This context file is used only in a development IDE for rapid development,
     it is never released with the Alfresco.war
     =================================================================================================================-->
--->
 
 <!-- Setup docBase to something like share-amp/target/share-amp-war
      and path to /share -->

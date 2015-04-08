@@ -383,6 +383,30 @@
                         </lifecycleMappingMetadata>
                     </configuration>
                 </plugin>
+                <!-- Compress JavaScript files and store as *-min.js -->
+                <plugin>
+                    <groupId>net.alchim31.maven</groupId>
+                    <artifactId>yuicompressor-maven-plugin</artifactId>
+                    <version>1.5.1</version>
+                    <executions>
+                        <execution>
+                            <id>compress-js</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>compress</goal>
+                            </goals>
+                            <configuration>
+                                <excludes>
+                                    <exclude>**/site-webscripts/**</exclude>
+                                    <exclude>**/*.lib.js</exclude>
+                                    <exclude>**/*.css</exclude>
+                                </excludes>
+                                <warSourceDirectory>src/main/resources/META-INF</warSourceDirectory>
+                                <jswarn>false</jswarn>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
 

@@ -61,23 +61,6 @@
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>yuicompressor-maven-plugin</artifactId>
-                <version>1.5.1</version>
-                <configuration>
-                    <excludes>
-                        <exclude>alfresco/**/*.*</exclude>
-                        <exclude>**/*-min.js</exclude>
-                        <exclude>**/*.css</exclude>
-                    </excludes>
-                    <resources/>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>compress-js</id>
-                        <goals>
-                            <goal>compress</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
