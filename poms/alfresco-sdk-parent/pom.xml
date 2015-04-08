@@ -266,6 +266,7 @@
                             <nonFilteredFileExtension>woff</nonFilteredFileExtension>
                             <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
                             <nonFilteredFileExtension>css</nonFilteredFileExtension>
+                            <nonFilteredFileExtension>ico</nonFilteredFileExtension>
                         </nonFilteredFileExtensions>
                     </configuration>
                 </plugin>
