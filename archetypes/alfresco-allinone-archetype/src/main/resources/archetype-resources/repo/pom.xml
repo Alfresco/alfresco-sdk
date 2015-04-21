@@ -38,12 +38,21 @@
             <version>${project.version}</version>
             <type>amp</type>
         </dependency>
-        <!-- Demonstrating the usage of a well known GA AMP (SharePoint Protocol Support) -->
+        <!-- Uncomment if you are using SPP (SharePoint Protocol Support) for Online Edit etc -->
         <!--
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
             <artifactId>alfresco-spp</artifactId>
             <version>${alfresco.version}</version>
+            <type>amp</type>
+        </dependency>
+        -->
+        <!-- Uncomment if you are using the RM (Records Management) module. -->
+        <!--
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>alfresco-rm</artifactId>
+            <version>${alfresco.rm.version}</version>
             <type>amp</type>
         </dependency>
         -->
@@ -77,10 +86,19 @@
                             <artifactId>repo-amp</artifactId>
                             <type>amp</type>
                         </overlay>
+                        <!-- Uncomment if you are using SPP -->
                         <!--
                         <overlay>
                             <groupId>${alfresco.groupId}</groupId>
                             <artifactId>alfresco-spp</artifactId>
+                            <type>amp</type>
+                        </overlay>
+                        -->
+                        <!-- Uncomment if you are using RM -->
+                        <!--
+                        <overlay>
+                            <groupId>${alfresco.groupId}</groupId>
+                            <artifactId>alfresco-rm</artifactId>
                             <type>amp</type>
                         </overlay>
                         -->
@@ -89,6 +107,7 @@
             </plugin>
         </plugins>
     </build>
+
     <profiles>
         <!-- Overrides the run profile to disable securecomms and add rapid development configuration -->
         <profile>
@@ -152,53 +171,6 @@
                     <version>${maven.alfresco.version}</version>
                 </dependency>
             </dependencies>
-        </profile>
-        <!-- Installs the needed runtime artifact for an RM (Records Management) project -->
-        <profile>
-            <id>rm</id>
-             <properties>
-                <alfresco.rm.artifactId>alfresco-rm</alfresco.rm.artifactId>
-            </properties>
-            <build>
-                <plugins>
-                    <!-- Fetch Alfresco RM repo AMP -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>get-rm-repo</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>copy</goal>
-                                </goals>
-                                <configuration>
-                                    <artifact>${app.rm.artifact}</artifact>
-                                    <outputDirectory>${app.rm.amps.location}</outputDirectory>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <!-- The current AMP artifact is installed into the Alfresco folder using alfresco-maven-plugin -->
-                    <plugin>
-                        <groupId>org.alfresco.maven.plugin</groupId>
-                        <artifactId>alfresco-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install-rm-repo</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <ampLocation>${app.rm.amps.location}</ampLocation>
-                            <warLocation>${app.rm.war.location}</warLocation>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
         </profile>
     </profiles>
 </project>

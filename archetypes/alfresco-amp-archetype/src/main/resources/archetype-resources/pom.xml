@@ -21,10 +21,10 @@
         For more available properties see the alfresco-sdk-parent POM.
        -->
     <properties>
-        <!-- The following are default values for data location and Alfresco version.
-             Uncomment if you need to change
-          <alfresco.version>${alfresco.community.default.version}</alfresco.version>
-          <alfresco.data.location>${alfresco.data.location}</alfresco.data.location> -->
+        <!-- The following are default values for data location and Alfresco Community version.
+             Uncomment if you need to change (Note. current default version for Enterprise edition is 5.0.0.5)
+          <alfresco.version>5.0.d</alfresco.version>
+          <alfresco.data.location>alf_data_dev</alfresco.data.location> -->
 
         <!-- This control the root logging level for all apps uncomment and change, defaults to WARN
             <app.log.root.level>WARN</app.log.root.level>

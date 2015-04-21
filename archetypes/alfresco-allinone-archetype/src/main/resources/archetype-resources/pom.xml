@@ -22,10 +22,11 @@
        For more available properties see the alfresco-sdk-parent POM.
        -->
     <properties>
-        <!-- The following are default values for data location and Alfresco version.
-             Uncomment if you need to change
-          <alfresco.version>${alfresco.community.default.version}</alfresco.version>
-          <alfresco.data.location>${alfresco.data.location}</alfresco.data.location> -->
+        <!-- The following are default values for data location, Alfresco Community version, and Records Management Module version.
+             Uncomment if you need to change (Note. current default version for Enterprise edition is 5.0.0.5)
+          <alfresco.version>5.0.d</alfresco.version>
+          <alfresco.rm.version>2.3</alfresco.rm.version>
+          <alfresco.data.location>alf_data_dev</alfresco.data.location> -->
 
         <!-- This control the root logging level for all apps uncomment and change, defaults to WARN
             <app.log.root.level>WARN</app.log.root.level>
@@ -65,27 +66,17 @@
         </plugins>
     </build>
 
-    <!-- Invoke your build with -Prun to run the multimodule project and enable rapid dev mode in your IDE.
-         See 'run' profile in the sub modules pom.xml for further behavioral details.
-     -->
     <profiles>
         <profile>
+            <!-- Invoke your build with -Prun to run the multimodule project and enable rapid dev mode in your IDE.
+                 See 'run' profile in the sub modules pom.xml for further behavioral details.
+             -->
             <id>run</id>
             <properties>
                 <!-- While running in rapid dev mode with -Prun, we don't want amp web resources 
                     to be added to the war, so we can load them directly from the AMP project (see 
                     runner/tomcat/context-*.xml for more details) -->
                 <maven.alfresco.includeWebResources>false</maven.alfresco.includeWebResources>
-            </properties>
-        </profile>
-        <!-- RM profile, manually activated, automatically adds support for RM development (dependencies) and install the RM amps in the WARs -->
-        <profile>
-            <id>rm</id>
-            <properties>
-                <alfresco.rm.version>2.3.a.1</alfresco.rm.version>
-                <app.rm.amps.location>${project.build.directory}/rm-amps</app.rm.amps.location>
-                <app.rm.war.location>${project.build.directory}/${project.build.finalName}.war</app.rm.war.location>
-                <app.rm.artifact>org.alfresco:${alfresco.rm.artifactId}:${alfresco.rm.version}:amp</app.rm.artifact>
             </properties>
         </profile>
     </profiles>

@@ -3,9 +3,9 @@
     <config evaluator="string-compare" condition="WebFramework">
         <web-framework>
             <autowire>
-                <!-- Changing this to 'development' currently breaks the Admin Console so it does not work correctly.
-                     During testing we instead disable JS compilation by overriding bean javaScriptProcessor -->
-                <mode>production</mode>
+                <!-- Changing this to 'development' currently breaks the Admin Console.
+                     Instead we make a POST to clear Share dependency caches, see 'clear-caches-refresh-ws' profile. -->
+                <mode>production</mode> <!-- not really need in the long run, used for YUI - deprecate -->
             </autowire>
 
             <!--
