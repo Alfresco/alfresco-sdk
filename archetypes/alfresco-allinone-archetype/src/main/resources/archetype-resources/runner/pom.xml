@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>${artifactId}</artifactId>
-    <name>Alfresco, Share and Solr Tomcat Runner</name>
+    <name>Alfresco, Share and Solr4 Tomcat Runner</name>
     <packaging>pom</packaging>
-    <description>Alfresco, Share and Solr Tomcat Runner</description>
+    <description>Alfresco, Share and Solr4 Tomcat Runner</description>
 
     <parent>
         <groupId>${groupId}</groupId>
@@ -25,6 +25,7 @@
 
             <build>
                 <plugins>
+                    <!-- Copy and filter webapp context files - output dir is runner/target/contexts -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-resources-plugin</artifactId>
@@ -72,7 +73,9 @@
                             <systemProperties>
                                 <solr.solr.home>${alfresco.solr.home.dir}</solr.solr.home>
                             </systemProperties>
-                            <!-- Prevent classloader delegation, each webapp loads.
+                            <!-- Should this class loader delegate to the parent class loader before searching its
+                                 own repositories (i.e. the usual Java2 delegation model) -->
+                            <!-- Prevent parent classloader delegation, each webapp loads.
                                  If set to true then you will get a truckload of Solr logging as
                                  the alf_data_dev/solr4/config/log4j-solr.properties file is not picked up.
                                  This also fixes issues with the Google Guava Library, which this tomcat plugin uses
@@ -84,7 +87,8 @@
                                     <artifactId>repo</artifactId>
                                     <version>${project.version}</version>
                                     <type>war</type>
-                                    <!-- Make sure webapp is loaded as webapp and not as just context -->
+                                    <!-- Make sure webapp is loaded with context and everything,
+                                         if set to 'false' then you will get 404 when trying to access the webapp from browser -->
                                     <asWebapp>true</asWebapp>
                                     <contextPath>/alfresco</contextPath>
                                     <contextFile>${project.build.directory}/contexts/context-repo.xml</contextFile>
@@ -105,7 +109,7 @@
                                     <type>war</type>
                                     <asWebapp>true</asWebapp>
                                     <contextPath>/solr4</contextPath>
-                                    <contextFile>${alfresco.solr.home.dir}/context.xml</contextFile>
+                                    <contextFile>${project.build.directory}/contexts/context-solr.xml</contextFile>
                                 </webapp>
                             </webapps>
                         </configuration>
@@ -114,18 +118,30 @@
             </build>
         </profile>
 
-        <!-- Runs regression tests using Alfresco Share PO (Page Object) vanilla Selenium / Webdrone driven functional test, during integration-test phase. 
-             NOTE: Assumes an already running Alfresco + Share at the default location ${app.share.url} (e.g. by invoking -Prun,regression) -->
+        <!-- Runs Share User Interface regression tests using Alfresco Share PO (Page Object) vanilla Selenium / Webdrone (WebDriver wrapper).
+             NOTE: Assumes an already running Alfresco + Share at the default location ${share.client.url}
+             (e.g. by invoking:
+                        $ mvn clean install -Prun,regression-testing
+                   to run a specific test do:
+                        $ mvn clean install -Prun,regression-testing -Dit.test=LoginPageTest
+              -->
         <profile>
-            <id>regression</id>
+            <id>regression-testing</id>
             <properties>
+                <!-- Re-configure Tomcat 7 Plugin (see run profile) to fork so we can run tests in parallel -->
+                <!-- Note. the fork option does not fork a new JVM. Rather it is run in a thread created by the
+                     Maven Launcher class (org.codehaus.plexus.classworlds.launcher.Launcher) that is invoked by the mvn command. -->
                 <maven.tomcat.fork>true</maven.tomcat.fork>
-                <!-- The URL Under Test -->
-                <app.share.url>http://localhost:8080/share</app.share.url>
+
+                <!-- Make sure we are actually testing something -->
+                <skipTests>false</skipTests>
             </properties>
             <build>
                 <plugins>
-                    <!-- Workaround for classloading issue in share-po (need to unpack it) -->
+                    <!-- Need to unpack the tests becuase of Jiras: -->
+                    <!-- https://jira.codehaus.org/browse/SUREFIRE-997 -->
+                    <!-- https://jira.codehaus.org/browse/SUREFIRE-1024 -->
+                    <!-- Workaround for classloading issue in share-po (need to unpack it)-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
@@ -137,77 +153,82 @@
                                     <goal>unpack</goal>
                                 </goals>
                                 <configuration>
-                                    <artifact>${alfresco.groupId}:share-po:${alfresco.version}:jar:tests</artifact>
+                                    <artifact>${alfresco.groupId}:share-po:${share.po.version}:jar:tests</artifact>
                                     <outputDirectory>${project.build.directory}/testng-resources</outputDirectory>
                                 </configuration>
                             </execution>
                         </executions>
                     </plugin>
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.17</version>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>2.18.1</version>
+                        <configuration>
+                            <suiteXmlFiles>
+                                <!-- Smaller test suite for Share, essential stuff like Login, Navigation, DocLib, and Search -->
+                                <suiteXmlFile>${project.build.directory}/testng-resources/testng-alfresco-share.xml</suiteXmlFile>
+
+                                <!-- Everthing takes a long time, hours-->
+                                <!--<suiteXmlFile>${project.build.directory}/testng-resources/testng.xml</suiteXmlFile> -->
+                            </suiteXmlFiles>
+                            <testClassesDirectory>${project.build.directory}/testng-resources</testClassesDirectory>
+                            <systemPropertyVariables>
+                                <!-- Where is the Alfresco Share Webapp that we are testing -->
+                                <share.target>${share.client.url}</share.target>
+                            </systemPropertyVariables>
+
+                            <!-- The out-of-the-box Alfresco Share PO test classes does not follow the *IT.java
+                                 naming convention, they use *Test.java, so need to add that -->
+                            <includes>
+                                <include>**/*Test.java</include>
+                            </includes>
+                        </configuration>
                         <executions>
                             <execution>
-                                <id>run-regression-tests</id>
-                                <goals>
-                                    <goal>test</goal>
-                                </goals>
+                                <id>regression-tests</id>
                                 <phase>integration-test</phase>
-                                <configuration>
-                                    <systemProperties>
-                                        <share.target>${app.share.url}</share.target>
-                                    </systemProperties>
-                                    <dependenciesToScan>
-                                        <dependency>${alfresco.groupId}:share-po</dependency>
-                                    </dependenciesToScan>
-                                    <additionalClasspathElements>
-                                        <additionalClasspathElement>${project.build.directory}/testng-resources</additionalClasspathElement>
-                                    </additionalClasspathElements>
-                                    <suiteXmlFiles>
-                                        <suiteXmlFile>${project.build.directory}/testng-resources/testng.xml</suiteXmlFile>
-                                    </suiteXmlFiles>
-                                </configuration>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>verify-tests</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>verify</goal>
+                                </goals>
                             </execution>
                         </executions>
                     </plugin>
+
                 </plugins>
             </build>
+
             <dependencies>
+                <!-- Bring in the Share Page Objects (PO) used in the regression tests -->
                 <dependency>
                     <groupId>${alfresco.groupId}</groupId>
                     <artifactId>share-po</artifactId>
-                    <version>${alfresco.version}</version>
+                    <version>${share.po.version}</version>
                     <scope>test</scope>
                 </dependency>
+                <!-- Bring in the Share Page Object (PO) regression tests that comes with Alfresco.
+                     These tests cover the Alfresco Share Web Application -->
                 <dependency>
                     <groupId>${alfresco.groupId}</groupId>
                     <artifactId>share-po</artifactId>
-                    <version>${alfresco.version}</version>
+                    <version>${share.po.version}</version>
                     <classifier>tests</classifier>
-                </dependency>
-                <dependency>
-                    <groupId>commons-cli</groupId>
-                    <artifactId>commons-cli</artifactId>
-                    <version>1.2</version>
                     <scope>test</scope>
                 </dependency>
+
+                <!-- Test NG is defined with test scope in share-po, so need it here too -->
+                <!-- Alfresco code creates a wrapper around Test NG -->
                 <dependency>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-beans</artifactId>
-                    <version>3.1.1.RELEASE</version>
-                    <scope>test</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-context</artifactId>
-                    <version>3.1.1.RELEASE</version>
-                    <scope>test</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.testng</groupId>
-                    <artifactId>testng</artifactId>
-                    <version>6.8.8</version>
+                    <groupId>org.alfresco.test</groupId>
+                    <artifactId>alfresco-testng</artifactId>
+                    <version>1.1</version>
                     <scope>test</scope>
                     <exclusions>
                         <exclusion>
@@ -219,7 +240,94 @@
             </dependencies>
         </profile>
 
-        
+        <!-- Runs functional domain specific tests using Alfresco Share PO (Page Object) vanilla Selenium / Webdrone (WebDriver wrapper).
+             NOTE: Assumes an already running Alfresco + Share at the default location ${share.client.url}
+             (e.g. by invoking:
+                        $ mvn clean install -Prun,functional-testing
+                   to run a specific test do:
+                        $ mvn clean install -Prun,functional-testing -Dit.test=DemoPageTestIT
+              -->
+        <profile>
+            <id>functional-testing</id>
+            <properties>
+                <!-- Re-configure Tomcat 7 Plugin (see run profile) to fork so we can run tests in parallel -->
+                <!-- Note. the fork option does not fork a new JVM. Rather it is run in a thread created by the
+                     Maven Launcher class (org.codehaus.plexus.classworlds.launcher.Launcher) that is invoked by the mvn command. -->
+                <maven.tomcat.fork>true</maven.tomcat.fork>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>2.18.1</version>
+                        <configuration>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>${project.parent.basedir}/share-amp/target/test-classes/testng.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+                            <testClassesDirectory>${project.parent.basedir}/share-amp/target/test-classes</testClassesDirectory>
+                            <systemPropertyVariables>
+                                <!-- Where is the Alfresco Share Webapp that we are testing -->
+                                <share.target>${share.client.url}</share.target>
+                            </systemPropertyVariables>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>functional-tests</id>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>verify-tests</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+
+            <dependencies>
+                <!-- Bring in the Share Page Objects (PO) used in our functional tests.
+                     Without it TestNG cannot load our test class when it uses page objects such as LoginPage -->
+                <dependency>
+                    <groupId>${alfresco.groupId}</groupId>
+                    <artifactId>share-po</artifactId>
+                    <version>${share.po.version}</version>
+                    <scope>test</scope>
+                </dependency>
+
+                <!-- Bring in the Share Page Object (PO) Tests that comes with Alfresco. It has
+                     the org.alfresco.po.share.AbstractTest class that our custom tests extend.
+                     Without it TestNG cannot load our test class -->
+                <dependency>
+                    <groupId>${alfresco.groupId}</groupId>
+                    <artifactId>share-po</artifactId>
+                    <version>${share.po.version}</version>
+                    <classifier>tests</classifier>
+                    <scope>test</scope>
+                </dependency>
+
+                <!-- Test NG is defined with test scope in share-po, so need it here too -->
+                <!-- Alfresco code creates a wrapper around Test NG -->
+                <dependency>
+                    <groupId>org.alfresco.test</groupId>
+                    <artifactId>alfresco-testng</artifactId>
+                    <version>1.1</version>
+                    <scope>test</scope>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.hamcrest</groupId>
+                            <artifactId>hamcrest-core</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+        </profile>
+
     </profiles>
-    
 </project>

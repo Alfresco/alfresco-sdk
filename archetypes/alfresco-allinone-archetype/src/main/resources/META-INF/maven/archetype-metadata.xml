@@ -56,13 +56,13 @@
 
         <module id="share-amp" dir="share-amp" name="share-amp">
             <fileSets>
-                <fileSet filtered="false" packaged="true" encoding="UTF-8">
+                <fileSet filtered="true" packaged="true" encoding="UTF-8">
                     <directory>src/main/java</directory>
                     <includes>
                         <include>**/*.java</include>
                     </includes>
                 </fileSet>
-                <fileSet filtered="false" packaged="true" encoding="UTF-8">
+                <fileSet filtered="true" packaged="true" encoding="UTF-8">
                     <directory>src/test/java</directory>
                     <includes>
                         <include>**/*.java</include>
@@ -74,7 +74,7 @@
                         <include>**</include>
                     </includes>
                 </fileSet>
-                <fileSet encoding="UTF-8" filtered="false">
+                <fileSet filtered="true" packaged="false" encoding="UTF-8">
                     <directory>src/test/resources</directory>
                     <includes>
                         <include>**</include>

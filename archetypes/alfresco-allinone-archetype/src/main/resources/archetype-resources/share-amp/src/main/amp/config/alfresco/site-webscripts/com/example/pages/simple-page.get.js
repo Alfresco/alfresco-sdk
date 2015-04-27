@@ -5,23 +5,25 @@ model.jsonModel = {
         config: {
             title: "This is a simple page"
         }
-    }, 
-    {
-        id: "MY_HORIZONTAL_WIDGET_LAYOUT",
-        name: "alfresco/layout/HorizontalWidgets",
-        config: {
-            widgetWidth: 50,
-            widgets: [
-                {
-                    name: "alfresco/logo/Logo",
-                    config: {
-                        logoClasses: "alfresco-logo-only"
+    },
+        {
+            id: "MY_HORIZONTAL_WIDGET_LAYOUT",
+            name: "alfresco/layout/HorizontalWidgets",
+            config: {
+                widgetWidth: 50,
+                widgets: [
+                    {
+                        id: "DEMO_SIMPLE_LOGO",
+                        name: "alfresco/logo/Logo",
+                        config: {
+                            logoClasses: "alfresco-logo-only"
+                        }
+                    },
+                    {
+                        id: "DEMO_SIMPLE_MSG",
+                        name: "example/widgets/TemplateWidget"
                     }
-                },
-                {
-                  name: "example/widgets/TemplateWidget"
-                }
-            ]
-        }
-    }]
+                ]
+            }
+        }]
 };

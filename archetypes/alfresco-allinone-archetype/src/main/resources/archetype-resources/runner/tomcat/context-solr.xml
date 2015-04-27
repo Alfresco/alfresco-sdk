@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context>
+    <Environment name="solr/home"        type="java.lang.String" value="${project.parent.basedir}/alf_data_dev/solr4/config/" override="true"/>
+    <Environment name="solr/model/dir"   type="java.lang.String" value="${project.parent.basedir}/alf_data_dev/solr4/config/alfrescoModels/" override="true"/>
+    <Environment name="solr/content/dir" type="java.lang.String" value="${project.parent.basedir}/alf_data_dev/solr4/data/content/" override="true"/>
+
+    <!-- Pick up static resource files from any Solr extensions, being it a JAR or an AMP,
+         by default there are no extensions, just the standard Solr webapp files.
+         (this should not include docBase)-->
+    <Resources className="org.apache.naming.resources.VirtualDirContext"
+               extraResourcePaths="/=${project.parent.basedir}/runner/target/tomcat/webapps/alfresco-solr4" />
+
+    <!-- Configure where the Solr (solr4.war) web application can load classes, test classes, and config -->
+    <!-- Solr is not customized by default so just points to standard Solr classes. -->
+    <!-- Setup the virtual class path like this:
+         1) target/classes
+         3) target/test-classes
+
+         This way mvn compile can be invoked and all changes will be picked up-->
+
+    <Loader className="org.apache.catalina.loader.VirtualWebappLoader"
+            searchVirtualFirst="true"
+            virtualClasspath="${project.parent.basedir}/runner/target/tomcat/webapps/alfresco-solr4/WEB-INF/classes" />
+
+    <!-- Load from all directories, not just when the META-INF directory is found in exploded JAR -->
+    <JarScanner scanAllDirectories="true" />
+</Context>

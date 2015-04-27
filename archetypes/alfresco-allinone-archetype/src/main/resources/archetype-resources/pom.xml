@@ -23,9 +23,9 @@
        -->
     <properties>
         <!-- The following are default values for data location, Alfresco Community version, and Records Management Module version.
-             Uncomment if you need to change (Note. current default version for Enterprise edition is 5.0.1)
-          <alfresco.version>5.0.d</alfresco.version>
-          <alfresco.rm.version>2.3</alfresco.rm.version>
+             Uncomment if you need to change (Note. current default version for Enterprise edition is @@alfresco.enterprise.default.version@@)
+          <alfresco.version>@@alfresco.community.default.version@@</alfresco.version>
+          <alfresco.rm.version>@@alfresco.rm.version@@</alfresco.rm.version>
           <alfresco.data.location>alf_data_dev</alfresco.data.location> -->
 
         <!-- This control the root logging level for all apps uncomment and change, defaults to WARN
@@ -36,6 +36,13 @@
              for embedded run, defaults to the 'local' environment. See SDK Parent POM for more info.
         <env>local</env>
         -->
+
+        <!-- The Alfresco Share web application is accessible via this URL -->
+        <share.client.url>http://localhost:8080/share</share.client.url>
+
+        <!-- For the Regression tests and Functional tests
+             we are using the following Share Page Objects (PO) release -->
+        <share.po.version>5.1-SNAPSHOT</share.po.version>
     </properties>
 
     <!-- Here we realize the connection with the Alfresco selected platform (e.g.version and edition) -->

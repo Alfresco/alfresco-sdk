@@ -86,7 +86,6 @@
                         <configuration>
                             <regex>false</regex>
                             <includes>
-                                <include>${alfresco.solr.home.dir}/context.xml</include>
                                 <include>${alfresco.solr.home.dir}/archive-SpacesStore/conf/solrcore.properties</include>
                                 <include>${alfresco.solr.home.dir}/workspace-SpacesStore/conf/solrcore.properties</include>
                             </includes>
