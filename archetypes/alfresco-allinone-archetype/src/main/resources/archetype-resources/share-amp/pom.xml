@@ -23,9 +23,6 @@
              Allowed values: alfresco | share. In this case it's configured to use OOTB share -->
         <alfresco.client.war>share</alfresco.client.war>
 
-        <!-- Since Alfresco Repository is already running on port 8080, we run Share on port 8081 -->
-        <maven.tomcat.port>8081</maven.tomcat.port>
-
         <!-- Used in share-config-custom.xml. By default points to standard location of Alfresco Repository -->
         <alfresco.repo.url>http://localhost:8080/alfresco</alfresco.repo.url>
 

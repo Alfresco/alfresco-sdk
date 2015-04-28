@@ -151,6 +151,10 @@
         -->
         <maven.alfresco.version>2.0.1-SNAPSHOT</maven.alfresco.version>
 
+        <!-- Setup the default Embedded Tomcat port for use by the tomcat7-maven-plugin so
+             it can be accessed from the Groovy scripts and other places -->
+        <maven.tomcat.port>8080</maven.tomcat.port>
+
         <!-- Sets the H2 Database version to use.
              Note. Upgrading to 1.4.186 did not work, on second start (after initial db creation etc) it will not connect... -->
         <h2.version>1.4.185</h2.version>
@@ -407,6 +411,25 @@
                         </execution>
                     </executions>
                 </plugin>
+                <plugin>
+                    <groupId>org.codehaus.groovy.maven</groupId>
+                    <artifactId>gmaven-plugin</artifactId>
+                    <version>1.0</version>
+                    <executions>
+                        <execution>
+                            <!-- Important to execute the Groovy scripts in the compile phase,
+                                 otherwise the files will be copied after this and the web script
+                                 refresh will not be recognized.
+
+                                 See the refresh-share and refresh-repo profiles.
+                            -->
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>execute</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -496,12 +519,73 @@
         </profile>
 
         <!--
-          Clear JS & CSS Dependency Caches for Share, Refresh Repo & Share Web Scripts.
+          Refresh Spring Surf Web Scripts and clear JS & CSS Dependency Caches for Share.
           You will have to activate this profile manually while you are compiling.
-          For example: $mvn compile -Pclear-caches-refresh-ws
+          For example: $mvn compile -Prefresh-share
           -->
         <profile>
-            <id>clear-caches-refresh-ws</id>
+            <id>refresh-share</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.codehaus.groovy.modules.http-builder</groupId>
+                    <artifactId>http-builder</artifactId>
+                    <version>0.7.1</version>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.groovy.maven</groupId>
+                        <artifactId>gmaven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <configuration>
+                                    <properties>
+                                        <tomcatPort>${maven.tomcat.port}</tomcatPort>
+                                    </properties>
+                                    <!-- See pluginManagement for the rest of the configuration -->
+                                    <source>
+                                        <![CDATA[
+                                        import groovyx.net.http.RESTClient
+                                        import groovyx.net.http.HttpResponseException
+                                        import org.apache.http.conn.HttpHostConnectException
+                                        import static groovyx.net.http.ContentType.*
+
+                                        try {
+                                            def share = new RESTClient('http://localhost:' + project.properties.tomcatPort + '/share/')
+
+                                            // Clear Alfresco Share Dependency Caches for JS, CSS, Templates
+                                            def clearDependencyCachesPath = 'page/caches/dependency/clear'
+                                            share.auth.basic 'admin', 'admin'
+                                            def resp = share.post(path: clearDependencyCachesPath)
+                                            log.info "\nRequest: Alfresco Share Clear Dependency Caches. Response status: ${resp.status}"
+
+                                            // Refresh Share Web Scripts
+                                            refreshWebScriptsPath = 'page/index'
+                                            resp = share.post(path: refreshWebScriptsPath, body: [reset: 'on', submit: 'Refresh Web Scripts'], requestContentType: URLENC)
+                                            log.info "\nRequest: Alfresco Share Refresh Web Scripts. Response status: ${resp.status}"
+                                        } catch (HttpHostConnectException hcex) {
+                                            println "Embedded Tomcat is not running, skipping Share Webapp Refresh."
+                                        } catch (HttpResponseException ex) {
+                                            println "Unexpected response error: ${ex.statusCode}"
+                                        }
+                                        ]]>
+                                    </source>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!--
+          Refresh Repository Web Scripts.
+          You will have to activate this profile manually while you are compiling.
+          For example: $mvn compile -Prefresh-repo
+          -->
+        <profile>
+            <id>refresh-repo</id>
             <dependencies>
                 <dependency>
                     <groupId>org.codehaus.groovy.modules.http-builder</groupId>
@@ -517,42 +601,28 @@
                         <version>1.0</version>
                         <executions>
                             <execution>
-                                <!-- Important to do this in the compile phase, otherwise the files will be copied
-                                     after this and the web script refresh will not be recognized
-                                -->
-                                <phase>compile</phase>
-                                <goals>
-                                    <goal>execute</goal>
-                                </goals>
                                 <configuration>
+                                    <properties>
+                                        <tomcatPort>${maven.tomcat.port}</tomcatPort>
+                                    </properties>
+                                    <!-- See pluginManagement for the rest of the configuration -->
                                     <source>
                                         <![CDATA[
                                         import groovyx.net.http.RESTClient
                                         import groovyx.net.http.HttpResponseException
+                                        import org.apache.http.conn.HttpHostConnectException
                                         import static groovyx.net.http.ContentType.*
 
                                         try {
-                                            def alfresco = new RESTClient('http://localhost:8080/alfresco/')
+                                            def alfresco = new RESTClient('http://localhost:' + project.properties.tomcatPort + '/alfresco/')
 
                                             // Refresh Alfresco Repo Web Scripts
                                             def refreshWebScriptsPath = 's/index'
                                             alfresco.auth.basic 'admin', 'admin'
                                             def resp = alfresco.post(path: refreshWebScriptsPath, body: [reset: 'on', submit: 'Refresh Web Scripts'], requestContentType: URLENC)
                                             log.info "\nRequest: Alfresco Repo Refresh Web Scripts. Response status: ${resp.status}"
-
-                                            def share = new RESTClient('http://localhost:8080/share/')
-
-                                            // Clear Alfresco Share Dependency Caches for JS, CSS, Templates
-                                            def clearDependencyCachesPath = 'page/caches/dependency/clear'
-                                            share.auth.basic 'admin', 'admin'
-                                            resp = share.post(path: clearDependencyCachesPath)
-                                            log.info "\nRequest: Alfresco Share Clear Dependency Caches. Response status: ${resp.status}"
-
-                                            // Refresh Share Web Scripts
-                                            refreshWebScriptsPath = 'page/index'
-                                            share.auth.basic 'admin', 'admin'
-                                            resp = share.post(path: refreshWebScriptsPath, body: [reset: 'on', submit: 'Refresh Web Scripts'], requestContentType: URLENC)
-                                            log.info "\nRequest: Alfresco Share Refresh Web Scripts. Response status: ${resp.status}"
+                                        } catch (HttpHostConnectException hcex) {
+                                            println "Embedded Tomcat is not running, skipping Repo Webapp Refresh."
                                         } catch (HttpResponseException ex) {
                                             println "Unexpected response error: ${ex.statusCode}"
                                         }
