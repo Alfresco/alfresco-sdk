@@ -1,5 +1,7 @@
 #!/bin/bash
-# Downloads the spring-loaded lib if not existing and runs repository AMP
+# Downloads the spring-loaded lib if not existing and      
+# runs the Repo AMP applied to Alfresco WAR.           
+# Note. the Share WAR is not deployed.              
 springloadedfile=~/.m2/repository/org/springframework/springloaded/@@springloaded.version@@/springloaded-@@springloaded.version@@.jar
 
 if [ ! -f $springloadedfile ]; then
