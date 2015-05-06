@@ -1,85 +1,59 @@
 # [![Alfresco SDK logo](https://github.com/Alfresco/alfresco-sdk/raw/master/src/site/resources/img/alfresco-maven-logo.jpg)](#features) Alfresco SDK
 
-SDK for Alfresco Development, Testing, packaging and custom project lifecycle management based on Apache Maven. 
+This is the home of the source code for the Alfresco SDK. The Alfresco SDK is used by developers to build extensions for the Alfresco content management system. It is maven based and enables Rapid Application Development (RAD) and Test Driven Development (TDD).
 
-Includes support for rapid and standard development, testing, packaging, versioning and release of your Alfresco integration and extension projects. 
+## Gettin Started
 
-## SDK 2.0.0 available in Maven Central
-
-The SDK 2.0.0 is finally [released in Maven Central](http://search.maven.org/#search|ga|1|alfresco%20sdk). 
-
-- *To create a new Alfresco project*: Run a 
-
-```bash
-mvn archetype:generate -Dfilter=org.alfresco:
-```
-
-and use one of the available archetypes (AMP, Share AMP, All in One)
-
-- *To use the SDK in your project:*  Add the below parent reference snippet to the existing project (*NOTE*: you might need folder layout changes) to inherit features from Alfresco SDK POM:
-
-```xml
-<parent>
-   <groupId>org.alfresco.maven</groupId>
-   <artifactId>alfresco-sdk-parent</artifactId>
-   <version>2.0.0</version>
-</parent>
-
-```
-## Resources 
-
-### Alfresco Official Docs
-
-- Documentation for the SDK on Alfresco Community (latest) is available [here](http://docs.alfresco.com/community/concepts/alfresco-sdk-intro.html)
-
-- Documentation for the SDK on Alfresco Enterprise (5.0) is available [here](http://docs.alfresco.com/5.0/concepts/alfresco-sdk-intro.html)
-
-### Developer Documentation
-
-**SDK 2.x**: Full developer (Maven) documentation is available at the [Alfresco SDK site](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-sdk-aggregator/latest/index.html).
-
-
-
-# Check the SDK in action!
-
-For an overview of the SDK potential check out this video:
-
-[![Alfresco SDK 2.x howto](http://img.youtube.com/vi/utYZaVe9Nd0/0.jpg)](https://www.youtube.com/watch?v=utYZaVe9Nd0)
-
-The SDK is composed of:
-
-- An [SDK Parent POM](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-lifecycle-aggregator/latest/poms/alfresco-sdk-parent/index.html) which you can use in your projects to enable rapid Alfresco development features
-- An [Alfresco Platform Distribution POM](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-platform-distribution/latest/index.html) which pre-configures versions of Alfresco and common 3rd party dependency libraries, for stability purposes
-- A [Maven Alfresco Plugin](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-lifecycle-aggregator/latest/plugins/alfresco-maven-plugin/index.html) which provides AMP packaging and installation facilities (a la MMT) and other common goals for Alfresco development
-- A number of *Maven Archetypes* (sample projects) including:
-	1. [Alfresco Repository AMP Archetype](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-lifecycle-aggregator/latest/archetypes/alfresco-amp-archetype/index.html)
-	2. [Alfresco Share AMP Archetype](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-lifecycle-aggregator/latest/archetypes/share-amp-archetype/index.html)
-	3. [Alfresco All-in-One Archetype](https://artifacts.alfresco.com/nexus/content/groups/public/alfresco-lifecycle-aggregator/latest/archetypes/alfresco-allinone-archetype/index.html)
-
+To get started visit the offical [Alfresco Documentation](http://docs.alfresco.com/community/concepts/alfresco-sdk-intro.html). 
 
 ### Samples 
 
-Advanced sample projects are maintained by @ohej in the [Alfresco SDK Samples project](https://github.com/Alfresco/alfresco-sdk-samples/).
+Sample extension projects that uses the SDK, maintained by @ohej in the [Alfresco SDK Samples project](https://github.com/Alfresco/alfresco-sdk-samples/).
 
+### Want to get up to speed quickly, check out this video
 
-### Contribute
+For an overview of the SDK potential check out this video:
+[TODO]
+[![Alfresco SDK 2.1 howto](http://img.youtube.com/vi/utYZaVe9Nd0/0.jpg)](https://www.youtube.com/watch?v=utYZaVe9Nd0)
+
+## Reporting Issues and getting Support
 
 Report issues (and contribute!) [here](https://github.com/Alfresco/alfresco-sdk/issues?milestone=1&state=open). You can also join the [Alfresco list on Google Groups](https://groups.google.com/forum/#!forum/maven-alfresco).
 
-## Maven Repositories
+## For Developers that want to contribute to the SDK
 
-The Alfresco SDK is released in Maven Central as of version 2.0-beta-1. 
+The following section descibes how to build the SDK from source and how to generate projects based on the local build.
 
-Alfresco (Community and Enterprise) artifacts are instead hosted in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/nexus/). 
+### Prerequisites
+Make sure you have setup and configured Spring Loaded, Maven, JDK, etc, see [Alfresco Documentation](http://docs.alfresco.com/5.0/concepts/alfresco-sdk-installing-prerequisite-software.html). 
 
-Alfresco Community artifacts (JARs, WARs, AMPs, poms) and SDK artifacts are publicly available. 
+### Building from Source
 
-for Enterprise and Premiere licensed software access you need to get credential via the Alfresco Enterprise Support. See [public docs](http://docs.alfresco.com/4.2/concepts/dev-extensions-maven-sdk-tutorials-alfresco-enterprise.html) or [this KB (login required)](https://myalfresco.force.com/support/articles/en_US/Technical_Article/Where-can-I-find-the-repository-for-Enterprise-Maven-artifacts) for more details.
+Get the SDK source:
+```
+$ git clone https://github.com/Alfresco/alfresco-sdk.git
+```
 
-## License and Support
-This project is released under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html). It's a community driven project which is supported for Alfresco Development (please refere to the official [Alfresco Documentation](http://docs.alfresco.com/community/concepts/alfresco-sdk-intro.html) for supported features.
+Step into the parent SDK project:
+```
+$ cd alfresco-sdk
+```
+
+Build the SDK and skip tests (skipping tests is useful if you don't have access to Enterprise artifacts):
+```
+alfresco-sdk$ mvn clean install -Dmaven.test.skip=true
+```
+
+### Generating an extension project from the local build
+```
+$ mvn archetype:generate -DarchetypeCatalog=local
+```
+
+## License
+This project is released under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html). 
 
 ## News
+- 2015-05-08: SDK 2.1.0-beta-1 released to Maven Central
 - 2014-12-20: SDK 2.0.0 in staging. If you want early access to the release candidate build and want to participate to the testing process check [this page](https://github.com/Alfresco/alfresco-sdk/wiki/SDK-Supported-Features-and-Test-plan) and report issues [here](https://github.com/Alfresco/alfresco-sdk/issues).
 - 2014-09-10: SDK 2.0.0-beta-4 released to Maven Central and in the [Archetype Catalog](http://repo1.maven.org/maven2/archetype-catalog.xml)!
 - 2014-09-09: SDK 2.0.0-beta-3 released to Maven Central
