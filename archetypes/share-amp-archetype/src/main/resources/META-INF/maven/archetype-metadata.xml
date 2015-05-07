@@ -56,6 +56,7 @@
             <directory></directory>
             <includes>
                 <include>run.sh</include>
+                <include>run.bat</include>
             </includes>
         </fileSet>
     </fileSets>

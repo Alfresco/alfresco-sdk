@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="1" parallel="tests" preserve-order="true" verbose="6" name="Alfresco Share UI Basic Regression Test">
+    <groups>
+        <run>
+            <include name="unit"/>
+            <include name="alfresco-one"/>
+            <exclude name=".*Bug42"/>
+            <exclude name=".*Bug"/>
+            <exclude name="chromeOnly"/>
+            <exclude name="Hybrid"/>
+            <exclude name="download"/>
+            <exclude name="communityIssue"/>
+        </run>
+    </groups>
+    <test name="LoginPageTest">
+        <classes>
+            <class name="org.alfresco.po.share.LoginPageTest" />
+        </classes>
+    </test>
+    <test name="NavigationBarTest">
+        <classes>
+            <class name="org.alfresco.po.share.NavigationBarTest" />
+        </classes>
+    </test>
+    <test name="LiveSearchDropdownTest">
+        <classes>
+            <class name="org.alfresco.po.share.search.LiveSearchDropdownTest" />
+        </classes>
+    </test>
+    <test name="FacetedSearchResultsPageTest">
+        <classes>
+            <class name="org.alfresco.po.share.search.FacetedSearchResultsPageTest" />
+        </classes>
+    </test>
+    <test name="DocumentDetailsPageTest">
+        <classes>
+            <class name="org.alfresco.po.share.site.document.DocumentDetailsPageTest"/>
+        </classes>
+    </test>
+    <!-- TODO: fix this, currently does not work
+    <test name="DocumentLibraryPageTest">
+        <classes>
+            <class name="org.alfresco.po.share.site.document.DocumentLibraryPageTest"/>
+        </classes>
+    </test>
+    -->
+    <test name="FileDirectoryInfoTest">
+        <classes>
+            <class name="org.alfresco.po.share.site.document.FileDirectoryInfoTest">
+                <methods>
+                    <!-- these currently take longer than 60 seconds for page rendering... -->
+                    <exclude name="test107TagsForFolder" />
+                    <exclude name="test114TagsForFile" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="FolderDetailsPageTest">
+        <classes>
+            <class name="org.alfresco.po.share.site.document.FolderDetailsPageTest"/>
+        </classes>
+    </test>
+    <test name="ManagePermissionsTest">
+        <classes>
+            <class name="org.alfresco.po.share.site.document.ManagePermissionsTest"/>
+        </classes>
+    </test>
+    <test name="InviteMembersPageTest">
+        <classes>
+            <class name="org.alfresco.po.share.site.InviteMembersPageTest" />
+        </classes>
+    </test>
+    <test name="SiteFinderPageTest">
+        <classes>
+            <class name="org.alfresco.po.share.site.SiteFinderPageTest" />
+        </classes>
+    </test>
+</suite>

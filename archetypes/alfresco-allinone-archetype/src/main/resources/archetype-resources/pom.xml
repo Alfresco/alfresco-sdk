@@ -39,10 +39,6 @@
 
         <!-- The Alfresco Share web application is accessible via this URL -->
         <share.client.url>http://localhost:8080/share</share.client.url>
-
-        <!-- For the Regression tests and Functional tests
-             we are using the following Share Page Objects (PO) release -->
-        <share.po.version>5.1-SNAPSHOT</share.po.version>
     </properties>
 
     <!-- Here we realize the connection with the Alfresco selected platform (e.g.version and edition) -->

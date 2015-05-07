@@ -8,7 +8,7 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 @echo off
 
-set springloadedfile=%HOME%\.m2\repository\org\springframework\springloaded\1.2.3.RELEASE\springloaded-1.2.3.RELEASE.jar
+set springloadedfile=%HOME%\.m2\repository\org\springframework\springloaded\@@springloaded.version@@\springloaded-@@springloaded.version@@.jar
 
 if not exist %springloadedfile% (
   mvn validate -Psetup

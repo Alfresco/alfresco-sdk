@@ -129,6 +129,12 @@
                     </includes>
                 </fileSet>
                 <fileSet encoding="UTF-8" filtered="false">
+                    <directory>test-ng</directory>
+                    <includes>
+                        <include>**</include>
+                    </includes>
+                </fileSet>
+                <fileSet encoding="UTF-8" filtered="false">
                     <directory>src/main/webapp</directory>
                     <includes>
                         <include>**</include>
@@ -143,6 +149,7 @@
             <directory></directory>
             <includes>
                 <include>run.sh</include>
+                <include>run.bat</include>
             </includes>
         </fileSet>
     </fileSets>

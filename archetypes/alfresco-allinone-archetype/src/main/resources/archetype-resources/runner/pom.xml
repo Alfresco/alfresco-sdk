@@ -153,7 +153,7 @@
                                     <goal>unpack</goal>
                                 </goals>
                                 <configuration>
-                                    <artifact>${alfresco.groupId}:share-po:${share.po.version}:jar:tests</artifact>
+                                    <artifact>${alfresco.groupId}:share-po:${alfresco.version}:jar:tests</artifact>
                                     <outputDirectory>${project.build.directory}/testng-resources</outputDirectory>
                                 </configuration>
                             </execution>
@@ -167,10 +167,9 @@
                         <configuration>
                             <suiteXmlFiles>
                                 <!-- Smaller test suite for Share, essential stuff like Login, Navigation, DocLib, and Search -->
-                                <suiteXmlFile>${project.build.directory}/testng-resources/testng-alfresco-share.xml</suiteXmlFile>
-
-                                <!-- Everthing takes a long time, hours-->
-                                <!--<suiteXmlFile>${project.build.directory}/testng-resources/testng.xml</suiteXmlFile> -->
+                                <!-- Currently using our own config to be able to comment out one test class
+                                    <suiteXmlFile>${project.build.directory}/testng-resources/testng-alfresco-share.xml</suiteXmlFile> -->
+                                <suiteXmlFile>${project.basedir}/test-ng/testng-alfresco-share.xml</suiteXmlFile>
                             </suiteXmlFiles>
                             <testClassesDirectory>${project.build.directory}/testng-resources</testClassesDirectory>
                             <systemPropertyVariables>
@@ -210,17 +209,61 @@
                 <dependency>
                     <groupId>${alfresco.groupId}</groupId>
                     <artifactId>share-po</artifactId>
-                    <version>${share.po.version}</version>
+                    <version>${alfresco.version}</version>
                     <scope>test</scope>
+
+                    <!-- Exclude version 2.39.0 of selenium that does not work with latest FF browsers, we include
+                       version 2.45 later on here in this profile -->
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.seleniumhq.selenium</groupId>
+                            <artifactId>selenium-java</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.seleniumhq.selenium</groupId>
+                            <artifactId>selenium-server</artifactId>
+                        </exclusion>
+                    </exclusions>
                 </dependency>
                 <!-- Bring in the Share Page Object (PO) regression tests that comes with Alfresco.
                      These tests cover the Alfresco Share Web Application -->
                 <dependency>
                     <groupId>${alfresco.groupId}</groupId>
                     <artifactId>share-po</artifactId>
-                    <version>${share.po.version}</version>
+                    <version>${alfresco.version}</version>
                     <classifier>tests</classifier>
                     <scope>test</scope>
+
+                    <!-- Exclude version 2.39.0 of selenium that does not work with latest FF browsers, we include
+                       version 2.45 later on here in this profile -->
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.seleniumhq.selenium</groupId>
+                            <artifactId>selenium-java</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.seleniumhq.selenium</groupId>
+                            <artifactId>selenium-server</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+
+                <!-- Make sure we are running with newer selenium that works with newest FF (newer than 2.39.0) -->
+                <dependency>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-java</artifactId>
+                    <version>2.45.0-alfresco</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-server</artifactId>
+                    <version>2.45.0-alfresco</version>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.mortbay.jetty</groupId>
+                            <artifactId>servlet-api-2.5</artifactId>
+                        </exclusion>
+                    </exclusions>
                 </dependency>
 
                 <!-- Test NG is defined with test scope in share-po, so need it here too -->
@@ -297,8 +340,21 @@
                 <dependency>
                     <groupId>${alfresco.groupId}</groupId>
                     <artifactId>share-po</artifactId>
-                    <version>${share.po.version}</version>
+                    <version>${alfresco.version}</version>
                     <scope>test</scope>
+
+                    <!-- Exclude version 2.39.0 of selenium that does not work with latest FF browsers, we include
+                       version 2.45 later on here in this profile -->
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.seleniumhq.selenium</groupId>
+                            <artifactId>selenium-java</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.seleniumhq.selenium</groupId>
+                            <artifactId>selenium-server</artifactId>
+                        </exclusion>
+                    </exclusions>
                 </dependency>
 
                 <!-- Bring in the Share Page Object (PO) Tests that comes with Alfresco. It has
@@ -307,9 +363,40 @@
                 <dependency>
                     <groupId>${alfresco.groupId}</groupId>
                     <artifactId>share-po</artifactId>
-                    <version>${share.po.version}</version>
+                    <version>${alfresco.version}</version>
                     <classifier>tests</classifier>
                     <scope>test</scope>
+
+                    <!-- Exclude version 2.39.0 of selenium that does not work with latest FF browsers, we include
+                       version 2.45 later on here in this profile -->
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.seleniumhq.selenium</groupId>
+                            <artifactId>selenium-java</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.seleniumhq.selenium</groupId>
+                            <artifactId>selenium-server</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+
+                <!-- Make sure we are running with newer selenium that works with newest FF (newer than 2.39.0) -->
+                <dependency>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-java</artifactId>
+                    <version>2.45.0-alfresco</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-server</artifactId>
+                    <version>2.45.0-alfresco</version>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.mortbay.jetty</groupId>
+                            <artifactId>servlet-api-2.5</artifactId>
+                        </exclusion>
+                    </exclusions>
                 </dependency>
 
                 <!-- Test NG is defined with test scope in share-po, so need it here too -->
