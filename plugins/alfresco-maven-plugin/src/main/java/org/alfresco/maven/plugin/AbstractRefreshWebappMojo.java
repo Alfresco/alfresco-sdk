@@ -61,13 +61,13 @@ public abstract class AbstractRefreshWebappMojo extends AbstractMojo {
     /**
      * The hostname for where the Alfresco Tomcat server is running.
      */
-    @Parameter(property = "refreshHost", defaultValue = DEFAULT_USERNAME, alias = "refreshHost")
+    @Parameter(property = "refreshHost", defaultValue = DEFAULT_HOST, alias = "refreshHost")
     private String _host = DEFAULT_HOST;
 
     /**
      * The port number for where the Alfresco Tomcat server is running.
      */
-    @Parameter(property = "refreshPort", defaultValue = DEFAULT_USERNAME, alias = "refreshPort")
+    @Parameter(property = "refreshPort", defaultValue = DEFAULT_PORT, alias = "refreshPort")
     private String _port = DEFAULT_PORT;
 
     /**
