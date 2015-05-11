@@ -66,6 +66,10 @@
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>yuicompressor-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.alfresco.maven.plugin</groupId>
+                <artifactId>alfresco-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 
