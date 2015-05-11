@@ -21,7 +21,7 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
 /**
- * Refresh Alfresco Share (share.war) Mojo.
+ * Refresh Alfresco Repo and Share Mojo.
  * Will refresh the Web Script container so new and changed
  * Spring Surf Web Scripts are detected.
  * Will also clear the dependency caches for web resources (CSS, JS, etc).
@@ -33,13 +33,53 @@ import org.apache.maven.plugins.annotations.Mojo;
  * @author martin.bergljung@alfresco.com
  * @since 2.1.0
  */
-@Mojo(name = "refresh-share", defaultPhase = LifecyclePhase.PROCESS_RESOURCES, threadSafe = true, requiresProject = true)
-public class RefreshShareWebappMojo extends AbstractRefreshWebappMojo {
+@Mojo(name = "refresh", threadSafe = true, defaultPhase = LifecyclePhase.PROCESS_RESOURCES, aggregator = true)
+public class RefreshMojo extends AbstractRefreshWebappMojo {
+
 
     /**
      * Call the Share Webapp and refresh web scripts and clear caches.
      */
     protected void executeRefresh() {
-        _refreshShare();
+        switch (refreshMode) {
+            case "auto":
+                _autoRefresh();
+                break;
+
+            case "both":
+                _refreshRepo();
+                _refreshShare();
+                break;
+
+            case "share":
+                _refreshShare();
+                break;
+
+            case "repo":
+                _refreshRepo();
+                break;
+
+            default:
+                break;
+
+        }
+
+    }
+
+    private void _autoRefresh() {
+
+        if ( ! this.project.getPackaging().equalsIgnoreCase("amp") ) {
+            _refreshRepo();
+            _refreshShare();
+            return;
+        }
+
+        if ( this.alfrescoClientWar.startsWith("alfresco") ) {
+            _refreshRepo();
+        } else {
+            _refreshShare();
+        }
+
+
     }
 }

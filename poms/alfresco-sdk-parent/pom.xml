@@ -227,13 +227,6 @@
                     <extensions>true</extensions>
                     <configuration>
                         <snapshotToTimestamp>true</snapshotToTimestamp>
-                        <refreshHost>localhost</refreshHost>
-                        <refreshPort>${maven.tomcat.port}</refreshPort>
-                        <refreshRepoUrl>/alfresco/service/index</refreshRepoUrl>
-                        <refreshShareUrl>/share/page/index</refreshShareUrl>
-                        <clearCacheShareUrl>/share/page/caches/dependency/clear</clearCacheShareUrl>
-                        <refreshUsername>admin</refreshUsername>
-                        <refreshPassword>admin</refreshPassword>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -382,6 +375,7 @@
                                             <goal>set-version</goal>
                                             <goal>refresh-share</goal>
                                             <goal>refresh-repo</goal>
+                                            <goal>refresh</goal>
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
@@ -882,7 +876,7 @@
 
 
         <profile>
-            <id>refresh-repo</id>
+            <id>refresh-both</id>
             <activation>
                 <file>
                     <exists>src/main/amp/module.properties</exists>
@@ -895,10 +889,10 @@
                         <artifactId>alfresco-maven-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>refresh-repo</id>
+                                <id>refresh-webscripts-repo-and-share</id>
                                 <phase>process-resources</phase>
                                 <goals>
-                                    <goal>refresh-repo</goal>
+                                    <goal>refresh</goal>
                                 </goals>
                             </execution>
                         </executions>
@@ -908,31 +902,6 @@
         </profile>
 
 
-        <profile>
-            <id>refresh-share</id>
-            <activation>
-                <file>
-                    <exists>src/main/amp/module.properties</exists>
-                </file>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.alfresco.maven.plugin</groupId>
-                        <artifactId>alfresco-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>refresh-share</id>
-                                <phase>process-resources</phase>
-                                <goals>
-                                    <goal>refresh-share</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
 
 
         <!-- ====================================================================================================

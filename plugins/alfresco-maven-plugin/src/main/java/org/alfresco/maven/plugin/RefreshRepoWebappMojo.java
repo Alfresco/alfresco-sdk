@@ -19,7 +19,6 @@ package org.alfresco.maven.plugin;
 
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
-import org.apache.maven.plugins.annotations.Parameter;
 
 /**
  * Refresh Alfresco Repository (alfresco.war) Mojo.
@@ -33,23 +32,11 @@ import org.apache.maven.plugins.annotations.Parameter;
  * @author martin.bergljung@alfresco.com
  * @since 2.1.0
  */
-@Mojo(name = "refresh-repo", defaultPhase = LifecyclePhase.COMPILE)
+@Mojo(name = "refresh-repo", defaultPhase = LifecyclePhase.PROCESS_RESOURCES, requiresProject = true, threadSafe = true)
 public class RefreshRepoWebappMojo extends AbstractRefreshWebappMojo {
-    public static final String DEFAULT_REPO_REFRESH_URL = "/alfresco/service/index";
-
-    /**
-     * The URL to send the POST to when you want to refresh Alfresco Repo Web Scripts container.
-     */
-    @Parameter(property = "refreshRepoUrl", required = true, alias = "refreshRepoUrl")
-    private String _refreshRepoUrl = DEFAULT_REPO_REFRESH_URL;
-
-    public RefreshRepoWebappMojo() {
-        setRefreshUrl(_refreshRepoUrl);
-        setWebappName("Alfresco Repository");
-    }
 
     @Override
     protected void executeRefresh() {
-        refreshWebScripts();
+        _refreshRepo();
     }
 }
