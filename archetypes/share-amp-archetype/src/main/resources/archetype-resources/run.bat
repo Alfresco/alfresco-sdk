@@ -14,7 +14,7 @@ if not exist %springloadedfile% (
   mvn validate -Psetup
 )
 
-set MAVEN_OPTS=-javaagent:"%springloadedfile%" -noverify -Xms256m -Xmx2G -XX:PermSize=300m
+set MAVEN_OPTS=-javaagent:"%springloadedfile%" -noverify
 
 mvn integration-test -Pamp-to-war -nsu
 :: mvn integration-test -Pamp-to-war 
