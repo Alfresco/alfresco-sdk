@@ -409,6 +409,7 @@
                             </goals>
                             <configuration>
                                 <excludes>
+                                    <exclude>**/webscripts/**</exclude>
                                     <exclude>**/site-webscripts/**</exclude>
                                     <exclude>**/*.lib.js</exclude>
                                     <exclude>**/*.css</exclude>
