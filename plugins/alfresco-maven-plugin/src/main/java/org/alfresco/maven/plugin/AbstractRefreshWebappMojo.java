@@ -67,57 +67,52 @@ public abstract class AbstractRefreshWebappMojo extends AbstractMojo {
      * repo  - Forces only to refresh repo
      * none - Disables refreshing web scripts
      */
-    @Parameter(property = "maven.alfresco.refreshMode", defaultValue = "auto")
+    @Parameter(property = "maven.alfresco.refresh.mode", defaultValue = "auto")
     protected String refreshMode;
 
     /**
      * The hostname for where the Alfresco Tomcat server is running.
      */
-    @Parameter(property = "maven.alfresco.refreshHost", defaultValue = "localhost")
+    @Parameter(property = "maven.alfresco.refresh.host", defaultValue = "localhost")
     protected String refreshHost;
 
     /**
      * The port number for where the Alfresco Tomcat server is running.
      */
-    @Parameter(property = "maven.alfresco.refreshPort", defaultValue = "${maven.tomcat.port}")
+    @Parameter(property = "maven.alfresco.refresh.port", defaultValue = "${maven.tomcat.port}")
     private String refreshPort;
 
     /**
      * The username for authenticating against Alfresco Repo.
      */
-    @Parameter(property = "maven.alfresco.refreshUsername", defaultValue = "admin")
+    @Parameter(property = "maven.alfresco.refresh.username", defaultValue = "admin")
     private String refreshUsername;
 
     /**
      * The password for authenticating against Alfresco Repo.
      */
-    @Parameter(property = "maven.alfresco.refreshPassword", defaultValue = "admin")
+    @Parameter(property = "maven.alfresco.refresh.password", defaultValue = "admin")
     protected String refreshPassword;
 
     /**
      * The URL to send the POST to when you want to refresh Alfresco Repo Web Scripts container.
      */
-    @Parameter(property = "maven.alfresco.refreshRepoUrl", defaultValue = "/alfresco/service/index")
+    @Parameter(property = "maven.alfresco.refresh.repoUrl", defaultValue = "/alfresco/service/index")
     protected String refreshRepoUrl;
 
 
     /**
      * The URL to send the POST to when you want to refresh Alfresco Share Spring Surf Web Scripts container.
      */
-    @Parameter(property = "maven.alfresco.refreshShareUrl", defaultValue = "/share/page/index")
+    @Parameter(property = "maven.alfresco.refresh.shareUrl", defaultValue = "/share/page/index")
     protected String refreshShareUrl;
 
     /**
      * The URL to send the POST to when you want to clear dependency caches for the Alfresco Share webapp.
      */
-    @Parameter(property = "maven.alfresco.clearCacheShareUrl", defaultValue = "/share/page/caches/dependency/clear")
+    @Parameter(property = "maven.alfresco.refresh.clearCacheShareUrl", defaultValue = "/share/page/caches/dependency/clear")
     protected String clearCacheShareUrl;
 
-
-    /**
-     * The Clear Dependency Caches URL to call, currently only applicable to Share.
-     */
-    protected String clearDependencyCachesUrl;
 
     /**
      * The name of the web application we are refreshing, just for logging purpose
