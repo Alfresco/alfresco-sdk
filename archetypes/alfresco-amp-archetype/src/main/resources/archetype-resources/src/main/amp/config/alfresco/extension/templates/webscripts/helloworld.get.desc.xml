@@ -1,5 +1,5 @@
 <webscript>
-    <shortname>Javascript Sample Webscript</shortname>
+    <shortname>Hello World Sample Webscript</shortname>
     <description>Hands back a greeting</description>
     <url>/sample/helloworld</url>
     <authentication>user</authentication>
