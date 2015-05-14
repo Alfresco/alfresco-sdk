@@ -846,16 +846,17 @@
                                         <!-- Test for Alfresco version -->
                                         <requireProperty>
                                             <property>alfresco.version</property>
-                                            <message>The SDK 2.x is supported only for Alfresco 5.x Community and
-                                                Enterprise versions
+                                            <message>The SDK 2.1.x is supported only for Alfresco 5.0.d Community and above or 
+                                                Alfresco Enterprise 5.1.0 
                                             </message>
+                                            <!-- TODO: Need to be updated for DEVPLAT-67 -->
                                             <regex>^5\..*</regex>
                                         </requireProperty>
 
                                         <!-- Test for JDK version -->
                                         <requireJavaVersion>
-                                            <version>[1.7.0,)</version>
-                                            <message>Alfresco 5+ requires Java 7</message>
+                                            <version>[1.8.0,)</version>
+                                            <message>Alfresco 5+ requires Java 8</message>
                                         </requireJavaVersion>
 
                                         <!-- Test for Maven version -->
