@@ -37,7 +37,9 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.project.MavenProject;
 
 import java.io.Closeable;
 import java.net.MalformedURLException;
@@ -53,49 +55,72 @@ import java.util.List;
  * @since 2.1.0
  */
 public abstract class AbstractRefreshWebappMojo extends AbstractMojo {
-    public static final String DEFAULT_USERNAME = "admin";
-    public static final String DEFAULT_PASSWORD = "admin";
-    public static final String DEFAULT_HOST = "localhost";
-    public static final String DEFAULT_PORT = "8080";
+
+    @Component
+    protected MavenProject project;
+
+    /**
+     * The mode for the refresh goal, current supported values are:
+     * auto - Checks packaging and app.amp.client.war.artifactId to determine if it should refresh for repo or share
+     * both - Forces it to refresh both for Repo and Share
+     * share - Forces only to refresh share
+     * repo  - Forces only to refresh repo
+     * none - Disables refreshing web scripts
+     */
+    @Parameter(property = "maven.alfresco.refresh.mode", defaultValue = "auto")
+    protected String refreshMode;
 
     /**
      * The hostname for where the Alfresco Tomcat server is running.
      */
-    @Parameter(property = "refreshHost", defaultValue = DEFAULT_HOST, alias = "refreshHost")
-    private String _host = DEFAULT_HOST;
+    @Parameter(property = "maven.alfresco.refresh.host", defaultValue = "localhost")
+    protected String refreshHost;
 
     /**
      * The port number for where the Alfresco Tomcat server is running.
      */
-    @Parameter(property = "refreshPort", defaultValue = DEFAULT_PORT, alias = "refreshPort")
-    private String _port = DEFAULT_PORT;
+    @Parameter(property = "maven.alfresco.refresh.port", defaultValue = "${maven.tomcat.port}")
+    private String refreshPort;
 
     /**
      * The username for authenticating against Alfresco Repo.
      */
-    @Parameter(property = "refreshUsername", defaultValue = DEFAULT_USERNAME, alias = "refreshUsername")
-    private String _username = DEFAULT_USERNAME;
+    @Parameter(property = "maven.alfresco.refresh.username", defaultValue = "admin")
+    private String refreshUsername;
 
     /**
      * The password for authenticating against Alfresco Repo.
      */
-    @Parameter(property = "refreshPassword", defaultValue = DEFAULT_PASSWORD, alias = "refreshPassword")
-    private String _password = DEFAULT_PASSWORD;
+    @Parameter(property = "maven.alfresco.refresh.password", defaultValue = "admin")
+    protected String refreshPassword;
 
     /**
-     * The Refresh URL to call, can be either for Share or Repo
+     * The URL to send the POST to when you want to refresh Alfresco Repo Web Scripts container.
      */
-    private String refreshUrl;
+    @Parameter(property = "maven.alfresco.refresh.repoUrl", defaultValue = "/alfresco/service/index")
+    protected String refreshRepoUrl;
+
 
     /**
-     * The Clear Dependency Caches URL to call, currently only applicable to Share.
+     * The URL to send the POST to when you want to refresh Alfresco Share Spring Surf Web Scripts container.
      */
-    private String clearDependencyCachesUrl;
+    @Parameter(property = "maven.alfresco.refresh.shareUrl", defaultValue = "/share/page/index")
+    protected String refreshShareUrl;
+
+    /**
+     * The URL to send the POST to when you want to clear dependency caches for the Alfresco Share webapp.
+     */
+    @Parameter(property = "maven.alfresco.refresh.clearCacheShareUrl", defaultValue = "/share/page/caches/dependency/clear")
+    protected String clearCacheShareUrl;
+
 
     /**
      * The name of the web application we are refreshing, just for logging purpose
      */
-    private String refreshWebappName;
+    protected String refreshWebappName;
+
+    @Parameter(defaultValue = "${app.amp.client.war.artifactId}")
+    protected String alfrescoClientWar;
 
     /**
      * Mojo interface implementation
@@ -105,41 +130,39 @@ public abstract class AbstractRefreshWebappMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException {
         // Do a ping to see if the server is up, if not, log and just exit
         if (!ping()) {
-            getLog().warn("Connection failed to " + _host + ":" + _port + ", " + getAbortedMsg());
+            getLog().warn("Connection failed to " + refreshHost + ":" + refreshPort + ", " + getAbortedMsg());
             return;
         }
 
         executeRefresh();
     }
 
+
+
     /**
      * To be implemented by webapp "refresh" Mojos 
      */
     protected abstract void executeRefresh();
 
-    /**
-     * The following methods are called by specific refresh mojo implementations
-     */
 
-    protected void setRefreshUrl(String refreshUrl) {
-        this.refreshUrl = refreshUrl;
+    protected void _refreshRepo() {
+        refreshWebappName = "Alfresco Repository";
+        refreshWebScripts(refreshRepoUrl);
     }
 
-    protected void setClearDependencyCachesUrl(String clearDependencyCachesUrl) {
-        this.clearDependencyCachesUrl = clearDependencyCachesUrl;
-    }
-
-    protected void setWebappName(String refreshWebappName) {
-        this.refreshWebappName = refreshWebappName;
+    protected void _refreshShare() {
+        refreshWebappName = "Alfresco Share";
+        refreshWebScripts(refreshShareUrl);
+        clearDependencyCaches(clearCacheShareUrl);
     }
 
     /**
      * Perform a Refresh of Web Scripts container in webapp.
      * Called by specific refresh mojo implementation.
      */
-    protected void refreshWebScripts() {
+    protected void refreshWebScripts(String url) {
         // Create the Refresh URL for the Alfresco Tomcat server
-        URL alfrescoTomcatUrl = buildFinalUrl(refreshUrl);
+        URL alfrescoTomcatUrl = buildFinalUrl(url);
         if (alfrescoTomcatUrl == null) {
             getLog().error("Could not build refresh URL for " + refreshWebappName + ", " + getAbortedMsg());
         }
@@ -157,9 +180,9 @@ public abstract class AbstractRefreshWebappMojo extends AbstractMojo {
      * Perform a Clear Dependency Caches call on Share webapp.
      * Called by specific refresh mojo implementation, currently only applicable to Share webapp.
      */
-    protected void clearDependencyCaches() {
+    protected void clearDependencyCaches(String url) {
         // Create the Clear Cache URL for the Alfresco Tomcat server
-        URL alfrescoTomcatUrl = buildFinalUrl(clearDependencyCachesUrl);
+        URL alfrescoTomcatUrl = buildFinalUrl(url);
         if (alfrescoTomcatUrl == null) {
             getLog().error("Could not build clear dependency caches URL for " +
                     refreshWebappName + ", " + getAbortedMsg());
@@ -187,7 +210,7 @@ public abstract class AbstractRefreshWebappMojo extends AbstractMojo {
             // Set up authentication parameters
             CredentialsProvider credsProvider = new BasicCredentialsProvider();
             credsProvider.setCredentials(new AuthScope(targetHost.getHostName(), targetHost.getPort()),
-                    new UsernamePasswordCredentials(_username, _password));
+                    new UsernamePasswordCredentials(refreshUsername, refreshPassword));
 
             // Create the HTTP Client we will use to make the call
             client = HttpClients.custom().setDefaultCredentialsProvider(credsProvider).build();
@@ -230,7 +253,7 @@ public abstract class AbstractRefreshWebappMojo extends AbstractMojo {
                         statusCode + ", message: " + reasonPhrase);
             }
         } catch (Exception ex) {
-            getLog().error("POST request failed to " + _host + ":" + _port + refreshUrl + ", " + getAbortedMsg());
+            getLog().error("POST request failed to " + alfrescoTomcatUrl.toString() + ", " + getAbortedMsg());
             getLog().error("Exception Msg: " + ex.getMessage());
         } finally {
             closeQuietly(response);
@@ -240,7 +263,7 @@ public abstract class AbstractRefreshWebappMojo extends AbstractMojo {
 
     private URL buildFinalUrl(String specificRefreshUrlPath) {
         try {
-            return new URL("http://" + _host + ":" + _port + specificRefreshUrlPath);
+            return new URL("http://" + refreshHost + ":" + refreshPort + specificRefreshUrlPath);
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return null;
