@@ -68,6 +68,12 @@
                         <include>**/*.java</include>
                     </includes>
                 </fileSet>
+                <fileSet filtered="true" packaged="false" encoding="UTF-8">
+                    <directory>src/main/amp/config/alfresco/web-extension</directory>
+                    <includes>
+                        <include>*.xml</include>
+                    </includes>
+                </fileSet>
                 <fileSet encoding="UTF-8" filtered="false">
                     <directory>src/main/amp</directory>
                     <includes>
