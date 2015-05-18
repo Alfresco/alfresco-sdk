@@ -872,7 +872,10 @@
             </build>
         </profile>
 
-
+        <!--
+            Turn on webapp refresh for both Alfresco Repo (alfresco.war) and Alfresco Share (share.war)
+            if we find a module.properties file for an AMP extension.
+             -->
         <profile>
             <id>refresh-both</id>
             <activation>
@@ -898,8 +901,6 @@
                 </plugins>
             </build>
         </profile>
-
-
 
 
         <!-- ====================================================================================================

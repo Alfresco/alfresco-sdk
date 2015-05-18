@@ -11,7 +11,7 @@
   <Resources className="org.apache.naming.resources.VirtualDirContext"
     extraResourcePaths="/=${project.build.directory}/${project.build.finalName}/web" />
 
-
+  <!-- Configure where the Share (share.war) web application can load classes, test classes, and config -->
   <!-- Setup the virtual class path like this:
        1) target/classes
        2) target/${project.build.finalName}/config

@@ -23,9 +23,6 @@
              Allowed values: alfresco | share. In this case it's configured to use OOTB share -->
         <app.amp.client.war.artifactId>share</app.amp.client.war.artifactId>
 
-        <!-- Used in share-config-custom.xml. By default points to standard location of Alfresco Repository -->
-        <alfresco.repo.url>http://localhost:8080/alfresco</alfresco.repo.url>
-
         <!-- Defines the log level used in log4j.properties -->
         <app.log.root.level>WARN</app.log.root.level>
     </properties>

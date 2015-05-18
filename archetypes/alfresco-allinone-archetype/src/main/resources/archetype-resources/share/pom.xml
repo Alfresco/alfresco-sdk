@@ -13,6 +13,12 @@
         <version>${version}</version>
     </parent>
 
+    <properties>
+        <!-- Used in share-config-custom.xml when testing.
+             By default points to standard location (local) of Alfresco Repository -->
+        <alfresco.repo.url>http://localhost:8080/alfresco</alfresco.repo.url>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
