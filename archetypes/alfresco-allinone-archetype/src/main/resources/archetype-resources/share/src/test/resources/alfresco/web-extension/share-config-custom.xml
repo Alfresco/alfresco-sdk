@@ -9,11 +9,15 @@
             </autowire>
 
             <!--
+                 We don't need to do this when we have the new refresh mojos in the Alfresco plug-in.
+
                  If resource caching has been disabled then all the dependency caches will be cleared
                  before processing the Aikau jsonModel request...
                     (i.e. this.dojoDependencyHandler.clearCaches() )
+
+                 For more information see the Aikau source code: https://github.com/Alfresco/Aikau
             -->
-            <disable-resource-caching>true</disable-resource-caching>
+            <disable-resource-caching>false</disable-resource-caching>
         </web-framework>
     </config>
 
