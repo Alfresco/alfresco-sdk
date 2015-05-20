@@ -3,7 +3,7 @@
 This is the home of the Alfresco SDK. The Alfresco SDK is used by developers to build extensions for the Alfresco content management system. It is based on [Apache Maven](http://maven.apache.org/), compatible with major IDEs and enables Rapid Application Development (RAD) and Test Driven Development (TDD).
 
 ## License
-This project is released under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html). 
+This project is released under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html). If you are an Enterprise customer check the [Support](#support) section.
 
 ## News
 - 2015-05-20: SDK 2.1.0 released to Maven Central. Docs for [Community](http://docs.alfresco.com/community/concepts/alfresco-sdk-intro.html), [Enterprise](http://docs.alfresco.com/5.0/concepts/alfresco-sdk-intro.html), [Release notes](https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-sdk-aggregator/latest/github-report.html)
@@ -33,8 +33,8 @@ Sample extension projects that use the SDK, maintained by @ohej in the [Alfresco
 ## Reporting Issues and Community Support
 Report issues (and contribute!) [here](https://github.com/Alfresco/alfresco-sdk/issues?milestone=1&state=open). You can also join the [Alfresco list on Google Groups](https://groups.google.com/forum/#!forum/maven-alfresco) or join us on the [IRC Channel](http://chat.alfresco.com/). 
 
-## Support for Alfresco Enterprise Customers and Partners
-If you are an Alfresco Customer please check the [SDK Support status](http://www.alfresco.com/services/subscription/technical-support/product-support-status) for the version you are using and the (Compatibily Matrix)[http://docs.alfresco.com/community/concepts/alfresco-sdk-compatibility.html] for the SDK / Alfresco compatibility. If your version is in Limited or Full Support, you can raise issues via the [Support Portal](http://support.alfresco.com).
+## Alfresco Enterprise Customers and Partners Support
+If you are an Alfresco Customer please check the [SDK Support status](http://www.alfresco.com/services/subscription/technical-support/product-support-status) for the version you are using and the [Compatibily Matrix](http://docs.alfresco.com/community/concepts/alfresco-sdk-compatibility.html) for the SDK / Alfresco compatibility. If your version is in Limited or Full Support, you can raise issues via the [Support Portal](http://support.alfresco.com).
 
 ## Maven repositories
 
