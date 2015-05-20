@@ -3,7 +3,7 @@
 This is the home of the Alfresco SDK. The Alfresco SDK is used by developers to build extensions for the Alfresco content management system. It is based on [Apache Maven](http://maven.apache.org/), compatible with major IDEs and enables Rapid Application Development (RAD) and Test Driven Development (TDD).
 
 ## License
-This project is released under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html). If you are an Enterprise customer check the [Support](#support) section.
+This project is released under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html). If you are an Enterprise customer check the [Support](#alfresco-enterprise-customers-and-partners-support) section.
 
 ## News
 - 2015-05-20: SDK 2.1.0 released to Maven Central. Docs for [Community](http://docs.alfresco.com/community/concepts/alfresco-sdk-intro.html), [Enterprise](http://docs.alfresco.com/5.0/concepts/alfresco-sdk-intro.html), [Release notes](https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-sdk-aggregator/latest/github-report.html)
