@@ -51,7 +51,7 @@ public class AmpUnArchiver extends AbstractZipUnArchiver {
             
             getLogger().info("Installing " + getSourceFile() + " into " + destLocation);
             try {
-                mmt.installModule(
+            	mmt.installModule(
                         getSourceFile().getAbsolutePath(),
                         destLocation.getAbsolutePath(),
                         false,  //preview
