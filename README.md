@@ -37,14 +37,33 @@ Report issues (and contribute!) [here](https://github.com/Alfresco/alfresco-sdk/
 If you are an Alfresco Customer please check the [SDK Support status](http://www.alfresco.com/services/subscription/technical-support/product-support-status) for the version you are using and the [Compatibily Matrix](http://docs.alfresco.com/community/concepts/alfresco-sdk-compatibility.html) for the SDK / Alfresco compatibility. If your version is in Limited or Full Support, you can raise issues via the [Support Portal](http://support.alfresco.com).
 
 ## Maven repositories
-
-- The Alfresco SDK is released in Maven Central as of version 2.0-beta-1. Previous versions are available in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/).
-
+- As of version 2.0-beta-1, The Alfresco SDK is released in [Maven Central](http://search.maven.org/#search|ga|1|alfresco-sdk). Previous versions are available in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/).
 - Alfresco (Community and Enterprise) artifacts are  hosted in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/).
-
 - Alfresco Community artifacts (JARs, WARs, AMPs, poms) and SDK artifacts are publicly available.
 
-For Enterprise and Premiere licensed software access you need to get credential via the Alfresco Enterprise Support. See [docs for Enterprise](http://docs.alfresco.com/5.0/concepts/alfresco-sdk-tutorials-alfresco-enterprise.html).
+*NOTE:* For Enterprise and Premiere licensed software access you need to get credential via the Alfresco Enterprise Support. See [Maven Alfresco Enterprise setup](http://docs.alfresco.com/5.0/concepts/alfresco-sdk-tutorials-alfresco-enterprise.html).
+
+### Alfresco Artifacts Repository
+
+#### Alfresco Releases
+You can use the following snippet in your pom.xml to access releases on Alfresco Artifact repository:
+
+```xml
+<repository>
+    <id>alfresco-public</id>
+    <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+</repository>
+```
+
+#### SDK Snapshots
+To test new unreleased (unsupported) features, you can use the following snippet in your pom.xml to access SDK nightlies (SNAPSHOTS) from the OSS Sonatype repository:
+
+```xml
+<repository>
+    <id>oss-sonatype-snapshots</id>
+    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+</repository>
+```
 
 ## For Developers that want to contribute to the SDK
 See the [Developers Wiki page](https://github.com/Alfresco/alfresco-sdk/wiki/Developer-Wiki).
