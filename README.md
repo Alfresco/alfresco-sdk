@@ -37,43 +37,15 @@ Report issues (and contribute!) [here](https://github.com/Alfresco/alfresco-sdk/
 If you are an Alfresco Customer please check the [SDK Support status](http://www.alfresco.com/services/subscription/technical-support/product-support-status) for the version you are using and the (Compatibily Matrix)[http://docs.alfresco.com/community/concepts/alfresco-sdk-compatibility.html] for the SDK / Alfresco compatibility. If your version is in Limited or Full Support, you can raise issues via the [Support Portal](http://support.alfresco.com).
 
 ## Maven repositories
-The Alfresco SDK is released in Maven Central as of version 2.0-beta-1. Previous versions are available in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/).
 
-Alfresco (Community and Enterprise) artifacts are  hosted in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/).
+- The Alfresco SDK is released in Maven Central as of version 2.0-beta-1. Previous versions are available in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/).
 
-Alfresco Community artifacts (JARs, WARs, AMPs, poms) and SDK artifacts are publicly available.
+- Alfresco (Community and Enterprise) artifacts are  hosted in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/).
+
+- Alfresco Community artifacts (JARs, WARs, AMPs, poms) and SDK artifacts are publicly available.
 
 For Enterprise and Premiere licensed software access you need to get credential via the Alfresco Enterprise Support. See [docs for Enterprise](http://docs.alfresco.com/5.0/concepts/alfresco-sdk-tutorials-alfresco-enterprise.html).
 
 ## For Developers that want to contribute to the SDK
-
-The following section descibes how to build the SDK from source and how to generate projects based on the local build.
-
-### Prerequisites
-Make sure you have setup and configured Spring Loaded, Maven, JDK, etc, see [Alfresco Documentation](http://docs.alfresco.com/5.0/concepts/alfresco-sdk-installing-prerequisite-software.html). 
-
-### Building from Source
-
-Get the SDK source:
-```
-$ git clone https://github.com/Alfresco/alfresco-sdk.git
-```
-
-Step into the parent SDK project:
-```
-$ cd alfresco-sdk
-```
-
-Build the SDK and skip tests (skipping tests is useful if you don't have access to Enterprise artifacts):
-```
-alfresco-sdk$ mvn clean install -Dmaven.test.skip=true
-```
-
-### Generating an extension project from the local build
-```
-$ mvn archetype:generate -DarchetypeCatalog=local
-```
-
-This project is released under the Apache License, Version 2.0. It's a community driven project which is supported for Alfresco Development (please refere to the official Alfresco Documentation for supported features.
-
+See the [Developers Wiki page](https://github.com/Alfresco/alfresco-sdk/wiki/Developer-Wiki).
 
