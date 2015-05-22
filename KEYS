@@ -9,6 +9,10 @@ Developers:
         (gpg --list-key <your email>
              && gpg --armor --export <your email>) >> this file.
 
+################################################################
+# Gabriele Columbro
+################################################################
+
 pub   4096R/6FE5701E 2012-03-25
 uid                  Gabriele Columbro (VALID CODE SIGNING KEY) <gabriele@apache.org>
 sub   4096R/E97059F3 2012-03-25
@@ -86,4 +90,66 @@ hrGAueS2lH5DUpjZPqClR+txnAK+hVCuFogoWsdsbRHMLkqKqhnQjWnvRrU0ud9j
 ytG/XwLK3RL7LTmPIC9RqlO1U1A3h5Ykw2INH/bB90lBxmydmp/PHpkhjEAEvzGW
 r+ipOwsWpF6kLIHUT2LuPxLqTGQCrqYtJyTp61tE
 =GUM9
+-----END PGP PUBLIC KEY BLOCK-----
+
+################################################################
+# Alfresco Software, Inc - PGP key
+################################################################
+
+pub   4096R/DAD3B670 2014-10-20 [expires: 2015-10-20]
+      Key fingerprint = 6959 A697 47E2 7AC4 E1E7  1636 199D 99B1 DAD3 B670
+uid                  Alfresco Software, Inc (GPG) <info@alfresco.com>
+sub   4096R/A4B70B45 2014-10-20 [expires: 2015-10-20]
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v2.0.14 (GNU/Linux)
+
+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
+ARVlLqDOpHP01PW6WUQta2xAQ2mshuQZTX1H
+=3Y/D
 -----END PGP PUBLIC KEY BLOCK-----
