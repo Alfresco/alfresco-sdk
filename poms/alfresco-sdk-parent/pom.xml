@@ -268,6 +268,7 @@
                             <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
                             <nonFilteredFileExtension>css</nonFilteredFileExtension>
                             <nonFilteredFileExtension>ico</nonFilteredFileExtension>
+                            <nonFilteredFileExtension>psd</nonFilteredFileExtension>
                         </nonFilteredFileExtensions>
                     </configuration>
                 </plugin>
