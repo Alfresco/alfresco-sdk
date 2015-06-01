@@ -1,0 +1,9 @@
+source "https://api.berkshelf.com"
+
+cookbook 'tomcat', git:'git@github.com:maoo/tomcat.git', tag: "v0.17.3-fork2"
+cookbook 'maven', git:'git@github.com:maoo/maven.git', tag: "v1.2.0-fork"
+cookbook 'file', git: 'git@github.com:jenssegers/chef-file.git', tag: "v1.0.0"
+cookbook 'alfresco', git:'git@github.com:Alfresco/chef-alfresco.git'
+
+# TODO - using trunk to allow maven-repo attr. configuration
+cookbook 'artifact-deployer', git:'git@github.com:maoo/artifact-deployer.git'

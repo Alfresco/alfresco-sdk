@@ -55,11 +55,18 @@
                 <include>**/*.xml</include>
             </includes>
         </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory></directory>
+            <includes>
+                <include>Vagrantfile</include>
+            </includes>
+        </fileSet>
         <fileSet encoding="UTF-8">
             <directory></directory>
             <includes>
                 <include>run.sh</include>
                 <include>run.bat</include>
+                <include>Berksfile</include>
             </includes>
         </fileSet>
     </fileSets>
