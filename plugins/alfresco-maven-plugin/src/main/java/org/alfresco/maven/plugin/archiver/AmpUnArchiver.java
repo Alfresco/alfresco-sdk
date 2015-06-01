@@ -43,11 +43,12 @@ public class AmpUnArchiver extends AbstractZipUnArchiver {
              */
             ModuleManagementTool mmt = new ModuleManagementTool();
             mmt.setVerbose(false);
+            
             if(getDestFile() != null)
-            	getLogger().info("getDestFile ():" + getDestFile());
+            	getLogger().info("Installing into destination file: " + getDestFile());
             
             if(getDestDirectory()!= null)
-            	getLogger().info("getDestDirectory ():" + getDestDirectory());
+            	getLogger().info("Installing into destination folder: " + getDestDirectory());
             
             File destLocation = (getDestFile() == null || !getDestFile().exists() ) ? getDestDirectory() : getDestFile();
             
