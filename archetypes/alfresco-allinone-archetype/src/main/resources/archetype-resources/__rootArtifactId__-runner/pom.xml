@@ -84,7 +84,7 @@
                             <webapps>
                                 <webapp>
                                     <groupId>${project.groupId}</groupId>
-                                    <artifactId>repo</artifactId>
+                                    <artifactId>${rootArtifactId}-repo</artifactId>
                                     <version>${project.version}</version>
                                     <type>war</type>
                                     <!-- Make sure webapp is loaded with context and everything,
@@ -95,7 +95,7 @@
                                 </webapp>
                                 <webapp>
                                     <groupId>${project.groupId}</groupId>
-                                    <artifactId>share</artifactId>
+                                    <artifactId>${rootArtifactId}-share</artifactId>
                                     <version>${project.version}</version>
                                     <type>war</type>
                                     <asWebapp>true</asWebapp>

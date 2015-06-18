@@ -8,7 +8,7 @@
          by default there are no extensions, just the standard Solr webapp files.
          (this should not include docBase)-->
     <Resources className="org.apache.naming.resources.VirtualDirContext"
-               extraResourcePaths="/=${project.parent.basedir}/runner/target/tomcat/webapps/alfresco-solr4" />
+               extraResourcePaths="/=${project.parent.basedir}/${rootArtifactId}-runner/target/tomcat/webapps/alfresco-solr4" />
 
     <!-- Configure where the Solr (solr4.war) web application can load classes, test classes, and config -->
     <!-- Solr is not customized by default so just points to standard Solr classes. -->
@@ -20,7 +20,7 @@
 
     <Loader className="org.apache.catalina.loader.VirtualWebappLoader"
             searchVirtualFirst="true"
-            virtualClasspath="${project.parent.basedir}/runner/target/tomcat/webapps/alfresco-solr4/WEB-INF/classes" />
+            virtualClasspath="${project.parent.basedir}/${rootArtifactId}-runner/target/tomcat/webapps/alfresco-solr4/WEB-INF/classes" />
 
     <!-- Load from all directories, not just when the META-INF directory is found in exploded JAR -->
     <JarScanner scanAllDirectories="true" />

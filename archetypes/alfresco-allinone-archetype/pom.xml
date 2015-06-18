@@ -49,6 +49,7 @@
                 <useDefaultDelimiters>false</useDefaultDelimiters>
                 <delimiters>
                     <delimiter>@@</delimiter>
+                    <delimiter>__</delimiter>
                 </delimiters>
             </configuration>
         </plugin>

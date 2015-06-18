@@ -10,7 +10,7 @@
     <!-- Pick up static resource files from any Share extensions, being it a JAR or an AMP
          (this should not include docBase) -->
     <Resources className="org.apache.naming.resources.VirtualDirContext"
-               extraResourcePaths="/=${project.parent.basedir}/share-amp/target/share-amp/web" />
+               extraResourcePaths="/=${project.parent.basedir}/${rootArtifactId}-share-amp/target/${rootArtifactId}-share-amp/web" />
 
     <!-- Configure where the Share (share.war) web application can load classes, config, and test classes (in that order) -->
     <!-- Setup the virtual class path like this:
@@ -23,8 +23,7 @@
          This way mvn compile can be invoked and all changes will be picked up
     -->
     <Loader className="org.apache.catalina.loader.VirtualWebappLoader"
-            searchVirtualFirst="true"
-            virtualClasspath="${project.parent.basedir}/share-amp/target/classes;${project.parent.basedir}/share-amp/target/share-amp/config;${project.parent.basedir}/share-amp/target/test-classes;${project.parent.basedir}/share/target/test-classes" />
+            virtualClasspath="${project.parent.basedir}/${rootArtifactId}-share-amp/target/classes;${project.parent.basedir}/${rootArtifactId}-share-amp/target/${rootArtifactId}-share-amp/config;${project.parent.basedir}/${rootArtifactId}-share-amp/target/test-classes;${project.parent.basedir}/@@rootArtifactId@@-share/target/test-classes" />
 
     <!-- Load from all directories, not just when the META-INF directory is found in exploded JAR -->
     <JarScanner scanAllDirectories="true" />
