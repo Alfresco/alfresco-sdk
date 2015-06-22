@@ -103,7 +103,7 @@
                         <include>**/*.properties</include>
                     </includes>
                 </fileSet>
-                <fileSet encoding="UTF-8" filtered="false">
+                <fileSet encoding="UTF-8" filtered="true">
                     <directory>src/main/resources</directory>
                     <includes>
                         <include>**</include>
@@ -134,7 +134,7 @@
 
         <module id="${rootArtifactId}-runner" dir="__rootArtifactId__-runner" name="${rootArtifactId}-runner" filtered="false">
             <fileSets>
-                <fileSet encoding="UTF-8" filtered="false">
+                <fileSet encoding="UTF-8" filtered="true">
                     <directory>tomcat</directory>
                     <includes>
                         <include>**</include>
