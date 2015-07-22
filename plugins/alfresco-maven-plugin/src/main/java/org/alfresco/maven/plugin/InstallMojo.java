@@ -84,6 +84,7 @@ public class InstallMojo extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         if (skipAmpInstallation) {
+        	getLog().info("AMP Installation is skipped via configuration");
             return;
         }
         // Checks appropriate input params are in place

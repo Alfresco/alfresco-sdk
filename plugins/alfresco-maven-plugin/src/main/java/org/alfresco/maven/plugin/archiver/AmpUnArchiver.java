@@ -1,20 +1,12 @@
 package org.alfresco.maven.plugin.archiver;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
 
 import org.alfresco.repo.module.tool.ModuleManagementTool;
 import org.apache.maven.execution.MavenSession;
-import org.apache.maven.model.ConfigurationContainer;
 import org.apache.maven.model.Plugin;
-import org.apache.maven.model.PluginConfiguration;
-import org.apache.maven.plugin.ContextEnabled;
 import org.apache.maven.plugin.LegacySupport;
-import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.descriptor.PluginDescriptor;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.archiver.ArchiverException;
 import org.codehaus.plexus.archiver.zip.AbstractZipUnArchiver;
@@ -28,31 +20,28 @@ import org.codehaus.plexus.util.xml.Xpp3Dom;
  */
 public class AmpUnArchiver extends AbstractZipUnArchiver {
 
+	@Requirement
+	private LegacySupport legacySupport;
+	
     public AmpUnArchiver()
     {
+    	
     }
-    @Requirement
-    private LegacySupport legacySupport;
     
-    private Map pluginContext = new HashMap();
+    protected File destDirectory;
     
-    /**
-     * @parameter default-value="${mojoExecution}"
-     * @readonly
-     */
-    private MojoExecution mojoExecution; 
-
     @Override
     /**
      * By default the AMPs are unpacked in ${project.directory}/${project.build.finalName}
      */
     public File getDestDirectory() {
+    	MavenSession session = legacySupport.getSession();
+    	MavenProject project = session.getCurrentProject().getExecutionProject();
     	
-        MavenSession session = legacySupport.getSession();
-        MavenProject project = session.getCurrentProject();
-        // By default we use build finalName
+    	
         File location = new File(project.getBuild().getDirectory() + File.separator + project.getBuild().getFinalName());
-        // If the war plugin configures a custom webappDirectory instead, we pick it up
+        // If the war plugin configures a custom webappDirectory instead, we pick it up - this only works is this is defined in the main maven-war-plugin configuration
+        // TODO fix it for executions, see https://github.com/Alfresco/alfresco-sdk/issues/297
         Plugin warPlugin = project.getPlugin("org.apache.maven.plugins:maven-war-plugin");
         if(warPlugin != null)
         {
@@ -72,9 +61,10 @@ public class AmpUnArchiver extends AbstractZipUnArchiver {
         
         }
         return location;
+
     }
 
-    @Override
+	//@Override
     protected void execute() throws ArchiverException {
         try {
             /**
@@ -113,6 +103,5 @@ public class AmpUnArchiver extends AbstractZipUnArchiver {
       
         }
     }
-
-
+  
 }
