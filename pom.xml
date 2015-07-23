@@ -221,7 +221,9 @@
                                     <goal>jar</goal>
                                 </goals>
                                 <configuration>
+                                    <!-- Add this to build Javadoc with JDK8
                                     <additionalparam>-Xdoclint:none</additionalparam>
+                                    -->
                                 </configuration>
                             </execution>
                         </executions>
