@@ -131,6 +131,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
         <maven.archetype.version>2.2</maven.archetype.version>
         <alfresco.sdk.parent.version>${project.version}</alfresco.sdk.parent.version>
         <alfresco.community.default.version>5.0.d</alfresco.community.default.version>
@@ -188,12 +190,10 @@
             <id>sdk-release</id>
             <properties>
                 <maven.site.url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-sdk-aggregator/latest</maven.site.url>
-                <maven.release.version>2.5.1</maven.release.version>
+                <maven.release.version>2.5.2</maven.release.version>
                 <maven.release.goals>deploy site-deploy</maven.release.goals>
                 <maven.site.version>3.4</maven.site.version>
                 <maven.changes.version>2.10</maven.changes.version>
-	        <maven.compiler.source>1.8</maven.compiler.source>
-                <maven.compiler.target>1.7</maven.compiler.target>
             </properties>
             <build>
                 <plugins>
@@ -221,7 +221,7 @@
                                     <goal>jar</goal>
                                 </goals>
                                 <configuration>
-	                                <additionalparam>-Xdoclint:none</additionalparam>
+                                    <additionalparam>-Xdoclint:none</additionalparam>
                                 </configuration>
                             </execution>
                         </executions>
