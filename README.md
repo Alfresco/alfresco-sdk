@@ -26,6 +26,9 @@ To get started with Alfresco SDK 2.1 (latest) visit the offical Alfresco Documen
 ### Samples 
 Sample extension projects that use the SDK, maintained by @ohej in the [Alfresco SDK Samples project](https://github.com/Alfresco/alfresco-sdk-samples/).
 
+### Command reference
+A list of supported features and commands, explanation of Maven profiles and commands is kept in the [Alfresco Official Docs](http://docs.alfresco.com/5.0/concepts/alfresco-sdk-cmd-reference.html).
+
 ### Want to get up to speed quickly in Eclipse? Check out this video!
 
 [![Alfresco SDK 2.1 howto](http://img.youtube.com/vi/utYZaVe9Nd0/0.jpg)](https://www.youtube.com/watch?v=utYZaVe9Nd0)
