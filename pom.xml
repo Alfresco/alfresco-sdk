@@ -277,7 +277,7 @@
                             <preparationGoals>clean install</preparationGoals>
                             <goals>${maven.release.goals}</goals>
                             <autoVersionSubmodules>true</autoVersionSubmodules>
-                            <releaseProfiles>sdk-release</releaseProfiles>
+                            <releaseProfiles>sdk-release,enterprise-tests</releaseProfiles>
                         </configuration>
                     </plugin>
                 </plugins>
