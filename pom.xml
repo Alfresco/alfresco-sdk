@@ -135,6 +135,7 @@
         <maven.compiler.target>1.7</maven.compiler.target>
         <maven.archetype.version>2.2</maven.archetype.version>
         <alfresco.sdk.parent.version>${project.version}</alfresco.sdk.parent.version>
+        <alfresco.sdk.tests.exclude>*/*-enterprise/*</alfresco.sdk.tests.exclude>
         <alfresco.community.default.version>5.0.d</alfresco.community.default.version>
         <alfresco.enterprise.default.version>5.0.1</alfresco.enterprise.default.version>
         <alfresco.rm.version>2.3</alfresco.rm.version>
@@ -186,6 +187,32 @@
     </repositories>
 
     <profiles>
+        <profile>
+            <id>exclude-enterprise-tests-for-archetypes</id>
+            <activation>
+                <file>
+                    <exists>src/test/resources/projects</exists>
+                </file>
+            </activation>
+            <build>
+                <testResources>
+                    <testResource>
+                        <directory>src/test/resources</directory>
+                        <excludes>
+                            <exclude>${alfresco.sdk.tests.exclude}</exclude>
+                        </excludes>
+                    </testResource>
+                </testResources>
+            </build>
+        </profile>
+        <profile>
+            <id>enterprise-tests</id>
+            <properties>
+                <!-- Sets it to empty, so that also enterprise tests are run -->
+                <alfresco.sdk.tests.exclude></alfresco.sdk.tests.exclude>
+            </properties>
+        </profile>
+    	
         <profile>
             <id>sdk-release</id>
             <properties>
