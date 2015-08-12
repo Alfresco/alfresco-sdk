@@ -44,7 +44,7 @@ If you are an Alfresco Customer please check the [SDK Support status](http://www
 - Alfresco (Community and Enterprise) artifacts are  hosted in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/).
 - Alfresco Community artifacts (JARs, WARs, AMPs, poms) and SDK artifacts are publicly available.
 
-*NOTE:* For Enterprise and Premiere licensed software access you need to get credential via the Alfresco Enterprise Support. See [Maven Alfresco Enterprise setup](http://docs.alfresco.com/5.0/concepts/alfresco-sdk-tutorials-alfresco-enterprise.html).
+*NOTE:* For Enterprise and Premiere licensed software access you need to get credential via the Alfresco Enterprise Support. See [Maven Alfresco Enterprise setup](http://docs.alfresco.com/5.0/concepts/alfresco-sdk-using-enterprise-edition.html).
 
 ### Alfresco Artifacts Repository
 
