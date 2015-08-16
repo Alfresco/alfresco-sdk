@@ -10,7 +10,7 @@
         </requiredProperty>
     </requiredProperties>
     <modules>
-        <module id="repo-amp" dir="repo-amp" name="repo-amp">
+        <module id="${rootArtifactId}-repo-amp" dir="__rootArtifactId__-repo-amp" name="${rootArtifactId}-repo-amp">
             <fileSets>
                 <fileSet filtered="true" packaged="true" encoding="UTF-8">
                     <directory>src/main/java</directory>
@@ -54,7 +54,7 @@
             </fileSets>
         </module>
 
-        <module id="share-amp" dir="share-amp" name="share-amp">
+        <module id="${rootArtifactId}-share-amp" dir="__rootArtifactId__-share-amp" name="${rootArtifactId}-share-amp">
             <fileSets>
                 <fileSet filtered="true" packaged="true" encoding="UTF-8">
                     <directory>src/main/java</directory>
@@ -95,7 +95,7 @@
             </fileSets>
         </module>
 
-        <module id="repo" dir="repo" name="repo">
+        <module id="${rootArtifactId}-repo" dir="__rootArtifactId__-repo" name="${rootArtifactId}-repo">
             <fileSets>
                 <fileSet encoding="UTF-8" filtered="false">
                     <directory>src/main/properties</directory>
@@ -103,7 +103,7 @@
                         <include>**/*.properties</include>
                     </includes>
                 </fileSet>
-                <fileSet encoding="UTF-8" filtered="false">
+                <fileSet encoding="UTF-8" filtered="true">
                     <directory>src/main/resources</directory>
                     <includes>
                         <include>**</include>
@@ -112,10 +112,10 @@
             </fileSets>
         </module>
 
-        <module id="solr4" dir="solr-config" name="solr4" filtered="false">
+        <module id="${rootArtifactId}-solr4" dir="__rootArtifactId__-solr-config" name="${rootArtifactId}-solr4" filtered="false">
         </module>
 
-        <module id="share" dir="share" name="share" filtered="false">
+        <module id="${rootArtifactId}-share" dir="__rootArtifactId__-share" name="${rootArtifactId}-share" filtered="false">
             <fileSets>
                 <fileSet encoding="UTF-8" filtered="false">
                     <directory>src/main/resources</directory>
@@ -132,9 +132,9 @@
             </fileSets>
         </module>
 
-        <module id="runner" dir="runner" name="runner" filtered="false">
+        <module id="${rootArtifactId}-runner" dir="__rootArtifactId__-runner" name="${rootArtifactId}-runner" filtered="false">
             <fileSets>
-                <fileSet encoding="UTF-8" filtered="false">
+                <fileSet encoding="UTF-8" filtered="true">
                     <directory>tomcat</directory>
                     <includes>
                         <include>**</include>
