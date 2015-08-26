@@ -11,6 +11,11 @@
          (this should not include docBase) -->
     <Resources className="org.apache.naming.resources.VirtualDirContext"
                extraResourcePaths="/=${project.parent.basedir}/share-amp/target/share-amp/web" />
+    <!-- IMPORTANT! The extraResourcePaths string need to be on one continues line, so if we add another Share AMP,
+                    it would look something like this:
+    <Resources className="org.apache.naming.resources.VirtualDirContext"
+               extraResourcePaths="/=${project.parent.basedir}/share-amp/target/share-amp/web,/=${project.parent.basedir}/component-a-share/target/component-a-share/web" />
+               -->
 
     <!-- Configure where the Share (share.war) web application can load classes, config, and test classes (in that order) -->
     <!-- Setup the virtual class path like this:
@@ -24,7 +29,10 @@
     -->
     <Loader className="org.apache.catalina.loader.VirtualWebappLoader"
             searchVirtualFirst="true"
-            virtualClasspath="${project.parent.basedir}/share-amp/target/classes;${project.parent.basedir}/share-amp/target/share-amp/config;${project.parent.basedir}/share-amp/target/test-classes;${project.parent.basedir}/share/target/test-classes" />
+            virtualClasspath="${project.parent.basedir}/share-amp/target/classes;
+            ${project.parent.basedir}/share-amp/target/share-amp/config;
+            ${project.parent.basedir}/share-amp/target/test-classes;
+            ${project.parent.basedir}/share/target/test-classes" />
 
     <!-- Load from all directories, not just when the META-INF directory is found in exploded JAR -->
     <JarScanner scanAllDirectories="true" />

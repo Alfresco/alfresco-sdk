@@ -17,11 +17,11 @@
    -->
 
    <!-- Add module specific messages and labels -->
-   <bean id="${package}.share-amp.resources"
+   <bean id="${package}.${artifactId}.resources"
          class="org.springframework.extensions.surf.util.ResourceBundleBootstrapComponent">
       <property name="resourceBundles">
          <list>
-            <value>alfresco.web-extension.messages.custom</value>
+            <value>alfresco.web-extension.messages.${artifactId}</value>
          </list>
       </property>
    </bean>

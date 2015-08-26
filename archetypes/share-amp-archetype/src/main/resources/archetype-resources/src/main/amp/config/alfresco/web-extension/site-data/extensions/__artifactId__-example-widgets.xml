@@ -1,7 +1,10 @@
+#set($symbol_pound='#')
+#set($symbol_dollar='$')
+#set($symbol_escape='\' )
 <extension>
   <modules>
     <module>
-      <id>Example Aikau Widgets</id>
+      <id>${artifactId} - Example Aikau Widgets</id>
       <version>1.0</version>
       <auto-deploy>true</auto-deploy>
       <configurations>
