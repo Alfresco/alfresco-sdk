@@ -290,11 +290,6 @@
                             <artifactId>alfresco-maven-plugin</artifactId>
                             <version>${maven.alfresco.version}</version>
                         </dependency>
-                        <dependency>
-                            <groupId>org.codehaus.plexus</groupId>
-                            <artifactId>plexus-archiver</artifactId>
-                            <version>2.3</version>
-                        </dependency>
                     </dependencies>
                 </plugin>
                 <plugin>
@@ -345,13 +340,6 @@
                             <groupId>com.h2database</groupId>
                             <artifactId>h2</artifactId>
                             <version>${h2.version}</version>
-                        </dependency>
-                        <!-- Major performance improvement,
-                        see http://mindthegab.com/2013/06/20/maven-is-not-so-evil-plexus-archives-2-3-is-a-life-saver-for-the-speed-of-your-war-development-with-maven/ -->
-                        <dependency>
-                            <groupId>org.codehaus.plexus</groupId>
-                            <artifactId>plexus-archiver</artifactId>
-                            <version>2.3</version>
                         </dependency>
                     </dependencies>
                 </plugin>
