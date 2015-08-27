@@ -71,13 +71,13 @@
                 <fileSet filtered="true" packaged="false" encoding="UTF-8">
                     <directory>src/main/amp/config/alfresco/web-extension</directory>
                     <includes>
-                        <include>*.xml</include>
+                        <include>__artifactId__-slingshot-application-context.xml</include>
                     </includes>
                 </fileSet>
                 <fileSet filtered="true" packaged="false" encoding="UTF-8">
                     <directory>src/main/amp/config/alfresco/web-extension/site-data/extensions</directory>
                     <includes>
-                        <include>*.xml</include>
+                        <include>__artifactId__-example-widgets.xml</include>
                     </includes>
                 </fileSet>
                 <fileSet encoding="UTF-8" filtered="false">
@@ -85,6 +85,10 @@
                     <includes>
                         <include>**</include>
                     </includes>
+                    <excludes>
+                        <exclude>**/__artifactId__-slingshot-application-context.xml</exclude>
+                        <exclude>**/__artifactId__-example-widgets.xml</exclude>
+                    </excludes>
                 </fileSet>
                 <fileSet filtered="true" packaged="false" encoding="UTF-8">
                     <directory>src/test/resources</directory>
@@ -109,11 +113,20 @@
                         <include>**/*.properties</include>
                     </includes>
                 </fileSet>
+                <fileSet encoding="UTF-8" filtered="true">
+                    <directory>src/main/resources/alfresco/extension</directory>
+                    <includes>
+                        <include>dev-log4j.properties</include>
+                    </includes>
+                </fileSet>
                 <fileSet encoding="UTF-8" filtered="false">
                     <directory>src/main/resources</directory>
                     <includes>
                         <include>**</include>
                     </includes>
+                    <excludes>
+                        <exclude>**/dev-log4j.properties</exclude>
+                    </excludes>
                 </fileSet>
             </fileSets>
         </module>

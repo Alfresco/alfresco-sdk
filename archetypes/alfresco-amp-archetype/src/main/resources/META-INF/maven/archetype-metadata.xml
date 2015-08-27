@@ -29,7 +29,14 @@
             </includes>
             <excludes>
                 <exclude>**/*-context.xml</exclude>
+                <exclude>**/log4j.properties</exclude>
             </excludes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="true">
+            <directory>src/main/amp/config/alfresco/module/__artifactId__</directory>
+            <includes>
+                <include>log4j.properties</include>
+            </includes>
         </fileSet>
         <fileSet encoding="UTF-8" filtered="true" packaged="false">
             <directory>src/main/amp</directory>
