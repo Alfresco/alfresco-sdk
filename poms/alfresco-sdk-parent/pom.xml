@@ -111,7 +111,9 @@
               as it may break SDK functionalities
              -->
         <app.filtering.enabled>true</app.filtering.enabled>
-        <app.testing.jvm.args>-Xms256m -Xmx1524m -XX:MaxPermSize=256m -Duser.language=en</app.testing.jvm.args>
+        
+        <!-- Additional command line arguments, used by Surefire forked JVM-->
+        <argLine>-Xms256m -Xmx1524m -XX:MaxPermSize=256m -Duser.language=en</argLine>
 
         <!--  Logging in project's target folder by default
               NOTE: Remember the trailing slash when overriding this.
@@ -680,9 +682,6 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>${maven.surefire.version}</version>
-                        <configuration>
-                            <argLine>${app.testing.jvm.args}</argLine>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
