@@ -507,7 +507,7 @@
             </properties>
             <build>
                 <plugins>
-                    <!-- Fetch and unpack Alfresco Repository WAR (alfresco.war) -->
+                    <!-- Fetch and unpack Alfresco Repository/Share WAR (alfresco.war or share.war) -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
@@ -532,7 +532,8 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <!-- The current AMP artifact is installed into the Alfresco folder using alfresco-maven-plugin -->
+                    <!-- The current AMP artifact is installed into the Alfresco.war or share.war
+                        using alfresco-maven-plugin -->
                     <plugin>
                         <groupId>org.alfresco.maven.plugin</groupId>
                         <artifactId>alfresco-maven-plugin</artifactId>
@@ -546,11 +547,13 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <!-- We need to selectively not install web resources so to enable rapid dev -->
+                            <!-- We need to selectively not install web resources (i.e. /web folder in AMP),
+                                so these files can be picked up directly from the build project instead,
+                                enabling rapid application dev -->
                             <includeWebResources>false</includeWebResources>
                         </configuration>
                     </plugin>
-                    <!-- Configures tomcat to run against the Alfresco WAR with Tomcat7 virtual webapp features.
+                    <!-- Configures Tomcat to run with the alfresco.war or share.war as virtual webapp.
                          (http://tomcat.apache.org/tomcat-7.0-doc/config/context.html#Virtual_webapp)
                          The target/classes and target/test-classes (containing tests and the amp config for test purposes) are prepended to the
                          running webapp context, so changes from the IDE are automatically picked up first. See context.xml for details.
@@ -577,16 +580,17 @@
                                 </configuration>
                             </execution>
                         </executions>
+                        <dependencies>
+                            <!-- Include H2 scripts and lib -->
+                            <dependency>
+                                <groupId>org.alfresco.maven</groupId>
+                                <artifactId>alfresco-rad</artifactId>
+                                <version>${maven.alfresco.version}</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
-            <dependencies>
-                <dependency>
-                    <groupId>org.alfresco.maven</groupId>
-                    <artifactId>alfresco-rad</artifactId>
-                    <version>${maven.alfresco.version}</version>
-                </dependency>
-            </dependencies>
         </profile>
 
 

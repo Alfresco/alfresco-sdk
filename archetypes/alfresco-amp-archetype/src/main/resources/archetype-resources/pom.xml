@@ -88,7 +88,7 @@
 
             TODO: TO INVESTIGATE: This dependency is already defined in the parent SDK pom in the 'amp-to-war' profile
                   but this does not work, it is not include...
-            -->
+
         <profile>
             <id>amp-to-war</id>
             <dependencies>
@@ -98,6 +98,6 @@
                     <version>${maven.alfresco.version}</version>
                 </dependency>
             </dependencies>
-        </profile>
+        </profile> -->
     </profiles>
 </project>
