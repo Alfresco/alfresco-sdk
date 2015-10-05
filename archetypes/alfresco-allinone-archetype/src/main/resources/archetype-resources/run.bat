@@ -11,5 +11,5 @@ if not exist %springloadedfile% (
 
 set MAVEN_OPTS=-javaagent:"%springloadedfile%" -noverify -Xms256m -Xmx2G
 
-mvn install -Prun -nsu
+mvn clean install -Prun -nsu
 :: mvn install -Prun 
