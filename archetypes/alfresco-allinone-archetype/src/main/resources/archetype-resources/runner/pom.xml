@@ -19,7 +19,7 @@
             <!-- TODO: figure out a way to define these properties in a parent POM, they are now also duplicated
                        in the solr-config/pom.xml -->
             <properties>
-                <alfresco.solr.dir>${project.parent.basedir}/${alfresco.data.location}/solr4</alfresco.solr.dir>
+                <alfresco.solr.dir>${alfresco.data.location}/solr4</alfresco.solr.dir>
                 <alfresco.solr.home.dir>${alfresco.solr.dir}/config</alfresco.solr.home.dir>
                 <alfresco.solr.data.dir>${alfresco.solr.dir}/data</alfresco.solr.data.dir>
             </properties>

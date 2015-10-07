@@ -44,8 +44,9 @@
         <!-- This is the name of the Alfresco data folder.
              Configured in alfresco-global.properties with the 'dir.root' property.
              This folder will contain all content files, index files, and database with metadata when running embedded.
-             (this folder is relative to the top folder in the project) -->
-        <alfresco.data.location>alf_data_dev</alfresco.data.location>
+             (best practice is absolute path to this folder, here we use session.executionRootDirectory
+             property to get correct path to alf_data when running in AIO and Repo AMP) -->
+        <alfresco.data.location>${session.executionRootDirectory}/alf_data_dev</alfresco.data.location>
 
         <!-- Alfresco Repo Database configuration.
              By default it uses a flat file H2 database to be able to run embedded.
@@ -59,7 +60,7 @@
         <alfresco.db.password>alfresco</alfresco.db.password>
         <alfresco.db.params>AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;MVCC=FALSE;LOCK_MODE=0
         </alfresco.db.params>
-        <alfresco.db.url>jdbc:h2:./${alfresco.data.location}/h2_data/${alfresco.db.name};${alfresco.db.params}</alfresco.db.url>
+        <alfresco.db.url>jdbc:h2:${alfresco.data.location}/h2_data/${alfresco.db.name};${alfresco.db.params}</alfresco.db.url>
         <alfresco.db.datasource.class>org.h2.jdbcx.JdbcDataSource</alfresco.db.datasource.class>
 
         <!--
@@ -448,7 +449,7 @@
                         <configuration>
                             <filesets>
                                 <fileset>
-                                    <directory>${project.basedir}/${alfresco.data.location}</directory>
+                                    <directory>${alfresco.data.location}</directory>
                                 </fileset>
                                 <fileset>
                                     <directory>${project.basedir}</directory>
