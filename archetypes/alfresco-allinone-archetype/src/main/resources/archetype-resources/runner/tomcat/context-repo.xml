@@ -13,7 +13,7 @@
 <Context docBase="${project.parent.basedir}/alfresco-war/target/${project.build.finalName}">
     <!-- Pick up static resource files from AMPs and other directories (this should not include docBase) -->
     <Resources className="org.apache.naming.resources.VirtualDirContext"
-               extraResourcePaths="/=${project.parent.basedir}/${rootArtifactId}-repo-amp/target/${rootArtifactId}-repo-amp/web" />
+               extraResourcePaths="/=${project.parent.basedir}/repo-amp/target/repo-amp/web" />
     <!-- IMPORTANT! The extraResourcePaths string need to be on one continues line, so if we add another Repo AMP,
                     it would look something like this:
     <Resources className="org.apache.naming.resources.VirtualDirContext"
@@ -30,9 +30,9 @@
     -->
     <Loader className="org.apache.catalina.loader.VirtualWebappLoader"
             searchVirtualFirst="true"
-            virtualClasspath="${project.parent.basedir}/${rootArtifactId}-repo-amp/target/classes;
-            ${project.parent.basedir}/${rootArtifactId}-repo-amp/target/${rootArtifactId}-repo-amp/config;
-            ${project.parent.basedir}/${rootArtifactId}-repo-amp/target/test-classes" />
+            virtualClasspath="${project.parent.basedir}/repo-amp/target/classes;
+            ${project.parent.basedir}/repo-amp/target/repo-amp/config;
+            ${project.parent.basedir}/repo-amp/target/test-classes" />
 
     <!-- Load from all directories, not just when the META-INF directory is found in exploded JAR -->
     <JarScanner scanAllDirectories="true" />

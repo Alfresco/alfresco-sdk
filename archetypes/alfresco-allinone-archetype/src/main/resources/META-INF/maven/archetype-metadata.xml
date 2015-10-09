@@ -10,7 +10,7 @@
         </requiredProperty>
     </requiredProperties>
     <modules>
-        <module id="${rootArtifactId}-repo-amp" name="${rootArtifactId}-repo-amp" dir="__rootArtifactId__-repo-amp">
+        <module id="repo-amp" dir="repo-amp" name="repo-amp">
             <fileSets>
                 <fileSet filtered="true" packaged="true" encoding="UTF-8">
                     <directory>src/main/java</directory>
@@ -54,7 +54,7 @@
             </fileSets>
         </module>
 
-        <module id="${rootArtifactId}-share-amp" name="${rootArtifactId}-share-amp" dir="__rootArtifactId__-share-amp" >
+        <module id="share-amp" dir="share-amp" name="share-amp">
             <fileSets>
                 <fileSet filtered="true" packaged="true" encoding="UTF-8">
                     <directory>src/main/java</directory>
@@ -153,7 +153,7 @@
 
         <module id="runner" dir="runner" name="runner" filtered="false">
             <fileSets>
-                <fileSet encoding="UTF-8" filtered="true">
+                <fileSet encoding="UTF-8" filtered="false">
                     <directory>tomcat</directory>
                     <includes>
                         <include>**</include>

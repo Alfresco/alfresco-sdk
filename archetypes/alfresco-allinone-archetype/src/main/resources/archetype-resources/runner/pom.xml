@@ -307,9 +307,9 @@
                         <version>2.18.1</version>
                         <configuration>
                             <suiteXmlFiles>
-                                <suiteXmlFile>${project.parent.basedir}/${rootArtifactId}-share-amp/target/test-classes/testng.xml</suiteXmlFile>
+                                <suiteXmlFile>${project.parent.basedir}/share-amp/target/test-classes/testng.xml</suiteXmlFile>
                             </suiteXmlFiles>
-                            <testClassesDirectory>${project.parent.basedir}/${rootArtifactId}-share-amp/target/test-classes</testClassesDirectory>
+                            <testClassesDirectory>${project.parent.basedir}/share-amp/target/test-classes</testClassesDirectory>
                             <systemPropertyVariables>
                                 <!-- Where is the Alfresco Share Webapp that we are testing -->
                                 <share.target>${share.client.url}</share.target>
