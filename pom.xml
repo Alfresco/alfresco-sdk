@@ -64,10 +64,10 @@
         <developer>
             <id>ohej</id>
             <name>Ole Hejlskov</name>
-            <email>ole@magenta-aps.dk</email>
+            <email>ole@phpfreak.dk</email>
             <url>http://ohej.dk/</url>
-            <organization>Magenta</organization>
-            <organizationUrl>http://magenta.dk</organizationUrl>
+            <organization>Alfresco</organization>
+            <organizationUrl>http://www.alfresco.com</organizationUrl>
             <timezone>+1</timezone>
             <roles>
                 <role>Developer</role>
