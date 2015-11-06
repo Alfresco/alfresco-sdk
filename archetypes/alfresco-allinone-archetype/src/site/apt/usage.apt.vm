@@ -16,9 +16,9 @@ Project layout
 
 +---+
     pom.xml
-    |-> repo-amp
+    |-> rootArtifactid-repo-amp
+    |-> rootArtifactid-share-amp
     |-> repo
-    |-> share-amp
     |-> share
     |-> solr
     |-> runner (a Tomcat embedded runner / integration test runner)
@@ -28,14 +28,14 @@ Project layout
 
     The All-in-One Alfresco project is composed by the following modules:
    
-    * <<<repo-amp>>>: An Repository Tier AMP project, demonstrating sample project structure and demo component loading
+    * <<<rootArtifactid-repo-amp>>>: An Repository Tier AMP project, demonstrating sample project structure and demo component loading
      
     * <<<repo>>>: An <<<alfresco.war>>> Repository Extension, overlaying the Alfresco WAR with custom resources / classes 
     and depending on the <<<amp>>> project
     
-    * <<<share-amp>>>: A Share Tier AMP project, demonstrating sample project structure and demo component loading
+    * <<<rootArtifactid-share-amp>>>: A Share Tier AMP project, demonstrating sample project structure and demo component loading
     
-    * <<<share>>>: A <<<share.war>>> extension, overlaying the Share WAR with the custom developed <<<share-amp>>>
+    * <<<share>>>: A <<<share.war>>> extension, overlaying the Share WAR with the custom developed <<<rootArtifactid-share-amp>>>
     
     * <<<solr>>>: An Alfresco <<<alfresco-*-*-solr.zip>>> overlay / customization to configure {{{http://solr.apache.org}Apache Solr}} cores properties
     
