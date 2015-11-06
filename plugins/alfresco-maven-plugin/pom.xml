@@ -8,7 +8,7 @@
   <parent>
       <groupId>org.alfresco.maven</groupId>
       <artifactId>alfresco-sdk-aggregator</artifactId>
-      <version>2.1.2-SNAPSHOT</version>
+      <version>3.0.0-SNAPSHOT</version>
       <relativePath>../../pom.xml</relativePath>
   </parent>
 
@@ -128,6 +128,11 @@
         <groupId>org.alfrescolabs.alfresco-technical-validation</groupId>
         <artifactId>org.alfrescolabs.alfresco-technical-validation</artifactId>
         <version>0.4.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.twdata.maven</groupId>
+      <artifactId>mojo-executor</artifactId>
+      <version>2.2.0</version>
     </dependency>
   </dependencies>
 
