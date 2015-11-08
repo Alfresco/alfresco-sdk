@@ -12,16 +12,6 @@
           </execution>
         </executions>
       </phase>
-      <phase>
-        <id>package</id>
-        <executions>
-          <execution>
-            <goals>
-              <goal>amp</goal>
-            </goals>
-          </execution>
-        </executions>
-      </phase>
     </phases>
   </lifecycle>
 </lifecycles>

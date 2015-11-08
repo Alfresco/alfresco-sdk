@@ -14,24 +14,6 @@
       </configuration>
     </component>
 
-    <component>
-      <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
-      <role-hint>amp</role-hint>
-      <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
-      <configuration>
-        <phases>
-          <initialize>org.alfresco.maven.plugin:alfresco-maven-plugin:set-version</initialize>
-          <process-resources>org.apache.maven.plugins:maven-resources-plugin:resources</process-resources>
-          <compile>org.apache.maven.plugins:maven-compiler-plugin:compile</compile>
-          <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources</process-test-resources>
-          <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
-          <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
-          <package>org.alfresco.maven.plugin:alfresco-maven-plugin:amp</package>
-          <install>org.apache.maven.plugins:maven-install-plugin:install</install>
-          <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
-        </phases>
-      </configuration>
-    </component>
 
     <component>
       <role>org.codehaus.plexus.archiver.Archiver</role>

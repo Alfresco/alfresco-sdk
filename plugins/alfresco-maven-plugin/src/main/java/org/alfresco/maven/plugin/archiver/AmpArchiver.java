@@ -19,7 +19,7 @@ package org.alfresco.maven.plugin.archiver;
  * under the License.
  */
 
-import org.codehaus.plexus.archiver.jar.JarArchiver;
+import org.codehaus.plexus.archiver.zip.ZipArchiver;
 
 import java.io.File;
 
@@ -30,18 +30,10 @@ import java.io.File;
  *
  * @author Gabriele Columbro, Maurizio Pillitu
  */
-public class AmpArchiver extends JarArchiver {
+public class AmpArchiver extends ZipArchiver {
 
     public AmpArchiver() {
         super.archiveType = "amp";
     }
 
-    /**
-     * @see org.codehaus.plexus.archiver.AbstractArchiver#addDirectory(java.io.File, String, String[], String[])
-     */
-    public void addDirectory(final File directory, final String prefix, final String[] includes,
-                             final String[] excludes) {
-        getLogger().info("Adding directory to AMP package [ '" + directory + "' '" + prefix + "']");
-        super.addDirectory(directory, prefix, includes, excludes);
-    }
 }
