@@ -6,4 +6,6 @@ springloadedfile=~/.m2/repository/org/springframework/springloaded/@@springloade
 if [ ! -f $springloadedfile ]; then
 mvn validate -Psetup
 fi
-MAVEN_OPTS="-javaagent:$springloadedfile -noverify -Xms256m -Xmx2G" mvn clean install -Prun
+# Spring loaded does not work very well with 5.1 at the moment, breaks the H2 db after first run and then restart
+#MAVEN_OPTS="-javaagent:$springloadedfile -noverify -Xms256m -Xmx2G" mvn clean install -Prun
+MAVEN_OPTS="-noverify -Xms256m -Xmx2G" mvn clean install -Prun

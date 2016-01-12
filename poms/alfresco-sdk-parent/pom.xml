@@ -6,7 +6,7 @@
     <description>
         The Maven Alfresco SDK Parent POM exposes the developer features of the Maven Alfresco SDK.
         Declare this POM as parent for your project and select the Alfresco version/edition by defining
-        the alfresco.groupId and alfresco.version in your POM.
+        the alfresco.groupId, alfresco.version, and share.version in your POM.
     </description>
     <packaging>pom</packaging>
 
@@ -480,7 +480,10 @@
             <properties>
                 <alfresco.version>${alfresco.enterprise.default.version}</alfresco.version>
                 <alfresco.repo.artifactId>alfresco-enterprise</alfresco.repo.artifactId>
-                <alfresco.share.artifactId>share-enterprise</alfresco.share.artifactId>
+                <!-- In 5.1 there is only one release of Share that works with both the Community and the Enterprise version of the product.
+                    i.e. there is no more a share-enterprise artifact...
+                -->
+                <alfresco.share.artifactId>share</alfresco.share.artifactId>
                 <!-- Not needed in the webapp for enterprise -->
                 <app.slf4j.scope>provided</app.slf4j.scope>
             </properties>
@@ -489,7 +492,22 @@
                     <id>alfresco-private-repository</id>
                     <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
                 </repository>
+
+                <!-- TODO: Remove when 5.1 Enterprise has been released, this is just for early access. -->
+                <repository>
+                    <id>alfresco-ea-enterprise-repository</id>
+                    <url>https://artifacts.alfresco.com/nexus/content/repositories/5.1-EA</url>
+                </repository>
             </repositories>
+
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>alfresco-ea-enterprise-repository</id>
+                    <name>Alfresco Early Access Enterprise</name>
+                    <url>https://artifacts.alfresco.com/nexus/content/repositories/5.1-EA/</url>
+                </pluginRepository>
+            </pluginRepositories>
+
         </profile>
 
         <!--
@@ -564,6 +582,35 @@
                     <plugin>
                         <groupId>org.apache.tomcat.maven</groupId>
                         <artifactId>tomcat7-maven-plugin</artifactId>
+                        <dependencies>
+                            <!-- Bring in the H2 Database scripts needed when running embedded, they are now
+                                 available from the standard generated artifacts, no longer needed to be picked
+                                 up from the alfresco-rad project -->
+                            <dependency>
+                                <groupId>org.alfresco</groupId>
+                                <artifactId>alfresco-repository</artifactId>
+                                <version>${alfresco.version}</version>
+                                <classifier>h2scripts</classifier>
+                                <exclusions>
+                                    <exclusion>
+                                        <groupId>*</groupId>
+                                        <artifactId>*</artifactId>
+                                    </exclusion>
+                                </exclusions>
+                            </dependency>
+                            <!-- Explicitly bring in the Plexus Archiver so assembly goes quicker -->
+                            <dependency>
+                                <groupId>org.codehaus.plexus</groupId>
+                                <artifactId>plexus-archiver</artifactId>
+                                <version>2.3</version>
+                            </dependency>
+                            <!-- Include remote Junit testing lib -->
+                            <dependency>
+                                <groupId>org.alfresco.maven</groupId>
+                                <artifactId>alfresco-rad</artifactId>
+                                <version>${maven.alfresco.version}</version>
+                            </dependency>
+                        </dependencies>
                         <executions>
                             <execution>
                                 <id>run-embedded</id>
@@ -583,14 +630,6 @@
                                 </configuration>
                             </execution>
                         </executions>
-                        <dependencies>
-                            <!-- Include H2 scripts and lib -->
-                            <dependency>
-                                <groupId>org.alfresco.maven</groupId>
-                                <artifactId>alfresco-rad</artifactId>
-                                <version>${maven.alfresco.version}</version>
-                            </dependency>
-                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
@@ -839,10 +878,10 @@
                                         <!-- Test for Alfresco version -->
                                         <requireProperty>
                                             <property>alfresco.version</property>
-                                            <message>The SDK 2.1.x is supported only for Alfresco 5.0.d Community and above or
-                                                Alfresco Enterprise 5.0.1 and above
+                                            <message>The SDK 2.2.x is supported only for Alfresco 5.1.x Community and above or
+                                                Alfresco Enterprise 5.1 and above
                                             </message>
-                                            <regex>^(5\.(0\.[d-z1-9]|[1-9])|6\.).*$</regex>
+                                            <regex>^(5\.(1\.[a-z1-9]|[1-9])|6\.).*$</regex>
                                         </requireProperty>
 
                                         <!-- Test for Maven version -->

@@ -41,6 +41,24 @@
         <share.client.url>http://localhost:8080/share</share.client.url>
     </properties>
 
+    <dependencies>
+        <!-- If we are running tests then make the H2 Scripts available.
+             Note. tests are skipped when you are running -Prun -->
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>alfresco-repository</artifactId>
+            <version>${alfresco.version}</version>
+            <classifier>h2scripts</classifier>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
     <!-- Here we realize the connection with the Alfresco selected platform (e.g.version and edition) -->
     <dependencyManagement>
         <dependencies>

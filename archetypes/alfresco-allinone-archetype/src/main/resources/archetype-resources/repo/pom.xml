@@ -56,7 +56,7 @@
         </dependency>
         -->
         <!-- Uncomment if you are using the RM (Records Management) module. -->
-        <!--
+        <!-- Set alfresco.rm.version in parent pom to appropriate version for 5.1
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
             <artifactId>alfresco-rm</artifactId>
@@ -173,6 +173,7 @@
                 </plugins>
             </build>
             <dependencies>
+                <!-- Include remote JUnit test lib -->
                 <dependency>
                     <groupId>org.alfresco.maven</groupId>
                     <artifactId>alfresco-rad</artifactId>
