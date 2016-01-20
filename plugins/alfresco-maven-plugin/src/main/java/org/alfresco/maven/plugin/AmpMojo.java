@@ -49,7 +49,7 @@ public class AmpMojo extends AbstractMojo {
     /**
      * Target folder used to aggregate content then packaged into the AMP
      *
-     * @parameter property="maven.alfresco.ampBuildDirectory" default-value="${project.build.directory}/${project.build.finalName}"
+     * @parameter property="maven.alfresco.ampBuildDirectory" default-value="${app.amp.output.folder}"
      * @required
      *
      */

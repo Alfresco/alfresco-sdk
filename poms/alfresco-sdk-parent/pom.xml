@@ -66,10 +66,14 @@
         <!--
             Alfresco Module Packages (AMP) settings
             -->
-        <app.amp.folder>src/main/amp</app.amp.folder> <!-- To know which resource folder to filter for AMP extension projects -->
-        <app.amp.output.folder>../${project.build.finalName}</app.amp.output.folder> <!-- To know which folder filtered AMP resources should end up in -->
-        <app.amp.overlay.excludes /> <!-- AMP excludes when installing into a WAR, by default empty (i.e. everything is included) -->
-        <app.amp.excludes /> <!-- Empty AMP source excludes by default, see the amp-to-war profile for usage example -->
+        <!-- To know which resource folder to filter for AMP extension projects -->
+        <app.amp.folder>src/main/amp</app.amp.folder>
+        <!-- To know which folder filtered AMP resources should end up in under /target -->
+        <app.amp.output.folder>${project.build.directory}/amp</app.amp.output.folder>
+        <!-- AMP excludes when installing into a WAR, by default empty (i.e. everything is included) -->
+        <app.amp.overlay.excludes />
+        <!-- Empty AMP source excludes by default, see the amp-to-war profile for usage example -->
+        <app.amp.excludes />
 
         <!--
             Settings related to the stand-alone AMP extension projects.
@@ -81,7 +85,7 @@
                 my-repo-amp/target/my-repo-amp-war  (Alfresco.war extension)
                 my-share-amp/target/my-share-amp-war  (Share.war extension)
              -->
-        <app.amp.client.war.folder>${project.build.directory}/${project.build.finalName}-war</app.amp.client.war.folder>
+        <app.amp.client.war.folder>${project.build.directory}/amp-war</app.amp.client.war.folder>
         <!-- The Maven artifact ID to use when loading the WAR that the AMP should be applied to,
              defaults to the alfresco.war artifact ID, overriding this in the share-amp project. -->
         <app.amp.client.war.artifactId>${alfresco.repo.artifactId}</app.amp.client.war.artifactId>
@@ -398,7 +402,10 @@
                                     <exclude>**/*.lib.js</exclude>
                                     <exclude>**/*.css</exclude>
                                 </excludes>
-                                <warSourceDirectory>src/main/resources/META-INF</warSourceDirectory>
+                                <sourceDirectory>src/main/amp</sourceDirectory>
+                                <outputDirectory>${project.build.directory}/amp</outputDirectory>
+                                <!-- Exclude resources so we don't get an extra dir structure with -min.js files -->
+                                <excludeResources>true</excludeResources>
                                 <jswarn>false</jswarn>
                             </configuration>
                         </execution>
