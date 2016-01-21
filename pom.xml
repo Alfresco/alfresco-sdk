@@ -133,13 +133,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-        <maven.archetype.version>2.2</maven.archetype.version>
+        <maven.archetype.version>2.4</maven.archetype.version>
         <alfresco.sdk.parent.version>${project.version}</alfresco.sdk.parent.version>
         <alfresco.sdk.tests.exclude>*/*-enterprise/*</alfresco.sdk.tests.exclude>
         <alfresco.community.default.version>5.1.d-EA</alfresco.community.default.version>
         <alfresco.enterprise.default.version>5.1-EA-3</alfresco.enterprise.default.version>
         <alfresco.rm.version>2.3</alfresco.rm.version>
-        <springloaded.version>1.2.3.RELEASE</springloaded.version>
+        <springloaded.version>1.2.5.RELEASE</springloaded.version>
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
     </properties>
 
@@ -165,7 +165,7 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-webdav-jackrabbit</artifactId>
-                <version>2.2</version>
+                <version>2.10</version>
             </extension>
         </extensions>
     </build>
@@ -217,10 +217,10 @@
             <id>sdk-release</id>
             <properties>
                 <maven.site.url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-sdk-aggregator/latest</maven.site.url>
-                <maven.release.version>2.5.2</maven.release.version>
+                <maven.release.version>2.5.3</maven.release.version>
                 <maven.release.goals>deploy site-deploy</maven.release.goals>
                 <maven.site.version>3.4</maven.site.version>
-                <maven.changes.version>2.10</maven.changes.version>
+                <maven.changes.version>2.11</maven.changes.version>
             </properties>
             <build>
                 <plugins>
@@ -240,7 +240,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>2.10.1</version>
+                        <version>2.10.3</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
@@ -258,7 +258,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
+                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>

@@ -125,25 +125,25 @@
 
         <!-- Needed for community to avoid weird logging exceptions -->
         <app.slf4j.scope>runtime</app.slf4j.scope>
-        <app.slf4j.version>1.5.11</app.slf4j.version>
+        <app.slf4j.version>1.7.13</app.slf4j.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Maven Plugins Versions used by the SDK -->
-        <maven.compiler.version>3.2</maven.compiler.version>
+        <maven.compiler.version>3.5</maven.compiler.version>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-        <maven.clean.version>2.6.1</maven.clean.version>
-        <maven.dependency.version>2.9</maven.dependency.version>
-        <maven.enforcer.plugin>1.4</maven.enforcer.plugin>
+        <maven.clean.version>3.0.0</maven.clean.version>
+        <maven.dependency.version>2.10</maven.dependency.version>
+        <maven.enforcer.plugin>1.4.1</maven.enforcer.plugin>
         <maven.resources.version>2.7</maven.resources.version>
-        <maven.surefire.version>2.18</maven.surefire.version>
+        <maven.surefire.version>2.19.1</maven.surefire.version>
         <maven.install.version>2.5.2</maven.install.version>
-        <maven.jar.version>2.5</maven.jar.version>
-        <maven.war.version>2.5</maven.war.version>
-        <maven.antrun.version>1.7</maven.antrun.version>
-        <maven.release.version>2.5.1</maven.release.version>
-        <maven.buildhelper.version>1.9.1</maven.buildhelper.version>
+        <maven.jar.version>2.6</maven.jar.version>
+        <maven.war.version>2.6</maven.war.version>
+        <maven.antrun.version>1.8</maven.antrun.version>
+        <maven.release.version>2.5.3</maven.release.version>
+        <maven.buildhelper.version>1.10</maven.buildhelper.version>
         <maven.replacer.version>1.5.3</maven.replacer.version>
         <maven.tomcat.version>2.2</maven.tomcat.version>
 
@@ -160,9 +160,8 @@
              it can be accessed from the Groovy scripts and other places -->
         <maven.tomcat.port>8080</maven.tomcat.port>
 
-        <!-- Sets the H2 Database version to use.
-             Note. Upgrading to 1.4.186 did not work, on second start (after initial db creation etc) it will not connect... -->
-        <h2.version>1.4.185</h2.version>
+        <!-- Sets the H2 Database version to use. -->
+        <h2.version>1.4.190</h2.version>
 
         <!-- Give the JVM some more memory so it can load the alfresco.war,share.war,and solr4.war -->
         <argLine>-Xms256m -Xmx1524m -XX:MaxPermSize=256m -Duser.language=en</argLine>
