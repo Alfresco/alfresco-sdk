@@ -502,14 +502,14 @@
 
                 <!-- TODO: Remove when 5.1 Enterprise has been released, this is just for early access. -->
                 <repository>
-                    <id>alfresco-ea-enterprise-repository</id>
+                    <id>alfresco-internal-releases</id>
                     <url>https://artifacts.alfresco.com/nexus/content/repositories/5.1-EA</url>
                 </repository>
             </repositories>
 
             <pluginRepositories>
                 <pluginRepository>
-                    <id>alfresco-ea-enterprise-repository</id>
+                    <id>alfresco-internal-releases</id>
                     <name>Alfresco Early Access Enterprise</name>
                     <url>https://artifacts.alfresco.com/nexus/content/repositories/5.1-EA/</url>
                 </pluginRepository>
