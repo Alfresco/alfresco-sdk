@@ -173,7 +173,7 @@
                 </plugins>
             </build>
             <dependencies>
-                <!-- Include remote JUnit test lib -->
+                <!-- Include remote JUnit test lib to allow remote unit testing and start remote JUnit runner. -->
                 <dependency>
                     <groupId>org.alfresco.maven</groupId>
                     <artifactId>alfresco-rad</artifactId>

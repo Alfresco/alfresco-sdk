@@ -5,7 +5,7 @@
   <packaging>jar</packaging>
 
   <name>Rapid Application Development Support</name>
-  <description>SDK module for Rapid Development support - Remote JUnit</description>
+  <description>SDK module for Rapid Development support - allows remote unit testing and starts remote JUnit runner</description>
 
   <parent>
       <groupId>org.alfresco.maven</groupId>
