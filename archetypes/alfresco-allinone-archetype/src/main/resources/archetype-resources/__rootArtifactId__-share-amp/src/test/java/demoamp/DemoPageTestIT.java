@@ -18,8 +18,8 @@
 package ${package}.demoamp;
 
 import ${package}.demoamp.po.DemoPage;
+import org.alfresco.po.share.LoginPage;
 import org.alfresco.po.AbstractTest;
-//import org.alfresco.po.share.LoginPage;
 import org.alfresco.po.share.PeopleFinderPage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -41,18 +41,22 @@ public class DemoPageTestIT extends AbstractTest {
 
     @BeforeClass(groups = {"alfresco-one"})
     public void prepare() throws Exception {
-        // Navigate to share
-//        drone.navigateTo(shareUrl + "/page/hdp/ws/simple-page");
-        // Reuse Alfresco Share login page object from share-po lib.
-  //      LoginPage loginPage = new LoginPage(drone);
-    //    loginPage.loginAs(username, password);
+        // Navigate to share, which will redirect to Login page
+        driver.navigate().to(shareUrl + "/page");
+
+        // Resolve/Bind current page to LoginPage object
+        LoginPage loginPage = resolvePage(driver).render();
+        loginPage.loginAs(username, password);
     }
 
     @BeforeMethod
     public void loadPage() {
         // Goto demo page
- //       drone.navigateTo(shareUrl + "/page/hdp/ws/simple-page");
-   //     page = new DemoPage(drone);
+        driver.navigate().to(shareUrl + "/page/hdp/ws/simple-page");
+
+        // We need to instantiate the page like this as it is not yet in
+        // the factory known list of pages
+        page = factoryPage.instantiatePage(driver, DemoPage.class);
     }
 
     @Test
@@ -63,9 +67,9 @@ public class DemoPageTestIT extends AbstractTest {
     @Test
     public void messageIsDisplayed() {
         page.render();
-     //   String msg = page.getMessage();
-       // Assert.assertNotNull(msg);
-        //Assert.assertEquals("Hello from i18n!", msg);
+        String msg = page.getMessage();
+        Assert.assertNotNull(msg);
+        Assert.assertEquals("Hello from i18n!", msg);
     }
 
     /**
@@ -86,7 +90,7 @@ public class DemoPageTestIT extends AbstractTest {
     @Test
     public void navigate() {
         Assert.assertNotNull(page.getNav());
-        PeopleFinderPage peoppleFinderPage = page.getNav().selectPeople().render();
-        Assert.assertNotNull(peoppleFinderPage);
+        PeopleFinderPage peopleFinderPage = page.getNav().selectPeople().render();
+        Assert.assertNotNull(peopleFinderPage);
     }
 }

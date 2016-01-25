@@ -46,12 +46,13 @@
         </dependency>
 
         <!--===============================================================
-            The following dependencies are needed to be able to compile the
-            custom functional tests that are based on Page Objects (PO)
-            ===============================================================-->
+             The following dependencies are needed to be able to compile the
+             custom functional tests that are based on Page Objects (PO)
+             ===============================================================-->
 
         <!-- Bring in the Share Page Objects (PO) used in our functional tests.
-             It contains page objects such as LoginPage -->
+             It contains page objects such as LoginPage and it also brings
+             in selenium-grid and selenium. -->
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
             <artifactId>share-po</artifactId>
@@ -67,8 +68,7 @@
             <classifier>tests</classifier>
             <scope>test</scope>
 
-            <!-- Exclude version 2.39.0 of selenium that does not work with latest FF browsers, we include
-               version 2.45 later on here -->
+            <!-- Exclude selenium as it is already brought in by share-po dependency above -->
             <exclusions>
                 <exclusion>
                     <groupId>org.seleniumhq.selenium</groupId>
@@ -79,13 +79,6 @@
                     <artifactId>selenium-server</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <!-- Bring in newer selenium version -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>2.45.0-alfresco</version>
-            <scope>test</scope>
         </dependency>
         <!-- Test NG is defined with test scope in share-po, so need it here too -->
         <!-- Alfresco code creates a wrapper around Test NG -->
@@ -101,7 +94,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
     </dependencies>
 
 </project>
