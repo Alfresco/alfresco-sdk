@@ -104,5 +104,35 @@
                 <maven.alfresco.includeWebResources>false</maven.alfresco.includeWebResources>
             </properties>
         </profile>
+
+	<!-- if we're on a unix machine, chmod run.sh to be executable -->        
+        <profile>
+        	<id>chmod</id>
+        	<activation><os><family>unix</family></os></activation>
+        	<build>
+        		<plugins>
+		            <plugin>
+		              <groupId>org.codehaus.mojo</groupId>
+		              <artifactId>exec-maven-plugin</artifactId>
+		              <version>1.2.1</version>
+		              <inherited>false</inherited>
+		              <executions>
+		              	<execution>
+		              		<id>chmod</id>
+		              		<phase>validate</phase>
+		              		<goals><goal>exec</goal></goals>
+		              	</execution>
+		              </executions>
+		              <configuration>
+		              	<executable>chmod</executable>
+		              	<arguments>
+		              		<argument>+x</argument>
+		              		<argument>${basedir}/run.sh</argument>
+		              	</arguments>
+		              </configuration>
+		            </plugin>
+        		</plugins>
+        	</build>
+        </profile>
     </profiles>
 </project>
