@@ -866,7 +866,7 @@
         <profile>
             <id>enforce-sdk-rules</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activation><file><missing>does-not-exist.tmp</missing></file></activation><!-- turn on this profile (by triggering on a file that is not expected to exist) -->
             </activation>
             <build>
                 <plugins>
