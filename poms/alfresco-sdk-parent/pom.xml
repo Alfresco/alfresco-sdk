@@ -634,6 +634,8 @@
                                     </systemProperties>
                                     <delegate>true</delegate>
                                     <contextFile>${project.basedir}/tomcat/context.xml</contextFile>
+                                    <!-- Encode url in UTF-8 for proper character handling -->
+                                    <uriEncoding>UTF-8</uriEncoding>
                                 </configuration>
                             </execution>
                         </executions>
