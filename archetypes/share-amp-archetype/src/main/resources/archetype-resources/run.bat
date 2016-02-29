@@ -9,8 +9,8 @@ IF "%MAVEN_OPTS%" == "" (
       mvn validate -Psetup
     )
 
-    # Spring loaded can be used with the Share AMP project in 5.1
-    # (i.e. it does not have the same problem as Repo AMP and AIO)
+    :: Spring loaded can be used with the Share AMP project in 5.1
+    :: (i.e. it does not have the same problem as Repo AMP and AIO)
     SET MAVEN_OPTS=-javaagent:"%springloadedfile%" -noverify
 )
 ECHO MAVEN_OPTS is set to '%MAVEN_OPTS%'
