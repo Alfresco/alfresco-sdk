@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Context>
-    <Environment name="solr/home"        type="java.lang.String" value="${project.parent.basedir}/alf_data_dev/solr4/config/" override="true"/>
-    <Environment name="solr/model/dir"   type="java.lang.String" value="${project.parent.basedir}/alf_data_dev/solr4/config/alfrescoModels/" override="true"/>
-    <Environment name="solr/content/dir" type="java.lang.String" value="${project.parent.basedir}/alf_data_dev/solr4/data/content/" override="true"/>
+    <Environment name="solr/home"        type="java.lang.String" value="${alfresco.solr.home.dir}/" override="true"/>
+    <Environment name="solr/model/dir"   type="java.lang.String" value="${alfresco.solr.home.dir}/alfrescoModels/" override="true"/>
+    <Environment name="solr/content/dir" type="java.lang.String" value="${alfresco.solr.data.dir}/content/" override="true"/>
 
     <!-- Pick up static resource files from any Solr extensions, being it a JAR or an AMP,
          by default there are no extensions, just the standard Solr webapp files.

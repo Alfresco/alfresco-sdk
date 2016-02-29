@@ -38,13 +38,11 @@
             <class name="org.alfresco.po.share.site.document.DocumentDetailsPageTest"/>
         </classes>
     </test>
-    <!-- TODO: fix this, currently does not work
     <test name="DocumentLibraryPageTest">
         <classes>
             <class name="org.alfresco.po.share.site.document.DocumentLibraryPageTest"/>
         </classes>
     </test>
-    -->
     <test name="FileDirectoryInfoTest">
         <classes>
             <class name="org.alfresco.po.share.site.document.FileDirectoryInfoTest">

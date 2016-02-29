@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>${artifactId}</artifactId>
+    <name>Alfresco Share AMP Module</name>
+    <packaging>amp</packaging>
+    <description>This is a sample Alfresco Share AMP project, depended upon by the share WAR module</description>
+
+    <parent>
+        <groupId>${groupId}</groupId>
+        <artifactId>${rootArtifactId}</artifactId>
+        <version>${version}</version>
+    </parent>
+
+    <!-- 
+        SDK properties have sensible defaults in the SDK parent,
+        but you can override the properties below to use another version.
+        For more available properties see the alfresco-sdk-parent POM.
+       -->
+    <properties>
+        <!-- Defines the target WAR artifactId to run this amp, only used with the -Pamp-to-war switch
+             Allowed values: alfresco | share. In this case it's configured to use OOTB share -->
+        <app.amp.client.war.artifactId>share</app.amp.client.war.artifactId>
+
+        <!-- Defines the log level used in log4j.properties -->
+        <app.log.root.level>WARN</app.log.root.level>
+    </properties>
+
+    <!-- Following dependencies are needed for compiling Java code in src/main/java; 
+         <scope>provided</scope> is inherited for each of the following; 
+         for more info, please refer to alfresco-platform-distribution POM -->
+    <dependencies>
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>share</artifactId>
+            <version>${alfresco.version}</version>
+            <classifier>classes</classifier>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.extensions.surf</groupId>
+            <artifactId>spring-surf-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--===============================================================
+             The following dependencies are needed to be able to compile the
+             custom functional tests that are based on Page Objects (PO)
+             ===============================================================-->
+
+        <!-- Bring in the Share Page Objects (PO) used in our functional tests.
+             It contains page objects such as LoginPage and it also brings
+             in selenium-grid and selenium. -->
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>share-po</artifactId>
+            <version>${alfresco.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Bring in the Share Page Object (PO) Tests that comes with Alfresco. It has
+             the org.alfresco.po.share.AbstractTest class that our custom tests extend. -->
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>share-po</artifactId>
+            <version>${alfresco.version}</version>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+
+            <!-- Exclude selenium as it is already brought in by share-po dependency above -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-java</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-server</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Test NG is defined with test scope in share-po, so need it here too -->
+        <!-- Alfresco code creates a wrapper around Test NG -->
+        <dependency>
+            <groupId>org.alfresco.test</groupId>
+            <artifactId>alfresco-testng</artifactId>
+            <version>1.1</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hamcrest</groupId>
+                    <artifactId>hamcrest-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+</project>

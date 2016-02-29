@@ -6,7 +6,7 @@
     <description>
         The Maven Alfresco SDK Parent POM exposes the developer features of the Maven Alfresco SDK.
         Declare this POM as parent for your project and select the Alfresco version/edition by defining
-        the alfresco.groupId and alfresco.version in your POM.
+        the alfresco.groupId, alfresco.version, and share.version in your POM.
     </description>
     <packaging>pom</packaging>
 
@@ -14,12 +14,12 @@
     <parent>
         <groupId>org.alfresco.maven</groupId>
         <artifactId>alfresco-sdk-aggregator</artifactId>
-        <version>2.1.1-SNAPSHOT</version>
+        <version>2.2.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <!-- This defines the version of the SDK in terms of features -->
-    <version>2.1.1-SNAPSHOT</version>
+    <version>2.2.0-SNAPSHOT</version>
 
 
     <properties>
@@ -44,8 +44,9 @@
         <!-- This is the name of the Alfresco data folder.
              Configured in alfresco-global.properties with the 'dir.root' property.
              This folder will contain all content files, index files, and database with metadata when running embedded.
-             (this folder is relative to the top folder in the project) -->
-        <alfresco.data.location>alf_data_dev</alfresco.data.location>
+             (best practice is absolute path to this folder, here we use session.executionRootDirectory
+             property to get correct path to alf_data when running in AIO and Repo AMP) -->
+        <alfresco.data.location>${session.executionRootDirectory}/alf_data_dev</alfresco.data.location>
 
         <!-- Alfresco Repo Database configuration.
              By default it uses a flat file H2 database to be able to run embedded.
@@ -59,16 +60,20 @@
         <alfresco.db.password>alfresco</alfresco.db.password>
         <alfresco.db.params>AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;MVCC=FALSE;LOCK_MODE=0
         </alfresco.db.params>
-        <alfresco.db.url>jdbc:h2:./${alfresco.data.location}/h2_data/${alfresco.db.name};${alfresco.db.params}</alfresco.db.url>
+        <alfresco.db.url>jdbc:h2:${alfresco.data.location}/h2_data/${alfresco.db.name};${alfresco.db.params}</alfresco.db.url>
         <alfresco.db.datasource.class>org.h2.jdbcx.JdbcDataSource</alfresco.db.datasource.class>
 
         <!--
             Alfresco Module Packages (AMP) settings
             -->
-        <app.amp.folder>src/main/amp</app.amp.folder> <!-- To know which resource folder to filter for AMP extension projects -->
-        <app.amp.output.folder>../${project.build.finalName}</app.amp.output.folder> <!-- To know which folder filtered AMP resources should end up in -->
-        <app.amp.overlay.excludes /> <!-- AMP excludes when installing into a WAR, by default empty (i.e. everything is included) -->
-        <app.amp.excludes /> <!-- Empty AMP source excludes by default, see the amp-to-war profile for usage example -->
+        <!-- To know which resource folder to filter for AMP extension projects -->
+        <app.amp.folder>src/main/amp</app.amp.folder>
+        <!-- To know which folder filtered AMP resources should end up in under /target -->
+        <app.amp.output.folder>${project.build.directory}/amp</app.amp.output.folder>
+        <!-- AMP excludes when installing into a WAR, by default empty (i.e. everything is included) -->
+        <app.amp.overlay.excludes />
+        <!-- Empty AMP source excludes by default, see the amp-to-war profile for usage example -->
+        <app.amp.excludes />
 
         <!--
             Settings related to the stand-alone AMP extension projects.
@@ -80,7 +85,7 @@
                 my-repo-amp/target/my-repo-amp-war  (Alfresco.war extension)
                 my-share-amp/target/my-share-amp-war  (Share.war extension)
              -->
-        <app.amp.client.war.folder>${project.build.directory}/${project.build.finalName}-war</app.amp.client.war.folder>
+        <app.amp.client.war.folder>${project.build.directory}/amp-war</app.amp.client.war.folder>
         <!-- The Maven artifact ID to use when loading the WAR that the AMP should be applied to,
              defaults to the alfresco.war artifact ID, overriding this in the share-amp project. -->
         <app.amp.client.war.artifactId>${alfresco.repo.artifactId}</app.amp.client.war.artifactId>
@@ -123,25 +128,25 @@
 
         <!-- Needed for community to avoid weird logging exceptions -->
         <app.slf4j.scope>runtime</app.slf4j.scope>
-        <app.slf4j.version>1.5.11</app.slf4j.version>
+        <app.slf4j.version>1.7.13</app.slf4j.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Maven Plugins Versions used by the SDK -->
-        <maven.compiler.version>3.2</maven.compiler.version>
+        <maven.compiler.version>3.5</maven.compiler.version>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-        <maven.clean.version>2.6.1</maven.clean.version>
-        <maven.dependency.version>2.9</maven.dependency.version>
-        <maven.enforcer.plugin>1.4</maven.enforcer.plugin>
+        <maven.clean.version>3.0.0</maven.clean.version>
+        <maven.dependency.version>2.10</maven.dependency.version>
+        <maven.enforcer.plugin>1.4.1</maven.enforcer.plugin>
         <maven.resources.version>2.7</maven.resources.version>
-        <maven.surefire.version>2.18</maven.surefire.version>
+        <maven.surefire.version>2.19.1</maven.surefire.version>
         <maven.install.version>2.5.2</maven.install.version>
-        <maven.jar.version>2.5</maven.jar.version>
-        <maven.war.version>2.5</maven.war.version>
-        <maven.antrun.version>1.7</maven.antrun.version>
-        <maven.release.version>2.5.1</maven.release.version>
-        <maven.buildhelper.version>1.9.1</maven.buildhelper.version>
+        <maven.jar.version>2.6</maven.jar.version>
+        <maven.war.version>2.6</maven.war.version>
+        <maven.antrun.version>1.8</maven.antrun.version>
+        <maven.release.version>2.5.3</maven.release.version>
+        <maven.buildhelper.version>1.10</maven.buildhelper.version>
         <maven.replacer.version>1.5.3</maven.replacer.version>
         <maven.tomcat.version>2.2</maven.tomcat.version>
 
@@ -150,9 +155,9 @@
 
         <!-- This is used to set the version for the following Alfresco artifacts:
               - Maven Alfresco plugin that enables Maven to handle AMP files (alfresco-maven-plugin)
-              - Alfresco Rapid Application Development module (alfresco-rad)
+              - Alfresco Rapid Application Development module that starts remote JUnit runner and enables remote unit testing alfresco-rad)
         -->
-        <maven.alfresco.version>2.1.1-SNAPSHOT</maven.alfresco.version>
+        <maven.alfresco.version>2.2.0-SNAPSHOT</maven.alfresco.version>
 
         <!-- Setup the default Embedded Tomcat port for use by the tomcat7-maven-plugin so
              it can be accessed from the Groovy scripts and other places -->
@@ -160,7 +165,7 @@
 
         <!-- Sets the H2 Database version to use.
              Note. Upgrading to 1.4.186 did not work, on second start (after initial db creation etc) it will not connect... -->
-        <h2.version>1.4.185</h2.version>
+        <h2.version>1.4.190</h2.version>
     </properties>
 
     <!--
@@ -221,7 +226,7 @@
     </pluginRepositories>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
+        <finalName>${project.artifactId}-${project.version}</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -271,6 +276,7 @@
                             <nonFilteredFileExtension>css</nonFilteredFileExtension>
                             <nonFilteredFileExtension>ico</nonFilteredFileExtension>
                             <nonFilteredFileExtension>psd</nonFilteredFileExtension>
+                            <nonFilteredFileExtension>js</nonFilteredFileExtension>
                         </nonFilteredFileExtensions>
                     </configuration>
                 </plugin>
@@ -397,7 +403,10 @@
                                     <exclude>**/*.lib.js</exclude>
                                     <exclude>**/*.css</exclude>
                                 </excludes>
-                                <warSourceDirectory>src/main/resources/META-INF</warSourceDirectory>
+                                <sourceDirectory>src/main/amp</sourceDirectory>
+                                <outputDirectory>${project.build.directory}/amp</outputDirectory>
+                                <!-- Exclude resources so we don't get an extra dir structure with -min.js files -->
+                                <excludeResources>true</excludeResources>
                                 <jswarn>false</jswarn>
                             </configuration>
                         </execution>
@@ -448,7 +457,7 @@
                         <configuration>
                             <filesets>
                                 <fileset>
-                                    <directory>${project.basedir}/${alfresco.data.location}</directory>
+                                    <directory>${alfresco.data.location}</directory>
                                 </fileset>
                                 <fileset>
                                     <directory>${project.basedir}</directory>
@@ -479,7 +488,10 @@
             <properties>
                 <alfresco.version>${alfresco.enterprise.default.version}</alfresco.version>
                 <alfresco.repo.artifactId>alfresco-enterprise</alfresco.repo.artifactId>
-                <alfresco.share.artifactId>share-enterprise</alfresco.share.artifactId>
+                <!-- In 5.1 there is only one release of Share that works with both the Community and the Enterprise version of the product.
+                    i.e. there is no more a share-enterprise artifact...
+                -->
+                <alfresco.share.artifactId>share</alfresco.share.artifactId>
                 <!-- Not needed in the webapp for enterprise -->
                 <app.slf4j.scope>provided</app.slf4j.scope>
             </properties>
@@ -488,7 +500,22 @@
                     <id>alfresco-private-repository</id>
                     <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
                 </repository>
+
+                <!-- TODO: Remove when 5.1 Enterprise has been released, this is just for early access. -->
+                <repository>
+                    <id>alfresco-internal-releases</id>
+                    <url>https://artifacts.alfresco.com/nexus/content/repositories/5.1-EA</url>
+                </repository>
             </repositories>
+
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>alfresco-internal-releases</id>
+                    <name>Alfresco Early Access Enterprise</name>
+                    <url>https://artifacts.alfresco.com/nexus/content/repositories/5.1-EA/</url>
+                </pluginRepository>
+            </pluginRepositories>
+
         </profile>
 
         <!--
@@ -509,7 +536,7 @@
             </properties>
             <build>
                 <plugins>
-                    <!-- Fetch and unpack Alfresco Repository WAR (alfresco.war) -->
+                    <!-- Fetch and unpack Alfresco Repository/Share WAR (alfresco.war or share.war) -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
@@ -534,7 +561,8 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <!-- The current AMP artifact is installed into the Alfresco folder using alfresco-maven-plugin -->
+                    <!-- The current AMP artifact is installed into the Alfresco.war or share.war
+                        using alfresco-maven-plugin -->
                     <plugin>
                         <groupId>org.alfresco.maven.plugin</groupId>
                         <artifactId>alfresco-maven-plugin</artifactId>
@@ -548,11 +576,13 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <!-- We need to selectively not install web resources so to enable rapid dev -->
+                            <!-- We need to selectively not install web resources (i.e. /web folder in AMP),
+                                so these files can be picked up directly from the build project instead,
+                                enabling rapid application dev -->
                             <includeWebResources>false</includeWebResources>
                         </configuration>
                     </plugin>
-                    <!-- Configures tomcat to run against the Alfresco WAR with Tomcat7 virtual webapp features.
+                    <!-- Configures Tomcat to run with the alfresco.war or share.war as virtual webapp.
                          (http://tomcat.apache.org/tomcat-7.0-doc/config/context.html#Virtual_webapp)
                          The target/classes and target/test-classes (containing tests and the amp config for test purposes) are prepended to the
                          running webapp context, so changes from the IDE are automatically picked up first. See context.xml for details.
@@ -560,6 +590,35 @@
                     <plugin>
                         <groupId>org.apache.tomcat.maven</groupId>
                         <artifactId>tomcat7-maven-plugin</artifactId>
+                        <dependencies>
+                            <!-- Bring in the H2 Database scripts needed when running embedded, they are now
+                                 available from the standard generated artifacts, no longer needed to be picked
+                                 up from the alfresco-rad project -->
+                            <dependency>
+                                <groupId>org.alfresco</groupId>
+                                <artifactId>alfresco-repository</artifactId>
+                                <version>${alfresco.version}</version>
+                                <classifier>h2scripts</classifier>
+                                <exclusions>
+                                    <exclusion>
+                                        <groupId>*</groupId>
+                                        <artifactId>*</artifactId>
+                                    </exclusion>
+                                </exclusions>
+                            </dependency>
+                            <!-- Explicitly bring in the Plexus Archiver so assembly goes quicker -->
+                            <dependency>
+                                <groupId>org.codehaus.plexus</groupId>
+                                <artifactId>plexus-archiver</artifactId>
+                                <version>2.3</version>
+                            </dependency>
+                            <!-- Include remote Junit testing lib and start remote JUnit runner -->
+                            <dependency>
+                                <groupId>org.alfresco.maven</groupId>
+                                <artifactId>alfresco-rad</artifactId>
+                                <version>${maven.alfresco.version}</version>
+                            </dependency>
+                        </dependencies>
                         <executions>
                             <execution>
                                 <id>run-embedded</id>
@@ -576,19 +635,14 @@
                                     </systemProperties>
                                     <delegate>true</delegate>
                                     <contextFile>${project.basedir}/tomcat/context.xml</contextFile>
+                                    <!-- Encode url in UTF-8 for proper character handling -->
+                                    <uriEncoding>UTF-8</uriEncoding>
                                 </configuration>
                             </execution>
                         </executions>
                     </plugin>
                 </plugins>
             </build>
-            <dependencies>
-                <dependency>
-                    <groupId>org.alfresco.maven</groupId>
-                    <artifactId>alfresco-rad</artifactId>
-                    <version>${maven.alfresco.version}</version>
-                </dependency>
-            </dependencies>
         </profile>
 
 
@@ -691,8 +745,8 @@
                     <artifactId>junit</artifactId>
                     <scope>test</scope>
                 </dependency>
-                <!-- Add RAD capabilities for remote JUnit test running. Scope=test so the custom JUnit remote runner
-                     is found in the Maven test classpath -->
+                <!-- Add RAD capabilities for remote JUnit test running and start remote JUnit runner.
+                     Scope=test so the custom JUnit remote runner is found in the Maven test classpath -->
                 <dependency>
                     <groupId>org.alfresco.maven</groupId>
                     <artifactId>alfresco-rad</artifactId>
@@ -815,7 +869,7 @@
         <profile>
             <id>enforce-sdk-rules</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <file><missing>does-not-exist.tmp</missing></file><!-- turn on this profile (by triggering on a file that is not expected to exist) -->
             </activation>
             <build>
                 <plugins>
@@ -834,10 +888,10 @@
                                         <!-- Test for Alfresco version -->
                                         <requireProperty>
                                             <property>alfresco.version</property>
-                                            <message>The SDK 2.1.x is supported only for Alfresco 5.0.d Community and above or
-                                                Alfresco Enterprise 5.0.1 and above
+                                            <message>The SDK 2.2.x is supported only for Alfresco 5.1.x Community and above or
+                                                Alfresco Enterprise 5.1 and above
                                             </message>
-                                            <regex>^(5\.(0\.[d-z1-9]|[1-9])|6\.).*$</regex>
+                                            <regex>^(5\.(1\.[a-z1-9]|[1-9])|6\.).*$</regex>
                                         </requireProperty>
 
                                         <!-- Test for Maven version -->

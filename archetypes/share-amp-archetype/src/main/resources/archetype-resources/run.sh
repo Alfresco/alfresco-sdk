@@ -7,4 +7,5 @@ if [ ! -f $springloadedfile ]; then
 mvn validate -Psetup
 fi
 
+# Spring loaded can be used with the Share AMP project
 MAVEN_OPTS="-javaagent:$springloadedfile -noverify" mvn integration-test -Pamp-to-war

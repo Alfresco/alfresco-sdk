@@ -89,22 +89,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <!--
-            Brings in the extra Enterprise specific share classes,
-            if the 'enterprise' profile has been activated, needs to be activated manually. -->
-        <profile>
-            <id>enterprise</id>
-            <dependencies>
-                <dependency>
-                    <groupId>${alfresco.groupId}</groupId>
-                    <artifactId>share-enterprise</artifactId>
-                    <version>${alfresco.version}</version>
-                    <classifier>classes</classifier>
-                    <scope>provided</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
 </project>

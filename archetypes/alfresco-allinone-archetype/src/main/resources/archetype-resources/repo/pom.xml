@@ -42,7 +42,7 @@
         <!-- Demonstrating the dependency / installation of the repo AMP developed in the 'repo-amp' module -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>repo-amp</artifactId>
+            <artifactId>${rootArtifactId}-repo-amp</artifactId>
             <version>${project.version}</version>
             <type>amp</type>
         </dependency>
@@ -56,7 +56,7 @@
         </dependency>
         -->
         <!-- Uncomment if you are using the RM (Records Management) module. -->
-        <!--
+        <!-- Set alfresco.rm.version in parent pom to appropriate version for 5.1
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
             <artifactId>alfresco-rm</artifactId>
@@ -91,7 +91,7 @@
                         <!-- Add / sort your AMPs here -->
                         <overlay>
                             <groupId>${project.groupId}</groupId>
-                            <artifactId>repo-amp</artifactId>
+                            <artifactId>${rootArtifactId}-repo-amp</artifactId>
                             <type>amp</type>
                         </overlay>
                         <!-- Uncomment if you are using SPP -->
@@ -173,6 +173,7 @@
                 </plugins>
             </build>
             <dependencies>
+                <!-- Include remote JUnit test lib to allow remote unit testing and start remote JUnit runner. -->
                 <dependency>
                     <groupId>org.alfresco.maven</groupId>
                     <artifactId>alfresco-rad</artifactId>

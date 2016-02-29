@@ -26,7 +26,7 @@
              Uncomment if you need to change (Note. current default version for Enterprise edition is @@alfresco.enterprise.default.version@@)
           <alfresco.version>@@alfresco.community.default.version@@</alfresco.version>
           <alfresco.rm.version>@@alfresco.rm.version@@</alfresco.rm.version>
-          <alfresco.data.location>alf_data_dev</alfresco.data.location> -->
+          <alfresco.data.location>/absolute/path/to/alf_data_dev</alfresco.data.location> -->
 
         <!-- This control the root logging level for all apps uncomment and change, defaults to WARN
             <app.log.root.level>WARN</app.log.root.level>
@@ -40,6 +40,24 @@
         <!-- The Alfresco Share web application is accessible via this URL -->
         <share.client.url>http://localhost:8080/share</share.client.url>
     </properties>
+
+    <dependencies>
+        <!-- If we are running tests then make the H2 Scripts available.
+             Note. tests are skipped when you are running -Prun -->
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>alfresco-repository</artifactId>
+            <version>${alfresco.version}</version>
+            <classifier>h2scripts</classifier>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
 
     <!-- Here we realize the connection with the Alfresco selected platform (e.g.version and edition) -->
     <dependencyManagement>
@@ -85,6 +103,36 @@
                     runner/tomcat/context-*.xml for more details) -->
                 <maven.alfresco.includeWebResources>false</maven.alfresco.includeWebResources>
             </properties>
+        </profile>
+
+	<!-- if we're on a unix machine, chmod run.sh to be executable -->        
+        <profile>
+        	<id>chmod</id>
+        	<activation><os><family>unix</family></os></activation>
+        	<build>
+        		<plugins>
+		            <plugin>
+		              <groupId>org.codehaus.mojo</groupId>
+		              <artifactId>exec-maven-plugin</artifactId>
+		              <version>1.2.1</version>
+		              <inherited>false</inherited>
+		              <executions>
+		              	<execution>
+		              		<id>chmod</id>
+		              		<phase>validate</phase>
+		              		<goals><goal>exec</goal></goals>
+		              	</execution>
+		              </executions>
+		              <configuration>
+		              	<executable>chmod</executable>
+		              	<arguments>
+		              		<argument>+x</argument>
+		              		<argument>${basedir}/run.sh</argument>
+		              	</arguments>
+		              </configuration>
+		            </plugin>
+        		</plugins>
+        	</build>
         </profile>
     </profiles>
 </project>

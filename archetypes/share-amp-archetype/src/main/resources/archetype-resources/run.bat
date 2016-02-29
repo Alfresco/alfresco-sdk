@@ -14,7 +14,7 @@ if not exist %springloadedfile% (
   mvn validate -Psetup
 )
 
+:: Spring loaded can be used with the Share AMP project
 set MAVEN_OPTS=-javaagent:"%springloadedfile%" -noverify
 
 mvn integration-test -Pamp-to-war -nsu
-:: mvn integration-test -Pamp-to-war 
