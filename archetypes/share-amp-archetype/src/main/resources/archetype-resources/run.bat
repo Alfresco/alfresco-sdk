@@ -1,20 +1,17 @@
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::      Dev environment startup script for Alfresco Community.    ::
-::                                                                ::
-::      Downloads the spring-loaded lib if not existing and       ::
-::      runs the Share AMP applied to Share WAR.                  ::
-::      Note. requires Alfresco.war to be running in another      ::
-::      Tomcat on port 8080.                                      ::
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-@echo off
+@ECHO OFF
 
-set springloadedfile=%HOME%\.m2\repository\org\springframework\springloaded\@@springloaded.version@@\springloaded-@@springloaded.version@@.jar
+IF "%MAVEN_OPTS%" == "" (
+    ECHO The environment variable 'MAVEN_OPTS' is not set, setting it for you
 
-if not exist %springloadedfile% (
-  mvn validate -Psetup
+    SET springloadedfile=%HOME%\.m2\repository\org\springframework\springloaded\1.2.5.RELEASE\springloaded-1.2.5.RELEASE.jar
+
+    if not exist %springloadedfile% (
+      mvn validate -Psetup
+    )
+
+    # Spring loaded can be used with the Share AMP project in 5.1
+    # (i.e. it does not have the same problem as Repo AMP and AIO)
+    SET MAVEN_OPTS=-javaagent:"%springloadedfile%" -noverify
 )
-
-:: Spring loaded can be used with the Share AMP project
-set MAVEN_OPTS=-javaagent:"%springloadedfile%" -noverify
-
-mvn integration-test -Pamp-to-war -nsu
+ECHO MAVEN_OPTS is set to '%MAVEN_OPTS%'
+mvn clean install -Pamp-to-war

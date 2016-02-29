@@ -1,16 +1,7 @@
 #!/bin/bash
-# Downloads the spring-loaded lib if not existing and      
-# runs the Repo AMP applied to Alfresco WAR.           
-# Note. the Share WAR is not deployed.              
-springloadedfile=~/.m2/repository/org/springframework/springloaded/@@springloaded.version@@/springloaded-@@springloaded.version@@.jar
-
-if [ ! -f $springloadedfile ]; then
-mvn validate -Psetup
+if [[ -z ${MAVEN_OPTS} ]]; then
+    echo "The environment variable 'MAVEN_OPTS' is not set, setting it for you";
+    MAVEN_OPTS="-Xms256m -Xmx1524m -XX:PermSize=300m"
 fi
-
-# Use these settings if you're using JDK7
-# MAVEN_OPTS="-javaagent:$springloadedfile -noverify -Xms256m -Xmx2G -XX:PermSize=300m" mvn install -Prun
-
-# Spring loaded does not work very well with 5.1 at the moment, breaks the H2 db after first run and then restart
-#MAVEN_OPTS="-javaagent:$springloadedfile -noverify -Xms256m -Xmx2G" mvn integration-test -Pamp-to-war
-MAVEN_OPTS="-noverify -Xms256m -Xmx2G" mvn integration-test -Pamp-to-war
+echo "MAVEN_OPTS is set to '$MAVEN_OPTS'";
+mvn clean install -Pamp-to-war
