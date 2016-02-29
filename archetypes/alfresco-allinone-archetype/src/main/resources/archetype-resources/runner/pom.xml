@@ -110,6 +110,8 @@
                                  This also fixes issues with the Google Guava Library, which this tomcat plugin uses
                                  version 10.0.1 of but Solr uses 14.0.1 -->
                             <delegate>false</delegate>
+                            <!-- Encode url in UTF-8 for proper character handling -->
+                            <uriEncoding>UTF-8</uriEncoding>
                             <webapps>
                                 <webapp>
                                     <groupId>${project.groupId}</groupId>
