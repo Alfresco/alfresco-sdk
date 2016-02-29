@@ -2,16 +2,15 @@
 <!-- ===================================================================================================================
     This context file is used only in a development IDE for rapid development,
     it is never released with the Alfresco.war
-
-    IMPORTANT: If an AMP or JAR extension is added to the Alfresco WAR,
-              then you need to add the paths below for this new extension.
     =================================================================================================================-->
 
-<!-- Pick up static resource files from ../repo/target/repo.
-     The Alfresco.war 5.0 does not have a webapp (it used to have Alfresco Explorer but not anymore)
-     that we will access, so this docBase might not be needed -->
-<Context docBase="${project.parent.basedir}/alfresco-war/target/${project.build.finalName}">
-    <!-- Pick up static resource files from AMPs and other directories (this should not include docBase) -->
+<!-- Setup a virtual context for the /alfresco webapp.
+     The run profile uses the tomcat7-maven-plugin to kick off the webapp and it is configured with the
+     webapp resources and path (i.e. /alfresco).
+
+     Note. Alfresco.war 5.0 does not have a webapp, just an index page, the Alfresco Explorer webapp is no longer available.
+-->
+<Context>
     <Resources className="org.apache.naming.resources.VirtualDirContext"
                extraResourcePaths="/=${project.parent.basedir}/${rootArtifactId}-repo-amp/target/amp/web" />
     <!-- IMPORTANT! The extraResourcePaths string need to be on one continues line, so if we add another Repo AMP,

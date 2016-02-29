@@ -2,13 +2,12 @@
 <!-- ===================================================================================================================
     This context file is used only in a development IDE for rapid development,
     it is never released with the Share.war
+    =================================================================================================================-->
 
-    IMPORTANT: If an AMP or JAR extension is added to the Share WAR,
-               then you need to add the paths below for this new extension.
-=================================================================================================================-->
+<!-- Setup a virtual context for the /share webapp.
+     The run profile uses the tomcat7-maven-plugin to kick off the webapp and it is configured with the
+     webapp resources and path (i.e. /share). -->
 <Context>
-    <!-- Pick up static resource files from any Share extensions, being it a JAR or an AMP
-         (this should not include docBase) -->
     <Resources className="org.apache.naming.resources.VirtualDirContext"
                extraResourcePaths="/=${project.parent.basedir}/${rootArtifactId}-share-amp/target/amp/web" />
     <!-- IMPORTANT! The extraResourcePaths string need to be on one continues line, so if we add another Share AMP,

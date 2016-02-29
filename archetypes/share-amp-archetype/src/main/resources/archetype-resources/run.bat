@@ -14,8 +14,7 @@ if not exist %springloadedfile% (
   mvn validate -Psetup
 )
 
-:: Spring loaded does not work very well with 5.1 at the moment, breaks the H2 db after first run and then restart
-:: set MAVEN_OPTS=-javaagent:"%springloadedfile%" -noverify
-set MAVEN_OPTS=-noverify
+:: Spring loaded can be used with the Share AMP project
+set MAVEN_OPTS=-javaagent:"%springloadedfile%" -noverify
 
 mvn integration-test -Pamp-to-war -nsu
