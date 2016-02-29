@@ -116,6 +116,9 @@
               as it may break SDK functionalities
              -->
         <app.filtering.enabled>true</app.filtering.enabled>
+        
+        <!-- Additional command line arguments, used by Surefire forked JVM-->
+        <argLine>-Xms256m -Xmx1524m -XX:MaxPermSize=256m -Duser.language=en</argLine>
 
         <!--  Logging in project's target folder by default
               NOTE: Remember the trailing slash when overriding this.
@@ -160,11 +163,9 @@
              it can be accessed from the Groovy scripts and other places -->
         <maven.tomcat.port>8080</maven.tomcat.port>
 
-        <!-- Sets the H2 Database version to use. -->
+        <!-- Sets the H2 Database version to use.
+             Note. Upgrading to 1.4.186 did not work, on second start (after initial db creation etc) it will not connect... -->
         <h2.version>1.4.190</h2.version>
-
-        <!-- Give the JVM some more memory so it can load the alfresco.war,share.war,and solr4.war -->
-        <argLine>-Xms256m -Xmx1524m -XX:MaxPermSize=256m -Duser.language=en</argLine>
     </properties>
 
     <!--
