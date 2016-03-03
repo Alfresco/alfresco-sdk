@@ -158,6 +158,7 @@
               - Alfresco Rapid Application Development module that starts remote JUnit runner and enables remote unit testing alfresco-rad)
         -->
         <maven.alfresco.version>2.2.0-SNAPSHOT</maven.alfresco.version>
+        <maven.alfresco.api.explorer.version>1.0</maven.alfresco.api.explorer.version>
 
         <!-- Setup the default Embedded Tomcat port for use by the tomcat7-maven-plugin so
              it can be accessed from the Groovy scripts and other places -->
