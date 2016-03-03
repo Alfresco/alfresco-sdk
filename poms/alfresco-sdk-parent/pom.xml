@@ -506,7 +506,7 @@
 
             <pluginRepositories>
                 <pluginRepository>
-                    <id>alfresco-private-plugin-repository</id>
+                    <id>alfresco-private-repository</id>
                     <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
                 </pluginRepository>
             </pluginRepositories>
