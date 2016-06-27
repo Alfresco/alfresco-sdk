@@ -193,61 +193,7 @@ public class RunMojo extends AbstractMojo {
 
     private ExecutionEnvironment execEnv;
 
-    /**
-     * Have to have this setter as it does not seem to work to assign a default value to a property
-     * where the value comes from a property that is not used (i.e. alfrescoRepoWarArtifactId)
-     *
-     * @param artifactId
-
-    public void setRunnerAlfrescoRepoArtifactId(String artifactId) {
-        getLog().info("setRunnerAlfrescoRepoArtifactId [artifactId=" + artifactId +
-                "][alfrescoRepoArtifactId=" + this.alfrescoRepoArtifactId + "]");
-        if (StringUtils.isBlank(artifactId)) {
-            if (StringUtils.isNotBlank(this.alfrescoRepoArtifactId)) {
-                this.runnerAlfrescoRepoArtifactId = this.alfrescoRepoArtifactId;
-            } else {
-                getLog().error("Alfresco Repository WAR Maven Artifact ID is not set via either " +
-                        "runner.alfresco.platform.war.artifactId or alfresco.platform.war.artifactId");
-            }
-        } else {
-            this.runnerAlfrescoRepoArtifactId = artifactId;
-        }
-    }
-     */
-
-    /**
-     * Have to have this setter as it does not seem to work to assign a default value to a property
-     * where the value comes from a property that is not used (i.e. alfrescoShareWarArtifactId)
-     *
-     * @param artifactId
-
-    public void setRunnerAlfrescoShareArtifactId(String artifactId) {
-        getLog().info("setRunnerAlfrescoShareArtifactId [artifactId=" + artifactId +
-                "][alfrescoShareWarArtifactId=" + this.alfrescoShareWarArtifactId + "]");
-        if (StringUtils.isBlank(artifactId)) {
-            if (StringUtils.isNotBlank(this.alfrescoShareWarArtifactId)) {
-                this.runnerAlfrescoShareWarArtifactId = this.alfrescoShareWarArtifactId;
-            } else {
-                getLog().error("Alfresco Share WAR Maven Artifact ID is not set via either " +
-                        "runner.alfresco.share.artifactId or alfresco.share.artifactId");
-            }
-        } else {
-            this.runnerAlfrescoShareWarArtifactId = artifactId;
-        }
-    }
-     */
-
     public void execute() throws MojoExecutionException {
-        // The runner repo artifact ID might not be set, initialize in that case
-/*        if (StringUtils.isBlank(this.runnerAlfrescoRepoWarArtifactId)) {
-            setRunneralfrescoRepoWarArtifactId(null);
-        }
-
-        // The runner share artifact ID might not be set, initialize in that case
-        if (StringUtils.isBlank(this.runnerAlfrescoShareWarArtifactId)) {
-            setRunnerAlfrescoShareArtifactId(null);
-        }
-*/
         execEnv = executionEnvironment(
                 project,
                 session,
@@ -404,13 +350,13 @@ public class RunMojo extends AbstractMojo {
         if (enableRepository) {
             webapps2Deploy.add(createWebAppElement(
                     runnerAlfrescoGroupId, runnerAlfrescoRepoWarArtifactId, runnerAlfrescoRepoVersion,
-                    "/alfresco", "${project.build.testOutputDirectory}/tomcat/context-repo.xml"));
+                    "/alfresco", null));
         }
 
         if (enableShare) {
             webapps2Deploy.add(createWebAppElement(
                     runnerAlfrescoGroupId, runnerAlfrescoShareWarArtifactId, runnerAlfrescoShareVersion,
-                    "/share", "${project.build.testOutputDirectory}/tomcat/context-share.xml"));
+                    "/share", null));
         }
 
         if (enableSolr) {
@@ -531,18 +477,25 @@ public class RunMojo extends AbstractMojo {
             getLog().error("Maven Version number " + errorStr);
         }
 
-        Element e = element(name("webapp"),
-                element(name("groupId"), groupId),
-                element(name("artifactId"), artifactId),
-                element(name("version"), version),
-                element(name("type"), "war"),
+        Element groupIdEl = element(name("groupId"), groupId);
+        Element artifactIdEl = element(name("artifactId"), artifactId);
+        Element versionEl = element(name("version"), version);
+        Element typeEl = element(name("type"), "war");
+        // Make sure webapp is loaded with context and everything,
+        // if set to 'false' then you will get 404 when trying to access the webapp from browser
+        Element asWebappEl = element(name("asWebapp"), "true");
+        Element contextPathEl = element(name("contextPath"), contextPath);
 
-                // Make sure webapp is loaded with context and everything,
-                // if set to 'false' then you will get 404 when trying to access the webapp from browser
-                element(name("asWebapp"), "true"),
+        Element e;
+        if (StringUtils.isNotBlank(contextFile)) {
+            e = element(name("webapp"),
+                    groupIdEl, artifactIdEl, versionEl,typeEl,asWebappEl, contextPathEl,
+                    element(name("contextFile"), contextFile));
 
-                element(name("contextPath"), contextPath),
-                StringUtils.isNotBlank(contextFile) ? element(name("contextFile"), contextFile) : null);
+        } else {
+            e = element(name("webapp"),
+                    groupIdEl, artifactIdEl, versionEl, typeEl, asWebappEl, contextPathEl);
+        }
 
         getLog().info(e.toDom().toUnescapedString());
 
