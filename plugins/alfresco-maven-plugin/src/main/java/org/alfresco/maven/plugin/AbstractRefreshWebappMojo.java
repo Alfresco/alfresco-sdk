@@ -17,6 +17,7 @@
  */
 package org.alfresco.maven.plugin;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.net.telnet.TelnetClient;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpStatus;
@@ -128,9 +129,13 @@ public abstract class AbstractRefreshWebappMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException {
+        if (StringUtils.isBlank(this.refreshPort)) {
+            this.refreshPort = "8080";
+        }
+
         // Do a ping to see if the server is up, if not, log and just exit
         if (!ping()) {
-            getLog().warn("Connection failed to " + refreshHost + ":" + refreshPort + ", " + getAbortedMsg());
+            getLog().warn("Connection failed to " + this.refreshHost + ":" + this.refreshPort + ", " + getAbortedMsg());
             return;
         }
 
@@ -263,7 +268,7 @@ public abstract class AbstractRefreshWebappMojo extends AbstractMojo {
 
     private URL buildFinalUrl(String specificRefreshUrlPath) {
         try {
-            return new URL("http://" + refreshHost + ":" + refreshPort + specificRefreshUrlPath);
+            return new URL("http://" + this.refreshHost + ":" + this.refreshPort + specificRefreshUrlPath);
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return null;
