@@ -47,6 +47,14 @@ import static org.twdata.maven.mojoexecutor.MojoExecutor.*;
         aggregator = true,
         requiresDependencyResolution = ResolutionScope.TEST)
 public class RunMojo extends AbstractMojo {
+    public static final String MAVEN_DEPENDENCY_PLUGIN_VERSION = "2.10";
+    public static final String MAVEN_WAR_PLUGIN_VERSION = "2.6";
+    public static final String MAVEN_INSTALL_PLUGIN_VERSION = "2.5.2";
+    public static final String MAVEN_REPLACER_PLUGIN_VERSION = "1.5.3";
+    public static final String MAVEN_RESOURCE_PLUGIN_VERSION = "2.7";
+    public static final String MAVEN_TOMCAT7_PLUGIN_VERSION = "2.2";
+    public static final String MAVEN_ALFRESCO_PLUGIN_VERSION = "3.0.0-SNAPSHOT";
+
     @Component
     protected MavenProject project;
 
@@ -61,14 +69,13 @@ public class RunMojo extends AbstractMojo {
      * Alfresco Maven plugin itself.
      * <p/>
      * For example:
-     * <pre>
      *    {@code
      *      <plugin>
      *          <groupId>org.alfresco.maven.plugin</groupId>
      *          <artifactId>alfresco-maven-plugin</artifactId>
      *          <version>3.0.0</version>
      *          <configuration>
-     *              <enableRepository>true</enableRepository>
+     *              <enablePlatform>true</enablePlatform>
      *              <enableShare>false</enableShare>
      *              <enableSolr>true</enableSolr>
      *              <enableH2>true</enableH2>
@@ -91,10 +98,10 @@ public class RunMojo extends AbstractMojo {
     protected boolean enableH2;
 
     /**
-     * Switch to enable/disable the Repository (alfresco.war) when running embedded Tomcat.
+     * Switch to enable/disable the Platform/Repository (alfresco.war) when running embedded Tomcat.
      */
-    @Parameter(property = "maven.alfresco.enableRepository", defaultValue = "true")
-    protected boolean enableRepository;
+    @Parameter(property = "maven.alfresco.enablePlatform", defaultValue = "true")
+    protected boolean enablePlatform;
 
     /**
      * Switch to enable/disable the Share (share.war) when running embedded Tomcat.
@@ -115,10 +122,10 @@ public class RunMojo extends AbstractMojo {
     protected boolean enableTestProperties;
 
     /**
-     * Switch to enable/disable running embedded Apache Tomcat.
+     * Control if Tomcat 7 Plugin should be kicked off and start Apache Tomcat
      */
-    @Parameter(property = "maven.alfresco.enableTomcat", defaultValue = "true")
-    protected boolean enableTomcat;
+    @Parameter(property = "maven.alfresco.startTomcat", defaultValue = "true")
+    protected boolean startTomcat;
 
     /**
      * Directory containing test files that should be used when running embedded Tomcat
@@ -139,7 +146,7 @@ public class RunMojo extends AbstractMojo {
     protected String alfrescoGroupId;
 
     @Parameter(property = "alfresco.platform.war.artifactId", defaultValue = "alfresco")
-    protected String alfrescoRepoWarArtifactId;
+    protected String alfrescoPlatformWarArtifactId;
 
     @Parameter(property = "alfresco.share.war.artifactId", defaultValue = "share")
     protected String alfrescoShareWarArtifactId;
@@ -151,7 +158,7 @@ public class RunMojo extends AbstractMojo {
     protected String alfrescoApiExplorerArtifactId;
 
     @Parameter(property = "alfresco.platform.version", defaultValue = "5.1.g")
-    protected String alfrescoRepoVersion;
+    protected String alfrescoPlatformVersion;
 
     @Parameter(property = "alfresco.share.version", defaultValue = "5.1.f")
     protected String alfrescoShareVersion;
@@ -162,21 +169,34 @@ public class RunMojo extends AbstractMojo {
     /**
      * Maven GAV properties for customized alfresco.war and share.war
      * Used by the Maven Tomcat 7 Plugin
+     * TODO: These properties don't need to be params anymore
      */
     @Parameter(property = "runner.alfresco.groupId", defaultValue = "${alfresco.groupId}")
     protected String runnerAlfrescoGroupId;
 
     @Parameter(property = "runner.alfresco.platform.war.artifactId", defaultValue = "${alfresco.platform.war.artifactId}")
-    protected String runnerAlfrescoRepoWarArtifactId;
+    protected String runnerAlfrescoPlatformWarArtifactId;
 
     @Parameter(property = "runner.alfresco.share.war.artifactId", defaultValue = "${alfresco.share.war.artifactId}")
     protected String runnerAlfrescoShareWarArtifactId;
 
     @Parameter(property = "runner.alfresco.platform.version", defaultValue = "${alfresco.platform.version}")
-    protected String runnerAlfrescoRepoVersion;
+    protected String runnerAlfrescoPlatformVersion;
 
     @Parameter(property = "runner.alfresco.share.version", defaultValue = "${alfresco.share.version}")
     protected String runnerAlfrescoShareVersion;
+
+    /**
+     * JARs and AMPs that should be overlayed/applied to the Platform/Repository WAR (i.e. alfresco.war)
+     */
+    @Parameter(property = "runner.alfresco.platform.modules", defaultValue = "")
+    protected List<ModuleDependency> runnerAlfrescoPlatformModules;
+
+    /**
+     * JARs and AMPs that should be overlayed/applied to the Share WAR (i.e. share.war)
+     */
+    @Parameter(property = "runner.alfresco.share.modules", defaultValue = "")
+    protected List<ModuleDependency> runnerAlfrescoShareModules;
 
     /**
      * Directory that contains the Alfresco Solr 4 configuration
@@ -210,7 +230,15 @@ public class RunMojo extends AbstractMojo {
             copyAlfrescoGlobalProperties();
         }
 
-        if (enableTomcat) {
+        if (enablePlatform) {
+            buildPlatformWar();
+        }
+
+        if (enableShare) {
+            buildShareWar();
+        }
+
+        if (startTomcat) {
             startTomcat();
         }
     }
@@ -227,7 +255,7 @@ public class RunMojo extends AbstractMojo {
                 plugin(
                         groupId("org.apache.maven.plugins"),
                         artifactId("maven-dependency-plugin"),
-                        version("2.9")
+                        version(MAVEN_DEPENDENCY_PLUGIN_VERSION)
                 ),
                 goal("unpack"),
                 configuration(
@@ -236,7 +264,7 @@ public class RunMojo extends AbstractMojo {
                                 element(name("artifactItem"),
                                         element(name("groupId"), alfrescoGroupId),
                                         element(name("artifactId"), alfrescoSolrArtifactId),
-                                        element(name("version"), alfrescoRepoVersion),
+                                        element(name("version"), alfrescoPlatformVersion),
                                         element(name("classifier"), "config"),
                                         element(name("type"), "zip")
                                 )
@@ -244,7 +272,6 @@ public class RunMojo extends AbstractMojo {
                 ),
                 execEnv
         );
-
     }
 
     /**
@@ -259,7 +286,7 @@ public class RunMojo extends AbstractMojo {
                 plugin(
                         groupId("com.google.code.maven-replacer-plugin"),
                         artifactId("replacer"),
-                        version("1.5.3")
+                        version(MAVEN_REPLACER_PLUGIN_VERSION)
                 ),
                 goal("replace"),
                 configuration(
@@ -277,7 +304,6 @@ public class RunMojo extends AbstractMojo {
                 ),
                 execEnv
         );
-
     }
 
     /**
@@ -293,7 +319,7 @@ public class RunMojo extends AbstractMojo {
                 plugin(
                         groupId("org.apache.maven.plugins"),
                         artifactId("maven-resources-plugin"),
-                        version("2.7")
+                        version(MAVEN_RESOURCE_PLUGIN_VERSION)
                 ),
                 goal("copy-resources"),
                 configuration(
@@ -310,6 +336,200 @@ public class RunMojo extends AbstractMojo {
                 ),
                 execEnv
         );
+    }
+
+    /**
+     * Build the customized Platform webapp (i.e. the Repository, alfresco.war)
+     * that should be deployed by Tomcat by applying all AMPs and JARs from
+     * the {@code <runnerAlfrescoPlatformModules> } configuration.
+     */
+    protected void buildPlatformWar() throws MojoExecutionException {
+        String platformWarArtifactId = buildCustomWar("platform",
+                runnerAlfrescoPlatformModules,
+                alfrescoPlatformWarArtifactId,
+                alfrescoPlatformVersion);
+
+        // Set up the custom platform war to be run by Tomcat plugin
+        runnerAlfrescoGroupId = "${project.groupId}";
+        runnerAlfrescoPlatformWarArtifactId = platformWarArtifactId;
+        runnerAlfrescoPlatformVersion = "${project.version}";
+    }
+
+    /**
+     * Build the customized Share webapp (i.e. the share.war)
+     * that should be deployed by Tomcat by applying all AMPs and JARs from
+     * the {@code <runnerAlfrescoShareModules> } configuration.
+     */
+    protected void buildShareWar() throws MojoExecutionException  {
+        String shareWarArtifactId = buildCustomWar("share",
+                runnerAlfrescoShareModules,
+                alfrescoShareWarArtifactId,
+                alfrescoShareVersion);
+
+        // Set up the custom share war to be run by Tomcat plugin
+        runnerAlfrescoGroupId = "${project.groupId}";
+        runnerAlfrescoShareWarArtifactId = shareWarArtifactId;
+        runnerAlfrescoShareVersion = "${project.version}";
+    }
+
+    /**
+     * Build a customized webapp, applying a number of AMPs and JARs from alfresco maven plugin configuration.
+     *
+     * @param warName the name of the custom war
+     * @param modules the modules that should be applied to the custom war
+     * @param originalWarArtifactId the artifactId for the original war file that should be customized
+     * @param originalWarVersion the version for the original war file that should be customized
+     * @return the customized war file artifactId, to be used by the tomcat7 plugin
+     * @throws MojoExecutionException
+     */
+    protected String buildCustomWar(String warName,
+                                  List<ModuleDependency> modules,
+                                  String originalWarArtifactId,
+                                  String originalWarVersion) throws MojoExecutionException {
+        final String warArtifactId = "${project.artifactId}-" + warName;
+        final String warOutputDir = "${project.build.directory}/" + warName + "-war";
+        final String ampsOutputDir = "${project.build.directory}/modules/" + warName + "/amps";
+        List<Element> ampModules = new ArrayList<>();
+        List<Element> jarModules = new ArrayList<>();
+
+        if (modules != null) {
+            for (ModuleDependency moduleDep : modules) {
+                Element el = element(name("artifactItem"),
+                        element(name("groupId"), moduleDep.getGroupId()),
+                        element(name("artifactId"), moduleDep.getArtifactId()),
+                        element(name("version"), moduleDep.getVersion()),
+                        element(name("type"), moduleDep.getType()),
+                        element(name("overWrite"), "true"));
+                if (moduleDep.isAmp()) {
+                    ampModules.add(el);
+                } else if (moduleDep.isJar()) {
+                    jarModules.add(el);
+                } else {
+                    throw new MojoExecutionException(
+                            "Unknown module type: " + moduleDep.getType() +
+                                    " when building custom " + warName +
+                                    " war, only 'jar' and 'amp' types are allowed");
+                }
+            }
+        }
+
+        // Convert from list to array so we can add these elements below
+        Element[] ampModuleArray = new Element[ampModules.size()];
+        ampModules.toArray(ampModuleArray);
+        Element[] jarModuleArray = new Element[jarModules.size()];
+        jarModules.toArray(jarModuleArray);
+
+        // Unpack the original war to /target/<warName>-war
+        executeMojo(
+                plugin(
+                        groupId("org.apache.maven.plugins"),
+                        artifactId("maven-dependency-plugin"),
+                        version(MAVEN_DEPENDENCY_PLUGIN_VERSION)
+                ),
+                goal("unpack"),
+                configuration(
+                        element(name("outputDirectory"), warOutputDir),
+                        element(name("artifactItems"),
+                                element(name("artifactItem"),
+                                        element(name("groupId"), alfrescoGroupId),
+                                        element(name("artifactId"), originalWarArtifactId),
+                                        element(name("version"), originalWarVersion),
+                                        element(name("type"), "war")
+                                )
+                        )
+                ),
+                execEnv
+        );
+
+        if (ampModuleArray.length > 0) {
+            // Copy AMPs to target/modules/<warName>/amps so we can install them onto the WAR
+            executeMojo(
+                    plugin(
+                            groupId("org.apache.maven.plugins"),
+                            artifactId("maven-dependency-plugin"),
+                            version(MAVEN_DEPENDENCY_PLUGIN_VERSION)
+                    ),
+                    goal("copy"),
+                    configuration(
+                            element(name("outputDirectory"), ampsOutputDir),
+                            element(name("artifactItems"), ampModuleArray)
+                    ),
+                    execEnv
+            );
+
+            // Then apply all these amps to the unpacked war
+            executeMojo(
+                    plugin(
+                            groupId("org.alfresco.maven.plugin"),
+                            artifactId("alfresco-maven-plugin"),
+                            version(MAVEN_ALFRESCO_PLUGIN_VERSION)
+                    ),
+                    goal("install"),
+                    configuration(
+                            element(name("ampLocation"), ampsOutputDir),
+                            element(name("warLocation"), warOutputDir)
+                    ),
+                    execEnv
+            );
+        }
+
+        // Then copy all JAR dependencies to the unpacked war /target/<warName>-war/WEB-INF/lib
+        if (jarModuleArray.length > 0) {
+            executeMojo(
+                    plugin(
+                            groupId("org.apache.maven.plugins"),
+                            artifactId("maven-dependency-plugin"),
+                            version(MAVEN_DEPENDENCY_PLUGIN_VERSION)
+                    ),
+                    goal("copy"),
+                    configuration(
+                            element(name("outputDirectory"), warOutputDir + "/WEB-INF/lib"),
+                            element(name("artifactItems"), jarModuleArray)
+                    ),
+                    execEnv
+            );
+        }
+
+        // Build the customized war file
+        executeMojo(
+                plugin(
+                        groupId("org.apache.maven.plugins"),
+                        artifactId("maven-war-plugin"),
+                        version(MAVEN_WAR_PLUGIN_VERSION)
+                ),
+                goal("war"),
+                configuration(
+                        element(name("warName"), warName),
+                        element(name("warSourceDirectory"), warOutputDir),
+                        // Specifically tell the archiver where the manifest file is,
+                        // so a new manifest is not generated.
+                        // We are picking the manifest from the original war.
+                        // If we don't do this, then customized share.war will not start properly.
+                        element(name("archive"),
+                                element(name("manifestFile"), warOutputDir + "/META-INF/MANIFEST.MF")
+                        )
+                )
+                , execEnv
+        );
+
+        // Install the customized war file in local maven  repo
+        executeMojo(
+                plugin(
+                        groupId("org.apache.maven.plugins"),
+                        artifactId("maven-install-plugin"),
+                        version(MAVEN_INSTALL_PLUGIN_VERSION)
+                ),
+                goal("install-file"),
+                configuration(
+                        element(name("file"), "${project.build.directory}/" + warName + ".war"),
+                        element(name("groupId"), "${project.groupId}"),
+                        element(name("artifactId"), warArtifactId),
+                        element(name("version"), "${project.version}")
+                )
+                , execEnv
+        );
+
+        return warArtifactId;
     }
 
     /**
@@ -336,7 +556,7 @@ public class RunMojo extends AbstractMojo {
                 dependency("javax.servlet", "javax.servlet-api", "3.0.1"));
 
         if (enableH2) {
-            Dependency h2ScriptsDependency = dependency(alfrescoGroupId, "alfresco-repository", alfrescoRepoVersion);
+            Dependency h2ScriptsDependency = dependency(alfrescoGroupId, "alfresco-repository", alfrescoPlatformVersion);
             h2ScriptsDependency.setClassifier("h2scripts");
 
             tomcatDependencies.add(
@@ -347,9 +567,9 @@ public class RunMojo extends AbstractMojo {
                     h2ScriptsDependency);
         }
 
-        if (enableRepository) {
+        if (enablePlatform) {
             webapps2Deploy.add(createWebAppElement(
-                    runnerAlfrescoGroupId, runnerAlfrescoRepoWarArtifactId, runnerAlfrescoRepoVersion,
+                    runnerAlfrescoGroupId, runnerAlfrescoPlatformWarArtifactId, runnerAlfrescoPlatformVersion,
                     "/alfresco", null));
         }
 
@@ -360,7 +580,7 @@ public class RunMojo extends AbstractMojo {
         }
 
         if (enableSolr) {
-            webapps2Deploy.add(createWebAppElement(alfrescoGroupId, alfrescoSolrArtifactId, alfrescoRepoVersion,
+            webapps2Deploy.add(createWebAppElement(alfrescoGroupId, alfrescoSolrArtifactId, alfrescoPlatformVersion,
                     "/solr4", "${project.build.testOutputDirectory}/tomcat/context-solr.xml"));
         }
 
@@ -378,7 +598,7 @@ public class RunMojo extends AbstractMojo {
                 plugin(
                         groupId("org.apache.tomcat.maven"),
                         artifactId("tomcat7-maven-plugin"),
-                        version("2.2"),
+                        version(MAVEN_TOMCAT7_PLUGIN_VERSION),
                         tomcatDependencies
                 ),
                 goal("run"),
