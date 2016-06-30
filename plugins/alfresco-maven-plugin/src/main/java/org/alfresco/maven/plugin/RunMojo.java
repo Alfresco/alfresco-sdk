@@ -75,10 +75,18 @@ public class RunMojo extends AbstractMojo {
      *          <artifactId>alfresco-maven-plugin</artifactId>
      *          <version>3.0.0</version>
      *          <configuration>
-     *              <enablePlatform>true</enablePlatform>
-     *              <enableShare>false</enableShare>
-     *              <enableSolr>true</enableSolr>
      *              <enableH2>true</enableH2>
+     *              <enablePlatform>true</enablePlatform>
+     *              <enableSolr>true</enableSolr>
+     *              <enableShare>false</enableShare>*
+     *              <platformModules>
+     *                  <moduleDependency>
+     *                      <groupId>${alfresco.groupId}</groupId>
+     *                      <artifactId>alfresco-share-services</artifactId>
+     *                      <version>${alfresco.share.version}</version>
+     *                      <type>amp</type>
+     *                  </moduleDependency>
+     *              </platformModules>
      *          </configuration>
      *      </plugin>
      *    }
@@ -140,6 +148,18 @@ public class RunMojo extends AbstractMojo {
     protected String testInclude;
 
     /**
+     * JARs and AMPs that should be overlayed/applied to the Platform/Repository WAR (i.e. alfresco.war)
+     */
+    @Parameter(property = "maven.alfresco.platform.modules", defaultValue = "")
+    protected List<ModuleDependency> platformModules;
+
+    /**
+     * JARs and AMPs that should be overlayed/applied to the Share WAR (i.e. share.war)
+     */
+    @Parameter(property = "maven.alfresco.share.modules", defaultValue = "")
+    protected List<ModuleDependency> shareModules;
+
+    /**
      * Maven GAV properties for standard Alfresco web applications.
      */
     @Parameter(property = "alfresco.groupId", defaultValue = "org.alfresco")
@@ -167,50 +187,31 @@ public class RunMojo extends AbstractMojo {
     protected String alfrescoApiExplorerVersion;
 
     /**
-     * Maven GAV properties for customized alfresco.war and share.war
-     * Used by the Maven Tomcat 7 Plugin
-     * TODO: These properties don't need to be params anymore
-     */
-    @Parameter(property = "runner.alfresco.groupId", defaultValue = "${alfresco.groupId}")
-    protected String runnerAlfrescoGroupId;
-
-    @Parameter(property = "runner.alfresco.platform.war.artifactId", defaultValue = "${alfresco.platform.war.artifactId}")
-    protected String runnerAlfrescoPlatformWarArtifactId;
-
-    @Parameter(property = "runner.alfresco.share.war.artifactId", defaultValue = "${alfresco.share.war.artifactId}")
-    protected String runnerAlfrescoShareWarArtifactId;
-
-    @Parameter(property = "runner.alfresco.platform.version", defaultValue = "${alfresco.platform.version}")
-    protected String runnerAlfrescoPlatformVersion;
-
-    @Parameter(property = "runner.alfresco.share.version", defaultValue = "${alfresco.share.version}")
-    protected String runnerAlfrescoShareVersion;
-
-    /**
-     * JARs and AMPs that should be overlayed/applied to the Platform/Repository WAR (i.e. alfresco.war)
-     */
-    @Parameter(property = "runner.alfresco.platform.modules", defaultValue = "")
-    protected List<ModuleDependency> runnerAlfrescoPlatformModules;
-
-    /**
-     * JARs and AMPs that should be overlayed/applied to the Share WAR (i.e. share.war)
-     */
-    @Parameter(property = "runner.alfresco.share.modules", defaultValue = "")
-    protected List<ModuleDependency> runnerAlfrescoShareModules;
-
-    /**
      * Directory that contains the Alfresco Solr 4 configuration
      */
     @Parameter(property = "solr.home", defaultValue = "${project.basedir}/${alfresco.data.location}/solr")
     protected String solrHome;
 
     /**
+     * Maven GAV properties for customized alfresco.war and share.war
+     * Used by the Maven Tomcat 7 Plugin
+     */
+    private String runnerAlfrescoGroupId;
+    private String runnerAlfrescoPlatformWarArtifactId;
+    private String runnerAlfrescoShareWarArtifactId;
+    private String runnerAlfrescoPlatformVersion;
+    private String runnerAlfrescoShareVersion;
+
+    /**
      * Database JDBC connection URL
      * TODO: Is this parameter needed here?
      */
-    @Parameter(property = "alfresco.db.url", defaultValue = "jdbc:h2:./${alfresco.data.location}/h2_data/${alfresco.db.name};${alfresco.db.params}")
-    protected String alfrescoDbUrl;
+//    @Parameter(property = "alfresco.db.url", defaultValue = "jdbc:h2:./${alfresco.data.location}/h2_data/${alfresco.db.name};${alfresco.db.params}")
+  //  protected String alfrescoDbUrl;
 
+    /**
+     * The Maven environment that this mojo is executed in
+     */
     private ExecutionEnvironment execEnv;
 
     public void execute() throws MojoExecutionException {
@@ -345,7 +346,7 @@ public class RunMojo extends AbstractMojo {
      */
     protected void buildPlatformWar() throws MojoExecutionException {
         String platformWarArtifactId = buildCustomWar("platform",
-                runnerAlfrescoPlatformModules,
+                platformModules,
                 alfrescoPlatformWarArtifactId,
                 alfrescoPlatformVersion);
 
@@ -362,7 +363,7 @@ public class RunMojo extends AbstractMojo {
      */
     protected void buildShareWar() throws MojoExecutionException  {
         String shareWarArtifactId = buildCustomWar("share",
-                runnerAlfrescoShareModules,
+                shareModules,
                 alfrescoShareWarArtifactId,
                 alfrescoShareVersion);
 
