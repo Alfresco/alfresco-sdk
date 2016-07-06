@@ -42,7 +42,7 @@ import static org.twdata.maven.mojoexecutor.MojoExecutor.*;
  * @version 1.0
  * @since 3.0.0
  */
-@Mojo(  name = "run",
+@Mojo(name = "run",
         defaultPhase = LifecyclePhase.TEST,
         aggregator = true,
         requiresDependencyResolution = ResolutionScope.TEST)
@@ -54,6 +54,9 @@ public class RunMojo extends AbstractMojo {
     public static final String MAVEN_RESOURCE_PLUGIN_VERSION = "2.7";
     public static final String MAVEN_TOMCAT7_PLUGIN_VERSION = "2.2";
     public static final String MAVEN_ALFRESCO_PLUGIN_VERSION = "3.0.0-SNAPSHOT";
+
+    public static final String PLATFORM_WAR_PREFIX_NAME = "platform";
+    public static final String SHARE_WAR_PREFIX_NAME = "share";
 
     @Component
     protected MavenProject project;
@@ -207,7 +210,7 @@ public class RunMojo extends AbstractMojo {
      * TODO: Is this parameter needed here?
      */
 //    @Parameter(property = "alfresco.db.url", defaultValue = "jdbc:h2:./${alfresco.data.location}/h2_data/${alfresco.db.name};${alfresco.db.params}")
-  //  protected String alfrescoDbUrl;
+    //  protected String alfrescoDbUrl;
 
     /**
      * The Maven environment that this mojo is executed in
@@ -308,6 +311,51 @@ public class RunMojo extends AbstractMojo {
     }
 
     /**
+     * Replaces web.xml where applicable in platform webapp (alfresco.war),
+     * commenting out the security-constraints.
+     * <p/>
+     * This is only needed for 5.0 (5.1 handles it automatically when turning off ssl via props)
+     *
+     * @throws MojoExecutionException
+     */
+    protected void commentOutSecureCommsInPlatformWebXml() throws MojoExecutionException {
+        if (isPlatformVersionGtOrEqTo51()) {
+            return;
+        }
+
+        String webInfPath = getWarOutputDir(PLATFORM_WAR_PREFIX_NAME) + "/WEB-INF/";
+        String webXmlFilePath = webInfPath + "web.xml";
+
+        getLog().info("Commenting out the security-constraints in " + webXmlFilePath);
+
+        executeMojo(
+                plugin(
+                        groupId("com.google.code.maven-replacer-plugin"),
+                        artifactId("replacer"),
+                        version(MAVEN_REPLACER_PLUGIN_VERSION)
+                ),
+                goal("replace"),
+                configuration(
+                        element(name("ignoreErrors"), "true"),
+                        element(name("file"), webXmlFilePath),
+                        element(name("outputDir"), webInfPath),
+                        element(name("preserveDir"), "false"),
+                        element(name("replacements"),
+                                element(name("replacement"),
+                                        element(name("token"), "<!-- Toggle securecomms placeholder start -->"),
+                                        element(name("value"), "<!-- ")
+                                ),
+                                element(name("replacement"),
+                                        element(name("token"), "<!-- Toggle securecomms placeholder end -->"),
+                                        element(name("value"), " -->")
+                                )
+                        )
+                ),
+                execEnv
+        );
+    }
+
+    /**
      * Copy the alfresco-global.properties file that will be used when
      * running Alfresco. It contains database connection parameters and
      * other general configuration for Alfresco Repository (alfresco.war)
@@ -342,13 +390,15 @@ public class RunMojo extends AbstractMojo {
     /**
      * Build the customized Platform webapp (i.e. the Repository, alfresco.war)
      * that should be deployed by Tomcat by applying all AMPs and JARs from
-     * the {@code <runnerAlfrescoPlatformModules> } configuration.
+     * the {@code <platformModules> } configuration.
      */
     protected void buildPlatformWar() throws MojoExecutionException {
-        String platformWarArtifactId = buildCustomWar("platform",
-                platformModules,
-                alfrescoPlatformWarArtifactId,
-                alfrescoPlatformVersion);
+        buildCustomWar(PLATFORM_WAR_PREFIX_NAME, platformModules,
+                alfrescoPlatformWarArtifactId, alfrescoPlatformVersion);
+
+        commentOutSecureCommsInPlatformWebXml();
+
+        String platformWarArtifactId = packageAndInstallCustomWar(PLATFORM_WAR_PREFIX_NAME);
 
         // Set up the custom platform war to be run by Tomcat plugin
         runnerAlfrescoGroupId = "${project.groupId}";
@@ -359,13 +409,12 @@ public class RunMojo extends AbstractMojo {
     /**
      * Build the customized Share webapp (i.e. the share.war)
      * that should be deployed by Tomcat by applying all AMPs and JARs from
-     * the {@code <runnerAlfrescoShareModules> } configuration.
+     * the {@code <shareModules> } configuration.
      */
-    protected void buildShareWar() throws MojoExecutionException  {
-        String shareWarArtifactId = buildCustomWar("share",
-                shareModules,
-                alfrescoShareWarArtifactId,
-                alfrescoShareVersion);
+    protected void buildShareWar() throws MojoExecutionException {
+        buildCustomWar(SHARE_WAR_PREFIX_NAME, shareModules, alfrescoShareWarArtifactId, alfrescoShareVersion);
+
+        String shareWarArtifactId = packageAndInstallCustomWar(SHARE_WAR_PREFIX_NAME);
 
         // Set up the custom share war to be run by Tomcat plugin
         runnerAlfrescoGroupId = "${project.groupId}";
@@ -376,19 +425,17 @@ public class RunMojo extends AbstractMojo {
     /**
      * Build a customized webapp, applying a number of AMPs and JARs from alfresco maven plugin configuration.
      *
-     * @param warName the name of the custom war
-     * @param modules the modules that should be applied to the custom war
+     * @param warName               the name of the custom war
+     * @param modules               the modules that should be applied to the custom war
      * @param originalWarArtifactId the artifactId for the original war file that should be customized
-     * @param originalWarVersion the version for the original war file that should be customized
-     * @return the customized war file artifactId, to be used by the tomcat7 plugin
+     * @param originalWarVersion    the version for the original war file that should be customized
      * @throws MojoExecutionException
      */
-    protected String buildCustomWar(String warName,
+    protected void buildCustomWar(String warName,
                                   List<ModuleDependency> modules,
                                   String originalWarArtifactId,
                                   String originalWarVersion) throws MojoExecutionException {
-        final String warArtifactId = "${project.artifactId}-" + warName;
-        final String warOutputDir = "${project.build.directory}/" + warName + "-war";
+        final String warOutputDir = getWarOutputDir(warName);
         final String ampsOutputDir = "${project.build.directory}/modules/" + warName + "/amps";
         List<Element> ampModules = new ArrayList<>();
         List<Element> jarModules = new ArrayList<>();
@@ -401,6 +448,15 @@ public class RunMojo extends AbstractMojo {
                         element(name("version"), moduleDep.getVersion()),
                         element(name("type"), moduleDep.getType()),
                         element(name("overWrite"), "true"));
+
+                if (moduleDep.getArtifactId().equalsIgnoreCase("alfresco-share-services")) {
+                    // Skip if we are not running a 5.1 version of Alfresco, 'Alfresco Share Services'
+                    // was not used in earlier versions
+                    if (!isPlatformVersionGtOrEqTo51()) {
+                        continue;
+                    }
+                }
+
                 if (moduleDep.isAmp()) {
                     ampModules.add(el);
                 } else if (moduleDep.isJar()) {
@@ -490,8 +546,20 @@ public class RunMojo extends AbstractMojo {
                     execEnv
             );
         }
+    }
 
-        // Build the customized war file
+    /**
+     * Package customized war file and install it in local maven repo.
+     *
+     * @param warName the name of the custom war
+     * @return the customized war file artifactId, to be used by the tomcat7 plugin
+     * @throws MojoExecutionException
+     */
+    protected String packageAndInstallCustomWar(String warName) throws MojoExecutionException {
+        final String warArtifactId = "${project.artifactId}-" + warName;
+        final String warOutputDir = getWarOutputDir(warName);
+
+        // Package the customized war file
         executeMojo(
                 plugin(
                         groupId("org.apache.maven.plugins"),
@@ -710,7 +778,7 @@ public class RunMojo extends AbstractMojo {
         Element e;
         if (StringUtils.isNotBlank(contextFile)) {
             e = element(name("webapp"),
-                    groupIdEl, artifactIdEl, versionEl,typeEl,asWebappEl, contextPathEl,
+                    groupIdEl, artifactIdEl, versionEl, typeEl, asWebappEl, contextPathEl,
                     element(name("contextFile"), contextFile));
 
         } else {
@@ -721,5 +789,31 @@ public class RunMojo extends AbstractMojo {
         getLog().info(e.toDom().toUnescapedString());
 
         return e;
+    }
+
+    /**
+     * Returns true if current platform version (i.e. version of alfresco.war) is
+     * >= 5.1
+     *
+     * @return true if platform version >= 5.1
+     */
+    private boolean isPlatformVersionGtOrEqTo51() {
+        int versionNumber = Integer.parseInt(
+                alfrescoPlatformVersion.replaceAll("[^0-9]", "").substring(0, 2));
+        if (versionNumber >= 51) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * The directory where the custom war will be assembled
+     *
+     * @param warName a war prefix, such as 'platform' or 'share'
+     * @return a directory such as: .../aio/target/platform-war
+     */
+    private String getWarOutputDir(String warName) {
+        return "${project.build.directory}/" + warName + "-war";
     }
 }
