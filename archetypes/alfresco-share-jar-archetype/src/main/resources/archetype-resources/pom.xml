@@ -5,106 +5,168 @@
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
-    <name>${artifactId} AMP project</name>
-    <packaging>amp</packaging>
-    <description>Manages the lifecycle of the ${artifactId} AMP (Alfresco Module Package)</description>
+    <name>${artifactId} Share Jar Module - SDK 3</name>
+    <description>Share JAR Module (to be included in the share.war) - SDK 3</description>
+    <packaging>jar</packaging>
 
-    <parent>
-        <groupId>org.alfresco.maven</groupId>
-        <artifactId>alfresco-sdk-parent</artifactId>
-        <version>@@alfresco.sdk.parent.version@@</version>
-    </parent>
-
-    <!-- 
-        SDK properties have sensible defaults in the SDK parent,
-        but you can override the properties below to use another version.
-        For more available properties see the alfresco-sdk-parent POM.
-       -->
     <properties>
-        <!-- The following are default values for data location and Alfresco version.
-             Uncomment if you need to change
-        <alfresco.version>${alfresco.community.default.version}</alfresco.version> -->
+        <alfresco.sdk.version>3.0.0-SNAPSHOT</alfresco.sdk.version>
 
-        <!-- This control the root logging level for all apps uncomment and change, defaults to WARN
-            <app.log.root.level>WARN</app.log.root.level>
-        -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- Set the enviroment to use, this controls which properties will be picked in src/test/properties
-             for embedded run, defaults to the 'local' environment. See SDK Parent POM for more info.
-        <env>other environment name</env>
-        -->
+        <!-- Alfresco webapp artifacts and versions, these are the webapps that will be deployed
+            and run by the tomcat maven plugin when executing $ mvn .... alfresco:run -->
+        <alfresco.groupId>org.alfresco</alfresco.groupId>
+        <alfresco.share.war.artifactId>share</alfresco.share.war.artifactId>
+        <alfresco.share.version>5.1.g</alfresco.share.version>
+        <alfresco.surf.version>6.3</alfresco.surf.version>
 
-        <!-- The Maven artifact ID to use when loading the Share.WAR that the AMP should be applied to,
-                    defaults to the alfresco.war artifact ID, so we need to override here. -->
-        <app.amp.client.war.artifactId>${alfresco.share.artifactId}</app.amp.client.war.artifactId>
-
-        <!-- Since Alfresco.WAR (i.e. the Repository) is already running on port 8080, we run Share.WAR on port 8081 -->
+        <!-- Since alfresco.war (i.e. the Platform/Repository) is already running on port 8080, we run Share.WAR on port 8081.
+            If Alfresco Platform is not running, then generate a platform-jar-module and start it up. -->
         <maven.tomcat.port>8081</maven.tomcat.port>
 
-        <!-- Used in share-config-custom.xml. By default points to local installation of Alfresco Repo -->
-        <alfresco.repo.url>http://localhost:8080/alfresco</alfresco.repo.url>
-
+        <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
+        <jrebel.version>1.1.6</jrebel.version>
     </properties>
 
-    <!-- Here we realize the connection with the Alfresco selected platform 
-        (e.g.version and edition) -->
-    <dependencyManagement>
-        <dependencies>
-            <!-- This will import the dependencyManagement for all artifacts in the selected Alfresco version/edition
-                (see http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Importing_Dependencies) 
-                NOTE: You still need to define dependencies in your POM, but you can omit version as it's enforced by this dependencyManagement. NOTE: It defaults 
-                to the latest version this SDK pom has been tested with, but alfresco version can/should be overridden in your project's pom -->
-            <dependency>
-                <groupId>${alfresco.groupId}</groupId>
-                <artifactId>alfresco-platform-distribution</artifactId>
-                <version>${alfresco.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <!-- Following dependencies are needed for compiling Java code in src/main/java;  -->
     <dependencies>
+        <!-- Following dependencies are needed for compiling Java code in src/main/java -->
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
-            <artifactId>share</artifactId>
-            <version>${alfresco.version}</version>
+            <artifactId>${alfresco.share.war.artifactId}</artifactId>
+            <version>${alfresco.share.version}</version>
             <classifier>classes</classifier>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
-            <groupId>org.springframework.extensions.surf</groupId>
+            <groupId>org.alfresco.surf</groupId>
             <artifactId>spring-surf-api</artifactId>
+            <version>${alfresco.surf.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <!-- Compress JavaScript files and store as *-min.js -->
+            <!--
+                The Alfresco Maven Plugin contains all the logic to run the extension
+                in an embedded Tomcat with the H2 database.
+                -->
             <plugin>
-                <groupId>net.alchim31.maven</groupId>
-                <artifactId>yuicompressor-maven-plugin</artifactId>
+                <groupId>org.alfresco.maven.plugin</groupId>
+                <artifactId>alfresco-maven-plugin</artifactId>
+                <version>${alfresco.sdk.version}</version>
+                <configuration>
+                    <!-- We assume that the platform/repository is already running on localhost:8080 -->
+                    <enableH2>false</enableH2>
+                    <enablePlatform>false</enablePlatform>
+                    <enableSolr>false</enableSolr>
+
+                    <!-- Enable the Share webapp, which is what we customize with Share JAR modules -->
+                    <enableShare>true</enableShare>
+                </configuration>
+            </plugin>
+
+            <!-- Build an AMP if 3rd party libs are needed by the extension -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>build-amp-file</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptor>src/main/assembly/amp.xml</descriptor>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.alfresco.maven.plugin</groupId>
+                        <artifactId>alfresco-maven-plugin</artifactId>
+                        <version>${alfresco.sdk.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!-- Hot reloading with JRebel -->
+            <plugin>
+                <groupId>org.zeroturnaround</groupId>
+                <artifactId>jrebel-maven-plugin</artifactId>
+                <version>${jrebel.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-rebel-xml</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--
+                      addResourcesDirToRebelXml - default is false
+                      Required if the resource directories are to be added to rebel.xml
+                    -->
+                    <addResourcesDirToRebelXml>true</addResourcesDirToRebelXml>
+
+                    <!-- Always generate the rebel.xml file no matter what timestamps -->
+                    <alwaysGenerate>true</alwaysGenerate>
+                </configuration>
             </plugin>
         </plugins>
+
+        <resources>
+            <!-- Filter the resource files in this project and do property substitutions -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <testResources>
+            <!-- Filter the test resource files in this project and do property substitutions -->
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
     </build>
 
-    <profiles>
-        <!--
-            Brings in the extra Enterprise specific share classes,
-            if the 'enterprise' profile has been activated, needs to be activated manually. -->
-        <profile>
-            <id>enterprise</id>
-            <dependencies>
-                <dependency>
-                    <groupId>${alfresco.groupId}</groupId>
-                    <artifactId>share-enterprise</artifactId>
-                    <version>${alfresco.version}</version>
-                    <classifier>classes</classifier>
-                    <scope>provided</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
+    <!--
+        Alfresco Maven Repositories
+        -->
+    <repositories>
+        <repository>
+            <id>alfresco-public</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>alfresco-public-snapshots</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>alfresco-plugin-public</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>alfresco-plugin-public-snapshots</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
 </project>

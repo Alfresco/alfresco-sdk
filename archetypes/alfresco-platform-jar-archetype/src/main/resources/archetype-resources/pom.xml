@@ -32,8 +32,9 @@
              executing for example $ mvn clean install alfresco:run -->
         <alfresco.groupId>org.alfresco</alfresco.groupId>
         <alfresco.platform.war.artifactId>alfresco-platform</alfresco.platform.war.artifactId>
-        <alfresco.platform.version>5.1.g</alfresco.platform.version>
-        <alfresco.share.version>5.1.f</alfresco.share.version>
+        <!--4.2, 5.0, 5.1 artifact ID: <alfresco.platform.war.artifactId>alfresco</alfresco.platform.war.artifactId>-->
+        <alfresco.platform.version>5.2.a-EA</alfresco.platform.version>
+        <alfresco.share.version>5.1.g</alfresco.share.version>
 
         <!-- Alfresco Repo Database configuration.
            By default it uses a flat file H2 database to be able to run embedded.
