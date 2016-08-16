@@ -3,13 +3,7 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 @echo off
 
-set springloadedfile=%HOME%\.m2\repository\org\springframework\springloaded\@@springloaded.version@@\springloaded-@@springloaded.version@@.jar
+set MAVEN_OPTS=-Xms256m -Xmx2G
 
-if not exist %springloadedfile% (
-  mvn validate -Psetup
-)
+mvn clean install -DskipTests=true alfresco:run
 
-set MAVEN_OPTS=-javaagent:"%springloadedfile%" -noverify -Xms256m -Xmx2G
-
-mvn clean install -Prun -nsu
-:: mvn install -Prun 

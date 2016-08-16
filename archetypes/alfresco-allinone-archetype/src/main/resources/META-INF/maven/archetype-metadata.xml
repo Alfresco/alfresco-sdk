@@ -10,8 +10,16 @@
         </requiredProperty>
     </requiredProperties>
     <modules>
-        <module id="${rootArtifactId}-repo-amp" name="${rootArtifactId}-repo-amp" dir="__rootArtifactId__-repo-amp">
+        <module id="${rootArtifactId}-platform-jar"
+                name="${rootArtifactId}-platform-jar"
+                dir="__rootArtifactId__-platform-jar">
             <fileSets>
+                <fileSet filtered="false" packaged="false" encoding="UTF-8">
+                    <directory>src/main/assembly</directory>
+                    <includes>
+                        <include>**/*.xml</include>
+                    </includes>
+                </fileSet>
                 <fileSet filtered="true" packaged="true" encoding="UTF-8">
                     <directory>src/main/java</directory>
                     <includes>
@@ -25,7 +33,7 @@
                     </includes>
                 </fileSet>
                 <fileSet encoding="UTF-8" filtered="false">
-                    <directory>src/main/amp</directory>
+                    <directory>src/main/resources</directory>
                     <includes>
                         <include>**</include>
                     </includes>
@@ -34,7 +42,7 @@
                     </excludes>
                 </fileSet>
                 <fileSet encoding="UTF-8" filtered="true" packaged="false">
-                    <directory>src/main/amp</directory>
+                    <directory>src/main/resources</directory>
                     <includes>
                         <include>**/*-context.xml</include>
                     </includes>
@@ -54,7 +62,9 @@
             </fileSets>
         </module>
 
-        <module id="${rootArtifactId}-share-amp" name="${rootArtifactId}-share-amp" dir="__rootArtifactId__-share-amp" >
+        <module id="${rootArtifactId}-share-jar"
+                name="${rootArtifactId}-share-jar"
+                dir="__rootArtifactId__-share-jar" >
             <fileSets>
                 <fileSet filtered="true" packaged="true" encoding="UTF-8">
                     <directory>src/main/java</directory>
@@ -69,19 +79,19 @@
                     </includes>
                 </fileSet>
                 <fileSet filtered="true" packaged="false" encoding="UTF-8">
-                    <directory>src/main/amp/config/alfresco/web-extension</directory>
+                    <directory>src/main/resources/alfresco/web-extension</directory>
                     <includes>
                         <include>__artifactId__-slingshot-application-context.xml</include>
                     </includes>
                 </fileSet>
                 <fileSet filtered="true" packaged="false" encoding="UTF-8">
-                    <directory>src/main/amp/config/alfresco/web-extension/site-data/extensions</directory>
+                    <directory>src/main/resources/alfresco/web-extension/site-data/extensions</directory>
                     <includes>
                         <include>__artifactId__-example-widgets.xml</include>
                     </includes>
                 </fileSet>
                 <fileSet encoding="UTF-8" filtered="false">
-                    <directory>src/main/amp</directory>
+                    <directory>src/main/resources</directory>
                     <includes>
                         <include>**</include>
                     </includes>
@@ -96,86 +106,18 @@
                         <include>**</include>
                     </includes>
                 </fileSet>
-                <fileSet encoding="UTF-8" filtered="false">
-                    <directory>src/main/resources</directory>
-                    <includes>
-                        <include>**</include>
-                    </includes>
-                </fileSet>
-            </fileSets>
-        </module>
-
-        <module id="repo" dir="repo" name="repo">
-            <fileSets>
-                <fileSet encoding="UTF-8" filtered="false">
-                    <directory>src/main/properties</directory>
-                    <includes>
-                        <include>**/*.properties</include>
-                    </includes>
-                </fileSet>
-                <fileSet encoding="UTF-8" filtered="true">
-                    <directory>src/main/resources/alfresco/extension</directory>
-                    <includes>
-                        <include>dev-log4j.properties</include>
-                    </includes>
-                </fileSet>
-                <fileSet encoding="UTF-8" filtered="false">
-                    <directory>src/main/resources</directory>
-                    <includes>
-                        <include>**</include>
-                    </includes>
-                    <excludes>
-                        <exclude>**/dev-log4j.properties</exclude>
-                    </excludes>
-                </fileSet>
-            </fileSets>
-        </module>
-
-        <module id="solr4" dir="solr-config" name="solr4" filtered="false">
-        </module>
-
-        <module id="share" dir="share" name="share" filtered="false">
-            <fileSets>
-                <fileSet encoding="UTF-8" filtered="false">
-                    <directory>src/main/resources</directory>
-                    <includes>
-                        <include>**</include>
-                    </includes>
-                </fileSet>
-                <fileSet filtered="true" packaged="false" encoding="UTF-8">
-                    <directory>src/test/resources</directory>
-                    <includes>
-                        <include>**</include>
-                    </includes>
-                </fileSet>
-            </fileSets>
-        </module>
-
-        <module id="runner" dir="runner" name="runner" filtered="false">
-            <fileSets>
-                <fileSet encoding="UTF-8" filtered="true">
-                    <directory>tomcat</directory>
-                    <includes>
-                        <include>**</include>
-                    </includes>
-                </fileSet>
-                <fileSet encoding="UTF-8" filtered="false">
-                    <directory>test-ng</directory>
-                    <includes>
-                        <include>**</include>
-                    </includes>
-                </fileSet>
-                <fileSet encoding="UTF-8" filtered="false">
-                    <directory>src/main/webapp</directory>
-                    <includes>
-                        <include>**</include>
-                    </includes>
-                </fileSet>
             </fileSets>
         </module>
     </modules>
 
     <fileSets>
+        <fileSet encoding="UTF-8">
+            <directory>src</directory>
+            <includes>
+                <include>**</include>
+            </includes>
+        </fileSet>
+
         <fileSet encoding="UTF-8">
             <directory></directory>
             <includes>
