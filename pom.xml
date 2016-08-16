@@ -77,7 +77,7 @@
             <id>gravitonian</id>
             <name>Martin Bergljung</name>
             <email>martin.bergljung@alfresco.com</email>
-            <url>http://www.marversolutions.com</url>
+            <url>https://sites.google.com/site/gravitonian/</url>
             <organization>Alfresco Software</organization>
             <organizationUrl>http://www.alfresco.com</organizationUrl>
             <timezone>+0</timezone>
@@ -124,8 +124,8 @@
         <!-- POM files -->
         <module>poms/alfresco-sdk-parent</module>
         <!-- Archetypes -->
-        <module>archetypes/alfresco-amp-archetype</module>
-        <module>archetypes/share-amp-archetype</module>
+        <module>archetypes/alfresco-platform-jar-archetype</module>
+        <module>archetypes/alfresco-share-jar-archetype</module>
         <module>archetypes/alfresco-allinone-archetype</module>
   </modules>
 

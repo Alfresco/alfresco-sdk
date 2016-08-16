@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archetype-descriptor
         xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd"
-        name="All In One Archetype for Alfresco. Provides rapid development, IDE integration, and running embedded of Alfresco Repo, Share and Solr"
+        name="Alfresco All In One (AIO) Archetype."
         xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <requiredProperties>
@@ -39,12 +39,14 @@
                     </includes>
                     <excludes>
                         <exclude>**/*-context.xml</exclude>
+                        <exclude>**/log4j.properties</exclude>
                     </excludes>
                 </fileSet>
                 <fileSet encoding="UTF-8" filtered="true" packaged="false">
                     <directory>src/main/resources</directory>
                     <includes>
                         <include>**/*-context.xml</include>
+                        <include>**/log4j.properties</include>
                     </includes>
                 </fileSet>
                 <fileSet encoding="UTF-8" filtered="false">
@@ -123,6 +125,7 @@
             <includes>
                 <include>run.sh</include>
                 <include>run.bat</include>
+                <include>README.md</include>
             </includes>
         </fileSet>
     </fileSets>
