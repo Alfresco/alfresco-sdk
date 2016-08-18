@@ -19,7 +19,7 @@
         <alfresco.groupId>org.alfresco</alfresco.groupId>
         <alfresco.share.war.artifactId>share</alfresco.share.war.artifactId>
         <alfresco.share.version>5.1.g</alfresco.share.version>
-        <alfresco.surf.version>6.3</alfresco.surf.version>
+        <alfresco.surf.version>6.5</alfresco.surf.version>
 
         <!-- Since alfresco.war (i.e. the Platform/Repository) is already running on port 8080, we run Share.WAR on port 8081.
             If Alfresco Platform is not running, then generate a platform-jar-module and start it up. -->

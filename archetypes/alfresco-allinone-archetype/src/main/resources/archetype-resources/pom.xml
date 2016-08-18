@@ -36,7 +36,7 @@
         <alfresco.platform.version>5.2.a-EA</alfresco.platform.version>
         <alfresco.share.war.artifactId>share</alfresco.share.war.artifactId>
         <alfresco.share.version>5.1.g</alfresco.share.version>
-        <alfresco.surf.version>6.3</alfresco.surf.version>
+        <alfresco.surf.version>6.5</alfresco.surf.version>
 
         <!-- Alfresco Repo Database configuration.
            By default it uses a flat file H2 database to be able to run embedded.
