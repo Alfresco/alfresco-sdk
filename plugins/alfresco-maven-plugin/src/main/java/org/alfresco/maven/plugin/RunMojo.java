@@ -597,20 +597,6 @@ public class RunMojo extends AbstractMojo {
         final String warSourceDir = getWarOutputDir(warName);
 
 
-/*
-        Runtime rt = Runtime.getRuntime();
-        try {
-
-            String warFilePath = project.getBasedir() + "/target/" + warName + ".war";
-            String warSourceDir2 = project.getBasedir() + "/target/" + warName + "-war";
-            String cmd = "jar cf " + warFilePath + " " + warSourceDir2 + "/*";
-            getLog().info("Creating WAR: " + cmd);
-            Process pr = rt.exec(cmd);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-*/
-
         // Package the customized war file
         executeMojo(
                 plugin(
@@ -635,7 +621,7 @@ public class RunMojo extends AbstractMojo {
 
         // Delete temporary webapp assembly dir, so it is not added to next webapp that is assembled...
         // (otherwise share.war will contain alfresco.war stuff)
-        String tempAssemblyDir = project.getBasedir() + "/target/aio-1.0-SNAPSHOT";
+        String tempAssemblyDir = project.getBasedir() + "/target/" + project.getArtifactId() + "-" + project.getVersion();
         getLog().info("Deleting temp webapp assembly dir: " + tempAssemblyDir);
         File tempWebAppAssemblyDir = new File(tempAssemblyDir);
         try {
