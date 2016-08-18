@@ -166,6 +166,12 @@ public class RunMojo extends AbstractMojo {
     protected List<ModuleDependency> shareModules;
 
     /**
+     * Community Edition or Enterprise Edition? (i.e community or enterprise)
+     */
+    @Parameter(property = "maven.alfresco.edition", defaultValue = "community")
+    protected String alfrescoEdition;
+
+    /**
      * Maven GAV properties for standard Alfresco web applications.
      */
     @Parameter(property = "alfresco.groupId", defaultValue = "org.alfresco")
@@ -678,9 +684,10 @@ public class RunMojo extends AbstractMojo {
             tomcatDependencies.add(
                     // Bring in the flat file H2 database
                     dependency("com.h2database", "h2", "1.4.190"));
-            tomcatDependencies.add(
-                    // Bring in the H2 Database scripts for the Alfresco version we use
-                    getH2ScriptsDependency());
+
+            // Copy the h2 scripts
+            copyH2Dialect();
+
         }
 
         if (enablePlatform) {
@@ -941,33 +948,92 @@ public class RunMojo extends AbstractMojo {
     }
 
     /**
-     * TODO: Remove when we got h2-scripts in alfresco-repository for all artifacts
+     * TODO: From 5.1.e and onwards we have the alfresco-repository:h2scripts:jar artifact, so we potentially only need to do this for older than 5.1.e
      *
-     * Return the H2 database scripts dependency, so Tomcat knows where to grab them.
      *
-     * @return dependency for H2 database scripts
+     * Extract PostgreSQL dialect and ibatis from alfresco-repository, rename to H2Dialect in the test-classes
+     *
+     * @return
      */
-    private Dependency getH2ScriptsDependency() {
-        Dependency h2ScriptsDependency = null;
+    private void copyH2Dialect() throws MojoExecutionException {
+        getLog().info("Unpacking DB Dialects and ibatis");
+        executeMojo(
+                plugin(
+                        groupId("org.apache.maven.plugins"),
+                        artifactId("maven-dependency-plugin"),
+                        version("2.9")
+                ),
+                goal("unpack"),
+                configuration(
+                        element(name("outputDirectory"), "${project.build.testOutputDirectory}"),
+                        element(name("artifactItems"),
+                                element(name("artifactItem"),
+                                        element(name("groupId"), alfrescoGroupId),
+                                        element(name("artifactId"), "alfresco-repository"),
+                                        element(name("version"), alfrescoPlatformVersion),
+                                        element(name("includes"), "alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/dbscripts/upgrade/*/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect/*")
+                                )
+                        )
+                ),
+                execEnv
+        );
 
-        if (isPlatformVersionLtOrEqTo42() || isPlatformVersion50bOr50c()) {
-            // The alfresco-repository H2 Scripts artifact is not available until version 5.0.d of Alfresco,
-            // have to grab it from a community project called h2-support instead, this artifact is used by
-            // previous versions of the SDK, version 1.5 is for Alfresco 4.2 community
-            // See https://github.com/skuro/alfresco-h2-support/wiki/H2-Database-support-for-Alfresco
-
-            if (isPlatformVersion50bOr50c()) {
-                h2ScriptsDependency = dependency("tk.skuro.alfresco", "h2-support", "5.0");
-            } else {
-                h2ScriptsDependency = dependency("tk.skuro.alfresco", "h2-support", "1.5");
-            }
-        } else {
-            h2ScriptsDependency = dependency(alfrescoGroupId, "alfresco-repository", alfrescoPlatformVersion);
-            h2ScriptsDependency.setClassifier("h2scripts");
+        // If we're in enterprise we need to make sure we grab everything
+        if (this.alfrescoEdition.equals( "enterprise" )) {
+            executeMojo(
+                    plugin(
+                            groupId("org.apache.maven.plugins"),
+                            artifactId("maven-dependency-plugin"),
+                            version("2.9")
+                    ),
+                    goal("unpack"),
+                    configuration(
+                            element(name("outputDirectory"), "${project.build.testOutputDirectory}"),
+                            element(name("artifactItems"),
+                                    element(name("artifactItem"),
+                                            element(name("groupId"), alfrescoGroupId),
+                                            element(name("artifactId"), "alfresco-enterprise-repository"),
+                                            element(name("version"), alfrescoPlatformVersion),
+                                            element(name("includes"), "alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/dbscripts/upgrade/*/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect/*")
+                                    )
+                            )
+                    ),
+                    execEnv
+            );
         }
 
-        return h2ScriptsDependency;
+        getLog().info("Extracting H2 Dialect");
+        executeMojo(
+                plugin(
+                        groupId("org.apache.maven.plugins"),
+                        artifactId("maven-resources-plugin"),
+                        version("2.7")
+                ),
+                goal("copy-resources"),
+                configuration(
+                        element(name("outputDirectory"), "${project.build.testOutputDirectory}"),
+                        element(name("resources"),
+                                element(name("resource"),
+                                        element(name("directory"), "${project.build.testOutputDirectory}/alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect"),
+                                        element(name("includes"),
+                                                element(name("include"), "*")
+                                        ),
+                                        element(name("targetPath"), "alfresco/dbscripts/create/org.hibernate.dialect.H2Dialect")
+                                ),
+                                element(name("resource"),
+                                        element(name("directory"), "${project.build.testOutputDirectory}/alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect"),
+                                        element(name("includes"),
+                                                element(name("include"), "*")
+                                        ),
+                                        element(name("targetPath"), "alfresco/ibatis/org.hibernate.dialect.H2Dialect")
+                                )
+                        )
+                ),
+                execEnv
+        );
+
     }
+
 
     /**
      * The directory where the custom war will be assembled
