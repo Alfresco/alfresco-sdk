@@ -162,6 +162,9 @@
                 <artifactId>alfresco-maven-plugin</artifactId>
                 <version>${alfresco.sdk.version}</version>
                 <configuration>
+                    <!-- Default is to run with a Community edition, change to 'enterprise' if using Enterprise edition -->
+                    <alfrescoEdition>community</alfrescoEdition>
+
                     <!-- We need the flat file H2 database to run the Repo -->
                     <enableH2>true</enableH2>
                     <!-- We always need the Platform/Repo webapp - alfresco.war -->

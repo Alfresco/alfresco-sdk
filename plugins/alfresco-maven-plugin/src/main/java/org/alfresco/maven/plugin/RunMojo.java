@@ -61,6 +61,9 @@ public class RunMojo extends AbstractMojo {
     public static final String PLATFORM_WAR_PREFIX_NAME = "platform";
     public static final String SHARE_WAR_PREFIX_NAME = "share";
 
+    public static final String ALFRESCO_ENTERPRISE_EDITION = "enterprise";
+    public static final String ALFRESCO_COMMUNITY_EDITION = "community";
+
     @Component
     protected MavenProject project;
 
@@ -81,6 +84,7 @@ public class RunMojo extends AbstractMojo {
      *          <artifactId>alfresco-maven-plugin</artifactId>
      *          <version>3.0.0</version>
      *          <configuration>
+     *              <alfrescoEdition>community</alfrescoEdition>
      *              <enableH2>true</enableH2>
      *              <enablePlatform>true</enablePlatform>
      *              <enableSolr>true</enableSolr>
@@ -168,7 +172,7 @@ public class RunMojo extends AbstractMojo {
     /**
      * Community Edition or Enterprise Edition? (i.e community or enterprise)
      */
-    @Parameter(property = "maven.alfresco.edition", defaultValue = "community")
+    @Parameter(property = "maven.alfresco.edition", defaultValue = ALFRESCO_COMMUNITY_EDITION)
     protected String alfrescoEdition;
 
     /**
@@ -356,7 +360,7 @@ public class RunMojo extends AbstractMojo {
      * Replaces web.xml where applicable in platform webapp (alfresco.war),
      * commenting out the security-constraints.
      * <p/>
-     * This is only needed for 5.0 (5.1 handles it automatically when turning off ssl via props)
+     * This is only needed for 4.2, 5.0 (5.1 handles it automatically when turning off ssl via props)
      *
      * @throws MojoExecutionException
      */
@@ -430,6 +434,41 @@ public class RunMojo extends AbstractMojo {
     }
 
     /**
+     * Copy the Alfresco Enterprise license to its correct place in the Platform WAR, if it exists.
+     *
+     * @throws MojoExecutionException
+     */
+    protected void copyAlfrescoLicense() throws MojoExecutionException {
+        final String warOutputDir = getWarOutputDir(PLATFORM_WAR_PREFIX_NAME);
+        final String licDestDir = warOutputDir + "/WEB-INF/classes/alfresco/extension/license";
+
+        getLog().info("Copying Alfresco Enterprise license to: " + licDestDir);
+
+        executeMojo(
+                plugin(
+                        groupId("org.apache.maven.plugins"),
+                        artifactId("maven-resources-plugin"),
+                        version(MAVEN_RESOURCE_PLUGIN_VERSION)
+                ),
+                goal("copy-resources"),
+                configuration(
+                        element(name("outputDirectory"), licDestDir),
+                        element(name("resources"),
+                                element(name("resource"),
+                                        element(name("directory"), "src/main/resources/alfresco/extension/license"),
+                                        element(name("includes"),
+                                                element(name("include"), "*.lic")
+                                        ),
+                                        element(name("filtering"), "false")
+                                )
+                        )
+                ),
+                execEnv
+        );
+    }
+
+
+    /**
      * Build the customized Platform webapp (i.e. the Repository, alfresco.war)
      * that should be deployed by Tomcat by applying all AMPs and JARs from
      * the {@code <platformModules> } configuration.
@@ -439,6 +478,7 @@ public class RunMojo extends AbstractMojo {
                 getPlatformWarArtifactId(), alfrescoPlatformVersion);
 
         commentOutSecureCommsInPlatformWebXml();
+        copyAlfrescoLicense();
 
         String platformWarArtifactId = packageAndInstallCustomWar(PLATFORM_WAR_PREFIX_NAME);
 
@@ -602,7 +642,6 @@ public class RunMojo extends AbstractMojo {
         final String warArtifactId = "${project.artifactId}-" + warName;
         final String warSourceDir = getWarOutputDir(warName);
 
-
         // Package the customized war file
         executeMojo(
                 plugin(
@@ -687,7 +726,6 @@ public class RunMojo extends AbstractMojo {
 
             // Copy the h2 scripts
             copyH2Dialect();
-
         }
 
         if (enablePlatform) {
@@ -877,23 +915,6 @@ public class RunMojo extends AbstractMojo {
     }
 
     /**
-     * TODO: Remove when we got h2-scripts in alfresco-repository for all artifacts
-     *
-     * Returns true if current platform version (i.e. version of alfresco.war) is
-     * 5.0.b or 5.0.c (h2-scripts appears first in 5.0.d)
-     *
-     * @return true if platform version is 5.0.b or 5.0.c
-     */
-    private boolean isPlatformVersion50bOr50c() {
-        if (StringUtils.equalsIgnoreCase(alfrescoPlatformVersion, "5.0.b") ||
-                StringUtils.equalsIgnoreCase(alfrescoPlatformVersion, "5.0.c")) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
      * Get the Solr artifactId, it changes when we move to Solr 4 in Alfresco version 5
      *
      * @return the Maven artifactId for Solr
@@ -921,6 +942,8 @@ public class RunMojo extends AbstractMojo {
         if (isPlatformVersionGtOrEqTo51() == false) {
             // We are running version 4.2 or 5.0, so use older artifactId
             alfrescoPlatformWarArtifactId = "alfresco";
+        } else if (alfrescoEdition.equals(ALFRESCO_ENTERPRISE_EDITION)) {
+            alfrescoPlatformWarArtifactId = "alfresco-enterprise";
         }
 
         return alfrescoPlatformWarArtifactId;
@@ -956,12 +979,12 @@ public class RunMojo extends AbstractMojo {
      * @return
      */
     private void copyH2Dialect() throws MojoExecutionException {
-        getLog().info("Unpacking DB Dialects and ibatis");
+        getLog().info("Unpacking DB Dialects and ibatis files from alfresco-repository artifact");
         executeMojo(
                 plugin(
                         groupId("org.apache.maven.plugins"),
                         artifactId("maven-dependency-plugin"),
-                        version("2.9")
+                        version(MAVEN_DEPENDENCY_PLUGIN_VERSION)
                 ),
                 goal("unpack"),
                 configuration(
@@ -979,12 +1002,12 @@ public class RunMojo extends AbstractMojo {
         );
 
         // If we're in enterprise we need to make sure we grab everything
-        if (this.alfrescoEdition.equals( "enterprise" )) {
+        if (this.alfrescoEdition.equals(ALFRESCO_ENTERPRISE_EDITION)) {
             executeMojo(
                     plugin(
                             groupId("org.apache.maven.plugins"),
                             artifactId("maven-dependency-plugin"),
-                            version("2.9")
+                            version(MAVEN_DEPENDENCY_PLUGIN_VERSION)
                     ),
                     goal("unpack"),
                     configuration(
@@ -1002,12 +1025,12 @@ public class RunMojo extends AbstractMojo {
             );
         }
 
-        getLog().info("Extracting H2 Dialect");
+        getLog().info("Copying H2 Dialect SQL create files into target/test-classes");
         executeMojo(
                 plugin(
                         groupId("org.apache.maven.plugins"),
                         artifactId("maven-resources-plugin"),
-                        version("2.7")
+                        version(MAVEN_RESOURCE_PLUGIN_VERSION)
                 ),
                 goal("copy-resources"),
                 configuration(

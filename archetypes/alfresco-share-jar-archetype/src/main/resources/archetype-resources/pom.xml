@@ -63,6 +63,9 @@
                 <artifactId>alfresco-maven-plugin</artifactId>
                 <version>${alfresco.sdk.version}</version>
                 <configuration>
+                    <!-- Default is to run with a Community edition, change to 'enterprise' if using Enterprise edition -->
+                    <alfrescoEdition>community</alfrescoEdition>
+
                     <!-- We assume that the platform/repository is already running on localhost:8080 -->
                     <enableH2>false</enableH2>
                     <enablePlatform>false</enablePlatform>
