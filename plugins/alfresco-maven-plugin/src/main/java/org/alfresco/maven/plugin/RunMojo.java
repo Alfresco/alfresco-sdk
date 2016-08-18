@@ -430,7 +430,7 @@ public class RunMojo extends AbstractMojo {
      */
     protected void buildPlatformWar() throws MojoExecutionException {
         buildCustomWarInDir(PLATFORM_WAR_PREFIX_NAME, platformModules,
-                alfrescoPlatformWarArtifactId, alfrescoPlatformVersion);
+                getPlatformWarArtifactId(), alfrescoPlatformVersion);
 
         commentOutSecureCommsInPlatformWebXml();
 
@@ -870,6 +870,23 @@ public class RunMojo extends AbstractMojo {
     }
 
     /**
+     * TODO: Remove when we got h2-scripts in alfresco-repository for all artifacts
+     *
+     * Returns true if current platform version (i.e. version of alfresco.war) is
+     * 5.0.b or 5.0.c (h2-scripts appears first in 5.0.d)
+     *
+     * @return true if platform version is 5.0.b or 5.0.c
+     */
+    private boolean isPlatformVersion50bOr50c() {
+        if (StringUtils.equalsIgnoreCase(alfrescoPlatformVersion, "5.0.b") ||
+                StringUtils.equalsIgnoreCase(alfrescoPlatformVersion, "5.0.c")) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Get the Solr artifactId, it changes when we move to Solr 4 in Alfresco version 5
      *
      * @return the Maven artifactId for Solr
@@ -883,6 +900,23 @@ public class RunMojo extends AbstractMojo {
         }
 
         return alfrescoSolrArtifactId;
+    }
+
+    /**
+     * Get the Alfresco Platform Webapp artifactId (i.e. for alfresco.war),
+     * it changes from 'alfresco' to 'alfresco-platform' in 5.1.
+     *
+     * @return the Maven artifactId for Alfresco Platform webapp
+     */
+    private String getPlatformWarArtifactId() {
+        // Default alfrescoPlatformWarArtifactId is 'alfresco-platform'
+
+        if (isPlatformVersionGtOrEqTo51() == false) {
+            // We are running version 4.2 or 5.0, so use older artifactId
+            alfrescoPlatformWarArtifactId = "alfresco";
+        }
+
+        return alfrescoPlatformWarArtifactId;
     }
 
     /**
@@ -907,19 +941,26 @@ public class RunMojo extends AbstractMojo {
     }
 
     /**
+     * TODO: Remove when we got h2-scripts in alfresco-repository for all artifacts
+     *
      * Return the H2 database scripts dependency, so Tomcat knows where to grab them.
      *
-     * @return
+     * @return dependency for H2 database scripts
      */
     private Dependency getH2ScriptsDependency() {
         Dependency h2ScriptsDependency = null;
 
-        if (isPlatformVersionLtOrEqTo42()) {
-            // The alfresco-repository H2 Scripts artifact is not available until version 5.0 of Alfresco,
+        if (isPlatformVersionLtOrEqTo42() || isPlatformVersion50bOr50c()) {
+            // The alfresco-repository H2 Scripts artifact is not available until version 5.0.d of Alfresco,
             // have to grab it from a community project called h2-support instead, this artifact is used by
             // previous versions of the SDK, version 1.5 is for Alfresco 4.2 community
             // See https://github.com/skuro/alfresco-h2-support/wiki/H2-Database-support-for-Alfresco
-            h2ScriptsDependency = dependency("tk.skuro.alfresco", "h2-support", "1.5");
+
+            if (isPlatformVersion50bOr50c()) {
+                h2ScriptsDependency = dependency("tk.skuro.alfresco", "h2-support", "5.0");
+            } else {
+                h2ScriptsDependency = dependency("tk.skuro.alfresco", "h2-support", "1.5");
+            }
         } else {
             h2ScriptsDependency = dependency(alfrescoGroupId, "alfresco-repository", alfrescoPlatformVersion);
             h2ScriptsDependency.setClassifier("h2scripts");

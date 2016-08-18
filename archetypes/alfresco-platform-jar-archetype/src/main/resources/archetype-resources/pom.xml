@@ -27,13 +27,14 @@
         <solr.model.dir>${solr.home}/alfrescoModels</solr.model.dir>
         <solr.content.dir>${solr.home}/index</solr.content.dir>
 
-        <!-- Alfresco webapp artifacts and versions, these are the original Alfresco webapps that will be
-             customized and then deployed and run by the tomcat maven plugin when
-             executing for example $ mvn clean install alfresco:run -->
+        <!-- Properties used in dependency declarations, you don't need to change these -->
         <alfresco.groupId>org.alfresco</alfresco.groupId>
-        <alfresco.platform.war.artifactId>alfresco-platform</alfresco.platform.war.artifactId>
-        <!--4.2, 5.0, 5.1 artifact ID: <alfresco.platform.war.artifactId>alfresco</alfresco.platform.war.artifactId>-->
+
+        <!-- Alfresco Platform webapp version, this is the original Alfresco webapp that will be
+            customized and then deployed and run by the tomcat maven plugin when
+            executing for example $ mvn clean install alfresco:run -->
         <alfresco.platform.version>5.2.a-EA</alfresco.platform.version>
+        <!-- Alfresco Share version, so we can bring in correct alfresco-share-services artifact -->
         <alfresco.share.version>5.1.g</alfresco.share.version>
 
         <!-- Alfresco Repo Database configuration.
@@ -68,7 +69,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.alfresco</groupId>
+                <groupId>${alfresco.groupId}</groupId>
                 <artifactId>alfresco-platform-distribution</artifactId>
                 <version>${alfresco.platform.version}</version>
                 <type>pom</type>

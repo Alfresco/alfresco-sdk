@@ -14,11 +14,16 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- Alfresco webapp artifacts and versions, these are the webapps that will be deployed
-            and run by the tomcat maven plugin when executing $ mvn .... alfresco:run -->
+        <!-- Properties used in dependency declarations, you don't need to change these -->
         <alfresco.groupId>org.alfresco</alfresco.groupId>
         <alfresco.share.war.artifactId>share</alfresco.share.war.artifactId>
+
+        <!-- Alfresco Share webapp version, this is the original Alfresco webapp that will be
+            customized and then deployed and run by the tomcat maven plugin when
+            executing for example $ mvn clean install alfresco:run -->
         <alfresco.share.version>5.1.g</alfresco.share.version>
+
+        <!-- Alfresco Surf version, if you change Share version you might need to change Surf version -->
         <alfresco.surf.version>6.5</alfresco.surf.version>
 
         <!-- Since alfresco.war (i.e. the Platform/Repository) is already running on port 8080, we run Share.WAR on port 8081.
