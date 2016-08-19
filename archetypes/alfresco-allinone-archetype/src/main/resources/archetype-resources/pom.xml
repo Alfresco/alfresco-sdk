@@ -41,6 +41,10 @@
         <!-- Alfresco Surf version, if you change Share version you might need to change Surf version -->
         <alfresco.surf.version>6.5</alfresco.surf.version>
 
+        <!-- Aikau framework version, it is released separately, so it can be useful to be able
+             to bring in newer versions with bug fixes etc -->
+        <aikau.version>1.0.82</aikau.version>
+
         <!-- Alfresco Repo Database configuration.
            By default it uses a flat file H2 database to be able to run embedded.
            The H2 database implementation is brought in via the tomcat7-maven-plugin as a dependency.
@@ -194,12 +198,15 @@
 
                     <!--
                         JARs and AMPs that should be overlayed/applied to the Share WAR (i.e. share.war)
+                        No need to include our self...
                     -->
                     <shareModules>
                         <moduleDependency>
-                            <groupId>${project.groupId}</groupId>
-                            <artifactId>${artifactId}-share-jar</artifactId>
-                            <version>${project.version}</version>
+                            <!-- Bring in a newer version, can coexist with older versions in the WAR disttribution,
+                                 newest version is picked -->
+                            <groupId>${alfresco.groupId}</groupId>
+                            <artifactId>aikau</artifactId>
+                            <version>${aikau.version}</version>
                         </moduleDependency>
                     </shareModules>
                 </configuration>

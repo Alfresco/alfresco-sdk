@@ -26,6 +26,10 @@
         <!-- Alfresco Surf version, if you change Share version you might need to change Surf version -->
         <alfresco.surf.version>6.5</alfresco.surf.version>
 
+        <!-- Aikau framework version, it is released separately, so it can be useful to be able
+             to bring in newer versions with bug fixes etc -->
+        <aikau.version>1.0.82</aikau.version>
+
         <!-- Since alfresco.war (i.e. the Platform/Repository) is already running on port 8080, we run Share.WAR on port 8081.
             If Alfresco Platform is not running, then generate a platform-jar-module and start it up. -->
         <maven.tomcat.port>8081</maven.tomcat.port>
@@ -73,6 +77,24 @@
 
                     <!-- Enable the Share webapp, which is what we customize with Share JAR modules -->
                     <enableShare>true</enableShare>
+
+                    <!--
+                        JARs and AMPs that should be overlayed/applied to the Share WAR (i.e. share.war)
+                    -->
+                    <shareModules>
+                        <moduleDependency>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>${artifactId}-share-jar</artifactId>
+                            <version>${project.version}</version>
+                        </moduleDependency>
+                        <moduleDependency>
+                            <!-- Bring in a newer version, can coexist with older versions in the WAR disttribution,
+                                 newest version is picked -->
+                            <groupId>${alfresco.groupId}</groupId>
+                            <artifactId>aikau</artifactId>
+                            <version>${aikau.version}</version>
+                        </moduleDependency>
+                    </shareModules>
                 </configuration>
             </plugin>
 

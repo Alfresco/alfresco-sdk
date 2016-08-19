@@ -439,6 +439,11 @@ public class RunMojo extends AbstractMojo {
      * @throws MojoExecutionException
      */
     protected void copyAlfrescoLicense() throws MojoExecutionException {
+        if (alfrescoEdition.equals(ALFRESCO_COMMUNITY_EDITION)) {
+            getLog().info("NOT copying Alfresco Enterprise license, running Community edition");
+            return;
+        }
+
         final String warOutputDir = getWarOutputDir(PLATFORM_WAR_PREFIX_NAME);
         final String licDestDir = warOutputDir + "/WEB-INF/classes/alfresco/extension/license";
 
