@@ -79,13 +79,6 @@
                     <enableShare>true</enableShare>
 
                     <!--
-                        JARs and AMPs that should be overlayed/applied to the Share WAR (i.e. share.war)
-                    -->
-                    <groupId>${alfresco.groupId}</groupId>
-                    <artifactId>aikau</artifactId>
-                    <version>${aikau.version}</version>
-
-                    <!--
                        JARs and AMPs that should be overlayed/applied to the Share WAR
                        (i.e. share.war)
                        No need to include our self...
