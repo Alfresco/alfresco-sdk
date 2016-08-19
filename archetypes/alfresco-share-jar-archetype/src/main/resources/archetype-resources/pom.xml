@@ -81,15 +81,19 @@
                     <!--
                         JARs and AMPs that should be overlayed/applied to the Share WAR (i.e. share.war)
                     -->
+                    <groupId>${alfresco.groupId}</groupId>
+                    <artifactId>aikau</artifactId>
+                    <version>${aikau.version}</version>
+
+                    <!--
+                       JARs and AMPs that should be overlayed/applied to the Share WAR
+                       (i.e. share.war)
+                       No need to include our self...
+                   -->
                     <shareModules>
                         <moduleDependency>
-                            <groupId>${project.groupId}</groupId>
-                            <artifactId>${artifactId}-share-jar</artifactId>
-                            <version>${project.version}</version>
-                        </moduleDependency>
-                        <moduleDependency>
                             <!-- Bring in a newer version, can coexist with older versions in the WAR disttribution,
-                                 newest version is picked -->
+                                 newest version is picked. -->
                             <groupId>${alfresco.groupId}</groupId>
                             <artifactId>aikau</artifactId>
                             <version>${aikau.version}</version>

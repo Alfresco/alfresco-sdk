@@ -189,6 +189,8 @@
                             <version>${alfresco.share.version}</version>
                             <type>amp</type>
                         </moduleDependency>
+
+                        <!-- Bring in custom Modules -->
                         <moduleDependency>
                             <groupId>${project.groupId}</groupId>
                             <artifactId>${artifactId}-platform-jar</artifactId>
@@ -198,7 +200,6 @@
 
                     <!--
                         JARs and AMPs that should be overlayed/applied to the Share WAR (i.e. share.war)
-                        No need to include our self...
                     -->
                     <shareModules>
                         <moduleDependency>
@@ -207,6 +208,13 @@
                             <groupId>${alfresco.groupId}</groupId>
                             <artifactId>aikau</artifactId>
                             <version>${aikau.version}</version>
+                        </moduleDependency>
+
+                        <!-- Bring in custom Modules -->
+                        <moduleDependency>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>${artifactId}-share-jar</artifactId>
+                            <version>${project.version}</version>
                         </moduleDependency>
                     </shareModules>
                 </configuration>
