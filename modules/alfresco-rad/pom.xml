@@ -42,6 +42,7 @@
   <build>
   	<plugins>
   	   <!-- Copied PostgreSQL dialect files to generate H2 dialect files on-the-fly -->
+        <!--
        <plugin>
            <artifactId>maven-dependency-plugin</artifactId>
            <executions>
@@ -91,7 +92,7 @@
                                </includes>
                                <targetPath>alfresco/ibatis/org.hibernate.dialect.H2Dialect</targetPath>
                            </resource>
-                           <!-- Upgrade scripts - does not seem to be picked up, so any changes you would make to them are not picked up...
+                            Upgrade scripts - does not seem to be picked up, so any changes you would make to them are not picked up...
                            <resource>
                                <directory>${pgsql.dialect.folder}/alfresco/dbscripts/upgrade/4.1/org.hibernate.dialect.PostgreSQLDialect</directory>
                                <includes>
@@ -113,12 +114,13 @@
                                </includes>
                                <targetPath>alfresco/dbscripts/upgrade/5.0/org.hibernate.dialect.H2Dialect</targetPath>
                            </resource>
-                           -->
+
                        </resources>
                    </configuration>
                </execution>
            </executions>
        </plugin>
+       -->
   	</plugins>
   
   </build>
