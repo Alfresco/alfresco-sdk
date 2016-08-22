@@ -14,12 +14,12 @@
     <parent>
         <groupId>org.alfresco.maven</groupId>
         <artifactId>alfresco-sdk-aggregator</artifactId>
-        <version>3.0.0-beta-1</version>
+        <version>3.0.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <!-- This defines the version of the SDK in terms of features -->
-    <version>3.0.0-beta-1</version>
+    <version>3.0.0-SNAPSHOT</version>
 
 
     <properties>
@@ -150,7 +150,7 @@
               - Maven Alfresco plugin that enables Maven to handle AMP files (alfresco-maven-plugin)
               - Alfresco Rapid Application Development module (alfresco-rad)
         -->
-        <maven.alfresco.version>3.0.0-beta-1</maven.alfresco.version>
+        <maven.alfresco.version>3.0.0-SNAPSHOT</maven.alfresco.version>
 
         <!-- Setup the default Embedded Tomcat port for use by the tomcat7-maven-plugin so
              it can be accessed from the Groovy scripts and other places -->
