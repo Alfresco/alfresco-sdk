@@ -56,6 +56,7 @@ public class RunMojo extends AbstractMojo {
     public static final String MAVEN_REPLACER_PLUGIN_VERSION = "1.5.3";
     public static final String MAVEN_RESOURCE_PLUGIN_VERSION = "2.7";
     public static final String MAVEN_TOMCAT7_PLUGIN_VERSION = "2.2";
+    public static final String MAVEN_BUILD_HELPER_PLUGIN_VERSION = "1.12";
     public static final String MAVEN_ALFRESCO_PLUGIN_VERSION = "3.0.0-SNAPSHOT";
 
     public static final String PLATFORM_WAR_PREFIX_NAME = "platform";
@@ -239,6 +240,7 @@ public class RunMojo extends AbstractMojo {
 
         if (enableSolr) {
             unpackSolrConfig();
+            fixSolrHomePath();
             replaceSolrConfigProperties();
             installSolr10InLocalRepo();
         }
@@ -291,7 +293,33 @@ public class RunMojo extends AbstractMojo {
                 ),
                 execEnv
         );
+    }
 
+    /**
+     * For windows paths, convert single \ to / for the ${alfresco.solr.data.dir} path,
+     * by default it will be c:\bla\, we need forward slash or double backslash.
+     *
+     * @throws MojoExecutionException
+     */
+    protected void fixSolrHomePath() throws MojoExecutionException {
+        getLog().info("Fix Solr Home Path to work in Windows");
+
+        executeMojo(
+                plugin(
+                        groupId("org.codehaus.mojo"),
+                        artifactId("build-helper-maven-plugin"),
+                        version(MAVEN_BUILD_HELPER_PLUGIN_VERSION)
+                ),
+                goal("regex-property"),
+                configuration(
+                        element(name("name"), "solrDataDir"),
+                        element(name("value"), solrHome),
+                        element(name("regex"), "\\\\"),
+                        element(name("replacement"), "/"),
+                        element(name("failIfNoMatch"), "false")
+                ),
+                execEnv
+        );
     }
 
     /**
@@ -318,7 +346,7 @@ public class RunMojo extends AbstractMojo {
                         element(name("replacements"),
                                 element(name("replacement"),
                                         element(name("token"), "@@ALFRESCO_SOLR4_DATA_DIR@@"),
-                                        element(name("value"), solrHome + "/index")
+                                        element(name("value"), "${solrDataDir}/index")
                                 )
                         )
                 ),
