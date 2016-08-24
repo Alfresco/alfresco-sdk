@@ -140,4 +140,16 @@ public class InstallMojo extends AbstractMojo {
         if(!skipWarManifestCheck && warLocation.isDirectory() && !manifest.exists())
             throw new MojoExecutionException("No MANIFEST.MF found in " + manifest.getAbsolutePath() + ". AMP installation cannot proceed. Are you binding amp:install to the right phase?");
     }
+
+    public void setWarLocation(File warLocation) {
+        this.warLocation = warLocation;
+    }
+
+    public void setAmpLocation(File ampLocation) {
+        this.ampLocation = ampLocation;
+    }
+
+    public void setForce(boolean force) {
+        this.force = force;
+    }
 }

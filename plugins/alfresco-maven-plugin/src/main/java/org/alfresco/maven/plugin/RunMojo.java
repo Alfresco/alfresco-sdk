@@ -24,6 +24,7 @@ import org.apache.maven.model.Dependency;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.BuildPluginManager;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -57,7 +58,6 @@ public class RunMojo extends AbstractMojo {
     public static final String MAVEN_RESOURCE_PLUGIN_VERSION = "2.7";
     public static final String MAVEN_TOMCAT7_PLUGIN_VERSION = "2.2";
     public static final String MAVEN_BUILD_HELPER_PLUGIN_VERSION = "1.12";
-    public static final String MAVEN_ALFRESCO_PLUGIN_VERSION = "3.0.0-SNAPSHOT";
 
     public static final String PLATFORM_WAR_PREFIX_NAME = "platform";
     public static final String SHARE_WAR_PREFIX_NAME = "share";
@@ -552,7 +552,8 @@ public class RunMojo extends AbstractMojo {
                                        String originalWarArtifactId,
                                        String originalWarVersion) throws MojoExecutionException {
         final String warOutputDir = getWarOutputDir(warName);
-        final String ampsOutputDir = "${project.build.directory}/modules/" + warName + "/amps";
+        final String ampsModuleDir = "modules/" + warName + "/amps";
+        final String ampsOutputDir = "${project.build.directory}/" + ampsModuleDir;
         List<Element> ampModules = new ArrayList<>();
         List<Element> jarModules = new ArrayList<>();
 
@@ -631,19 +632,18 @@ public class RunMojo extends AbstractMojo {
             );
 
             // Then apply all these amps to the unpacked war
-            executeMojo(
-                    plugin(
-                            groupId("org.alfresco.maven.plugin"),
-                            artifactId("alfresco-maven-plugin"),
-                            version(MAVEN_ALFRESCO_PLUGIN_VERSION)
-                    ),
-                    goal("install"),
-                    configuration(
-                            element(name("ampLocation"), ampsOutputDir),
-                            element(name("warLocation"), warOutputDir)
-                    ),
-                    execEnv
-            );
+            // Call the Alfresco Maven Plugin Install Mojo directly, so we don't have to keep SDK version info here
+            String ampsLocation = project.getBasedir() + "/target/" + ampsModuleDir;
+            String warLocation = project.getBasedir() + "/target/" + getWarName(warName);
+            InstallMojo installMojo = new InstallMojo();
+            installMojo.setAmpLocation(new File(ampsLocation));
+            installMojo.setWarLocation(new File(warLocation));
+            installMojo.setForce(true);
+            try {
+                installMojo.execute();
+            } catch (MojoFailureException e) {
+                e.printStackTrace();
+            }
         }
 
         // Then copy all JAR dependencies to the unpacked war /target/<warName>-war/WEB-INF/lib
@@ -1094,10 +1094,20 @@ public class RunMojo extends AbstractMojo {
     /**
      * The directory where the custom war will be assembled
      *
-     * @param warName a war prefix, such as 'platform' or 'share'
+     * @param baseWarName a war base name, such as 'platform' or 'share'
      * @return a directory such as: .../aio/target/platform-war
      */
-    private String getWarOutputDir(String warName) {
-        return "${project.build.directory}/" + warName + "-war";
+    private String getWarOutputDir(String baseWarName) {
+        return "${project.build.directory}/" + getWarName(baseWarName);
+    }
+
+    /**
+     * Get the war filename based on passed in war type
+     *
+     * @param baseWarName a war base name, such as 'platform' or 'share'
+     * @return
+     */
+    private String getWarName(String baseWarName) {
+        return baseWarName + "-war";
     }
 }
