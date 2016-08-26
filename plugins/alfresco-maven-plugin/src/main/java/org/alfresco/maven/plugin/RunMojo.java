@@ -77,7 +77,7 @@ public class RunMojo extends AbstractMojo {
     /**
      * The following properties that start with 'maven.' are used to control the
      * Alfresco Maven plugin itself.
-     * <p/>
+     * <pre>
      * For example:
      *    {@code
      *      <plugin>
@@ -101,6 +101,7 @@ public class RunMojo extends AbstractMojo {
      *          </configuration>
      *      </plugin>
      *    }
+     * </pre>
      */
 
     /**
@@ -218,13 +219,6 @@ public class RunMojo extends AbstractMojo {
     private String runnerAlfrescoShareWarArtifactId;
     private String runnerAlfrescoPlatformVersion;
     private String runnerAlfrescoShareVersion;
-
-    /**
-     * Database JDBC connection URL
-     * TODO: Is this parameter needed here?
-     */
-//    @Parameter(property = "alfresco.db.url", defaultValue = "jdbc:h2:./${alfresco.data.location}/h2_data/${alfresco.db.name};${alfresco.db.params}")
-    //  protected String alfrescoDbUrl;
 
     /**
      * The Maven environment that this mojo is executed in
@@ -499,7 +493,6 @@ public class RunMojo extends AbstractMojo {
                 execEnv
         );
     }
-
 
     /**
      * Build the customized Platform webapp (i.e. the Repository, alfresco.war)
@@ -797,7 +790,8 @@ public class RunMojo extends AbstractMojo {
                 goal("run"),
                 configuration(
                         /*
-                         * SDK Projects doesn't have packaging set to 'war', they are JARs or POMs, this setting ignores that fact.
+                         * SDK Projects doesn't have packaging set to 'war', they are JARs or POMs,
+                         * this setting ignores that fact.
                          */
                         element(name("ignorePackaging"), "true"),
 
@@ -810,10 +804,11 @@ public class RunMojo extends AbstractMojo {
                          *      (which lives in Servlet API 3)
                          *
                          */
-                        //element(name("useSeparateTomcatClassLoader"), "true"),
+                        element(name("useSeparateTomcatClassLoader"), "true"),
 
                         /*
-                         * Bring in stuff in the test classpath, such as the alfresco-global.properties that should be used
+                         * Bring in stuff in the test classpath, such as the alfresco-global.properties
+                         * that should be used
                          */
                         element(name("useTestClasspath"), "true"),
 

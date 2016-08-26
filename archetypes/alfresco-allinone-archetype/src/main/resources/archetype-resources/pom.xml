@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
 
     <properties>
+        <!-- Alfresco Maven Plugin version to use -->
         <alfresco.sdk.version>@@alfresco.sdk.parent.version@@</alfresco.sdk.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -203,8 +204,8 @@
                     -->
                     <shareModules>
                         <moduleDependency>
-                            <!-- Bring in a newer version, can coexist with older versions in the WAR disttribution,
-                                 newest version is picked -->
+                            <!-- Bring in a newer version of Aikau, can coexist with older versions in the
+                                WAR distribution, newest version is picked. -->
                             <groupId>${alfresco.groupId}</groupId>
                             <artifactId>aikau</artifactId>
                             <version>${aikau.version}</version>
@@ -262,13 +263,25 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <!--
-                      addResourcesDirToRebelXml - default is false
-                      Required if the resource directories are to be added to rebel.xml
-                    -->
-                    <addResourcesDirToRebelXml>true</addResourcesDirToRebelXml>
+                    <!-- For more information about how to configure JRebel plugin see:
+                         http://manuals.zeroturnaround.com/jrebel/standalone/maven.html#maven-rebel-xml -->
+                    <classpath>
+                        <fallback>all</fallback>
+                        <resources>
+                            <resource>
+                                <!--
+                                Empty resource element marks default configuration. By
+                                default it is placed first in generated configuration.
+                                -->
+                            </resource>
+                        </resources>
+                    </classpath>
 
-                    <!-- Always generate the rebel.xml file no matter what timestamps -->
+                    <!--
+                      alwaysGenerate - default is false
+                      If 'false' - rebel.xml is generated if timestamps of pom.xml and the current rebel.xml file are not equal.
+                      If 'true' - rebel.xml will always be generated
+                    -->
                     <alwaysGenerate>true</alwaysGenerate>
                 </configuration>
             </plugin>

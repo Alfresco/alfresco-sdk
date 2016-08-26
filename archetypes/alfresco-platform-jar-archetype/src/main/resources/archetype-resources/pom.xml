@@ -10,6 +10,7 @@
     <packaging>jar</packaging>
 
     <properties>
+        <!-- Alfresco Maven Plugin version to use -->
         <alfresco.sdk.version>@@alfresco.sdk.parent.version@@</alfresco.sdk.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -112,7 +113,6 @@
                     <!--
                        JARs and AMPs that should be overlayed/applied to the Platform/Repository WAR
                        (i.e. alfresco.war)
-                       No need to include our self...
                        -->
                     <platformModules>
                         <!-- This AMP is needed if we are going to access the platform webapp from a Share webapp -->
@@ -121,6 +121,14 @@
                             <artifactId>alfresco-share-services</artifactId>
                             <version>${alfresco.share.version}</version>
                             <type>amp</type>
+                        </moduleDependency>
+                        <!-- Bring in this JAR project, need to be included here, otherwise resources from META-INF
+                             will not be loaded, such as the test.html page
+                        -->
+                        <moduleDependency>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>${project.artifactId}</artifactId>
+                            <version>${project.version}</version>
                         </moduleDependency>
                     </platformModules>
                 </configuration>
@@ -167,13 +175,25 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <!--
-                      addResourcesDirToRebelXml - default is false
-                      Required if the resource directories are to be added to rebel.xml
-                    -->
-                    <addResourcesDirToRebelXml>true</addResourcesDirToRebelXml>
+                    <!-- For more information about how to configure JRebel plugin see:
+                         http://manuals.zeroturnaround.com/jrebel/standalone/maven.html#maven-rebel-xml -->
+                    <classpath>
+                        <fallback>all</fallback>
+                        <resources>
+                            <resource>
+                                <!--
+                                Empty resource element marks default configuration. By
+                                default it is placed first in generated configuration.
+                                -->
+                            </resource>
+                        </resources>
+                    </classpath>
 
-                    <!-- Always generate the rebel.xml file no matter what timestamps -->
+                    <!--
+                      alwaysGenerate - default is false
+                      If 'false' - rebel.xml is generated if timestamps of pom.xml and the current rebel.xml file are not equal.
+                      If 'true' - rebel.xml will always be generated
+                    -->
                     <alwaysGenerate>true</alwaysGenerate>
                 </configuration>
             </plugin>
