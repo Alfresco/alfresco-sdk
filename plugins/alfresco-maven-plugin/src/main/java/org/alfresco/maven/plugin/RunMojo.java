@@ -17,7 +17,6 @@
  */
 package org.alfresco.maven.plugin;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.model.Dependency;
@@ -31,9 +30,9 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
+import org.zeroturnaround.zip.ZipUtil;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 import static org.twdata.maven.mojoexecutor.MojoExecutor.*;
@@ -52,7 +51,6 @@ import static org.twdata.maven.mojoexecutor.MojoExecutor.*;
         requiresDependencyResolution = ResolutionScope.TEST)
 public class RunMojo extends AbstractMojo {
     public static final String MAVEN_DEPENDENCY_PLUGIN_VERSION = "2.10";
-    public static final String MAVEN_WAR_PLUGIN_VERSION = "2.6";
     public static final String MAVEN_INSTALL_PLUGIN_VERSION = "2.5.2";
     public static final String MAVEN_REPLACER_PLUGIN_VERSION = "1.5.3";
     public static final String MAVEN_RESOURCE_PLUGIN_VERSION = "2.7";
@@ -626,8 +624,8 @@ public class RunMojo extends AbstractMojo {
 
             // Then apply all these amps to the unpacked war
             // Call the Alfresco Maven Plugin Install Mojo directly, so we don't have to keep SDK version info here
-            String ampsLocation = project.getBasedir() + "/target/" + ampsModuleDir;
-            String warLocation = project.getBasedir() + "/target/" + getWarName(warName);
+            String ampsLocation = project.getBuild().getDirectory() + "/" + ampsModuleDir;
+            String warLocation = project.getBuild().getDirectory() + "/" + getWarName(warName);
             InstallMojo installMojo = new InstallMojo();
             installMojo.setAmpLocation(new File(ampsLocation));
             installMojo.setWarLocation(new File(warLocation));
@@ -669,39 +667,12 @@ public class RunMojo extends AbstractMojo {
         final String warSourceDir = getWarOutputDir(warName);
 
         // Package the customized war file
-        executeMojo(
-                plugin(
-                        groupId("org.apache.maven.plugins"),
-                        artifactId("maven-war-plugin"),
-                        version(MAVEN_WAR_PLUGIN_VERSION)
-                ),
-                goal("war"),
-                configuration(
-                        element(name("warName"), warName),
-                        element(name("warSourceDirectory"), warSourceDir),
-                        // Specifically tell the archiver where the manifest file is,
-                        // so a new manifest is not generated.
-                        // We are picking the manifest from the original war.
-                        // If we don't do this, then customized share.war will not start properly.
-                        element(name("archive"),
-                                element(name("manifestFile"), warSourceDir + "/META-INF/MANIFEST.MF")
-                        )
-                )
-                , execEnv
-        );
+        // Note. don't use the maven-war-plugin here as it will package the module files twice, once from the
+        // target/classes dir and once via the JAR
+        String warPath = project.getBuild().getDirectory() + "/" + warName + ".war";
+        ZipUtil.pack(new File(warSourceDir), new File(warPath));
 
-        // Delete temporary webapp assembly dir, so it is not added to next webapp that is assembled...
-        // (otherwise share.war will contain alfresco.war stuff)
-        String tempAssemblyDir = project.getBasedir() + "/target/" + project.getArtifactId() + "-" + project.getVersion();
-        getLog().info("Deleting temp webapp assembly dir: " + tempAssemblyDir);
-        File tempWebAppAssemblyDir = new File(tempAssemblyDir);
-        try {
-            FileUtils.deleteDirectory(tempWebAppAssemblyDir);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // Install the customized war file in local maven  repo
+        // Install the customized war file in the local maven repo
         executeMojo(
                 plugin(
                         groupId("org.apache.maven.plugins"),
@@ -710,7 +681,7 @@ public class RunMojo extends AbstractMojo {
                 ),
                 goal("install-file"),
                 configuration(
-                        element(name("file"), "${project.build.directory}/" + warName + ".war"),
+                        element(name("file"), warPath),
                         element(name("groupId"), "${project.groupId}"),
                         element(name("artifactId"), warArtifactId),
                         element(name("version"), "${project.version}"),
@@ -1093,7 +1064,7 @@ public class RunMojo extends AbstractMojo {
      * @return a directory such as: .../aio/target/platform-war
      */
     private String getWarOutputDir(String baseWarName) {
-        return "${project.build.directory}/" + getWarName(baseWarName);
+        return project.getBuild().getDirectory() + "/" + getWarName(baseWarName);
     }
 
     /**
