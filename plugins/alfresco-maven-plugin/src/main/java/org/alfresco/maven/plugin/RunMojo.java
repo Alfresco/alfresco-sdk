@@ -455,6 +455,7 @@ public class RunMojo extends AbstractMojo {
 
     /**
      * Copy the Alfresco Enterprise license to its correct place in the Platform WAR, if it exists.
+     * It is not enough to have it on the test classpath, then it will start up as Trial license...
      *
      * @throws MojoExecutionException
      */
@@ -480,7 +481,7 @@ public class RunMojo extends AbstractMojo {
                         element(name("outputDirectory"), licDestDir),
                         element(name("resources"),
                                 element(name("resource"),
-                                        element(name("directory"), "src/main/resources/alfresco/extension/license"),
+                                        element(name("directory"), "src/test/license"),
                                         element(name("includes"),
                                                 element(name("include"), "*.lic")
                                         ),
@@ -888,9 +889,7 @@ public class RunMojo extends AbstractMojo {
      * @return true if platform version >= 5.1
      */
     private boolean isPlatformVersionGtOrEqTo51() {
-        int versionNumber = Integer.parseInt(
-                alfrescoPlatformVersion.replaceAll("[^0-9]", "").substring(0, 2));
-        if (versionNumber >= 51) {
+        if (getPlatformVersionNumber() >= 51) {
             return true;
         }
 
@@ -904,13 +903,20 @@ public class RunMojo extends AbstractMojo {
      * @return true if platform version <= 4.2
      */
     private boolean isPlatformVersionLtOrEqTo42() {
-        int versionNumber = Integer.parseInt(
-                alfrescoPlatformVersion.replaceAll("[^0-9]", "").substring(0, 2));
-        if (versionNumber <= 42) {
+        if (getPlatformVersionNumber() <= 42) {
             return true;
         }
 
         return false;
+    }
+
+    /**
+     * Grabs the first 2 numbers in the version string
+     *
+     * @return major and minor version as int, such as 41,50,51
+     */
+    private int getPlatformVersionNumber() {
+        return Integer.parseInt(alfrescoPlatformVersion.replaceAll("[^0-9]", "").substring(0, 2));
     }
 
     /**
