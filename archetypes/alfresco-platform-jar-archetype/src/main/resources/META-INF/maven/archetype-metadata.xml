@@ -58,6 +58,12 @@
                 <include>**/*.properties</include>
             </includes>
         </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+            <directory>src/test/license</directory>
+            <includes>
+                <include>**</include>
+            </includes>
+        </fileSet>
         <fileSet encoding="UTF-8">
             <directory></directory>
             <includes>
