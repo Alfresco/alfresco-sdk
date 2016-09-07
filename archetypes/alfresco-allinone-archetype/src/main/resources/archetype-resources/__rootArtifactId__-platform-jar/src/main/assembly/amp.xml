@@ -12,12 +12,38 @@
     <includeBaseDirectory>false</includeBaseDirectory>
 
     <files>
+        <!-- Filter module.properties and put at top level in the AMP -->
         <file>
             <source>src/main/resources/alfresco/module/${project.artifactId}/module.properties</source>
             <filtered>true</filtered>
         </file>
+        <!-- Include AMP -> WAR mapping file (needed for custom mappings) -->
+        <file>
+            <source>src/main/assembly/file-mapping.properties</source>
+            <filtered>false</filtered>
+        </file>
     </files>
 
+    <fileSets>
+        <!-- Anything in the assembly/lib directory will end up in the /lib directory in the AMP -->
+        <fileSet>
+            <directory>src/main/assembly/lib</directory>
+            <outputDirectory>lib</outputDirectory>
+            <excludes>
+                <exclude>README.md</exclude>
+            </excludes>
+        </fileSet>
+        <!-- Anything in the assembly/web directory will end up in the /web directory in the AMP -->
+        <fileSet>
+            <directory>src/main/assembly/web</directory>
+            <outputDirectory>web</outputDirectory>
+            <excludes>
+                <exclude>README.md</exclude>
+            </excludes>
+        </fileSet>
+    </fileSets>
+
+    <!-- Include the project artifact (JAR) in the /lib directory in the AMP -->
     <dependencySets>
         <dependencySet>
             <outputDirectory>lib</outputDirectory>
