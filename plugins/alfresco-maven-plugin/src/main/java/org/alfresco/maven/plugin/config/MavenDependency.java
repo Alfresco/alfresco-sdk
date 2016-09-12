@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2016 Alfresco Software Limited.
  * <p/>
- * This file is part of the Alfresco SDK project.
+ * This file is part of the Alfresco SDK Samples project.
  * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,46 +16,26 @@
  * limitations under the License.
  */
 
-package org.alfresco.maven.plugin;
-
-import org.apache.commons.lang.StringUtils;
+package org.alfresco.maven.plugin.config;
 
 /**
- * Defines an Alfresco extension module dependency (JAR or AMP) to be
- * overlayed on an Alfresco webapp file via Maven WAR plugin.
- * <p/>
- * This is so we can skip the WAR projects in the AIO project,
- * and so we can include the Share Services AMP when running
- * with a simple platform JAR.
- * <p/>
- * This class is used by the RunMojo class.
+ * A Maven Dependency containing the Group ID, Artifact ID, and Version (GAV).
  *
  * @author martin.bergljung@alfresco.com
  * @version 1.0
  * @since 3.0.0
  */
-public class ModuleDependency {
-    public static final String TYPE_JAR = "jar";
-    public static final String TYPE_AMP = "amp";
-
+public abstract class MavenDependency {
     private String groupId;
     private String artifactId;
     private String version;
-    private String type = TYPE_JAR;
 
-    public ModuleDependency() {}
+    public MavenDependency() {}
 
-    public ModuleDependency(String g, String a, String v) {
+    public MavenDependency(String g, String a, String v) {
         this.groupId = g;
         this.artifactId = a;
         this.version = v;
-    }
-
-    public ModuleDependency(String g, String a, String v, String t) {
-        this.groupId = g;
-        this.artifactId = a;
-        this.version = v;
-        this.type = t;
     }
 
     public String getGroupId() {
@@ -82,33 +62,16 @@ public class ModuleDependency {
         this.version = version;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public boolean isAmp() {
-        return StringUtils.equalsIgnoreCase(this.type, TYPE_AMP);
-    }
-
-    public boolean isJar() {
-        return StringUtils.equalsIgnoreCase(this.type, TYPE_JAR);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ModuleDependency)) return false;
+        if (!(o instanceof MavenDependency)) return false;
 
-        ModuleDependency that = (ModuleDependency) o;
+        MavenDependency that = (MavenDependency) o;
 
         if (!groupId.equals(that.groupId)) return false;
         if (!artifactId.equals(that.artifactId)) return false;
-        if (!version.equals(that.version)) return false;
-        return !(type != null ? !type.equals(that.type) : that.type != null);
+        return version.equals(that.version);
 
     }
 
@@ -117,17 +80,15 @@ public class ModuleDependency {
         int result = groupId.hashCode();
         result = 31 * result + artifactId.hashCode();
         result = 31 * result + version.hashCode();
-        result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "ModuleDependency{" +
+        return "MavenDependency{" +
                 "groupId='" + groupId + '\'' +
                 ", artifactId='" + artifactId + '\'' +
                 ", version='" + version + '\'' +
-                ", type='" + type + '\'' +
                 '}';
     }
 }

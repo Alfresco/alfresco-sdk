@@ -17,6 +17,8 @@
  */
 package org.alfresco.maven.plugin;
 
+import org.alfresco.maven.plugin.config.ModuleDependency;
+import org.alfresco.maven.plugin.config.TomcatDependency;
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.model.Dependency;
@@ -112,8 +114,20 @@ public class RunMojo extends AbstractMojo {
      * Switch to enable/disable the H2 database when running embedded Tomcat.
      * This also brings in the needed H2 database scripts.
      */
-    @Parameter(property = "maven.alfresco.enableH2", defaultValue = "true")
+    @Parameter(property = "maven.alfresco.enableH2", defaultValue = "false")
     protected boolean enableH2;
+
+    /**
+     * Switch to enable/disable the MySQL database when running embedded Tomcat.
+     */
+    @Parameter(property = "maven.alfresco.enableMySQL", defaultValue = "false")
+    protected boolean enableMySQL;
+
+    /**
+     * Switch to enable/disable the PostgreSQL database when running embedded Tomcat.
+     */
+    @Parameter(property = "maven.alfresco.enablePostgreSQL", defaultValue = "false")
+    protected boolean enablePostgreSQL;
 
     /**
      * Switch to enable/disable the Platform/Repository (alfresco.war) when running embedded Tomcat.
@@ -174,6 +188,14 @@ public class RunMojo extends AbstractMojo {
      */
     @Parameter(property = "maven.alfresco.edition", defaultValue = ALFRESCO_COMMUNITY_EDITION)
     protected String alfrescoEdition;
+
+    /**
+     * Tomcat Dependencies that should be added to the Embedded Tomcat configuration before start.
+     * Normally there would not be any extra dependencies, but could be if you run an Enterprise database
+     * such as Oracle, for which there's no quick config, such as enableH2, enableMySQL, or enablePostgreSQL.
+     */
+    @Parameter(property = "maven.alfresco.tomcat.dependencies", defaultValue = "")
+    protected List<TomcatDependency> tomcatDependencies;
 
     /**
      * Maven GAV properties for standard Alfresco web applications.
@@ -250,6 +272,7 @@ public class RunMojo extends AbstractMojo {
         }
 
         if (startTomcat) {
+            checkDatabaseConfig();
             startTomcat();
         }
     }
@@ -549,7 +572,7 @@ public class RunMojo extends AbstractMojo {
         List<Element> ampModules = new ArrayList<>();
         List<Element> jarModules = new ArrayList<>();
 
-        if (modules != null) {
+        if (modules != null && modules.size() > 0) {
             for (ModuleDependency moduleDep : modules) {
                 Element el = element(name("artifactItem"),
                         element(name("groupId"), moduleDep.getGroupId()),
@@ -695,6 +718,30 @@ public class RunMojo extends AbstractMojo {
     }
 
     /**
+     * Check that a database configuration has been supplied correctly
+     */
+    private void checkDatabaseConfig() throws MojoExecutionException {
+        if (enableH2 && !enableMySQL && !enablePostgreSQL) {
+            // Run with the H2 database
+            return;
+        } else if (!enableH2 && enableMySQL && !enablePostgreSQL) {
+            // Run with the MySQL database
+            return;
+        } else if (!enableH2 && !enableMySQL && enablePostgreSQL) {
+            // Run with the PostgreSQL database
+            return;
+        } else if (!enableH2 && !enableMySQL && !enablePostgreSQL) {
+            // Run with a database configured via Tomcat Dependencies
+            return;
+        } else {
+            throw new MojoExecutionException(
+                    "Invalid database configuration, " +
+                            "should be enableH2 or enableMySQL or enablePostgreSQL " +
+                            "or none (i.e. config via Tomcat Dependencies)");
+        }
+    }
+
+    /**
      * Start up the embedded Tomcat server with the webapps that has been
      * configured in the SDK project.
      *
@@ -703,27 +750,43 @@ public class RunMojo extends AbstractMojo {
     protected void startTomcat() throws MojoExecutionException {
         getLog().info("Starting Tomcat");
 
-        List<Dependency> tomcatDependencies = new ArrayList<Dependency>();
+        List<Dependency> tomcatPluginDependencies = new ArrayList<Dependency>();
         ArrayList webapps2Deploy = new ArrayList<Element>();
 
         // Add the basic Tomcat dependencies
-        tomcatDependencies.add(
+        tomcatPluginDependencies.add(
                 // Packaging goes faster with this lib
                 dependency("org.codehaus.plexus", "plexus-archiver", "2.3"));
-        tomcatDependencies.add(
+        tomcatPluginDependencies.add(
                 // The following dependency is needed, otherwise you get
                 //  Caused by: java.lang.NoSuchMethodError:
                 //      javax.servlet.ServletContext.getSessionCookieConfig()Ljavax/servlet/SessionCookieConfig
                 // This method is in Servlet API 3.0
                 dependency("javax.servlet", "javax.servlet-api", "3.0.1"));
 
+        // Do we have any extra Tomcat Plugin dependencies to include?
+        if (tomcatDependencies != null && tomcatDependencies.size() > 0) {
+            for (TomcatDependency tomcatDep : tomcatDependencies) {
+                tomcatPluginDependencies.add(
+                        dependency(tomcatDep.getGroupId(), tomcatDep.getArtifactId(), tomcatDep.getVersion()));
+            }
+        }
+
         if (enableH2) {
-            tomcatDependencies.add(
+            tomcatPluginDependencies.add(
                     // Bring in the flat file H2 database
                     dependency("com.h2database", "h2", "1.4.190"));
 
             // Copy the h2 scripts
             copyH2Dialect();
+        } else if (enableMySQL) {
+            tomcatPluginDependencies.add(
+                    // Bring in the MySQL JDBC Driver
+                    dependency("mysql", "mysql-connector-java", "5.1.32"));
+        } else if (enablePostgreSQL) {
+            tomcatPluginDependencies.add(
+                    // Bring in the PostgreSQL JDBC Driver
+                    dependency("org.postgresql", "postgresql", "9.4-1201-jdbc41"));
         }
 
         if (enablePlatform) {
@@ -757,7 +820,7 @@ public class RunMojo extends AbstractMojo {
                         groupId("org.apache.tomcat.maven"),
                         artifactId("tomcat7-maven-plugin"),
                         version(MAVEN_TOMCAT7_PLUGIN_VERSION),
-                        tomcatDependencies
+                        tomcatPluginDependencies
                 ),
                 goal("run"),
                 configuration(
