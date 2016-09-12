@@ -30,8 +30,9 @@
 
         <!-- Properties used in dependency declarations, you don't need to change these -->
         <alfresco.groupId>org.alfresco</alfresco.groupId>
-        <alfresco.platform.war.artifactId>alfresco-platform</alfresco.platform.war.artifactId>
         <alfresco.share.war.artifactId>share</alfresco.share.war.artifactId>
+        <!-- Platform WAR artifact, change to 'alfresco-enterprise' if using Enterprise Edition -->
+        <alfresco.platform.war.artifactId>alfresco-platform</alfresco.platform.war.artifactId>
 
         <!-- Alfresco Platform and Share webapp versions, these are the original Alfresco webapps that will be
              customized and then deployed and run by the tomcat maven plugin when
