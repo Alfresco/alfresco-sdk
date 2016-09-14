@@ -68,6 +68,10 @@
 
         <!-- Environment to use, Alfresco Maven Plugin will copy alfresco-global.properties from this directory -->
         <env>local</env>
+
+        <!-- Compile with Java 7, default is 5 -->
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
 
     <dependencyManagement>
@@ -159,17 +163,6 @@
         </pluginManagement>
 
         <plugins>
-            <!-- Compile with Java 7, default is 5 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
-
             <!--
                 The Alfresco Maven Plugin contains all the logic to run the extension
                 in an embedded Tomcat with the H2 database.
