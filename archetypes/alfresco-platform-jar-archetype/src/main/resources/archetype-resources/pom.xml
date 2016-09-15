@@ -36,9 +36,9 @@
         <!-- Alfresco Platform webapp version, this is the original Alfresco webapp that will be
             customized and then deployed and run by the tomcat maven plugin when
             executing for example $ mvn clean install alfresco:run -->
-        <alfresco.platform.version>5.2.a-EA</alfresco.platform.version>
+        <alfresco.platform.version>5.2.b-EA</alfresco.platform.version>
         <!-- Alfresco Share version, so we can bring in correct alfresco-share-services artifact -->
-        <alfresco.share.version>5.1.g</alfresco.share.version>
+        <alfresco.share.version>5.2.a-EA</alfresco.share.version>
 
         <!-- Alfresco Repo Database configuration.
            By default it uses a flat file H2 database to be able to run embedded.
@@ -115,6 +115,8 @@
                     <enableSolr>true</enableSolr>
                     <!-- We don't need the share.war if we don't have any UI extensions -->
                     <enableShare>false</enableShare>
+                    <!-- Enable the REST API Explorer -->
+                    <enableApiExplorer>true</enableApiExplorer>
 
                     <!--
                        JARs and AMPs that should be overlayed/applied to the Platform/Repository WAR

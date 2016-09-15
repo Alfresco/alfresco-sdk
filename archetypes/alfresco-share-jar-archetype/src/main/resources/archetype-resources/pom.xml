@@ -22,14 +22,14 @@
         <!-- Alfresco Share webapp version, this is the original Alfresco webapp that will be
             customized and then deployed and run by the tomcat maven plugin when
             executing for example $ mvn clean install alfresco:run -->
-        <alfresco.share.version>5.1.g</alfresco.share.version>
+        <alfresco.share.version>5.2.a-EA</alfresco.share.version>
 
         <!-- Alfresco Surf version, if you change Share version you might need to change Surf version -->
-        <alfresco.surf.version>6.5</alfresco.surf.version>
+        <alfresco.surf.version>6.6</alfresco.surf.version>
 
         <!-- Aikau framework version, it is released separately, so it can be useful to be able
              to bring in newer versions with bug fixes etc -->
-        <aikau.version>1.0.82</aikau.version>
+        <aikau.version>1.0.85</aikau.version>
 
         <!-- Since alfresco.war (i.e. the Platform/Repository) is already running on port 8080, we run Share.WAR on port 8081.
             If Alfresco Platform is not running, then generate a platform-jar-module and start it up. -->

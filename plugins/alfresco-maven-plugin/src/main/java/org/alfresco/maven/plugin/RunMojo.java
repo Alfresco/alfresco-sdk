@@ -221,7 +221,7 @@ public class RunMojo extends AbstractMojo {
     @Parameter(property = "alfresco.share.version", defaultValue = "5.1.g")
     protected String alfrescoShareVersion;
 
-    @Parameter(property = "alfresco.api.explorer.version", defaultValue = "1.0")
+    @Parameter(property = "alfresco.api.explorer.version", defaultValue = "1.2")
     protected String alfrescoApiExplorerVersion;
 
     /**

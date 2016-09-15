@@ -37,15 +37,15 @@
         <!-- Alfresco Platform and Share webapp versions, these are the original Alfresco webapps that will be
              customized and then deployed and run by the tomcat maven plugin when
              executing for example $ mvn clean install alfresco:run -->
-        <alfresco.platform.version>5.2.a-EA</alfresco.platform.version>
-        <alfresco.share.version>5.1.g</alfresco.share.version>
+        <alfresco.platform.version>5.2.b-EA</alfresco.platform.version>
+        <alfresco.share.version>5.2.a-EA</alfresco.share.version>
 
         <!-- Alfresco Surf version, if you change Share version you might need to change Surf version -->
-        <alfresco.surf.version>6.5</alfresco.surf.version>
+        <alfresco.surf.version>6.6</alfresco.surf.version>
 
         <!-- Aikau framework version, it is released separately, so it can be useful to be able
              to bring in newer versions with bug fixes etc -->
-        <aikau.version>1.0.82</aikau.version>
+        <aikau.version>1.0.85</aikau.version>
 
         <!-- Alfresco Repo Database configuration.
            By default it uses a flat file H2 database to be able to run embedded.
@@ -255,6 +255,8 @@
                     <enableSolr>true</enableSolr>
                     <!-- We need Share webapp, so we got a UI for working with the Repo -->
                     <enableShare>true</enableShare>
+                    <!-- Enable the REST API Explorer -->
+                    <enableApiExplorer>true</enableApiExplorer>
 
                     <!--
                         JARs and AMPs that should be overlayed/applied to the Platform/Repository WAR
