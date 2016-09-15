@@ -186,7 +186,38 @@
         </repository>
     </repositories>
 
+    <distributionManagement>
+        <repository>
+            <id>central-releases-staging</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+        <snapshotRepository>
+            <id>central-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <site>
+            <id>alfresco-docs</id>
+            <url>dav:${maven.site.url}</url>
+        </site>
+    </distributionManagement>
+
     <profiles>
+        <profile>
+            <id>internal-release</id>
+            <activation>
+                <property>
+                    <name>internal.release</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <distributionManagement>
+                <repository>
+                    <id>alfresco-releases</id>
+                    <url>https://artifacts.alfresco.com/nexus/content/repositories/releases/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+
         <profile>
             <id>exclude-enterprise-tests-for-archetypes</id>
             <activation>
@@ -212,7 +243,7 @@
                 <alfresco.sdk.tests.exclude />
             </properties>
         </profile>
-    	
+
         <profile>
             <id>sdk-release</id>
             <properties>
@@ -310,20 +341,6 @@
                     </plugin>
                 </plugins>
             </reporting>
-            <distributionManagement>
-                <repository>
-                    <id>central-releases-staging</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-                </repository>
-                <snapshotRepository>
-                    <id>central-snapshots</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-                </snapshotRepository>
-                <site>
-                    <id>alfresco-docs</id>
-                    <url>dav:${maven.site.url}</url>
-                </site>
-            </distributionManagement>
         </profile>
         <!-- Attempt (failed) to retain run.sh permissions. Zip files are bad at this, full stop.
         <profile>
