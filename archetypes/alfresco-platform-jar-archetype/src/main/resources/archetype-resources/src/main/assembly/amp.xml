@@ -37,6 +37,7 @@
         <fileSet>
             <directory>src/main/assembly/web</directory>
             <outputDirectory>web</outputDirectory>
+            <filtered>true</filtered> <!-- Will filter files and substitute POM props such as for example ${project.name} -->
             <excludes>
                 <exclude>README.md</exclude>
             </excludes>
