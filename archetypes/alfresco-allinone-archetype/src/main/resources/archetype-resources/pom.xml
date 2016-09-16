@@ -47,26 +47,11 @@
              to bring in newer versions with bug fixes etc -->
         <aikau.version>1.0.85</aikau.version>
 
-        <!-- Alfresco Repo Database configuration.
-           By default it uses a flat file H2 database to be able to run embedded.
-           The H2 database implementation is brought in via the tomcat7-maven-plugin as a dependency.
-           The data files for the H2 database will be created in a relative path, such as alf_data_dev/h2_data/alf_dev,
-           see alfresco.db.url below.
-           For more information about the db parameters see:http://www.h2database.com/html/features.html
-        -->
-        <alfresco.db.name>alf_dev</alfresco.db.name>
-        <alfresco.db.username>alfresco</alfresco.db.username>
-        <alfresco.db.password>alfresco</alfresco.db.password>
-        <alfresco.db.params>AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;MVCC=FALSE;LOCK_MODE=0
-        </alfresco.db.params>
-        <alfresco.db.url>jdbc:h2:${alfresco.data.location}/h2_data/${alfresco.db.name};${alfresco.db.params}
-        </alfresco.db.url>
-        <alfresco.db.datasource.class>org.h2.jdbcx.JdbcDataSource</alfresco.db.datasource.class>
-
         <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
         <jrebel.version>1.1.6</jrebel.version>
 
-        <!-- Environment to use, Alfresco Maven Plugin will copy alfresco-global.properties from this directory -->
+        <!-- Environment to use, Alfresco Maven Plugin will
+             copy alfresco-global-*.properties files from this directory, such as src/test/properties/local -->
         <env>local</env>
 
         <!-- Compile with Java 7, default is 5 -->

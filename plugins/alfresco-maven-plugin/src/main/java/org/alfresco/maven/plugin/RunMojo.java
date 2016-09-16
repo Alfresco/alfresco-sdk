@@ -130,6 +130,12 @@ public class RunMojo extends AbstractMojo {
     protected boolean enablePostgreSQL;
 
     /**
+     * Switch to enable/disable the Enterprise database (such as Oracle or MS SQL Server) when running embedded Tomcat.
+     */
+    @Parameter(property = "maven.alfresco.enableEnterpriseDb", defaultValue = "false")
+    protected boolean enableEnterpriseDb;
+
+    /**
      * Switch to enable/disable the Platform/Repository (alfresco.war) when running embedded Tomcat.
      */
     @Parameter(property = "maven.alfresco.enablePlatform", defaultValue = "true")
@@ -261,6 +267,7 @@ public class RunMojo extends AbstractMojo {
 
         if (enableTestProperties) {
             copyAlfrescoGlobalProperties();
+            renameAlfrescoGlobalProperties();
         }
 
         if (enablePlatform) {
@@ -445,14 +452,14 @@ public class RunMojo extends AbstractMojo {
     }
 
     /**
-     * Copy the alfresco-global.properties file that will be used when
-     * running Alfresco. It contains database connection parameters and
+     * Copy the different alfresco-global-*.properties files (there are one for each open source db and one for
+     * enterprise db config) that will be used when running Alfresco. It contains database connection parameters and
      * other general configuration for Alfresco Repository (alfresco.war)
      *
      * @throws MojoExecutionException
      */
     protected void copyAlfrescoGlobalProperties() throws MojoExecutionException {
-        getLog().info("Copying alfresco-global.properties to test resources");
+        getLog().info("Copying and filtering alfresco-global-*.properties files to target/test-classes");
         executeMojo(
                 plugin(
                         groupId("org.apache.maven.plugins"),
@@ -471,6 +478,45 @@ public class RunMojo extends AbstractMojo {
                                         element(name("filtering"), "true")
                                 )
                         )
+                ),
+                execEnv
+        );
+    }
+
+    /**
+     * Rename the configured database specific alfresco-global-*.properties file to
+     * alfresco-global.properties so it will be used during Tomcat run.
+     *
+     * @throws MojoExecutionException
+     */
+    protected void renameAlfrescoGlobalProperties() throws MojoExecutionException {
+        String alfrescoGlobalFilePath = "${project.build.testOutputDirectory}/alfresco-global-";
+        if (enableH2) {
+            alfrescoGlobalFilePath += "h2.properties";
+            getLog().info("Renaming alfresco-global-h2.properties to alfresco-global.properties");
+        } else if (enableMySQL) {
+            alfrescoGlobalFilePath += "mysql.properties";
+            getLog().info("Renaming alfresco-global-mysql.properties to alfresco-global.properties");
+        } else if (enablePostgreSQL) {
+            alfrescoGlobalFilePath += "postgresql.properties";
+            getLog().info("Renaming alfresco-global-postgresql.properties to alfresco-global.properties");
+        } else if (enableEnterpriseDb) {
+            alfrescoGlobalFilePath += "enterprise.properties";
+            getLog().info("Renaming alfresco-global-enterprise.properties to alfresco-global.properties");
+        } else {
+            throw new MojoExecutionException("Invalid database configuration, use enableH2, enableMySQL, " +
+                    "enablePostgreSQL, or enabaleEnterpriseDb");
+        }
+        executeMojo(
+                plugin(
+                        groupId("com.coderplus.maven.plugins"),
+                        artifactId("copy-rename-maven-plugin"),
+                        version("1.0")
+                ),
+                goal("rename"),
+                configuration(
+                        element(name("sourceFile"), alfrescoGlobalFilePath),
+                        element(name("destinationFile"), "${project.build.testOutputDirectory}/alfresco-global.properties")
                 ),
                 execEnv
         );
