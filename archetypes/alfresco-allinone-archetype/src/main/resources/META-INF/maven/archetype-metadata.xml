@@ -129,6 +129,8 @@
         <fileSet encoding="UTF-8">
             <directory></directory>
             <includes>
+                <include>debug.sh</include>
+                <include>debug.bat</include>
                 <include>run.sh</include>
                 <include>run.bat</include>
                 <include>README.md</include>

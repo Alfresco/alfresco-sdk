@@ -5,5 +5,5 @@
 
 set MAVEN_OPTS=-Xms256m -Xmx2G
 
-mvn clean install -DskipTests=true alfresco:run
+mvn clean install alfresco:run
 
