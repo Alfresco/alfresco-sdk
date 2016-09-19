@@ -39,26 +39,12 @@
                     </includes>
                     <excludes>
                         <exclude>**/*-context.xml</exclude>
-                        <exclude>**/log4j.properties</exclude>
                     </excludes>
                 </fileSet>
                 <fileSet encoding="UTF-8" filtered="true" packaged="false">
                     <directory>src/main/resources</directory>
                     <includes>
                         <include>**/*-context.xml</include>
-                        <include>**/log4j.properties</include>
-                    </includes>
-                </fileSet>
-                <fileSet encoding="UTF-8" filtered="false">
-                    <directory>src/test/resources</directory>
-                    <includes>
-                        <include>**</include>
-                    </includes>
-                </fileSet>
-                <fileSet encoding="UTF-8" filtered="false">
-                    <directory>src/test/properties</directory>
-                    <includes>
-                        <include>**/*.properties</include>
                     </includes>
                 </fileSet>
             </fileSets>
@@ -66,7 +52,7 @@
 
         <module id="${rootArtifactId}-share-jar"
                 name="${rootArtifactId}-share-jar"
-                dir="__rootArtifactId__-share-jar" >
+                dir="__rootArtifactId__-share-jar">
             <fileSets>
                 <fileSet filtered="false" packaged="false" encoding="UTF-8">
                     <directory>src/main/assembly</directory>
@@ -108,24 +94,38 @@
                         <exclude>**/__artifactId__-example-widgets.xml</exclude>
                     </excludes>
                 </fileSet>
-                <fileSet filtered="true" packaged="false" encoding="UTF-8">
-                    <directory>src/test/resources</directory>
-                    <includes>
-                        <include>**</include>
-                    </includes>
-                </fileSet>
             </fileSets>
         </module>
     </modules>
 
     <fileSets>
-        <fileSet encoding="UTF-8">
-            <directory>src</directory>
+        <fileSet encoding="UTF-8" filtered="true">
+            <directory>src/test/resources</directory>
+            <includes>
+                <include>**/dev-log4j.properties</include>
+            </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+            <directory>src/test/resources</directory>
+            <includes>
+                <include>**</include>
+            </includes>
+            <excludes>
+                <exclude>**/dev-log4j.properties</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+            <directory>src/test/properties</directory>
+            <includes>
+                <include>**/*.properties</include>
+            </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+            <directory>src/test/license</directory>
             <includes>
                 <include>**</include>
             </includes>
         </fileSet>
-
         <fileSet encoding="UTF-8">
             <directory></directory>
             <includes>

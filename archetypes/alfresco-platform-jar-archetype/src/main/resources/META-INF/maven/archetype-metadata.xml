@@ -36,14 +36,18 @@
             </includes>
             <excludes>
                 <exclude>**/*-context.xml</exclude>
-                <exclude>**/log4j.properties</exclude>
             </excludes>
         </fileSet>
         <fileSet encoding="UTF-8" filtered="true" packaged="false">
             <directory>src/main/resources</directory>
             <includes>
                 <include>**/*-context.xml</include>
-                <include>**/log4j.properties</include>
+            </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="true">
+            <directory>src/test/resources</directory>
+            <includes>
+                <include>**/dev-log4j.properties</include>
             </includes>
         </fileSet>
         <fileSet encoding="UTF-8" filtered="false">
@@ -51,6 +55,9 @@
             <includes>
                 <include>**</include>
             </includes>
+            <excludes>
+                <exclude>**/dev-log4j.properties</exclude>
+            </excludes>
         </fileSet>
         <fileSet encoding="UTF-8" filtered="false">
             <directory>src/test/properties</directory>

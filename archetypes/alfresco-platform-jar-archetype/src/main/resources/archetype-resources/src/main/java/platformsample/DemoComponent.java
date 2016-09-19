@@ -35,7 +35,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Maurizio Pillitu
  */
 public class DemoComponent extends AbstractModuleComponent {
-    Log log = LogFactory.getLog(DemoComponent.class);
+    private static Log logger = LogFactory.getLog(DemoComponent.class);
 
     private NodeService nodeService;
 
@@ -55,8 +55,8 @@ public class DemoComponent extends AbstractModuleComponent {
     @Override
     protected void executeInternal() throws Throwable {
         System.out.println("DemoComponent has been executed");
-        log.debug("Test debug logging. Congratulation your JAR Module is working");
-        log.info("This is only for information purposed. Better remove me from the log in Production");
+        logger.debug("Test debug logging. Congratulation your JAR Module is working");
+        logger.info("This is only for information purposed. Better remove me from the log in Production");
     }
 
     /**
