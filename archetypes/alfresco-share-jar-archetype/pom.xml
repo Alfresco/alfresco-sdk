@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.alfresco.maven.archetype</groupId>
-    <artifactId>share-amp-archetype</artifactId>
+    <artifactId>alfresco-share-jar-archetype</artifactId>
 
     <packaging>maven-archetype</packaging>
-    <name>Maven Alfresco SDK - Share AMP Archetype</name>
-    <description>Share project with full support for lifecycle and rapid development of AMPs (Alfresco Module
+    <name>Alfresco SDK - Share JAR Archetype</name>
+    <description>Share project with full support for lifecycle and rapid development of JARs and AMPs (Alfresco Module
         Packages)
     </description>
 
@@ -26,6 +26,8 @@
                     <include>archetype-resources/pom.xml</include>
                     <include>archetype-resources/run.sh</include>
                     <include>archetype-resources/run.bat</include>
+                    <include>archetype-resources/debug.sh</include>
+                    <include>archetype-resources/debug.bat</include>
                     <include>META-INF/maven/archetype-metadata.xml</include>
                 </includes>
                 <filtering>true</filtering>
@@ -36,6 +38,8 @@
                     <exclude>archetype-resources/pom.xml</exclude>
                     <exclude>archetype-resources/run.sh</exclude>
                     <exclude>archetype-resources/run.bat</exclude>
+                    <exclude>archetype-resources/debug.sh</exclude>
+                    <exclude>archetype-resources/debug.bat</exclude>
                     <exclude>META-INF/maven/archetype-metadata.xml</exclude>
                 </excludes>
                 <filtering>false</filtering>
@@ -44,8 +48,9 @@
 
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.7</version>
+                <version>${maven.resource.version}</version>
                 <configuration>
                     <useDefaultDelimiters>false</useDefaultDelimiters>
                     <delimiters>

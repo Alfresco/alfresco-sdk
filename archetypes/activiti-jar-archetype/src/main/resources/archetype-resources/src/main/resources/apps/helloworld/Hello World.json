@@ -1,0 +1,20 @@
+{
+  "models": [
+    {
+      "id": 2005,
+      "name": "Hello World",
+      "version": 1,
+      "modelType": 0,
+      "description": "The Hello World business process that is part of the Alfresco SDK 3.0 Activiti JAR Module Maven archetype",
+      "stencilSetId": 0,
+      "createdByFullName": " Administrator",
+      "createdBy": 1,
+      "lastUpdatedByFullName": " Administrator",
+      "lastUpdatedBy": 1,
+      "lastUpdated": "2016-09-29T12:38:13.716+0000"
+    }
+  ],
+  "theme": "theme-1",
+  "icon": "glyphicon-cog",
+  "publishIdentityInfo": []
+}

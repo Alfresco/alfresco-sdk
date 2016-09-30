@@ -1,0 +1,53 @@
+{
+  "referenceId": 2005,
+  "name": "Decide What Greeting",
+  "description": "Decide, depending on time of day, what greeting to display.",
+  "editorJson": {
+    "id": 2007,
+    "name": "Decide What Greeting",
+    "key": "DecideWhatGreeting",
+    "description": "Decide, depending on time of day, what greeting to display.",
+    "hitIndicator": "FIRST",
+    "inputExpressions": [
+      {
+        "id": "3",
+        "variableId": "timeofday",
+        "variableType": "formfield",
+        "type": "string",
+        "label": "Time of day",
+        "entries": null,
+        "newVariable": false
+      }
+    ],
+    "outputExpressions": [
+      {
+        "id": "4",
+        "variableId": "dayGreeting",
+        "variableType": "variable",
+        "type": "string",
+        "label": "DayGreeting",
+        "entries": null,
+        "newVariable": true
+      }
+    ],
+    "rules": [
+      {
+        "3": "== \"time_of_day_morning\"",
+        "4": "\"Good Morning!\""
+      },
+      {
+        "3": "== \"time_of_day_lunch\"",
+        "4": "\"Good Day!\""
+      },
+      {
+        "3": "== \"time_of_day_dinner\"",
+        "4": "\"Good Evening!\""
+      },
+      {
+        "3": "== \"time_of_day_night\"",
+        "4": "\"Good Night!\""
+      }
+    ],
+    "executionVariables": []
+  }
+}

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>${groupId}</groupId>
+    <artifactId>${artifactId}</artifactId>
+    <version>${version}</version>
+    <name>${artifactId} Activiti Jar Module - SDK 3</name>
+    <description>Activiti JAR Module that produces a JAR file with Java extensions such as service task delegates. It also produces an application ZIP with workflow definition, forms etc that can be deployed via /activiti-app - SDK 3</description>
+    <packaging>jar</packaging>
+
+    <properties>
+        <!-- Alfresco Maven Plugin version to use -->
+        <alfresco.sdk.version>@@alfresco.sdk.parent.version@@</alfresco.sdk.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Base directory for all RDBMS data and Content data -->
+        <activiti.datadir>${project.basedir}/activiti_data_dev</activiti.datadir>
+
+        <!-- Properties used in dependency declarations, you don't usually need to change these -->
+        <activiti.groupId>com.activiti</activiti.groupId>
+        <activiti.app.war.artifactId>activiti-app</activiti.app.war.artifactId> <!--This contains the Alfresco Activiti webapp, including the workflow engine. This webapp is also the user interface for people involved in the task and processes running in the Activiti engine. You also use this webapp to create and manage process definitions, and to display and define analytics reports on users' tasks and processes. -->
+        <activiti.admin.war.artifactId>activiti-admin</activiti.admin.war.artifactId> <!-- This contains the Alfresco Activiti Administrator webapp. You use this to administer and monitor your Alfresco Activiti engines.-->
+
+        <!-- The version of the Alfresco Activiti Enterprise Workflow Engine that the customization will run in -->
+        <activiti.version>1.5.1</activiti.version>
+
+        <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
+        <jrebel.version>1.1.6</jrebel.version>
+
+        <!-- Compile with Java 7, default is 5 -->
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <!-- The main Activiti Enterprise application dependency that brings in all
+             needed classes to compile your customizations -->
+        <dependency>
+            <groupId>${activiti.groupId}</groupId>
+            <artifactId>activiti-app-logic</artifactId>
+            <version>${activiti.version}</version>
+            <exclusions>
+                <!-- Exclude the SLF4J JAR so we don't get multiple binding warnings when running -->
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Logging, maybe needed for testing....
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        -->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Create the BAR with project process definitions, forms etc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.3</version>
+                <executions>
+                    <execution>
+                        <id>create-app-zip</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <zip destfile="${project.build.directory}/${project.artifactId}-app-${project.version}.zip">
+                                    <fileset dir="src/main/resources/apps/helloworld">
+                                        <include name="**"/>
+                                    </fileset>
+                                </zip>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--
+                The Alfresco Maven Plugin contains all the logic to run the extension
+                in an embedded Tomcat with the H2 database.
+                -->
+            <plugin>
+                <groupId>org.alfresco.maven.plugin</groupId>
+                <artifactId>alfresco-maven-plugin</artifactId>
+                <version>${alfresco.sdk.version}</version>
+                <configuration>
+                    <!-- We need the flat file H2 database to run Activiti -->
+                    <enableH2>true</enableH2>
+
+                    <!-- Bring in the Activiti Workflow Engine and Management webapp (i.e. activiti-app.war) -->
+                    <enableActivitiApp>true</enableActivitiApp>
+
+                    <!-- Optionally bring in the Activiti Admin App (i.e. activiti-admin.war) -->
+                    <enableActivitiAdmin>false</enableActivitiAdmin>
+
+                    <!-- Disable all Alfresco ECM apps by default -->
+                    <alfrescoEdition>community</alfrescoEdition>
+                    <enablePlatform>false</enablePlatform>
+                    <enableSolr>false</enableSolr>
+                    <enableShare>false</enableShare>
+
+                    <!--
+                       JARs that should be overlayed/applied to the Activiti App WAR
+                       (i.e. activiti-app.war)
+                       -->
+                    <activitiModules>
+                        <!-- Bring in this JAR project, need to be included here, otherwise resources from META-INF
+                             will not be loaded, such as the test.html page
+                        -->
+                        <moduleDependency>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>${project.artifactId}</artifactId>
+                            <version>${project.version}</version>
+                        </moduleDependency>
+                    </activitiModules>
+                </configuration>
+            </plugin>
+
+            <!-- Hot reloading with JRebel -->
+            <plugin>
+                <groupId>org.zeroturnaround</groupId>
+                <artifactId>jrebel-maven-plugin</artifactId>
+                <version>${jrebel.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-rebel-xml</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- For more information about how to configure JRebel plugin see:
+                         http://manuals.zeroturnaround.com/jrebel/standalone/maven.html#maven-rebel-xml -->
+                    <classpath>
+                        <fallback>all</fallback>
+                        <resources>
+                            <resource>
+                                <!--
+                                Empty resource element marks default configuration. By
+                                default it is placed first in generated configuration.
+                                -->
+                            </resource>
+                        </resources>
+                    </classpath>
+
+                    <!--
+                      alwaysGenerate - default is false
+                      If 'false' - rebel.xml is generated if timestamps of pom.xml and the current rebel.xml file are not equal.
+                      If 'true' - rebel.xml will always be generated
+                    -->
+                    <alwaysGenerate>true</alwaysGenerate>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <nonFilteredFileExtensions> <!-- jpg, jpeg, gif, bmp and png are added automatically -->
+                        <nonFilteredFileExtension>ftl</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>acp</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>svg</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>pdf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>doc</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>docx</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>xls</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>xlsx</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>ppt</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>pptx</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>bin</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>lic</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>swf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>zip</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>msg</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>jar</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>eot</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>css</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>ico</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>psd</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>js</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <resources>
+            <!-- Filter the resource files in this project and do property substitutions -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <!-- The Project JAR Should not contain any process definition stuff,
+                     it cannot be deployed via JAR in Activiti Enterprise -->
+                <excludes>
+                    <exclude>apps/**</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <testResources>
+            <!-- Filter the test resource files in this project and do property substitutions -->
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+            <!-- Copy over the Activiti license to the classpath -->
+            <testResource>
+                <directory>src/test/license</directory>
+                <filtering>false</filtering>
+            </testResource>
+        </testResources>
+    </build>
+
+    <!--
+        Alfresco Maven Repositories
+        -->
+    <repositories>
+        <!-- Alfresco ECM -->
+        <repository>
+            <id>alfresco-public</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>alfresco-public-snapshots</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+            </snapshots>
+        </repository>
+        <!-- Alfresco Enterprise Edition Artifacts, put username/pwd for server in settings.xml -->
+        <repository>
+            <id>alfresco-private-repository</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
+        </repository>
+
+        <!-- Activiti BPM -->
+        <repository>
+            <id>activiti-public</id>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/activiti-releases/</url>
+        </repository>
+        <repository>
+            <id>activiti-public-snapshots</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+            </snapshots>
+        </repository>
+        <!-- Activiti Enterprise Edition Artifacts, put username/pwd for server in settings.xml -->
+        <repository>
+            <id>activiti-private-repository</id>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/activiti-enterprise-releases</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>alfresco-plugin-public</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>alfresco-plugin-public-snapshots</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+</project>

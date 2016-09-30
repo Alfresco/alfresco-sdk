@@ -1,0 +1,201 @@
+{
+  "referenceId": 2005,
+  "name": "Hello World Start",
+  "description": "The form for the Start task in the Hello World business process.",
+  "editorJson": {
+    "tabs": [],
+    "fields": [
+      {
+        "fieldType": "ContainerRepresentation",
+        "id": "1475149613209",
+        "name": "Label",
+        "type": "container",
+        "value": null,
+        "required": false,
+        "readOnly": false,
+        "overrideId": false,
+        "colspan": 1,
+        "placeholder": null,
+        "minLength": 0,
+        "maxLength": 0,
+        "minValue": null,
+        "maxValue": null,
+        "regexPattern": null,
+        "optionType": null,
+        "hasEmptyValue": null,
+        "options": null,
+        "restUrl": null,
+        "restResponsePath": null,
+        "restIdProperty": null,
+        "restLabelProperty": null,
+        "tab": null,
+        "className": null,
+        "dateDisplayFormat": null,
+        "layout": null,
+        "sizeX": 2,
+        "sizeY": 1,
+        "row": -1,
+        "col": -1,
+        "visibilityCondition": null,
+        "numberOfColumns": 2,
+        "fields": {
+          "1": [
+            {
+              "fieldType": "FormFieldRepresentation",
+              "id": "greeting",
+              "name": "Greeting",
+              "type": "text",
+              "value": null,
+              "required": true,
+              "readOnly": false,
+              "overrideId": false,
+              "colspan": 1,
+              "placeholder": null,
+              "minLength": 0,
+              "maxLength": 0,
+              "minValue": null,
+              "maxValue": null,
+              "regexPattern": null,
+              "optionType": null,
+              "hasEmptyValue": null,
+              "options": null,
+              "restUrl": null,
+              "restResponsePath": null,
+              "restIdProperty": null,
+              "restLabelProperty": null,
+              "tab": null,
+              "className": null,
+              "params": {
+                "existingColspan": 1,
+                "maxColspan": 2
+              },
+              "dateDisplayFormat": null,
+              "layout": {
+                "row": -1,
+                "column": -1,
+                "colspan": 1
+              },
+              "sizeX": 1,
+              "sizeY": 1,
+              "row": -1,
+              "col": -1,
+              "visibilityCondition": null
+            }
+          ],
+          "2": []
+        }
+      },
+      {
+        "fieldType": "ContainerRepresentation",
+        "id": "1475149862241",
+        "name": "Label",
+        "type": "container",
+        "value": null,
+        "required": false,
+        "readOnly": false,
+        "overrideId": false,
+        "colspan": 1,
+        "placeholder": null,
+        "minLength": 0,
+        "maxLength": 0,
+        "minValue": null,
+        "maxValue": null,
+        "regexPattern": null,
+        "optionType": null,
+        "hasEmptyValue": null,
+        "options": null,
+        "restUrl": null,
+        "restResponsePath": null,
+        "restIdProperty": null,
+        "restLabelProperty": null,
+        "tab": null,
+        "className": null,
+        "dateDisplayFormat": null,
+        "layout": null,
+        "sizeX": 2,
+        "sizeY": 1,
+        "row": -1,
+        "col": -1,
+        "visibilityCondition": null,
+        "numberOfColumns": 2,
+        "fields": {
+          "1": [
+            {
+              "fieldType": "RestFieldRepresentation",
+              "id": "timeofday",
+              "name": "Time of Day",
+              "type": "dropdown",
+              "value": "Choose one...",
+              "required": false,
+              "readOnly": false,
+              "overrideId": false,
+              "colspan": 1,
+              "placeholder": null,
+              "minLength": 0,
+              "maxLength": 0,
+              "minValue": null,
+              "maxValue": null,
+              "regexPattern": null,
+              "optionType": null,
+              "hasEmptyValue": true,
+              "options": [
+                {
+                  "id": "empty",
+                  "name": "Choose one..."
+                },
+                {
+                  "id": "time_of_day_morning",
+                  "name": "Morning"
+                },
+                {
+                  "id": "time_of_day_lunch",
+                  "name": "Lunch"
+                },
+                {
+                  "id": "time_of_day_dinner",
+                  "name": "Dinner"
+                },
+                {
+                  "id": "time_of_day_night",
+                  "name": "Night"
+                }
+              ],
+              "restUrl": null,
+              "restResponsePath": null,
+              "restIdProperty": null,
+              "restLabelProperty": null,
+              "tab": null,
+              "className": null,
+              "params": {
+                "existingColspan": 1,
+                "maxColspan": 2
+              },
+              "dateDisplayFormat": null,
+              "layout": {
+                "row": -1,
+                "column": -1,
+                "colspan": 1
+              },
+              "sizeX": 1,
+              "sizeY": 1,
+              "row": -1,
+              "col": -1,
+              "visibilityCondition": null,
+              "endpoint": null,
+              "requestHeaders": null
+            }
+          ],
+          "2": []
+        }
+      }
+    ],
+    "outcomes": [],
+    "javascriptEvents": [],
+    "className": "",
+    "style": "",
+    "customFieldTemplates": {},
+    "metadata": {},
+    "variables": [],
+    "gridsterForm": false
+  }
+}

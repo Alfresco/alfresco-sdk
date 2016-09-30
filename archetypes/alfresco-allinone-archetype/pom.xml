@@ -5,8 +5,8 @@
   <groupId>org.alfresco.maven.archetype</groupId>
   <artifactId>alfresco-allinone-archetype</artifactId>
   <packaging>maven-archetype</packaging>
-  <name>Maven Alfresco SDK - All-in-One Archetype</name>
-  <description>Sample multi-module project for All-in-One development on the Alfresco plaftorm. Includes modules for: Repository WAR overlay, Repository AMP, Share WAR overlay, Solr configuration, and embedded Tomcat runner</description>
+  <name>Alfresco SDK - All-in-One Archetype</name>
+  <description>Sample multi-module project for All-in-One development on the Alfresco plaftorm. Includes modules for Platform/Repository JAR and Share JAR</description>
   
   <parent>
     <groupId>org.alfresco.maven</groupId>
@@ -23,7 +23,8 @@
                 <include>archetype-resources/pom.xml</include>
                 <include>archetype-resources/run.sh</include>
                 <include>archetype-resources/run.bat</include>
-                <include>archetype-resources/runner/src/main/webapp/index.html</include>
+                <include>archetype-resources/debug.sh</include>
+                <include>archetype-resources/debug.bat</include>
                 <include>META-INF/maven/archetype-metadata.xml</include>
             </includes>
             <filtering>true</filtering>
@@ -34,7 +35,8 @@
                 <exclude>archetype-resources/pom.xml</exclude>
                 <exclude>archetype-resources/run.sh</exclude>
                 <exclude>archetype-resources/run.bat</exclude>
-                <exclude>archetype-resources/runner/src/main/webapp/index.html</exclude>
+                <exclude>archetype-resources/debug.sh</exclude>
+                <exclude>archetype-resources/debug.bat</exclude>
                 <exclude>META-INF/maven/archetype-metadata.xml</exclude>
             </excludes>
             <filtering>false</filtering>
@@ -43,8 +45,9 @@
 
      <plugins>
         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-resources-plugin</artifactId>
-            <version>2.7</version>
+            <version>${maven.resource.version}</version>
             <configuration>
                 <useDefaultDelimiters>false</useDefaultDelimiters>
                 <delimiters>

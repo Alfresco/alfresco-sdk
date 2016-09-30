@@ -121,25 +121,25 @@
         <module>modules/alfresco-rad</module>
         <!-- Plugins -->
         <module>plugins/alfresco-maven-plugin</module>
-        <!-- POM files -->
-        <module>poms/alfresco-sdk-parent</module>
         <!-- Archetypes -->
         <module>archetypes/alfresco-platform-jar-archetype</module>
         <module>archetypes/alfresco-share-jar-archetype</module>
         <module>archetypes/alfresco-allinone-archetype</module>
+        <module>archetypes/activiti-jar-archetype</module>
   </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-        <maven.archetype.version>2.2</maven.archetype.version>
+        <maven.resource.version>3.0.1</maven.resource.version>
+        <maven.archetype.version>2.4</maven.archetype.version>
         <alfresco.sdk.parent.version>${project.version}</alfresco.sdk.parent.version>
         <alfresco.sdk.tests.exclude>*/*-enterprise/*</alfresco.sdk.tests.exclude>
-        <alfresco.community.default.version>5.0.d</alfresco.community.default.version>
-        <alfresco.enterprise.default.version>5.0.1</alfresco.enterprise.default.version>
-        <alfresco.rm.version>2.3</alfresco.rm.version>
-        <springloaded.version>1.2.3.RELEASE</springloaded.version>
+
+        <!-- The following version is needed to grab the alfresco-mmt -->
+        <alfresco.community.default.version>5.1.g</alfresco.community.default.version>
+
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
     </properties>
 
@@ -183,6 +183,11 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
+        </repository>
+        <!-- Activiti Enterprise Edition Artifacts, put username/pwd for server in settings.xml -->
+        <repository>
+            <id>activiti-private-repository</id>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/activiti-enterprise-releases</url>
         </repository>
     </repositories>
 
