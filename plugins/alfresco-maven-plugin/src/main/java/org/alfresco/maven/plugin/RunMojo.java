@@ -19,6 +19,7 @@ package org.alfresco.maven.plugin;
 
 import org.alfresco.maven.plugin.config.ModuleDependency;
 import org.alfresco.maven.plugin.config.TomcatDependency;
+import org.alfresco.maven.plugin.config.TomcatWebapp;
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.model.Dependency;
@@ -229,6 +230,22 @@ public class RunMojo extends AbstractMojo {
      */
     @Parameter(property = "maven.alfresco.tomcat.dependencies", defaultValue = "")
     protected List<TomcatDependency> tomcatDependencies;
+
+    /**
+     * System Properties to feed the Tomcat plugin before start.
+     * Normally there would not be any extra dependencies, but we could run a custom webapp that needed
+     * a custom sys prop set.
+     */
+    @Parameter(property = "maven.alfresco.tomcat.system.properties", defaultValue = "")
+    protected Map<String, String> tomcatSystemProperties;
+
+    /**
+     * Custom webapps that should be deployed to the embedded Tomcat engine.
+     * Normally there would not be any extra webapps, but we could run a bigger project that uses
+     * some custom webapp.
+     */
+    @Parameter(property = "maven.alfresco.tomcat.custom.webapps", defaultValue = "")
+    protected List<TomcatWebapp> tomcatCustomWebapps;
 
     /**
      * Maven GAV properties for standard Alfresco web applications.
@@ -975,6 +992,15 @@ public class RunMojo extends AbstractMojo {
                     activitiGroupId, activitiAdminWarArtifactId, activitiVersion, "/activiti-admin", null));
         }
 
+        if (tomcatCustomWebapps != null && !tomcatCustomWebapps.isEmpty()) {
+            // We got extra custom webapps to deploy
+            for (TomcatWebapp customWebapp: tomcatCustomWebapps) {
+                webapps2Deploy.add(createWebAppElement(
+                        customWebapp.getGroupId(), customWebapp.getArtifactId(), customWebapp.getVersion(),
+                        customWebapp.getContextPath(), customWebapp.getContextFile()));
+            }
+        }
+
         // This might be ugly, the MojoExecuter will only accept Element[] and we need this list to be dynamic
         // to avoid NPEs. If there's a better way to do this, then feel free to change it!
         Element[] webapps = new Element[webapps2Deploy.size()];
@@ -989,6 +1015,12 @@ public class RunMojo extends AbstractMojo {
         if (enableActivitiApp) {
             // Should be in activiti-jar/src/test/resources
             systemProps.add(element(name("log4j.configuration"), "log4j-dev.properties"));
+        }
+        // Add custom system properties defined in plugin config
+        if (tomcatSystemProperties != null && !tomcatSystemProperties.isEmpty()) {
+            for (Map.Entry<String, String> sysProp : tomcatSystemProperties.entrySet()) {
+                systemProps.add(element(name(sysProp.getKey()), sysProp.getValue()));
+            }
         }
         // This might be ugly, the MojoExecuter will only accept Element[] and we need this list to be dynamic
         // to avoid NPEs. If there's a better way to do this, then feel free to change it!

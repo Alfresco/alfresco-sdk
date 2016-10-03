@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2016 Alfresco Software Limited.
  * <p/>
- * This file is part of the Alfresco SDK Samples project.
+ * This file is part of the Alfresco SDK project.
  * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
