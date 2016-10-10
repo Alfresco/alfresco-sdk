@@ -150,6 +150,15 @@ public class RunMojo extends AbstractMojo {
     protected boolean enableShare;
 
     /**
+     * Enables the use of custom context path for the Share webapp.
+     * Some solution integrators uses a custom context path for Share in their projects.
+     * This property enables them to continue to do that in SDK 3 without having to completely override the
+     * Maven Tomcat plugin configuration, or not use it at all and go back the good old runner project again...
+     */
+    @Parameter(property = "maven.alfresco.shareContextPath", defaultValue = "/share")
+    protected String shareContextPath;
+
+    /**
      * Switch to enable/disable the Alfresco REST API Explorer (api-explorer.war) when running embedded Tomcat.
      */
     @Parameter(property = "maven.alfresco.enableApiExplorer", defaultValue = "false")
@@ -968,7 +977,7 @@ public class RunMojo extends AbstractMojo {
         if (enableShare) {
             webapps2Deploy.add(createWebAppElement(
                     runnerAlfrescoGroupId, runnerAlfrescoShareWarArtifactId, runnerAlfrescoShareVersion,
-                    "/share", null));
+                    shareContextPath, null));
         }
 
         if (enableSolr) {
