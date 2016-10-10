@@ -160,6 +160,17 @@ public class RunMojo extends AbstractMojo {
     protected String shareContextPath;
 
     /**
+     * Share Log4j.properties configuration cannot be customized via extension
+     * put on the classpath, like on the platform side.
+     * So we need to override the log4j.properties in share/WEB-INF/classes
+     * to be able to log from custom code.
+     * This property can be used to turn off this overriding, to produce a WAR with
+     * the standard Share log4j.properties file.
+     */
+    @Parameter(property = "maven.alfresco.useCustomShareLog4jConfig", defaultValue = "true")
+    protected boolean useCustomShareLog4jConfig;
+
+    /**
      * Switch to enable/disable the Alfresco REST API Explorer (api-explorer.war) when running embedded Tomcat.
      */
     @Parameter(property = "maven.alfresco.enableApiExplorer", defaultValue = "false")
@@ -645,7 +656,7 @@ public class RunMojo extends AbstractMojo {
     }
 
     /**
-     * Copy the Activiti Log4J Dev config into the activiti-app/WEB-INF/classes dir.
+     * Copy the Activiti Log4J Dev config into the activitiApp-war/WEB-INF/classes dir.
      *
      * @throws MojoExecutionException
      */
@@ -669,6 +680,47 @@ public class RunMojo extends AbstractMojo {
                                         element(name("directory"), "src/test/resources"),
                                         element(name("includes"),
                                                 element(name("include"), "log4j-dev.properties")
+                                        ),
+                                        element(name("filtering"), "true")
+                                )
+                        )
+                ),
+                execEnv
+        );
+    }
+
+    /**
+     * Copy a custom Share Log4J config into the share-war/WEB-INF/classes dir.
+     * There is no custom classpath resolve mechanism for Share log4j,
+     * to log custom stuff overriding standard log4j.properties is needed.
+     *
+     * @throws MojoExecutionException
+     */
+    protected void copyShareLog4jConfig() throws MojoExecutionException {
+        if (!useCustomShareLog4jConfig) {
+            getLog().info("NOT overriding share/WEB-INF/classes/log4j.properties");
+            return;
+        }
+
+        final String warOutputDir = getWarOutputDir(SHARE_WAR_PREFIX_NAME);
+        final String logConfDestDir = warOutputDir + "/WEB-INF/classes";
+
+        getLog().info("Copying Share log4j.properties to: " + logConfDestDir);
+
+        executeMojo(
+                plugin(
+                        groupId("org.apache.maven.plugins"),
+                        artifactId("maven-resources-plugin"),
+                        version(MAVEN_RESOURCE_PLUGIN_VERSION)
+                ),
+                goal("copy-resources"),
+                configuration(
+                        element(name("outputDirectory"), logConfDestDir),
+                        element(name("resources"),
+                                element(name("resource"),
+                                        element(name("directory"), "src/test/resources/share"),
+                                        element(name("includes"),
+                                                element(name("include"), "log4j.properties")
                                         ),
                                         element(name("filtering"), "true")
                                 )
@@ -706,6 +758,8 @@ public class RunMojo extends AbstractMojo {
     protected void buildShareWar() throws MojoExecutionException {
         buildCustomWarInDir(SHARE_WAR_PREFIX_NAME, shareModules,
                 alfrescoGroupId, alfrescoShareWarArtifactId, alfrescoShareVersion);
+
+        copyShareLog4jConfig();
 
         String shareWarArtifactId = packageAndInstallCustomWar(SHARE_WAR_PREFIX_NAME);
 
