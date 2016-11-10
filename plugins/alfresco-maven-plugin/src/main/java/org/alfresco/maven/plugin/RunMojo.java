@@ -268,6 +268,9 @@ public class RunMojo extends AbstractMojo {
     @Parameter(property = "maven.alfresco.tomcat.custom.webapps", defaultValue = "")
     protected List<TomcatWebapp> tomcatCustomWebapps;
 
+    @Parameter(property = "maven.alfresco.platform.custom.context.file", defaultValue = "")
+    protected String platformCustomContextFile;
+
     /**
      * Maven GAV properties for standard Alfresco web applications.
      */
@@ -1033,9 +1036,10 @@ public class RunMojo extends AbstractMojo {
         }
 
         if (enablePlatform) {
+            String platformContextFile = StringUtils.isNotBlank(platformCustomContextFile) ? platformCustomContextFile : null;
             webapps2Deploy.add(createWebAppElement(
                     runnerAlfrescoGroupId, runnerAlfrescoPlatformWarArtifactId, runnerAlfrescoPlatformVersion,
-                    "/alfresco", null));
+                    "/alfresco", platformContextFile));
         }
 
         if (enableShare) {
