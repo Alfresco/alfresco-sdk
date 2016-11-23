@@ -72,6 +72,7 @@
                 <configuration>
                     <!-- Bring in the MANIFEST.MF file from the original share.war, it contains version information
                          that is needed for it to operate properly -->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                     <archive>
                         <addMavenDescriptor>false</addMavenDescriptor>
                         <manifestFile>${project.build.directory}/dependency/META-INF/MANIFEST.MF</manifestFile>

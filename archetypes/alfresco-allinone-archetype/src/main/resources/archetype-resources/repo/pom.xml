@@ -77,6 +77,7 @@
                         | explicitly mention it in the overlay section.
                         | NOTE: First-win resource strategy is used by the WAR plugin
                          -->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                     <overlays>
                         <!-- Current project customizations. This is normally empty, since customizations come from the AMPs -->
                         <overlay/>
