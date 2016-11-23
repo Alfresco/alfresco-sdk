@@ -3,7 +3,7 @@
   <groupId>org.alfresco.maven.plugin</groupId>
   <artifactId>alfresco-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
-  <name>Maven Alfresco Plugin</name>
+  <name>Maven Alfresco Plugin with support for native Windows HTTP authentication.</name>
 
   <parent>
       <groupId>org.alfresco.maven</groupId>
@@ -106,7 +106,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
+      <artifactId>httpclient-win</artifactId>
       <version>4.5.1</version>
     </dependency>
     <dependency>

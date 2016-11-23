@@ -30,10 +30,7 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.impl.auth.BasicScheme;
-import org.apache.http.impl.client.BasicAuthCache;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.*;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -113,6 +110,11 @@ public abstract class AbstractRefreshWebappMojo extends AbstractMojo {
     @Parameter(property = "maven.alfresco.refresh.clearCacheShareUrl", defaultValue = "/share/page/caches/dependency/clear")
     protected String clearCacheShareUrl;
 
+    /**
+     * Set to "true" if plugin should use native Windows authentication in HTTP requests.
+     */
+    @Parameter(property = "maven.alfresco.refresh.useWinAuth", defaultValue = "false")
+    protected String useWinAuth;
 
     /**
      * The name of the web application we are refreshing, just for logging purpose
@@ -207,24 +209,7 @@ public abstract class AbstractRefreshWebappMojo extends AbstractMojo {
             HttpHost targetHost = new HttpHost(
                     alfrescoTomcatUrl.getHost(), alfrescoTomcatUrl.getPort(), alfrescoTomcatUrl.getProtocol());
 
-            // Set up authentication parameters
-            CredentialsProvider credsProvider = new BasicCredentialsProvider();
-            credsProvider.setCredentials(new AuthScope(targetHost.getHostName(), targetHost.getPort()),
-                    new UsernamePasswordCredentials(refreshUsername, refreshPassword));
-
-            // Create the HTTP Client we will use to make the call
-            client = HttpClients.custom().setDefaultCredentialsProvider(credsProvider).build();
-
-            // Create AuthCache instance
-            AuthCache authCache = new BasicAuthCache();
-
-            // Generate BASIC scheme object and add it to the local auth cache
-            BasicScheme basicAuth = new BasicScheme();
-            authCache.put(targetHost, basicAuth);
-
-            // Add AuthCache to the execution context
-            HttpClientContext localContext = HttpClientContext.create();
-            localContext.setAuthCache(authCache);
+            client = getHttpClient(targetHost);
 
             // Make the call to Refresh the Alfresco Webapp
             HttpPost httpPost = new HttpPost(alfrescoTomcatUrl.toURI());
@@ -259,6 +244,47 @@ public abstract class AbstractRefreshWebappMojo extends AbstractMojo {
             closeQuietly(response);
             closeQuietly(client);
         }
+    }
+
+    private CloseableHttpClient getHttpClient(HttpHost targetHost) {
+
+        if ("true".equalsIgnoreCase(this.useWinAuth)) {
+            if (!WinHttpClients.isWinAuthAvailable()) {
+                getLog().warn("Native Windows HTTP client not available. Falling back to default HTTP client.");
+                return getDefaultHttpClient(targetHost);
+            }
+            return getNativeHttpClient();
+        } else {
+            return getDefaultHttpClient(targetHost);
+        }
+
+    }
+
+    private CloseableHttpClient getDefaultHttpClient(HttpHost targetHost) {
+        // Set up authentication parameters
+        CredentialsProvider credsProvider = new BasicCredentialsProvider();
+        credsProvider.setCredentials(new AuthScope(targetHost.getHostName(), targetHost.getPort()),
+                new UsernamePasswordCredentials(refreshUsername, refreshPassword));
+
+        // Create the HTTP Client we will use to make the call
+        CloseableHttpClient client = HttpClients.custom().setDefaultCredentialsProvider(credsProvider).build();
+
+        // Create AuthCache instance
+        AuthCache authCache = new BasicAuthCache();
+
+        // Generate BASIC scheme object and add it to the local auth cache
+        BasicScheme basicAuth = new BasicScheme();
+        authCache.put(targetHost, basicAuth);
+
+        // Add AuthCache to the execution context
+        HttpClientContext localContext = HttpClientContext.create();
+        localContext.setAuthCache(authCache);
+
+        return client;
+    }
+
+    private CloseableHttpClient getNativeHttpClient() {
+        return WinHttpClients.createDefault();
     }
 
     private URL buildFinalUrl(String specificRefreshUrlPath) {
