@@ -1,0 +1,9 @@
+source "https://api.berkshelf.com"
+
+# That's all we need
+cookbook 'alfresco', git:'git@github.com:Alfresco/chef-alfresco.git', tag: "v0.6.1"
+
+# Transitive cookbook dependencies that are not (yet) in Chef Supermarker
+cookbook 'tomcat', git:'git@github.com:maoo/tomcat.git', tag: "v0.17.3-fork4"
+cookbook 'maven', git:'git@github.com:maoo/maven.git', tag: "v1.2.0-fork"
+cookbook 'file', git: 'git@github.com:jenssegers/chef-file.git', tag: "v1.0.0"

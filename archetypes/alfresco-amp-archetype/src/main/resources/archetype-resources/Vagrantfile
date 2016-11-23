@@ -1,0 +1,68 @@
+# Alfresco Vagrantfile
+#
+# Prerequisites
+# - Install ChefDK - https://downloads.chef.io/chef-dk/
+# - Install Vagrant - https://www.vagrantup.com/downloads.html
+# - Install Virtualbox - https://www.virtualbox.org/wiki/Downloads
+# - Make sure that `PATH=$HOME/.chefdk/gem/ruby/2.1.0/bin:/opt/chefdk/bin:/opt/chefdk/embedded/bin:$PATH`
+# - Make sure that you have SSH Keys configured in GitHub - https://help.github.com/articles/generating-ssh-keys
+#
+# Run
+# vagrant up
+#
+# Only rerun provisioning
+# vagrant provision
+#
+# Restart VM
+#
+# vagrant reload
+#
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+  # Box env configuration
+  config.vm.provider :virtualbox do |vb,override|
+    override.vm.box_url         = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-7.0_chef-provisionerless.box"
+    override.vm.box             = "opscode-centos-7.0"
+    vb.customize ["modifyvm", :id, "--memory", 2048]
+    vb.customize ["modifyvm", :id, "--cpus", 1]
+  end
+
+  # You need vagrant-berkshelf plugin
+  # vagrant plugin install vagrant-berkshelf
+  config.berkshelf.berksfile_path = "Berksfile"
+  config.berkshelf.enabled = true
+
+  config.vm.network "forwarded_port", guest: 80, host: 8800
+  config.vm.network "forwarded_port", guest: 8070, host: 8070
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
+  config.vm.network "forwarded_port", guest: 8081, host: 8081
+  config.vm.network "forwarded_port", guest: 8090, host: 8090
+  config.vm.network "forwarded_port", guest: 9000, host: 9000
+
+  config.vm.provision :chef_solo do |chef|
+    chef.add_recipe "recipe[alfresco::default]"
+    chef.json = {
+      "alfresco" => {
+        "components" => ['haproxy','nginx','tomcat','transform','repo','share','solr','mysql']
+      },
+      "nginx" => {
+        "proxy_set_header_port" => "8800"
+      },
+      "artifacts" => {
+        "custom-amp" => {
+          "enabled" => true,
+          "path" => "/vagrant/target/@@project.artifactId@@.amp",
+          "type" => "amp",
+          "owner" => "tomcat",
+          "destination" => "/usr/share/tomcat/amps"
+        }
+      },
+      "artifact-deployer" => {
+        "maven" => {
+          "timeout" => 1500
+        }
+      }
+    }
+  end
+end
