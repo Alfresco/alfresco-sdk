@@ -2,7 +2,6 @@
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
 <?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
 <!--
 	Licensed to the Apache Software Foundation (ASF) under one or more
 	contributor license agreements.  See the NOTICE file distributed with
@@ -19,8 +18,11 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 -->
-<beans>
-    
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
     <!-- A simple class that is initialized by Spring -->
     <bean id="${package}.exampleBean" class="${package}.platformsample.Demo" init-method="init" />
 
