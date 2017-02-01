@@ -37,15 +37,15 @@
         <!-- Alfresco Platform and Share webapp versions, these are the original Alfresco webapps that will be
              customized and then deployed and run by the tomcat maven plugin when
              executing for example $ mvn clean install alfresco:run -->
-        <alfresco.platform.version>5.2.b-EA</alfresco.platform.version>
-        <alfresco.share.version>5.2.a-EA</alfresco.share.version>
+        <alfresco.platform.version>5.2.e</alfresco.platform.version>
+        <alfresco.share.version>5.2.d</alfresco.share.version>
 
         <!-- Alfresco Surf version, if you change Share version you might need to change Surf version -->
-        <alfresco.surf.version>6.6</alfresco.surf.version>
+        <alfresco.surf.version>6.11</alfresco.surf.version>
 
         <!-- Aikau framework version, it is released separately, so it can be useful to be able
              to bring in newer versions with bug fixes etc -->
-        <aikau.version>1.0.85</aikau.version>
+        <aikau.version>1.0.101.3</aikau.version>
 
         <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
         <jrebel.version>1.1.6</jrebel.version>
