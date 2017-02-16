@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2015 Alfresco Software Limited.
+ * Copyright (C) 2017 Alfresco Software Limited.
  * <p/>
  * This file is part of the Alfresco SDK.
  * <p/>

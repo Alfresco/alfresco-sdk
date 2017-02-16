@@ -17,13 +17,6 @@
     </properties>
 
     <dependencies>
-        <!-- The main Alfresco Repo dependency for compiling Java code in src/main/java -->
-        <dependency>
-            <groupId>${alfresco.groupId}</groupId>
-            <artifactId>alfresco-repository</artifactId>
-
-        </dependency>
-
     </dependencies>
 
     <build>
