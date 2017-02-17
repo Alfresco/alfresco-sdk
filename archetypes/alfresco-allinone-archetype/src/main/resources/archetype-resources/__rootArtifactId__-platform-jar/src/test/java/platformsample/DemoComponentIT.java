@@ -52,7 +52,7 @@ public class DemoComponentIT extends AbstractAlfrescoIT {
 
     @Test
     public void testGetCompanyHome() {
-        DemoComponent demoComponent = (DemoComponent) getApplicationContext().getBean("org.alfresco.test.DemoComponent");
+        DemoComponent demoComponent = (DemoComponent) getApplicationContext().getBean("${package}.DemoComponent");
         NodeRef companyHome = demoComponent.getCompanyHome();
         assertNotNull(companyHome);
         String companyHomeName = (String) getServiceRegistry().getNodeService().getProperty(
@@ -63,7 +63,7 @@ public class DemoComponentIT extends AbstractAlfrescoIT {
 
     @Test
     public void testChildNodesCount() {
-        DemoComponent demoComponent = (DemoComponent) getApplicationContext().getBean("org.alfresco.test.DemoComponent");
+        DemoComponent demoComponent = (DemoComponent) getApplicationContext().getBean("${package}.DemoComponent");
         NodeRef companyHome = demoComponent.getCompanyHome();
         int childNodeCount = demoComponent.childNodesCount(companyHome);
         assertNotNull(childNodeCount);
