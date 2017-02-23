@@ -47,7 +47,7 @@ import static org.twdata.maven.mojoexecutor.MojoExecutor.*;
  * @since 3.0
  */
 @Mojo(name = "it",
-        defaultPhase = LifecyclePhase.INTEGRATION_TEST,
+        defaultPhase = LifecyclePhase.PRE_INTEGRATION_TEST,
         aggregator = true, // Only run against the top-level project in a Maven build
         requiresDependencyResolution = ResolutionScope.TEST)
 public class IntegrationTestMojo extends AbstractRunMojo {
@@ -85,14 +85,14 @@ public class IntegrationTestMojo extends AbstractRunMojo {
 
             // Create a JAR with all tests and add to module dependencies for platform WAR
             // So we can run tests on the server
-            copyTestClassesFromSubModules2Parent();
-            testJarArtifactId = packageAndInstallTestsJar();
-            platformModules.add(
-                    new ModuleDependency(
-                            project.getGroupId(),
-                            testJarArtifactId,
-                            project.getVersion(),
-                            ModuleDependency.TYPE_JAR));
+            // TODO: remove    different approach at the moment with separate integration-tests module   copyTestClassesFromSubModules2Parent();
+            // TODO: remove    testJarArtifactId = packageAndInstallTestsJar();
+            // TODO: remove platformModules.add(
+            // TODO:         new ModuleDependency(
+            // TODO:                 project.getGroupId(),
+            // TODO:                 testJarArtifactId,
+            // TODO:                 project.getVersion(),
+            // TODO:                 ModuleDependency.TYPE_JAR));
             // Now build the platform WAR
             buildPlatformWar();
         }
@@ -108,8 +108,8 @@ public class IntegrationTestMojo extends AbstractRunMojo {
         if (startTomcat) {
             boolean fork = true;
             startTomcat(fork);
-            runIntegrationTests(testJarArtifactId);
-            stopTomcat();
+            // TODO: remove    different approach at the moment with separate integration-tests module   runIntegrationTests(testJarArtifactId);
+            // TODO: remove    stopTomcat();
         }
     }
 

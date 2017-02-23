@@ -96,6 +96,44 @@
                 </fileSet>
             </fileSets>
         </module>
+
+        <module id="integration-tests" name="integration-tests" dir="integration-tests">
+            <fileSets>
+                <fileSet filtered="true" packaged="true" encoding="UTF-8">
+                    <directory>src/main/java</directory>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
+                </fileSet>
+                <fileSet filtered="true" packaged="true" encoding="UTF-8">
+                    <directory>src/test/java</directory>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
+                </fileSet>
+                <fileSet encoding="UTF-8" filtered="true">
+                    <directory>src/test/resources</directory>
+                    <includes>
+                        <include>**/dev-log4j.properties</include>
+                    </includes>
+                </fileSet>
+                <fileSet encoding="UTF-8" filtered="false">
+                    <directory>src/test/resources</directory>
+                    <includes>
+                        <include>**</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/dev-log4j.properties</exclude>
+                    </excludes>
+                </fileSet>
+                <fileSet encoding="UTF-8" filtered="false">
+                    <directory>src/test/properties</directory>
+                    <includes>
+                        <include>**/*.properties</include>
+                    </includes>
+                </fileSet>
+            </fileSets>
+        </module>
     </modules>
 
     <fileSets>
