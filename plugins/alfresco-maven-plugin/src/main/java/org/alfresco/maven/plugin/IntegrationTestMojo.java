@@ -30,6 +30,7 @@ import org.zeroturnaround.zip.ZipUtil;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import static org.twdata.maven.mojoexecutor.MojoExecutor.*;
 
@@ -59,6 +60,26 @@ public class IntegrationTestMojo extends AbstractRunMojo {
                 session,
                 pluginManager
         );
+
+        // Check if we should skip this Mojo execution, i.e. if tests have been
+        // skipped by the user
+        Properties sysProperties = execEnv.getMavenSession().getSystemProperties();
+        boolean skipThisMojo = sysProperties.containsKey("skipTests") ||
+                sysProperties.containsKey("skipITs") ||
+                sysProperties.containsKey("maven.test.skip");
+        if (skipThisMojo) {
+            getLog().info("Skipping integration testing.");
+            return;
+        }
+
+        List<String> goals = execEnv.getMavenSession().getGoals();
+        if (goals.contains("alfresco:run")) {
+            sysProperties.put("skipTests", "true");
+            getLog().info("Skipping integration testing as alfresco:run is active.");
+            return;
+        }
+
+//        execEnv.getMavenSession().getGoals().add("alfresco:it");
 
         if (enableSolr) {
             unpackSolrConfig();
