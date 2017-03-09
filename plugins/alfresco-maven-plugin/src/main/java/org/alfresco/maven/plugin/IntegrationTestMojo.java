@@ -81,6 +81,8 @@ public class IntegrationTestMojo extends AbstractRunMojo {
 
 //        execEnv.getMavenSession().getGoals().add("alfresco:it");
 
+        getLog().info("Checking if Tomcat is already running on port " + "");
+
         if (enableSolr) {
             unpackSolrConfig();
             fixSolrHomePath();

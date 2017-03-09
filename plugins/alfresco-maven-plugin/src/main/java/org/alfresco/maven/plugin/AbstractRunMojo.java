@@ -264,6 +264,19 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     protected List<TomcatWebapp> tomcatCustomWebapps;
 
     /**
+     * Port to run Tomcat on
+     */
+    @Parameter(property = "maven.alfresco.tomcat.port", defaultValue = "8080")
+    protected String tomcatPort;
+
+    /**
+     * Legacy to be compatible with maven.tomcat.port
+     */
+    @Parameter(property = "maven.tomcat.port", defaultValue = "8080")
+    protected String mavenTomcatPort;
+
+
+    /**
      * Maven GAV properties for standard Alfresco web applications.
      */
     @Parameter(property = "alfresco.groupId", defaultValue = "org.alfresco")
@@ -325,6 +338,20 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      * The Maven environment that this mojo is executed in
      */
     protected ExecutionEnvironment execEnv;
+
+    /**
+     * Get the Tomcat port. By default the port is changed by using the maven.alfresco.tomcat.port property
+     * but for legacy and external configuration purposes maven.tomcat.port will override if defined
+     */
+    protected String getPort() {
+        String port = tomcatPort;
+        if (mavenTomcatPort.toString() != tomcatPort.toString()) {
+            port = mavenTomcatPort;
+            getLog().info( "Tomcat Port overridden by property maven.tomcat.port");
+        }
+
+        return port;
+    }
 
     /**
      * Download and unpack the Solr 4 configuration as we don't have it in the project.
@@ -411,7 +438,12 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                                 element(name("replacement"),
                                         element(name("token"), "@@ALFRESCO_SOLR4_DATA_DIR@@"),
                                         element(name("value"), "${solrDataDir}/index")
+                                ),
+                                element(name("replacement"),
+                                        element(name("token"), "alfresco.port=8080"),
+                                        element(name("value"), "alfresco.port=" + getPort())
                                 )
+
                         )
                 ),
                 execEnv
@@ -518,6 +550,36 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                                                 element(name("include"), testInclude)
                                         ),
                                         element(name("filtering"), "true")
+                                )
+                        )
+                ),
+                execEnv
+        );
+
+        executeMojo(
+                plugin(
+                        groupId("com.google.code.maven-replacer-plugin"),
+                        artifactId("replacer"),
+                        version(MAVEN_REPLACER_PLUGIN_VERSION)
+                ),
+                goal("replace"),
+                configuration(
+                        element(name("regex"), "false"),
+                        element(name("includes"),
+                                element(name("include"), "${project.build.testOutputDirectory}/*.properties")
+                        ),
+                        element(name("replacements"),
+                                element(name("replacement"),
+                                        element(name("token"), "alfresco.port=8080"),
+                                        element(name("value"), "alfresco.port=" + getPort())
+                                ),
+                                element(name("replacement"),
+                                        element(name("token"), "share.port=8080"),
+                                        element(name("value"), "share.port=" + getPort())
+                                ),
+                                element(name("replacement"),
+                                        element(name("token"), "solr.port=8080"),
+                                        element(name("value"), "solr.port=" + getPort())
                                 )
                         )
                 ),
@@ -647,6 +709,46 @@ public abstract class AbstractRunMojo extends AbstractMojo {
         );
     }
 
+
+    /**
+     * Copy Share Config Custom in order to have global overrides for development and dynamic port
+     *
+     * @throws MojoExecutionException
+     */
+    protected void copyShareConfigCustom() throws MojoExecutionException {
+        final String warOutputDir = getWarOutputDir(SHARE_WAR_PREFIX_NAME);
+        final String distDir = warOutputDir + "/WEB-INF/classes/alfresco/web-extension/";
+        String repoUrl = project.getProperties().getProperty("alfresco.repo.url");
+        if (repoUrl == null) {
+            project.getProperties().setProperty("alfresco.repo.url", "http://localhost:" + getPort() + "/alfresco");
+        }
+
+        getLog().info("Copying Share config custom to: " + distDir);
+
+        executeMojo(
+                plugin(
+                        groupId("org.apache.maven.plugins"),
+                        artifactId("maven-resources-plugin"),
+                        version(MAVEN_RESOURCE_PLUGIN_VERSION)
+                ),
+                goal("copy-resources"),
+                configuration(
+                        element(name("outputDirectory"), distDir),
+                        element(name("resources"),
+                                element(name("resource"),
+                                        element(name("directory"), "src/test/resources/share"),
+                                        element(name("includes"),
+                                                element(name("include"), "*.xml")
+                                        ),
+                                        element(name("filtering"), "true")
+                                )
+                        )
+                ),
+                execEnv
+        );
+    }
+
+
     /**
      * Copy a custom Share Log4J config into the share-war/WEB-INF/classes dir.
      * There is no custom classpath resolve mechanism for Share log4j,
@@ -718,6 +820,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                 alfrescoGroupId, alfrescoShareWarArtifactId, alfrescoShareVersion);
 
         copyShareLog4jConfig();
+        copyShareConfigCustom();
 
         String shareWarArtifactId = packageAndInstallCustomWar(SHARE_WAR_PREFIX_NAME);
 
@@ -1069,6 +1172,11 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                 goal("run"),
                 configuration(
                         element(name("fork"), fork ? "true" : "false"),
+
+                        /*
+                         * Port
+                         */
+                        element(name( "port" ), getPort()),
 
                         /*
                          * SDK Projects doesn't have packaging set to 'war', they are JARs or POMs,
