@@ -307,6 +307,15 @@
                             <artifactId>${artifactId}-platform-jar</artifactId>
                             <version>${project.version}</version>
                         </moduleDependency>
+
+                        <!-- Bring in the integration tests -->
+                        <moduleDependency>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>integration-tests</artifactId>
+                            <version>${project.version}</version>
+                            <classifier>tests</classifier>
+                        </moduleDependency>
+
                     </platformModules>
 
                     <!--

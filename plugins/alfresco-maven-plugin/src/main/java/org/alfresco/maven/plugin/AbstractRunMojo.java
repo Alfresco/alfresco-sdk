@@ -21,6 +21,11 @@ import org.alfresco.maven.plugin.config.ModuleDependency;
 import org.alfresco.maven.plugin.config.TomcatDependency;
 import org.alfresco.maven.plugin.config.TomcatWebapp;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.net.telnet.TelnetClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.plugin.AbstractMojo;
@@ -33,6 +38,10 @@ import org.codehaus.plexus.util.FileUtils;
 import org.zeroturnaround.zip.ZipUtil;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -272,7 +281,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     /**
      * Legacy to be compatible with maven.tomcat.port
      */
-    @Parameter(property = "maven.tomcat.port", defaultValue = "8080")
+    @Parameter(property = "maven.tomcat.port", defaultValue = "")
     protected String mavenTomcatPort;
 
 
@@ -345,7 +354,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      */
     protected String getPort() {
         String port = tomcatPort;
-        if (mavenTomcatPort.toString() != tomcatPort.toString()) {
+        if (mavenTomcatPort != null) {
             port = mavenTomcatPort;
             getLog().info( "Tomcat Port overridden by property maven.tomcat.port");
         }
@@ -353,6 +362,28 @@ public abstract class AbstractRunMojo extends AbstractMojo {
         return port;
     }
 
+    /**
+     *
+     */
+    protected boolean tomcatIsRunning()  {
+
+        CloseableHttpClient client= HttpClients.createDefault();
+        CloseableHttpResponse response = null;
+
+        try {
+            HttpGet httpget = new HttpGet("http://localhost:" + getPort() + "/alfresco");
+            response = client.execute(httpget);
+            getLog().info("Tomcat is running on port "+ getPort());
+            return true;
+
+        } catch (Exception ex) {
+            getLog().info("Tomcat is not running on port " + getPort() );
+            return false;
+        }
+
+
+
+    }
     /**
      * Download and unpack the Solr 4 configuration as we don't have it in the project.
      * It will reside under /alf_data_dev/solr
@@ -877,6 +908,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                         element(name("groupId"), moduleDep.getGroupId()),
                         element(name("artifactId"), moduleDep.getArtifactId()),
                         element(name("version"), moduleDep.getVersion()),
+                        element(name("classifier"), moduleDep.getClassifier()),
                         element(name("type"), moduleDep.getType()),
                         element(name("overWrite"), "true"));
 
@@ -1143,7 +1175,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
 
         // Set up the system properties that should be set for Tomcat
         ArrayList systemProps = new ArrayList<Element>();
-        systemProps.add(element(name("java.io.tmpdir"), "${project.build.directory}"));
+        systemProps.add(element(name("java.io.tmpdir"), "${project.build.directory}/tmp"));
         if (enableSolr) {
             systemProps.add(element(name("solr.solr.home"), solrHome));
         }

@@ -29,6 +29,7 @@ public abstract class MavenDependency {
     private String groupId;
     private String artifactId;
     private String version;
+    private String classifier;
 
     public MavenDependency() {}
 
@@ -37,6 +38,14 @@ public abstract class MavenDependency {
         this.artifactId = a;
         this.version = v;
     }
+
+    public MavenDependency(String g, String a, String v, String c) {
+        this.groupId = g;
+        this.artifactId = a;
+        this.version = v;
+        this.classifier = c;
+    }
+
 
     public String getGroupId() {
         return groupId;
@@ -54,13 +63,19 @@ public abstract class MavenDependency {
         this.artifactId = artifactId;
     }
 
-    public String getVersion() {
-        return version;
-    }
+    public String getVersion() { return version; }
 
     public void setVersion(String version) {
         this.version = version;
     }
+
+    public String getClassifier() {
+        return classifier;
+    }
+
+    public void setClassifier(String c) { this.classifier = c; }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -71,6 +86,7 @@ public abstract class MavenDependency {
 
         if (!groupId.equals(that.groupId)) return false;
         if (!artifactId.equals(that.artifactId)) return false;
+        if (!classifier.equals(that.classifier)) return false;
         return version.equals(that.version);
 
     }

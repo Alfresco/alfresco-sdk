@@ -31,6 +31,21 @@
 
     <build>
         <plugins>
+
+            <!-- Make sure we attach the tests so we can include them when running -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Filter the test resource files in the IT project, and do property substitutions.
                 We need this config so this is done before the Alfresco Maven Plugin 'it' is executed. -->
             <plugin>
@@ -103,15 +118,6 @@
                         </goals>
                         <phase>pre-integration-test</phase>
                     </execution>
-                    <!-- No need to call a shutdown mojo, it shuts down after the tests finishes
-                    <execution>
-                        <id>stop-alfresco</id>
-                        <goals>
-                            <goal>shutdown</goal>
-                        </goals>
-                        <phase>post-integration-test</phase>
-                    </execution>
-                    -->
                 </executions>
             </plugin>
         </plugins>
