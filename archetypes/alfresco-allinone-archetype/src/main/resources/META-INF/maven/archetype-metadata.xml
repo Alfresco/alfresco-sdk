@@ -143,6 +143,12 @@
                 <include>**/dev-log4j.properties</include>
             </includes>
         </fileSet>
+        <fileSet encoding="UTF-8" filtered="true">
+            <directory>src/test/resources</directory>
+            <includes>
+                <include>*hotswap-agent.properties</include>
+            </includes>
+        </fileSet>
         <fileSet encoding="UTF-8" filtered="false">
             <directory>src/test/resources</directory>
             <includes>
@@ -150,6 +156,7 @@
             </includes>
             <excludes>
                 <exclude>**/dev-log4j.properties</exclude>
+                <exclude>*hotswap-agent.properties</exclude>
             </excludes>
         </fileSet>
         <fileSet encoding="UTF-8" filtered="false">

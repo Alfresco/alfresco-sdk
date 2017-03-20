@@ -237,34 +237,14 @@
             </resource>
         </resources>
 
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+
         <plugins>
-            <!-- Filter the test resource files in the AIO parent project, and do property substitutions.
-                 We need this config so this is done before the Alfresco Maven Plugin 'run' is executed. -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.0.1</version>
-                <inherited>false</inherited>
-                <!-- Run only for the AIO parent Project -->
-                <executions>
-                    <execution>
-                        <id>copy-and-filter-test-resources</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
-                            <resources>
-                                <testResource>
-                                    <directory>src/test/resources</directory>
-                                    <filtering>true</filtering>
-                                </testResource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
 
             <!--
                 The Alfresco Maven Plugin contains all the logic to run the extension
@@ -322,13 +302,6 @@
                         JARs and AMPs that should be overlayed/applied to the Share WAR (i.e. share.war)
                     -->
                     <shareModules>
-                        <moduleDependency>
-                            <!-- Bring in a newer version of Aikau, can coexist with older versions in the
-                                WAR distribution, newest version is picked. -->
-                            <groupId>${alfresco.groupId}</groupId>
-                            <artifactId>aikau</artifactId>
-                            <version>${aikau.version}</version>
-                        </moduleDependency>
 
                         <!-- Bring in custom Modules -->
                         <moduleDependency>
@@ -361,10 +334,8 @@
                         <fallback>all</fallback>
                         <resources>
                             <resource>
-                                <!--
-                                Empty resource element marks default configuration. By
-                                default it is placed first in generated configuration.
-                                -->
+                                <directory>${project.build.outputDirectory}</directory>
+                                <directory>${project.build.testOutputDirectory}</directory>
                             </resource>
                         </resources>
                     </classpath>

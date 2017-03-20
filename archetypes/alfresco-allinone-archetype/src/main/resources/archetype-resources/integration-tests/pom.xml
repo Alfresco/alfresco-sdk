@@ -30,7 +30,23 @@
     </dependencies>
 
     <build>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+
         <plugins>
+
+            <plugin>
+                <groupId>org.zeroturnaround</groupId>
+                <artifactId>jrebel-maven-plugin</artifactId>
+                <version>${jrebel.version}</version>
+                <configuration>
+                    <rebelXmlDirectory>${project.build.testOutputDirectory}</rebelXmlDirectory>
+                </configuration>
+            </plugin>
 
             <!-- Make sure we attach the tests so we can include them when running -->
             <plugin>
@@ -42,34 +58,6 @@
                         <goals>
                             <goal>test-jar</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Filter the test resource files in the IT project, and do property substitutions.
-                We need this config so this is done before the Alfresco Maven Plugin 'it' is executed. -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.0.1</version>
-                <inherited>false</inherited>
-                <!-- Run only for the AIO parent Project -->
-                <executions>
-                    <execution>
-                        <id>copy-and-filter-test-resources</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
-                            <resources>
-                                <testResource>
-                                    <directory>src/test/resources</directory>
-                                    <filtering>true</filtering>
-                                </testResource>
-                            </resources>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>

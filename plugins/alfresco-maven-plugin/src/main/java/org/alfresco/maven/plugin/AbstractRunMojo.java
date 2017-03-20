@@ -21,7 +21,6 @@ import org.alfresco.maven.plugin.config.ModuleDependency;
 import org.alfresco.maven.plugin.config.TomcatDependency;
 import org.alfresco.maven.plugin.config.TomcatWebapp;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.net.telnet.TelnetClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -38,10 +37,6 @@ import org.codehaus.plexus.util.FileUtils;
 import org.zeroturnaround.zip.ZipUtil;
 
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -80,6 +75,9 @@ public abstract class AbstractRunMojo extends AbstractMojo {
 
     @Component
     protected BuildPluginManager pluginManager;
+
+    @Parameter(property = "reactorProjects", required = true, readonly = true)
+    protected List<MavenProject> reactorProjects;
 
     /**
      * The following properties that start with 'maven.' are used to control the
@@ -147,6 +145,13 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      */
     @Parameter(property = "maven.alfresco.enablePlatform", defaultValue = "true")
     protected boolean enablePlatform;
+
+    /**
+     * Enable or disable generation of Hotswap Agent configuration
+     */
+    @Parameter(property = "maven.alfresco.copyHotswapAgentConfig", defaultValue = "true")
+    protected boolean copyHotswapAgentConfig;
+
 
     /**
      * Switch to enable/disable the Share (share.war) when running embedded Tomcat.
@@ -821,6 +826,40 @@ public abstract class AbstractRunMojo extends AbstractMojo {
         );
     }
 
+
+    /**
+     * Copy and Build hotswap-agent.properties
+     *
+     * @throws MojoExecutionException
+     */
+    protected void copyHotswapAgentProperties(String warPrefix) throws MojoExecutionException {
+        if ( copyHotswapAgentConfig == false ) {
+            return;
+        }
+
+        final String warOutputDir = getWarOutputDir(warPrefix) + "/WEB-INF/classes/";
+
+
+        getLog().info("Copying " + warPrefix + "-hotswap-agent.properties to " + warOutputDir);
+
+        executeMojo(
+                plugin(
+                        groupId("com.coderplus.maven.plugins"),
+                        artifactId("copy-rename-maven-plugin"),
+                        version("1.0")
+                ),
+                goal("rename"),
+                configuration(
+                        element(name("sourceFile"), project.getBuild().getTestOutputDirectory() + "/" + warPrefix + "-hotswap-agent.properties"),
+                        element(name("destinationFile"), warOutputDir + "hotswap-agent.properties")
+                ),
+                execEnv
+        );
+
+
+
+    }
+
     /**
      * Build the customized Platform webapp (i.e. the Repository, alfresco.war)
      * that should be deployed by Tomcat by applying all AMPs and JARs from
@@ -832,6 +871,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
 
         commentOutSecureCommsInPlatformWebXml();
         copyAlfrescoLicense();
+        copyHotswapAgentProperties(PLATFORM_WAR_PREFIX_NAME);
 
         String platformWarArtifactId = packageAndInstallCustomWar(PLATFORM_WAR_PREFIX_NAME);
 
@@ -852,6 +892,8 @@ public abstract class AbstractRunMojo extends AbstractMojo {
 
         copyShareLog4jConfig();
         copyShareConfigCustom();
+        copyHotswapAgentProperties(SHARE_WAR_PREFIX_NAME);
+
 
         String shareWarArtifactId = packageAndInstallCustomWar(SHARE_WAR_PREFIX_NAME);
 
