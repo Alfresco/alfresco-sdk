@@ -109,12 +109,14 @@
                        -->
                     <platformModules>
                         <!-- This AMP is needed if we are going to access the platform webapp from a Share webapp -->
+                        <!-- Share Services will be ignored if you are on Platform earlier than 5.1 -->
                         <moduleDependency>
                             <groupId>${alfresco.groupId}</groupId>
                             <artifactId>alfresco-share-services</artifactId>
                             <version>${alfresco.share.version}</version>
                             <type>amp</type>
                         </moduleDependency>
+                        
                         <!-- Bring in this JAR project, need to be included here, otherwise resources from META-INF
                              will not be loaded, such as the test.html page
                         -->
@@ -127,7 +129,14 @@
                 </configuration>
             </plugin>
 
-            <!-- Build an AMP if 3rd party libs are needed by the extension -->
+            <!--
+                Build an AMP if 3rd party libs are needed by the extensions
+                JARs are the default artifact produced in your modules, if you want to build an amp for each module
+                you have to enable this plugin and inspect the src/main/assembly.xml file if you want to customize
+                the layout of your AMP. The end result is that Maven will produce both a JAR file and an AMP with your
+                module.
+            -->
+            <!--
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.6</version>
@@ -152,6 +161,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            -->
 
             <!-- Hot reloading with JRebel -->
             <plugin>

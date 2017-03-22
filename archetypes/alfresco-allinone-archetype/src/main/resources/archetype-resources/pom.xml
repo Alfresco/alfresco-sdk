@@ -164,7 +164,14 @@
     <build>
         <pluginManagement>
             <plugins>
-                <!-- Build an AMP if 3rd party libs are needed by the extensions -->
+                <!--
+                    Build an AMP if 3rd party libs are needed by the extensions
+                    JARs are the default artifact produced in your modules, if you want to build an amp for each module
+                    you have to enable this plugin and inspect the src/main/assembly.xml file if you want to customize
+                    the layout of your AMP. The end result is that Maven will produce both a JAR file and an AMP with your
+                    module.
+                -->
+                <!--
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
@@ -190,6 +197,7 @@
                         </dependency>
                     </dependencies>
                 </plugin>
+                -->
 
                 <!-- Filter resources in any sub-project with this config -->
                 <plugin>
@@ -266,7 +274,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <!--
                 The Alfresco Maven Plugin contains all the logic to run the extension
                 in an embedded Tomcat with the H2 database.
@@ -295,6 +303,7 @@
                         (i.e. alfresco.war)
                     -->
                     <platformModules>
+                        <!-- Share Services will be ignored if you are on Platform earlier than 5.1 -->
                         <moduleDependency>
                             <groupId>${alfresco.groupId}</groupId>
                             <artifactId>alfresco-share-services</artifactId>
