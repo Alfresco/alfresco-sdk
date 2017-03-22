@@ -237,15 +237,36 @@
             </resource>
         </resources>
 
-        <testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-                <filtering>true</filtering>
-            </testResource>
-        </testResources>
 
         <plugins>
-
+            <!-- Filter the test resource files in the AIO parent project, and do property substitutions.
+                 We need this config so this is done before the Alfresco Maven Plugin 'run' is executed. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.1</version>
+                <inherited>false</inherited>
+                <!-- Run only for the AIO parent Project -->
+                <executions>
+                    <execution>
+                        <id>copy-and-filter-test-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+                            <resources>
+                                <testResource>
+                                    <directory>src/test/resources</directory>
+                                    <filtering>true</filtering>
+                                </testResource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
             <!--
                 The Alfresco Maven Plugin contains all the logic to run the extension
                 in an embedded Tomcat with the H2 database.
