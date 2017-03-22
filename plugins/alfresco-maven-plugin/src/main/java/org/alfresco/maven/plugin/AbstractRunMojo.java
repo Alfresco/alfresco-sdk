@@ -476,8 +476,16 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                                         element(name("value"), "${solrDataDir}/index")
                                 ),
                                 element(name("replacement"),
+                                        element(name("token"), "@@ALFRESCO_SOLR_DIR@@"),
+                                        element(name("value"), "${solrDataDir}/index")
+                                ),
+                                element(name("replacement"),
                                         element(name("token"), "alfresco.port=8080"),
                                         element(name("value"), "alfresco.port=" + getPort())
+                                ),
+                                element(name("replacement"),
+                                        element(name("token"), "alfresco.secureComms=https"),
+                                        element(name("value"), "alfresco.secureComms=none")
                                 )
 
                         )
@@ -495,6 +503,93 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     protected void installSolr10InLocalRepo() throws MojoExecutionException {
         if (isPlatformVersionLtOrEqTo42()) {
             getLog().info("Installing Solr 1.0 WAR in local Maven repo");
+            File solrWarSource = new File( solrHome + "/apache-solr-1.4.1.war" );
+            File outputDir = new File( project.getBuild().getDirectory() + "/solr");
+            if (outputDir.exists()) {
+                getLog().info("Solr build dir: "+ outputDir +" already exists, not rebuilding");
+                return;
+            }
+
+            ZipUtil.unpack( solrWarSource, outputDir );
+
+            // Comment out SSL/security requirements
+            executeMojo(
+                    plugin(
+                            groupId("com.google.code.maven-replacer-plugin"),
+                            artifactId("replacer"),
+                            version(MAVEN_REPLACER_PLUGIN_VERSION)
+                    ),
+                    goal("replace"),
+                    configuration(
+                            element(name("regex"), "false"),
+                            element(name("includes"),
+                                    element(name("include"), outputDir + "/WEB-INF/web.xml")
+                            ),
+                            element(name("replacements"),
+                                    element(name("replacement"),
+                                            element(name("token"), "<!-- <security-constraint>"),
+                                            element(name("value"), "<security-constraint>")
+                                    ),
+                                    element(name("replacement"),
+                                            element(name("token"), "</security-role> -->"),
+                                            element(name("value"), "</security-role>")
+                                    ),
+
+                                    element(name("replacement"),
+                                            element(name("token"), "<security-constraint>"),
+                                            element(name("value"), "<!-- <security-constraint>")
+                                    ),
+                                    element(name("replacement"),
+                                            element(name("token"), "</security-role>"),
+                                            element(name("value"), "</security-role> -->")
+                                    )
+                            )
+                    ),
+                    execEnv
+            );
+
+            executeMojo(
+                    plugin(
+                            groupId("com.coderplus.maven.plugins"),
+                            artifactId("copy-rename-maven-plugin"),
+                            version("1.0")
+                    ),
+                    goal("copy"),
+                    configuration(
+                            element(name("sourceFile"), solrHome + "/log4j-solr.properties"),
+                            element(name("destinationFile"), outputDir + "/WEB-INF/classes/log4j.properties")
+                    ),
+                    execEnv
+            );
+
+
+
+            executeMojo(
+                    plugin(
+                            groupId("org.apache.maven.plugins"),
+                            artifactId("maven-resources-plugin"),
+                            version(MAVEN_RESOURCE_PLUGIN_VERSION)
+                    ),
+                    goal("copy-resources"),
+                    configuration(
+                            element(name("outputDirectory"), outputDir + "/WEB-INF/lib"),
+                            element(name("resources"),
+                                    element(name("resource"),
+                                            element(name("directory"), solrHome + "/lib"),
+                                            element(name("includes"),
+                                                    element(name("include"), "*org.springframework*")
+                                            ),
+                                            element(name("filtering"), "false")
+                                    )
+                            )
+                    ),
+                    execEnv
+            );
+
+
+
+            ZipUtil.pack(outputDir, new File(solrHome + "/apache-solr-1.4.1.war"));
+
 
             // Install the Solr 1.0 war file in local maven  repo
             executeMojo(
@@ -621,6 +716,37 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                 ),
                 execEnv
         );
+
+        if (isPlatformVersionLtOrEqTo42() && enableSolr) {
+            getLog().info("Platform is 4.2 and Solr is enabled, setting 'index.subsystem.name=solr' in alfresco-global.properties");
+
+            executeMojo(
+                    plugin(
+                            groupId("com.google.code.maven-replacer-plugin"),
+                            artifactId("replacer"),
+                            version(MAVEN_REPLACER_PLUGIN_VERSION)
+                    ),
+                    goal("replace"),
+                    configuration(
+                            element(name("regex"), "false"),
+                            element(name("includes"),
+                                    element(name("include"), "${project.build.testOutputDirectory}/*.properties")
+                            ),
+                            element(name("replacements"),
+                                    element(name("replacement"),
+                                            element(name("token"), "index.subsystem.name=solr4"),
+                                            element(name("value"), "index.subsystem.name=solr")
+                                    ),
+                                    element(name("replacement"),
+                                            element(name("token"), "index.subsystem.name=lucene"),
+                                            element(name("value"), "index.subsystem.name=solr")
+                                    )
+                            )
+                    ),
+                    execEnv
+            );
+
+        }
     }
 
     /**
@@ -1134,6 +1260,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
         tomcatPluginDependencies.add(
                 // Packaging goes faster with this lib
                 dependency("org.codehaus.plexus", "plexus-archiver", "2.3"));
+
         tomcatPluginDependencies.add(
                 // The following dependency is needed, otherwise you get
                 //  Caused by: java.lang.NoSuchMethodError:
@@ -1217,9 +1344,8 @@ public abstract class AbstractRunMojo extends AbstractMojo {
 
         // Set up the system properties that should be set for Tomcat
         ArrayList systemProps = new ArrayList<Element>();
-        systemProps.add(element(name("java.io.tmpdir"), "${project.build.directory}/tmp"));
         if (enableSolr) {
-            systemProps.add(element(name("solr.solr.home"), solrHome));
+            systemProps.add(element(name("solr.solr.home"), solrHome + "/"));
         }
         if (enableActivitiApp) {
             // Should be in activiti-jar/src/test/resources
@@ -1274,6 +1400,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                          * that should be used
                          */
                         element(name("useTestClasspath"), "true"),
+
 
                         /**
                          * Set up where Solr Home directory is
@@ -1472,30 +1599,12 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      * @return
      */
     private void copyH2Dialect() throws MojoExecutionException {
-        getLog().info("Unpacking DB Dialects and ibatis files from alfresco-repository artifact");
-        executeMojo(
-                plugin(
-                        groupId("org.apache.maven.plugins"),
-                        artifactId("maven-dependency-plugin"),
-                        version(MAVEN_DEPENDENCY_PLUGIN_VERSION)
-                ),
-                goal("unpack"),
-                configuration(
-                        element(name("outputDirectory"), "${project.build.testOutputDirectory}"),
-                        element(name("artifactItems"),
-                                element(name("artifactItem"),
-                                        element(name("groupId"), alfrescoGroupId),
-                                        element(name("artifactId"), "alfresco-repository"),
-                                        element(name("version"), alfrescoPlatformVersion),
-                                        element(name("includes"), "alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/dbscripts/upgrade/*/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect/*")
-                                )
-                        )
-                ),
-                execEnv
-        );
 
-        // If we're in enterprise we need to make sure we grab everything
-        if (this.alfrescoEdition.equals(ALFRESCO_ENTERPRISE_EDITION)) {
+        String h2SourceDir;
+
+        if ( ! isPlatformVersionLtOrEqTo42()) {
+
+            getLog().info("Unpacking DB Dialects and ibatis files from alfresco-repository artifact");
             executeMojo(
                     plugin(
                             groupId("org.apache.maven.plugins"),
@@ -1508,7 +1617,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                             element(name("artifactItems"),
                                     element(name("artifactItem"),
                                             element(name("groupId"), alfrescoGroupId),
-                                            element(name("artifactId"), "alfresco-enterprise-repository"),
+                                            element(name("artifactId"), "alfresco-repository"),
                                             element(name("version"), alfrescoPlatformVersion),
                                             element(name("includes"), "alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/dbscripts/upgrade/*/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect/*")
                                     )
@@ -1516,7 +1625,37 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                     ),
                     execEnv
             );
+
+            // If we're in enterprise we need to make sure we grab everything
+            if (this.alfrescoEdition.equals(ALFRESCO_ENTERPRISE_EDITION)) {
+                executeMojo(
+                        plugin(
+                                groupId("org.apache.maven.plugins"),
+                                artifactId("maven-dependency-plugin"),
+                                version(MAVEN_DEPENDENCY_PLUGIN_VERSION)
+                        ),
+                        goal("unpack"),
+                        configuration(
+                                element(name("outputDirectory"), "${project.build.testOutputDirectory}"),
+                                element(name("artifactItems"),
+                                        element(name("artifactItem"),
+                                                element(name("groupId"), alfrescoGroupId),
+                                                element(name("artifactId"), "alfresco-enterprise-repository"),
+                                                element(name("version"), alfrescoPlatformVersion),
+                                                element(name("includes"), "alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/dbscripts/upgrade/*/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect/*")
+                                        )
+                                )
+                        ),
+                        execEnv
+                );
+            }
+
+            h2SourceDir = project.getBuild().getTestOutputDirectory();
+        } else {
+            // 4.2 has the dbscript directly in the exploded WAR file so we simply grab them there
+            h2SourceDir = getWarOutputDir(PLATFORM_WAR_PREFIX_NAME) + "/WEB-INF/classes";
         }
+
 
         getLog().info("Copying H2 Dialect SQL create files into target/test-classes");
         executeMojo(
@@ -1530,14 +1669,14 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                         element(name("outputDirectory"), "${project.build.testOutputDirectory}"),
                         element(name("resources"),
                                 element(name("resource"),
-                                        element(name("directory"), "${project.build.testOutputDirectory}/alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect"),
+                                        element(name("directory"), h2SourceDir + "/alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect"),
                                         element(name("includes"),
                                                 element(name("include"), "*")
                                         ),
                                         element(name("targetPath"), "alfresco/dbscripts/create/org.hibernate.dialect.H2Dialect")
                                 ),
                                 element(name("resource"),
-                                        element(name("directory"), "${project.build.testOutputDirectory}/alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect"),
+                                        element(name("directory"), h2SourceDir + "/alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect"),
                                         element(name("includes"),
                                                 element(name("include"), "*")
                                         ),

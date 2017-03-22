@@ -73,7 +73,6 @@
                         <atomic>true</atomic>
                         <stored>false</stored>
                         <tokenised>false</tokenised>
-                        <facetable>true</facetable>
                     </index>
                     <constraints>
                         <constraint ref="acme:securityClassificationOptions"/>
