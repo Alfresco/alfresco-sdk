@@ -44,7 +44,7 @@ public class SpringContextHolder implements ApplicationContextAware {
      * Default constructor.
      */
     public SpringContextHolder() {
-        System.out.println("Initializing the SpringContextHolder class.");
+        //System.out.println("Initializing the SpringContextHolder class.");
         springContextHolderInstance = this;
     }
 
@@ -58,7 +58,7 @@ public class SpringContextHolder implements ApplicationContextAware {
     }
 
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        System.out.println("Setting current Spring Application Context in SpringContextHolder class.");
+        //System.out.println("Setting current Spring Application Context in SpringContextHolder class.");
         this.applicationContext = applicationContext;
     }
 

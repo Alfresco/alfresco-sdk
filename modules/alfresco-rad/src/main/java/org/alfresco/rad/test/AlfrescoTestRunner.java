@@ -129,7 +129,7 @@ public class AlfrescoTestRunner extends BlockJUnit4ClassRunner {
 
         // Create the GET Request for the Web Script that will run the test
         String testWebScriptUrl = "/service/testing/test.xml?clazz=" + className.replace("#", "%23");
-        System.out.println("AlfrescoTestRunner: Invoking Web Script for test execution: " + testWebScriptUrl);
+        //System.out.println("AlfrescoTestRunner: Invoking Web Script for test execution: " + testWebScriptUrl);
         HttpGet get = new HttpGet(getContextRoot(method) + testWebScriptUrl);
 
         try {
