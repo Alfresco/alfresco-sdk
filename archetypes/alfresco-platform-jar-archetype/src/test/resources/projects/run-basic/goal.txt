@@ -1,1 +1,1 @@
-verify alfresco:run -Dmaven.tomcat.fork=true
+install
