@@ -1374,6 +1374,12 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                         element(name("fork"), fork ? "true" : "false"),
 
                         /*
+                         * Path
+                         * In case there is a src/main/webapp in AIO it's nice to serve it up
+                         */
+                        element(name( "path"), "/"),
+
+                        /*
                          * Port
                          */
                         element(name( "port" ), getPort()),
