@@ -36,9 +36,9 @@
         <!-- Alfresco Platform webapp version, this is the original Alfresco webapp that will be
             customized and then deployed and run by the tomcat maven plugin when
             executing for example $ mvn clean install alfresco:run -->
-        <alfresco.platform.version>5.2.b-EA</alfresco.platform.version>
+        <alfresco.platform.version>5.2.e</alfresco.platform.version>
         <!-- Alfresco Share version, so we can bring in correct alfresco-share-services artifact -->
-        <alfresco.share.version>5.2.a-EA</alfresco.share.version>
+        <alfresco.share.version>5.2.d</alfresco.share.version>
 
         <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
         <jrebel.version>1.1.6</jrebel.version>
@@ -76,6 +76,31 @@
             <groupId>${alfresco.groupId}</groupId>
             <artifactId>alfresco-repository</artifactId>
         </dependency>
+
+        <!-- Bring in Alfresco RAD so we get access to AlfrescoTestRunner classes -->
+        <dependency>
+            <groupId>org.alfresco.maven</groupId>
+            <artifactId>alfresco-rad</artifactId>
+            <version>${alfresco.sdk.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Bring in Spring Context so we can use ApplicationContext, ApplicationContextAware etc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>3.2.17.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Integration tests need httpcomponents to execute tests -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -88,6 +113,15 @@
                 <groupId>org.alfresco.maven.plugin</groupId>
                 <artifactId>alfresco-maven-plugin</artifactId>
                 <version>${alfresco.sdk.version}</version>
+                <executions>
+                    <execution>
+                        <id>start-alfresco</id>
+                        <goals>
+                            <goal>it</goal>
+                        </goals>
+                        <phase>pre-integration-test</phase>
+                    </execution>
+                </executions>
                 <configuration>
                     <!-- Default is to run with a Community edition, change to 'enterprise' if using Enterprise edition -->
                     <alfrescoEdition>community</alfrescoEdition>
@@ -109,12 +143,14 @@
                        -->
                     <platformModules>
                         <!-- This AMP is needed if we are going to access the platform webapp from a Share webapp -->
+                        <!-- Share Services will be ignored if you are on Platform earlier than 5.1 -->
                         <moduleDependency>
                             <groupId>${alfresco.groupId}</groupId>
                             <artifactId>alfresco-share-services</artifactId>
                             <version>${alfresco.share.version}</version>
                             <type>amp</type>
                         </moduleDependency>
+
                         <!-- Bring in this JAR project, need to be included here, otherwise resources from META-INF
                              will not be loaded, such as the test.html page
                         -->
@@ -127,7 +163,14 @@
                 </configuration>
             </plugin>
 
-            <!-- Build an AMP if 3rd party libs are needed by the extension -->
+            <!--
+                Build an AMP if 3rd party libs are needed by the extensions
+                JARs are the default artifact produced in your modules, if you want to build an amp for each module
+                you have to enable this plugin and inspect the src/main/assembly.xml file if you want to customize
+                the layout of your AMP. The end result is that Maven will produce both a JAR file and an AMP with your
+                module.
+            -->
+            <!--
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.6</version>
@@ -152,6 +195,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            -->
 
             <!-- Hot reloading with JRebel -->
             <plugin>
@@ -225,6 +269,38 @@
                     </nonFilteredFileExtensions>
                 </configuration>
             </plugin>
+
+
+            <!-- Runs the integration tests, any class that follows naming convention
+                 "**/IT*.java", "**/*IT.java", and "**/*ITCase.java" will be considered an integration test -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.19.1</version>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>verify-test</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>2.19.1</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>
 
         <resources>
@@ -241,6 +317,10 @@
                 <filtering>true</filtering>
             </testResource>
         </testResources>
+
+
+
+
     </build>
 
     <!--

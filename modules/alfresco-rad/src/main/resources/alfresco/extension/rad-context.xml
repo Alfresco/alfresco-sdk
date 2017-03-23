@@ -20,11 +20,15 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
      
-    <bean id="remoteRunnnerWrapper" class="org.alfresco.maven.rad.RemoteRunnerWrapper"/>
-    
-    <bean id="remoteRunnnerWrapperThread" class="java.lang.Thread" init-method="start" destroy-method="interrupt">
-        <constructor-arg ref="remoteRunnnerWrapper"/>
-    </bean>
+  
+    <!-- Bean that holds current Alfresco Spring context -->
+    <bean id="org.alfresco.rad.springContextHolder" class="org.alfresco.rad.SpringContextHolder"/>
 
+    <!-- Web Script that can be used to invoke integration tests remotely.
+        Integration testing framework donated by Zia Consulting -->
+    <bean id="webscript.org.alfresco.rad.test.runtest.get"
+          class="org.alfresco.rad.test.RunTestWebScript"
+          parent="webscript">
+    </bean>
 
 </beans>

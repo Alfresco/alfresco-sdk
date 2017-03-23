@@ -37,15 +37,15 @@
         <!-- Alfresco Platform and Share webapp versions, these are the original Alfresco webapps that will be
              customized and then deployed and run by the tomcat maven plugin when
              executing for example $ mvn clean install alfresco:run -->
-        <alfresco.platform.version>5.2.b-EA</alfresco.platform.version>
-        <alfresco.share.version>5.2.a-EA</alfresco.share.version>
+        <alfresco.platform.version>5.2.e</alfresco.platform.version>
+        <alfresco.share.version>5.2.d</alfresco.share.version>
 
         <!-- Alfresco Surf version, if you change Share version you might need to change Surf version -->
-        <alfresco.surf.version>6.6</alfresco.surf.version>
+        <alfresco.surf.version>6.11</alfresco.surf.version>
 
         <!-- Aikau framework version, it is released separately, so it can be useful to be able
              to bring in newer versions with bug fixes etc -->
-        <aikau.version>1.0.85</aikau.version>
+        <aikau.version>1.0.101.3</aikau.version>
 
         <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
         <jrebel.version>1.1.6</jrebel.version>
@@ -58,6 +58,52 @@
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
+
+    <!-- Libs used in Unit and Integration tests -->
+    <!-- IMPORTANT - Test dependencies need to be here in the top parent POM as
+                     the Alfresco Maven IT Mojo runs as part of the parent project ... -->
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- The main Alfresco Repo dependency for compiling Java code in src/main/java -->
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>alfresco-repository</artifactId>
+        </dependency>
+
+        <!-- Bring in Spring Context so we can use ApplicationContext, ApplicationContextAware etc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>3.2.17.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Bring in Alfresco RAD so we get access to AlfrescoTestRunner classes -->
+        <dependency>
+            <groupId>org.alfresco.maven</groupId>
+            <artifactId>alfresco-rad</artifactId>
+            <version>${alfresco.sdk.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <dependencyManagement>
         <dependencies>
@@ -118,7 +164,14 @@
     <build>
         <pluginManagement>
             <plugins>
-                <!-- Build an AMP if 3rd party libs are needed by the extensions -->
+                <!--
+                    Build an AMP if 3rd party libs are needed by the extensions
+                    JARs are the default artifact produced in your modules, if you want to build an amp for each module
+                    you have to enable this plugin and inspect the src/main/assembly.xml file if you want to customize
+                    the layout of your AMP. The end result is that Maven will produce both a JAR file and an AMP with your
+                    module.
+                -->
+                <!--
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
@@ -144,6 +197,7 @@
                         </dependency>
                     </dependencies>
                 </plugin>
+                -->
 
                 <!-- Filter resources in any sub-project with this config -->
                 <plugin>
@@ -190,6 +244,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+
 
         <plugins>
             <!-- Filter the test resource files in the AIO parent project, and do property substitutions.
@@ -248,6 +303,7 @@
                         (i.e. alfresco.war)
                     -->
                     <platformModules>
+                        <!-- Share Services will be ignored if you are on Platform earlier than 5.1 -->
                         <moduleDependency>
                             <groupId>${alfresco.groupId}</groupId>
                             <artifactId>alfresco-share-services</artifactId>
@@ -261,19 +317,21 @@
                             <artifactId>${artifactId}-platform-jar</artifactId>
                             <version>${project.version}</version>
                         </moduleDependency>
+
+                        <!-- Bring in the integration tests -->
+                        <moduleDependency>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>integration-tests</artifactId>
+                            <version>${project.version}</version>
+                            <classifier>tests</classifier>
+                        </moduleDependency>
+
                     </platformModules>
 
                     <!--
                         JARs and AMPs that should be overlayed/applied to the Share WAR (i.e. share.war)
                     -->
                     <shareModules>
-                        <moduleDependency>
-                            <!-- Bring in a newer version of Aikau, can coexist with older versions in the
-                                WAR distribution, newest version is picked. -->
-                            <groupId>${alfresco.groupId}</groupId>
-                            <artifactId>aikau</artifactId>
-                            <version>${aikau.version}</version>
-                        </moduleDependency>
 
                         <!-- Bring in custom Modules -->
                         <moduleDependency>
@@ -306,10 +364,8 @@
                         <fallback>all</fallback>
                         <resources>
                             <resource>
-                                <!--
-                                Empty resource element marks default configuration. By
-                                default it is placed first in generated configuration.
-                                -->
+                                <directory>${project.build.outputDirectory}</directory>
+                                <directory>${project.build.testOutputDirectory}</directory>
                             </resource>
                         </resources>
                     </classpath>

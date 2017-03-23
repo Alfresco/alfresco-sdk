@@ -5,7 +5,8 @@
   <packaging>jar</packaging>
 
   <name>Rapid Application Development Support</name>
-  <description>SDK module for Rapid Development support</description>
+  <description>SDK module for Rapid Development support, such as Alfresco JUnit runner</description>
+
   <parent>
       <groupId>org.alfresco.maven</groupId>
       <artifactId>alfresco-sdk-aggregator</artifactId>
@@ -13,116 +14,29 @@
       <relativePath>../../pom.xml</relativePath>
   </parent>
 
-  <properties>
-     <pgsql.dialect.folder>${project.build.directory}/pg-dialect-tmp</pgsql.dialect.folder>
-  </properties>
   <dependencies>
-       <!-- Enables JUnit remote testing (using JRebel) -->
-       <dependency>
-            <groupId>com.tradeshift</groupId>
-            <artifactId>junit-remote</artifactId>
-            <version>3</version>
-            <type>jar</type>
-            <exclusions>
-                <exclusion>
-                    <artifactId>servlet-api</artifactId>
-                    <groupId>javax.servlet</groupId>
-                </exclusion>
-            </exclusions>
-       </dependency>
-       <!-- Required to have annotation based remote testing working -->
-       <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>3.0.6.RELEASE</version>
-            <type>jar</type>
-       </dependency>
-  </dependencies>
-  
-  <build>
-  	<plugins>
-  	   <!-- Copied PostgreSQL dialect files to generate H2 dialect files on-the-fly -->
-        <!--
-       <plugin>
-           <artifactId>maven-dependency-plugin</artifactId>
-           <executions>
-               <execution>
-                   <id>extract-postgres-dialect</id>
-                   <phase>generate-test-resources</phase>
-                   <goals>
-                       <goal>unpack</goal>
-                   </goals>
-                   <configuration>
-                       <artifactItems>
-                           <artifactItem>
-                               <groupId>org.alfresco</groupId>
-                               <artifactId>alfresco-repository</artifactId>
-                               <version>${alfresco.community.default.version}</version>
-                               <includes>alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/dbscripts/upgrade/*/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect/*</includes>
-                               <outputDirectory>${pgsql.dialect.folder}</outputDirectory>
-                           </artifactItem>
-                       </artifactItems>
-                   </configuration>
-               </execution>
-           </executions>
-       </plugin>
-       <plugin>
-           <artifactId>maven-resources-plugin</artifactId>
-           <executions>
-               <execution>
-                   <id>generate-h2-dialect</id>
-                   <phase>generate-test-resources</phase>
-                   <goals>
-                       <goal>copy-resources</goal>
-                   </goals>
-                   <configuration>
-                       <outputDirectory>${project.build.outputDirectory}</outputDirectory>
-                       <resources>
-                           <resource>
-                               <directory>${pgsql.dialect.folder}/alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect</directory>
-                               <includes>
-                                   <include>*</include>
-                               </includes>
-                               <targetPath>alfresco/dbscripts/create/org.hibernate.dialect.H2Dialect</targetPath>
-                           </resource>
-                           <resource>
-                               <directory>${pgsql.dialect.folder}/alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect</directory>
-                               <includes>
-                                   <include>*</include>
-                               </includes>
-                               <targetPath>alfresco/ibatis/org.hibernate.dialect.H2Dialect</targetPath>
-                           </resource>
-                            Upgrade scripts - does not seem to be picked up, so any changes you would make to them are not picked up...
-                           <resource>
-                               <directory>${pgsql.dialect.folder}/alfresco/dbscripts/upgrade/4.1/org.hibernate.dialect.PostgreSQLDialect</directory>
-                               <includes>
-                                   <include>*</include>
-                               </includes>
-                               <targetPath>alfresco/dbscripts/upgrade/4.1/org.hibernate.dialect.H2Dialect</targetPath>
-                           </resource>
-                           <resource>
-                               <directory>${pgsql.dialect.folder}/alfresco/dbscripts/upgrade/4.2/org.hibernate.dialect.PostgreSQLDialect</directory>
-                               <includes>
-                                   <include>*</include>
-                               </includes>
-                               <targetPath>alfresco/dbscripts/upgrade/4.2/org.hibernate.dialect.H2Dialect</targetPath>
-                           </resource>
-                           <resource>
-                               <directory>${pgsql.dialect.folder}/alfresco/dbscripts/upgrade/5.0/org.hibernate.dialect.PostgreSQLDialect</directory>
-                               <includes>
-                                   <include>*</include>
-                               </includes>
-                               <targetPath>alfresco/dbscripts/upgrade/5.0/org.hibernate.dialect.H2Dialect</targetPath>
-                           </resource>
+      <!-- Access to org.alfresco.service.ServiceRegistry -->
+      <dependency>
+          <groupId>org.alfresco</groupId>
+          <artifactId>alfresco-repository</artifactId>
+          <version>${alfresco.community.default.version}</version>
+          <scope>provided</scope>
+      </dependency>
 
-                       </resources>
-                   </configuration>
-               </execution>
-           </executions>
-       </plugin>
-       -->
-  	</plugins>
-  
-  </build>
+      <!-- Bring in ApplicationContextAware, ApplicationContext etc -->
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-context</artifactId>
+          <version>3.2.17.RELEASE</version>
+      </dependency>
+
+      <!-- Access to JUnit runner classes -->
+      <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>4.12</version>
+      </dependency>
+
+  </dependencies>
 
 </project>

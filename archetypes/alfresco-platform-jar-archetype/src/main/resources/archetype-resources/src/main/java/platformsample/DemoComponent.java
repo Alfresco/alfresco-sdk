@@ -56,7 +56,7 @@ public class DemoComponent extends AbstractModuleComponent {
     protected void executeInternal() throws Throwable {
         System.out.println("DemoComponent has been executed");
         logger.debug("Test debug logging. Congratulation your JAR Module is working");
-        logger.info("This is only for information purposed. Better remove me from the log in Production");
+        logger.info("This is only for information purposes. Better remove me from the log in Production");
     }
 
     /**
