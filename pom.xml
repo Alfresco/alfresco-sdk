@@ -136,7 +136,7 @@
         <alfresco.sdk.parent.version>${project.version}</alfresco.sdk.parent.version>
         <alfresco.sdk.tests.exclude>*/*-enterprise/*</alfresco.sdk.tests.exclude>
 
-        <!-- The following version is needed to grab the alfresco-mmt -->
+        <!-- The following version is needed for alfresco-rad -->
         <alfresco.community.default.version>5.2.e</alfresco.community.default.version>
 
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>

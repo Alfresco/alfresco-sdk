@@ -122,7 +122,7 @@
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-mmt</artifactId>
-      <version>${alfresco.community.default.version}</version>
+      <version>5.1.g</version>
     </dependency>
     <dependency>
         <groupId>org.alfrescolabs.alfresco-technical-validation</groupId>
