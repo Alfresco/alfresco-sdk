@@ -11,7 +11,7 @@
     <url>${maven.site.url}</url>
 
     <prerequisites>
-        <maven>3.0.3</maven>
+        <maven>3.3.0</maven>
     </prerequisites>
 
     <licenses>
@@ -123,9 +123,11 @@
         <module>plugins/alfresco-maven-plugin</module>
         <!-- Archetypes -->
         <module>archetypes/alfresco-platform-jar-archetype</module>
+
         <module>archetypes/alfresco-share-jar-archetype</module>
         <module>archetypes/alfresco-allinone-archetype</module>
         <module>archetypes/activiti-jar-archetype</module>
+
   </modules>
 
     <properties>
@@ -138,6 +140,8 @@
 
         <!-- The following version is needed for alfresco-rad -->
         <alfresco.community.default.version>5.2.e</alfresco.community.default.version>
+        <alfresco.enterprise.default.version>5.2.0</alfresco.enterprise.default.version>
+        <alfresco.sdk.default.edition>community</alfresco.sdk.default.edition>
 
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
     </properties>
@@ -237,14 +241,17 @@
             <build>
                 <testResources>
                     <testResource>
+                        <filtering>true</filtering>
                         <directory>src/test/resources</directory>
                         <excludes>
                             <exclude>${alfresco.sdk.tests.exclude}</exclude>
                         </excludes>
                     </testResource>
                 </testResources>
+
             </build>
         </profile>
+
         <profile>
             <id>enterprise-tests</id>
             <properties>

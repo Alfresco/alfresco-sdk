@@ -120,14 +120,14 @@
                  They are defined in alfresco-platform-distribution... -->
             <dependency>
                 <groupId>${alfresco.groupId}</groupId>
-                <artifactId>${alfresco.share.war.artifactId}</artifactId>
+                <artifactId>share</artifactId>
                 <version>${alfresco.share.version}</version>
                 <type>war</type>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>${alfresco.groupId}</groupId>
-                <artifactId>${alfresco.share.war.artifactId}</artifactId>
+                <artifactId>share</artifactId>
                 <version>${alfresco.share.version}</version>
                 <classifier>classes</classifier>
                 <scope>provided</scope>
