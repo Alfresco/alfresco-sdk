@@ -40,12 +40,11 @@
         <alfresco.platform.version>5.2.e</alfresco.platform.version>
         <alfresco.share.version>5.2.d</alfresco.share.version>
 
+        <!-- Default is to run with a Community edition, change to 'enterprise' if using Enterprise edition -->
+        <maven.alfresco.edition>community</maven.alfresco.edition>
+
         <!-- Alfresco Surf version, if you change Share version you might need to change Surf version -->
         <alfresco.surf.version>6.11</alfresco.surf.version>
-
-        <!-- Aikau framework version, it is released separately, so it can be useful to be able
-             to bring in newer versions with bug fixes etc -->
-        <aikau.version>1.0.101.3</aikau.version>
 
         <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
         <jrebel.version>1.1.6</jrebel.version>
@@ -284,8 +283,6 @@
                 <artifactId>alfresco-maven-plugin</artifactId>
                 <version>${alfresco.sdk.version}</version>
                 <configuration>
-                    <!-- Default is to run with a Community edition, change to 'enterprise' if using Enterprise edition -->
-                    <alfrescoEdition>community</alfrescoEdition>
 
                     <!-- We need the flat file H2 database to run the Repo -->
                     <enableH2>true</enableH2>
@@ -332,7 +329,6 @@
                         JARs and AMPs that should be overlayed/applied to the Share WAR (i.e. share.war)
                     -->
                     <shareModules>
-
                         <!-- Bring in custom Modules -->
                         <moduleDependency>
                             <groupId>${project.groupId}</groupId>
