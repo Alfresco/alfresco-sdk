@@ -132,12 +132,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-        <maven.resource.version>3.0.1</maven.resource.version>
-        <maven.archetype.version>2.4</maven.archetype.version>
+        <maven.archetype.version>3.0.0</maven.archetype.version>
         <alfresco.sdk.parent.version>${project.version}</alfresco.sdk.parent.version>
         <alfresco.sdk.tests.exclude>*/*-enterprise/*</alfresco.sdk.tests.exclude>
 
-        <!-- The following version is needed to grab the alfresco-mmt -->
+        <!-- The following version is needed for alfresco-rad -->
         <alfresco.community.default.version>5.2.e</alfresco.community.default.version>
 
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
@@ -146,6 +145,11 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.0.2</version>
+                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-archetype-plugin</artifactId>
@@ -253,17 +257,14 @@
             <id>sdk-release</id>
             <properties>
                 <maven.site.url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-sdk-aggregator/latest</maven.site.url>
-                <maven.release.version>2.5.2</maven.release.version>
                 <maven.release.goals>deploy site-deploy</maven.release.goals>
-                <maven.site.version>3.4</maven.site.version>
-                <maven.changes.version>2.10</maven.changes.version>
             </properties>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
+                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -277,7 +278,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-release-plugin</artifactId>
-                        <version>${maven.release.version}</version>
+                        <version>2.5.3</version>
                         <configuration>
                             <preparationGoals>clean install</preparationGoals>
                             <goals>${maven.release.goals}</goals>
@@ -291,7 +292,7 @@
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-site-plugin</artifactId>
-                            <version>${maven.site.version}</version>
+                            <version>3.6</version>
                         </plugin>
                     </plugins>
                 </pluginManagement>
@@ -301,7 +302,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-changes-plugin</artifactId>
-                        <version>${maven.changes.version}</version>
+                        <version>2.12.1</version>
                         <reportSets>
                             <reportSet>
                                 <reports>
