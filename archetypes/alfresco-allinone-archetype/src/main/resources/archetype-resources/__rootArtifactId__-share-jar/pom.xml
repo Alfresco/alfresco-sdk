@@ -22,7 +22,7 @@
     <dependencies>
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
-            <artifactId>${alfresco.share.war.artifactId}</artifactId>
+            <artifactId>share</artifactId>
             <classifier>classes</classifier>
         </dependency>
 

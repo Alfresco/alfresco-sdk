@@ -299,7 +299,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     @Parameter(property = "activiti.groupId", defaultValue = "com.activiti")
     protected String activitiGroupId;
 
-    @Parameter(property = "alfresco.platform.war.artifactId", defaultValue = "alfresco-platform")
+    @Parameter(property = "alfresco.platform.war.artifactId", defaultValue = "alfresco")
     protected String alfrescoPlatformWarArtifactId;
 
     @Parameter(property = "alfresco.share.war.artifactId", defaultValue = "share")

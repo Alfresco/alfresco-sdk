@@ -17,7 +17,6 @@
 
         <!-- Properties used in dependency declarations, you don't need to change these -->
         <alfresco.groupId>org.alfresco</alfresco.groupId>
-        <alfresco.share.war.artifactId>share</alfresco.share.war.artifactId>
 
         <!-- Alfresco Share webapp version, this is the original Alfresco webapp that will be
             customized and then deployed and run by the tomcat maven plugin when
@@ -46,7 +45,7 @@
         <!-- Following dependencies are needed for compiling Java code in src/main/java -->
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
-            <artifactId>${alfresco.share.war.artifactId}</artifactId>
+            <artifactId>share</artifactId>
             <version>${alfresco.share.version}</version>
             <classifier>classes</classifier>
             <scope>provided</scope>
