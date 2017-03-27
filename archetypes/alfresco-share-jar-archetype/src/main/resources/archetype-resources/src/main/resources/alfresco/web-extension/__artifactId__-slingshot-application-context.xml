@@ -17,7 +17,7 @@
    -->
 
    <!-- Add module specific messages and labels -->
-   <bean id="${package}.${artifactId}.resources"
+   <bean id="${artifactId}.resources"
          class="org.springframework.extensions.surf.util.ResourceBundleBootstrapComponent">
       <property name="resourceBundles">
          <list>

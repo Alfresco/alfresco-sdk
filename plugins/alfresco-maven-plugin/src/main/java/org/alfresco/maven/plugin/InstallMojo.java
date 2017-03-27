@@ -46,7 +46,7 @@ public class InstallMojo extends AbstractMojo {
     /**
      * The location of the AMP file(s) to be installed. If this location is a
      * folder all AMPs contained in the folder are installed, if it's a file it
-     * get direclty installed on the ${warLocation}
+     * get directly installed on the ${warLocation}
      * 
      * @parameter property="maven.alfresco.ampLocation" default-value="${project.build.directory}/${project.build.finalName}.amp"
      */
@@ -54,9 +54,9 @@ public class InstallMojo extends AbstractMojo {
     
     /**
      * The WAR file or exploded dir to install the AMPs in. If specified
-     * Defaults to <code>"${project.build.directory}/${project.build.finalName}-war</code>
-     * 
-     * @parameter property="maven.alfresco.warLocation" default-value="${project.build.directory}/${project.build.finalName}-war"
+     * Defaults to <code>"${app.amp.client.war.folder}</code>
+     *
+     * @parameter property="maven.alfresco.warLocation" default-value="${app.amp.client.war.folder}"
      */
     private File warLocation;
     
