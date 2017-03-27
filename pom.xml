@@ -136,7 +136,7 @@
         <maven.compiler.target>1.7</maven.compiler.target>
         <maven.archetype.version>3.0.0</maven.archetype.version>
         <alfresco.sdk.parent.version>${project.version}</alfresco.sdk.parent.version>
-        <alfresco.sdk.tests.exclude>*/*-enterprise/*</alfresco.sdk.tests.exclude>
+        <alfresco.sdk.tests.exclude>*/*-enterprise*/*</alfresco.sdk.tests.exclude>
 
         <!-- The following version is needed for alfresco-rad -->
         <alfresco.community.default.version>5.2.e</alfresco.community.default.version>
@@ -176,6 +176,16 @@
                 <version>2.10</version>
             </extension>
         </extensions>
+        <testResources>
+            <testResource>
+                <filtering>true</filtering>
+                <directory>src/test/resources</directory>
+                <excludes>
+                    <exclude>${alfresco.sdk.tests.exclude}</exclude>
+                </excludes>
+            </testResource>
+        </testResources>
+
     </build>
 
     <repositories>
@@ -229,27 +239,6 @@
                     <url>https://artifacts.alfresco.com/nexus/content/repositories/releases/</url>
                 </repository>
             </distributionManagement>
-        </profile>
-
-        <profile>
-            <id>exclude-enterprise-tests-for-archetypes</id>
-            <activation>
-                <file>
-                    <exists>src/test/resources/projects</exists>
-                </file>
-            </activation>
-            <build>
-                <testResources>
-                    <testResource>
-                        <filtering>true</filtering>
-                        <directory>src/test/resources</directory>
-                        <excludes>
-                            <exclude>${alfresco.sdk.tests.exclude}</exclude>
-                        </excludes>
-                    </testResource>
-                </testResources>
-
-            </build>
         </profile>
 
         <profile>

@@ -1,1 +1,1 @@
-install -Dalfresco.platform.version=4.2.7 -Dmaven.alfresco.edition=enterprise
+install -Dalfresco.platform.version=4.2.7 -Dalfresco.share.version=4.2.7 -Dmaven.alfresco.edition=enterprise
