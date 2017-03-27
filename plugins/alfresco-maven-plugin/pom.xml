@@ -3,7 +3,7 @@
     <groupId>org.alfresco.maven.plugin</groupId>
     <artifactId>alfresco-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <name>Maven Alfresco Plugin</name>
+    <name>Alfresco Maven Plugin</name>
 
     <parent>
         <groupId>org.alfresco.maven</groupId>

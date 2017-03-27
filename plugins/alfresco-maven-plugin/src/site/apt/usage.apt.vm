@@ -1,62 +1,28 @@
   ------
   Usage
-  ------
-  Gabriele Columbro
-  ------
-  Nov 2012
-  ------
+
 
 How to use this plugin?
 
-  There are fundamentally 3 methods to use this plugin:
+  There are fundamentally two methods to use this plugin:
   
   [[1]] Using Archetypes provided in the Alfresco SDK
-    
-  [[2]] By using the Alfresco SDK Parent POM
-  
-  [[3]] Via direct configuration in your POM
+
+  [[2]] Via direct configuration in your POM
   
 * Method 1 - Using Alfresco SDK Archetypes
 
   Two sample archetypes already use the plugin and provide best practice example on how to use it:
   
-  [[1]] The {{{../../archetypes/alfresco-amp-archetype/index.html} Alfresco AMP Archetype}} provides a sample of AMP packaging
+  [[1]] The {{{../../archetypes/alfresco-platform-jar-archetype/index.html} Alfresco Platform JAR Archetype}} provides a sample of JAR packaging with AMP as an optional assembly for 3rd party dependencies
   
-  [[2]] The {{{../../archetypes/alfresco-allinone-archetype/index.html} Alfresco All-in-One Archetype}} provides a sample using AMPs as dependencies and WAR overlay
+  [[2]] The {{{../../archetypes/alfresco-allinone-archetype/index.html} Alfresco All-in-One Archetype}} provides a sample using JARs for both Alfresco Platform and Share
   
-  
- This is the <<recommended>> and less error-prone way of using the plugin.
- 
-* Method 2 - Using Alfresco SDK Parent POM
 
-  The {{{../../poms/alfresco-sdk-parent/index.html}Alfresco SDK Parent POM}} provides a single entry point for all SDK features.
-  
-  By using it as parent as follows:
-  
-+---+
-<project>
-     ...
-     <parent>
-        <groupId>org.alfresco.maven</groupId>
-        <artifactId>alfresco-sdk-parent</artifactId>
-        <version>1.0</version>
-    </parent>
-    ...
-</project>
-+---+
-
-  you will have automatic support for AMP packaging of your project (just add you sources in <<<src/main/amp>>>).
-  
 * Method 3 - Direct configuration in POM
 
    If you want more control over the plugin behavior you can use it directly in your POM.
-   
-   <<NOTE>>: The following configuration is not required when using the SDK parent, as it's already included there.  
-   
-   In order to manage AMP artifacts with the Maven Alfresco plugin you need to:
-   
-   * Declare the plugin in your POM with <<<<extensions>>>> enabled, to allow AMP packaging lifecycle:
-      
+
 +---+
 <project>
   [...]
@@ -67,7 +33,25 @@ How to use this plugin?
           <groupId>org.alfresco.maven.plugin</groupId>
           <artifactId>alfresco-maven-plugin</artifactId>
           <version>${project.version}</version>
-          <extensions>true</extensions>
+          <plugin>
+              <groupId>org.alfresco.maven.plugin</groupId>
+              <artifactId>alfresco-maven-plugin</artifactId>
+              <version>3.0.0</version>
+              <configuration>
+                  <alfrescoEdition>community</alfrescoEdition>
+                  <enableH2>true</enableH2>
+                  <enablePlatform>true</enablePlatform>
+                  <enableSolr>true</enableSolr>
+                  <enableShare>false</enableShare>*
+                  <platformModules>
+                      <moduleDependency>
+                          <groupId>${alfresco.groupId}</groupId>
+                          <artifactId>alfresco-share-services</artifactId>
+                          <version>${alfresco.share.version}</version>
+                          <type>amp</type>
+                      </moduleDependency>
+                  </platformModules>
+              </configuration>
         </plugin>
         ...
     </plugins>
@@ -75,25 +59,3 @@ How to use this plugin?
   [...]
 </project>
 +---+
-
-  * If you want to package an Alfresco Module Package from your <<<amp>>> packaging project you also need to make sure
-  your AMP content gets copied to <<<\${project.build.directory}/\${project.build.finalName}>>> so the plugin can pick them up.
-  Supposing your AMP sources are in <<<src/main/amp>>> you should configure the following <<<<resource>>>> block:
-  
-+---+
-<project>
-  [...]
-  <build>
-    <resources>
-        ...
-        <resource>
-            <directory>src/main/amp</directory>
-            <!-- This is relative to \${project.build.outputDirectory} -->
-            <targetPath>../\${project.build.finalName}</targetPath>
-            <filtering>${app.filtering.enabled}</filtering>
-        </resource>
-    </resources>
-  </build>
-  [...]
-</project>
-+---+ 

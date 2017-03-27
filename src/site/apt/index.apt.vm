@@ -1,15 +1,10 @@
   ------
   Alfresco SDK\x99
-  ------
-  Gabriele Columbro
-  ------
-  Aug 2014
-  ------
 
 Introduction
 
   The Alfresco SDK\x99  - formerly Maven Alfresco SDK\x99, formerly {{{https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/maven-alfresco-lifecycle/latest/index.html} Alfresco Lifecycle 3.9.1}} -
-  provides a fully fledged Maven support for {{{http://www.alfresco.com}Alfresco ECM}} WAR and {{{https://wiki.alfresco.com/wiki/AMP_Files}AMP}} project development.
+  provides a fully fledged Maven support for {{{http://www.alfresco.com}Alfresco Content Services}} WAR, JAR and {{{https://community.alfresco.com/docs/DOC-5146-amp-files}AMP}} project development.
   Being fully integrated with Maven it allows to both leverage the vast number of Maven plugins for your Alfresco project as well as integrated your
   project easily in Open Source and Enterprise development processes.
 
@@ -18,10 +13,9 @@ Introduction
  
 How to Use the SDK
 
-  The easiest way to use the SDK is to create a sample project using one of the available <<archetypes>> (Repo AMP, Share AMP, All in One).
-  
-  You can also use the Alfresco SDK Parent POM directly in your Maven project to inherit Alfresco behaviors and configurations.
-  
+  The easiest way to use the SDK is to create a sample project using one of the available <<archetypes>> (Platform JAR, Share JAR or All in One).
+
+  You can also use the Alfresco Maven Plugin directly on any JAR project.
   
 SDK Versions 
   
@@ -29,7 +23,8 @@ SDK Versions
   
   Maven Alfresco SDK 1.x versions rely on the {{{https://artifacts.alfresco.com/nexus/content/groups/public/}Alfresco Artifacts Repository}}.
   For documentation on the Maven Alfresco SDK\x99 1.x please refer to {{{https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-lifecycle-aggregator/latest/index.html} Maven Alfresco SDK 1.x}}
-  
+
+
 SDK Alfresco Compatibility
 
   Please refer to the {{{http://docs.alfresco.com/community/concepts/alfresco-sdk-compatibility.html}official Alfresco docs}} for details of SDK / Alfresco compatibility.  
@@ -39,35 +34,34 @@ Alfresco SDK\x99 components
 
   The Alfresco SDK relies on a number of components:
 
-  * {{{./poms/alfresco-sdk-parent/index.html}The SDK parent POM}} providing full Alfresco project lifecycle feature, to be added as a <<<<parent>>>> in your projects
-
   * Archetypes providing sample project to kickstart your Alfresco development and boost it with best practices
 
-      * the {{{./archetypes/alfresco-amp-archetype/index.html}Repo AMP}}, a single project that customizes Alfresco Repository
+      * the {{{./archetypes/alfresco-platform-jar-archetype/index.html}Platform JAR}}, a single project that customizes Alfresco Repository
 
-      * the {{{./archetypes/share-amp-archetype/index.html}Share AMP}}, a single project that customizes Alfresco Share 
+      * the {{{./archetypes/alfresco-share-jar-archetype/index.html}Share JAR}}, a single project that customizes Alfresco Share
 
       * the {{{./archetypes/alfresco-allinone-archetype/index.html}All-in-One}}, a multi-module project to customize and run all components
 
-  * The {{{./plugins/alfresco-maven-plugin/index.html} Maven Alfresco Plugin}} to manage AMP packaging and dependencies
-  
-  * {{{https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-platform-distribution/latest}Alfresco Platform Distribution POM}} can (optionally) be used to provide centralized <<<<dependencyManagement>>>> on a particular Alfresco version / edition (Community / Enterprise)  
+  * The {{{./plugins/alfresco-maven-plugin/index.html} Maven Alfresco Plugin}} to setup, build, test and run your customizations
 
-  * The {{{https://artifacts.alfresco.com}Alfresco Artifacts Repository}} provides backing for this SDK. Check the {{{http://wiki.alfresco.com/wiki/Alfresco_Artifacts_Repository}Alfresco Wiki}} for Community / Enterprise access information. 
+  * The {{{https://artifacts.alfresco.com}Alfresco Artifacts Repository}} provides backing for this SDK.
 
 Pre-requisites
 
 * System prerequisites
 
-    No manual Alfresco download, application server or database is required. 
+    No manual Alfresco download, application server or database is required. The {{{./plugins/alfresco-maven-plugin/index.html} Maven Alfresco Plugin}} will by default launch an embedded
+    H2 Database along with an embedded Tomcat server. Advanced use cases can be configured to use external databases such as MySQL, PostgreSQL or various enterprise databases. See the
+    {{{./plugins/alfresco-maven-plugin/index.html} Maven Alfresco Plugin}} documentation for more information.
+
     See details in the {{{./prerequisites.html} SDK pre-requisites page}}.
 
-* Rapid development with Spring Loaded
+* Rapid development with HotSwap Agent or JRebel
 
-    The SDK (as of 2.0) support true rapid development and IDE integration. To allow hot reload of Java classes the SDK leverages
-    {{{https://github.com/spring-projects/spring-loaded}spring-loaded}}, a library which allows seamless reloading of classfiles.
+    The SDK (as of 3.0) support true rapid development and IDE integration. To allow hot reload of Java classes the SDK leverages
+    {{{http://hotswapagent.org}HotSwap Agent}}, a library which allows seamless reloading of classfiles. JRebel is also supported out of the box.
     
-    Check the {{{./prerequisites.html} SDK pre-requisites page}} to enable spring-loaded rapid development.
+    Check the {{{./prerequisites.html} SDK pre-requisites page}} to enable rapid development.
 
 Project History
 
@@ -86,3 +80,5 @@ Project History
   * The new Maven Alfresco SDK 1.0 is released and presented on Tuesday 7 November at {{{http://devcon.alfresco.com/}Alfresco DevCon}} in Berlin.
   
   * The new Alfresco SDK 2.0 is released and presented on late 2014 November and released on Maven Central
+
+  * In March 2017 Alfresco SDK 3.0 is released

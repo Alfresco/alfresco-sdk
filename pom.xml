@@ -34,33 +34,7 @@
   </scm>
 
     <developers>
-        <developer>
-            <id>mindthegab</id>
-            <name>Gabriele Columbro</name>
-            <email>gabriele.columbro@alfresco.com</email>
-            <url>http://mindthegab.com</url>
-            <organization>Alfresco Software</organization>
-            <organizationUrl>http://www.alfresco.com</organizationUrl>
-            <timezone>-5</timezone>
-            <roles>
-                <role>Founder</role>
-                <role>Architect</role>
-                <role>Developer</role>
-            </roles>
-        </developer>
-        <developer>
-            <id>maoo</id>
-            <name>Maurizio Pillitu</name>
-            <email>maurizio.pillitu@alfresco.com</email>
-            <url>http://session.it</url>
-            <organization>Alfresco Software</organization>
-            <organizationUrl>http://www.alfresco.com</organizationUrl>
-            <timezone>+1</timezone>
-            <roles>
-                <role>Architect</role>
-                <role>Developer</role>
-            </roles>
-        </developer>
+
         <developer>
             <id>ohej</id>
             <name>Ole Hejlskov</name>
@@ -89,6 +63,22 @@
     </developers>
 
     <contributors>
+        <contributor>
+            <name>Gabriele Columbro</name>
+            <email>gabriele.columbro@alfresco.com</email>
+            <url>http://mindthegab.com</url>
+            <organization>Alfresco Software</organization>
+            <organizationUrl>http://www.alfresco.com</organizationUrl>
+            <timezone>-5</timezone>
+        </contributor>
+        <contributor>
+            <name>Maurizio Pillitu</name>
+            <email>maurizio.pillitu@alfresco.com</email>
+            <url>http://session.it</url>
+            <organization>Alfresco Software</organization>
+            <organizationUrl>http://www.alfresco.com</organizationUrl>
+            <timezone>+1</timezone>
+        </contributor>
         <contributor>
             <name>Carlo Sciolla</name>
             <email>carlo@backbase.com</email>
@@ -282,6 +272,11 @@
                             <releaseProfiles>sdk-release,enterprise-tests</releaseProfiles>
                         </configuration>
                     </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-project-info-reports-plugin</artifactId>
+                        <version>2.9</version>
+                    </plugin>
                 </plugins>
                 <pluginManagement>
                     <plugins>
@@ -308,6 +303,8 @@
                         </reportSets>
                         <configuration>
                             <onlyCurrentVersion>true</onlyCurrentVersion>
+                            <includeOpenIssues>false</includeOpenIssues>
+
                         </configuration>
                     </plugin>
                 </plugins>
