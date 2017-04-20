@@ -12,3 +12,4 @@ pom.xml.next
 release.properties
 **.settings
 **bin
+*.DS_Store
