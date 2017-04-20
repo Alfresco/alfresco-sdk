@@ -317,13 +317,13 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     @Parameter(property = "activiti.admin.war.artifactId", defaultValue = "activiti-admin")
     protected String activitiAdminWarArtifactId;
 
-    @Parameter(property = "alfresco.platform.version", defaultValue = "5.2.e")
+    @Parameter(property = "alfresco.platform.version", defaultValue = "5.2.f")
     protected String alfrescoPlatformVersion;
 
-    @Parameter(property = "alfresco.share.version", defaultValue = "5.2.d")
+    @Parameter(property = "alfresco.share.version", defaultValue = "5.2.e")
     protected String alfrescoShareVersion;
 
-    @Parameter(property = "alfresco.api.explorer.version", defaultValue = "5.2.e")
+    @Parameter(property = "alfresco.api.explorer.version", defaultValue = "5.2.f")
     protected String alfrescoApiExplorerVersion;
 
     @Parameter(property = "activiti.version", defaultValue = "1.5.3")
