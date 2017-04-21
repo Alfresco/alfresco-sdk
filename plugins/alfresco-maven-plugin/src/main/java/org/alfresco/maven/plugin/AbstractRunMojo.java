@@ -1084,6 +1084,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                     // Skip if we are not running a 5.1 version of Alfresco, 'Alfresco Share Services'
                     // was not used in earlier versions
                     if (!isPlatformVersionGtOrEqTo51()) {
+                        getLog().info("Skipping alfresco-share-services, only needed for 5.1+");
                         continue;
                     }
                 }
@@ -1560,16 +1561,36 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      * Get the Alfresco Platform Webapp artifactId (i.e. for alfresco.war),
      * it changes from 'alfresco' to 'alfresco-platform' in 5.1.
      *
+     * Matrix for determinig the Alfresco WAR Artifact
+     * 4.2.x Community  == alfresco.war
+     * 4.2.x Enterprise == alfresco-enterprise.war
+     * 5.0.x Community  == alfresco.war
+     * 5.0.x Enterprise == alfresco-enterprise.war
+     * 5.1.x Community  == alfresco-platform.war
+     * 5.1.x Enterprise == alfresco-platform-enterprise.war
+     *
      * @return the Maven artifactId for Alfresco Platform webapp
      */
     private String getPlatformWarArtifactId() {
-        // Default alfrescoPlatformWarArtifactId is 'alfresco-platform'
 
-        if (isPlatformVersionGtOrEqTo51() == false) {
-            // We are running version 4.2 or 5.0, so use older artifactId
+        if (isPlatformVersionGtOrEqTo51() == false && alfrescoEdition.equals(ALFRESCO_COMMUNITY_EDITION)) {
+            // We are running version 4.2 or 5.0 in community so use "alfresco"
             alfrescoPlatformWarArtifactId = "alfresco";
-        } else if (alfrescoEdition.equals(ALFRESCO_ENTERPRISE_EDITION)) {
+        }
+
+        if (isPlatformVersionGtOrEqTo51() == false && alfrescoEdition.equals(ALFRESCO_ENTERPRISE_EDITION)) {
+            // We are running version 4.2 or 5.0 in enterprise so use "alfresco-enterprise"
             alfrescoPlatformWarArtifactId = "alfresco-enterprise";
+        }
+
+        if (isPlatformVersionGtOrEqTo51() == true && alfrescoEdition.equals(ALFRESCO_COMMUNITY_EDITION)) {
+            // We are running version 5.1 or greater in community so use "alfresco-platform"
+            alfrescoPlatformWarArtifactId = "alfresco-platform";
+        }
+
+        if (isPlatformVersionGtOrEqTo51() == true && alfrescoEdition.equals(ALFRESCO_ENTERPRISE_EDITION)) {
+            // We are running version 5.1 or greater in enterprise so use "alfresco-platform-enterprise"
+            alfrescoPlatformWarArtifactId = "alfresco-platform-enterprise";
         }
 
         return alfrescoPlatformWarArtifactId;
