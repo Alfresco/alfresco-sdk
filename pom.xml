@@ -129,7 +129,7 @@
         <alfresco.sdk.tests.exclude>*/*-enterprise*/*</alfresco.sdk.tests.exclude>
 
         <!-- The following version is needed for alfresco-rad -->
-        <alfresco.community.default.version>5.2.e</alfresco.community.default.version>
+        <alfresco.community.default.version>5.2.f</alfresco.community.default.version>
         <alfresco.enterprise.default.version>5.2.0</alfresco.enterprise.default.version>
         <alfresco.sdk.default.edition>community</alfresco.sdk.default.edition>
 
