@@ -1561,9 +1561,9 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      * Get the Alfresco Platform Webapp artifactId (i.e. for alfresco.war),
      * it changes from 'alfresco' to 'alfresco-platform' in 5.1.
      *
-     * Matrix for determinig the Alfresco WAR Artifact
+     * Matrix for determining the Alfresco WAR Artifact
      * 4.2.x Community  == alfresco.war
-     * 4.2.x Enterprise == alfresco-enterprise.war
+     * 4.2.x Enterprise == alfresco.war
      * 5.0.x Community  == alfresco.war
      * 5.0.x Enterprise == alfresco-enterprise.war
      * 5.1.x Community  == alfresco-platform.war
@@ -1578,10 +1578,16 @@ public abstract class AbstractRunMojo extends AbstractMojo {
             alfrescoPlatformWarArtifactId = "alfresco";
         }
 
-        if (isPlatformVersionGtOrEqTo51() == false && alfrescoEdition.equals(ALFRESCO_ENTERPRISE_EDITION)) {
-            // We are running version 4.2 or 5.0 in enterprise so use "alfresco-enterprise"
+        if (isPlatformVersionLtOrEqTo42() == true && alfrescoEdition.equals(ALFRESCO_ENTERPRISE_EDITION)) {
+            // We are running version 4.2 so use "alfresco-enterprise"
+            alfrescoPlatformWarArtifactId = "alfresco";
+        }
+
+        if (getPlatformVersionNumber() == 50 && alfrescoEdition.equals(ALFRESCO_ENTERPRISE_EDITION)) {
+            // We are running version 5.0 in enterprise so use "alfresco-enterprise"
             alfrescoPlatformWarArtifactId = "alfresco-enterprise";
         }
+
 
         if (isPlatformVersionGtOrEqTo51() == true && alfrescoEdition.equals(ALFRESCO_COMMUNITY_EDITION)) {
             // We are running version 5.1 or greater in community so use "alfresco-platform"
