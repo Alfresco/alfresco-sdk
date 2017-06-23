@@ -7,6 +7,8 @@ This project is released under the [Apache License, Version 2.0](http://www.apac
 
 ## News
 
+- 2017-06-23: Alfresco SDK 3.0.1 released, [containing a critial bugfix](https://github.com/Alfresco/alfresco-sdk/issues/461)
+- 2017-04-01: Alfresco SDK 3.0.0 released
 - 2017-03-27: After years of hard work, countless iterations and gathering feedback, SDK 3.0 has finally been merged into the master branch, ready for release in the coming days
 - 2016-02-20: SDK 2.2.0 released to Maven Central. Docs for [Community](http://docs.alfresco.com/community/concepts/alfresco-sdk-intro.html), [Enterprise](http://docs.alfresco.com/5.1/concepts/alfresco-sdk-intro.html), [Release notes](https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-sdk-aggregator/latest/github-report.html)
 - 2015-10-19: SDK 2.1.1 released to Maven Central. Docs for [Community](http://docs.alfresco.com/community/concepts/alfresco-sdk-intro.html), [Enterprise](http://docs.alfresco.com/5.0/concepts/alfresco-sdk-intro.html)
