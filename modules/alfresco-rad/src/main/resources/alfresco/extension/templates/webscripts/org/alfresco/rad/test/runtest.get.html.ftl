@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>${test?html}</title>
+    <title>${test!?html}</title>
     <script language="JavaScript">
         function showdiv(id) {
             //safe function to show an element with a specified id
@@ -20,13 +20,13 @@
     </script>
 </head>
 <body>
-<h1>Integration Test: ${test?html}</h1>
-<div><b>Result:</b> ${result}</div>
+<h1>Integration Test: ${test!?html}</h1>
+<div><b>Result:</b> ${result!}</div>
 <#if failures??>
     <#list failures as failure>
-    <div id="testHeader"><b>${failure.getTestHeader()?html}</b></div>
-    <div id="message"><a href="#" onclick="showdiv('trace');return false;">${failure.getMessage()?html}</a></div>
-    <div id="trace" style="display:none;"><pre>${failure.getTrace()?html}</pre></div>
+    <div id="testHeader"><b>${failure.getTestHeader()!?html}</b></div>
+    <div id="message"><a href="#" onclick="showdiv('trace');return false;">${failure.getMessage()!?html}</a></div>
+    <div id="trace" style="display:none;"><pre>${failure.getTrace()!?html}</pre></div>
     <br/>
     </#list>
 </#if>
