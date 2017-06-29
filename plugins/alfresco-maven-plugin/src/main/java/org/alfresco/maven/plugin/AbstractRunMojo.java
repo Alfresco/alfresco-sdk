@@ -450,6 +450,35 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     }
 
     /**
+     * Copy custom solr configuration files over, so a 
+     * developer can overwrite any files needed
+     * 
+     * @throws MojoExecutionException
+     */
+    protected void copySolrCustomConfig() throws MojoExecutionException {
+    	getLog().info("Copying custom Solr config");
+        executeMojo(
+                plugin(
+                        groupId("org.apache.maven.plugins"),
+                        artifactId("maven-resources-plugin"),
+                        version(MAVEN_RESOURCE_PLUGIN_VERSION)
+                ),
+                goal("copy-resources"),
+                configuration(
+                        element(name("outputDirectory"), solrHome),
+                        element(name("overwrite"), "true"),
+                        element(name("resources"),
+                                element(name("resource"),
+                                        element(name("directory"), "src/test/resources/solr"),
+                                        element(name("filtering"), "true")
+                                )
+                        )
+                ),
+                execEnv
+        );
+    }
+    
+    /**
      * Replace property placeholders in configuration files for the cores, so the
      * index files can be found for each core when Solr starts up.
      *
