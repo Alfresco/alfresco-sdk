@@ -7,7 +7,7 @@
         <#list failures as failure>
             <trace>${failure.getTrace()?html}</trace>
             <exception>${failure.getException()?html}</exception>
-            <message>${failure.getMessage()?html}</message>
+            <message>${failure.getMessage()!""?html}</message>
             <testHeader>${failure.getTestHeader()?html}</testHeader>
         </#list>
     </failures>

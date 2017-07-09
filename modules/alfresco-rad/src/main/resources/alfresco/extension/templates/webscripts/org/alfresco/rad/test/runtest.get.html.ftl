@@ -25,7 +25,7 @@
 <#if failures??>
     <#list failures as failure>
     <div id="testHeader"><b>${failure.getTestHeader()?html}</b></div>
-    <div id="message"><a href="#" onclick="showdiv('trace');return false;">${failure.getMessage()?html}</a></div>
+    <div id="message"><a href="#" onclick="showdiv('trace');return false;">${failure.getMessage()!""?html}</a></div>
     <div id="trace" style="display:none;"><pre>${failure.getTrace()?html}</pre></div>
     <br/>
     </#list>
