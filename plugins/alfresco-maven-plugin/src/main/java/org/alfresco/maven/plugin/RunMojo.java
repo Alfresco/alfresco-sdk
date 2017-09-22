@@ -49,6 +49,7 @@ public class RunMojo extends AbstractRunMojo {
         if (enableSolr) {
             unpackSolrConfig();
             fixSolrHomePath();
+            copySolrCustomConfig();
             replaceSolrConfigProperties();
             installSolr10InLocalRepo();
         }
