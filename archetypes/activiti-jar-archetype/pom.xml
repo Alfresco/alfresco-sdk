@@ -6,8 +6,8 @@
   <artifactId>activiti-jar-archetype</artifactId>
 
   <packaging>maven-archetype</packaging>
-  <name>Alfresco SDK - Activiti JAR Archetype</name>
-  <description>Sample project with full support for lifecycle and rapid development of Activiti JARs</description>
+  <name>DEPRECATED - UNSUPPORTED - EXPERIMENTAL: Alfresco SDK - Activiti JAR Archetype</name>
+  <description>DEPRECATED - UNSUPPORTED - EXPERIMENTAL</description>
 
   <parent>
     <groupId>org.alfresco.maven</groupId>

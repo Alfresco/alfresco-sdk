@@ -186,6 +186,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     protected boolean enableApiExplorer;
 
     /**
+     * Deprecated as of SDK 3.1
      * Switch to enable/disable Alfresco Activiti Workflow Engine (activiti-app.war) when running embedded Tomcat.
      * This contains the Alfresco Activiti webapp, including the workflow engine.
      * This webapp is also the user interface for people involved in the task and processes
@@ -197,6 +198,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     protected boolean enableActivitiApp;
 
     /**
+     * Deprecated as of SDK 3.1
      * Switch to enable/disable Alfresco Activiti Admin (activiti-admin.war) when running embedded Tomcat.
      * This contains the Alfresco Activiti Administrator webapp. You use this to administer and monitor your
      * Alfresco Activiti engines.
@@ -242,6 +244,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     protected List<ModuleDependency> shareModules;
 
     /**
+     * Deprecated as of SDK 3.1
      * JARs that should be overlayed/applied to the Activiti App WAR (i.e. activiti-app.war)
      */
     @Parameter(property = "maven.activiti.modules", defaultValue = "")
@@ -296,6 +299,9 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     @Parameter(property = "alfresco.groupId", defaultValue = "org.alfresco")
     protected String alfrescoGroupId;
 
+    /**
+     * Deprecated as of SDK 3.1
+     */
     @Parameter(property = "activiti.groupId", defaultValue = "com.activiti")
     protected String activitiGroupId;
 
@@ -311,9 +317,16 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     @Parameter(property = "alfresco.api.explorer.artifactId", defaultValue = "api-explorer")
     protected String alfrescoApiExplorerArtifactId;
 
+    /**
+     * Deprecated as of SDK 3.1
+     */
+
     @Parameter(property = "activiti.app.war.artifactId", defaultValue = "activiti-app")
     protected String activitiAppWarArtifactId;
 
+    /**
+     * Deprecated as of SDK 3.1
+     */
     @Parameter(property = "activiti.admin.war.artifactId", defaultValue = "activiti-admin")
     protected String activitiAdminWarArtifactId;
 
@@ -326,6 +339,9 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     @Parameter(property = "alfresco.api.explorer.version", defaultValue = "5.2.e")
     protected String alfrescoApiExplorerVersion;
 
+    /**
+     * Deprecated as of SDK 3.1
+     */
     @Parameter(property = "activiti.version", defaultValue = "1.5.3")
     protected String activitiVersion;
 
@@ -1348,6 +1364,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
         }
 
         if (enableActivitiApp) {
+
             webapps2Deploy.add(createWebAppElement(
                     runnerActivitiAppGroupId, runnerActivitiAppWarArtifactId, runnerActivitiAppVersion,
                     "/activiti-app", null));
