@@ -26,6 +26,7 @@
     <format default="html">any</format>
     <lifecycle>internal</lifecycle>
     <authentication>user</authentication>
+    <transaction>none</transaction>
     <family>Alfresco SDK</family>
     <cache>
         <never>false</never>
