@@ -352,6 +352,12 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     protected String solrHome;
 
     /**
+     * Solr indexation frequency. It is customizable to speed up integration tests execution.
+     */
+    @Parameter(property = "solr.alfresco.cron", defaultValue = "0/15 * * * * ? *")
+    protected String solrCron;
+
+    /**
      * Maven GAV properties for customized alfresco.war, share.war, activiti-app.war
      * Used by the Maven Tomcat 7 Plugin
      */
@@ -531,8 +537,11 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                                 element(name("replacement"),
                                         element(name("token"), "alfresco.secureComms=https"),
                                         element(name("value"), "alfresco.secureComms=none")
+                                ),
+                                element(name("replacement"),
+                                        element(name("token"), "alfresco.cron=0/15 * * * * ? *"),
+                                        element(name("value"), "alfresco.cron=" + solrCron)
                                 )
-
                         )
                 ),
                 execEnv
