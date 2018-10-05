@@ -82,18 +82,12 @@ public class IntegrationTestMojo extends AbstractRunMojo {
         getLog().info("Checking if Tomcat is already running on port " + "");
         if ( ! tomcatIsRunning() ) {
 
-            if (enableSolr) {
-                unpackSolrConfig();
-                fixSolrHomePath();
-                replaceSolrConfigProperties();
-                installSolr10InLocalRepo();
-            }
+
 
             if (enableTestProperties && enablePlatform) {
                 copyAlfrescoGlobalProperties();
             }
 
-            String testJarArtifactId = null;
             if (enablePlatform) {
                 // Add alfresco-rad module to platform WAR
                 // So we got access to Alfresco Test Runner in the server

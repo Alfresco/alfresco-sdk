@@ -47,15 +47,6 @@ public class RunMojo extends AbstractRunMojo {
         );
 
 
-
-        if (enableSolr) {
-            unpackSolrConfig();
-            fixSolrHomePath();
-            copySolrCustomConfig();
-            replaceSolrConfigProperties();
-            installSolr10InLocalRepo();
-        }
-
         if (enableTestProperties && enablePlatform) {
             copyAlfrescoGlobalProperties();
         }
@@ -69,7 +60,6 @@ public class RunMojo extends AbstractRunMojo {
         }
 
         if (startTomcat) {
-            checkDatabaseConfig();
             boolean fork = false;
             startTomcat(fork);
         }
