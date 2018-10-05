@@ -26,12 +26,13 @@
 
         <!-- Properties used in dependency declarations, you don't need to change these -->
         <alfresco.groupId>org.alfresco</alfresco.groupId>
+        <alfresco.bomDependencyArtifactId>acs-community-packaging</alfresco.bomDependencyArtifactId>
 
         <!-- Alfresco Platform and Share webapp versions, these are the original Alfresco webapps that will be
              customized and then deployed and run by the tomcat maven plugin when
              executing for example $ mvn clean install alfresco:run -->
         <alfresco.platform.version>6.0.7-ga</alfresco.platform.version>
-        <alfresco.share.version>6.0.7-ga</alfresco.share.version>
+        <alfresco.share.version>6.0.c</alfresco.share.version>
 
 
         <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
@@ -72,9 +73,8 @@
         <!-- The main Alfresco Repo dependency for compiling Java code in src/main/java -->
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
-            <artifactId>alfresco-repository</artifactId>
+            <artifactId>alfresco-remote-api</artifactId>
         </dependency>
-
 
         <!-- Bring in Alfresco RAD so we get access to AlfrescoTestRunner classes -->
         <dependency>
@@ -95,7 +95,7 @@
             -->
             <dependency>
                 <groupId>${alfresco.groupId}</groupId>
-                <artifactId>alfresco-platform-distribution</artifactId>
+                <artifactId>${alfresco.bomDependencyArtifactId}</artifactId>
                 <version>${alfresco.platform.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -124,20 +124,6 @@
                 <scope>provided</scope>
             </dependency>
 
-            <!-- Redefine the following surf dependencies as they have no resolvable version in the
-                 alfresco-platform-distribution artifact -->
-            <dependency>
-                <groupId>org.alfresco.surf</groupId>
-                <artifactId>spring-surf</artifactId>
-                <version>${alfresco.surf.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.alfresco.surf</groupId>
-                <artifactId>spring-surf-api</artifactId>
-                <version>${alfresco.surf.version}</version>
-                <scope>provided</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 

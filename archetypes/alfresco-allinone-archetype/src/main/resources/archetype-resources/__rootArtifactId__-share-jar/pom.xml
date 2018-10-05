@@ -26,10 +26,6 @@
             <classifier>classes</classifier>
         </dependency>
 
-        <dependency>
-            <groupId>org.alfresco.surf</groupId>
-            <artifactId>spring-surf-api</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
