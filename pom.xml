@@ -113,10 +113,8 @@
         <module>plugins/alfresco-maven-plugin</module>
         <!-- Archetypes -->
         <module>archetypes/alfresco-platform-jar-archetype</module>
-
         <module>archetypes/alfresco-share-jar-archetype</module>
         <module>archetypes/alfresco-allinone-archetype</module>
-        <module>archetypes/activiti-jar-archetype</module>
 
   </modules>
 

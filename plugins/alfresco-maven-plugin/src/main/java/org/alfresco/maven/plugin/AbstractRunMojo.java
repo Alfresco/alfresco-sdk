@@ -62,7 +62,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
 
     public static final String PLATFORM_WAR_PREFIX_NAME = "platform";
     public static final String SHARE_WAR_PREFIX_NAME = "share";
-    public static final String ACTIVITI_APP_WAR_PREFIX_NAME = "activitiApp";
+
 
     public static final String ALFRESCO_ENTERPRISE_EDITION = "enterprise";
     public static final String ALFRESCO_COMMUNITY_EDITION = "community";
@@ -185,27 +185,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     @Parameter(property = "maven.alfresco.enableApiExplorer", defaultValue = "false")
     protected boolean enableApiExplorer;
 
-    /**
-     * Deprecated as of SDK 3.1
-     * Switch to enable/disable Alfresco Activiti Workflow Engine (activiti-app.war) when running embedded Tomcat.
-     * This contains the Alfresco Activiti webapp, including the workflow engine.
-     * This webapp is also the user interface for people involved in the task and processes
-     * running in the Activiti engine.
-     * You also use this webapp to create and manage process definitions, and to display and define analytics
-     * reports on users' tasks and processes.
-     */
-    @Parameter(property = "maven.alfresco.enableActivitiApp", defaultValue = "false")
-    protected boolean enableActivitiApp;
-
-    /**
-     * Deprecated as of SDK 3.1
-     * Switch to enable/disable Alfresco Activiti Admin (activiti-admin.war) when running embedded Tomcat.
-     * This contains the Alfresco Activiti Administrator webapp. You use this to administer and monitor your
-     * Alfresco Activiti engines.
-     *
-     */
-    @Parameter(property = "maven.alfresco.enableActivitiAdmin", defaultValue = "false")
-    protected boolean enableActivitiAdmin;
 
     /**
      * Switch to enable/disable test properties when running embedded Tomcat.
@@ -243,12 +222,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     @Parameter(property = "maven.alfresco.share.modules", defaultValue = "")
     protected List<ModuleDependency> shareModules;
 
-    /**
-     * Deprecated as of SDK 3.1
-     * JARs that should be overlayed/applied to the Activiti App WAR (i.e. activiti-app.war)
-     */
-    @Parameter(property = "maven.activiti.modules", defaultValue = "")
-    protected List<ModuleDependency> activitiModules;
 
     /**
      * Community Edition or Enterprise Edition? (i.e community or enterprise)
@@ -299,12 +272,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     @Parameter(property = "alfresco.groupId", defaultValue = "org.alfresco")
     protected String alfrescoGroupId;
 
-    /**
-     * Deprecated as of SDK 3.1
-     */
-    @Parameter(property = "activiti.groupId", defaultValue = "com.activiti")
-    protected String activitiGroupId;
-
     @Parameter(property = "alfresco.platform.war.artifactId", defaultValue = "alfresco-platform")
     protected String alfrescoPlatformWarArtifactId;
 
@@ -317,18 +284,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     @Parameter(property = "alfresco.api.explorer.artifactId", defaultValue = "api-explorer")
     protected String alfrescoApiExplorerArtifactId;
 
-    /**
-     * Deprecated as of SDK 3.1
-     */
-
-    @Parameter(property = "activiti.app.war.artifactId", defaultValue = "activiti-app")
-    protected String activitiAppWarArtifactId;
-
-    /**
-     * Deprecated as of SDK 3.1
-     */
-    @Parameter(property = "activiti.admin.war.artifactId", defaultValue = "activiti-admin")
-    protected String activitiAdminWarArtifactId;
 
     @Parameter(property = "alfresco.platform.version", defaultValue = "5.2.f")
     protected String alfrescoPlatformVersion;
@@ -339,11 +294,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     @Parameter(property = "alfresco.api.explorer.version", defaultValue = "5.2.e")
     protected String alfrescoApiExplorerVersion;
 
-    /**
-     * Deprecated as of SDK 3.1
-     */
-    @Parameter(property = "activiti.version", defaultValue = "1.5.3")
-    protected String activitiVersion;
 
     /**
      * Directory that contains the Alfresco Solr 4 configuration
@@ -352,7 +302,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     protected String solrHome;
 
     /**
-     * Maven GAV properties for customized alfresco.war, share.war, activiti-app.war
+     * Maven GAV properties for customized alfresco.war and share.war
      * Used by the Maven Tomcat 7 Plugin
      */
     private String runnerAlfrescoGroupId;
@@ -360,9 +310,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     private String runnerAlfrescoShareWarArtifactId;
     private String runnerAlfrescoPlatformVersion;
     private String runnerAlfrescoShareVersion;
-    private String runnerActivitiAppGroupId;
-    private String runnerActivitiAppWarArtifactId;
-    private String runnerActivitiAppVersion;
 
     /**
      * The Maven environment that this mojo is executed in
@@ -882,39 +829,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
         );
     }
 
-    /**
-     * Copy the Activiti Log4J Dev config into the activitiApp-war/WEB-INF/classes dir.
-     *
-     * @throws MojoExecutionException
-     */
-    protected void copyActivitiLog4JDevConfig() throws MojoExecutionException {
-       final String warOutputDir = getWarOutputDir(ACTIVITI_APP_WAR_PREFIX_NAME);
-        final String logConfDestDir = warOutputDir + "/WEB-INF/classes";
-
-        getLog().info("Copying Activiti log4j-dev.properties to: " + logConfDestDir);
-
-        executeMojo(
-                plugin(
-                        groupId("org.apache.maven.plugins"),
-                        artifactId("maven-resources-plugin"),
-                        version(MAVEN_RESOURCE_PLUGIN_VERSION)
-                ),
-                goal("copy-resources"),
-                configuration(
-                        element(name("outputDirectory"), logConfDestDir),
-                        element(name("resources"),
-                                element(name("resource"),
-                                        element(name("directory"), "src/test/resources"),
-                                        element(name("includes"),
-                                                element(name("include"), "log4j-dev.properties")
-                                        ),
-                                        element(name("filtering"), "true")
-                                )
-                        )
-                ),
-                execEnv
-        );
-    }
 
 
     /**
@@ -1074,24 +988,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
         runnerAlfrescoShareVersion = "${project.version}";
     }
 
-    /**
-     * Build the customized Activiti App webapp (i.e. the activiti-app.war)
-     * that should be deployed by Tomcat by applying all JARs from
-     * the {@code <activitiModules> } configuration.
-     */
-    protected void buildActivitiAppWar() throws MojoExecutionException {
-        buildCustomWarInDir(ACTIVITI_APP_WAR_PREFIX_NAME, activitiModules,
-                activitiGroupId, activitiAppWarArtifactId, activitiVersion);
-
-        copyActivitiLog4JDevConfig();
-
-        String activitiAppWarArtifactId = packageAndInstallCustomWar(ACTIVITI_APP_WAR_PREFIX_NAME);
-
-        // Set up the custom share war to be run by Tomcat plugin
-        runnerActivitiAppGroupId = "${project.groupId}";
-        runnerActivitiAppWarArtifactId = activitiAppWarArtifactId;
-        runnerActivitiAppVersion = "${project.version}";
-    }
 
     /**
      * Build a customized webapp in a directory,
@@ -1266,8 +1162,8 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      * Check that a database configuration has been supplied correctly
      */
     protected void checkDatabaseConfig() throws MojoExecutionException {
-        // Only do this check if we are running alfresco.war or activiti-app.war that needs a database.
-        if (enablePlatform || enableActivitiApp) {
+        // Only do this check if we are running alfresco.war that needs a database.
+        if (enablePlatform) {
             if (enableH2 && !enableMySQL && !enablePostgreSQL) {
                 // Run with the H2 database
                 return;
@@ -1363,17 +1259,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                     "/api-explorer", null));
         }
 
-        if (enableActivitiApp) {
-
-            webapps2Deploy.add(createWebAppElement(
-                    runnerActivitiAppGroupId, runnerActivitiAppWarArtifactId, runnerActivitiAppVersion,
-                    "/activiti-app", null));
-        }
-
-        if (enableActivitiAdmin) {
-            webapps2Deploy.add(createWebAppElement(
-                    activitiGroupId, activitiAdminWarArtifactId, activitiVersion, "/activiti-admin", null));
-        }
 
         if (tomcatCustomWebapps != null && !tomcatCustomWebapps.isEmpty()) {
             // We got extra custom webapps to deploy
@@ -1393,10 +1278,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
         ArrayList systemProps = new ArrayList<Element>();
         if (enableSolr) {
             systemProps.add(element(name("solr.solr.home"), solrHome + "/"));
-        }
-        if (enableActivitiApp) {
-            // Should be in activiti-jar/src/test/resources
-            systemProps.add(element(name("log4j.configuration"), "log4j-dev.properties"));
         }
         // Add custom system properties defined in plugin config
         if (tomcatSystemProperties != null && !tomcatSystemProperties.isEmpty()) {

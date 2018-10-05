@@ -111,9 +111,6 @@ public class IntegrationTestMojo extends AbstractRunMojo {
                 buildShareWar();
             }
 
-            if (enableActivitiApp) {
-                buildActivitiAppWar();
-            }
 
             if (startTomcat) {
                 boolean fork = true;
