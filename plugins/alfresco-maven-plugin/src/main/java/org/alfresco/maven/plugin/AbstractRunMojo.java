@@ -741,53 +741,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
         }
     }
 
-    /**
-     * Rename the configured database specific alfresco-global-*.properties file to
-     * alfresco-global.properties so it will be used during Tomcat run.
-     *
-     * @throws MojoExecutionException
-     */
-    protected void renameAlfrescoGlobalProperties() throws MojoExecutionException {
-        String alfrescoGlobalFilePath = project.getBuild().getTestOutputDirectory() + "/alfresco-global-";
-        if (enableH2) {
-            alfrescoGlobalFilePath += "h2.properties";
-            getLog().info("Renaming alfresco-global-h2.properties to alfresco-global.properties");
-        } else if (enableMySQL) {
-            alfrescoGlobalFilePath += "mysql.properties";
-            getLog().info("Renaming alfresco-global-mysql.properties to alfresco-global.properties");
-        } else if (enablePostgreSQL) {
-            alfrescoGlobalFilePath += "postgresql.properties";
-            getLog().info("Renaming alfresco-global-postgresql.properties to alfresco-global.properties");
-        } else if (enableEnterpriseDb) {
-            alfrescoGlobalFilePath += "enterprise.properties";
-            getLog().info("Renaming alfresco-global-enterprise.properties to alfresco-global.properties");
-        } else {
-            throw new MojoExecutionException("Invalid database configuration, use enableH2, enableMySQL, " +
-                    "enablePostgreSQL, or enabaleEnterpriseDb");
-        }
 
-        if (!FileUtils.fileExists(alfrescoGlobalFilePath)) {
-            throw new MojoExecutionException("Missing file: " + alfrescoGlobalFilePath + ", when converting from older " +
-                    "SDK versions generate an SDK 3 AIO or Platform JAR project and copy " +
-                    "alfresco-global-*.properties files from it. Then configure any custom settings from old SDK " +
-                    "project repo/src/main/properties/local/alfresco-global.properties file in the new " +
-                    "alfresco-global-h2.properties file, or other config file corresponding to the database you are using.");
-        }
-
-        executeMojo(
-                plugin(
-                        groupId("com.coderplus.maven.plugins"),
-                        artifactId("copy-rename-maven-plugin"),
-                        version("1.0")
-                ),
-                goal("rename"),
-                configuration(
-                        element(name("sourceFile"), alfrescoGlobalFilePath),
-                        element(name("destinationFile"), "${project.build.testOutputDirectory}/alfresco-global.properties")
-                ),
-                execEnv
-        );
-    }
 
     /**
      * Copy the Alfresco Enterprise license to its correct place in the Platform WAR, if it exists.

@@ -91,7 +91,6 @@ public class IntegrationTestMojo extends AbstractRunMojo {
 
             if (enableTestProperties && enablePlatform) {
                 copyAlfrescoGlobalProperties();
-                renameAlfrescoGlobalProperties();
             }
 
             String testJarArtifactId = null;

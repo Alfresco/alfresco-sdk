@@ -58,7 +58,6 @@ public class RunMojo extends AbstractRunMojo {
 
         if (enableTestProperties && enablePlatform) {
             copyAlfrescoGlobalProperties();
-            renameAlfrescoGlobalProperties();
         }
 
         if (enablePlatform) {
