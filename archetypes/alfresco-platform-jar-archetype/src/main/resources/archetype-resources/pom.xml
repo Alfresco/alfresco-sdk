@@ -23,10 +23,6 @@
                 -->
         <alfresco.data.location>${session.executionRootDirectory}/alf_data_dev</alfresco.data.location>
 
-        <!-- Duplicated with alfresco.solrHome in the plugin, we need them out here to do filtering -->
-        <solr.home>${alfresco.data.location}/solr</solr.home>
-        <solr.model.dir>${solr.home}/alfrescoModels</solr.model.dir>
-        <solr.content.dir>${solr.home}/index</solr.content.dir>
 
         <!-- Properties used in dependency declarations, you don't need to change these -->
         <alfresco.groupId>org.alfresco</alfresco.groupId>
@@ -34,12 +30,10 @@
         <!-- Alfresco Platform webapp version, this is the original Alfresco webapp that will be
             customized and then deployed and run by the tomcat maven plugin when
             executing for example $ mvn clean install alfresco:run -->
-        <alfresco.platform.version>5.2.f</alfresco.platform.version>
+        <alfresco.platform.version>6.0.7-ga</alfresco.platform.version>
         <!-- Alfresco Share version, so we can bring in correct alfresco-share-services artifact -->
-        <alfresco.share.version>5.2.e</alfresco.share.version>
+        <alfresco.share.version>6.0.c</alfresco.share.version>
 
-        <!-- Default is to run with a Community edition, change to 'enterprise' if using Enterprise edition -->
-        <maven.alfresco.edition>community</maven.alfresco.edition>
 
 
         <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
@@ -64,7 +58,7 @@
         <dependencies>
             <dependency>
                 <groupId>${alfresco.groupId}</groupId>
-                <artifactId>alfresco-platform-distribution</artifactId>
+                <artifactId>${alfresco.bomDependencyArtifactId}</artifactId>
                 <version>${alfresco.platform.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -76,7 +70,7 @@
         <!-- The main Alfresco Repo dependency for compiling Java code in src/main/java -->
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
-            <artifactId>alfresco-repository</artifactId>
+            <artifactId>alfresco-remote-api</artifactId>
         </dependency>
 
         <!-- Bring in Alfresco RAD so we get access to AlfrescoTestRunner classes -->
@@ -91,7 +85,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>3.2.17.RELEASE</version>
             <scope>test</scope>
         </dependency>
 
@@ -125,12 +118,8 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <!-- We need the flat file H2 database to run the Repo -->
-                    <enableH2>true</enableH2>
                     <!-- This is a platform extension JAR, so we need the platform webapp (alfresco.war) -->
                     <enablePlatform>true</enablePlatform>
-                    <!-- Enable Solr so we can use search, our Repo extension probably need search -->
-                    <enableSolr>true</enableSolr>
                     <!-- We don't need the share.war if we don't have any UI extensions -->
                     <enableShare>false</enableShare>
                     <!-- Enable the REST API Explorer -->
