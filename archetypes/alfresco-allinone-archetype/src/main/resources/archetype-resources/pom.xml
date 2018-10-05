@@ -265,12 +265,8 @@
                 <version>${alfresco.sdk.version}</version>
                 <configuration>
 
-                    <!-- We need the flat file H2 database to run the Repo -->
-                    <enableH2>true</enableH2>
                     <!-- We always need the Platform/Repo webapp - alfresco.war -->
                     <enablePlatform>true</enablePlatform>
-                    <!-- Enable Solr webapp so we can use search -->
-                    <enableSolr>true</enableSolr>
                     <!-- We need Share webapp, so we got a UI for working with the Repo -->
                     <enableShare>true</enableShare>
                     <!-- Enable the REST API Explorer -->
