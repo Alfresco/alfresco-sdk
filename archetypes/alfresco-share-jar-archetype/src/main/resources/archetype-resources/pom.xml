@@ -5,8 +5,8 @@
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
-    <name>${artifactId} Share Jar Module - SDK 3</name>
-    <description>Share JAR Module (to be included in the share.war) - SDK 3</description>
+    <name>${artifactId} Share Jar Module - SDK 4.0</name>
+    <description>Share JAR Module (to be included in the share.war) - SDK 4.0</description>
     <packaging>jar</packaging>
 
     <properties>
