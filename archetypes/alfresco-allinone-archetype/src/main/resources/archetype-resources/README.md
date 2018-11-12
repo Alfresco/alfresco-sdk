@@ -1,19 +1,19 @@
-# Alfresco AIO Project - SDK 3
+# Alfresco AIO Project - SDK 4.0
 
-This is an All-In-One (AIO) project for Alfresco SDK 3.0. 
+This is an All-In-One (AIO) project for Alfresco SDK 4.0.
 
-Run with `mvn clean install -DskipTests=true alfresco:run` or `./run.sh` and verify that it 
+Run with `mvn clean install -DskipTests=true alfresco:run` or `./run.sh` and verify that it
 
- * Runs the embedded Tomcat + H2 DB 
+ * Runs the embedded Tomcat + H2 DB
  * Runs Alfresco Platform (Repository)
  * Runs Alfresco Solr4
  * Runs Alfresco Share
  * Packages both as JAR and AMP assembly for modules
- 
+
 # Few things to notice
 
  * No parent pom
- * No WAR projects, all handled by the Alfresco Maven Plugin 
+ * No WAR projects, all handled by the Alfresco Maven Plugin
  * No runner project - it's all in the Alfresco Maven Plugin
  * Standard JAR packaging and layout
  * Works seamlessly with Eclipse and IntelliJ IDEA
@@ -23,12 +23,9 @@ Run with `mvn clean install -DskipTests=true alfresco:run` or `./run.sh` and ver
  * No unit testing/functional tests just yet
  * Resources loaded from META-INF
  * Web Fragment (this includes a sample servlet configured via web fragment)
- 
+
 # TODO
- 
+
   * Abstract assembly into a dependency so we don't have to ship the assembly in the archetype
   * Purge
   * Functional/remote unit tests
-   
-  
- 

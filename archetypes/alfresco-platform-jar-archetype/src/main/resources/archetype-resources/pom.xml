@@ -5,8 +5,8 @@
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
-    <name>${artifactId} Platform Jar Module - SDK 3</name>
-    <description>Platform JAR Module (to be included in the alfresco.war) - SDK 3</description>
+    <name>${artifactId} Platform Jar Module - SDK 4.0</name>
+    <description>Platform JAR Module (to be included in the alfresco.war) - SDK 4.0</description>
     <packaging>jar</packaging>
 
     <properties>

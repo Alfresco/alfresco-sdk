@@ -3,7 +3,7 @@
 This is the home of the Alfresco SDK. The Alfresco SDK is used by developers to build extensions for the Alfresco Digital Business Platform. It is based on [Apache Maven](http://maven.apache.org/), compatible with major IDEs and enables Rapid Application Development (RAD) and Test Driven Development (TDD).
 
 ## License
-This project is released under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html) license. 
+This project is released under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html) license.
 If you are an Enterprise customer check the [Support](#alfresco-enterprise-customers-and-partners-support) section.
 
 ## News
@@ -21,11 +21,12 @@ If you are an Enterprise customer check the [Support](#alfresco-enterprise-custo
 ## User Getting Started
 
 ### Latest Documentation
-To get started with **Alfresco SDK 3.0.x** (latest) visit the [Alfresco Documentation](https://docs.alfresco.com/5.2/concepts/sdk-intro.html) 
+To get started with **Alfresco SDK 4.0.x** (latest) visit the [Alfresco Documentation](https://docs.alfresco.com/6.0/concepts/dev-for-developers.html) (documentation pending).
 
 #### Documentation about Previous Versions
-| SDK Version  | Alfresco Enterprise Version       |  Alfresco Community Version       | Documentation  | 
+| SDK Version  | Alfresco Enterprise Version       |  Alfresco Community Version       | Documentation  |
 | ------------- |:-------------:| :-----:|:-----|
+| SDK 3.0   | Alfresco 5.2.x | Alfresco 5.2.x | http://docs.alfresco.com/5.2/concepts/sdk-intro.html |
 | SDK 2.2   | Alfresco 5.1.x | Alfresco 5.1.x | https://docs.alfresco.com/5.1/concepts/alfresco-sdk-intro.html |
 | SDK 2.1   | Alfresco 5.0.1 | Alfresco 5.0.d | https://docs.alfresco.com/sdk2.1/concepts/alfresco-sdk-intro.html |
 | SDK 2.0   | Alfresco 5.0.0 | Alfresco 5.0.c | https://docs.alfresco.com/sdk2.0/concepts/alfresco-sdk-intro.html |
@@ -37,8 +38,8 @@ To get started with **Alfresco SDK 3.0.x** (latest) visit the [Alfresco Document
 Report issues (and contribute!) [here](https://github.com/Alfresco/alfresco-sdk/issues?milestone=1&state=open) or join us on the [IRC Channel](http://chat.alfresco.com/).
 
 ## Alfresco Enterprise Customers and Partners Support
-If you are an Alfresco Customer 
-please check the [SDK Support status](http://www.alfresco.com/services/subscription/technical-support/product-support-status) 
+If you are an Alfresco Customer
+please check the [SDK Support status](http://www.alfresco.com/services/subscription/technical-support/product-support-status)
 for the version you are using.  If your version is in Limited or Full Support and you need help, visit the [Support Portal](http://support.alfresco.com).
 
 ## Maven repositories
@@ -46,7 +47,7 @@ for the version you are using.  If your version is in Limited or Full Support an
 - Alfresco (Community and Enterprise) artifacts are  hosted in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/).
 - Alfresco Community artifacts (JARs, WARs, AMPs, poms) and SDK artifacts are publicly available.
 
-*NOTE:* By default the Alfresco SDK will use Community Edition releases but it can be configured to use Enterprise Edition releases.  Enterprise and Premier customers can use the SDK with 
+*NOTE:* By default the Alfresco SDK will use Community Edition releases but it can be configured to use Enterprise Edition releases.  Enterprise and Premier customers can use the SDK with
 Enterprise Edition releases by following the process described in [Working with Enterprise](https://docs.alfresco.com/5.2/concepts/sdk-using-enterprise.html)
 
 ### Alfresco Artifacts Repository
@@ -73,4 +74,3 @@ To test new unreleased (unsupported) features, you can use the following snippet
 
 ## For Developers that want to contribute to the SDK
 See the [Developers Wiki page](https://github.com/Alfresco/alfresco-sdk/wiki/Developer-Wiki).
-
