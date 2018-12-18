@@ -19,6 +19,7 @@ package org.alfresco.rad.test;
 
 import org.alfresco.rad.SpringContextHolder;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -66,6 +67,9 @@ import java.io.*;
  * @since 3.0
  */
 public class AlfrescoTestRunner extends BlockJUnit4ClassRunner {
+    private static final String ACS_ENDPOINT_PROP = "acs.endpoint.path";
+    private static final String ACS_DEFAULT_ENDPOINT = "http://localhost:8080/alfresco";
+
     public static final String SUCCESS = "SUCCESS";
     public static final String FAILURE = "FAILURE";
 
@@ -230,7 +234,9 @@ public class AlfrescoTestRunner extends BlockJUnit4ClassRunner {
 
     /**
      * Check the @Remote config on the test class to see where the
-     * Alfresco Repo is running
+     * Alfresco Repo is running. If it is not present, check the
+     * ACS_ENDPOINT_PROP system property as an alternative location.
+     * If none of them has a value, then return the default location.
      *
      * @param method
      * @return
@@ -243,7 +249,8 @@ public class AlfrescoTestRunner extends BlockJUnit4ClassRunner {
             return annotation.endpoint();
         }
 
-        return "http://localhost:8080/alfresco";
+        final String platformEndpoint = System.getProperty(ACS_ENDPOINT_PROP);
+        return StringUtils.isNotBlank(platformEndpoint) ? platformEndpoint : ACS_DEFAULT_ENDPOINT;
     }
 
 }
