@@ -1,13 +1,14 @@
 #set( $symbol_dollar = '$' )
 version: '3.4'
 services:
-  ${rootArtifactId}-share:
-    image: ${symbol_dollar}{docker.share.image}:${symbol_dollar}{alfresco.share.version}
-    environment:
-      REPO_HOST: ${rootArtifactId}-acs
-      REPO_PORT: 8080
-    ports:
-      - "${symbol_dollar}{share.port}:8080"
+#  Optional
+#  ${rootArtifactId}-share:
+#    image: ${symbol_dollar}{docker.share.image}:${symbol_dollar}{alfresco.share.version}
+#    environment:
+#      REPO_HOST: ${rootArtifactId}-acs
+#      REPO_PORT: 8080
+#    ports:
+#      - "${symbol_dollar}{share.port}:8080"
   ${rootArtifactId}-acs:
     image: alfresco-content-services-${rootArtifactId}:development
     build:
