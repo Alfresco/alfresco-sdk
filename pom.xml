@@ -126,6 +126,12 @@
         <alfresco.sdk.parent.version>${project.version}</alfresco.sdk.parent.version>
         <alfresco.sdk.tests.exclude>*/*-enterprise*/*</alfresco.sdk.tests.exclude>
 
+        <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
+        <alfresco.platform.version>6.0.7-ga</alfresco.platform.version>
+        <alfresco.share.version>6.0.c</alfresco.share.version>
+        <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
+        <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+
         <!-- The following version is needed for alfresco-rad -->
         <alfresco.community.default.version>5.2.f</alfresco.community.default.version>
         <alfresco.enterprise.default.version>5.2.0</alfresco.enterprise.default.version>
