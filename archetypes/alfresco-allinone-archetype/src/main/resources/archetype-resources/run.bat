@@ -4,7 +4,7 @@
 SET COMPOSE_FILE_PATH=%CD%\target\classes\docker\docker-compose.yml
 
 IF [%1]==[] (
-    echo "Usage: %0 {build_start|stop|purge|tail|reload_share|reload_acs|build_test|test}"
+    echo "Usage: %0 {build_start|start|stop|purge|tail|reload_share|reload_acs|build_test|test}"
     GOTO END
 )
 
@@ -57,7 +57,7 @@ IF %1==test (
     CALL :test
     GOTO END
 )
-echo "Usage: %0 {build_start|stop|purge|tail|reload_share|reload_acs|build_test|test}"
+echo "Usage: %0 {build_start|start|stop|purge|tail|reload_share|reload_acs|build_test|test}"
 :END
 EXIT /B %ERRORLEVEL%
 

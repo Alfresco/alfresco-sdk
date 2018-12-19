@@ -98,5 +98,5 @@ case "${symbol_dollar}1" in
     test
     ;;
   *)
-    echo "Usage: ${symbol_dollar}0 {build_start|stop|purge|tail|reload_share|reload_acs|build_test|test}"
+    echo "Usage: ${symbol_dollar}0 {build_start|start|stop|purge|tail|reload_share|reload_acs|build_test|test}"
 esac
