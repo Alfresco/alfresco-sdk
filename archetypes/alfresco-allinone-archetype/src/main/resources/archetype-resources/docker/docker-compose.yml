@@ -1,0 +1,59 @@
+#set( $symbol_dollar = '$' )
+version: '3.4'
+services:
+  ${rootArtifactId}-share:
+    image: alfresco-share-${rootArtifactId}:development
+    build:
+      dockerfile: ./Dockerfile
+      context: ../../../${rootArtifactId}-share-docker/target
+    environment:
+      CATALINA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8888"
+      REPO_HOST: ${rootArtifactId}-acs
+      REPO_PORT: 8080
+    ports:
+      - "${symbol_dollar}{share.port}:8080"
+      - "${symbol_dollar}{share.debug.port}:8888"
+  ${rootArtifactId}-acs:
+    image: alfresco-content-services-${rootArtifactId}:development
+    build:
+      dockerfile: ./Dockerfile
+      context: ../../../${rootArtifactId}-platform-docker/target
+    environment:
+      CATALINA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8888"
+    ports:
+      - "${symbol_dollar}{acs.port}:8080"
+      - "${symbol_dollar}{acs.debug.port}:8888"
+    volumes:
+      - alf-acs-volume:/usr/local/tomcat/alf_data
+    depends_on:
+      - ${rootArtifactId}-postgres
+  ${rootArtifactId}-postgres:
+    image: postgres:9.6
+    environment:
+      POSTGRES_DB: alfresco
+      POSTGRES_USER: alfresco
+      POSTGRES_PASSWORD: alfresco
+    ports:
+      - "${symbol_dollar}{postgres.port}:5432"
+    volumes:
+      - alf-db-volume:/var/lib/postgresql/data
+  ${rootArtifactId}-ass:
+    image: alfresco/alfresco-search-services:1.2.0
+    environment:
+      SOLR_ALFRESCO_HOST: ${rootArtifactId}-acs
+      SOLR_ALFRESCO_PORT: 8080
+      SOLR_SOLR_HOST: ${rootArtifactId}-ass
+      SOLR_SOLR_PORT: 8983
+      SOLR_CREATE_ALFRESCO_DEFAULTS: alfresco,archive
+    ports:
+      - "8983:8983"
+    volumes:
+      - alf-ass-volume:/opt/alfresco-search-services/contentstore
+      - alf-ass-volume:/opt/alfresco-search-services/data
+volumes:
+  alf-acs-volume:
+    external: true
+  alf-db-volume:
+    external: true
+  alf-ass-volume:
+    external: true
