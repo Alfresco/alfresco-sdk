@@ -128,7 +128,7 @@
 
         <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
         <alfresco.platform.version>6.0.7-ga</alfresco.platform.version>
-        <alfresco.share.version>6.0.c</alfresco.share.version>
+        <alfresco.share.version>6.0.b</alfresco.share.version>
         <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
         <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
 
