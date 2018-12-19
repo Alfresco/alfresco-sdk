@@ -11,10 +11,10 @@
      -->
 <alfresco-config>
     <!--================================================================================================================
-            Make custom types and aspects visible in "Change Type" and "Manage Aspects" actions.
-             This will also make them visible when creating rules.
-            (will be merged with out-of-the-box configured types and aspects)
-        =============================================================================================================-->
+        Make custom types and aspects visible in "Change Type" and "Manage Aspects" actions.
+         This will also make them visible when creating rules.
+        (will be merged with out-of-the-box configured types and aspects)
+    =============================================================================================================-->
 
     <config evaluator="string-compare" condition="DocumentLibrary">
         <aspects>

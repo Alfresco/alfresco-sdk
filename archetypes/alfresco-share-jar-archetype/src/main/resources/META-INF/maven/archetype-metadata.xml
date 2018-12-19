@@ -11,11 +11,37 @@
     </requiredProperties>
 
     <fileSets>
+        <fileSet encoding="UTF-8" filtered="true">
+            <directory>docker</directory>
+            <includes>
+                <include>**</include>
+            </includes>
+        </fileSet>
         <fileSet filtered="false" packaged="false" encoding="UTF-8">
             <directory>src/main/assembly</directory>
             <includes>
                 <include>**</include>
             </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="false">
+            <directory>src/main/docker</directory>
+            <includes>
+                <include>Dockerfile</include>
+                <include>share-config-custom.xml</include>
+            </includes>
+            <excludes>
+                <exclude>**/*.properties</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="true">
+            <directory>src/main/docker</directory>
+            <includes>
+                <include>**/*.properties</include>
+            </includes>
+            <excludes>
+                <exclude>Dockerfile</exclude>
+                <exclude>share-config-custom.xml</exclude>
+            </excludes>
         </fileSet>
         <fileSet filtered="true" packaged="true" encoding="UTF-8">
             <directory>src/main/java</directory>
@@ -51,18 +77,9 @@
                 <exclude>**/__artifactId__-example-widgets.xml</exclude>
             </excludes>
         </fileSet>
-        <fileSet filtered="true" packaged="false" encoding="UTF-8">
-            <directory>src/test/resources</directory>
-            <includes>
-                <include>**</include>
-            </includes>
-        </fileSet>
-
-        <fileSet encoding="UTF-8">
+        <fileSet encoding="UTF-8" filtered="true">
             <directory></directory>
             <includes>
-                <include>debug.sh</include>
-                <include>debug.bat</include>
                 <include>run.sh</include>
                 <include>run.bat</include>
                 <include>README.md</include>
