@@ -26,6 +26,7 @@ services:
                 -Dsolr.secureComms=none
                 -Dsolr.base.url=/solr
                 -Dindex.subsystem.name=solr6
+                -Dcsrf.filter.enabled=false
                 "
     ports:
       - "${symbol_dollar}{acs.port}:8080"
