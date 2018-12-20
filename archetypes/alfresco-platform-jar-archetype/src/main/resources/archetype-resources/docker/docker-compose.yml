@@ -20,7 +20,7 @@ services:
       - "${symbol_dollar}{acs.port}:8080"
       - "${symbol_dollar}{acs.debug.port}:8888"
     volumes:
-      - alf-acs-volume:/usr/local/tomcat/alf_data
+      - ${rootArtifactId}-acs-volume:/usr/local/tomcat/alf_data
     depends_on:
       - ${rootArtifactId}-postgres
   ${rootArtifactId}-postgres:
@@ -32,7 +32,7 @@ services:
     ports:
       - "${symbol_dollar}{postgres.port}:5432"
     volumes:
-      - alf-db-volume:/var/lib/postgresql/data
+      - ${rootArtifactId}-db-volume:/var/lib/postgresql/data
   ${rootArtifactId}-ass:
     image: alfresco/alfresco-search-services:1.2.0
     environment:
@@ -44,12 +44,12 @@ services:
     ports:
       - "8983:8983"
     volumes:
-      - alf-ass-volume:/opt/alfresco-search-services/contentstore
-      - alf-ass-volume:/opt/alfresco-search-services/data
+      - ${rootArtifactId}-ass-volume:/opt/alfresco-search-services/contentstore
+      - ${rootArtifactId}-ass-volume:/opt/alfresco-search-services/data
 volumes:
-  alf-acs-volume:
+  ${rootArtifactId}-acs-volume:
     external: true
-  alf-db-volume:
+  ${rootArtifactId}-db-volume:
     external: true
-  alf-ass-volume:
+  ${rootArtifactId}-ass-volume:
     external: true
