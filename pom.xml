@@ -103,6 +103,13 @@
             <timezone>-5</timezone>
             <url>http://rgauss.com/</url>
         </contributor>
+        <contributor>
+            <name>Jose Luis Osorno Gil</name>
+            <email>joseluis.osorno@ixxus.com</email>
+            <organization>Ixxus</organization>
+            <organizationUrl>http://www.ixxus.com</organizationUrl>
+            <timezone>+1</timezone>
+        </contributor>
     </contributors>
 
     <!-- All the modules of the Alfresco SDK -->
