@@ -82,7 +82,7 @@ EXIT /B 0
     docker-compose -f "%COMPOSE_FILE_PATH%" logs -f
 EXIT /B 0
 :test
-    call mvn verify -pl
+    call mvn verify
 EXIT /B 0
 :purge
     docker volume rm ${rootArtifactId}-acs-volume

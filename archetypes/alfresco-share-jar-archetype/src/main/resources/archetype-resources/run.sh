@@ -41,7 +41,7 @@ tail() {
 }
 
 test() {
-    mvn verify -pl
+    mvn verify
 }
 
 case "${symbol_dollar}1" in
