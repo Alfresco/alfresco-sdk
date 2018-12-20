@@ -56,9 +56,9 @@ echo "Usage: %0 {build_start|start|stop|purge|tail|reload_share|build_test|test}
 EXIT /B %ERRORLEVEL%
 
 :start
-    docker volume create alf-acs-volume
-    docker volume create alf-db-volume
-    docker volume create alf-ass-volume
+    docker volume create ${rootArtifactId}-acs-volume
+    docker volume create ${rootArtifactId}-db-volume
+    docker volume create ${rootArtifactId}-ass-volume
     docker-compose -f "%COMPOSE_FILE_PATH%" up --build -d
 EXIT /B 0
 :start_share
@@ -85,7 +85,7 @@ EXIT /B 0
     call mvn verify -pl
 EXIT /B 0
 :purge
-    docker volume rm alf-acs-volume
-    docker volume rm alf-db-volume
-    docker volume rm alf-ass-volume
+    docker volume rm ${rootArtifactId}-acs-volume
+    docker volume rm ${rootArtifactId}-db-volume
+    docker volume rm ${rootArtifactId}-ass-volume
 EXIT /B 0

@@ -4,9 +4,9 @@
 export COMPOSE_FILE_PATH=${symbol_dollar}{PWD}/target/classes/docker/docker-compose.yml
 
 start() {
-    docker volume create alf-acs-volume
-    docker volume create alf-db-volume
-    docker volume create alf-ass-volume
+    docker volume create ${rootArtifactId}-acs-volume
+    docker volume create ${rootArtifactId}-db-volume
+    docker volume create ${rootArtifactId}-ass-volume
     docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH up --build -d
 }
 
@@ -19,9 +19,9 @@ down() {
 }
 
 purge() {
-    docker volume rm alf-acs-volume
-    docker volume rm alf-db-volume
-    docker volume rm alf-ass-volume
+    docker volume rm ${rootArtifactId}-acs-volume
+    docker volume rm ${rootArtifactId}-db-volume
+    docker volume rm ${rootArtifactId}-ass-volume
 }
 
 build() {

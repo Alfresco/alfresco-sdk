@@ -1,1 +1,1 @@
-verify -Dmaven.test.skip=true
+verify -DskipTests=true

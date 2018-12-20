@@ -1,1 +1,0 @@
-install -Dalfresco.platform.version=5.1 -Dalfresco.share.version=5.1 -Dmaven.alfresco.edition=enterprise
