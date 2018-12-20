@@ -1,0 +1,1 @@
+install -DskipTests -Dalfresco.bomDependencyArtifactId="acs-packaging" -Dalfresco.platform.version="6.0.0.2" -Dalfresco.share.version="6.0" -Dalfresco.platform.docker.image="alfresco/alfresco-content-repository" -Dalfresco.share.docker.image="alfresco/alfresco-share"

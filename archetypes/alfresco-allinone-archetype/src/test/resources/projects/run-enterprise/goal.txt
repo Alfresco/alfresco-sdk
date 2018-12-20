@@ -1,1 +1,0 @@
-install -Dalfresco.platform.version=@@alfresco.enterprise.default.version@@ -Dalfresco.share.version=@@alfresco.enterprise.default.version@@ -Dmaven.alfresco.edition=enterprise
