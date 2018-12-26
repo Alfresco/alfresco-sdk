@@ -40,7 +40,7 @@
         <acs.debug.port>8888</acs.debug.port>
         <postgres.port>5555</postgres.port>
         <!-- This parameter is only required for those cases in which ACS is not exposed in http://localhost:8080/alfresco (i.e. Windows Docker) -->
-        <test.acs.endpoint.path></test.acs.endpoint.path>
+        <test.acs.endpoint.path>@@test.acs.endpoint.path@@</test.acs.endpoint.path>
 
     </properties>
 
