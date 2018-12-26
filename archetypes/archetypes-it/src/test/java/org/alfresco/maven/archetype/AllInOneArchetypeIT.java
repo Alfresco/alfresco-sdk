@@ -26,6 +26,9 @@ public class AllInOneArchetypeIT extends AbstractArchetypeIT {
         generateProjectFromArchetype();
 
         // Since creating the archetype was successful, we now want to actually build the generated project executing the integration tests
+        // Execute a purge to ensure old data don't make the test fail
+        ProcessBuilder purge = getProcessBuilder("purge");
+        purge.start().waitFor();
         ProcessBuilder pb = getProcessBuilder("build_test");
         pb.start().waitFor();
 
