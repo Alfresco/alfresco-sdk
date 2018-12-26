@@ -145,6 +145,8 @@
         <alfresco.enterprise.default.version>5.2.0</alfresco.enterprise.default.version>
         <alfresco.sdk.default.edition>community</alfresco.sdk.default.edition>
 
+        <test.acs.endpoint.path></test.acs.endpoint.path>
+
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
     </properties>
 
@@ -244,10 +246,13 @@
         </profile>
 
         <profile>
-            <id>enterprise-tests</id>
+            <id>enterprise-60-tests</id>
             <properties>
-                <!-- Sets it to empty, so that also enterprise tests are run -->
-                <alfresco.sdk.tests.exclude />
+                <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>6.0.0.2</alfresco.platform.version>
+                <alfresco.share.version>6.0</alfresco.share.version>
+                <alfresco.platform.docker.image>alfresco/alfresco-content-repository</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
             </properties>
         </profile>
 
@@ -321,6 +326,14 @@
                     </plugin>
                 </plugins>
             </reporting>
+        </profile>
+
+        <profile>
+            <id>docker-toolbox</id>
+            <properties>
+                <!-- Define the ACS endpoint path when docker toolbox is used (docker container are not exposed through localhost) -->
+                <test.acs.endpoint.path>http://192.168.99.100:8080/alfresco</test.acs.endpoint.path>
+            </properties>
         </profile>
 
         <!-- Attempt (failed) to retain run.sh permissions. Zip files are bad at this, full stop.
