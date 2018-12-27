@@ -26,7 +26,7 @@
         <docker.share.image>@@alfresco.share.docker.image@@</docker.share.image>
 
         <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
-        <jrebel.version>1.1.6</jrebel.version>
+        <jrebel.version>1.1.8</jrebel.version>
 
         <!-- Compile with Java 8, default is 5 -->
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -101,7 +101,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.1.0</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
                     <nonFilteredFileExtensions> <!-- jpg, jpeg, gif, bmp and png are added automatically -->
@@ -170,7 +170,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.0.2</version>
+                <version>3.1.1</version>
                 <executions>
                     <!-- Copy the share extension -->
                     <execution>
