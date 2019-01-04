@@ -20,6 +20,7 @@
  */
 package ${package}.platformsample;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -44,9 +45,13 @@ import static org.junit.Assert.assertNotNull;
  * @since 3.0
  */
 public class HelloWorldWebScriptIT {
+
+    private static final String ACS_ENDPOINT_PROP = "acs.endpoint.path";
+    private static final String ACS_DEFAULT_ENDPOINT = "http://localhost:8080/alfresco";
+
     @Test
     public void testWebScriptCall() throws Exception {
-        String webscriptURL = "http://localhost:8080/alfresco/service/sample/helloworld";
+        String webscriptURL = getPlatformEndpoint() + "/service/sample/helloworld";
         String expectedResponse = "Message: 'Hello from JS!' 'HelloFromJava'";
 
         // Login credentials for Alfresco Repo
@@ -71,5 +76,10 @@ public class HelloWorldWebScriptIT {
         } finally {
             httpclient.close();
         }
+    }
+
+    private String getPlatformEndpoint() {
+        final String platformEndpoint = System.getProperty(ACS_ENDPOINT_PROP);
+        return StringUtils.isNotBlank(platformEndpoint) ? platformEndpoint : ACS_DEFAULT_ENDPOINT;
     }
 }
