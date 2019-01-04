@@ -15,7 +15,7 @@ services:
       dockerfile: ./Dockerfile
       context: ../../../target
     environment:
-      CATALINA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8888"
+      CATALINA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8888"
     ports:
       - "${symbol_dollar}{acs.port}:8080"
       - "${symbol_dollar}{acs.debug.port}:8888"
