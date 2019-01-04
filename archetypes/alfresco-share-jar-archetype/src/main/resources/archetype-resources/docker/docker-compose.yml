@@ -27,6 +27,7 @@ services:
                 -Dsolr.base.url=/solr
                 -Dindex.subsystem.name=solr6
                 -Dcsrf.filter.enabled=false
+                -Dmessaging.broker.url=\"vm://localhost?broker.persistent=false\"
                 "
     ports:
       - "${symbol_dollar}{acs.port}:8080"
