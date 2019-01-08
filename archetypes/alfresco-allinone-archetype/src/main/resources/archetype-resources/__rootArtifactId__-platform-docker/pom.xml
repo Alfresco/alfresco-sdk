@@ -121,6 +121,7 @@
                                     <excludes>
                                         <exclude>**/*.jar</exclude>
                                         <exclude>**/*.so</exclude>
+                                        <exclude>**/*.gz</exclude>
                                     </excludes>
                                 </resource>
                             </resources>
@@ -141,6 +142,7 @@
                                     <includes>
                                         <include>**/*.jar</include>
                                         <include>**/*.so</include>
+                                        <include>**/*.gz</include>
                                     </includes>
                                 </resource>
                             </resources>
