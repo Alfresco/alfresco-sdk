@@ -1,4 +1,4 @@
-# Hot to configure and use JRebel
+# How to configure and use JRebel
 
 [JRebel](https://zeroturnaround.com/software/jrebel/) is the agent that enables you to do hot reloading. This allows you to modify the application code, 
 and view the changes without having to restart Alfresco Tomcat (or the ACS Docker container).
@@ -32,9 +32,9 @@ _Note that a license is required. In this step you will be able to request a tri
 
 ![Alt text](./imgs/sdk-jrebel-eclipse-server.png?raw=true "Eclipse JRebel remote server configuration")
 
-7. Select the checkbox to enable the server synchronisation and the checkbox to `Synchronise on build`.
+7. Select the checkbox to enable the server synchronisation and the checkbox to `Synchronize on build`.
 
-![Alt text](./imgs/sdk-jrebel-eclipse-servers.png?raw=true "Eclipse JRebel remote servers synchronisation")
+![Alt text](./imgs/sdk-jrebel-eclipse-servers.png?raw=true "Eclipse JRebel remote servers synchronization")
 
 8. Select `Help > JRebel > Configuration > Projects` and select the checkbox to enable JRebel and the remote server support for required projects (the complete 
 project in case of the Platform Jar archetype or the `PROJECT_ARTIFACT_ID-platform-jar` and `integration-tests` modules in case of the All-In-One archetype).
@@ -55,7 +55,7 @@ _Note that a license is required. In this step you will be able to request a tri
 
 ![Alt text](./imgs/sdk-jrebel-intellij-server.png?raw=true "Eclipse JRebel remote server configuration")
 
-7. Select the checkbox to enable the server synchronisation and the checkbox to `Synchronise on build`.
+7. Select the checkbox to enable the server synchronisation and the checkbox to `Synchronize on build`.
 
 ![Alt text](./imgs/sdk-jrebel-intellij-servers.png?raw=true "Eclipse JRebel remote server configuration")
 
@@ -79,7 +79,7 @@ COPY jrebel.jar /jrebel.jar
 COPY libjrebel64.so /libjrebel64.so
 ```
 3. Modify the file `docker/docker-compose.yml` to change the `CATALINA_OPTS` environment property to use the JRebel agent and the remote plugin. Add the 
-command to avoid executing Tomcat with the Security Manager:
+command to avoid executing Tomcat with the Security Manager enabled (it makes the hot reloading tools to fail):
 ```
 sample-project-acs:
     image: alfresco-content-services-sample-project:development
