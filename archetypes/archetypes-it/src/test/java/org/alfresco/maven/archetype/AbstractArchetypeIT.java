@@ -86,7 +86,10 @@ public abstract class AbstractArchetypeIT {
      * @param logger the {@link Logger} to print the log content
      */
     protected void printVerifierLog(final String prefix, final Verifier verifier, final Logger logger) throws Exception {
+        logger.info("[{}] - {}", prefix, "Standard output");
         verifier.loadFile(verifier.getBasedir(), verifier.getLogFileName(), false).forEach(line -> logger.info("[{}] - {}", prefix, line));
+        logger.info("[{}] - {}", prefix, "Error output");
+        verifier.loadFile(verifier.getBasedir(), ERROR_FILENAME, false).forEach(line -> logger.info("[{}] - {}", prefix, line));
     }
 
     private String getCommand() {
