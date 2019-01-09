@@ -3,7 +3,7 @@
 
 export COMPOSE_FILE_PATH=${symbol_dollar}{PWD}/target/classes/docker/docker-compose.yml
 
-if [[ -z "${symbol_dollar}{M2_HOME}" ]]; then
+if [ -z "${symbol_dollar}{M2_HOME}" ]; then
   export MVN_EXEC="mvn"
 else
   export MVN_EXEC="${symbol_dollar}{M2_HOME}/bin/mvn"
