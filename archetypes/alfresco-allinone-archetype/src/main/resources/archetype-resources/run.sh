@@ -2,6 +2,8 @@
 #!/bin/sh
 
 export COMPOSE_FILE_PATH=${symbol_dollar}{PWD}/target/classes/docker/docker-compose.yml
+mvn -v
+env
 
 start() {
     docker volume create ${rootArtifactId}-acs-volume
