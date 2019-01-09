@@ -50,6 +50,7 @@ IF %1==build_test (
     CALL :build
     CALL :start
     CALL :test
+    CALL :tail_all
     CALL :down
     GOTO END
 )
@@ -95,6 +96,9 @@ EXIT /B 0
 EXIT /B 0
 :tail
     docker-compose -f "%COMPOSE_FILE_PATH%" logs -f
+EXIT /B 0
+:tail_all
+    docker-compose -f "%COMPOSE_FILE_PATH%" logs --tail="all"
 EXIT /B 0
 :test
     call mvn verify -pl integration-tests

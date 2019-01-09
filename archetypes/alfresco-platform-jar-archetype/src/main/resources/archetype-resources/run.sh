@@ -29,6 +29,10 @@ tail() {
     docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH logs -f
 }
 
+tail_all() {
+    docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH logs --tail="all"
+}
+
 test() {
     mvn verify
 }
@@ -59,6 +63,7 @@ case "${symbol_dollar}1" in
     build
     start
     test
+    tail_all
     down
     ;;
   test)
