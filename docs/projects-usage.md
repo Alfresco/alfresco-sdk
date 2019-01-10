@@ -23,9 +23,14 @@ Task | Description
 `stop` | Stop the dockerised environment.
 `purge` | Stop the dockerised container and delete all the persistent data (docker volumes).
 `tail` | Tail the logs of all the containers.
-`reload_share` | Build the Share module, recreate the Share docker image and restart the Share container.
-`reload_acs` | Build the ACS module, recreate the ACS docker image and restart the ACS container.
+`reload_share` | Build the Share module, recreate the Share docker image and restart the Share container (not available in the Alfresco Platform JAR archetype).
+`reload_acs` | Build the ACS module, recreate the ACS docker image and restart the ACS container (only available in the All-In-One archetype).
 `build_test` | Build the whole project, recreate the ACS and Share docker images, start the dockerised environment, execute the integration tests from the `integration-tests` module and stop the environment.
 `test` | Execute the integration tests (the environment must be already started).
 
+This utility script uses `mvn`, `docker` and `docker-compose` commands, so make sure you have properly installed Maven, Docker and Docker compose and you have 
+configured them properly to be accessible in the path.
+
+In the case of Maven, it is not necessary that the `mvn` executable is in the path if you've properly configured the environment variable `M2_HOME`. The script
+looks for the `M2_HOME` environment variable to build the path to the `mvn` executable. 
 
