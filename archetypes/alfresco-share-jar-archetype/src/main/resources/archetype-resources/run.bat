@@ -79,13 +79,13 @@ EXIT /B 0
 :build
     docker rmi alfresco-content-services-${rootArtifactId}:development
     docker rmi alfresco-share-${rootArtifactId}:development
-	call "%MVN_EXEC%" clean install -DskipTests
+	call %MVN_EXEC% clean install -DskipTests
 EXIT /B 0
 :build_share
     docker-compose -f "%COMPOSE_FILE_PATH%" kill ${rootArtifactId}-share
     docker-compose -f "%COMPOSE_FILE_PATH%" rm -f ${rootArtifactId}-share
     docker rmi alfresco-share-${rootArtifactId}:development
-	call "%MVN_EXEC%" clean install -DskipTests
+	call %MVN_EXEC% clean install -DskipTests
 EXIT /B 0
 :tail
     docker-compose -f "%COMPOSE_FILE_PATH%" logs -f
@@ -94,7 +94,7 @@ EXIT /B 0
     docker-compose -f "%COMPOSE_FILE_PATH%" logs --tail="all"
 EXIT /B 0
 :test
-    call "%MVN_EXEC%" verify
+    call %MVN_EXEC% verify
 EXIT /B 0
 :purge
     docker volume rm ${rootArtifactId}-acs-volume
