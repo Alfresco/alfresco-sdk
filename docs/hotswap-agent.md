@@ -12,7 +12,7 @@ The way to configure HotSwapAgent in case of using Java 8 or Java 11 is pretty d
 
 ## Issue with Docker Toolbox
 
-It is worth to note that the HotSwapAgent's hot reloading mechanism is not working for [Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/) 
+It's worth noting that the HotSwapAgent's hot reloading mechanism is not working for [Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/) 
 at the moment. Docker Toolbox is for older Mac and Windows systems that do not meet the requirements of [Docker for Mac](https://docs.docker.com/docker-for-mac/) 
 and [Docker for Windows](https://docs.docker.com/docker-for-windows/).
 
@@ -79,7 +79,7 @@ the hot reloading tools to fail):
 ...
 ```
 
-5. Modify the file `docker/docker-compose.yml` to mount the target folders into the folder ``docker/docker-compose.yml`` inside the ACS container:
+5. Modify the file `docker/docker-compose.yml` to mount the target folders into the folder `/usr/local/tomcat/hotswap-agent` inside the ACS container:
 
 ```
   sample-project-acs:
@@ -156,7 +156,7 @@ the hot reloading tools to fail):
 ...
 ```
 
-5. Modify the file `docker/docker-compose.yml` to mount the target folders into the folder ``docker/docker-compose.yml`` inside the ACS container:
+5. Modify the file `docker/docker-compose.yml` to mount the target folders into the folder `/usr/local/tomcat/hotswap-agent` inside the ACS container:
 
 ```
   sample-project-acs:
