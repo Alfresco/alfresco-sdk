@@ -2,6 +2,10 @@
 
 This article describes a list of common issues with the projects generated from the Alfresco SDK 4.0 archetypes and the way to troubleshoot them.
 
+* [Incorrect JDK version](#incorrect-jdk-version)
+* [Containers synchronization](#containers-synchronization)
+* [Ports conflict](#ports-conflict)
+
 ## Incorrect JDK version
 
 ### Problem
@@ -9,12 +13,12 @@ This article describes a list of common issues with the projects generated from 
 The ACS container is not starting properly and it is showing Java compatibility errors in the logs:
 
 ```
-sample-project-acs_1       |  org.springframework.beans.factory.CannotLoadBeanClassException: Error loading class [com.example.platformsample.Demo] for bean 
-                              with name 'com.example.Demo' defined in class path resource [alfresco/module/sample-project-platform-jar/context/service-context.xml]: 
-                              problem with class file or dependent class; nested exception is 
-                              java.lang.UnsupportedClassVersionError: com/example/platformsample/Demo has been compiled by a more recent version of the Java 
-                              Runtime (class file version 55.0), this version of the Java Runtime only recognizes class file versions up to 52.0 (unable to load 
-                              class [com.example.platformsample.Demo])
+org.springframework.beans.factory.CannotLoadBeanClassException: 
+Error loading class [com.example.platformsample.Demo] for bean with name 'com.example.Demo' defined in class path resource 
+[alfresco/module/sample-project-platform-jar/context/service-context.xml]: 
+problem with class file or dependent class; nested exception is java.lang.UnsupportedClassVersionError: 
+com/example/platformsample/Demo has been compiled by a more recent version of the Java Runtime (class file version 55.0), 
+this version of the Java Runtime only recognizes class file versions up to 52.0 (unable to load class [com.example.platformsample.Demo])
 ```
 
 This error represents that the source code was compiled using a wrong version of the JDK. This issue can happen if the generated project is compiled using 
@@ -137,3 +141,6 @@ That allows to modify the number of the exposed ports through maven properties i
 ```
 
 That way, if you face a port conflict, you only need to change the port in the corresponding maven property and rebuilt and restart the project.
+
+
+
