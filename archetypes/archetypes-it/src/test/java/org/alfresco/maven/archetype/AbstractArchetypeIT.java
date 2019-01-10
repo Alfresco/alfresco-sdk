@@ -71,7 +71,7 @@ public abstract class AbstractArchetypeIT {
      */
     protected ProcessBuilder getProcessBuilder(final String goalToExecute) {
         ProcessBuilder pb = new ProcessBuilder(getCommand(), goalToExecute);
-        LOG.info("ProcessBuilder environment: {}", pb.environment().toString());
+        LOG.trace("ProcessBuilder environment: {}", pb.environment().toString());
         pb.directory(new File(projectPath));
         pb.redirectOutput(new File(projectPath + File.separator + LOG_FILENAME));
         pb.redirectError(new File(projectPath + File.separator + ERROR_FILENAME));
