@@ -3,6 +3,14 @@
 
 SET COMPOSE_FILE_PATH=%CD%\target\classes\docker\docker-compose.yml
 
+IF [%M2_HOME%]==[] (
+    SET MVN_EXEC=mvn
+)
+
+IF NOT [%M2_HOME%]==[] (
+    SET MVN_EXEC=%M2_HOME%\bin\mvn
+)
+
 IF [%1]==[] (
     echo "Usage: %0 {build_start|start|stop|purge|tail|reload_share|build_test|test}"
     GOTO END
@@ -44,6 +52,7 @@ IF %1==build_test (
     CALL :build
     CALL :start
     CALL :test
+    CALL :tail_all
     CALL :down
     GOTO END
 )
@@ -70,19 +79,22 @@ EXIT /B 0
 :build
     docker rmi alfresco-content-services-${rootArtifactId}:development
     docker rmi alfresco-share-${rootArtifactId}:development
-	call mvn clean install -DskipTests
+	call %MVN_EXEC% clean install -DskipTests
 EXIT /B 0
 :build_share
     docker-compose -f "%COMPOSE_FILE_PATH%" kill ${rootArtifactId}-share
     docker-compose -f "%COMPOSE_FILE_PATH%" rm -f ${rootArtifactId}-share
     docker rmi alfresco-share-${rootArtifactId}:development
-	call mvn clean install -DskipTests
+	call %MVN_EXEC% clean install -DskipTests
 EXIT /B 0
 :tail
     docker-compose -f "%COMPOSE_FILE_PATH%" logs -f
 EXIT /B 0
+:tail_all
+    docker-compose -f "%COMPOSE_FILE_PATH%" logs --tail="all"
+EXIT /B 0
 :test
-    call mvn verify
+    call %MVN_EXEC% verify
 EXIT /B 0
 :purge
     docker volume rm ${rootArtifactId}-acs-volume
