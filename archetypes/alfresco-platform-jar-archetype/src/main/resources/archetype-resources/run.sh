@@ -3,6 +3,12 @@
 
 export COMPOSE_FILE_PATH=${symbol_dollar}{PWD}/target/classes/docker/docker-compose.yml
 
+if [ -z "${symbol_dollar}{M2_HOME}" ]; then
+  export MVN_EXEC="mvn"
+else
+  export MVN_EXEC="${symbol_dollar}{M2_HOME}/bin/mvn"
+fi
+
 start() {
     docker volume create ${rootArtifactId}-acs-volume
     docker volume create ${rootArtifactId}-db-volume
@@ -22,15 +28,19 @@ purge() {
 
 build() {
     docker rmi alfresco-content-services-${rootArtifactId}:development
-    mvn clean install -DskipTests=true
+    ${symbol_dollar}MVN_EXEC clean install -DskipTests=true
 }
 
 tail() {
     docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH logs -f
 }
 
+tail_all() {
+    docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH logs --tail="all"
+}
+
 test() {
-    mvn verify
+    ${symbol_dollar}MVN_EXEC verify
 }
 
 case "${symbol_dollar}1" in
@@ -59,6 +69,7 @@ case "${symbol_dollar}1" in
     build
     start
     test
+    tail_all
     down
     ;;
   test)
