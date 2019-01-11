@@ -35,12 +35,13 @@ import java.util.Properties;
 import static org.twdata.maven.mojoexecutor.MojoExecutor.*;
 
 /**
+ * <p>
  * Alfresco Plugin mojo that are used when you want to run Integration Tests.
  * It will package up all the Integration Test classes and execute contained
  * tests with the Maven Failsafe plugin. The test classes will be added
  * to the platform war so they can be executed remotely via
- * the ${@link org.alfresco.rad.test.AlfrescoTestRunner}
- * <p/>
+ * the AlfrescoTestRunner.
+ * </p>
  * The Alfresco RAD module is also added to the Platform WAR so
  * the Alfresco Test runner classes are available.
  *

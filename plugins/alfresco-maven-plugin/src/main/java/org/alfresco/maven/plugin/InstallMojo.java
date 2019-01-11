@@ -26,9 +26,10 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
 /**
+ * <p>
  * Performs a AMP to WAR overlay invoking the Alfresco Repository ModuleManagementTool.
  * It therefore wraps and emulates the same WAR overlay performed by Alfresco MMT.
- * <p/>
+ * </p>
  * This goal will install the AMP file(s) found in ${ampLocation} onto the WAR (or exploded WAR) found in ${warLocation}
  * 
  * @version $Id:$
