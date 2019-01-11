@@ -35,14 +35,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * <p>
  * This Web Script works in consort with the ${@link AlfrescoTestRunner}. When a test is run from an IDE or
  * command line, the Alfresco test runner sends a proxied request to perform the test to this script. This runs
  * the test and wraps the results up so that the test initiator can be fooled into thinking they are
  * running the tests locally.
- * <p/>
+ * </p>
  * Integration testing framework donated by Zia Consulting.
  *
- * @author Bindu Wavell <bindu@ziaconsulting.com>
+ * @author Bindu Wavell (bindu@ziaconsulting.com)
  * @author martin.bergljung@alfresco.com (some editing)
  * @since 3.0
  */

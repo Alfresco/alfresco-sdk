@@ -24,14 +24,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * <p>
  * By default the ${@link AlfrescoTestRunner} will attempt to find a
  * running Alfresco instance at http://localhost:8080/alfresco
  * This annotation can be applied to a test class to have the
  * proxy calls go to a different host/port.
- * <p/>
+ * </p>
  * Integration testing framework donated by Zia Consulting.
  *
- * @author Bindu Wavell <bindu@ziaconsulting.com>
+ * @author Bindu Wavell (bindu@ziaconsulting.com)
  * @since 3.0
  */
 @Target(ElementType.TYPE)
