@@ -21,15 +21,18 @@ package org.alfresco.maven.plugin.config;
 import org.apache.commons.lang.StringUtils;
 
 /**
+ * <p>
  * Defines an Alfresco extension module dependency (JAR or AMP) to be
  * overlayed on an Alfresco webapp file.
- * <p/>
+ * </p>
+ * <p>
  * This is so we can skip the WAR projects in the AIO project,
  * and so we can include the Share Services AMP when running
  * with a simple platform JAR.
- * <p/>
+ * </p>
+ * <p>
  * This class is used by the RunMojo class.
- * <p/>
+ * </p>
  * Alfresco Maven Plugin config looks something like this:
  * <pre>
  *    {@code

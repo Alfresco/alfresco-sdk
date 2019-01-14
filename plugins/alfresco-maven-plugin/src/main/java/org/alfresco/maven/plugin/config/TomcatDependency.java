@@ -19,8 +19,9 @@
 package org.alfresco.maven.plugin.config;
 
 /**
+ * <p>
  * Tomcat Dependency used in Embedded Tomcat Maven plugin configuration.
- * <p/>
+ * </p>
  * Alfresco Maven Plugin config looks something like this:
  * <pre>
  *    {@code

@@ -18,11 +18,12 @@
 package org.alfresco.maven.plugin.config;
 
 /**
+ * <p>
  * Tomcat Webapp used in Embedded Tomcat Maven plugin configuration.
  * These are custom webapps that you would want to include for some reason
  * (The {webapp artifact}.war need to be available in a Maven Repo).
  * Note. the standard webapps are included with plugin properties such as enablePlatform and enableShare.
- * <p/>
+ * </p>
  * Alfresco Maven Plugin config looks something like this:
  * <pre>
  *    {@code

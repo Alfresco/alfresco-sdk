@@ -21,10 +21,11 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
 /**
+ * <p>
  * Refresh Alfresco Repository (alfresco.war) Mojo.
  * Will refresh the Web Script container so new and changed
  * Web Scripts are detected.
- * <p/>
+ * </p>
  * It is important to execute the refresh calls in the compile phase,
  * otherwise the files will be copied after this and the refresh calls
  * will not be recognized.
