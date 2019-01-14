@@ -17,17 +17,18 @@ start() {
 }
 
 down() {
-    docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH down
+    if [ -f ${symbol_dollar}COMPOSE_FILE_PATH ]; then
+        docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH down
+    fi
 }
 
 purge() {
-    docker volume rm ${rootArtifactId}-acs-volume
-    docker volume rm ${rootArtifactId}-db-volume
-    docker volume rm ${rootArtifactId}-ass-volume
+    docker volume rm -f ${rootArtifactId}-acs-volume
+    docker volume rm -f ${rootArtifactId}-db-volume
+    docker volume rm -f ${rootArtifactId}-ass-volume
 }
 
 build() {
-    docker rmi alfresco-content-services-${rootArtifactId}:development
     ${symbol_dollar}MVN_EXEC clean install -DskipTests=true
 }
 
