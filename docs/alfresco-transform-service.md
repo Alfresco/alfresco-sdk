@@ -1,3 +1,8 @@
+---
+Title: How to set up Alfresco Transform Service
+Added: v4.0.0
+Last reviewed: 2019-01-14
+---
 # How to set up Alfresco Transform Service
 
 By default, the _Alfresco Transform Service_ (from now ATS) is not included in the basic configuration of the projects generated making use of the Alfresco 

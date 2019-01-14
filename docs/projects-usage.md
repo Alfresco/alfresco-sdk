@@ -1,3 +1,8 @@
+---
+Title: Working with generated projects
+Added: v3.0.0
+Last reviewed: 2019-01-14
+---
 # Working with generated projects
 
 After generating your project, using one of the Alfresco SDK 4.0 Maven archetypes, it is important to know how to build/run/test these projects.

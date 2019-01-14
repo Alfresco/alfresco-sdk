@@ -1,3 +1,8 @@
+---
+Title: How to configure and use Hotswap Agent
+Added: v3.0.0
+Last reviewed: 2019-01-14
+---
 # How to configure and use Hotswap Agent
 
 [HotSwapAgent](http://hotswapagent.org/index.html) is the agent that enables you to do hot reloading. This allows you to modify the application code, and 

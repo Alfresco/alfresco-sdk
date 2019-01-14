@@ -1,3 +1,8 @@
+---
+Title: Setting up your development environment using Intellij IDEA
+Added: v3.0.0
+Last reviewed: 2019-01-14
+---
 # Setting up your development environment using Intellij IDEA
 
 The Maven Alfresco SDK is designed to work well with Eclipse. This support includes the ability to import existing Alfresco projects created using the 

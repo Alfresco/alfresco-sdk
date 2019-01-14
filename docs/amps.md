@@ -1,3 +1,8 @@
+---
+Title: Working with AMPs
+Added: v3.0.0
+Last reviewed: 2019-01-14
+---
 # Working with AMPs
 
 Since the early days of the Alfresco SDK, the Alfresco Module Packages (AMP) have been the way customizations were packaged. In Alfresco SDK 4.0 everything 

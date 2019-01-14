@@ -1,3 +1,8 @@
+---
+Title: Remote debugging using IntelliJ
+Added: v3.0.0
+Last reviewed: 2019-01-14
+---
 # Remote debugging using IntelliJ
 
 All the projects generated using the Alfresco SDK 4.0 are pre-configured to listen for remote debug connections. Depending on the selected archetypes you'll 

@@ -1,3 +1,8 @@
+---
+Title: Getting started with Alfresco SDK 4.0
+Added: v2.1.1
+Last reviewed: 2019-01-14
+---
 # Getting started with Alfresco SDK 4.0
 
 Use these instructions to get started with using Alfresco SDK 4.0.

@@ -1,3 +1,8 @@
+---
+Title: How to configure and use JRebel
+Added: v3.0.0
+Last reviewed: 2019-01-14
+---
 # How to configure and use JRebel
 
 [JRebel](https://zeroturnaround.com/software/jrebel/) is the agent that enables you to do hot reloading. This allows you to modify the application code, 
