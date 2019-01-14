@@ -83,7 +83,9 @@ EXIT /B 0
     docker-compose -f "%COMPOSE_FILE_PATH%" up --build -d ${rootArtifactId}-acs
 EXIT /B 0
 :down
-    docker-compose -f "%COMPOSE_FILE_PATH%" down
+    if exist "%COMPOSE_FILE_PATH%" (
+        docker-compose -f "%COMPOSE_FILE_PATH%" down
+    )
 EXIT /B 0
 :build
 	call %MVN_EXEC% clean install -DskipTests
@@ -99,9 +101,7 @@ EXIT /B 0
 	call %MVN_EXEC% clean install -DskipTests -pl ${rootArtifactId}-platform-jar
 EXIT /B 0
 :tail
-    if exist "%COMPOSE_FILE_PATH%" (
-        docker-compose -f "%COMPOSE_FILE_PATH%" logs -f
-    )
+    docker-compose -f "%COMPOSE_FILE_PATH%" logs -f
 EXIT /B 0
 :tail_all
     docker-compose -f "%COMPOSE_FILE_PATH%" logs --tail="all"
