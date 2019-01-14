@@ -86,24 +86,22 @@ EXIT /B 0
     docker-compose -f "%COMPOSE_FILE_PATH%" down
 EXIT /B 0
 :build
-    docker rmi alfresco-content-services-${rootArtifactId}:development
-    docker rmi alfresco-share-${rootArtifactId}:development
 	call %MVN_EXEC% clean install -DskipTests
 EXIT /B 0
 :build_share
     docker-compose -f "%COMPOSE_FILE_PATH%" kill ${rootArtifactId}-share
     docker-compose -f "%COMPOSE_FILE_PATH%" rm -f ${rootArtifactId}-share
-    docker rmi alfresco-share-${rootArtifactId}:development
 	call %MVN_EXEC% clean install -DskipTests -pl ${rootArtifactId}-share-jar
 EXIT /B 0
 :build_acs
     docker-compose -f "%COMPOSE_FILE_PATH%" kill ${rootArtifactId}-acs
     docker-compose -f "%COMPOSE_FILE_PATH%" rm -f ${rootArtifactId}-acs
-    docker rmi alfresco-content-services-${rootArtifactId}:development
 	call %MVN_EXEC% clean install -DskipTests -pl ${rootArtifactId}-platform-jar
 EXIT /B 0
 :tail
-    docker-compose -f "%COMPOSE_FILE_PATH%" logs -f
+    if exist "%COMPOSE_FILE_PATH%" (
+        docker-compose -f "%COMPOSE_FILE_PATH%" logs -f
+    )
 EXIT /B 0
 :tail_all
     docker-compose -f "%COMPOSE_FILE_PATH%" logs --tail="all"
@@ -112,7 +110,7 @@ EXIT /B 0
     call %MVN_EXEC% verify -pl integration-tests
 EXIT /B 0
 :purge
-    docker volume rm ${rootArtifactId}-acs-volume
-    docker volume rm ${rootArtifactId}-db-volume
-    docker volume rm ${rootArtifactId}-ass-volume
+    docker volume rm -f ${rootArtifactId}-acs-volume
+    docker volume rm -f ${rootArtifactId}-db-volume
+    docker volume rm -f ${rootArtifactId}-ass-volume
 EXIT /B 0
