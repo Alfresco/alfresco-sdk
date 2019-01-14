@@ -51,14 +51,13 @@ public class SpringContextHolder implements ApplicationContextAware {
     /**
      * Return the singleton instance
      *
-     * @return
+     * @return the singleton instance
      */
     public static SpringContextHolder Instance() {
         return springContextHolderInstance;
     }
 
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        //System.out.println("Setting current Spring Application Context in SpringContextHolder class.");
         this.applicationContext = applicationContext;
     }
 

@@ -65,10 +65,11 @@ EXIT /B %ERRORLEVEL%
     docker-compose -f "%COMPOSE_FILE_PATH%" up --build -d
 EXIT /B 0
 :down
-    docker-compose -f "%COMPOSE_FILE_PATH%" down
+    if exist "%COMPOSE_FILE_PATH%" (
+        docker-compose -f "%COMPOSE_FILE_PATH%" down
+    )
 EXIT /B 0
 :build
-    docker rmi alfresco-content-services-${rootArtifactId}:development
 	call %MVN_EXEC% clean install -DskipTests
 EXIT /B 0
 :tail
@@ -81,7 +82,7 @@ EXIT /B 0
     call %MVN_EXEC% verify
 EXIT /B 0
 :purge
-    docker volume rm ${rootArtifactId}-acs-volume
-    docker volume rm ${rootArtifactId}-db-volume
-    docker volume rm ${rootArtifactId}-ass-volume
+    docker volume rm -f ${rootArtifactId}-acs-volume
+    docker volume rm -f ${rootArtifactId}-db-volume
+    docker volume rm -f ${rootArtifactId}-ass-volume
 EXIT /B 0

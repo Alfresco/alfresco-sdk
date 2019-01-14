@@ -21,11 +21,12 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
 /**
+ * <p>
  * Refresh Alfresco Repo and Share Mojo.
  * Will refresh the Web Script container so new and changed
  * Spring Surf Web Scripts are detected.
  * Will also clear the dependency caches for web resources (CSS, JS, etc).
- * <p/>
+ * </p>
  * It is important to execute the refresh calls in the compile phase,
  * otherwise the files will be copied after this and the refresh calls
  * will not be recognized.

@@ -164,6 +164,8 @@ public abstract class AbstractRefreshWebappMojo extends AbstractMojo {
     /**
      * Perform a Refresh of Web Scripts container in webapp.
      * Called by specific refresh mojo implementation.
+     *
+     * @param url the relative path to refresh webscripts
      */
     protected void refreshWebScripts(String url) {
         // Create the Refresh URL for the Alfresco Tomcat server
@@ -184,6 +186,8 @@ public abstract class AbstractRefreshWebappMojo extends AbstractMojo {
     /**
      * Perform a Clear Dependency Caches call on Share webapp.
      * Called by specific refresh mojo implementation, currently only applicable to Share webapp.
+     *
+     * @param url the relative path to clear cache
      */
     protected void clearDependencyCaches(String url) {
         // Create the Clear Cache URL for the Alfresco Tomcat server
