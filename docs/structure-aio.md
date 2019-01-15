@@ -5,7 +5,7 @@ Last reviewed: 2019-01-15
 ---
 # All-In-One project structure
 
-The following pages provide a detailed description of the All-In-One (AIO) project, including the project structure and folder contents.
+This page provides a detailed description of the All-In-One (AIO) project, including the project structure and folder contents.
 
 Now that you know what an All-In-One project is, let’s introduce the structure of the project, once it is created using the 
 `org.alfresco.maven.archetype:alfresco-allinone-archetype`.
@@ -228,8 +228,8 @@ Content | Description
 `src/main/resources/alfresco/module/<artifactId>` | This folder contains all the configuration files and settings for the Alfresco Share module. Here you can find the property file for the module.
 `src/main/resources/alfresco/web-extension` | In this folder you can find the extensions to the web client (Alfresco Share) and it's where you store Spring configurations that extend and override the system Share configuration. There are two important sub-directories here: `site-data` and `site-webscripts`.
 `src/main/resources/alfresco/META-INF/resources` | This folder hosts the content that will be placed in the `META-INF` folder of a standard Java web application. It is best practice to use a further subdirectory based on the module name. This allows you to manage multiple modules, so that their web resources don't conflict with each other.
-`src/main/resources/alfresco/ META-INF/share-config-custom.xml` | This file is a relevant Alfresco Share file used to configure the sub-project with the correct settings, depending on your environment. For more details, see [Share configuration](http://docs.alfresco.com/5.2/concepts/dev-extensions-share-configuration.html). 
-
+`src/main/resources/alfresco/META-INF/share-config-custom.xml` | This file is a relevant Alfresco Share file used to configure the sub-project with the correct settings, depending on your environment. For more details, see [Share configuration](http://docs.alfresco.com/5.2/concepts/dev-extensions-share-configuration.html).
+`src/test/java/<groupId>...` | This folder contains the same content you can find in a regular Java project, i.e. the Java source code for tests. Here you should put all the custom classes, interfaces, and Java source code related to tests.
 
 ## my-all-in-one-project-share-docker
 
@@ -243,4 +243,12 @@ Content | Description
 `src/main/docker` | In this folder you can find everything that's needed to fully configure the custom Alfresco Share Docker image.
 `src/main/docker/Dockerfile` | This is the file that define the custom Alfresco Share Docker image. The default configuration installs all the existing JARs and AMPs under `${project.build.directory}/extensions` folder and adds custom configuration files.
 
+## integration-tests
 
+Below is a description of the content in the `integration-tests` sub-project. This sub-project contains all the source code and resources needed to run the integration tests.
+
+Content | Description
+--- | ---
+`pom.xml` | This XML file contains information about the project and configuration details used by Apache Maven to build the project. You can define all the configurations, parameters, and settings in this file even if it depends on the parent pom in the root folder. For the majority of use cases, settings and configurations are directly inherited from the parent pom, and this file can work in its default version.
+`src/main/java/<groupId>...` | This folder contains the same content you can find in a regular Java project, i.e. the Java source code. Here you should put all the custom classes, interfaces, and Java source code in general. The folder is empty by default.
+`src/test/java/<groupId>...` | This folder contains the same content you can find in a regular Java project, i.e. the Java source code for tests. Here you should put all the custom classes, interfaces, and Java source code in general related to tests. By default you can find three different tests related to content modelling, custom components, and web scripts.
