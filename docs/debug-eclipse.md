@@ -20,7 +20,7 @@ and `share.debug.port` in the `pom.xml` file of the main project.
     <acs.debug.port>8888</acs.debug.port>
 ```
 
-This remote debug ports are configured in the docker compose file to be exposed by the corresponding docker containers.
+These remote debug ports are configured in the docker compose file to be exposed by the corresponding docker containers.
 
 ```
 services:
@@ -48,13 +48,13 @@ services:
 Here you'll see how to create and manage a configuration to remotely debug your launched Alfresco project that's waiting for a connection. This assumes you 
 have an Eclipse IDE up and running, and have already imported the same project you are going to debug.
 
-For more details on how import an Alfresco project into your Eclipse IDE, see Setting up your development environment using Eclipse.
+For more details on how to import an Alfresco project into your Eclipse IDE, see Setting up your development environment using Eclipse.
 
 1. Open the Eclipse IDE and click on `Run Configurations` (top right).
 
 ![Alt text](./imgs/sdk-debug-eclipse-create.png?raw=true "Eclipse remote debug create configuration")
 
-2. Click on the green plus (top left) and select `Remote Java Application` to add a new configuration for a remote app.
+2. Click on the green plus sign (top left) and select `Remote Java Application` to add a new configuration for a remote app.
 
 3. Enter a descriptive name for your configuration, for example, `Sample project ACS debug`.
 
@@ -74,7 +74,7 @@ You will be taken back to the project source code.
 
 ![Alt text](./imgs/sdk-debug-eclipse-launch.png?raw=true "Eclipse remote debug configuration launch")
 
-The IDE connects the source code with the deployed one at the docker container. Once the code it's linked, you can open a browser and start using your 
+The IDE connects the source code to the deployed one at the docker container. Once the code is linked, you can open a browser and start using your 
 application. In our case, we are going to test the behaviour of debugging by running the sample webscript.
 
 8. Open your browser and type `http://localhost:8080/alfresco/s/sample/helloworld`.

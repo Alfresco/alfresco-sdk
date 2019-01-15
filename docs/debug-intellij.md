@@ -20,7 +20,7 @@ and `share.debug.port` in the `pom.xml` file of the main project.
     <acs.debug.port>8888</acs.debug.port>
 ```
 
-This remote debug ports are configured in the docker compose file to be exposed by the corresponding docker containers.
+These remote debug ports are configured in the docker compose file to be exposed by the corresponding docker containers.
 
 ```
 services:
@@ -48,7 +48,7 @@ services:
 Here you'll see how to create and manage a configuration to remotely debug your launched Alfresco project that's waiting for a connection. This assumes you 
 have an IntelliJ IDEA IDE up and running, and have already imported the same project you are going to debug.
 
-For more details on how import an Alfresco project into your IntelliJ IDEA IDE, see Setting up your development environment using Intellij IDEA.
+For more details on how to import an Alfresco project into your IntelliJ IDEA IDE, see Setting up your development environment using Intellij IDEA.
 
 1. Open the IntelliJ IDEA IDE and click on `Add/Edit Configurations` (top right).
 
