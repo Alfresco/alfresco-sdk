@@ -9,8 +9,7 @@ By default, the _Alfresco Transform Service_ (from now ATS) is not included in t
 SDK archetypes. 
 
 ATS is only supported in ACS Enterprise and it is distributed as a composition of Docker containers. The docker images required for ATS are available in the 
-private Alfresco [Quay.io](https://quay.io/) docker registry. You'll need your [Quay.io](https://quay.io/) account credentials to access the Docker images. 
-If you don't already have these credentials, contact [Alfresco Support](https://support.alfresco.com/).
+Alfresco private docker registry at [Quay.io](https://quay.io/). For more information, see [How to configure private Alfresco Docker registry](enterprise-docker-registry.md).
 
 In order to properly configure ATS in a project generated using the Alfresco SDK archetypes it is required to execute 2 steps:
 1. Add the containers that conform ATS to the Docker compose file.
