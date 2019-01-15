@@ -72,7 +72,7 @@ You will be taken back to the project source code.
 
 ![Alt text](./imgs/sdk-debug-intellij-launch.png?raw=true "IntelliJ remote debug configuration launch")
 
-The IDE connects the source code with the deployed one at the docker container. Once the code it's linked, you can open a browser and start using your 
+The IDE connects the source code with the deployed one at the docker container. Once the code is linked, you can open a browser and start using your 
 application. In our case, we are going to test the behaviour of debugging by running the sample webscript.
 
 7. Open your browser and type `http://localhost:8080/alfresco/s/sample/helloworld`.

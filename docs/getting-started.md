@@ -199,3 +199,4 @@ In the terminal window, use:
 If this is the first time you are doing this, it will take a while for Maven to download all the required dependencies and for Docker to download all the
 required images.
 
+For more information about how to work with the projects, please visit [Working with generated projects](projects-usage.md).

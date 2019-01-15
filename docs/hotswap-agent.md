@@ -23,7 +23,7 @@ and [Docker for Windows](https://docs.docker.com/docker-for-windows/).
 
 This is due to an issue with the component used by HotSwapAgent to notify the changes in the compiled class files. HotSwapAgent uses the class 
 [WatcherNIO2.java](https://github.com/HotswapProjects/HotswapAgent/blob/master/hotswap-agent-core/src/main/java/org/hotswap/agent/watch/nio/WatcherNIO2.java) to 
-watch for the changes in the `extraClasspath` folder. That class is based in the Java class [WatchDir.java](https://docs.oracle.com/javase/tutorial/essential/io/examples/WatchDir.java) 
+watch for the changes in the `extraClasspath` folder. That class is based on the Java class [WatchDir.java](https://docs.oracle.com/javase/tutorial/essential/io/examples/WatchDir.java) 
 that, in Linux systems, is implemented using [inotify](http://man7.org/linux/man-pages/man7/inotify.7.html). It seems that inotify is not working properly
 with mounted volumes over Docker Toolbox (which internally uses VirtualBox).
  
@@ -70,7 +70,7 @@ RUN cd /usr/local/tomcat \
 ```
 
 4. Modify the file `docker/docker-compose.yml` to change the ACS container command to avoid the execution of Tomcat with the Security Manager enabled (it makes 
-the hot reloading tools to fail):
+the hot reloading tools fail):
 
 ```
   sample-project-acs:
@@ -109,13 +109,13 @@ For more information about HotSwapAgent configuration for Java 8, please check t
 
 ## Configuring HotSwapAgent in the project (Java 11)
 
-Using Java 11 and HotSwapAgent, it isn't necessary to configure the java agent and the alternative JVM as in previous versions. Instead of that, it is required 
+Using Java 11 and HotSwapAgent, it isn't necessary to configure the java agent and the alternative JVM as in previous versions. Instead, it is required 
 to use an alternative pre-built JDK distribution. That JDK is based on OpenJDK and includes all the required modifications to run the HotSwapAgent properly.
 
 In the context of the Alfresco SDK 4.0, this change is an issue because the JDK installation is inherited from the [Alfresco java docker image](https://github.com/Alfresco/alfresco-docker-base-java). 
 It is necessary to modify the project ACS docker image to change the default java installation of the container's OS to the one provided by HotSwapAgent.
 
-A way to implements the required modifications would be:
+A way to implement the required modifications would be:
 
 1. Download the last release of the Trava OpenJDK (Linux distribution) from [here](https://github.com/TravaOpenJDK/trava-jdk-11-dcevm/releases) and save it 
 into the folder `PROJECT_ARTIFACT_ID-platform-docker/src/main/docker`.
@@ -147,7 +147,7 @@ COPY hotswap-agent.properties $TOMCAT_DIR/webapps/alfresco/WEB-INF/classes
 ```
 
 4. Modify the file `docker/docker-compose.yml` to change the ACS container command to avoid the execution of Tomcat with the Security Manager enabled (it makes 
-the hot reloading tools to fail):
+the hot reloading tools fail):
 
 ```
   sample-project-acs:
@@ -182,8 +182,8 @@ the hot reloading tools to fail):
 ...
 ```
 
-Instead of downloading the Trava OpenJDK distribution file and copy it to the container, the Dockerfile script could include directly the download of the file 
-(via `curl` for instance), but that would slow down the creation of the ACS image each time it is rebuilt.
+Instead of downloading the Trava OpenJDK distribution file and copying it to the container, the Dockerfile script could include directly the download of the 
+file (via `curl` for instance), but that would slow down the creation of the ACS image each time it is rebuilt.
 
 ### Creating a custom HotSwapAgent ACS docker image
 

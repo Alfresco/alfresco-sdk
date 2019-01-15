@@ -26,22 +26,22 @@ com/example/platformsample/Demo has been compiled by a more recent version of th
 this version of the Java Runtime only recognizes class file versions up to 52.0 (unable to load class [com.example.platformsample.Demo])
 ```
 
-This error represents that the source code was compiled using a wrong version of the JDK. This issue can happen if the generated project is compiled using 
+This error represents that the source code was compiled using the wrong version of the JDK. This issue can happen if the generated project is compiled using 
 JDK 11 and it is deployed in an ACS 6.0 container (which uses JRE 8).
 
 ### Solution
 
 To solve this issue you can follow several approaches:
-* Compile the project using a JDK version lower than 11 (and upper or equal 8).
+* Compile the project using a JDK version lower than 11 (and equal to or newer than 8).
 * Remove the `java11` profile in the `pom.xml` file of the base project (this is not recommended if you plan to move to ACS 6.1 in the future).
-* Move to ACS 6.1+. This is highly recommended due to it uses JRE 11 (JDK 8 has already reached its end of support time).
+* Move to ACS 6.1+. This is highly recommended due to the fact that it uses JRE 11 (JDK 8 has already reached its end of support time).
 
 ## Containers synchronization
 
 ### Problem
 
-ACS depends on the readiness of the database in order to start properly. If the database is not ready when ACS reach the startup phase that requires it, then
-it fails showing some error messages in the log:
+ACS depends on the readiness of the database in order to start properly. If the database is not ready when ACS reaches the startup phase that requires it, then
+it fails showing error messages in the log:
 
 ```
 sample-project-acs_1    | Jan 10, 2019 10:58:06 AM org.postgresql.core.v3.ConnectionFactoryImpl log
@@ -126,7 +126,7 @@ With this configuration in place, when the project is rebuilt and restarted the 
 The docker-based development environment started by a project generated using the Alfresco SDK archetypes exposes a set of different ports to the hosted 
 machine (i.e. ACS http port, ACS debug port or PostgreSQL port). 
 
-If one of these ports is already in use in the hosted machine (by other service) when you start the development environment, then the startup process will fail 
+If one of these ports is already in use in the hosted machine (by another service) when you start the development environment, then the startup process will fail 
 and the container that wanted to expose the busy port won't start.
 
 ### Solution
@@ -134,7 +134,7 @@ and the container that wanted to expose the busy port won't start.
 The docker compose file under `docker/docker-compose.yml` is the source file that, in the compile phase of the project, will be filtered by the 
 `maven-resource-plugin` in order to produce the final copy of the docker compose file.
 
-That allows to modify the number of the exposed ports through maven properties in the `pom.xml` file of the main project.
+That allows you to modify the number of the exposed ports through maven properties in the `pom.xml` file of the main project.
 
 ```
     <!-- Environment configuration properties -->

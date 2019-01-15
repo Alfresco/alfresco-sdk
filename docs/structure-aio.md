@@ -177,7 +177,7 @@ Alfresco Share client.
 
 After this brief introduction of the All-In-One project, let’s focus on the content of the folders.
 
-## Project root
+## Project root folder
 
 Below is a description of the files in the root of the project (in this case, `my-all-in-one-project`).
 

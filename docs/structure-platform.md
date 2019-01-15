@@ -89,7 +89,7 @@ Services Repository.
 
 After this brief introduction of the Platform JAR project, let’s focus on the content of the folders.
 
-## Project root
+## Project root folder
 
 Below is a description of the files in the root of the project (in this case, `my-platform-jar-project`).
 
