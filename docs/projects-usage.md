@@ -1,7 +1,7 @@
 ---
 Title: Working with generated projects
 Added: v3.0.0
-Last reviewed: 2019-01-14
+Last reviewed: 2019-01-15
 ---
 # Working with generated projects
 
@@ -13,6 +13,19 @@ local environment making an intensive use of Docker and Docker compose technolog
 
 If you're not familiar to these technologies, it is highly recommended visiting the [Docker documentation website](https://docs.docker.com). This site offers
 a great quantity of training resources about [Docker](https://docs.docker.com/get-started/) and [Docker compose](https://docs.docker.com/compose/gettingstarted/).
+
+## Project structures
+
+After generating your project, using one of the Maven archetypes, review the project structure. The directory structure and content of each folder and file 
+can help you to understand how to start developing with the Alfresco SDK 4.0. Before continuing, make sure that have read and completed the tasks in the 
+[Getting started](getting-started.md) tutorial.
+
+The structure of the project and the purpose of the files it contains vary according to the [Maven archetype](mvn-archetypes.md) used to generate the project 
+itself. The following links provide detailed descriptions of the different project types.
+
+* [All-In-One project structure](structure-aio.md)
+* [Platform JAR project structure](structure-platform.md)
+* [Share JAR project structure](structure-share.md)
 
 ## Run script
 
@@ -38,4 +51,3 @@ configured them properly to be accessible in the path.
 
 In the case of Maven, it is not necessary that the `mvn` executable is in the path if you've properly configured the environment variable `M2_HOME`. The script
 looks for the `M2_HOME` environment variable to build the path to the `mvn` executable. 
-
