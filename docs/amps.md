@@ -187,3 +187,48 @@ Here is an example of how to install Florian Maul's Javascript Console.
     ...
 </project>
 ```
+
+## Controlling the order AMPs are applied
+
+Under some specific circumstances it is necessary to apply different AMPs in a development project in a precise order. The default configuration of the 
+projects generated using the Alfresco SDK 4.0 archetypes doesn't specify any concrete order applying the AMPs to the ACS/Share installation.
+
+Anyway, that order can be controlled modifying slightly the configuration of the custom Docker images in the project. For instance, let's say we have three
+third party AMPs that we want to apply in the next order `third-party-amp-01.amp -> third-party-amp-02.amp -> third-party-amp-03.amp`. In this example, we're
+going to consider we need to apply them to a platform JAR module (the process would be the same for a Share module, simply changing the path of the files).
+
+1. Follow the steps described in the section [Installing 3rd party AMPs](#installing-3rd-party-amps) to include all the AMPs dependencies.
+
+2. Locate the `Dockerfile` under the folder `src/main/docker`. In this file, there is a section that copies and applies the AMPs to the ACS installation.
+
+```
+# Copy Dockerfile to avoid an error if no AMPs exist
+COPY Dockerfile extensions/*.amp $TOMCAT_DIR/amps/
+RUN java -jar $TOMCAT_DIR/alfresco-mmt/alfresco-mmt*.jar install \
+              $TOMCAT_DIR/amps $TOMCAT_DIR/webapps/alfresco -directory -nobackup -force
+```
+
+3. Replace the `RUN` command to execute one installation of AMP each time and copy it three times, ensuring the installation is executed in the required
+order:
+
+```
+# Copy Dockerfile to avoid an error if no AMPs exist
+COPY Dockerfile extensions/*.amp $TOMCAT_DIR/amps/
+# Install third-party-amp-01
+RUN java -jar $TOMCAT_DIR/alfresco-mmt/alfresco-mmt*.jar install \
+              $TOMCAT_DIR/amps/third-party-amp-01.amp $TOMCAT_DIR/webapps/alfresco -directory -nobackup -force
+# Install third-party-amp-02
+RUN java -jar $TOMCAT_DIR/alfresco-mmt/alfresco-mmt*.jar install \
+              $TOMCAT_DIR/amps/third-party-amp-02.amp $TOMCAT_DIR/webapps/alfresco -directory -nobackup -force
+# Install third-party-amp-03
+RUN java -jar $TOMCAT_DIR/alfresco-mmt/alfresco-mmt*.jar install \
+              $TOMCAT_DIR/amps/third-party-amp-03.amp $TOMCAT_DIR/webapps/alfresco -directory -nobackup -force
+```
+
+4. Rebuild and restart the project (use `run.bat` instead in Windows):
+
+```
+$ ./run.sh build_start
+```
+
+At this point, you have configured your project to apply the AMPs in a specific order.
