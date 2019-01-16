@@ -5,7 +5,7 @@ Last reviewed: 2019-01-15
 ---
 # How to configure private Alfresco Nexus repository
 
-The first matter to consider is to ensure that you have credentials for the Alfresco Private Repository, where the Alfresco artifacts are stored. You can 
+The first matter to consider is to ensure that you have credentials for the Alfresco Private Repository ([artifacts.alfresco.com](artifacts.alfresco.com)), where the Alfresco artifacts are stored. Enterprise customers and partners can 
 request these credentials opening a ticket on the [Alfresco Support Portal](http://support.alfresco.com). 
 
 Once you have suitable credentials, you need to add support for Alfresco private Maven repository to your configuration. This would typically be done by 
