@@ -5,9 +5,9 @@ Last reviewed: 2019-01-16
 ---
 # Integration testing
 
-"Integration testing is the phase in software testing where individual software modules are combined and tested as a group. It occurs after unit testing and 
+_"Integration testing is the phase in software testing where individual software modules are combined and tested as a group. It occurs after unit testing and 
 before validation testing. Integration testing takes as its input modules that have been unit tested, groups them in larger aggregates, applies tests defined 
-in an integration test plan to those aggregates, and delivers as its output the integrated system ready for system testing. [Wikipedia]."
+in an integration test plan to those aggregates, and delivers as its output the integrated system ready for system testing. [Wikipedia]."_
 
 Even if the definition of integration testing is a general description, the concept is also valid for Alfresco projects. 
 

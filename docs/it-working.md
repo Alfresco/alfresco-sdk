@@ -121,7 +121,7 @@ classes are included in the folder `integration-tests/src/test/java`.
 ```
 
 This is specially useful when the ACS endpoint is not exposed at the default location (`http://localhost:8080/alfresco`). This property is important when the
-development environment is run using Docker Toolbox (old Windows and MacOS versions). In this case, the container exposed ports are not mapped to localhost, 
+development environment is run using Docker Toolbox (old Windows and MacOS versions). In this case, the container exposed ports are not mapped to `localhost`, 
 but to a custom IP provided by the Virtual Box virtual machine (i.e. `http://192.168.99.100:8080/alfresco`).
 
 * The All-In-One project utility scripts (`run.sh` / `run.bat`) offer two different tasks to execute the integration tests:
@@ -131,8 +131,7 @@ but to a custom IP provided by the Virtual Box virtual machine (i.e. `http://192
 
 ## Sample tests included in the generated project
 
-The All-In-One archetype includes some basic integration tests that demonstrates the way you can implement the integration tests of your custom module. This 
-section illustrates what they check.
+The All-In-One archetype includes some basic integration tests that demonstrate the way you can implement the integration tests of your custom module.
 
 ### `CustomContentModelIT`: Checking the correct existence and setup of a custom model
 
