@@ -35,23 +35,23 @@ code into place.
     * [All-In-One project structure](working-with-generated-projects/structure-aio.md)
     * [Platform JAR project structure](working-with-generated-projects/structure-platform.md)
     * [Share JAR project structure](working-with-generated-projects/structure-share.md)
-* Setting up your development environment
+* [Setting up your development environment](setting-up-your-development-environment/README.md)
     * [Setting up your development environment using Eclipse](setting-up-your-development-environment/dev-env-eclipse.md)
     * [Setting up your development environment using Intellij IDEA](setting-up-your-development-environment/dev-env-intellij.md)
-* Advanced topics
+* [Advanced topics](advanced-topics/README.md)
     * [Switching Alfresco Content Services and Share versions](advanced-topics/switching-versions.md)
     * [Working with Enterprise](advanced-topics/working-with-enterprise/README.md)
         * [How to configure private Alfresco Nexus repository](advanced-topics/working-with-enterprise/enterprise-mvn-repo.md)
         * [How to configure private Alfresco Docker registry](advanced-topics/working-with-enterprise/enterprise-docker-registry.md)
         * [How to set up Alfresco Transform Service](advanced-topics/working-with-enterprise/alfresco-transform-service.md)
     * [Working with AMPs](advanced-topics/amps.md)
-    * Debugging
+    * [Debugging](advanced-topics/debugging/README.md)
         * [Remote debugging using Eclipse](advanced-topics/debugging/debug-eclipse.md)
         * [Remote debugging using IntelliJ](advanced-topics/debugging/debug-intellij.md)
     * [Integration testing](advanced-topics/integration-testing/README.md)
         * [How SDK's integration tests work](advanced-topics/integration-testing/it-working.md)
         * [How to run SDK's integration tests](advanced-topics/integration-testing/it-running.md)
-    * Hot reloading
+    * [Hot reloading](advanced-topics/hot-reloading/README.md)
         * [How to configure and use JRebel](advanced-topics/hot-reloading/jrebel.md)
         * [How to configure and use Hotswap Agent](advanced-topics/hot-reloading/hotswap-agent.md)
 * [Troubleshooting](troubleshooting.md)
