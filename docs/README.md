@@ -28,7 +28,7 @@ code into place.
 
 ## Documentation Content
 
-* [What's new?]() **TODO**
+* [What's new?](whats-new.md)
 * [Getting started with Alfresco SDK 4.0](getting-started.md)
 * [Alfresco SDK Maven archetypes](mvn-archetypes.md)
 * [Working with generated projects](working-with-generated-projects/README.md)
