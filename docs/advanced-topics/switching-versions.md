@@ -18,6 +18,7 @@ When editing `pom.xml` you will see a number of properties that define the Alfre
 <alfresco.platform.version>6.0.7-ga</alfresco.platform.version>
 <alfresco.share.version>6.0.c</alfresco.share.version>
 ```
+**(confirmation required)**
 
 Before continuing, always remember to start from a newly generated SDK project before changing the version numbers. We do not recommend changing the versions 
 using developed customizations or source code.

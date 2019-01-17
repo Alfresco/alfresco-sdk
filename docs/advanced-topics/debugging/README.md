@@ -10,4 +10,4 @@ application server. This section outlines the steps needed to configure Alfresco
 and to troubleshoot issues by stepping through the code line by line.
 
 Here we assume you have already generated an Alfresco project using the Alfresco SDK. If you don't have a project already, follow the steps in 
-[Getting started with Alfresco SDK 3.0](../../getting-started.md) to learn how to generate it in a few easy steps.
+[Getting started with Alfresco SDK 4.0](../../getting-started.md) to learn how to generate it in a few easy steps.
