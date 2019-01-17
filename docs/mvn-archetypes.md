@@ -76,7 +76,7 @@ The All-In-One project is recommended to be used if you have to develop a custom
 customizations on Alfresco Share client. If your plan to develop a project on the Alfresco Content Services Repository only, use the Platform JAR Maven 
 archetype. If you plan to develop a project on the Alfresco Share client only, use the Share JAR Maven archetype.
 
-For more information about the All-In-One project, see [All-In-One project structure](structure-aio.md).
+For more information about the All-In-One project, see [All-In-One project structure](working-with-generated-projects/structure-aio.md).
 
 ### org.alfresco.maven.archetype:alfresco-platform-jar-archetype
 
@@ -95,7 +95,7 @@ Services Repository. The samples included in the project are basic and straightf
 The Platform JAR project is recommended to be used if you have to develop a customization of the Alfresco Content Services Repository. If you also plan to 
 develop a customization of the Alfresco Share client, use the All-In-One Maven archetype instead.
 
-For more information about the Platform JAR project, see [Platform JAR project structure](structure-platform.md).
+For more information about the Platform JAR project, see [Platform JAR project structure](working-with-generated-projects/structure-platform.md).
 
 ### org.alfresco.maven.archetype:alfresco-share-jar-archetype
 
@@ -114,7 +114,7 @@ The samples included in the project are basic and straightforward, and can help 
 The Share JAR project is recommended to be used if you have to develop a customization of the Alfresco Share client. If you also plan to develop a 
 customization of the Alfresco Content Services Repository, use the All-In-One Maven archetype instead.
 
-For more information about the Share JAR project, see [Share JAR project structure](structure-share.md).
+For more information about the Share JAR project, see [Share JAR project structure](working-with-generated-projects/structure-share.md).
 
 ### org.alfresco.maven.archetype:activiti-jar-archetype (for use with SDK 2.2 only)
 

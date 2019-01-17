@@ -252,7 +252,7 @@ You'll recognize HotSwapAgent is working when you see similar log messages:
 
 This is a sample webscript generated in every project created using SDK 4.0 and the platform artifact.
 
-![Alt text](./imgs/sdk-hellofromjava.png?raw=true "Hello World webscript original result")
+![Alt text](../../docassets/images/sdk-hellofromjava.png?raw=true "Hello World webscript original result")
 
 3. Locate `HelloWorldWebScript.java` in the `src/main/java/.../platformsample` folder of your project (If you are using an All-In-One project, the folder is 
 located in the platform sub-project).
@@ -280,6 +280,6 @@ A number of log messages appear in the Alfresco project terminal, for example:
 
 6. Refresh the browser to see the updated message:
 
-![alt text](./imgs/sdk-hellofromme.png?raw=true "Hello World webscript modified result")
+![alt text](../../docassets/images/sdk-hellofromme.png?raw=true "Hello World webscript modified result")
 
 By changing the code and compiling it again, the changes have been dynamically received from Alfresco Content Services.

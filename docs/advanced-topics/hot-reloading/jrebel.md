@@ -35,16 +35,16 @@ _Note that a license is required. In this step you will be able to request a tri
 5. Select `Help > JRebel > Configuration > Remote servers` to add a new remote server.
 6. Give a descriptive name to the new server and set the `Server URL` as `http://localhost:8080/alfresco`.
 
-![Alt text](./imgs/sdk-jrebel-eclipse-server.png?raw=true "Eclipse JRebel remote server configuration")
+![Alt text](../../docassets/images/sdk-jrebel-eclipse-server.png?raw=true "Eclipse JRebel remote server configuration")
 
 7. Select the checkbox to enable the server synchronisation and the checkbox to `Synchronize on build`.
 
-![Alt text](./imgs/sdk-jrebel-eclipse-servers.png?raw=true "Eclipse JRebel remote servers synchronization")
+![Alt text](../../docassets/images/sdk-jrebel-eclipse-servers.png?raw=true "Eclipse JRebel remote servers synchronization")
 
 8. Select `Help > JRebel > Configuration > Projects` and select the checkbox to enable JRebel and the remote server support for required projects (the complete 
 project in case of the Platform Jar archetype or the `PROJECT_ARTIFACT_ID-platform-jar` and `integration-tests` modules in case of the All-In-One archetype).
 
-![Alt text](./imgs/sdk-jrebel-eclipse-projects.png?raw=true "Eclipse JRebel projects configuration")
+![Alt text](../../docassets/images/sdk-jrebel-eclipse-projects.png?raw=true "Eclipse JRebel projects configuration")
 
 ## Installing JRebel using IntelliJ IDEA
 
@@ -58,16 +58,16 @@ _Note that a license is required. In this step you will be able to request a tri
 5. Select `Preferences > JRebel > Remote Servers` to add a new remote server.
 6. Give a descriptive name to the new server and set the `Server URL` as `http://localhost:8080/alfresco.
 
-![Alt text](./imgs/sdk-jrebel-intellij-server.png?raw=true "Eclipse JRebel remote server configuration")
+![Alt text](../../docassets/images/sdk-jrebel-intellij-server.png?raw=true "Eclipse JRebel remote server configuration")
 
 7. Select the checkbox to enable the server synchronisation and the checkbox to `Synchronize on build`.
 
-![Alt text](./imgs/sdk-jrebel-intellij-servers.png?raw=true "Eclipse JRebel remote server configuration")
+![Alt text](../../docassets/images/sdk-jrebel-intellij-servers.png?raw=true "Eclipse JRebel remote server configuration")
 
 8. Open the JRebel Panel and select the checkbox to enable JRebel and the remote server support for required projects (the complete project in case of the 
 Platform Jar archetype or the `PROJECT_ARTIFACT_ID-platform-jar` and `integration-tests` modules in case of the All-In-One archetype).
 
-![Alt text](./imgs/sdk-jrebel-intellij-projects.png?raw=true "Eclipse JRebel projects configuration")
+![Alt text](../../docassets/images/sdk-jrebel-intellij-projects.png?raw=true "Eclipse JRebel projects configuration")
 
 ## Configuring JRebel in the project
 
@@ -142,7 +142,7 @@ You'll recognize JRebel is working when you see similar log messages:
 
 This is a sample webscript generated in every project created using SDK 4.0 and the platform artifact.
 
-![Alt text](./imgs/sdk-hellofromjava.png?raw=true "Hello World webscript original result")
+![Alt text](../../docassets/images/sdk-hellofromjava.png?raw=true "Hello World webscript original result")
 
 3. Locate `HelloWorldWebScript.java` in the `src/main/java/.../platformsample` folder of your project (If you are using an All-In-One project, the folder is 
 located in the platform sub-project).
@@ -165,6 +165,6 @@ A number of log messages appear in the Alfresco project terminal, for example:
 
 6. Refresh the browser to see the updated message:
 
-![alt text](./imgs/sdk-hellofromme.png?raw=true "Hello World webscript modified result")
+![alt text](../../docassets/images/sdk-hellofromme.png?raw=true "Hello World webscript modified result")
 
 By changing the code and compiling it again, the changes have been dynamically received from Alfresco Content Services.

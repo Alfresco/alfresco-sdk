@@ -90,7 +90,7 @@ Below is a description of the files in the root of the project (in this case, `m
 
 File | Description
 --- | ---
-`run` (`sh` and `bat`) | Utility script to work with the project (compile, run, test, show logs, etc.). For detailed information about it, check [Working with generated projects](projects-usage.md).
+`run` (`sh` and `bat`) | Utility script to work with the project (compile, run, test, show logs, etc.). For detailed information about it, check [Working with generated projects](README.md).
 `pom.xml` | This XML file contains information about the project and configuration details used by Apache Maven to build the project.
 `README.md` | File in Markdown format containing the documentation for the project.
 
@@ -108,5 +108,5 @@ Content | Description
 `src/main/resources/alfresco/module/<artifactId>` | This folder contains all the configuration files and settings for the Alfresco Share module. Here you can find the property file for the module.
 `src/main/resources/alfresco/web-extension` | In this folder you can find the extensions to the web client (Alfresco Share) and it's where you store Spring configurations that extend and override the system Share configuration. There are two important sub-directories here: `site-data` and `site-webscripts`.
 `src/main/resources/alfresco/META-INF/resources` | This folder hosts the content that will be placed in the `META-INF` folder of a standard Java web application. It is best practice to use a further subdirectory based on the module name. This allows you to manage multiple modules, so that their web resources don't conflict with each other.
-`src/main/resources/alfresco/META-INF/share-config-custom.xml` | This file is a relevant Alfresco Share file used to configure the sub-project with the correct settings, depending on your environment. For more details, see [Share configuration](http://docs.alfresco.com/5.2/concepts/dev-extensions-share-configuration.html).
+`src/main/resources/alfresco/META-INF/share-config-custom.xml` | This file is a relevant Alfresco Share file used to configure the sub-project with the correct settings, depending on your environment. For more details, see [Share configuration](http://docs.alfresco.com/6.0/concepts/dev-extensions-share-configuration.html).
 `src/test/java/<groupId>...` | This folder contains the same content you can find in a regular Java project, i.e. the Java source code for tests. Here you should put all the custom classes, interfaces, and Java source code related to tests.

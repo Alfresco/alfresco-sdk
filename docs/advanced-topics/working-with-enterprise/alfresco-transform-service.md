@@ -116,5 +116,3 @@ messaging.broker.url=failover:(nio://activemq:61616)?timeout=3000&jms.useCompres
 
 Once these 2 modifications are done, rebuild and restart all the services (`run.sh/run.bat build_start`) and ACS will use ATS to execute remote transformations 
 asynchronously whenever possible.
-
-

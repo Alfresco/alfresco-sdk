@@ -146,6 +146,3 @@ That allows you to modify the number of the exposed ports through maven properti
 ```
 
 That way, if you face a port conflict, you only need to change the port in the corresponding maven property and rebuilt and restart the project.
-
-
-

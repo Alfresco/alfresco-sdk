@@ -18,9 +18,9 @@ a great quantity of training resources about [Docker](https://docs.docker.com/ge
 
 After generating your project, using one of the Maven archetypes, review the project structure. The directory structure and content of each folder and file 
 can help you to understand how to start developing with the Alfresco SDK 4.0. Before continuing, make sure that you have read and completed the tasks in the 
-[Getting started](getting-started.md) tutorial.
+[Getting started](../getting-started.md) tutorial.
 
-The structure of the project and the purpose of the files it contains vary according to the [Maven archetype](mvn-archetypes.md) used to generate the project 
+The structure of the project and the purpose of the files it contains vary according to the [Maven archetype](../mvn-archetypes.md) used to generate the project 
 itself. The following links provide detailed descriptions of the different project types.
 
 * [All-In-One project structure](structure-aio.md)

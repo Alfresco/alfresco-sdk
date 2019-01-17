@@ -22,7 +22,7 @@ When editing `pom.xml` you will see a number of properties that define the Alfre
 Before continuing, always remember to start from a newly generated SDK project before changing the version numbers. We do not recommend changing the versions 
 using developed customizations or source code.
 
-This article is focused on the Community version. If you want to switch to Alfresco Enterprise, please visit [Working with Enterprise](enterprise.md).
+This article is focused on the Community version. If you want to switch to Alfresco Enterprise, please visit [Working with Enterprise](working-with-enterprise/README.md).
 
 The supported versions are explained in the next sections of this article.
 
@@ -55,5 +55,5 @@ $ ./run.sh build_start
 ```
 
 **IMPORTANT:** Alfresco 6.1 is ready to work with JDK 11, but Alfresco 6.0 needs to be compiled and run using JDK 8, so please take this into account when you
-switch from version 6.1.x to 6.0.x. If you compile Alfresco 6.0.x with JDK 11 you'll experience the issue described in the [Troubleshooting page](troubleshooting.md) 
+switch from version 6.1.x to 6.0.x. If you compile Alfresco 6.0.x with JDK 11 you'll experience the issue described in the [Troubleshooting page](../troubleshooting.md) 
 about wrong JDK versions.

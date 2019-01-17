@@ -95,7 +95,7 @@ Below is a description of the files in the root of the project (in this case, `m
 
 File | Description
 --- | ---
-`run` (`sh` and `bat`) | Utility script to work with the project (compile, run, test, show logs, etc.). For detailed information about it, check [Working with generated projects](projects-usage.md).
+`run` (`sh` and `bat`) | Utility script to work with the project (compile, run, test, show logs, etc.). For detailed information about it, check [Working with generated projects](README.md).
 `pom.xml` | This XML file contains information about the project and configuration details used by Apache Maven to build the project.
 `README.md` | File in Markdown format containing the documentation for the project.
 
