@@ -17,6 +17,8 @@
  */
 package org.alfresco.maven.plugin;
 
+import de.schlichtherle.truezip.file.TVFS;
+import de.schlichtherle.truezip.fs.FsSyncException;
 import org.alfresco.maven.plugin.config.ModuleDependency;
 import org.alfresco.maven.plugin.config.TomcatDependency;
 import org.alfresco.maven.plugin.config.TomcatWebapp;
@@ -1176,6 +1178,13 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                     ),
                     execEnv
             );
+        }
+
+        // Force the unmount of all the files mounted with TrueZIP to avoid an exception in the FsSyncShutdownHook
+        try {
+            TVFS.umount();
+        } catch (final FsSyncException e) {
+            getLog().error(e);
         }
     }
 
