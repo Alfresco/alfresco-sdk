@@ -17,9 +17,11 @@
  */
 package org.alfresco.maven.plugin;
 
+import com.google.common.collect.ImmutableSet;
 import org.alfresco.maven.plugin.config.ModuleDependency;
 import org.alfresco.maven.plugin.config.TomcatDependency;
 import org.alfresco.maven.plugin.config.TomcatWebapp;
+import org.alfresco.util.Pair;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -40,6 +42,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static org.twdata.maven.mojoexecutor.MojoExecutor.*;
 
@@ -66,6 +69,29 @@ public abstract class AbstractRunMojo extends AbstractMojo {
 
     public static final String ALFRESCO_ENTERPRISE_EDITION = "enterprise";
     public static final String ALFRESCO_COMMUNITY_EDITION = "community";
+
+    private static final String TOMCAT_GROUP_ID = "org.apache.tomcat";
+    private static final String TOMCAT_EMBED_GROUP_ID = "org.apache.tomcat.embed";
+    private static final Set<Pair<String, String>> TOMCAT_DEPENDENCIES = new ImmutableSet.Builder<Pair<String, String>>()
+            .add(new Pair(TOMCAT_EMBED_GROUP_ID,"tomcat-embed-core"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-util"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-coyote"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-api"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-jdbc"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-dbcp"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-servlet-api"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-jsp-api"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-jasper"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-jasper-el"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-el-api"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-catalina"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-tribes"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-catalina-ha"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-annotations-api"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-juli"))
+            .add(new Pair(TOMCAT_EMBED_GROUP_ID,"tomcat-embed-logging-juli"))
+            .add(new Pair(TOMCAT_EMBED_GROUP_ID,"tomcat-embed-logging-log4j"))
+            .build();
 
     @Component
     protected MavenProject project;
@@ -350,6 +376,13 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      */
     @Parameter(property = "solr.home", defaultValue = "${project.basedir}/${alfresco.data.location}/solr")
     protected String solrHome;
+
+    /**
+     * Tomcat version to be used in the Maven Tomcat Plugin. If this parameter is not set, then the
+     * default Tomcat version will be used (it depends on the version of the Tomcat Maven Plugin).
+     */
+    @Parameter(property = "maven.alfresco.tomcat.version")
+    protected String tomcatVersion;
 
     /**
      * Maven GAV properties for customized alfresco.war, share.war, activiti-app.war
@@ -1341,6 +1374,11 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                     dependency("org.postgresql", "postgresql", "9.4-1201-jdbc41"));
         }
 
+        // If a custom version of Tomcat is required add the corresponding dependencies
+        if(StringUtils.isNotBlank(tomcatVersion)) {
+            addTomcatDependencies(tomcatPluginDependencies);
+        }
+
         if (enablePlatform) {
             webapps2Deploy.add(createWebAppElement(
                     runnerAlfrescoGroupId, runnerAlfrescoPlatformWarArtifactId, runnerAlfrescoPlatformVersion,
@@ -1787,5 +1825,17 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      */
     private String getWarName(String baseWarName) {
         return baseWarName + "-war";
+    }
+
+    /**
+     * Add all the required maven dependencies to execute a specific version of Tomcat set by the property <code>tomcatVersion</code> to the list of
+     * dependencies of the Tomcat Maven Plugin.
+     *
+     * @param tomcatPluginDependencies current list of dependencies of the Tomcat Maven Plugin
+     */
+    private void addTomcatDependencies(List<Dependency> tomcatPluginDependencies) {
+        for(Pair<String, String> tomcatDependency : TOMCAT_DEPENDENCIES) {
+            tomcatPluginDependencies.add(dependency(tomcatDependency.getFirst(),tomcatDependency.getSecond(),tomcatVersion));
+        }
     }
 }
