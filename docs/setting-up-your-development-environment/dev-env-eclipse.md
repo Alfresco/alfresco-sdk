@@ -29,14 +29,14 @@ required dependencies, this task will finish relatively quickly. Otherwise, be p
 
 Once the import is complete, a warning message may be displayed.
 
-![Alt text](../docassets/images/sdk-dev-env-eclipse-warning.png?raw=true "Eclipse maven project import warning")
+![Alt text](../docassets/images/sdk-dev-env-eclipse-warning.png "Eclipse maven project import warning")
 
 4. Click `Resolve All Later` to complete the import task.
 
 5. Check the Markers tab in the bottom panel, where you may see some Maven problems. Expand the list and right click on a item with an error, then select 
 `Quick Fix` and mark as shown.
 
-![Alt text](../docassets/images/sdk-dev-env-eclipse-quickfix.png?raw=true "Eclipse maven project import quick fix")
+![Alt text](../docassets/images/sdk-dev-env-eclipse-quickfix.png "Eclipse maven project import quick fix")
 
 6. Click `Finish` to confirm the fix.
 

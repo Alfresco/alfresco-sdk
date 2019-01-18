@@ -78,11 +78,11 @@ the `build_start` or the `start` goal of the `run` script.
 
 4. Right click and select `Run As ...`, then click `JUnit Test`.
 
-![Alt text](../../docassets/images/sdk-it-eclipse-run.png?raw=true "Eclipse integration tests run")
+![Alt text](../../docassets/images/sdk-it-eclipse-run.png "Eclipse integration tests run")
 
 Once the tests have completed (typically, after a few seconds), the results are presented.
 
-![Alt text](../../docassets/images/sdk-it-eclipse-results.png?raw=true "Eclipse integration test execution results")
+![Alt text](../../docassets/images/sdk-it-eclipse-results.png "Eclipse integration test execution results")
 
 When using an IDE, the source code related to the integration tests is the one deployed directly on the platform side. This means that an update in the code 
 for the Java classes will be included when you run the integration tests _if and only if_ they are deployed in the platform. To avoid stopping/starting 
@@ -104,11 +104,11 @@ the `build_start` or the `start` goal of the `run` script.
 
 4. Right click and select `Run Tests`.
 
-![Alt text](../../docassets/images/sdk-it-intellij-run.png?raw=true "IntelliJ IDEA integration tests run")
+![Alt text](../../docassets/images/sdk-it-intellij-run.png "IntelliJ IDEA integration tests run")
 
 Once the tests have completed (typically, after a few seconds), the results are presented.
 
-![Alt text](../../docassets/images/sdk-it-intellij-results.png?raw=true "IntelliJ IDEA integration test execution results")
+![Alt text](../../docassets/images/sdk-it-intellij-results.png "IntelliJ IDEA integration test execution results")
 
 When using an IDE, the source code related to the integration tests is the one deployed directly on the platform side. This means that an update in the code 
 for the Java classes will be included when you run the integration tests _if and only if_ they are deployed in the platform. To avoid stopping/starting 

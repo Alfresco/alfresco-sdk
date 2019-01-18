@@ -52,13 +52,13 @@ For more details on how to import an Alfresco project into your IntelliJ IDEA ID
 
 1. Open the IntelliJ IDEA IDE and click on `Add/Edit Configurations` (top right).
 
-![Alt text](../../docassets/images/sdk-debug-intellij-create.png?raw=true "IntelliJ remote debug create configuration")
+![Alt text](../../docassets/images/sdk-debug-intellij-create.png "IntelliJ remote debug create configuration")
 
 2. Click on the plus icon (top left) and select `Remote` to add a new configuration for a remote app.
 
 3. Enter a descriptive name for your configuration, for example, `Sample project ACS debug`.
 
-![Alt text](../../docassets/images/sdk-debug-intellij-config.png?raw=true "IntelliJ remote debug configuration detail")
+![Alt text](../../docassets/images/sdk-debug-intellij-config.png "IntelliJ remote debug configuration detail")
 
 4. Check that your settings match the screenshot. This is a sample to debug ACS. If you want to debug share or you have configured custom ports for remote 
 debugging you'll need to modify that configuration. If you're working with _Docker Toolbox_ instead of _Docker Desktop_ the host to access the container won't
@@ -70,7 +70,7 @@ You will be taken back to the project source code.
 
 6. Click on the `Edit Configurations` dropdown box and select the new configuration to run it.
 
-![Alt text](../../docassets/images/sdk-debug-intellij-launch.png?raw=true "IntelliJ remote debug configuration launch")
+![Alt text](../../docassets/images/sdk-debug-intellij-launch.png "IntelliJ remote debug configuration launch")
 
 The IDE connects the source code with the deployed one at the docker container. Once the code is linked, you can open a browser and start using your 
 application. In our case, we are going to test the behaviour of debugging by running the sample webscript.
@@ -79,7 +79,7 @@ application. In our case, we are going to test the behaviour of debugging by run
 
 This is a sample webscript generated in every project created using SDK 4.0 and the platform artifact.
 
-![Alt text](../../docassets/images/sdk-hellofromjava.png?raw=true "Hello World webscript original result")
+![Alt text](../../docassets/images/sdk-hellofromjava.png "Hello World webscript original result")
 
 Now let's find the `HelloWorldWebScript.java` file in the `src/main/java/.../platformsample` folder of your project. If you're using an All-In-One project, 
 the folder is located in the platform sub-project.
@@ -92,7 +92,7 @@ model.put(“fromJava”,”HelloFromJava”);
 
 9. Refresh the browser. IntelliJ IDEA will intercept the execution at the breakpoint:
 
-![Alt text](../../docassets/images/sdk-debug-intellij-breakpoint.png?raw=true "IntelliJ remote debug stopped at breakpoint")
+![Alt text](../../docassets/images/sdk-debug-intellij-breakpoint.png "IntelliJ remote debug stopped at breakpoint")
 
 From here the management is the same as for a regular Java application using your preferred IDE. Please note that the whole Alfresco source code is available 
 at debug time, thanks to the local maven repository.

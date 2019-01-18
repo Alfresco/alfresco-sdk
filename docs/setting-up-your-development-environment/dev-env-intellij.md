@@ -17,11 +17,11 @@ easy steps.
 1. Starting from IntelliJ IDEA, select `File > Open` from the main menu to open the Alfresco project. Alternatively, select `Import Project` if you're running 
 IntelliJ IDEA for the first time in your development environment.
 
-![Alt text](../docassets/images/sdk-dev-env-intellij-import.png?raw=true "IntelliJ maven project import")
+![Alt text](../docassets/images/sdk-dev-env-intellij-import.png "IntelliJ maven project import")
 
 2. After the project is imported, you will see a window similar to the following:
 
-![Alt text](../docassets/images/sdk-dev-env-intellij-finish.png?raw=true "IntelliJ maven project imported")
+![Alt text](../docassets/images/sdk-dev-env-intellij-finish.png "IntelliJ maven project imported")
 
 Once this is done, the project is successfully imported in IntelliJ IDEA. 
 
