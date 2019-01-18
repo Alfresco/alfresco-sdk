@@ -16,7 +16,7 @@ easy steps.
 
 1. Starting from Eclipse, select `File > Import > Maven > Existing Maven Projects` from the main menu to import the Alfresco project.
 
-![Alt text](../docassets/images/sdk-dev-env-eclipse-import.png?raw=true "Eclipse maven project import")
+![Eclipse maven project import](../docassets/images/sdk-dev-env-eclipse-import.png)
 
 2. Click `Next` then browse to the root of the Alfresco project.
 
