@@ -20,7 +20,7 @@ easy steps.
 
 2. Click `Next` then browse to the root of the Alfresco project.
 
-![Alt text](../docassets/images/sdk-dev-env-eclipse-project.png?raw=true "Eclipse maven project selection")
+![Alt text](../docassets/images/sdk-dev-env-eclipse-project.png "Eclipse maven project selection")
 
 3. Click `Finish` to start importing the project into Eclipse.
 
