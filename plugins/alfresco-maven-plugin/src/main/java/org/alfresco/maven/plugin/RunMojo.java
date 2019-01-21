@@ -46,9 +46,34 @@ public class RunMojo extends AbstractRunMojo {
                 pluginManager
         );
 
+        if (enableActivitiApp || enableActivitiAdmin) {
+            getLog().warn("*************************************************************************************************************");
+            getLog().warn("*");
+            getLog().warn("*");
+            getLog().warn("*");
+            getLog().warn("*");
+            getLog().warn("*");
+            getLog().warn("*");
+            getLog().warn("*");
+            getLog().warn("*");
+            getLog().warn("*\tWARNING" );
+            getLog().warn("*\tThe Activiti features in SDK 3.x are UNSUPPORTED.");
+            getLog().warn("*\tIt has been marked for deprecation (SDK 3.1) and will be removed in SDK 4.0.");
+            getLog().warn("*");
+            getLog().warn("*");
+            getLog().warn("*");
+            getLog().warn("*");
+            getLog().warn("*");
+            getLog().warn("*");
+            getLog().warn("*");
+            getLog().warn("*************************************************************************************************************");
+
+        }
+
         if (enableSolr) {
             unpackSolrConfig();
             fixSolrHomePath();
+            copySolrCustomConfig();
             replaceSolrConfigProperties();
             installSolr10InLocalRepo();
         }

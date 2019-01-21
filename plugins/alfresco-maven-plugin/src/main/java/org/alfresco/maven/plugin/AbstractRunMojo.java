@@ -17,11 +17,13 @@
  */
 package org.alfresco.maven.plugin;
 
+import com.google.common.collect.ImmutableSet;
 import de.schlichtherle.truezip.file.TVFS;
 import de.schlichtherle.truezip.fs.FsSyncException;
 import org.alfresco.maven.plugin.config.ModuleDependency;
 import org.alfresco.maven.plugin.config.TomcatDependency;
 import org.alfresco.maven.plugin.config.TomcatWebapp;
+import org.alfresco.util.Pair;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -42,6 +44,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static org.twdata.maven.mojoexecutor.MojoExecutor.*;
 
@@ -68,6 +71,29 @@ public abstract class AbstractRunMojo extends AbstractMojo {
 
     public static final String ALFRESCO_ENTERPRISE_EDITION = "enterprise";
     public static final String ALFRESCO_COMMUNITY_EDITION = "community";
+
+    private static final String TOMCAT_GROUP_ID = "org.apache.tomcat";
+    private static final String TOMCAT_EMBED_GROUP_ID = "org.apache.tomcat.embed";
+    private static final Set<Pair<String, String>> TOMCAT_DEPENDENCIES = new ImmutableSet.Builder<Pair<String, String>>()
+            .add(new Pair(TOMCAT_EMBED_GROUP_ID,"tomcat-embed-core"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-util"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-coyote"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-api"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-jdbc"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-dbcp"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-servlet-api"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-jsp-api"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-jasper"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-jasper-el"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-el-api"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-catalina"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-tribes"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-catalina-ha"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-annotations-api"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-juli"))
+            .add(new Pair(TOMCAT_EMBED_GROUP_ID,"tomcat-embed-logging-juli"))
+            .add(new Pair(TOMCAT_EMBED_GROUP_ID,"tomcat-embed-logging-log4j"))
+            .build();
 
     @Component
     protected MavenProject project;
@@ -188,6 +214,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     protected boolean enableApiExplorer;
 
     /**
+     * Deprecated as of SDK 3.1
      * Switch to enable/disable Alfresco Activiti Workflow Engine (activiti-app.war) when running embedded Tomcat.
      * This contains the Alfresco Activiti webapp, including the workflow engine.
      * This webapp is also the user interface for people involved in the task and processes
@@ -199,6 +226,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     protected boolean enableActivitiApp;
 
     /**
+     * Deprecated as of SDK 3.1
      * Switch to enable/disable Alfresco Activiti Admin (activiti-admin.war) when running embedded Tomcat.
      * This contains the Alfresco Activiti Administrator webapp. You use this to administer and monitor your
      * Alfresco Activiti engines.
@@ -244,6 +272,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     protected List<ModuleDependency> shareModules;
 
     /**
+     * Deprecated as of SDK 3.1
      * JARs that should be overlayed/applied to the Activiti App WAR (i.e. activiti-app.war)
      */
     @Parameter(property = "maven.activiti.modules", defaultValue = "")
@@ -298,6 +327,9 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     @Parameter(property = "alfresco.groupId", defaultValue = "org.alfresco")
     protected String alfrescoGroupId;
 
+    /**
+     * Deprecated as of SDK 3.1
+     */
     @Parameter(property = "activiti.groupId", defaultValue = "com.activiti")
     protected String activitiGroupId;
 
@@ -313,9 +345,16 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     @Parameter(property = "alfresco.api.explorer.artifactId", defaultValue = "api-explorer")
     protected String alfrescoApiExplorerArtifactId;
 
+    /**
+     * Deprecated as of SDK 3.1
+     */
+
     @Parameter(property = "activiti.app.war.artifactId", defaultValue = "activiti-app")
     protected String activitiAppWarArtifactId;
 
+    /**
+     * Deprecated as of SDK 3.1
+     */
     @Parameter(property = "activiti.admin.war.artifactId", defaultValue = "activiti-admin")
     protected String activitiAdminWarArtifactId;
 
@@ -328,6 +367,9 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     @Parameter(property = "alfresco.api.explorer.version", defaultValue = "5.2.e")
     protected String alfrescoApiExplorerVersion;
 
+    /**
+     * Deprecated as of SDK 3.1
+     */
     @Parameter(property = "activiti.version", defaultValue = "1.5.3")
     protected String activitiVersion;
 
@@ -336,6 +378,13 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      */
     @Parameter(property = "solr.home", defaultValue = "${project.basedir}/${alfresco.data.location}/solr")
     protected String solrHome;
+
+    /**
+     * Tomcat version to be used in the Maven Tomcat Plugin. If this parameter is not set, then the
+     * default Tomcat version will be used (it depends on the version of the Tomcat Maven Plugin).
+     */
+    @Parameter(property = "maven.alfresco.tomcat.version")
+    protected String tomcatVersion;
 
     /**
      * Maven GAV properties for customized alfresco.war, share.war, activiti-app.war
@@ -451,6 +500,35 @@ public abstract class AbstractRunMojo extends AbstractMojo {
         );
     }
 
+    /**
+     * Copy custom solr configuration files over, so a 
+     * developer can overwrite any files needed
+     * 
+     * @throws MojoExecutionException
+     */
+    protected void copySolrCustomConfig() throws MojoExecutionException {
+    	getLog().info("Copying custom Solr config");
+        executeMojo(
+                plugin(
+                        groupId("org.apache.maven.plugins"),
+                        artifactId("maven-resources-plugin"),
+                        version(MAVEN_RESOURCE_PLUGIN_VERSION)
+                ),
+                goal("copy-resources"),
+                configuration(
+                        element(name("outputDirectory"), solrHome),
+                        element(name("overwrite"), "true"),
+                        element(name("resources"),
+                                element(name("resource"),
+                                        element(name("directory"), "src/test/resources/solr"),
+                                        element(name("filtering"), "true")
+                                )
+                        )
+                ),
+                execEnv
+        );
+    }
+    
     /**
      * Replace property placeholders in configuration files for the cores, so the
      * index files can be found for each core when Solr starts up.
@@ -1305,6 +1383,11 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                     dependency("org.postgresql", "postgresql", "9.4-1201-jdbc41"));
         }
 
+        // If a custom version of Tomcat is required add the corresponding dependencies
+        if(StringUtils.isNotBlank(tomcatVersion)) {
+            addTomcatDependencies(tomcatPluginDependencies);
+        }
+
         if (enablePlatform) {
             webapps2Deploy.add(createWebAppElement(
                     runnerAlfrescoGroupId, runnerAlfrescoPlatformWarArtifactId, runnerAlfrescoPlatformVersion,
@@ -1328,6 +1411,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
         }
 
         if (enableActivitiApp) {
+
             webapps2Deploy.add(createWebAppElement(
                     runnerActivitiAppGroupId, runnerActivitiAppWarArtifactId, runnerActivitiAppVersion,
                     "/activiti-app", null));
@@ -1750,5 +1834,17 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      */
     private String getWarName(String baseWarName) {
         return baseWarName + "-war";
+    }
+
+    /**
+     * Add all the required maven dependencies to execute a specific version of Tomcat set by the property <code>tomcatVersion</code> to the list of
+     * dependencies of the Tomcat Maven Plugin.
+     *
+     * @param tomcatPluginDependencies current list of dependencies of the Tomcat Maven Plugin
+     */
+    private void addTomcatDependencies(List<Dependency> tomcatPluginDependencies) {
+        for(Pair<String, String> tomcatDependency : TOMCAT_DEPENDENCIES) {
+            tomcatPluginDependencies.add(dependency(tomcatDependency.getFirst(),tomcatDependency.getSecond(),tomcatVersion));
+        }
     }
 }

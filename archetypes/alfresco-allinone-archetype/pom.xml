@@ -6,12 +6,12 @@
   <artifactId>alfresco-allinone-archetype</artifactId>
   <packaging>maven-archetype</packaging>
   <name>Alfresco SDK - All-in-One Archetype</name>
-  <description>Sample multi-module project for All-in-One development on the Alfresco plaftorm. Includes modules for Platform/Repository JAR and Share JAR</description>
+  <description>Sample multi-module project for All-in-One development on the Alfresco platform. Includes modules for Platform/Repository JAR and Share JAR</description>
   
   <parent>
     <groupId>org.alfresco.maven</groupId>
     <artifactId>alfresco-sdk-aggregator</artifactId>
-    <version>3.0.1</version>
+    <version>3.0.2-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
   

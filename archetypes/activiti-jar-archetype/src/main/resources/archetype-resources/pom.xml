@@ -5,9 +5,14 @@
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
-    <name>${artifactId} Activiti Jar Module - SDK 3</name>
-    <description>Activiti JAR Module that produces a JAR file with Java extensions such as service task delegates. It also produces an application ZIP with workflow definition, forms etc that can be deployed via /activiti-app - SDK 3</description>
+    <name>DEPRECATED - UNSUPPORTED - EXPERIMENTAL ${artifactId}  Activiti Jar Module - SDK 3</name>
+    <description>DEPRECATED - UNSUPPORTED - EXPERIMENTAL Activiti JAR Module that produces a JAR file with Java extensions such as service task delegates. It also produces an application ZIP with workflow definition, forms etc that can be deployed via /activiti-app - SDK 3</description>
     <packaging>jar</packaging>
+
+    <!-- DEPRECATION NOTICE -->
+    <!-- This archetype has been deprecated in SDK 3.1 and will be removed or replaced in SDK 4.0 -->
+    <!-- This archetype was introduced as experimental support for Activiti 1.5 Enterprise. -->
+    <!-- The archetype and Activiti/APS features present in the SDK is NOT supported, use at your own risk -->
 
     <properties>
         <!-- Alfresco Maven Plugin version to use -->
