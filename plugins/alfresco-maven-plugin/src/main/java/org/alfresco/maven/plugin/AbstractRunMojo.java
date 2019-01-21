@@ -95,6 +95,8 @@ public abstract class AbstractRunMojo extends AbstractMojo {
             .add(new Pair(TOMCAT_EMBED_GROUP_ID,"tomcat-embed-logging-log4j"))
             .build();
 
+    private static final String AMP_LOCATION_PATTERN = "%s/%s-%s.amp";
+
     @Component
     protected MavenProject project;
 
@@ -1227,18 +1229,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
             );
 
             // Then apply all these amps to the unpacked war
-            // Call the Alfresco Maven Plugin Install Mojo directly, so we don't have to keep SDK version info here
-            String ampsLocation = project.getBuild().getDirectory() + "/" + ampsModuleDir;
-            String warLocation = project.getBuild().getDirectory() + "/" + getWarName(warName);
-            InstallMojo installMojo = new InstallMojo();
-            installMojo.setAmpLocation(new File(ampsLocation));
-            installMojo.setWarLocation(new File(warLocation));
-            installMojo.setForce(true);
-            try {
-                installMojo.execute();
-            } catch (MojoFailureException e) {
-                e.printStackTrace();
-            }
+            applyAMPs(warName, modules);
         }
 
         // Then copy all JAR dependencies to the unpacked war /target/<warName>-war/WEB-INF/lib
@@ -1846,5 +1837,57 @@ public abstract class AbstractRunMojo extends AbstractMojo {
         for(Pair<String, String> tomcatDependency : TOMCAT_DEPENDENCIES) {
             tomcatPluginDependencies.add(dependency(tomcatDependency.getFirst(),tomcatDependency.getSecond(),tomcatVersion));
         }
+    }
+
+    /**
+     * Apply a list of AMPs to a specific war file.
+     *
+     * @param warName the name of the war file to apply the AMPs to
+     * @param modules the list of proposed modules to be applied to the war file. Only the AMP files will be applied
+     * @throws MojoExecutionException when any problem appears applying the AMPs to the war
+     */
+    private void applyAMPs(String warName, List<ModuleDependency> modules) throws MojoExecutionException {
+        final String ampsModuleDir = "modules/" + warName + "/amps";
+        final String ampsLocation = project.getBuild().getDirectory() + "/" + ampsModuleDir;
+        final String warLocation = project.getBuild().getDirectory() + "/" + getWarName(warName);
+
+        // Apply one AMP module each time to preserve the order applying the AMPs to the war
+        for(ModuleDependency module : modules) {
+            if(module.isAmp()) {
+                applyAMP(ampsLocation, warLocation, module);
+            }
+        }
+    }
+
+    /**
+     * Apply an AMP to a specific war file.
+     *
+     * @param ampsLocation the location of the folder where the AMP is located
+     * @param warLocation the location of the war file to apply the AMP to
+     * @param ampModule the module that represents the AMP to apply
+     * @throws MojoExecutionException when any problem appears applying the AMP to the war
+     */
+    private void applyAMP(String ampsLocation, String warLocation, ModuleDependency ampModule) throws MojoExecutionException {
+        // Call the Alfresco Maven Plugin Install Mojo directly, so we don't have to keep SDK version info here
+        InstallMojo installMojo = new InstallMojo();
+        installMojo.setAmpLocation(new File(getAMPLocation(ampsLocation, ampModule)));
+        installMojo.setWarLocation(new File(warLocation));
+        installMojo.setForce(true);
+        try {
+            installMojo.execute();
+        } catch (MojoFailureException e) {
+            getLog().error(e);
+        }
+    }
+
+    /**
+     * Build the location of an AMP file.
+     *
+     * @param ampsLocation the location of the folder where the AMPs are located
+     * @param ampModule the {@link ModuleDependency} of the AMP to build its location
+     * @return the location of the AMP file
+     */
+    private String getAMPLocation(String ampsLocation, ModuleDependency ampModule) {
+        return String.format(AMP_LOCATION_PATTERN, ampsLocation, ampModule.getArtifactId(), ampModule.getVersion());
     }
 }
