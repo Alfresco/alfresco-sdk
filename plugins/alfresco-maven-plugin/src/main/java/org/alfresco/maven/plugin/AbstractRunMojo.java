@@ -17,9 +17,13 @@
  */
 package org.alfresco.maven.plugin;
 
+import com.google.common.collect.ImmutableSet;
+import de.schlichtherle.truezip.file.TVFS;
+import de.schlichtherle.truezip.fs.FsSyncException;
 import org.alfresco.maven.plugin.config.ModuleDependency;
 import org.alfresco.maven.plugin.config.TomcatDependency;
 import org.alfresco.maven.plugin.config.TomcatWebapp;
+import org.alfresco.util.Pair;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -40,6 +44,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static org.twdata.maven.mojoexecutor.MojoExecutor.*;
 
@@ -66,6 +71,31 @@ public abstract class AbstractRunMojo extends AbstractMojo {
 
     public static final String ALFRESCO_ENTERPRISE_EDITION = "enterprise";
     public static final String ALFRESCO_COMMUNITY_EDITION = "community";
+
+    private static final String TOMCAT_GROUP_ID = "org.apache.tomcat";
+    private static final String TOMCAT_EMBED_GROUP_ID = "org.apache.tomcat.embed";
+    private static final Set<Pair<String, String>> TOMCAT_DEPENDENCIES = new ImmutableSet.Builder<Pair<String, String>>()
+            .add(new Pair(TOMCAT_EMBED_GROUP_ID,"tomcat-embed-core"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-util"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-coyote"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-api"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-jdbc"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-dbcp"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-servlet-api"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-jsp-api"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-jasper"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-jasper-el"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-el-api"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-catalina"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-tribes"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-catalina-ha"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-annotations-api"))
+            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-juli"))
+            .add(new Pair(TOMCAT_EMBED_GROUP_ID,"tomcat-embed-logging-juli"))
+            .add(new Pair(TOMCAT_EMBED_GROUP_ID,"tomcat-embed-logging-log4j"))
+            .build();
+
+    private static final String AMP_LOCATION_PATTERN = "%s/%s-%s.amp";
 
     @Component
     protected MavenProject project;
@@ -356,6 +386,13 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      */
     @Parameter(property = "solr.alfresco.cron", defaultValue = "0/15 * * * * ? *")
     protected String solrCron;
+
+    /**
+     * Tomcat version to be used in the Maven Tomcat Plugin. If this parameter is not set, then the
+     * default Tomcat version will be used (it depends on the version of the Tomcat Maven Plugin).
+     */
+    @Parameter(property = "maven.alfresco.tomcat.version")
+    protected String tomcatVersion;
 
     /**
      * Maven GAV properties for customized alfresco.war, share.war, activiti-app.war
@@ -1201,18 +1238,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
             );
 
             // Then apply all these amps to the unpacked war
-            // Call the Alfresco Maven Plugin Install Mojo directly, so we don't have to keep SDK version info here
-            String ampsLocation = project.getBuild().getDirectory() + "/" + ampsModuleDir;
-            String warLocation = project.getBuild().getDirectory() + "/" + getWarName(warName);
-            InstallMojo installMojo = new InstallMojo();
-            installMojo.setAmpLocation(new File(ampsLocation));
-            installMojo.setWarLocation(new File(warLocation));
-            installMojo.setForce(true);
-            try {
-                installMojo.execute();
-            } catch (MojoFailureException e) {
-                e.printStackTrace();
-            }
+            applyAMPs(warName, modules);
         }
 
         // Then copy all JAR dependencies to the unpacked war /target/<warName>-war/WEB-INF/lib
@@ -1230,6 +1256,13 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                     ),
                     execEnv
             );
+        }
+
+        // Force the unmount of all the files mounted with TrueZIP to avoid an exception in the FsSyncShutdownHook
+        try {
+            TVFS.umount();
+        } catch (final FsSyncException e) {
+            getLog().error(e);
         }
     }
 
@@ -1348,6 +1381,11 @@ public abstract class AbstractRunMojo extends AbstractMojo {
             tomcatPluginDependencies.add(
                     // Bring in the PostgreSQL JDBC Driver
                     dependency("org.postgresql", "postgresql", "9.4-1201-jdbc41"));
+        }
+
+        // If a custom version of Tomcat is required add the corresponding dependencies
+        if(StringUtils.isNotBlank(tomcatVersion)) {
+            addTomcatDependencies(tomcatPluginDependencies);
         }
 
         if (enablePlatform) {
@@ -1796,5 +1834,69 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      */
     private String getWarName(String baseWarName) {
         return baseWarName + "-war";
+    }
+
+    /**
+     * Add all the required maven dependencies to execute a specific version of Tomcat set by the property <code>tomcatVersion</code> to the list of
+     * dependencies of the Tomcat Maven Plugin.
+     *
+     * @param tomcatPluginDependencies current list of dependencies of the Tomcat Maven Plugin
+     */
+    private void addTomcatDependencies(List<Dependency> tomcatPluginDependencies) {
+        for(Pair<String, String> tomcatDependency : TOMCAT_DEPENDENCIES) {
+            tomcatPluginDependencies.add(dependency(tomcatDependency.getFirst(),tomcatDependency.getSecond(),tomcatVersion));
+        }
+    }
+
+    /**
+     * Apply a list of AMPs to a specific war file.
+     *
+     * @param warName the name of the war file to apply the AMPs to
+     * @param modules the list of proposed modules to be applied to the war file. Only the AMP files will be applied
+     * @throws MojoExecutionException when any problem appears applying the AMPs to the war
+     */
+    private void applyAMPs(String warName, List<ModuleDependency> modules) throws MojoExecutionException {
+        final String ampsModuleDir = "modules/" + warName + "/amps";
+        final String ampsLocation = project.getBuild().getDirectory() + "/" + ampsModuleDir;
+        final String warLocation = project.getBuild().getDirectory() + "/" + getWarName(warName);
+
+        // Apply one AMP module each time to preserve the order applying the AMPs to the war
+        for(ModuleDependency module : modules) {
+            if(module.isAmp()) {
+                applyAMP(ampsLocation, warLocation, module);
+            }
+        }
+    }
+
+    /**
+     * Apply an AMP to a specific war file.
+     *
+     * @param ampsLocation the location of the folder where the AMP is located
+     * @param warLocation the location of the war file to apply the AMP to
+     * @param ampModule the module that represents the AMP to apply
+     * @throws MojoExecutionException when any problem appears applying the AMP to the war
+     */
+    private void applyAMP(String ampsLocation, String warLocation, ModuleDependency ampModule) throws MojoExecutionException {
+        // Call the Alfresco Maven Plugin Install Mojo directly, so we don't have to keep SDK version info here
+        InstallMojo installMojo = new InstallMojo();
+        installMojo.setAmpLocation(new File(getAMPLocation(ampsLocation, ampModule)));
+        installMojo.setWarLocation(new File(warLocation));
+        installMojo.setForce(true);
+        try {
+            installMojo.execute();
+        } catch (MojoFailureException e) {
+            getLog().error(e);
+        }
+    }
+
+    /**
+     * Build the location of an AMP file.
+     *
+     * @param ampsLocation the location of the folder where the AMPs are located
+     * @param ampModule the {@link ModuleDependency} of the AMP to build its location
+     * @return the location of the AMP file
+     */
+    private String getAMPLocation(String ampsLocation, ModuleDependency ampModule) {
+        return String.format(AMP_LOCATION_PATTERN, ampsLocation, ampModule.getArtifactId(), ampModule.getVersion());
     }
 }
