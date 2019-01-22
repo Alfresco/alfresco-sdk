@@ -389,6 +389,12 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     protected String tomcatVersion;
 
     /**
+     * Location of a custom context file to use in the deployment of the platform war in Tomcat.
+     */
+    @Parameter(property = "maven.alfresco.platform.custom.context.file")
+    protected String platformCustomContextFile;
+
+    /**
      * Maven GAV properties for customized alfresco.war, share.war, activiti-app.war
      * Used by the Maven Tomcat 7 Plugin
      */
@@ -1380,9 +1386,10 @@ public abstract class AbstractRunMojo extends AbstractMojo {
         }
 
         if (enablePlatform) {
+            String platformContextFile = StringUtils.isNotBlank(platformCustomContextFile) ? platformCustomContextFile : null;
             webapps2Deploy.add(createWebAppElement(
                     runnerAlfrescoGroupId, runnerAlfrescoPlatformWarArtifactId, runnerAlfrescoPlatformVersion,
-                    "/alfresco", null));
+                    "/alfresco", platformContextFile));
         }
 
         if (enableShare) {
@@ -1402,7 +1409,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
         }
 
         if (enableActivitiApp) {
-
             webapps2Deploy.add(createWebAppElement(
                     runnerActivitiAppGroupId, runnerActivitiAppWarArtifactId, runnerActivitiAppVersion,
                     "/activiti-app", null));
