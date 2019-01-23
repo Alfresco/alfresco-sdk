@@ -154,17 +154,18 @@ install the packaged AMPs in ACS / Share.
 
 Installing 3rd party AMPs to the projects is pretty simple. The only requirement is adding the dependency to the project. The default configuration installs
 any AMPs set as a maven dependency in the corresponding Docker image. It is important to remember that ACS and Share are separated containers, so you'll need
-to add the dependency in the corresponding module in case of an All-In-One project. 
+to add the dependency in the corresponding docker module in case of an All-In-One project. 
 
 Here is an example of how to install Florian Maul's Javascript Console.
 
 ```
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>sample-module-platform-jar</artifactId>
-    <name>Alfresco Platform/Repository JAR Module</name>
-    <description>Platform/Repo JAR Module (to be included in the alfresco.war) - part of AIO - SDK 4.0
-    </description>
+    <artifactId>sample-module-platform-docker</artifactId>
+    <name>Alfresco Platform/Repository Docker Module</name>
+    <description>Platform/Repo Docker Module to generate the final Docker image</description>
     <packaging>jar</packaging>
 
     <parent>
@@ -173,8 +174,16 @@ Here is an example of how to install Florian Maul's Javascript Console.
         <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <properties>
+    </properties>
+
     <dependencies>
-        <!-- Add here any JAR or AMP dependency that needs to be deployed to ACS -->
+        <dependency>
+            <groupId>org.alfresco</groupId>
+            <artifactId>sample-module-platform-jar</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <!-- Javascript Console AMP -->
         <dependency>
             <groupId>de.fmaul</groupId>
