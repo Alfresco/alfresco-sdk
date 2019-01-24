@@ -55,10 +55,9 @@ public class DemoComponentIT extends AbstractAlfrescoIT {
         DemoComponent demoComponent = (DemoComponent) getApplicationContext().getBean("${package}.DemoComponent");
         NodeRef companyHome = demoComponent.getCompanyHome();
         assertNotNull(companyHome);
-        String companyHomeName = (String) getServiceRegistry().getNodeService().getProperty(
-                companyHome, ContentModel.PROP_NAME);
-        assertNotNull(companyHomeName);
-        assertEquals("Company Home", companyHomeName);
+        String companyHomePath = getServiceRegistry().getNodeService().getPath(companyHome).toPrefixString(getServiceRegistry().getNamespaceService());
+        assertNotNull(companyHomePath);
+        assertEquals("/app:company_home", companyHomePath);
     }
 
     @Test
