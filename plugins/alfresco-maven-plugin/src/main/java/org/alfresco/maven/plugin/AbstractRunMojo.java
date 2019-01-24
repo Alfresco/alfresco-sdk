@@ -62,7 +62,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     public static final String MAVEN_INSTALL_PLUGIN_VERSION = "2.5.2";
     public static final String MAVEN_REPLACER_PLUGIN_VERSION = "1.5.3";
     public static final String MAVEN_RESOURCE_PLUGIN_VERSION = "2.7";
-    public static final String MAVEN_TOMCAT7_PLUGIN_VERSION = "2.2";
     public static final String MAVEN_BUILD_HELPER_PLUGIN_VERSION = "1.12";
 
     public static final String PLATFORM_WAR_PREFIX_NAME = "platform";
@@ -393,6 +392,13 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      */
     @Parameter(property = "maven.alfresco.tomcat.version")
     protected String tomcatVersion;
+
+    /**
+     * Tomcat Maven Plugin version to be used when running the project. If this parameter is not set, then the
+     * default Tomcat Maven Plugin version will be used (2.2).
+     */
+    @Parameter(property = "maven.alfresco.tomcat.maven.plugin.version", defaultValue = "2.2")
+    protected String tomcatMavenPluginVersion;
 
     /**
      * Location of a custom context file to use in the deployment of the platform war in Tomcat.
@@ -1466,7 +1472,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                 plugin(
                         groupId("org.apache.tomcat.maven"),
                         artifactId("tomcat7-maven-plugin"),
-                        version(MAVEN_TOMCAT7_PLUGIN_VERSION),
+                        version(tomcatMavenPluginVersion),
                         tomcatPluginDependencies
                 ),
                 goal("run"),
