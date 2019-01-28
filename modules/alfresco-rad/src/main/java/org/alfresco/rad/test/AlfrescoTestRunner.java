@@ -46,6 +46,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 
 /**
+ * <p>
  * This is a JUnit test runner that is designed to work with an Alfresco repository.
  * It detects if it's executing a test inside of a running Alfresco instance. If that
  * is the case the tests are all run normally. If however the test is being run from
@@ -54,14 +55,15 @@ import java.io.*;
  * test an HTTP request is made to a Web Script in a running Alfresco instance. This
  * Web Script runs the test and returns enough information to this class so we can
  * emulate having run the test locally.
- * <p/>
+ * </p>
+ * <p>
  * By doing this, we are able to create Integration Tests (IT) using standard JUnit
  * capabilities. These can then be run from our IDEs with the associated visualizations,
  * support for re-running failed tests, etc.
- * <p/>
+ * </p>
  * Integration testing framework donated by Zia Consulting
  *
- * @author Bindu Wavell <bindu@ziaconsulting.com>
+ * @author Bindu Wavell (bindu@ziaconsulting.com)
  * @author martin.bergljung@alfresco.com (some editing)
  * @since 3.0
  */
@@ -104,8 +106,8 @@ public class AlfrescoTestRunner extends BlockJUnit4ClassRunner {
      * Call a remote Alfresco server and have the test run there.
      *
      * @param method   the test method to run
-     * @param notifier
-     * @param desc
+     * @param notifier given @{@link RunNotifier} to notify the result of the test
+     * @param desc given @{@link Description} of the test to run
      */
     protected void callProxiedChild(FrameworkMethod method, RunNotifier notifier, Description desc) {
         notifier.fireTestStarted(desc);
@@ -232,8 +234,8 @@ public class AlfrescoTestRunner extends BlockJUnit4ClassRunner {
      * Check the @Remote config on the test class to see where the
      * Alfresco Repo is running
      *
-     * @param method
-     * @return
+     * @param method given @{@link FrameworkMethod} to be executed
+     * @return the ACS endpoint
      */
     protected String getContextRoot(FrameworkMethod method) {
         Class<?> declaringClass = method.getMethod().getDeclaringClass();
