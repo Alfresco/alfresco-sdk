@@ -29,7 +29,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.0.2</version>
                 <executions>
                     <!-- Copy the repository extension and the dependencies required for execute integration tests -->
                     <execution>
@@ -106,7 +105,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.0.1</version>
                 <executions>
                     <execution>
                         <id>copy-and-filter-docker-resources</id>
@@ -123,6 +121,7 @@
                                     <excludes>
                                         <exclude>**/*.jar</exclude>
                                         <exclude>**/*.so</exclude>
+                                        <exclude>**/*.gz</exclude>
                                     </excludes>
                                 </resource>
                             </resources>
@@ -143,6 +142,7 @@
                                     <includes>
                                         <include>**/*.jar</include>
                                         <include>**/*.so</include>
+                                        <include>**/*.gz</include>
                                     </includes>
                                 </resource>
                             </resources>

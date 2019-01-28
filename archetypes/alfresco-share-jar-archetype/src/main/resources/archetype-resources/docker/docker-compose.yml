@@ -7,7 +7,7 @@ services:
       dockerfile: ./Dockerfile
       context: ../../../target
     environment:
-      CATALINA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8888"
+      CATALINA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8888"
       REPO_HOST: ${rootArtifactId}-acs
       REPO_PORT: 8080
     ports:
@@ -27,6 +27,7 @@ services:
                 -Dsolr.base.url=/solr
                 -Dindex.subsystem.name=solr6
                 -Dcsrf.filter.enabled=false
+                -Dmessaging.broker.url=\"vm://localhost?broker.persistent=false\"
                 "
     ports:
       - "${symbol_dollar}{acs.port}:8080"

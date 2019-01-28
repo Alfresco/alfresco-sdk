@@ -42,7 +42,6 @@
             <plugin>
                 <groupId>org.zeroturnaround</groupId>
                 <artifactId>jrebel-maven-plugin</artifactId>
-                <version>${jrebel.version}</version>
                 <configuration>
                     <rebelXmlDirectory>${project.build.testOutputDirectory}</rebelXmlDirectory>
                 </configuration>
@@ -52,7 +51,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
                 <executions>
                     <execution>
                         <goals>
@@ -67,35 +65,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.19.1</version>
                 <configuration>
                     <systemPropertyVariables>
                         <acs.endpoint.path>${test.acs.endpoint.path}</acs.endpoint.path>
                     </systemPropertyVariables>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>integration-test</id>
-                        <phase>integration-test</phase>
-                        <goals>
-                            <goal>integration-test</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>verify-test</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.surefire</groupId>
-                        <artifactId>surefire-junit47</artifactId>
-                        <version>2.19.1</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>
