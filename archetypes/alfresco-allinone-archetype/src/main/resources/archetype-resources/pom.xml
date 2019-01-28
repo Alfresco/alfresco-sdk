@@ -284,6 +284,56 @@
                 </executions>
             </plugin>
 
+            <!-- Compress JavaScript files and store as *-min.js -->
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>yuicompressor-maven-plugin</artifactId>
+                <version>1.5.1</version>
+                <executions>
+                    <!-- Compress the JS files under the assembly folder -->
+                    <execution>
+                        <id>compress-assembly</id>
+                        <goals>
+                            <goal>compress</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>${project.basedir}/src/main/assembly/web</sourceDirectory>
+                            <outputDirectory>${project.basedir}/src/main/assembly/web</outputDirectory>
+                            <excludes>
+                                <exclude>**/webscripts/**</exclude>
+                                <exclude>**/site-webscripts/**</exclude>
+                                <exclude>**/META-INF/**</exclude>
+                                <exclude>**/*.lib.js</exclude>
+                                <exclude>**/*.css</exclude>
+                                <exclude>**/*-min.js</exclude>
+                                <exclude>**/*-min.css</exclude>
+                            </excludes>
+                            <force>true</force>
+                            <jswarn>false</jswarn>
+                        </configuration>
+                    </execution>
+                    <!-- Compress the JS files under the resources folder -->
+                    <execution>
+                        <id>compress-resources</id>
+                        <goals>
+                            <goal>compress</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/webscripts/**</exclude>
+                                <exclude>**/site-webscripts/**</exclude>
+                                <exclude>**/*.lib.js</exclude>
+                                <exclude>**/*.css</exclude>
+                                <exclude>**/*-min.js</exclude>
+                                <exclude>**/*-min.css</exclude>
+                            </excludes>
+                            <force>true</force>
+                            <jswarn>false</jswarn>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Hot reloading with JRebel -->
             <plugin>
                 <groupId>org.zeroturnaround</groupId>

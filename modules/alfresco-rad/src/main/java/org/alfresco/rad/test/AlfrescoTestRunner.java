@@ -116,7 +116,7 @@ public class AlfrescoTestRunner extends BlockJUnit4ClassRunner {
     protected void callProxiedChild(FrameworkMethod method, RunNotifier notifier, Description desc) {
         notifier.fireTestStarted(desc);
 
-        String className = method.getMethod().getDeclaringClass().getCanonicalName();
+        String className = this.getTestClass().getJavaClass().getCanonicalName();
         String methodName = method.getName();
         if (null != methodName) {
             className += "#" + methodName;
