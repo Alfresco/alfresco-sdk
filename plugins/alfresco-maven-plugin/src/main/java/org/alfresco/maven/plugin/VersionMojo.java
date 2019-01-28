@@ -28,8 +28,7 @@ import org.apache.maven.project.MavenProject;
 
 /**
  * Removes -SNAPSHOT suffix from the version number (if present), optionally replacing it with a timestamp.
- * The result is provided in the Maven property ${noSnapshotVersion} (name can be changed using
- * <propertyName>myCustomVersion</>).
+ * The result is provided in the Maven property ${noSnapshotVersion}.
  * This feature is mostly needed to avoid Alfresco failing when installing AMP modules with non-numeric
  * versions.
  *
@@ -67,7 +66,7 @@ public class VersionMojo extends AbstractMojo {
     /**
      * Allows to append a custom (numeric) value to the current artifact's version,
      * i.e. appending the SCM build number can be accomplished defining
-     * <customVersionSuffix>${buildnumber}</customVersionSuffix> in the plugin
+     * &lt;customVersionSuffix&gt;${buildnumber}&lt;/customVersionSuffix&gt; in the plugin
      * configuration.
      *
      * @parameter property="maven.alfresco.customVersionSuffix"

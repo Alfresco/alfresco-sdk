@@ -51,7 +51,7 @@ public class SpringContextHolder implements ApplicationContextAware {
     /**
      * Return the singleton instance
      *
-     * @return
+     * @return the singleton instance
      */
     public static SpringContextHolder Instance() {
         return springContextHolderInstance;
