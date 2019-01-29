@@ -21,21 +21,21 @@ For example, you might create a new project called "test-aio-400" to use as a ba
 
 ## Copy run scripts from base to target
 
-1. Copy run.bat and run.sh from base to target project
+1. Copy run.bat and run.sh from base to target project.
 
 ## Copy the docker directory from base into target
 
-1. Recursively copy the docker directory from base into target
+1. Recursively copy the docker directory from base into target.
 
-2. Clean up references in the docker-compose.yml file
+2. Clean up references in the docker-compose.yml file.
 
 In the docker directory copied from the base, edit the docker-compose.yml file to change references to the base project name to the target project name.
 
 ## Copy the platform-docker directory into target
 
-1. Recursively copy the *-platform-docker directory into target
+1. Recursively copy the \*-platform-docker directory into target
 
-2. Rename the directory. The name of the directory should follow the same pattern as the existing project. For example, if the existing project is test-aio-301 then the platform-docker directory should be called test-aio-301-platform-docker.
+2. Rename the directory. The name of the directory should follow the same pattern as the existing project. For example, if the existing project is upgrade-test then the platform-docker directory should be called upgrade-test-platform-docker.
 
 ## Clean up references in the platform-docker directory in target
 
@@ -46,7 +46,7 @@ In the docker directory copied from the base, edit the docker-compose.yml file t
 
 ## Copy the share-docker directory into target
 
-1. Recursively copy the *-share-docker directory into target
+1. Recursively copy the \*-share-docker directory into target
 
 Similar to previous step, the directory should follow the same pattern as the existing project.
 
@@ -67,47 +67,57 @@ Need to smartly do this merge so that target project maintains its dependencies,
 
 3. Replace the `alfresco-repository` dependency as follows. Change
 
-        <dependency>
-            <groupId>${alfresco.groupId}</groupId>
-            <artifactId>alfresco-repository</artifactId>
-        </dependency>
+    ```
+    <dependency>
+        <groupId>${alfresco.groupId}</groupId>
+        <artifactId>alfresco-repository</artifactId>
+    </dependency>
+    ```
 
     to:
 
-        <dependency>
-            <groupId>${alfresco.groupId}</groupId>
-            <artifactId>alfresco-remote-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
+    ```
+    <dependency>
+        <groupId>${alfresco.groupId}</groupId>
+        <artifactId>alfresco-remote-api</artifactId>
+        <scope>provided</scope>
+    </dependency>
+    ```
 
 3. Remove the `spring-context` dependency from the target pom.xml:
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>3.2.17.RELEASE</version>
-            <scope>test</scope>
-        </dependency>
+    ```
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>3.2.17.RELEASE</version>
+        <scope>test</scope>
+    </dependency>
+    ```
 
 4. Under dependencyManagement, the platform distribution dependency needs to have its artifactId updated. Change:
 
-        <dependency>
-            <groupId>${alfresco.groupId}</groupId>
-            <artifactId>alfresco-platform-distribution</artifactId>
-            <version>${alfresco.platform.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
+    ```
+    <dependency>
+        <groupId>${alfresco.groupId}</groupId>
+        <artifactId>alfresco-platform-distribution</artifactId>
+        <version>${alfresco.platform.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+    </dependency>
+    ```
 
     to:
 
-        <dependency>
-            <groupId>${alfresco.groupId}</groupId>
-            <artifactId>${alfresco.bomDependencyArtifactId}</artifactId>
-            <version>${alfresco.platform.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
+    ```
+    <dependency>
+        <groupId>${alfresco.groupId}</groupId>
+        <artifactId>${alfresco.bomDependencyArtifactId}</artifactId>
+        <version>${alfresco.platform.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+    </dependency>
+    ```
 
 5. The `maven-resources-plugin` needs the outputDirectory adjusted. Change:
 
