@@ -32,11 +32,19 @@ public class PlatformJarArchetypeIT extends AbstractArchetypeIT {
         LOGGER.info("Building the generated project {}", archetypeProperties.getProjectArtifactId());
         LOGGER.info("---------------------------------------------------------------------");
 
-        // Since creating the archetype was successful, we now want to actually build the generated project
+        // Since creating the archetype was successful, we now want to actually build the generated project executing the integration tests
+        // Execute a purge to ensure old data don't make the test fail
+        ProcessBuilder purge = getProcessBuilder("purge");
+        purge.start().waitFor();
+        ProcessBuilder pb = getProcessBuilder("build_test");
+        pb.start().waitFor();
+
+        // Verify the execution of the integration tests of the project were successful
         Verifier verifier = new Verifier(projectPath);
         verifier.setAutoclean(false);
-        verifier.executeGoal("install");
+        verifier.setLogFileName(LOG_FILENAME);
         printVerifierLog("PROJECT BUILD", verifier, LOGGER);
         verifier.verifyErrorFreeLog();
+        verifier.verifyTextInLog("Tests run: 5, Failures: 0, Errors: 0, Skipped: 0");
     }
 }
