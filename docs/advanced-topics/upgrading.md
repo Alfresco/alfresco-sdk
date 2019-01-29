@@ -137,6 +137,54 @@ Need to smartly do this merge so that target project maintains its dependencies,
 
 7. Remove the alfresco-maven plugin. HOWEVER, there may be some "platformModules" and some "shareModules" that are listed here which are third-party AMPs or JARs that need to be deployed to the image. These should be moved to their respective docker module (platform or share) and added to the Maven dependencies in the module's pom.xml file.
 
+For example, in the root pom.xml of the target project there might be a module dependency in the list of platform modules like:
+
+```
+<!-- JavaScript Console -->
+<moduleDependency>
+    <groupId>de.fmaul</groupId>
+    <artifactId>javascript-console-repo</artifactId>
+    <type>amp</type>
+    <version>0.7-SNAPSHOT</version>
+</moduleDependency>
+```
+
+That needs to be moved to the platform docker module into the list of dependencies, like:
+
+```
+<!-- JavaScript Console -->
+<dependency>
+    <groupId>de.fmaul</groupId>
+    <artifactId>javascript-console-repo</artifactId>
+    <type>amp</type>
+    <version>0.7-SNAPSHOT</version>
+</dependency>
+```
+
+Similarly, if the target pom.xml has a share module dependency like:
+
+```
+<!-- JavaScript Console -->
+<moduleDependency>
+    <groupId>de.fmaul</groupId>
+    <artifactId>javascript-console-share</artifactId>
+    <type>amp</type>
+    <version>0.7-SNAPSHOT</version>
+</moduleDependency>
+```
+
+Then that would need to be moved into the share docker module's pom.xml file in its list of dependencies like:
+
+```
+<!-- JavaScript Console -->
+<dependency>
+    <groupId>de.fmaul</groupId>
+    <artifactId>javascript-console-share</artifactId>
+    <type>amp</type>
+    <version>0.7-SNAPSHOT</version>
+</dependency>
+```
+
 8. Remove the spring-surf dependencies. Remove the following:
 
     ```
@@ -200,3 +248,11 @@ Remove the spring-surf-api dependency from the 4.0 share-jar module. Remove:
     <artifactId>spring-surf-api</artifactId>
 </dependency>
 ```
+
+## Remove alf_data_dev
+
+The data in your SDK content repository will not come over to the upgraded project. Therefore the alf_data_dev directory can be deleted.
+
+## Testing
+
+To test, try doing a `mvn clean` or a `mvn clean package`. If that goes okay, try to run the project using `run.sh build_start`.
