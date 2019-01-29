@@ -54,4 +54,5 @@ code into place.
     * [Hot reloading](advanced-topics/hot-reloading/README.md)
         * [How to configure and use JRebel](advanced-topics/hot-reloading/jrebel.md)
         * [How to configure and use Hotswap Agent](advanced-topics/hot-reloading/hotswap-agent.md)
+    * [Switching Alfresco Content Services database](advanced-topics/switching-dbs.md)
 * [Troubleshooting](troubleshooting.md)
