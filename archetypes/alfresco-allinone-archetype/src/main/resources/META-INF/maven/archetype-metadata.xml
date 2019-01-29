@@ -187,6 +187,7 @@
         <fileSet encoding="UTF-8" filtered="true">
             <directory></directory>
             <includes>
+                <include>.gitignore</include>
                 <include>run.sh</include>
                 <include>run.bat</include>
                 <include>README.md</include>
