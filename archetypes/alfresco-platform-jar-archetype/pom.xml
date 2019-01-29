@@ -49,6 +49,7 @@
                 <delimiters>
                     <delimiter>@@</delimiter>
                 </delimiters>
+                <addDefaultExcludes>false</addDefaultExcludes>
             </configuration>
         </plugin>
       </plugins>
