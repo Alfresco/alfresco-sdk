@@ -119,12 +119,6 @@
                 dir="__rootArtifactId__-platform-docker">
             <fileSets>
                 <fileSet encoding="UTF-8" filtered="false">
-                    <directory>src/main/docker/license</directory>
-                    <includes>
-                        <include>**</include>
-                    </includes>
-                </fileSet>
-                <fileSet encoding="UTF-8" filtered="false">
                     <directory>src/main/docker</directory>
                     <includes>
                         <include>license/**</include>
