@@ -23,6 +23,10 @@ For example, you might create a new project called "test-aio-400" to use as a ba
 
 1. Copy run.bat and run.sh from base to target project.
 
+## Clean up the references in the copied scripts
+
+The run.bat and run.sh scripts have references to the project name. Edit these to change the references that use the base project name to the target project name.
+
 ## Copy the docker directory from base into target
 
 1. Recursively copy the docker directory from base into target.
