@@ -30,26 +30,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
-                    <!-- Copy the share extension -->
-                    <execution>
-                        <id>copy-repo-extension</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>${groupId}</groupId>
-                                    <artifactId>${rootArtifactId}-share-jar</artifactId>
-                                    <version>${version}</version>
-                                    <overWrite>false</overWrite>
-                                    <outputDirectory>${project.build.directory}/extensions</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                    <!-- Copy other dependencies (JARs or AMPs) declared in the share module -->
+                    <!-- Copy the dependencies (JARs or AMPs) declared in this module -->
                     <execution>
                         <id>copy-third-party-dependencies</id>
                         <phase>pre-integration-test</phase>

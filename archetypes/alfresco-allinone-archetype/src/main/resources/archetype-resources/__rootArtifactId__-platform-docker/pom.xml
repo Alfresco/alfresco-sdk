@@ -30,22 +30,15 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
-                    <!-- Copy the repository extension and the dependencies required for execute integration tests -->
+                    <!-- Copy the dependencies required for execute integration tests -->
                     <execution>
-                        <id>copy-repo-extension</id>
+                        <id>copy-test-dependencies</id>
                         <phase>pre-integration-test</phase>
                         <goals>
                             <goal>copy</goal>
                         </goals>
                         <configuration>
                             <artifactItems>
-                                <artifactItem>
-                                    <groupId>${groupId}</groupId>
-                                    <artifactId>${rootArtifactId}-platform-jar</artifactId>
-                                    <version>${version}</version>
-                                    <overWrite>false</overWrite>
-                                    <outputDirectory>${project.build.directory}/extensions</outputDirectory>
-                                </artifactItem>
                                 <!-- Test dependencies -->
                                 <!-- We need these dependencies installed in ACS in order to execute the test remotely making use of the Alfresco RAD module -->
                                 <artifactItem>
@@ -87,7 +80,7 @@
                             </artifactItems>
                         </configuration>
                     </execution>
-                    <!-- Copy other dependencies (JARs or AMPs) declared in the platform module -->
+                    <!-- Copy the dependencies (JARs or AMPs) declared in this module -->
                     <execution>
                         <id>copy-third-party-dependencies</id>
                         <phase>pre-integration-test</phase>
