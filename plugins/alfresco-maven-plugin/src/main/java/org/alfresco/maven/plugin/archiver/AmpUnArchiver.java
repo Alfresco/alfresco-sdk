@@ -14,7 +14,7 @@ import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 /**
  * This class provides AMP unpacking support for projects depending on AMPs
- * This allows for example AMPs to be specified as <overlay> in the maven-war-plugin
+ * This allows for example AMPs to be specified as &lt;overlay&gt; in the maven-war-plugin
  * @author mindthegab
  *
  */

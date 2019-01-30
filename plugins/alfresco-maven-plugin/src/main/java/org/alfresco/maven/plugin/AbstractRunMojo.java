@@ -269,6 +269,8 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     /**
      * Get the Tomcat port. By default the port is changed by using the maven.alfresco.tomcat.port property
      * but for legacy and external configuration purposes maven.tomcat.port will override if defined
+     *
+     * @return the Tomcat port
      */
     protected String getPort() {
         String port = tomcatPort;
@@ -281,7 +283,9 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     }
 
     /**
+     * Check if Tomcat is already running.
      *
+     * @return <code>true</code> if Tomcat is already running, <code>false</code> otherwise
      */
     protected boolean tomcatIsRunning()  {
 
@@ -310,7 +314,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      * Copy the alfresco-global.properties files. It contains database connection parameters and
      * other general configuration for Alfresco Repository (alfresco.war)
      *
-     * @throws MojoExecutionException
+     * @throws MojoExecutionException when any problem appears copying the Alfresco global properties file
      */
     protected void copyAlfrescoGlobalProperties() throws MojoExecutionException {
         getLog().info("Copying and filtering alfresco-global.properties files to target/test-classes");
@@ -374,7 +378,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      * Copy the Alfresco Enterprise license to its correct place in the Platform WAR, if it exists.
      * It is not enough to have it on the test classpath, then it will start up as Trial license...
      *
-     * @throws MojoExecutionException
+     * @throws MojoExecutionException when any problem appears copying the Alfresco license
      */
     protected void copyAlfrescoLicense() throws MojoExecutionException {
 
@@ -411,7 +415,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     /**
      * Copy Share Config Custom in order to have global overrides for development and dynamic port
      *
-     * @throws MojoExecutionException
+     * @throws MojoExecutionException when any problem appears copying share config custom file
      */
     protected void copyShareConfigCustom() throws MojoExecutionException {
         final String warOutputDir = getWarOutputDir(SHARE_WAR_PREFIX_NAME);
@@ -452,7 +456,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      * There is no custom classpath resolve mechanism for Share log4j,
      * to log custom stuff overriding standard log4j.properties is needed.
      *
-     * @throws MojoExecutionException
+     * @throws MojoExecutionException when any problem appears copying the share log4j configuration
      */
     protected void copyShareLog4jConfig() throws MojoExecutionException {
         if (!useCustomShareLog4jConfig) {
@@ -492,7 +496,9 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     /**
      * Copy and Build hotswap-agent.properties
      *
-     * @throws MojoExecutionException
+     * @param warPrefix path to the war root directory
+     *
+     * @throws MojoExecutionException when any problem appears copying hotswap agent properties
      */
     protected void copyHotswapAgentProperties(String warPrefix) throws MojoExecutionException {
         if ( copyHotswapAgentConfig == false ) {
@@ -526,6 +532,8 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      * Build the customized Platform webapp (i.e. the Repository, alfresco.war)
      * that should be deployed by Tomcat by applying all AMPs and JARs from
      * the {@code <platformModules> } configuration.
+     *
+     * @throws MojoExecutionException when any problem appears building the platform war
      */
     protected void buildPlatformWar() throws MojoExecutionException {
         buildCustomWarInDir(PLATFORM_WAR_PREFIX_NAME, platformModules,
@@ -546,6 +554,8 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      * Build the customized Share webapp (i.e. the share.war)
      * that should be deployed by Tomcat by applying all AMPs and JARs from
      * the {@code <shareModules> } configuration.
+     *
+     * @throws MojoExecutionException when any problem appears building the share war
      */
     protected void buildShareWar() throws MojoExecutionException {
         buildCustomWarInDir(SHARE_WAR_PREFIX_NAME, shareModules,
@@ -574,7 +584,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      * @param originalWarGroupId    the Maven groupId for the original war file that should be customized
      * @param originalWarArtifactId the Maven artifactId for the original war file that should be customized
      * @param originalWarVersion    the Maven version for the original war file that should be customized
-     * @throws MojoExecutionException
+     * @throws MojoExecutionException when any problem appears building the custom war
      */
     protected void buildCustomWarInDir(String warName,
                                        List<ModuleDependency> modules,
@@ -701,7 +711,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      *
      * @param warName the name of the custom war
      * @return the customized war file artifactId, to be used by the tomcat7 plugin
-     * @throws MojoExecutionException
+     * @throws MojoExecutionException when any problem appears packaging or installing the custom war
      */
     protected String packageAndInstallCustomWar(String warName) throws MojoExecutionException {
         final String warArtifactId = "${project.artifactId}-" + warName;
@@ -740,7 +750,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      * configured in the SDK project.
      *
      * @param fork true if tomcat process should be forked
-     * @throws MojoExecutionException
+     * @throws MojoExecutionException when any problem appears starting tomcat
      */
     protected void startTomcat(boolean fork) throws MojoExecutionException {
         getLog().info("Starting Tomcat, fork = " + fork);

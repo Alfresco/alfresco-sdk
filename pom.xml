@@ -103,6 +103,13 @@
             <timezone>-5</timezone>
             <url>http://rgauss.com/</url>
         </contributor>
+        <contributor>
+            <name>Jose Luis Osorno Gil</name>
+            <email>joseluis.osorno@ixxus.com</email>
+            <organization>Ixxus</organization>
+            <organizationUrl>http://www.ixxus.com</organizationUrl>
+            <timezone>+1</timezone>
+        </contributor>
     </contributors>
 
     <!-- All the modules of the Alfresco SDK -->
@@ -115,6 +122,7 @@
         <module>archetypes/alfresco-platform-jar-archetype</module>
         <module>archetypes/alfresco-share-jar-archetype</module>
         <module>archetypes/alfresco-allinone-archetype</module>
+        <module>archetypes/archetypes-it</module>
 
   </modules>
 
@@ -126,10 +134,18 @@
         <alfresco.sdk.parent.version>${project.version}</alfresco.sdk.parent.version>
         <alfresco.sdk.tests.exclude>*/*-enterprise*/*</alfresco.sdk.tests.exclude>
 
+        <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
+        <alfresco.platform.version>6.0.7-ga</alfresco.platform.version>
+        <alfresco.share.version>6.0.b</alfresco.share.version>
+        <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
+        <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+
         <!-- The following version is needed for alfresco-rad -->
         <alfresco.community.default.version>5.2.f</alfresco.community.default.version>
         <alfresco.enterprise.default.version>5.2.0</alfresco.enterprise.default.version>
         <alfresco.sdk.default.edition>community</alfresco.sdk.default.edition>
+
+        <test.acs.endpoint.path />
 
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
     </properties>
@@ -148,6 +164,59 @@
                     <version>${maven.archetype.version}</version>
                     <configuration>
                         <skip>${skipTests}</skip>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <configuration>
+                        <tags>
+                            <tag>
+                                <name>goal</name>
+                                <placement>a</placement>
+                                <head>Goal:</head>
+                            </tag>
+                            <tag>
+                                <name>requiresDependencyResolution</name>
+                                <placement>a</placement>
+                                <head>Requires Dependency Resolution:</head>
+                            </tag>
+                            <tag>
+                                <name>description</name>
+                                <placement>a</placement>
+                                <head>Description:</head>
+                            </tag>
+                            <tag>
+                                <name>phase</name>
+                                <placement>a</placement>
+                                <head>Phase:</head>
+                            </tag>
+                            <tag>
+                                <name>requiresProject</name>
+                                <placement>a</placement>
+                                <head>Requires Project:</head>
+                            </tag>
+                            <tag>
+                                <name>threadSafe</name>
+                                <placement>a</placement>
+                                <head>Thread-Safe:</head>
+                            </tag>
+                            <tag>
+                                <name>required</name>
+                                <placement>a</placement>
+                                <head>Required:</head>
+                            </tag>
+                            <tag>
+                                <name>readonly</name>
+                                <placement>a</placement>
+                                <head>Read only:</head>
+                            </tag>
+                            <tag>
+                                <name>parameter</name>
+                                <placement>a</placement>
+                                <head>Parameter:</head>
+                            </tag>
+                        </tags>
                     </configuration>
                 </plugin>
             </plugins>
@@ -230,10 +299,25 @@
         </profile>
 
         <profile>
-            <id>enterprise-tests</id>
+            <id>enterprise-60-tests</id>
             <properties>
-                <!-- Sets it to empty, so that also enterprise tests are run -->
-                <alfresco.sdk.tests.exclude />
+                <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>6.0.0.2</alfresco.platform.version>
+                <alfresco.share.version>6.0</alfresco.share.version>
+                <alfresco.platform.docker.image>alfresco/alfresco-content-repository</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+            </properties>
+        </profile>
+
+        <!-- This profile requires to be executed using Java 11 -->
+        <profile>
+            <id>enterprise-61-tests</id>
+            <properties>
+                <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>6.1.0-RC4</alfresco.platform.version>
+                <alfresco.share.version>6.1.0-RC3</alfresco.share.version>
+                <alfresco.platform.docker.image>alfresco/alfresco-content-repository</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
             </properties>
         </profile>
 
@@ -307,6 +391,14 @@
                     </plugin>
                 </plugins>
             </reporting>
+        </profile>
+
+        <profile>
+            <id>docker-toolbox</id>
+            <properties>
+                <!-- Define the ACS endpoint path when docker toolbox is used (docker container are not exposed through localhost) -->
+                <test.acs.endpoint.path>http://192.168.99.100:8080/alfresco</test.acs.endpoint.path>
+            </properties>
         </profile>
 
         <!-- Attempt (failed) to retain run.sh permissions. Zip files are bad at this, full stop.

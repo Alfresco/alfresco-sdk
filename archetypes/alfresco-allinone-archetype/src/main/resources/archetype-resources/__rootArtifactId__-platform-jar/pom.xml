@@ -17,6 +17,7 @@
     </properties>
 
     <dependencies>
+        <!-- Add here any JAR or AMP dependency that needs to be deployed to ACS -->
     </dependencies>
 
     <build>

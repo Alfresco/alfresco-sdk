@@ -111,26 +111,61 @@
                         <include>**/*.java</include>
                     </includes>
                 </fileSet>
-                <fileSet encoding="UTF-8" filtered="true">
-                    <directory>src/test/resources</directory>
-                    <includes>
-                        <include>**/dev-log4j.properties</include>
-                    </includes>
-                </fileSet>
+            </fileSets>
+        </module>
+
+        <module id="${rootArtifactId}-platform-docker"
+                name="${rootArtifactId}-platform-docker"
+                dir="__rootArtifactId__-platform-docker">
+            <fileSets>
                 <fileSet encoding="UTF-8" filtered="false">
-                    <directory>src/test/resources</directory>
+                    <directory>src/main/docker</directory>
                     <includes>
-                        <include>**</include>
+                        <include>license/**</include>
+                        <include>Dockerfile</include>
+                        <include>disable-webscript-caching-context.xml</include>
                     </includes>
                     <excludes>
-                        <exclude>**/dev-log4j.properties</exclude>
+                        <exclude>**/*.properties</exclude>
                     </excludes>
                 </fileSet>
-                <fileSet encoding="UTF-8" filtered="false">
-                    <directory>src/test/properties</directory>
+                <fileSet encoding="UTF-8" filtered="true">
+                    <directory>src/main/docker</directory>
                     <includes>
                         <include>**/*.properties</include>
                     </includes>
+                    <excludes>
+                        <exclude>license/**</exclude>
+                        <exclude>Dockerfile</exclude>
+                        <exclude>disable-webscript-caching-context.xml</exclude>
+                    </excludes>
+                </fileSet>
+            </fileSets>
+        </module>
+
+        <module id="${rootArtifactId}-share-docker"
+                name="${rootArtifactId}-share-docker"
+                dir="__rootArtifactId__-share-docker">
+            <fileSets>
+                <fileSet encoding="UTF-8" filtered="false">
+                    <directory>src/main/docker</directory>
+                    <includes>
+                        <include>Dockerfile</include>
+                        <include>share-config-custom.xml</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/*.properties</exclude>
+                    </excludes>
+                </fileSet>
+                <fileSet encoding="UTF-8" filtered="true">
+                    <directory>src/main/docker</directory>
+                    <includes>
+                        <include>**/*.properties</include>
+                    </includes>
+                    <excludes>
+                        <exclude>Dockerfile</exclude>
+                        <exclude>share-config-custom.xml</exclude>
+                    </excludes>
                 </fileSet>
             </fileSets>
         </module>
@@ -138,44 +173,15 @@
 
     <fileSets>
         <fileSet encoding="UTF-8" filtered="true">
-            <directory>src/test/resources</directory>
+            <directory>docker</directory>
             <includes>
-                <include>**/dev-log4j.properties</include>
+                <include>**</include>
             </includes>
         </fileSet>
         <fileSet encoding="UTF-8" filtered="true">
-            <directory>src/test/resources</directory>
-            <includes>
-                <include>*hotswap-agent.properties</include>
-            </includes>
-        </fileSet>
-        <fileSet encoding="UTF-8" filtered="false">
-            <directory>src/test/resources</directory>
-            <includes>
-                <include>**</include>
-            </includes>
-            <excludes>
-                <exclude>**/dev-log4j.properties</exclude>
-                <exclude>*hotswap-agent.properties</exclude>
-            </excludes>
-        </fileSet>
-        <fileSet encoding="UTF-8" filtered="false">
-            <directory>src/test/properties</directory>
-            <includes>
-                <include>**/*.properties</include>
-            </includes>
-        </fileSet>
-        <fileSet encoding="UTF-8" filtered="false">
-            <directory>src/test/license</directory>
-            <includes>
-                <include>**</include>
-            </includes>
-        </fileSet>
-        <fileSet encoding="UTF-8">
             <directory></directory>
             <includes>
-                <include>debug.sh</include>
-                <include>debug.bat</include>
+                <include>.gitignore</include>
                 <include>run.sh</include>
                 <include>run.bat</include>
                 <include>README.md</include>
