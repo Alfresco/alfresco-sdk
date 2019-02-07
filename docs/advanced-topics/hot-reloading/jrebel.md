@@ -42,7 +42,7 @@ _Note that a license is required. In this step you will be able to request a tri
 ![Alt text](../../docassets/images/sdk-jrebel-eclipse-servers.png "Eclipse JRebel remote servers synchronization")
 
 8. Select `Help > JRebel > Configuration > Projects` and select the checkbox to enable JRebel and the remote server support for required projects (the complete 
-project in case of the Platform Jar archetype or the `PROJECT_ARTIFACT_ID-platform-jar` and `integration-tests` modules in case of the All-In-One archetype).
+project in case of the Platform Jar archetype or the `PROJECT_ARTIFACT_ID-platform` and `PROJECT_ARTEFACTID-integration-tests` modules in case of the All-In-One archetype).
 
 ![Alt text](../../docassets/images/sdk-jrebel-eclipse-projects.png "Eclipse JRebel projects configuration")
 
@@ -65,7 +65,7 @@ _Note that a license is required. In this step you will be able to request a tri
 ![Alt text](../../docassets/images/sdk-jrebel-intellij-servers.png "Eclipse JRebel remote server configuration")
 
 8. Open the JRebel Panel and select the checkbox to enable JRebel and the remote server support for required projects (the complete project in case of the 
-Platform Jar archetype or the `PROJECT_ARTIFACT_ID-platform-jar` and `integration-tests` modules in case of the All-In-One archetype).
+Platform Jar archetype or the `PROJECT_ARTIFACT_ID-platform` and `PROJECT_ARTEFACTID-integration-tests` modules in case of the All-In-One archetype).
 
 ![Alt text](../../docassets/images/sdk-jrebel-intellij-projects.png "Eclipse JRebel projects configuration")
 

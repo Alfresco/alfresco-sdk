@@ -93,12 +93,12 @@ EXIT /B 0
 :build_share
     docker-compose -f "%COMPOSE_FILE_PATH%" kill ${rootArtifactId}-share
     docker-compose -f "%COMPOSE_FILE_PATH%" rm -f ${rootArtifactId}-share
-	call %MVN_EXEC% clean install -DskipTests -pl ${rootArtifactId}-share-jar
+	call %MVN_EXEC% clean install -DskipTests -pl ${rootArtifactId}-share
 EXIT /B 0
 :build_acs
     docker-compose -f "%COMPOSE_FILE_PATH%" kill ${rootArtifactId}-acs
     docker-compose -f "%COMPOSE_FILE_PATH%" rm -f ${rootArtifactId}-acs
-	call %MVN_EXEC% clean install -DskipTests -pl ${rootArtifactId}-platform-jar
+	call %MVN_EXEC% clean install -DskipTests -pl ${rootArtifactId}-platform
 EXIT /B 0
 :tail
     docker-compose -f "%COMPOSE_FILE_PATH%" logs -f
@@ -107,7 +107,7 @@ EXIT /B 0
     docker-compose -f "%COMPOSE_FILE_PATH%" logs --tail="all"
 EXIT /B 0
 :test
-    call %MVN_EXEC% verify -pl integration-tests
+    call %MVN_EXEC% verify -pl ${rootArtifactId}-integration-tests
 EXIT /B 0
 :purge
     docker volume rm -f ${rootArtifactId}-acs-volume

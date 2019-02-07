@@ -67,7 +67,7 @@ module using the `maven-dependency-plugin`. The configuration is done in the fil
                     </artifactItem>
                     <artifactItem>
                         <groupId>org.alfresco</groupId>
-                        <artifactId>integration-tests</artifactId>
+                        <artifactId>PROJECT_ARTEFACTID-integration-tests</artifactId>
                         <version>1.0-SNAPSHOT</version>
                         <classifier>tests</classifier>
                         <overWrite>false</overWrite>
@@ -149,7 +149,7 @@ the environment.
 
 This integration test verifies the existence of the `DemoComponent` component deployed in the Alfresco Content Services instance. You can find the definition 
 of the `DemoComponent` as a custom component of a project created with the All-In-One archetype. For more details, see the class definition in
-`PROJECT_ARTEFACTID-platform-jar/src/main/java/com/example/platformsample/DemoComponent.java`.
+`PROJECT_ARTEFACTID-platform/src/main/java/com/example/platformsample/DemoComponent.java`.
 
 The integration test retrieves the `DemoComponent` bean from the Alfresco Content Services instance (see `testGetCompanyHome()`), and requests the Company 
 Home component. In addition, some Java assertions check if Company Home is identified correctly and has seven children stored in it.

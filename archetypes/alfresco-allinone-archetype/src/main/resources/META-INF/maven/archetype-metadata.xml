@@ -10,9 +10,9 @@
         </requiredProperty>
     </requiredProperties>
     <modules>
-        <module id="${rootArtifactId}-platform-jar"
-                name="${rootArtifactId}-platform-jar"
-                dir="__rootArtifactId__-platform-jar">
+        <module id="${rootArtifactId}-platform"
+                name="${rootArtifactId}-platform"
+                dir="__rootArtifactId__-platform">
             <fileSets>
                 <fileSet filtered="false" packaged="false" encoding="UTF-8">
                     <directory>src/main/assembly</directory>
@@ -50,9 +50,9 @@
             </fileSets>
         </module>
 
-        <module id="${rootArtifactId}-share-jar"
-                name="${rootArtifactId}-share-jar"
-                dir="__rootArtifactId__-share-jar">
+        <module id="${rootArtifactId}-share"
+                name="${rootArtifactId}-share"
+                dir="__rootArtifactId__-share">
             <fileSets>
                 <fileSet filtered="false" packaged="false" encoding="UTF-8">
                     <directory>src/main/assembly</directory>
@@ -97,7 +97,9 @@
             </fileSets>
         </module>
 
-        <module id="integration-tests" name="integration-tests" dir="integration-tests">
+        <module id="${rootArtifactId}-integration-tests"
+                name="${rootArtifactId}-integration-tests"
+                dir="__rootArtifactId__-integration-tests">
             <fileSets>
                 <fileSet filtered="true" packaged="true" encoding="UTF-8">
                     <directory>src/main/java</directory>

@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>${groupId}</groupId>
-            <artifactId>${rootArtifactId}-share-jar</artifactId>
+            <artifactId>${rootArtifactId}-share</artifactId>
             <version>${version}</version>
         </dependency>
     </dependencies>

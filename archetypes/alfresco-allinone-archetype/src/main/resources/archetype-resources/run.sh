@@ -43,13 +43,13 @@ build() {
 build_share() {
     docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH kill ${rootArtifactId}-share
     yes | docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH rm -f ${rootArtifactId}-share
-    ${symbol_dollar}MVN_EXEC clean install -DskipTests=true -pl ${rootArtifactId}-share-jar,${rootArtifactId}-share-docker
+    ${symbol_dollar}MVN_EXEC clean install -DskipTests=true -pl ${rootArtifactId}-share,${rootArtifactId}-share-docker
 }
 
 build_acs() {
     docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH kill ${rootArtifactId}-acs
     yes | docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH rm -f ${rootArtifactId}-acs
-    ${symbol_dollar}MVN_EXEC clean install -DskipTests=true -pl ${rootArtifactId}-platform-jar,${rootArtifactId}-platform-docker
+    ${symbol_dollar}MVN_EXEC clean install -DskipTests=true -pl ${rootArtifactId}-platform,${rootArtifactId}-platform-docker
 }
 
 tail() {
@@ -61,7 +61,7 @@ tail_all() {
 }
 
 test() {
-    ${symbol_dollar}MVN_EXEC verify -pl integration-tests
+    ${symbol_dollar}MVN_EXEC verify -pl ${rootArtifactId}-integration-tests
 }
 
 case "${symbol_dollar}1" in

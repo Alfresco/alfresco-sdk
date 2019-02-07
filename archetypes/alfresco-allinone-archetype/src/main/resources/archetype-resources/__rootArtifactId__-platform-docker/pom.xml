@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>${groupId}</groupId>
-            <artifactId>${rootArtifactId}-platform-jar</artifactId>
+            <artifactId>${rootArtifactId}-platform</artifactId>
             <version>${version}</version>
         </dependency>
     </dependencies>
@@ -50,7 +50,7 @@
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>${groupId}</groupId>
-                                    <artifactId>integration-tests</artifactId>
+                                    <artifactId>${rootArtifactId}-integration-tests</artifactId>
                                     <version>${version}</version>
                                     <classifier>tests</classifier>
                                     <overWrite>false</overWrite>

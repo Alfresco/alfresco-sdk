@@ -100,8 +100,8 @@ the hot reloading tools fail):
       - "${acs.debug.port}:8888"
     volumes:
       - alf-acs-volume:/usr/local/tomcat/alf_data
-      - ../../../sample-project-platform-jar/target/classes:/usr/local/tomcat/hotswap-agent/sample-project-platform-jar/target/classes
-      - ../../../integration-tests/target/test-classes:/usr/local/tomcat/hotswap-agent/integration-tests/target/test-classes
+      - ../../../sample-project-platform/target/classes:/usr/local/tomcat/hotswap-agent/sample-project-platform/target/classes
+      - ../../../sample-project-integration-tests/target/test-classes:/usr/local/tomcat/hotswap-agent/sample-project-integration-tests/target/test-classes
 ...
 ```
 
@@ -177,8 +177,8 @@ the hot reloading tools fail):
       - "${acs.debug.port}:8888"
     volumes:
       - alf-acs-volume:/usr/local/tomcat/alf_data
-      - ../../../sample-project-platform-jar/target/classes:/usr/local/tomcat/hotswap-agent/sample-project-platform-jar/target/classes
-      - ../../../integration-tests/target/test-classes:/usr/local/tomcat/hotswap-agent/integration-tests/target/test-classes
+      - ../../../sample-project-platform/target/classes:/usr/local/tomcat/hotswap-agent/sample-project-platform/target/classes
+      - ../../../sample-project-integration-tests/target/test-classes:/usr/local/tomcat/hotswap-agent/sample-project-integration-tests/target/test-classes
 ...
 ```
 
@@ -268,7 +268,7 @@ model.put(“fromJava”,”HelloFromMe”);
 A number of log messages appear in the Alfresco project terminal, for example:
 
 ```
- HOTSWAP AGENT: 14:10:29.887 DEBUG (org.hotswap.agent.watch.nio.WatcherNIO2) - Watch event 'ENTRY_MODIFY' on '/usr/local/tomcat/hotswap-agent/sample-project-platform-jar/target/classes/com/example/platformsample/HelloWorldWebScript.class' --> HelloWorldWebScript.class
+ HOTSWAP AGENT: 14:10:29.887 DEBUG (org.hotswap.agent.watch.nio.WatcherNIO2) - Watch event 'ENTRY_MODIFY' on '/usr/local/tomcat/hotswap-agent/sample-project-platform/target/classes/com/example/platformsample/HelloWorldWebScript.class' --> HelloWorldWebScript.class
  HOTSWAP AGENT: 14:10:30.319 DEBUG (org.hotswap.agent.command.impl.SchedulerImpl) - Executing pluginManager.hotswap([class com.example.platformsample.HelloWorldWebScript])
  HOTSWAP AGENT: 14:10:30.368 RELOAD (org.hotswap.agent.config.PluginManager) - Reloading classes [com.example.platformsample.HelloWorldWebScript] (autoHotswap)
  HOTSWAP AGENT: 14:10:30.387 DEBUG (org.hotswap.agent.plugin.jdk.JdkPlugin) - Flushing com.example.platformsample.HelloWorldWebScript from introspector

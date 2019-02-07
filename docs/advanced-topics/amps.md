@@ -66,7 +66,7 @@ do is modify the `pom.xml` file of the corresponding docker module / project in 
 <dependencies>
     <dependency>
         <groupId>org.alfresco</groupId>
-        <artifactId>sample-module-platform-jar</artifactId>
+        <artifactId>sample-module-platform</artifactId>
         <version>1.0-SNAPSHOT</version>
         <type>amp</type>
     </dependency>
@@ -91,7 +91,7 @@ do is modify the `pom.xml` file of the corresponding docker module / project in 
                 <artifactItems>
                     <artifactItem>
                         <groupId>org.alfresco</groupId>
-                        <artifactId>sample-module-platform-jar</artifactId>
+                        <artifactId>sample-module-platform</artifactId>
                         <version>1.0-SNAPSHOT</version>
                         <overWrite>false</overWrite>
                         <outputDirectory>${project.build.directory}/extensions</outputDirectory>
@@ -180,7 +180,7 @@ Here is an example of how to install Florian Maul's Javascript Console.
     <dependencies>
         <dependency>
             <groupId>org.alfresco</groupId>
-            <artifactId>sample-module-platform-jar</artifactId>
+            <artifactId>sample-module-platform</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
