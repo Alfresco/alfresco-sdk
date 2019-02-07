@@ -37,19 +37,19 @@ purge() {
 }
 
 build() {
-    ${symbol_dollar}MVN_EXEC clean install -DskipTests=true
+    ${symbol_dollar}MVN_EXEC clean package
 }
 
 build_share() {
     docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH kill ${rootArtifactId}-share
     yes | docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH rm -f ${rootArtifactId}-share
-    ${symbol_dollar}MVN_EXEC clean install -DskipTests=true -pl ${rootArtifactId}-share,${rootArtifactId}-share-docker
+    ${symbol_dollar}MVN_EXEC clean package -pl ${rootArtifactId}-share,${rootArtifactId}-share-docker
 }
 
 build_acs() {
     docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH kill ${rootArtifactId}-acs
     yes | docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH rm -f ${rootArtifactId}-acs
-    ${symbol_dollar}MVN_EXEC clean install -DskipTests=true -pl ${rootArtifactId}-platform,${rootArtifactId}-platform-docker
+    ${symbol_dollar}MVN_EXEC clean package -pl ${rootArtifactId}-platform,${rootArtifactId}-platform-docker
 }
 
 tail() {
@@ -60,8 +60,12 @@ tail_all() {
     docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH logs --tail="all"
 }
 
+prepare_test() {
+    ${symbol_dollar}MVN_EXEC verify -DskipTests=true -pl ${rootArtifactId}-platform,${rootArtifactId}-integration-tests,${rootArtifactId}-platform-docker
+}
+
 test() {
-    ${symbol_dollar}MVN_EXEC verify -pl ${rootArtifactId}-integration-tests
+    ${symbol_dollar}MVN_EXEC verify -pl ${rootArtifactId}-platform,${rootArtifactId}-integration-tests
 }
 
 case "${symbol_dollar}1" in
@@ -98,6 +102,7 @@ case "${symbol_dollar}1" in
   build_test)
     down
     build
+    prepare_test
     start
     test
     tail_all

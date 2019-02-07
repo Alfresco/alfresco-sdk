@@ -73,39 +73,22 @@ do is modify the `pom.xml` file of the corresponding docker module / project in 
 </dependencies>
 ```
 
-2. Modify the Maven Dependency Plugin in the file `PROJECT_ARTIFACT_ID-platform-docker/pom.xml` to set the platform JAR dependency type to `amp`:
+2. Add the `<includeTypes>amp</includeTypes>` to the `collect-extensions` execution in maven-dependency-plugin plugin build configuration in the same file:
 
 ```
-<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-dependency-plugin</artifactId>
-    <executions>
-        <!-- Copy the repository extension and the dependencies required for execute integration tests -->
-        <execution>
-            <id>copy-repo-extension</id>
-            <phase>pre-integration-test</phase>
-            <goals>
-                <goal>copy</goal>
-            </goals>
-            <configuration>
-                <artifactItems>
-                    <artifactItem>
-                        <groupId>org.alfresco</groupId>
-                        <artifactId>sample-module-platform</artifactId>
-                        <version>1.0-SNAPSHOT</version>
-                        <overWrite>false</overWrite>
-                        <outputDirectory>${project.build.directory}/extensions</outputDirectory>
-                        <type>amp</type>
-                    </artifactItem>
-                    <!-- Test dependencies -->
-                    ...
-                </artifactItems>
-            </configuration>
-        </execution>
-        <!-- Copy other dependencies (JARs or AMPs) declared in the platform module -->
-        ...
-    </executions>
-</plugin>
+<!-- Collect extensions (JARs or AMPs) declared in this module do be deployed to docker -->
+<execution>
+    <id>collect-extensions</id>
+    <phase>package</phase>
+    <goals>
+        <goal>copy-dependencies</goal>
+    </goals>
+    <configuration>
+        <outputDirectory>${project.build.directory}/extensions</outputDirectory>
+        <includeScope>runtime</includeScope>
+        <includeTypes>amp</includeTypes>
+    </configuration>
+</execution>
 ```
 
 3. Repeat these steps for the share module in the file `PROJECT_ARTIFACT_ID-share-docker/pom.xml`.
