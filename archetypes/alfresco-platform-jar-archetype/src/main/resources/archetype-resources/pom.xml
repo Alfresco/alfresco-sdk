@@ -214,7 +214,7 @@
                                 <artifactItem>
                                     <groupId>${groupId}</groupId>
                                     <artifactId>${artifactId}</artifactId>
-                                    <version>${version}</version>
+                                    <version>${project.version}</version>
                                     <overWrite>false</overWrite>
                                     <outputDirectory>${project.build.directory}/extensions</outputDirectory>
                                 </artifactItem>
