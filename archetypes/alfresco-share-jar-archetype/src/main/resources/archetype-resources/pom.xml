@@ -174,7 +174,7 @@
                 <executions>
                     <!-- Copy the share extension -->
                     <execution>
-                        <id>copy-repo-extension</id>
+                        <id>copy-share-extension</id>
                         <phase>pre-integration-test</phase>
                         <goals>
                             <goal>copy</goal>
@@ -184,7 +184,7 @@
                                 <artifactItem>
                                     <groupId>${groupId}</groupId>
                                     <artifactId>${artifactId}</artifactId>
-                                    <version>${version}</version>
+                                    <version>${project.version}</version>
                                     <overWrite>false</overWrite>
                                     <outputDirectory>${project.build.directory}/extensions</outputDirectory>
                                 </artifactItem>
