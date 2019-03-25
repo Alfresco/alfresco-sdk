@@ -75,6 +75,13 @@ case "${symbol_dollar}1" in
     start
     tail
     ;;
+  build_start_it_supported)
+    down
+    build
+    prepare_test
+    start
+    tail
+    ;;
   start)
     start
     tail
@@ -112,5 +119,5 @@ case "${symbol_dollar}1" in
     test
     ;;
   *)
-    echo "Usage: ${symbol_dollar}0 {build_start|start|stop|purge|tail|reload_share|reload_acs|build_test|test}"
+    echo "Usage: ${symbol_dollar}0 {build_start|build_start_it_supported|start|stop|purge|tail|reload_share|reload_acs|build_test|test}"
 esac

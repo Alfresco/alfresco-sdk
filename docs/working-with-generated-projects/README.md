@@ -37,6 +37,7 @@ The execution of this script must be followed by a parameter that dictates the t
 Task | Description
 --- | ---
 `build_start` | Build the whole project, recreate the ACS and Share docker images, start the dockerised environment composed by ACS, Share, ASS and PostgreSQL and tail the logs of all the containers.
+`build_start_it_supported` | Build the whole project including dependencies required for IT execution, recreate the ACS and Share docker images, start the dockerised environment composed by ACS, Share, ASS and PostgreSQL and tail the logs of all the containers.
 `start` | Start the dockerised environment without building the project and tail the logs of all the containers.
 `stop` | Stop the dockerised environment.
 `purge` | Stop the dockerised environment and delete all the persistent data (docker volumes).
