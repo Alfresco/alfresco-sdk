@@ -20,7 +20,7 @@ my-all-in-one-project
 ├── run.sh
 ├── docker
 |   └── docker-compose.yml
-├── integration-tests
+├── my-all-in-one-project-integration-tests
 |   ├── pom.xml
 │   └── src
 │       ├── main
@@ -47,7 +47,7 @@ my-all-in-one-project
 │               ├── hotswap-agent.properties
 │               └── license
 │                   └── README.md
-├── my-all-in-one-project-platform-jar
+├── my-all-in-one-project-platform
 │   ├── pom.xml
 │   └── src
 │       ├── main
@@ -74,7 +74,7 @@ my-all-in-one-project
 │       │       │   │                   ├── helloworld.get.html.ftl
 │       │       │   │                   └── helloworld.get.js
 │       │       │   └── module
-│       │       │       └── my-all-in-one-project-platform-jar
+│       │       │       └── my-all-in-one-project-platform
 │       │       │           ├── alfresco-global.properties
 │       │       │           ├── context
 │       │       │           │   ├── bootstrap-context.xml
@@ -107,7 +107,7 @@ my-all-in-one-project
 │               ├── hotswap-agent.properties
 │               ├── log4j.properties
 │               └── share-config-custom.xml
-└── my-all-in-one-project-share-jar
+└── my-all-in-one-project-share
     ├── pom.xml
     └── src
         ├── main
@@ -120,15 +120,15 @@ my-all-in-one-project
         │   │   └── com
         │       ├── alfresco
         │       │   ├── module
-        │       │   │   └── my-all-in-one-project-share-jar
+        │       │   │   └── my-all-in-one-project-share
         │       │   │       └── module.properties
         │       │   └── web-extension
         │       │       ├── messages
-        │       │       │   └── my-all-in-one-project-share-jar.properties
-        │       │       ├── my-all-in-one-project-share-jar-slingshot-application-context.xml
+        │       │       │   └── my-all-in-one-project-share.properties
+        │       │       ├── my-all-in-one-project-share-slingshot-application-context.xml
         │       │       ├── site-data
         │       │       │   └── extensions
-        │       │       │       └── my-all-in-one-project-share-jar-example-widgets.xml
+        │       │       │       └── my-all-in-one-project-share-example-widgets.xml
         │       │       └── site-webscripts
         │       │           ├── com
         │       │           │   └── example
@@ -141,7 +141,7 @@ my-all-in-one-project
         │       │                   └── README.md
         │       └── META-INF
         │           ├── resources
-        │           │   └── my-all-in-one-project-share-jar
+        │           │   └── my-all-in-one-project-share
         │           │       └── js
         │           │           └── tutorials
         │           │               └── widgets
@@ -165,14 +165,14 @@ From a high level standpoint, we can describe the content of the project as foll
 hosting service like GitHub, SVN, CVS, etc.
 * The files stored into the root of the project are mainly related to actions and commands (running, debugging, etc.), technical configuration (`pom.xml`), 
 and documentation (`README.md`).
-* `integration-tests` contains a sub-project entirely dedicated to integration tests.
+* `my-all-in-one-project-integration-tests` (typically named `<artefactId-integration-tests>`) contains a sub-project entirely dedicated to integration tests.
 * `my-all-in-one-project-platform-docker` (typically named `<artefactId-platform-docker>`) contains a sub-project dedicated to the configuration of a custom
-Docker image with the Alfresco Content Services Repository and the customization module `my-all-in-one-project-platform-jar` installed.
-* `my-all-in-one-project-platform-jar` (typically named `<artefactId-platform-jar>`) contains a sub-project entirely dedicated to the customization of the 
+Docker image with the Alfresco Content Services Repository and the customization module `my-all-in-one-project-platform` installed.
+* `my-all-in-one-project-platform` (typically named `<artefactId-platform>`) contains a sub-project entirely dedicated to the customization of the 
 Alfresco Content Services Repository.
 * `my-all-in-one-project-share-docker` (typically named `<artefactId-share-docker>`) contains a sub-project dedicated to the configuration of a custom
-Docker image with the Alfresco Share client and the customization module `my-all-in-one-project-share-jar` installed.
-* `my-all-in-one-project-share-jar` (typically named `<artefactId-share-jar>`) contains a sub-project entirely dedicated to the customization of the 
+Docker image with the Alfresco Share client and the customization module `my-all-in-one-project-share` installed.
+* `my-all-in-one-project-share` (typically named `<artefactId-share>`) contains a sub-project entirely dedicated to the customization of the 
 Alfresco Share client.
 
 After this brief introduction of the All-In-One project, let’s focus on the content of the folders.
@@ -187,9 +187,9 @@ File | Description
 `pom.xml` | This XML file contains information about the project and configuration details used by Apache Maven to build the project. You can define all the configurations, parameters, and settings in this file for projects as well as for sub-projects.
 `README.md` | File in Markdown format containing the documentation for the project.
 
-## my-all-in-one-project-platform-jar
+## my-all-in-one-project-platform
 
-Below is a description of the content in the `my-all-in-one-project-platform-jar` (typically named `<artefactId-platform-jar>`) sub-project. This sub-project 
+Below is a description of the content in the `my-all-in-one-project-platform` (typically named `<artefactId-platform>`) sub-project. This sub-project 
 contains the source code entirely dedicated to the customizing the Alfresco Content Services Repository.
 
 Content | Description
@@ -206,18 +206,18 @@ Content | Description
 
 Below is a description of the content in the `my-all-in-one-project-platform-docker` (typically named `<artefactId-platform-docker>`) sub-project. This 
 sub-project contains the resources required to define a custom Docker image with the Alfresco Content Services Repository and the customization module 
-`my-all-in-one-project-platform-jar` installed.
+`my-all-in-one-project-platform` installed.
 
 Content | Description
 --- | ---
-`pom.xml` | This XML file contains information about the project and configuration details used by Apache Maven to build the project. It adds the dependency to the `my-all-in-one-project-platform-jar` module and configures the `maven-dependency-plugin` to copy all the artifacts required in the Docker image into the folder `${project.build.directory}/extensions`.
+`pom.xml` | This XML file contains information about the project and configuration details used by Apache Maven to build the project. It adds the dependency to the `my-all-in-one-project-platform` module and configures the `maven-dependency-plugin` to copy all the artifacts required in the Docker image into the folder `${project.build.directory}/extensions`.
 `src/main/docker` | In this folder you can find everything that's needed to fully configure the custom ACS Docker image.
 `src/main/docker/Dockerfile` | This is the file that define the custom ACS Docker image. The default configuration installs all the existing JARs and AMPs under `${project.build.directory}/extensions` folder and adds custom configuration and license files.
 `src/main/docker/license` | This folder contains the licenses required for running an Enterprise project.
 
-## my-all-in-one-project-share-jar
+## my-all-in-one-project-share
 
-Below is a description of the content in the `my-all-in-one-project-share-jar` (typically named `<artefactId-share-jar>`) sub-project. This sub-project 
+Below is a description of the content in the `my-all-in-one-project-share` (typically named `<artefactId-share>`) sub-project. This sub-project 
 contains the source code entirely dedicated to the customizing the Alfresco Share client.
 
 Content | Description
@@ -235,17 +235,17 @@ Content | Description
 
 Below is a description of the content in the `my-all-in-one-project-share-docker` (typically named `<artefactId-share-docker>`) sub-project. This 
 sub-project contains the resources required to define a custom Docker image with the Alfresco Share Client and the customization module 
-`my-all-in-one-project-share-jar` installed.
+`my-all-in-one-project-share` installed.
 
 Content | Description
 --- | ---
-`pom.xml` | This XML file contains information about the project and configuration details used by Apache Maven to build the project. It adds the dependency to the `my-all-in-one-project-share-jar` module and configures the `maven-dependency-plugin` to copy all the artifacts required in the Docker image into the folder `${project.build.directory}/extensions`.
+`pom.xml` | This XML file contains information about the project and configuration details used by Apache Maven to build the project. It adds the dependency to the `my-all-in-one-project-share` module and configures the `maven-dependency-plugin` to copy all the artifacts required in the Docker image into the folder `${project.build.directory}/extensions`.
 `src/main/docker` | In this folder you can find everything that's needed to fully configure the custom Alfresco Share Docker image.
 `src/main/docker/Dockerfile` | This is the file that define the custom Alfresco Share Docker image. The default configuration installs all the existing JARs and AMPs under `${project.build.directory}/extensions` folder and adds custom configuration files.
 
-## integration-tests
+## my-all-in-one-project-integration-tests
 
-Below is a description of the content in the `integration-tests` sub-project. This sub-project contains all the source code and resources needed to run the integration tests.
+Below is a description of the content in the `my-all-in-one-project-integration-tests` (typically named `<artefactId-integration-tests>`) sub-project. This sub-project contains all the source code and resources needed to run the integration tests.
 
 Content | Description
 --- | ---

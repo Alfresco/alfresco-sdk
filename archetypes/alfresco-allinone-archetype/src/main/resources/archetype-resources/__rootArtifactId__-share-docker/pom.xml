@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>${groupId}</groupId>
-            <artifactId>${rootArtifactId}-share-jar</artifactId>
+            <artifactId>${rootArtifactId}-share</artifactId>
             <version>${version}</version>
         </dependency>
     </dependencies>
@@ -30,16 +30,17 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
-                    <!-- Copy the dependencies (JARs or AMPs) declared in this module -->
+                    <!-- Collect extensions (JARs or AMPs) declared in this module do be deployed to docker -->
                     <execution>
-                        <id>copy-third-party-dependencies</id>
-                        <phase>pre-integration-test</phase>
+                        <id>collect-extensions</id>
+                        <phase>package</phase>
                         <goals>
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
                             <outputDirectory>${project.build.directory}/extensions</outputDirectory>
                             <includeScope>runtime</includeScope>
+                            <!-- IMPORTANT: if using amp dependencies only, add <includeTypes>amp</includeTypes> -->
                         </configuration>
                     </execution>
                 </executions>

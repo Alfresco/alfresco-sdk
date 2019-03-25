@@ -20,7 +20,7 @@ The ACS container is not starting properly and it is showing Java compatibility 
 ```
 org.springframework.beans.factory.CannotLoadBeanClassException: 
 Error loading class [com.example.platformsample.Demo] for bean with name 'com.example.Demo' defined in class path resource 
-[alfresco/module/sample-project-platform-jar/context/service-context.xml]: 
+[alfresco/module/sample-project-platform/context/service-context.xml]: 
 problem with class file or dependent class; nested exception is java.lang.UnsupportedClassVersionError: 
 com/example/platformsample/Demo has been compiled by a more recent version of the Java Runtime (class file version 55.0), 
 this version of the Java Runtime only recognizes class file versions up to 52.0 (unable to load class [com.example.platformsample.Demo])

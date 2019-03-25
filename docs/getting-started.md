@@ -172,9 +172,9 @@ If everything has been configured correctly, you should see something similar to
 [INFO] Parameter: groupId, Value: com.acme
 [INFO] Parameter: artifactId, Value: my-all-in-one
 [INFO] Parameter: version, Value: 1.0-SNAPSHOT
-[INFO] Parent element not overwritten in /Users/Alfresco/my-all-in-one/my-all-in-one-platform-jar/pom.xml
-[INFO] Parent element not overwritten in /Users/Alfresco/my-all-in-one/my-all-in-one-share-jar/pom.xml
-[INFO] Parent element not overwritten in /Users/Alfresco/my-all-in-one/integration-tests/pom.xml
+[INFO] Parent element not overwritten in /Users/Alfresco/my-all-in-one/my-all-in-one-platform/pom.xml
+[INFO] Parent element not overwritten in /Users/Alfresco/my-all-in-one/my-all-in-one-share/pom.xml
+[INFO] Parent element not overwritten in /Users/Alfresco/my-all-in-one/my-all-in-one-integration-tests/pom.xml
 [INFO] Parent element not overwritten in /Users/Alfresco/my-all-in-one/my-all-in-one-platform-docker/pom.xml
 [INFO] Parent element not overwritten in /Users/Alfresco/my-all-in-one/my-all-in-one-share-docker/pom.xml
 [INFO] Executing META-INF/archetype-post-generate.groovy post-generation script
