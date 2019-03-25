@@ -20,7 +20,7 @@ $ ./run.sh build_test
 ```
 
 If you want all your previous data in the docker environment to be wiped out before the execution of the integration tests, remember to call the `purge` goal
-before the `build_start` goal:
+before the `build_test` goal:
 
 ```
 $ ./run.sh purge
@@ -69,8 +69,8 @@ If your project is available in Eclipse, you can easily run one or more of the i
 
 To run the integration tests:
 
-1. In order to properly execute the integration tests the dockerised environment must be already up and running. So, before executing the tests you must run
-the `build_start` or the `start` goal of the `run` script.
+1. In order to properly execute the integration tests the dockerised environment must be already up and running with IT support. So, before executing the tests 
+you must run the `build_start_it_supported` or the `start` goal of the `run` script.
 
 2. Open the project using the IDE.
 
@@ -95,8 +95,8 @@ If your project is available in IntelliJ IDEA, you can easily run one or more of
 
 To run the integration tests:
 
-1. In order to properly execute the integration tests the dockerised environment must be already up and running. So, before executing the tests you must run
-the `build_start` or the `start` goal of the `run` script.
+1. In order to properly execute the integration tests the dockerised environment must be already up and running with IT support. So, before executing the tests 
+you must run the `build_start_it_supported` or the `start` goal of the `run` script.
 
 2. Open the project using the IDE.
 

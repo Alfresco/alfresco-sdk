@@ -12,13 +12,21 @@ IF NOT [%M2_HOME%]==[] (
 )
 
 IF [%1]==[] (
-    echo "Usage: %0 {build_start|start|stop|purge|tail|reload_share|reload_acs|build_test|test}"
+    echo "Usage: %0 {build_start|build_start_it_supported|start|stop|purge|tail|reload_share|reload_acs|build_test|test}"
     GOTO END
 )
 
 IF %1==build_start (
     CALL :down
     CALL :build
+    CALL :start
+    CALL :tail
+    GOTO END
+)
+IF %1==build_start_it_supported (
+    CALL :down
+    CALL :build
+    CALL :prepare-test
     CALL :start
     CALL :tail
     GOTO END
