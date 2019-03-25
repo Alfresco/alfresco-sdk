@@ -135,15 +135,10 @@
         <alfresco.sdk.tests.exclude>*/*-enterprise*/*</alfresco.sdk.tests.exclude>
 
         <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-        <alfresco.platform.version>6.0.7-ga</alfresco.platform.version>
-        <alfresco.share.version>6.0.b</alfresco.share.version>
+        <alfresco.platform.version>6.1.2-ga</alfresco.platform.version>
+        <alfresco.share.version>6.1.0-RC3</alfresco.share.version>
         <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
         <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
-
-        <!-- The following version is needed for alfresco-rad -->
-        <alfresco.community.default.version>5.2.f</alfresco.community.default.version>
-        <alfresco.enterprise.default.version>5.2.0</alfresco.enterprise.default.version>
-        <alfresco.sdk.default.edition>community</alfresco.sdk.default.edition>
 
         <test.acs.endpoint.path />
 
@@ -298,6 +293,18 @@
             </distributionManagement>
         </profile>
 
+        <!-- 6.0 -->
+        <profile>
+            <id>community-60-tests</id>
+            <properties>
+                <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>6.0.7-ga</alfresco.platform.version>
+                <alfresco.share.version>6.0.b</alfresco.share.version>
+                <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+            </properties>
+        </profile>
+
         <profile>
             <id>enterprise-60-tests</id>
             <properties>
@@ -309,13 +316,14 @@
             </properties>
         </profile>
 
+        <!-- 6.1 -->
         <!-- This profile requires to be executed using Java 11 -->
         <profile>
             <id>enterprise-61-tests</id>
             <properties>
                 <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>6.1.0-RC4</alfresco.platform.version>
-                <alfresco.share.version>6.1.0-RC3</alfresco.share.version>
+                <alfresco.platform.version>6.1.0</alfresco.platform.version>
+                <alfresco.share.version>6.1.0</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
             </properties>
