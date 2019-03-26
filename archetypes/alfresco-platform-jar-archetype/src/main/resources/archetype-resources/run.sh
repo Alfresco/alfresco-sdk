@@ -29,7 +29,7 @@ purge() {
 }
 
 build() {
-    ${symbol_dollar}MVN_EXEC clean install -DskipTests=true
+    ${symbol_dollar}MVN_EXEC clean package
 }
 
 tail() {
@@ -40,6 +40,10 @@ tail_all() {
     docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH logs --tail="all"
 }
 
+prepare_test() {
+    ${symbol_dollar}MVN_EXEC verify -DskipTests=true
+}
+
 test() {
     ${symbol_dollar}MVN_EXEC verify
 }
@@ -48,6 +52,13 @@ case "${symbol_dollar}1" in
   build_start)
     down
     build
+    start
+    tail
+    ;;
+  build_start_it_supported)
+    down
+    build
+    prepare_test
     start
     tail
     ;;
@@ -68,6 +79,7 @@ case "${symbol_dollar}1" in
   build_test)
     down
     build
+    prepare_test
     start
     test
     tail_all
@@ -77,5 +89,5 @@ case "${symbol_dollar}1" in
     test
     ;;
   *)
-    echo "Usage: ${symbol_dollar}0 {build_start|start|stop|purge|tail|build_test|test}"
+    echo "Usage: ${symbol_dollar}0 {build_start|build_start_it_supported|start|stop|purge|tail|build_test|test}"
 esac
