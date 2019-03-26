@@ -20,9 +20,6 @@ All the services of the project are now run as docker containers. The run script
  * `tail`. Tail the logs of all the containers.
  * `reload_share`. Build the Share module, recreate the Share docker image and restart the Share container.
  * `reload_acs`. Build the ACS module, recreate the ACS docker image and restart the ACS container.
- * `build_test`. Build the whole project, recreate the Share docker image, start the dockerised environment, execute the integration tests from the
- `integration-tests` module and stop the environment.
- * `test`. Execute the integration tests (the environment must be already started).
 
 # Few things to notice
 
