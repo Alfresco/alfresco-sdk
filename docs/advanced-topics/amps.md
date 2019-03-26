@@ -95,39 +95,28 @@ do is modify the `pom.xml` file of the corresponding docker module / project in 
 
 ### Platform / Share project
 
-1. Modify the Maven Dependency Plugin in the file `pom.xml` to set the platform / share JAR dependency type to `amp`:
+1. Modify the Maven Resource Plugin in the file `pom.xml` to set the platform / share JAR artifact to copy to `amp`:
 
 ```
-<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-dependency-plugin</artifactId>
-    <executions>
-        <!-- Copy the repository extension and the dependencies required for execute integration tests -->
-        <execution>
-            <id>copy-repo-extension</id>
-            <phase>pre-integration-test</phase>
-            <goals>
-                <goal>copy</goal>
-            </goals>
-            <configuration>
-                <artifactItems>
-                    <artifactItem>
-                        <groupId>org.alfresco</groupId>
-                        <artifactId>sample-platform-jar</artifactId>
-                        <version>1.0-SNAPSHOT</version>
-                        <overWrite>false</overWrite>
-                        <outputDirectory>${project.build.directory}/extensions</outputDirectory>
-                        <type>amp</type>
-                    </artifactItem>
-                    <!-- Test dependencies -->
-                    ...
-                </artifactItems>
-            </configuration>
-        </execution>
-        <!-- Copy other dependencies (JARs or AMPs) declared in the platform module -->
-        ...
-    </executions>
-</plugin>
+<execution>
+    <id>copy-repository-extension</id>
+    <phase>package</phase>
+    <goals>
+        <goal>copy-resources</goal>
+    </goals>
+    <configuration>
+        <outputDirectory>${project.build.directory}/extensions</outputDirectory>
+        <resources>
+            <resource>
+                <directory>target</directory>
+                <includes>
+                    <include>${build.finalName}.amp</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </configuration>
+</execution>
 ```
 
 Once this configuration is in place, you simply need to rebuild and restart the project. The new configuration will make the Docker images automatically 
