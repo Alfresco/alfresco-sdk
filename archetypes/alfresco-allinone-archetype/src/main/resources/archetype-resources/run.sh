@@ -49,7 +49,7 @@ build_share() {
 build_acs() {
     docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH kill ${rootArtifactId}-acs
     yes | docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH rm -f ${rootArtifactId}-acs
-    ${symbol_dollar}MVN_EXEC clean package -pl ${rootArtifactId}-platform,${rootArtifactId}-platform-docker
+    ${symbol_dollar}MVN_EXEC clean package -pl ${rootArtifactId}-integration-tests,${rootArtifactId}-platform,${rootArtifactId}-platform-docker
 }
 
 tail() {

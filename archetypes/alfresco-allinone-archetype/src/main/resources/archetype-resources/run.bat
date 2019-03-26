@@ -107,7 +107,7 @@ EXIT /B 0
 :build_acs
     docker-compose -f "%COMPOSE_FILE_PATH%" kill ${rootArtifactId}-acs
     docker-compose -f "%COMPOSE_FILE_PATH%" rm -f ${rootArtifactId}-acs
-	call %MVN_EXEC% clean package -pl ${rootArtifactId}-platform,${rootArtifactId}-platform-docker
+	call %MVN_EXEC% clean package -pl ${rootArtifactId}-integration-tests,${rootArtifactId}-platform,${rootArtifactId}-platform-docker
 EXIT /B 0
 :tail
     docker-compose -f "%COMPOSE_FILE_PATH%" logs -f
