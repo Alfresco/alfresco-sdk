@@ -130,7 +130,7 @@
 
         <!-- The following version is needed for alfresco-rad -->
         <alfresco.community.default.version>5.2.f</alfresco.community.default.version>
-        <alfresco.enterprise.default.version>5.2.0</alfresco.enterprise.default.version>
+        <alfresco.enterprise.default.version>5.2.4</alfresco.enterprise.default.version>
         <alfresco.sdk.default.edition>community</alfresco.sdk.default.edition>
 
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
