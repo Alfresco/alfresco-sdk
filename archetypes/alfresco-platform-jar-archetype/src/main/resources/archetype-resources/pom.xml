@@ -98,6 +98,41 @@
 
     <build>
         <plugins>
+            <!--
+                    Build an AMP if 3rd party libs are needed by the extensions
+                    JARs are the default artifact produced in your modules, if you want to build an amp for each module
+                    you have to enable this plugin and inspect the src/main/assembly.xml file if you want to customize
+                    the layout of your AMP. The end result is that Maven will produce both a JAR file and an AMP with your
+                    module.
+                -->
+            <!--
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>build-amp-file</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptor>src/main/assembly/amp.xml</descriptor>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.alfresco.maven.plugin</groupId>
+                        <artifactId>alfresco-maven-plugin</artifactId>
+                        <version>${alfresco.sdk.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            -->
+
             <!-- Filter the test resource files in the AIO parent project, and do property substitutions.
                  We need this config so this is done before the Alfresco Maven Plugin 'run' is executed. -->
             <plugin>
@@ -365,41 +400,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <!--
-                    Build an AMP if 3rd party libs are needed by the extensions
-                    JARs are the default artifact produced in your modules, if you want to build an amp for each module
-                    you have to enable this plugin and inspect the src/main/assembly.xml file if you want to customize
-                    the layout of your AMP. The end result is that Maven will produce both a JAR file and an AMP with your
-                    module.
-                -->
-            <!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.6</version>
-                <executions>
-                    <execution>
-                        <id>build-amp-file</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <configuration>
-                            <appendAssemblyId>false</appendAssemblyId>
-                            <descriptor>src/main/assembly/amp.xml</descriptor>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.alfresco.maven.plugin</groupId>
-                        <artifactId>alfresco-maven-plugin</artifactId>
-                        <version>${alfresco.sdk.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            -->
 
             <!-- Hot reloading with JRebel -->
             <plugin>
