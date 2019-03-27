@@ -17,13 +17,9 @@
  */
 package org.alfresco.maven.plugin;
 
-import com.google.common.collect.ImmutableSet;
-import de.schlichtherle.truezip.file.TVFS;
-import de.schlichtherle.truezip.fs.FsSyncException;
 import org.alfresco.maven.plugin.config.ModuleDependency;
 import org.alfresco.maven.plugin.config.TomcatDependency;
 import org.alfresco.maven.plugin.config.TomcatWebapp;
-import org.alfresco.util.Pair;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -44,7 +40,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import static org.twdata.maven.mojoexecutor.MojoExecutor.*;
 
@@ -62,39 +57,11 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     public static final String MAVEN_INSTALL_PLUGIN_VERSION = "2.5.2";
     public static final String MAVEN_REPLACER_PLUGIN_VERSION = "1.5.3";
     public static final String MAVEN_RESOURCE_PLUGIN_VERSION = "2.7";
-    public static final String MAVEN_BUILD_HELPER_PLUGIN_VERSION = "1.12";
+    public static final String MAVEN_TOMCAT7_PLUGIN_VERSION = "2.2";
 
     public static final String PLATFORM_WAR_PREFIX_NAME = "platform";
     public static final String SHARE_WAR_PREFIX_NAME = "share";
-    public static final String ACTIVITI_APP_WAR_PREFIX_NAME = "activitiApp";
 
-    public static final String ALFRESCO_ENTERPRISE_EDITION = "enterprise";
-    public static final String ALFRESCO_COMMUNITY_EDITION = "community";
-
-    private static final String TOMCAT_GROUP_ID = "org.apache.tomcat";
-    private static final String TOMCAT_EMBED_GROUP_ID = "org.apache.tomcat.embed";
-    private static final Set<Pair<String, String>> TOMCAT_DEPENDENCIES = new ImmutableSet.Builder<Pair<String, String>>()
-            .add(new Pair(TOMCAT_EMBED_GROUP_ID,"tomcat-embed-core"))
-            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-util"))
-            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-coyote"))
-            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-api"))
-            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-jdbc"))
-            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-dbcp"))
-            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-servlet-api"))
-            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-jsp-api"))
-            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-jasper"))
-            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-jasper-el"))
-            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-el-api"))
-            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-catalina"))
-            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-tribes"))
-            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-catalina-ha"))
-            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-annotations-api"))
-            .add(new Pair(TOMCAT_GROUP_ID,"tomcat-juli"))
-            .add(new Pair(TOMCAT_EMBED_GROUP_ID,"tomcat-embed-logging-juli"))
-            .add(new Pair(TOMCAT_EMBED_GROUP_ID,"tomcat-embed-logging-log4j"))
-            .build();
-
-    private static final String AMP_LOCATION_PATTERN = "%s/%s-%s.amp";
 
     @Component
     protected MavenProject project;
@@ -105,8 +72,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     @Component
     protected BuildPluginManager pluginManager;
 
-    @Parameter(property = "reactorProjects", required = true, readonly = true)
-    protected List<MavenProject> reactorProjects;
+
 
     /**
      * The following properties that start with 'maven.' are used to control the
@@ -119,10 +85,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      *          <artifactId>alfresco-maven-plugin</artifactId>
      *          <version>3.0.0</version>
      *          <configuration>
-     *              <alfrescoEdition>community</alfrescoEdition>
-     *              <enableH2>true</enableH2>
      *              <enablePlatform>true</enablePlatform>
-     *              <enableSolr>true</enableSolr>
      *              <enableShare>false</enableShare>*
      *              <platformModules>
      *                  <moduleDependency>
@@ -138,36 +101,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      * </pre>
      */
 
-    /**
-     * Switch to enable/disable the Apache Solr 4 web application when running embedded Tomcat.
-     */
-    @Parameter(property = "maven.alfresco.enableSolr", defaultValue = "true")
-    protected boolean enableSolr;
-
-    /**
-     * Switch to enable/disable the H2 database when running embedded Tomcat.
-     * This also brings in the needed H2 database scripts.
-     */
-    @Parameter(property = "maven.alfresco.enableH2", defaultValue = "false")
-    protected boolean enableH2;
-
-    /**
-     * Switch to enable/disable the MySQL database when running embedded Tomcat.
-     */
-    @Parameter(property = "maven.alfresco.enableMySQL", defaultValue = "false")
-    protected boolean enableMySQL;
-
-    /**
-     * Switch to enable/disable the PostgreSQL database when running embedded Tomcat.
-     */
-    @Parameter(property = "maven.alfresco.enablePostgreSQL", defaultValue = "false")
-    protected boolean enablePostgreSQL;
-
-    /**
-     * Switch to enable/disable the Enterprise database (such as Oracle or MS SQL Server) when running embedded Tomcat.
-     */
-    @Parameter(property = "maven.alfresco.enableEnterpriseDb", defaultValue = "false")
-    protected boolean enableEnterpriseDb;
 
     /**
      * Switch to enable/disable the Platform/Repository (alfresco.war) when running embedded Tomcat.
@@ -214,27 +147,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     @Parameter(property = "maven.alfresco.enableApiExplorer", defaultValue = "false")
     protected boolean enableApiExplorer;
 
-    /**
-     * Deprecated as of SDK 3.1
-     * Switch to enable/disable Alfresco Activiti Workflow Engine (activiti-app.war) when running embedded Tomcat.
-     * This contains the Alfresco Activiti webapp, including the workflow engine.
-     * This webapp is also the user interface for people involved in the task and processes
-     * running in the Activiti engine.
-     * You also use this webapp to create and manage process definitions, and to display and define analytics
-     * reports on users' tasks and processes.
-     */
-    @Parameter(property = "maven.alfresco.enableActivitiApp", defaultValue = "false")
-    protected boolean enableActivitiApp;
-
-    /**
-     * Deprecated as of SDK 3.1
-     * Switch to enable/disable Alfresco Activiti Admin (activiti-admin.war) when running embedded Tomcat.
-     * This contains the Alfresco Activiti Administrator webapp. You use this to administer and monitor your
-     * Alfresco Activiti engines.
-     *
-     */
-    @Parameter(property = "maven.alfresco.enableActivitiAdmin", defaultValue = "false")
-    protected boolean enableActivitiAdmin;
 
     /**
      * Switch to enable/disable test properties when running embedded Tomcat.
@@ -272,18 +184,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     @Parameter(property = "maven.alfresco.share.modules", defaultValue = "")
     protected List<ModuleDependency> shareModules;
 
-    /**
-     * Deprecated as of SDK 3.1
-     * JARs that should be overlayed/applied to the Activiti App WAR (i.e. activiti-app.war)
-     */
-    @Parameter(property = "maven.activiti.modules", defaultValue = "")
-    protected List<ModuleDependency> activitiModules;
 
-    /**
-     * Community Edition or Enterprise Edition? (i.e community or enterprise)
-     */
-    @Parameter(property = "maven.alfresco.edition", defaultValue = ALFRESCO_COMMUNITY_EDITION)
-    protected String alfrescoEdition;
 
     /**
      * Tomcat Dependencies that should be added to the Embedded Tomcat configuration before start.
@@ -328,86 +229,30 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     @Parameter(property = "alfresco.groupId", defaultValue = "org.alfresco")
     protected String alfrescoGroupId;
 
-    /**
-     * Deprecated as of SDK 3.1
-     */
-    @Parameter(property = "activiti.groupId", defaultValue = "com.activiti")
-    protected String activitiGroupId;
-
-    @Parameter(property = "alfresco.platform.war.artifactId", defaultValue = "alfresco-platform")
+    @Parameter(property = "alfresco.platform.war.artifactId", defaultValue = "content-services-community")
     protected String alfrescoPlatformWarArtifactId;
 
     @Parameter(property = "alfresco.share.war.artifactId", defaultValue = "share")
     protected String alfrescoShareWarArtifactId;
 
-    @Parameter(property = "alfresco.solr.artifactId", defaultValue = "alfresco-solr4")
-    protected String alfrescoSolrArtifactId;
 
     @Parameter(property = "alfresco.api.explorer.artifactId", defaultValue = "api-explorer")
     protected String alfrescoApiExplorerArtifactId;
 
-    /**
-     * Deprecated as of SDK 3.1
-     */
 
-    @Parameter(property = "activiti.app.war.artifactId", defaultValue = "activiti-app")
-    protected String activitiAppWarArtifactId;
-
-    /**
-     * Deprecated as of SDK 3.1
-     */
-    @Parameter(property = "activiti.admin.war.artifactId", defaultValue = "activiti-admin")
-    protected String activitiAdminWarArtifactId;
-
-    @Parameter(property = "alfresco.platform.version", defaultValue = "5.2.f")
+    @Parameter(property = "alfresco.platform.version", defaultValue = "6.0.7-ga")
     protected String alfrescoPlatformVersion;
 
-    @Parameter(property = "alfresco.share.version", defaultValue = "5.2.e")
+    @Parameter(property = "alfresco.share.version", defaultValue = "6.0.7-ga")
     protected String alfrescoShareVersion;
 
-    @Parameter(property = "alfresco.api.explorer.version", defaultValue = "5.2.e")
+    @Parameter(property = "alfresco.api.explorer.version", defaultValue = "6.0.7-ga")
     protected String alfrescoApiExplorerVersion;
 
-    /**
-     * Deprecated as of SDK 3.1
-     */
-    @Parameter(property = "activiti.version", defaultValue = "1.5.3")
-    protected String activitiVersion;
+
 
     /**
-     * Directory that contains the Alfresco Solr 4 configuration
-     */
-    @Parameter(property = "solr.home", defaultValue = "${project.basedir}/${alfresco.data.location}/solr")
-    protected String solrHome;
-
-    /**
-     * Solr indexation frequency. It is customizable to speed up integration tests execution.
-     */
-    @Parameter(property = "solr.alfresco.cron", defaultValue = "0/15 * * * * ? *")
-    protected String solrCron;
-
-    /**
-     * Tomcat version to be used in the Maven Tomcat Plugin. If this parameter is not set, then the
-     * default Tomcat version will be used (it depends on the version of the Tomcat Maven Plugin).
-     */
-    @Parameter(property = "maven.alfresco.tomcat.version")
-    protected String tomcatVersion;
-
-    /**
-     * Tomcat Maven Plugin version to be used when running the project. If this parameter is not set, then the
-     * default Tomcat Maven Plugin version will be used (2.2).
-     */
-    @Parameter(property = "maven.alfresco.tomcat.maven.plugin.version", defaultValue = "2.2")
-    protected String tomcatMavenPluginVersion;
-
-    /**
-     * Location of a custom context file to use in the deployment of the platform war in Tomcat.
-     */
-    @Parameter(property = "maven.alfresco.platform.custom.context.file")
-    protected String platformCustomContextFile;
-
-    /**
-     * Maven GAV properties for customized alfresco.war, share.war, activiti-app.war
+     * Maven GAV properties for customized alfresco.war and share.war
      * Used by the Maven Tomcat 7 Plugin
      */
     private String runnerAlfrescoGroupId;
@@ -415,9 +260,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     private String runnerAlfrescoShareWarArtifactId;
     private String runnerAlfrescoPlatformVersion;
     private String runnerAlfrescoShareVersion;
-    private String runnerActivitiAppGroupId;
-    private String runnerActivitiAppWarArtifactId;
-    private String runnerActivitiAppVersion;
 
     /**
      * The Maven environment that this mojo is executed in
@@ -461,318 +303,21 @@ public abstract class AbstractRunMojo extends AbstractMojo {
             return false;
         }
 
-
-
-    }
-    /**
-     * Download and unpack the Solr 4 configuration as we don't have it in the project.
-     * It will reside under /alf_data_dev/solr
-     *
-     * @throws MojoExecutionException when any problem appears unpacking the Solr configuration
-     */
-    protected void unpackSolrConfig() throws MojoExecutionException {
-        getLog().info("Unpacking Solr config");
-
-        executeMojo(
-                plugin(
-                        groupId("org.apache.maven.plugins"),
-                        artifactId("maven-dependency-plugin"),
-                        version(MAVEN_DEPENDENCY_PLUGIN_VERSION)
-                ),
-                goal("unpack"),
-                configuration(
-                        element(name("outputDirectory"), solrHome),
-                        element(name("artifactItems"),
-                                element(name("artifactItem"),
-                                        element(name("groupId"), alfrescoGroupId),
-                                        element(name("artifactId"), getSolrArtifactId()),
-                                        element(name("version"), alfrescoPlatformVersion),
-                                        // The Solr config is not in a special file with classifier config if <= 4.2
-                                        isPlatformVersionLtOrEqTo42() ? element(name("classifier"), "") : element(name("classifier"), "config"),
-                                        element(name("type"), "zip")
-                                )
-                        )
-                ),
-                execEnv
-        );
     }
 
-    /**
-     * For windows paths, convert single \ to / for the ${alfresco.solr.data.dir} path,
-     * by default it will be c:\bla\, we need forward slash or double backslash.
-     *
-     * @throws MojoExecutionException when any problem appears fixing the Solr home path
-     */
-    protected void fixSolrHomePath() throws MojoExecutionException {
-        getLog().info("Fix Solr Home Path to work in Windows");
 
-        executeMojo(
-                plugin(
-                        groupId("org.codehaus.mojo"),
-                        artifactId("build-helper-maven-plugin"),
-                        version(MAVEN_BUILD_HELPER_PLUGIN_VERSION)
-                ),
-                goal("regex-property"),
-                configuration(
-                        element(name("name"), "solrDataDir"),
-                        element(name("value"), solrHome),
-                        element(name("regex"), "\\\\"),
-                        element(name("replacement"), "/"),
-                        element(name("failIfNoMatch"), "false")
-                ),
-                execEnv
-        );
-    }
+
+
+
 
     /**
-     * Copy custom solr configuration files over, so a 
-     * developer can overwrite any files needed
-     * 
-     * @throws MojoExecutionException when any problem appears copying the Solr custom configuration
-     */
-    protected void copySolrCustomConfig() throws MojoExecutionException {
-    	getLog().info("Copying custom Solr config");
-        executeMojo(
-                plugin(
-                        groupId("org.apache.maven.plugins"),
-                        artifactId("maven-resources-plugin"),
-                        version(MAVEN_RESOURCE_PLUGIN_VERSION)
-                ),
-                goal("copy-resources"),
-                configuration(
-                        element(name("outputDirectory"), solrHome),
-                        element(name("overwrite"), "true"),
-                        element(name("resources"),
-                                element(name("resource"),
-                                        element(name("directory"), "src/test/resources/solr"),
-                                        element(name("filtering"), "true")
-                                )
-                        )
-                ),
-                execEnv
-        );
-    }
-    
-    /**
-     * Replace property placeholders in configuration files for the cores, so the
-     * index files can be found for each core when Solr starts up.
-     *
-     * @throws MojoExecutionException when any problem appears replacing the Solr configuration properties
-     */
-    protected void replaceSolrConfigProperties() throws MojoExecutionException {
-        getLog().info("Replacing Solr config properties");
-        executeMojo(
-                plugin(
-                        groupId("com.google.code.maven-replacer-plugin"),
-                        artifactId("replacer"),
-                        version(MAVEN_REPLACER_PLUGIN_VERSION)
-                ),
-                goal("replace"),
-                configuration(
-                        element(name("regex"), "false"),
-                        element(name("includes"),
-                                element(name("include"), solrHome + "/archive-SpacesStore/conf/solrcore.properties"),
-                                element(name("include"), solrHome + "/workspace-SpacesStore/conf/solrcore.properties")
-                        ),
-                        element(name("replacements"),
-                                element(name("replacement"),
-                                        element(name("token"), "@@ALFRESCO_SOLR4_DATA_DIR@@"),
-                                        element(name("value"), "${solrDataDir}/index")
-                                ),
-                                element(name("replacement"),
-                                        element(name("token"), "@@ALFRESCO_SOLR_DIR@@"),
-                                        element(name("value"), "${solrDataDir}/index")
-                                ),
-                                element(name("replacement"),
-                                        element(name("token"), "alfresco.port=8080"),
-                                        element(name("value"), "alfresco.port=" + getPort())
-                                ),
-                                element(name("replacement"),
-                                        element(name("token"), "alfresco.secureComms=https"),
-                                        element(name("value"), "alfresco.secureComms=none")
-                                ),
-                                element(name("replacement"),
-                                        element(name("token"), "alfresco.cron=0/15 * * * * ? *"),
-                                        element(name("value"), "alfresco.cron=" + solrCron)
-                                )
-                        )
-                ),
-                execEnv
-        );
-    }
-
-    /**
-     * If we are in Alfresco version 4.2 or younger the Solr 1.0 WAR is not available as Maven artifact, just
-     * as part of a ZIP file, so install it locally so we can deploy from embedded tomcat
-     *
-     * @throws MojoExecutionException when any problem appears installing Solr10 in the local repository
-     */
-    protected void installSolr10InLocalRepo() throws MojoExecutionException {
-        if (isPlatformVersionLtOrEqTo42()) {
-            getLog().info("Installing Solr 1.0 WAR in local Maven repo");
-            File solrWarSource = new File( solrHome + "/apache-solr-1.4.1.war" );
-            File outputDir = new File( project.getBuild().getDirectory() + "/solr");
-            if (outputDir.exists()) {
-                getLog().info("Solr build dir: "+ outputDir +" already exists, not rebuilding");
-                return;
-            }
-
-            ZipUtil.unpack( solrWarSource, outputDir );
-
-            // Comment out SSL/security requirements
-            executeMojo(
-                    plugin(
-                            groupId("com.google.code.maven-replacer-plugin"),
-                            artifactId("replacer"),
-                            version(MAVEN_REPLACER_PLUGIN_VERSION)
-                    ),
-                    goal("replace"),
-                    configuration(
-                            element(name("regex"), "false"),
-                            element(name("includes"),
-                                    element(name("include"), outputDir + "/WEB-INF/web.xml")
-                            ),
-                            element(name("replacements"),
-                                    element(name("replacement"),
-                                            element(name("token"), "<!-- <security-constraint>"),
-                                            element(name("value"), "<security-constraint>")
-                                    ),
-                                    element(name("replacement"),
-                                            element(name("token"), "</security-role> -->"),
-                                            element(name("value"), "</security-role>")
-                                    ),
-
-                                    element(name("replacement"),
-                                            element(name("token"), "<security-constraint>"),
-                                            element(name("value"), "<!-- <security-constraint>")
-                                    ),
-                                    element(name("replacement"),
-                                            element(name("token"), "</security-role>"),
-                                            element(name("value"), "</security-role> -->")
-                                    )
-                            )
-                    ),
-                    execEnv
-            );
-
-            executeMojo(
-                    plugin(
-                            groupId("com.coderplus.maven.plugins"),
-                            artifactId("copy-rename-maven-plugin"),
-                            version("1.0")
-                    ),
-                    goal("copy"),
-                    configuration(
-                            element(name("sourceFile"), solrHome + "/log4j-solr.properties"),
-                            element(name("destinationFile"), outputDir + "/WEB-INF/classes/log4j.properties")
-                    ),
-                    execEnv
-            );
-
-
-
-            executeMojo(
-                    plugin(
-                            groupId("org.apache.maven.plugins"),
-                            artifactId("maven-resources-plugin"),
-                            version(MAVEN_RESOURCE_PLUGIN_VERSION)
-                    ),
-                    goal("copy-resources"),
-                    configuration(
-                            element(name("outputDirectory"), outputDir + "/WEB-INF/lib"),
-                            element(name("resources"),
-                                    element(name("resource"),
-                                            element(name("directory"), solrHome + "/lib"),
-                                            element(name("includes"),
-                                                    element(name("include"), "*org.springframework*")
-                                            ),
-                                            element(name("filtering"), "false")
-                                    )
-                            )
-                    ),
-                    execEnv
-            );
-
-
-
-            ZipUtil.pack(outputDir, new File(solrHome + "/apache-solr-1.4.1.war"));
-
-
-            // Install the Solr 1.0 war file in local maven  repo
-            executeMojo(
-                    plugin(
-                            groupId("org.apache.maven.plugins"),
-                            artifactId("maven-install-plugin"),
-                            version(MAVEN_INSTALL_PLUGIN_VERSION)
-                    ),
-                    goal("install-file"),
-                    configuration(
-                            element(name("file"), solrHome + "/apache-solr-1.4.1.war"),
-                            element(name("groupId"), "${project.groupId}"),
-                            element(name("artifactId"), getSolrArtifactId()),
-                            element(name("version"), "${project.version}"),
-                            element(name("packaging"), "war")
-                    )
-                    , execEnv
-            );
-        }
-    }
-
-    /**
-     * <p>
-     * Replaces web.xml where applicable in platform webapp (alfresco.war),
-     * commenting out the security-constraints.
-     * </p>
-     * This is only needed for 4.2, 5.0 (5.1 handles it automatically when turning off ssl via props)
-     *
-     * @throws MojoExecutionException when any problem appears commenting out the security configuration
-     */
-    protected void commentOutSecureCommsInPlatformWebXml() throws MojoExecutionException {
-        if (isPlatformVersionGtOrEqTo51()) {
-            return;
-        }
-
-        String webInfPath = getWarOutputDir(PLATFORM_WAR_PREFIX_NAME) + "/WEB-INF/";
-        String webXmlFilePath = webInfPath + "web.xml";
-
-        getLog().info("Commenting out the security-constraints in " + webXmlFilePath);
-
-        executeMojo(
-                plugin(
-                        groupId("com.google.code.maven-replacer-plugin"),
-                        artifactId("replacer"),
-                        version(MAVEN_REPLACER_PLUGIN_VERSION)
-                ),
-                goal("replace"),
-                configuration(
-                        element(name("ignoreErrors"), "true"),
-                        element(name("file"), webXmlFilePath),
-                        element(name("outputDir"), webInfPath),
-                        element(name("preserveDir"), "false"),
-                        element(name("replacements"),
-                                element(name("replacement"),
-                                        element(name("token"), "<!-- Toggle securecomms placeholder start -->"),
-                                        element(name("value"), "<!-- ")
-                                ),
-                                element(name("replacement"),
-                                        element(name("token"), "<!-- Toggle securecomms placeholder end -->"),
-                                        element(name("value"), " -->")
-                                )
-                        )
-                ),
-                execEnv
-        );
-    }
-
-    /**
-     * Copy the different alfresco-global-*.properties files (there are one for each open source db and one for
-     * enterprise db config) that will be used when running Alfresco. It contains database connection parameters and
+     * Copy the alfresco-global.properties files. It contains database connection parameters and
      * other general configuration for Alfresco Repository (alfresco.war)
      *
      * @throws MojoExecutionException when any problem appears copying the Alfresco global properties file
      */
     protected void copyAlfrescoGlobalProperties() throws MojoExecutionException {
-        getLog().info("Copying and filtering alfresco-global-*.properties files to target/test-classes");
+        getLog().info("Copying and filtering alfresco-global.properties files to target/test-classes");
         executeMojo(
                 plugin(
                         groupId("org.apache.maven.plugins"),
@@ -825,85 +370,9 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                 execEnv
         );
 
-        if (isPlatformVersionLtOrEqTo42() && enableSolr) {
-            getLog().info("Platform is 4.2 and Solr is enabled, setting 'index.subsystem.name=solr' in alfresco-global.properties");
-
-            executeMojo(
-                    plugin(
-                            groupId("com.google.code.maven-replacer-plugin"),
-                            artifactId("replacer"),
-                            version(MAVEN_REPLACER_PLUGIN_VERSION)
-                    ),
-                    goal("replace"),
-                    configuration(
-                            element(name("regex"), "false"),
-                            element(name("includes"),
-                                    element(name("include"), "${project.build.testOutputDirectory}/*.properties")
-                            ),
-                            element(name("replacements"),
-                                    element(name("replacement"),
-                                            element(name("token"), "index.subsystem.name=solr4"),
-                                            element(name("value"), "index.subsystem.name=solr")
-                                    ),
-                                    element(name("replacement"),
-                                            element(name("token"), "index.subsystem.name=lucene"),
-                                            element(name("value"), "index.subsystem.name=solr")
-                                    )
-                            )
-                    ),
-                    execEnv
-            );
-
-        }
     }
 
-    /**
-     * Rename the configured database specific alfresco-global-*.properties file to
-     * alfresco-global.properties so it will be used during Tomcat run.
-     *
-     * @throws MojoExecutionException when any problem appears renaming the alfresco global properties
-     */
-    protected void renameAlfrescoGlobalProperties() throws MojoExecutionException {
-        String alfrescoGlobalFilePath = project.getBuild().getTestOutputDirectory() + "/alfresco-global-";
-        if (enableH2) {
-            alfrescoGlobalFilePath += "h2.properties";
-            getLog().info("Renaming alfresco-global-h2.properties to alfresco-global.properties");
-        } else if (enableMySQL) {
-            alfrescoGlobalFilePath += "mysql.properties";
-            getLog().info("Renaming alfresco-global-mysql.properties to alfresco-global.properties");
-        } else if (enablePostgreSQL) {
-            alfrescoGlobalFilePath += "postgresql.properties";
-            getLog().info("Renaming alfresco-global-postgresql.properties to alfresco-global.properties");
-        } else if (enableEnterpriseDb) {
-            alfrescoGlobalFilePath += "enterprise.properties";
-            getLog().info("Renaming alfresco-global-enterprise.properties to alfresco-global.properties");
-        } else {
-            throw new MojoExecutionException("Invalid database configuration, use enableH2, enableMySQL, " +
-                    "enablePostgreSQL, or enabaleEnterpriseDb");
-        }
 
-        if (!FileUtils.fileExists(alfrescoGlobalFilePath)) {
-            throw new MojoExecutionException("Missing file: " + alfrescoGlobalFilePath + ", when converting from older " +
-                    "SDK versions generate an SDK 3 AIO or Platform JAR project and copy " +
-                    "alfresco-global-*.properties files from it. Then configure any custom settings from old SDK " +
-                    "project repo/src/main/properties/local/alfresco-global.properties file in the new " +
-                    "alfresco-global-h2.properties file, or other config file corresponding to the database you are using.");
-        }
-
-        executeMojo(
-                plugin(
-                        groupId("com.coderplus.maven.plugins"),
-                        artifactId("copy-rename-maven-plugin"),
-                        version("1.0")
-                ),
-                goal("rename"),
-                configuration(
-                        element(name("sourceFile"), alfrescoGlobalFilePath),
-                        element(name("destinationFile"), "${project.build.testOutputDirectory}/alfresco-global.properties")
-                ),
-                execEnv
-        );
-    }
 
     /**
      * Copy the Alfresco Enterprise license to its correct place in the Platform WAR, if it exists.
@@ -912,10 +381,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      * @throws MojoExecutionException when any problem appears copying the Alfresco license
      */
     protected void copyAlfrescoLicense() throws MojoExecutionException {
-        if (alfrescoEdition.equals(ALFRESCO_COMMUNITY_EDITION)) {
-            getLog().info("NOT copying Alfresco Enterprise license, running Community edition");
-            return;
-        }
 
         final String warOutputDir = getWarOutputDir(PLATFORM_WAR_PREFIX_NAME);
         final String licDestDir = warOutputDir + "/WEB-INF/classes/alfresco/extension/license";
@@ -945,39 +410,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
         );
     }
 
-    /**
-     * Copy the Activiti Log4J Dev config into the activitiApp-war/WEB-INF/classes dir.
-     *
-     * @throws MojoExecutionException when any problem appears copying the activity Log4J dev configuration
-     */
-    protected void copyActivitiLog4JDevConfig() throws MojoExecutionException {
-       final String warOutputDir = getWarOutputDir(ACTIVITI_APP_WAR_PREFIX_NAME);
-        final String logConfDestDir = warOutputDir + "/WEB-INF/classes";
-
-        getLog().info("Copying Activiti log4j-dev.properties to: " + logConfDestDir);
-
-        executeMojo(
-                plugin(
-                        groupId("org.apache.maven.plugins"),
-                        artifactId("maven-resources-plugin"),
-                        version(MAVEN_RESOURCE_PLUGIN_VERSION)
-                ),
-                goal("copy-resources"),
-                configuration(
-                        element(name("outputDirectory"), logConfDestDir),
-                        element(name("resources"),
-                                element(name("resource"),
-                                        element(name("directory"), "src/test/resources"),
-                                        element(name("includes"),
-                                                element(name("include"), "log4j-dev.properties")
-                                        ),
-                                        element(name("filtering"), "true")
-                                )
-                        )
-                ),
-                execEnv
-        );
-    }
 
 
     /**
@@ -1105,9 +537,8 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      */
     protected void buildPlatformWar() throws MojoExecutionException {
         buildCustomWarInDir(PLATFORM_WAR_PREFIX_NAME, platformModules,
-                alfrescoGroupId, getPlatformWarArtifactId(), alfrescoPlatformVersion);
+                alfrescoGroupId, alfrescoPlatformWarArtifactId, alfrescoPlatformVersion);
 
-        commentOutSecureCommsInPlatformWebXml();
         copyAlfrescoLicense();
         copyHotswapAgentProperties(PLATFORM_WAR_PREFIX_NAME);
 
@@ -1143,26 +574,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
         runnerAlfrescoShareVersion = "${project.version}";
     }
 
-    /**
-     * Build the customized Activiti App webapp (i.e. the activiti-app.war)
-     * that should be deployed by Tomcat by applying all JARs from
-     * the {@code <activitiModules> } configuration.
-     *
-     * @throws MojoExecutionException when any problem appears building the activity war
-     */
-    protected void buildActivitiAppWar() throws MojoExecutionException {
-        buildCustomWarInDir(ACTIVITI_APP_WAR_PREFIX_NAME, activitiModules,
-                activitiGroupId, activitiAppWarArtifactId, activitiVersion);
-
-        copyActivitiLog4JDevConfig();
-
-        String activitiAppWarArtifactId = packageAndInstallCustomWar(ACTIVITI_APP_WAR_PREFIX_NAME);
-
-        // Set up the custom share war to be run by Tomcat plugin
-        runnerActivitiAppGroupId = "${project.groupId}";
-        runnerActivitiAppWarArtifactId = activitiAppWarArtifactId;
-        runnerActivitiAppVersion = "${project.version}";
-    }
 
     /**
      * Build a customized webapp in a directory,
@@ -1263,7 +674,18 @@ public abstract class AbstractRunMojo extends AbstractMojo {
             );
 
             // Then apply all these amps to the unpacked war
-            applyAMPs(warName, modules);
+            // Call the Alfresco Maven Plugin Install Mojo directly, so we don't have to keep SDK version info here
+            String ampsLocation = project.getBuild().getDirectory() + "/" + ampsModuleDir;
+            String warLocation = project.getBuild().getDirectory() + "/" + getWarName(warName);
+            InstallMojo installMojo = new InstallMojo();
+            installMojo.setAmpLocation(new File(ampsLocation));
+            installMojo.setWarLocation(new File(warLocation));
+            installMojo.setForce(true);
+            try {
+                installMojo.execute();
+            } catch (MojoFailureException e) {
+                e.printStackTrace();
+            }
         }
 
         // Then copy all JAR dependencies to the unpacked war /target/<warName>-war/WEB-INF/lib
@@ -1281,13 +703,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                     ),
                     execEnv
             );
-        }
-
-        // Force the unmount of all the files mounted with TrueZIP to avoid an exception in the FsSyncShutdownHook
-        try {
-            TVFS.umount();
-        } catch (final FsSyncException e) {
-            getLog().error(e);
         }
     }
 
@@ -1329,34 +744,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
         return warArtifactId;
     }
 
-    /**
-     * Check that a database configuration has been supplied correctly
-     *
-     * @throws MojoExecutionException when any problem appears checking the database configuration
-     */
-    protected void checkDatabaseConfig() throws MojoExecutionException {
-        // Only do this check if we are running alfresco.war or activiti-app.war that needs a database.
-        if (enablePlatform || enableActivitiApp) {
-            if (enableH2 && !enableMySQL && !enablePostgreSQL) {
-                // Run with the H2 database
-                return;
-            } else if (!enableH2 && enableMySQL && !enablePostgreSQL) {
-                // Run with the MySQL database
-                return;
-            } else if (!enableH2 && !enableMySQL && enablePostgreSQL) {
-                // Run with the PostgreSQL database
-                return;
-            } else if (!enableH2 && !enableMySQL && !enablePostgreSQL) {
-                // Run with a database configured via Tomcat Dependencies
-                return;
-            } else {
-                throw new MojoExecutionException(
-                        "Invalid database configuration, " +
-                                "should be enableH2 or enableMySQL or enablePostgreSQL " +
-                                "or none (i.e. config via Tomcat Dependencies)");
-            }
-        }
-    }
 
     /**
      * Start up the embedded Tomcat server with the webapps that has been
@@ -1391,35 +778,19 @@ public abstract class AbstractRunMojo extends AbstractMojo {
             }
         }
 
-        if (enableH2) {
-            tomcatPluginDependencies.add(
-                    // Bring in the flat file H2 database
-                    dependency("com.h2database", "h2", "1.4.190"));
+        tomcatPluginDependencies.add(
+                // Bring in the MySQL JDBC Driver
+                dependency("mysql", "mysql-connector-java", "5.1.32"));
 
-            if (enablePlatform) {
-                // Copy the h2 scripts for the Alfresco Repository database
-                copyH2Dialect();
-            }
-        } else if (enableMySQL) {
-            tomcatPluginDependencies.add(
-                    // Bring in the MySQL JDBC Driver
-                    dependency("mysql", "mysql-connector-java", "5.1.32"));
-        } else if (enablePostgreSQL) {
-            tomcatPluginDependencies.add(
-                    // Bring in the PostgreSQL JDBC Driver
-                    dependency("org.postgresql", "postgresql", "9.4-1201-jdbc41"));
-        }
+        tomcatPluginDependencies.add(
+                // Bring in the PostgreSQL JDBC Driver
+                dependency("org.postgresql", "postgresql", "9.4-1201-jdbc41"));
 
-        // If a custom version of Tomcat is required add the corresponding dependencies
-        if(StringUtils.isNotBlank(tomcatVersion)) {
-            addTomcatDependencies(tomcatPluginDependencies);
-        }
 
         if (enablePlatform) {
-            String platformContextFile = StringUtils.isNotBlank(platformCustomContextFile) ? platformCustomContextFile : null;
             webapps2Deploy.add(createWebAppElement(
                     runnerAlfrescoGroupId, runnerAlfrescoPlatformWarArtifactId, runnerAlfrescoPlatformVersion,
-                    "/alfresco", platformContextFile));
+                    "/alfresco", null));
         }
 
         if (enableShare) {
@@ -1428,26 +799,12 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                     shareContextPath, null));
         }
 
-        if (enableSolr) {
-            webapps2Deploy.add(getSolrWebappElement());
-        }
-
         if (enableApiExplorer) {
             webapps2Deploy.add(createWebAppElement(
                     alfrescoGroupId, alfrescoApiExplorerArtifactId, alfrescoApiExplorerVersion,
                     "/api-explorer", null));
         }
 
-        if (enableActivitiApp) {
-            webapps2Deploy.add(createWebAppElement(
-                    runnerActivitiAppGroupId, runnerActivitiAppWarArtifactId, runnerActivitiAppVersion,
-                    "/activiti-app", null));
-        }
-
-        if (enableActivitiAdmin) {
-            webapps2Deploy.add(createWebAppElement(
-                    activitiGroupId, activitiAdminWarArtifactId, activitiVersion, "/activiti-admin", null));
-        }
 
         if (tomcatCustomWebapps != null && !tomcatCustomWebapps.isEmpty()) {
             // We got extra custom webapps to deploy
@@ -1465,13 +822,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
 
         // Set up the system properties that should be set for Tomcat
         ArrayList systemProps = new ArrayList<Element>();
-        if (enableSolr) {
-            systemProps.add(element(name("solr.solr.home"), solrHome + "/"));
-        }
-        if (enableActivitiApp) {
-            // Should be in activiti-jar/src/test/resources
-            systemProps.add(element(name("log4j.configuration"), "log4j-dev.properties"));
-        }
+
         // Add custom system properties defined in plugin config
         if (tomcatSystemProperties != null && !tomcatSystemProperties.isEmpty()) {
             for (Map.Entry<String, String> sysProp : tomcatSystemProperties.entrySet()) {
@@ -1487,7 +838,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                 plugin(
                         groupId("org.apache.tomcat.maven"),
                         artifactId("tomcat7-maven-plugin"),
-                        version(tomcatMavenPluginVersion),
+                        version(MAVEN_TOMCAT7_PLUGIN_VERSION),
                         tomcatPluginDependencies
                 ),
                 goal("run"),
@@ -1529,9 +880,6 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                         element(name("useTestClasspath"), "true"),
 
 
-                        /**
-                         * Set up where Solr Home directory is
-                         */
                         element(name("systemProperties"), systemPropArray),
 
                         /*  Should this class loader delegate to the parent class loader before searching its
@@ -1661,186 +1009,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
         return Integer.parseInt(alfrescoPlatformVersion.replaceAll("[^0-9]", "").substring(0, 2));
     }
 
-    /**
-     * Get the Solr artifactId, it changes when we move to Solr 4 in Alfresco version 5
-     *
-     * @return the Maven artifactId for Solr
-     */
-    private String getSolrArtifactId() {
-        // artifactId for Solr defaults to version 4 = alfresco-solr4
 
-        if (isPlatformVersionLtOrEqTo42()) {
-            // Solr version 1 is used in Alfresco 4.0 -> 4.2, Solr version 4.0 was introduced in Alfresco version 5.0
-            alfrescoSolrArtifactId = "alfresco-solr";
-        }
-
-        return alfrescoSolrArtifactId;
-    }
-
-    /**
-     * Get the Alfresco Platform Webapp artifactId (i.e. for alfresco.war),
-     * it changes from 'alfresco' to 'alfresco-platform' in 5.1.
-     *
-     * Matrix for determining the Alfresco WAR Artifact
-     * 4.2.x Community  == alfresco.war
-     * 4.2.x Enterprise == alfresco.war
-     * 5.0.x Community  == alfresco.war
-     * 5.0.x Enterprise == alfresco-enterprise.war
-     * 5.1.x Community  == alfresco-platform.war
-     * 5.1.x Enterprise == alfresco-platform-enterprise.war
-     *
-     * @return the Maven artifactId for Alfresco Platform webapp
-     */
-    private String getPlatformWarArtifactId() {
-
-        if (isPlatformVersionGtOrEqTo51() == false && alfrescoEdition.equals(ALFRESCO_COMMUNITY_EDITION)) {
-            // We are running version 4.2 or 5.0 in community so use "alfresco"
-            alfrescoPlatformWarArtifactId = "alfresco";
-        }
-
-        if (isPlatformVersionLtOrEqTo42() == true && alfrescoEdition.equals(ALFRESCO_ENTERPRISE_EDITION)) {
-            // We are running version 4.2 so use "alfresco-enterprise"
-            alfrescoPlatformWarArtifactId = "alfresco";
-        }
-
-        if (getPlatformVersionNumber() == 50 && alfrescoEdition.equals(ALFRESCO_ENTERPRISE_EDITION)) {
-            // We are running version 5.0 in enterprise so use "alfresco-enterprise"
-            alfrescoPlatformWarArtifactId = "alfresco-enterprise";
-        }
-
-
-        if (isPlatformVersionGtOrEqTo51() == true && alfrescoEdition.equals(ALFRESCO_COMMUNITY_EDITION)) {
-            // We are running version 5.1 or greater in community so use "alfresco-platform"
-            alfrescoPlatformWarArtifactId = "alfresco-platform";
-        }
-
-        if (isPlatformVersionGtOrEqTo51() == true && alfrescoEdition.equals(ALFRESCO_ENTERPRISE_EDITION)) {
-            // We are running version 5.1 or greater in enterprise so use "alfresco-platform-enterprise"
-            alfrescoPlatformWarArtifactId = "alfresco-platform-enterprise";
-        }
-
-        return alfrescoPlatformWarArtifactId;
-    }
-
-    /**
-     * Get the Solr webapp element for use by Tomcat, it changes when we move to Solr 4 in Alfresco version 5
-     *
-     * @return tomcat webapp element
-     */
-    private Element getSolrWebappElement() {
-        Element webappElement = null;
-
-        if (isPlatformVersionLtOrEqTo42()) {
-            // Solr version 1.0
-            webappElement = createWebAppElement("${project.groupId}", getSolrArtifactId(), "${project.version}",
-                    "/solr", "${project.build.testOutputDirectory}/tomcat/context-solr.xml");
-        } else {
-            // Solr version 4.0
-            webappElement = createWebAppElement(alfrescoGroupId, getSolrArtifactId(), alfrescoPlatformVersion,
-                "/solr4", "${project.build.testOutputDirectory}/tomcat/context-solr.xml");
-        }
-
-        return webappElement;
-    }
-
-    /**
-     * TODO: From 5.1.e and onwards we have the alfresco-repository:h2scripts:jar artifact, so we potentially only need to do this for older than 5.1.e
-     *
-     *
-     * Extract PostgreSQL dialect and ibatis from alfresco-repository, rename to H2Dialect in the test-classes
-     *
-     * @return
-     */
-    private void copyH2Dialect() throws MojoExecutionException {
-
-        String h2SourceDir;
-
-        if ( ! isPlatformVersionLtOrEqTo42()) {
-
-            getLog().info("Unpacking DB Dialects and ibatis files from alfresco-repository artifact");
-            executeMojo(
-                    plugin(
-                            groupId("org.apache.maven.plugins"),
-                            artifactId("maven-dependency-plugin"),
-                            version(MAVEN_DEPENDENCY_PLUGIN_VERSION)
-                    ),
-                    goal("unpack"),
-                    configuration(
-                            element(name("outputDirectory"), "${project.build.testOutputDirectory}"),
-                            element(name("artifactItems"),
-                                    element(name("artifactItem"),
-                                            element(name("groupId"), alfrescoGroupId),
-                                            element(name("artifactId"), "alfresco-repository"),
-                                            element(name("version"), alfrescoPlatformVersion),
-                                            element(name("includes"), "alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/dbscripts/upgrade/*/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect/*")
-                                    )
-                            )
-                    ),
-                    execEnv
-            );
-
-            // If we're in enterprise we need to make sure we grab everything
-            if (this.alfrescoEdition.equals(ALFRESCO_ENTERPRISE_EDITION)) {
-                executeMojo(
-                        plugin(
-                                groupId("org.apache.maven.plugins"),
-                                artifactId("maven-dependency-plugin"),
-                                version(MAVEN_DEPENDENCY_PLUGIN_VERSION)
-                        ),
-                        goal("unpack"),
-                        configuration(
-                                element(name("outputDirectory"), "${project.build.testOutputDirectory}"),
-                                element(name("artifactItems"),
-                                        element(name("artifactItem"),
-                                                element(name("groupId"), alfrescoGroupId),
-                                                element(name("artifactId"), "alfresco-enterprise-repository"),
-                                                element(name("version"), alfrescoPlatformVersion),
-                                                element(name("includes"), "alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/dbscripts/upgrade/*/org.hibernate.dialect.PostgreSQLDialect/*,alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect/*")
-                                        )
-                                )
-                        ),
-                        execEnv
-                );
-            }
-
-            h2SourceDir = project.getBuild().getTestOutputDirectory();
-        } else {
-            // 4.2 has the dbscript directly in the exploded WAR file so we simply grab them there
-            h2SourceDir = getWarOutputDir(PLATFORM_WAR_PREFIX_NAME) + "/WEB-INF/classes";
-        }
-
-
-        getLog().info("Copying H2 Dialect SQL create files into target/test-classes");
-        executeMojo(
-                plugin(
-                        groupId("org.apache.maven.plugins"),
-                        artifactId("maven-resources-plugin"),
-                        version(MAVEN_RESOURCE_PLUGIN_VERSION)
-                ),
-                goal("copy-resources"),
-                configuration(
-                        element(name("outputDirectory"), "${project.build.testOutputDirectory}"),
-                        element(name("resources"),
-                                element(name("resource"),
-                                        element(name("directory"), h2SourceDir + "/alfresco/dbscripts/create/org.hibernate.dialect.PostgreSQLDialect"),
-                                        element(name("includes"),
-                                                element(name("include"), "*")
-                                        ),
-                                        element(name("targetPath"), "alfresco/dbscripts/create/org.hibernate.dialect.H2Dialect")
-                                ),
-                                element(name("resource"),
-                                        element(name("directory"), h2SourceDir + "/alfresco/ibatis/org.hibernate.dialect.PostgreSQLDialect"),
-                                        element(name("includes"),
-                                                element(name("include"), "*")
-                                        ),
-                                        element(name("targetPath"), "alfresco/ibatis/org.hibernate.dialect.H2Dialect")
-                                )
-                        )
-                ),
-                execEnv
-        );
-
-    }
 
 
     /**
@@ -1861,69 +1030,5 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      */
     private String getWarName(String baseWarName) {
         return baseWarName + "-war";
-    }
-
-    /**
-     * Add all the required maven dependencies to execute a specific version of Tomcat set by the property <code>tomcatVersion</code> to the list of
-     * dependencies of the Tomcat Maven Plugin.
-     *
-     * @param tomcatPluginDependencies current list of dependencies of the Tomcat Maven Plugin
-     */
-    private void addTomcatDependencies(List<Dependency> tomcatPluginDependencies) {
-        for(Pair<String, String> tomcatDependency : TOMCAT_DEPENDENCIES) {
-            tomcatPluginDependencies.add(dependency(tomcatDependency.getFirst(),tomcatDependency.getSecond(),tomcatVersion));
-        }
-    }
-
-    /**
-     * Apply a list of AMPs to a specific war file.
-     *
-     * @param warName the name of the war file to apply the AMPs to
-     * @param modules the list of proposed modules to be applied to the war file. Only the AMP files will be applied
-     * @throws MojoExecutionException when any problem appears applying the AMPs to the war
-     */
-    private void applyAMPs(String warName, List<ModuleDependency> modules) throws MojoExecutionException {
-        final String ampsModuleDir = "modules/" + warName + "/amps";
-        final String ampsLocation = project.getBuild().getDirectory() + "/" + ampsModuleDir;
-        final String warLocation = project.getBuild().getDirectory() + "/" + getWarName(warName);
-
-        // Apply one AMP module each time to preserve the order applying the AMPs to the war
-        for(ModuleDependency module : modules) {
-            if(module.isAmp()) {
-                applyAMP(ampsLocation, warLocation, module);
-            }
-        }
-    }
-
-    /**
-     * Apply an AMP to a specific war file.
-     *
-     * @param ampsLocation the location of the folder where the AMP is located
-     * @param warLocation the location of the war file to apply the AMP to
-     * @param ampModule the module that represents the AMP to apply
-     * @throws MojoExecutionException when any problem appears applying the AMP to the war
-     */
-    private void applyAMP(String ampsLocation, String warLocation, ModuleDependency ampModule) throws MojoExecutionException {
-        // Call the Alfresco Maven Plugin Install Mojo directly, so we don't have to keep SDK version info here
-        InstallMojo installMojo = new InstallMojo();
-        installMojo.setAmpLocation(new File(getAMPLocation(ampsLocation, ampModule)));
-        installMojo.setWarLocation(new File(warLocation));
-        installMojo.setForce(true);
-        try {
-            installMojo.execute();
-        } catch (MojoFailureException e) {
-            getLog().error(e);
-        }
-    }
-
-    /**
-     * Build the location of an AMP file.
-     *
-     * @param ampsLocation the location of the folder where the AMPs are located
-     * @param ampModule the {@link ModuleDependency} of the AMP to build its location
-     * @return the location of the AMP file
-     */
-    private String getAMPLocation(String ampsLocation, ModuleDependency ampModule) {
-        return String.format(AMP_LOCATION_PATTERN, ampsLocation, ampModule.getArtifactId(), ampModule.getVersion());
     }
 }

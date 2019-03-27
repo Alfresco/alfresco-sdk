@@ -5,94 +5,216 @@
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
-    <name>${artifactId} Share Jar Module - SDK 3</name>
-    <description>Share JAR Module (to be included in the share.war) - SDK 3</description>
+    <name>${artifactId} Share JAR Module</name>
+    <description>Sample Share JAR Module (to be included in the share.war)</description>
     <packaging>jar</packaging>
 
     <properties>
         <!-- Alfresco Maven Plugin version to use -->
-	    <alfresco.sdk.version>@@alfresco.sdk.parent.version@@</alfresco.sdk.version>
+        <alfresco.sdk.version>@@alfresco.sdk.parent.version@@</alfresco.sdk.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Properties used in dependency declarations, you don't need to change these -->
         <alfresco.groupId>org.alfresco</alfresco.groupId>
+        <alfresco.bomDependencyArtifactId>@@alfresco.bomDependency.artifactId@@</alfresco.bomDependencyArtifactId>
+        <alfresco.platform.version>@@alfresco.platform.version@@</alfresco.platform.version>
+        <alfresco.share.version>@@alfresco.share.version@@</alfresco.share.version>
 
-        <!-- Alfresco Share webapp version, this is the original Alfresco webapp that will be
-            customized and then deployed and run by the tomcat maven plugin when
-            executing for example $ mvn clean install alfresco:run -->
-        <alfresco.share.version>5.2.d</alfresco.share.version>
-
-        <!-- Default is to run with a Community edition, change to 'enterprise' if using Enterprise edition -->
-        <maven.alfresco.edition>community</maven.alfresco.edition>
-
-        <!-- Alfresco Surf version, if you change Share version you might need to change Surf version -->
-        <alfresco.surf.version>6.11</alfresco.surf.version>
-
-        <!-- Since alfresco.war (i.e. the Platform/Repository) is already running on port 8080, we run Share.WAR on port 8081.
-            If Alfresco Platform is not running, then generate a platform-jar-module and start it up. -->
-        <maven.tomcat.port>8081</maven.tomcat.port>
+        <!-- Docker images -->
+        <docker.acs.image>@@alfresco.platform.docker.image@@</docker.acs.image>
+        <docker.share.image>@@alfresco.share.docker.image@@</docker.share.image>
 
         <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
-        <jrebel.version>1.1.6</jrebel.version>
+        <jrebel.version>1.1.8</jrebel.version>
 
-        <!-- Compile with Java 7, default is 5 -->
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <!-- Environment configuration properties -->
+        <share.port>8180</share.port>
+        <share.debug.port>9898</share.debug.port>
+        <acs.host>${artifactId}-acs</acs.host>
+        <acs.port>8080</acs.port>
+        <postgres.port>5555</postgres.port>
+
     </properties>
 
+    <!-- Libs used in Unit and Integration tests -->
+    <!-- IMPORTANT - Test dependencies need to be here in the top parent POM as
+                     the Alfresco Maven IT Mojo runs as part of the parent project ... -->
     <dependencies>
-        <!-- Following dependencies are needed for compiling Java code in src/main/java -->
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
             <artifactId>share</artifactId>
-            <version>${alfresco.share.version}</version>
             <classifier>classes</classifier>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.alfresco.surf</groupId>
-            <artifactId>spring-surf-api</artifactId>
-            <version>${alfresco.surf.version}</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- This will import the dependencyManagement for all artifacts in the selected Alfresco platform.
+                 NOTE: You still need to define dependencies in your POM, but you can omit version as
+                       it's enforced by this dependencyManagement.
+                 NOTE: It defaults to the latest version this SDK pom has been tested with,
+                       but alfresco version can/should be overridden in your project's pom
+            -->
+            <dependency>
+                <groupId>${alfresco.groupId}</groupId>
+                <artifactId>${alfresco.bomDependencyArtifactId}</artifactId>
+                <version>${alfresco.platform.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Redefine the following Share dependencies as they have different version numbers than platform.
+                 They are defined in alfresco-platform-distribution... -->
+            <dependency>
+                <groupId>${alfresco.groupId}</groupId>
+                <artifactId>share</artifactId>
+                <version>${alfresco.share.version}</version>
+                <type>war</type>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>${alfresco.groupId}</groupId>
+                <artifactId>share</artifactId>
+                <version>${alfresco.share.version}</version>
+                <classifier>classes</classifier>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>${alfresco.groupId}</groupId>
+                <artifactId>alfresco-web-framework-commons</artifactId>
+                <version>${alfresco.share.version}</version>
+                <classifier>classes</classifier>
+                <scope>provided</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
             <!--
-                The Alfresco Maven Plugin contains all the logic to run the extension
-                in an embedded Tomcat with the H2 database.
-                -->
+                                Build an AMP if 3rd party libs are needed by the extensions
+                                JARs are the default artifact produced in your modules, if you want to build an amp for each module
+                                you have to enable this plugin and inspect the src/main/assembly.xml file if you want to customize
+                                the layout of your AMP. The end result is that Maven will produce both a JAR file and an AMP with your
+                                module.
+                            -->
+            <!--
             <plugin>
-                <groupId>org.alfresco.maven.plugin</groupId>
-                <artifactId>alfresco-maven-plugin</artifactId>
-                <version>${alfresco.sdk.version}</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>build-amp-file</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptor>src/main/assembly/amp.xml</descriptor>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.alfresco.maven.plugin</groupId>
+                        <artifactId>alfresco-maven-plugin</artifactId>
+                        <version>${alfresco.sdk.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            -->
+
+            <!-- Filter the test resource files in the AIO parent project, and do property substitutions.
+                 We need this config so this is done before the Alfresco Maven Plugin 'run' is executed. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
                 <configuration>
-
-                    <!-- We assume that the platform/repository is already running on localhost:8080 -->
-                    <enableH2>false</enableH2>
-                    <enablePlatform>false</enablePlatform>
-                    <enableSolr>false</enableSolr>
-
-                    <!-- Enable the Share webapp, which is what we customize with Share JAR modules -->
-                    <enableShare>true</enableShare>
-
-                    <!--
-                       JARs and AMPs that should be overlayed/applied to the Share WAR
-                       (i.e. share.war)
-                   -->
-                    <shareModules>
-                        <!-- Bring in this JAR project, need to be included here, otherwise share-config-custom.xml
-                             will not be picked up. It will not be read from target/classes/META-INF -->
-                        <moduleDependency>
-                            <groupId>${project.groupId}</groupId>
-                            <artifactId>${project.artifactId}</artifactId>
-                            <version>${project.version}</version>
-                        </moduleDependency>
-                    </shareModules>
+                    <encoding>UTF-8</encoding>
+                    <nonFilteredFileExtensions> <!-- jpg, jpeg, gif, bmp and png are added automatically -->
+                        <nonFilteredFileExtension>ftl</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>acp</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>svg</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>pdf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>doc</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>docx</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>xls</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>xlsx</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>ppt</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>pptx</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>bin</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>lic</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>swf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>zip</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>msg</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>jar</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>eot</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>css</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>ico</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>psd</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>js</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>copy-and-filter-docker-compose-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}/docker</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>docker</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-and-filter-docker-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/docker</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-share-extension</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/extensions</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>target</directory>
+                                    <includes>
+                                        <include>${build.finalName}.jar</include>
+                                    </includes>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <!-- Compress JavaScript files and store as *-min.js -->
@@ -145,30 +267,25 @@
                 </executions>
             </plugin>
 
-            <!-- Build an AMP if 3rd party libs are needed by the extension -->
             <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.6</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.1</version>
                 <executions>
+                    <!-- Collect extensions (JARs or AMPs) declared in this module to be deployed to docker -->
                     <execution>
-                        <id>build-amp-file</id>
+                        <id>collect-extensions</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <appendAssemblyId>false</appendAssemblyId>
-                            <descriptor>src/main/assembly/amp.xml</descriptor>
+                            <outputDirectory>${project.build.directory}/extensions</outputDirectory>
+                            <includeScope>runtime</includeScope>
+                            <!-- IMPORTANT: if using amp dependencies only, add <includeTypes>amp</includeTypes> -->
                         </configuration>
                     </execution>
                 </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.alfresco.maven.plugin</groupId>
-                        <artifactId>alfresco-maven-plugin</artifactId>
-                        <version>${alfresco.sdk.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <!-- Hot reloading with JRebel -->
@@ -192,10 +309,8 @@
                         <fallback>all</fallback>
                         <resources>
                             <resource>
-                                <!--
-                                Empty resource element marks default configuration. By
-                                default it is placed first in generated configuration.
-                                -->
+                                <directory>${project.build.outputDirectory}</directory>
+                                <directory>${project.build.testOutputDirectory}</directory>
                             </resource>
                         </resources>
                     </classpath>
@@ -206,41 +321,6 @@
                       If 'true' - rebel.xml will always be generated
                     -->
                     <alwaysGenerate>true</alwaysGenerate>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.0.1</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <nonFilteredFileExtensions> <!-- jpg, jpeg, gif, bmp and png are added automatically -->
-                        <nonFilteredFileExtension>ftl</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>acp</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>svg</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>pdf</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>doc</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>docx</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>xls</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>xlsx</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>ppt</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>pptx</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>bin</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>lic</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>swf</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>zip</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>msg</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>jar</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>eot</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>css</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>ico</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>psd</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>js</nonFilteredFileExtension>
-                    </nonFilteredFileExtensions>
                 </configuration>
             </plugin>
         </plugins>
@@ -260,6 +340,46 @@
             </testResource>
         </testResources>
     </build>
+
+    <profiles>
+        <profile>
+            <id>java8</id>
+            <activation>
+                <jdk>[1.8,11.0)</jdk>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.8.0</version>
+                        <configuration>
+                            <source>1.8</source>
+                            <target>1.8</target>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>java11</id>
+            <activation>
+                <jdk>[11.0,)</jdk>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.8.0</version>
+                        <configuration>
+                            <release>11</release>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <!--
         Alfresco Maven Repositories
@@ -283,6 +403,7 @@
             <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
         </repository>
     </repositories>
+
     <pluginRepositories>
         <pluginRepository>
             <id>alfresco-plugin-public</id>
@@ -297,5 +418,4 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-
 </project>

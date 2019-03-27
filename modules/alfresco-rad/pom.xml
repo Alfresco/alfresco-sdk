@@ -10,16 +10,27 @@
     <parent>
         <groupId>org.alfresco.maven</groupId>
         <artifactId>alfresco-sdk-aggregator</artifactId>
-        <version>3.1.1-SNAPSHOT</version>
+        <version>4.0.1-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.alfresco</groupId>
+                <artifactId>${alfresco.bomDependency.artifactId}</artifactId>
+                <version>${alfresco.platform.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <!-- Access to org.alfresco.service.ServiceRegistry -->
         <dependency>
             <groupId>org.alfresco</groupId>
             <artifactId>alfresco-repository</artifactId>
-            <version>${alfresco.community.default.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -35,6 +46,7 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
