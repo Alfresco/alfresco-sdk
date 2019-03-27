@@ -10,7 +10,8 @@ If you are an Enterprise customer check the [Support](#alfresco-enterprise-custo
 
 ## News
 
-- 2019-XX-XX: Alfresco SDK 4.0.0 released **(confirmation required)** 
+- 2019-03: Alfresco SDK 4.0.0 released
+- 2019-03: Alfresco SDK 3.1.0 released
 - 2017-06-23: Alfresco SDK 3.0.1 released, [containing a critical bugfix](https://github.com/Alfresco/alfresco-sdk/issues/461)
 - 2017-04-01: Alfresco SDK 3.0.0 released
 - 2017-03-27: After years of hard work, countless iterations and gathering feedback, SDK 3.0 has finally been merged into the master branch, ready for release in the coming days
@@ -29,7 +30,8 @@ To get started with **Alfresco SDK 4.0.x** (latest) visit the [Alfresco Document
 #### Documentation about Previous Versions
 | SDK Version  | Alfresco Enterprise Version       |  Alfresco Community Version       | Documentation  |
 | ------------- |:-------------:| :-----:|:-----|
-| SDK 4.0   | Alfresco 6.0.x / 6.1.x | Alfresco 6.0.x / 6.1.x | https://master--alfresco-builder-network.netlify.com **(confirmation required)** |
+| SDK 4.0   | Alfresco 6.0.x / 6.1.x | Alfresco 6.0.x / 6.1.x | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md |
+| SDK 3.1   | Alfresco 5.2.x | Alfresco 5.2.x | http://docs.alfresco.com/5.2/concepts/sdk-intro.html |
 | SDK 3.0   | Alfresco 5.2.x | Alfresco 5.2.x | http://docs.alfresco.com/5.2/concepts/sdk-intro.html |
 | SDK 2.2   | Alfresco 5.1.x | Alfresco 5.1.x | https://docs.alfresco.com/5.1/concepts/alfresco-sdk-intro.html |
 | SDK 2.1   | Alfresco 5.0.1 | Alfresco 5.0.d | https://docs.alfresco.com/sdk2.1/concepts/alfresco-sdk-intro.html |
