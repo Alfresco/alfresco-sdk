@@ -14,6 +14,10 @@ local environment making an intensive use of Docker and Docker compose technolog
 If you're not familiar with these technologies, it is highly recommended visiting the [Docker documentation website](https://docs.docker.com). This site offers
 a great quantity of training resources about [Docker](https://docs.docker.com/get-started/) and [Docker compose](https://docs.docker.com/compose/gettingstarted/).
 
+* [Working with an All-In-One project](working-with-aio.md)
+* [Working with a Platform (Repository) JAR project](working-with-platform.md)
+* [Working with a Share JAR project](working-with-share.md)
+
 ## Project structures
 
 After generating your project, using one of the Maven archetypes, review the project structure. The directory structure and content of each folder and file 

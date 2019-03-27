@@ -1,7 +1,7 @@
 ---
 Title: Platform JAR project structure
 Added: v3.0.0
-Last reviewed: 2019-01-15
+Last reviewed: 2019-03-26
 ---
 # Platform JAR project structure
 
@@ -14,69 +14,73 @@ Below is an example directory structure of a Platform JAR created with `com.exam
 
 ```
 my-platform-jar-project
-├── pom.xml
 ├── README.md
+├── docker
+│   └── docker-compose.yml
+├── pom.xml
 ├── run.bat
 ├── run.sh
-├── docker
-|   └── docker-compose.yml
 └── src
     ├── main
-    │   ├── assembly
-    │   │   ├── amp.xml
-    │   │   ├── file-mapping.properties
-    │   │   └── web
-    │   │       └── README.md
-    │   ├── docker
-    │   │   ├── alfresco-global.properties
-    │   │   ├── dev-log4j.properties
-    │   │   ├── disable-webscript-caching-context.xml
-    │   │   ├── Dockerfile
-    │   │   ├── hotswap-agent.properties
-    │   │   └── license
-    │   │       └── README.md
-    │   ├── java
-    │   │   └── com
-    │   │       └── example
-    │   │           └── platformsample
-    │   │               ├── DemoComponent.java
-    │   │               ├── Demo.java
-    │   │               └── HelloWorldWebScript.java
-    │   └── resources
-    │       ├── alfresco
-    │       │   ├── extension
-    │       │   │   └── templates
-    │       │   │       └── webscripts
-    │       │   │           └── alfresco
-    │       │   │               └── tutorials
-    │       │   │                   ├── helloworld.get.desc.xml
-    │       │   │                   ├── helloworld.get.html.ftl
-    │       │   │                   └── helloworld.get.js
-    │       │   └── module
-    │       │       └── my-platform-jar-project
-    │       │           ├── alfresco-global.properties
-    │       │           ├── context
-    │       │           │   ├── bootstrap-context.xml
-    │       │           │   ├── service-context.xml
-    │       │           │   └── webscript-context.xml
-    │       │           ├── messages
-    │       │           │   └── content-model.properties
-    │       │           ├── model
-    │       │           │   ├── content-model.xml
-    │       │           │   └── workflow-model.xml
-    │       │           ├── module-context.xml
-    │       │           ├── module.properties
-    │       │           └── workflow
-    │       │               └── sample-process.bpmn20.xml
-    │       └── META-INF
-    │           └── resources
-    │               └── test.html
+    │   ├── assembly
+    │   │   ├── amp.xml
+    │   │   ├── file-mapping.properties
+    │   │   └── web
+    │   │       └── README.md
+    │   ├── docker
+    │   │   ├── Dockerfile
+    │   │   ├── alfresco-global.properties
+    │   │   ├── dev-log4j.properties
+    │   │   ├── disable-webscript-caching-context.xml
+    │   │   ├── hotswap-agent.properties
+    │   │   └── license
+    │   │       └── README.md
+    │   ├── java
+    │   │   └── com
+    │   │       └── example
+    │   │           └── platformsample
+    │   │               ├── Demo.java
+    │   │               ├── DemoComponent.java
+    │   │               └── HelloWorldWebScript.java
+    │   └── resources
+    │       ├── META-INF
+    │       │   └── resources
+    │       │       └── test.html
+    │       └── alfresco
+    │           ├── extension
+    │           │   └── templates
+    │           │       └── webscripts
+    │           │           └── alfresco
+    │           │               └── tutorials
+    │           │                   ├── helloworld.get.desc.xml
+    │           │                   ├── helloworld.get.html.ftl
+    │           │                   └── helloworld.get.js
+    │           └── module
+    │               └── my-platform-jar-project
+    │                   ├── alfresco-global.properties
+    │                   ├── context
+    │                   │   ├── bootstrap-context.xml
+    │                   │   ├── service-context.xml
+    │                   │   └── webscript-context.xml
+    │                   ├── log4j.properties
+    │                   ├── messages
+    │                   │   └── content-model.properties
+    │                   ├── model
+    │                   │   ├── content-model.xml
+    │                   │   └── workflow-model.xml
+    │                   ├── module-context.xml
+    │                   ├── module.properties
+    │                   └── workflow
+    │                       └── sample-process.bpmn20.xml
     └── test
         └── java
             └── com
                 └── example
                     └── platformsample
-                        └── HelloWorldWebScriptControllerTest.java
+                        ├── CustomContentModelIT.java
+                        ├── DemoComponentIT.java
+                        ├── HelloWorldWebScriptControllerTest.java
+                        └── HelloWorldWebScriptIT.java
 ```
 
 From a high level standpoint, we can describe the content of the project as follows:
