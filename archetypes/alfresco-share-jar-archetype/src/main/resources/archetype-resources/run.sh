@@ -33,13 +33,13 @@ purge() {
 }
 
 build() {
-    ${symbol_dollar}MVN_EXEC clean install -DskipTests=true
+    ${symbol_dollar}MVN_EXEC clean package
 }
 
 build_share() {
     docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH kill ${rootArtifactId}-share
     yes | docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH rm -f ${rootArtifactId}-share
-    ${symbol_dollar}MVN_EXEC clean install -DskipTests=true
+    ${symbol_dollar}MVN_EXEC clean package
 }
 
 tail() {
@@ -48,10 +48,6 @@ tail() {
 
 tail_all() {
     docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH logs --tail="all"
-}
-
-test() {
-    ${symbol_dollar}MVN_EXEC verify
 }
 
 case "${symbol_dollar}1" in
@@ -80,17 +76,6 @@ case "${symbol_dollar}1" in
     start_share
     tail
     ;;
-  build_test)
-    down
-    build
-    start
-    test
-    tail_all
-    down
-    ;;
-  test)
-    test
-    ;;
   *)
-    echo "Usage: ${symbol_dollar}0 {build_start|start|stop|purge|tail|reload_share|build_test|test}"
+    echo "Usage: ${symbol_dollar}0 {build_start|start|stop|purge|tail|reload_share}"
 esac
