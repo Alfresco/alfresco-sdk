@@ -17,7 +17,7 @@ public class ShareJarArchetypeIT extends AbstractArchetypeIT {
         return ArchetypeProperties.builder()
                 .withArchetypeGroupId("org.alfresco.maven.archetype")
                 .withArchetypeArtifactId("alfresco-share-jar-archetype")
-                .withArchetypeVersion("4.0.0-SNAPSHOT")
+                .withArchetypeVersion(System.getProperty("projectArtifactId"))
                 .withProjectGroupId("archetype.it")
                 .withProjectArtifactId("sharejar-test-run")
                 .withProjectVersion("0.1-SNAPSHOT")

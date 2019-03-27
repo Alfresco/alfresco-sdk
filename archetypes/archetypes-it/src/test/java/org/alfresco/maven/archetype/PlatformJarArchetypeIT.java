@@ -17,7 +17,7 @@ public class PlatformJarArchetypeIT extends AbstractArchetypeIT {
         return ArchetypeProperties.builder()
                 .withArchetypeGroupId("org.alfresco.maven.archetype")
                 .withArchetypeArtifactId("alfresco-platform-jar-archetype")
-                .withArchetypeVersion("4.0.0-SNAPSHOT")
+                .withArchetypeVersion(System.getProperty("projectArtifactId"))
                 .withProjectGroupId("archetype.it")
                 .withProjectArtifactId("repojar-test-run")
                 .withProjectVersion("0.1-SNAPSHOT")

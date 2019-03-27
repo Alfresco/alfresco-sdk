@@ -78,6 +78,7 @@
                         <org.slf4j.simpleLogger.showDateTime>false</org.slf4j.simpleLogger.showDateTime>
                         <org.slf4j.simpleLogger.showThreadName>false</org.slf4j.simpleLogger.showThreadName>
                         <org.slf4j.simpleLogger.showLogName>false</org.slf4j.simpleLogger.showLogName>
+                        <projectArtifactId>${project.version}</projectArtifactId>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

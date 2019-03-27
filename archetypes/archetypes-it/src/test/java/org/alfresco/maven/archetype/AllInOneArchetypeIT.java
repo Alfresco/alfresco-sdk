@@ -17,7 +17,7 @@ public class AllInOneArchetypeIT extends AbstractArchetypeIT {
         return ArchetypeProperties.builder()
                 .withArchetypeGroupId("org.alfresco.maven.archetype")
                 .withArchetypeArtifactId("alfresco-allinone-archetype")
-                .withArchetypeVersion("4.0.0-SNAPSHOT")
+                .withArchetypeVersion(System.getProperty("projectArtifactId"))
                 .withProjectGroupId("archetype.it")
                 .withProjectArtifactId("allinone-test-run")
                 .withProjectVersion("0.1-SNAPSHOT")
