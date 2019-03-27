@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.alfresco.maven</groupId>
     <artifactId>alfresco-sdk-aggregator</artifactId>
-    <version>3.0.2-SNAPSHOT</version>
+    <version>3.1.1-SNAPSHOT</version>
     <name>Alfresco SDK</name>
     <description>This aggregator Project builds all modules required for the Alfresco SDK</description>
     <packaging>pom</packaging>
@@ -130,7 +130,7 @@
 
         <!-- The following version is needed for alfresco-rad -->
         <alfresco.community.default.version>5.2.f</alfresco.community.default.version>
-        <alfresco.enterprise.default.version>5.2.0</alfresco.enterprise.default.version>
+        <alfresco.enterprise.default.version>5.2.4</alfresco.enterprise.default.version>
         <alfresco.sdk.default.edition>community</alfresco.sdk.default.edition>
 
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
