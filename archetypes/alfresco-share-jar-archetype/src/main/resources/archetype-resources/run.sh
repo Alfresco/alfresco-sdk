@@ -1,7 +1,7 @@
 #set( $symbol_dollar = '$' )
 #!/bin/sh
 
-export COMPOSE_FILE_PATH=${symbol_dollar}{PWD}/target/classes/docker/docker-compose.yml
+export COMPOSE_FILE_PATH="${symbol_dollar}{PWD}/target/classes/docker/docker-compose.yml"
 
 if [ -z "${symbol_dollar}{M2_HOME}" ]; then
   export MVN_EXEC="mvn"
@@ -13,16 +13,16 @@ start() {
     docker volume create ${rootArtifactId}-acs-volume
     docker volume create ${rootArtifactId}-db-volume
     docker volume create ${rootArtifactId}-ass-volume
-    docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH up --build -d
+    docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" up --build -d
 }
 
 start_share() {
-    docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH up --build -d ${rootArtifactId}-share
+    docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" up --build -d ${rootArtifactId}-share
 }
 
 down() {
-    if [ -f ${symbol_dollar}COMPOSE_FILE_PATH ]; then
-        docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH down
+    if [ -f "${symbol_dollar}COMPOSE_FILE_PATH" ]; then
+        docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" down
     fi
 }
 
@@ -37,17 +37,17 @@ build() {
 }
 
 build_share() {
-    docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH kill ${rootArtifactId}-share
-    yes | docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH rm -f ${rootArtifactId}-share
+    docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" kill ${rootArtifactId}-share
+    yes | docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" rm -f ${rootArtifactId}-share
     ${symbol_dollar}MVN_EXEC clean package
 }
 
 tail() {
-    docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH logs -f
+    docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" logs -f
 }
 
 tail_all() {
-    docker-compose -f ${symbol_dollar}COMPOSE_FILE_PATH logs --tail="all"
+    docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" logs --tail="all"
 }
 
 case "${symbol_dollar}1" in
