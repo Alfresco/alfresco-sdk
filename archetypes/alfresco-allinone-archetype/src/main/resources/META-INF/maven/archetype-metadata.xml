@@ -124,7 +124,6 @@
                     <directory>src/main/docker</directory>
                     <includes>
                         <include>license/**</include>
-                        <include>Dockerfile</include>
                         <include>disable-webscript-caching-context.xml</include>
                     </includes>
                     <excludes>
@@ -135,10 +134,10 @@
                     <directory>src/main/docker</directory>
                     <includes>
                         <include>**/*.properties</include>
+                        <include>Dockerfile</include>
                     </includes>
                     <excludes>
                         <exclude>license/**</exclude>
-                        <exclude>Dockerfile</exclude>
                         <exclude>disable-webscript-caching-context.xml</exclude>
                     </excludes>
                 </fileSet>
