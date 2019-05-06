@@ -44,9 +44,6 @@ wcmqs.publishQueueProcessor.schedule=0 50 2 * * ? 2060\n\
 # Fail or not when there are node integrity checker errors\n\
 integrity.failOnError=true\n\
 \n\
-# Fail or not when there are node integrity checker errors\n\
-integrity.failOnError=true\n\
-\n\
 # Alfresco Repository PostgreSQL Database configuration.\n\
 db.driver=org.postgresql.Driver\n\
 \n\
