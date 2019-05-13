@@ -10,7 +10,9 @@ COPY Dockerfile extensions/*.amp $TOMCAT_DIR/amps/
 RUN java -jar $TOMCAT_DIR/alfresco-mmt/alfresco-mmt*.jar install \
               $TOMCAT_DIR/amps $TOMCAT_DIR/webapps/alfresco -directory -nobackup -force
 
-COPY alfresco-global.properties $TOMCAT_DIR/shared/classes/alfresco-global.properties
+COPY alfresco-global.properties $TOMCAT_DIR/shared/classes/alfresco-global-dev.properties
+RUN mv $TOMCAT_DIR/shared/classes/alfresco-global.properties $TOMCAT_DIR/shared/classes/alfresco-global-orig.properties \
+   && awk -F= '!a[$1]++' $TOMCAT_DIR/shared/classes/alfresco-global-dev.properties $TOMCAT_DIR/shared/classes/alfresco-global-orig.properties > $TOMCAT_DIR/shared/classes/alfresco-global.properties
 COPY dev-log4j.properties $TOMCAT_DIR/shared/classes/alfresco/extension
 COPY disable-webscript-caching-context.xml $TOMCAT_DIR/shared/classes/alfresco/extension
 
