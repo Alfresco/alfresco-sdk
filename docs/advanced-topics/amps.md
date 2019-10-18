@@ -110,7 +110,7 @@ do is modify the `pom.xml` file of the corresponding docker module / project in 
             <resource>
                 <directory>target</directory>
                 <includes>
-                    <include>${build.finalName}.amp</include>
+                    <include>${project.build.finalName}.amp</include>
                 </includes>
                 <filtering>false</filtering>
             </resource>
