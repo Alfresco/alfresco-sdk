@@ -10,6 +10,7 @@ If you are an Enterprise customer check the [Support](#alfresco-enterprise-custo
 
 ## News
 
+- 2019-10: Alfresco SDK 4.1.0 released
 - 2019-03: Alfresco SDK 4.0.0 released
 - 2019-03: Alfresco SDK 3.1.0 released
 - 2017-06-23: Alfresco SDK 3.0.1 released, [containing a critical bugfix](https://github.com/Alfresco/alfresco-sdk/issues/461)
@@ -25,20 +26,19 @@ If you are an Enterprise customer check the [Support](#alfresco-enterprise-custo
 ## User Getting Started
 
 ### Latest Documentation
-To get started with **Alfresco SDK 4.0.x** (latest) visit the [Alfresco Documentation](docs/README.md).
+To get started with **Alfresco SDK 4.1.x** (latest) visit the [Alfresco Documentation](docs/README.md).
 
 #### Documentation about Previous Versions
 | SDK Version  | Alfresco Enterprise Version       |  Alfresco Community Version       | Documentation  |
 | ------------- |:-------------:| :-----:|:-----|
-| SDK 4.0   | Alfresco 6.0.x / 6.1.x | Alfresco 6.0.x / 6.1.x | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md |
+| SDK 4.1   | Alfresco 6.0.x / 6.1.x / 6.2.x | Alfresco 6.0.x / 6.1.x / 6.2.x | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md |
+| SDK 4.0   | Alfresco 6.0.x / 6.1.x | Alfresco 6.0.x / 6.1.x | https://github.com/Alfresco/alfresco-sdk/blob/sdk-4.0/docs/README.md |
 | SDK 3.1   | Alfresco 5.2.x | Alfresco 5.2.x | http://docs.alfresco.com/5.2/concepts/sdk-intro.html |
 | SDK 3.0   | Alfresco 5.2.x | Alfresco 5.2.x | http://docs.alfresco.com/5.2/concepts/sdk-intro.html |
 | SDK 2.2   | Alfresco 5.1.x | Alfresco 5.1.x | https://docs.alfresco.com/5.1/concepts/alfresco-sdk-intro.html |
 | SDK 2.1   | Alfresco 5.0.1 | Alfresco 5.0.d | https://docs.alfresco.com/sdk2.1/concepts/alfresco-sdk-intro.html |
 | SDK 2.0   | Alfresco 5.0.0 | Alfresco 5.0.c | https://docs.alfresco.com/sdk2.0/concepts/alfresco-sdk-intro.html |
 | SDK 1.1.1 | Alfresco 4.2.x | Alfresco 4.2.x | https://docs.alfresco.com/4.2/concepts/dev-extensions-maven-sdk-intro.html |
-
-
 
 ## Reporting Issues and Community Support
 Report issues (and contribute!) [here](https://github.com/Alfresco/alfresco-sdk/issues?milestone=1&state=open) or join us on the [IRC Channel](http://chat.alfresco.com/).

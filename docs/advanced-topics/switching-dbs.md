@@ -1,7 +1,7 @@
 ---
 Title: Switching Alfresco Content Services database
 Added: v4.0.0
-Last reviewed: 2019-01-29
+Last reviewed: 2019-10-18
 ---
 # Switching Alfresco Content Services database
 

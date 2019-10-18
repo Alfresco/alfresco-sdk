@@ -1,7 +1,7 @@
 ---
 Title: How to configure private Alfresco Nexus repository
 Added: v3.0.0
-Last reviewed: 2019-01-15
+Last reviewed: 2019-10-18
 ---
 # How to configure private Alfresco Nexus repository
 

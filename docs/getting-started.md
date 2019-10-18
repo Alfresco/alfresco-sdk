@@ -1,15 +1,15 @@
 ---
-Title: Getting started with Alfresco SDK 4.0
+Title: Getting started with Alfresco SDK 4.1
 Added: v2.1.1
-Last reviewed: 2019-01-14
+Last reviewed: 2019-10-18
 ---
-# Getting started with Alfresco SDK 4.0
+# Getting started with Alfresco SDK 4.1
 
-Use these instructions to get started with using Alfresco SDK 4.0.
+Use these instructions to get started with using Alfresco SDK 4.1.
 
 ## Prerequisites
    
-There are a number of software requirements for using Alfresco SDK 4.0.
+There are a number of software requirements for using Alfresco SDK 4.1.
 * Java Development Kit (JDK) - Version 11
 * Maven - Version 3.3
 * Docker - Latest stable version
@@ -18,7 +18,7 @@ There are a number of software requirements for using Alfresco SDK 4.0.
 
 ### Java
 
-ACS 6.0 is compiled and executed using Java 8, but it is highly recommended to work with ACS 6.1 which uses Java 11.
+ACS 6.0 is compiled and executed using Java 8, but it is highly recommended to work with ACS 6.1+ which uses Java 11.
 
 1. Download [JDK 11](https://jdk.java.net/11/), unzip it and configure it as the default Java installation.
 
@@ -46,7 +46,7 @@ JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home
 Alfresco recommends that you keep up-to-date with all the Maven releases. Linux distributions and package managers tend to bundle older releases and this is 
 the most common pitfall.
 
-Alfresco SDK 4.0 requires Maven 3.3.0+, but you are recommended to download the latest version.
+Alfresco SDK 4.1 requires Maven 3.3.0+, but you are recommended to download the latest version.
 
 1. Download and install [Apache Maven](https://maven.apache.org/download.cgi) and make sure it is configured correctly on your path.
 
@@ -95,7 +95,7 @@ mvn archetype:generate -Dfilter=org.alfresco:
 ```
 
 You'll be prompted to select the archetype you want. The previously available archetypes, alfresco-amp-archetype and share-amp-archetype will still show up 
-as an option, however these archetypes are not part of Alfresco SDK 4.0.
+as an option, however these archetypes are not part of Alfresco SDK 4.1.
 
 Attention: You'll need double quotes around the filter part if you are using Windows Powershell: mvn archetype:generate "-Dfilter=org.alfresco:".
 
@@ -118,7 +118,7 @@ Choose archetype:
 * `org.alfresco.maven.archetype:alfresco-platform-jar-archetype`
 * `org.alfresco.maven.archetype:alfresco-share-jar-archetype`
 
-3. Choose the latest version, such as 4.0.0.
+3. Choose the latest version, such as 4.1.0.
 
 ```
 Choose org.alfresco.maven.archetype:alfresco-allinone-archetype version:
@@ -133,6 +133,7 @@ Choose org.alfresco.maven.archetype:alfresco-allinone-archetype version:
 9: 3.0.0
 10: 3.0.1
 11: 4.0.0
+12: 4.1.0
 ```
 
 4. Next you will be prompted for additional values, like groupId, artifactId, and package, as shown below:
@@ -161,7 +162,7 @@ If everything has been configured correctly, you should see something similar to
 
 ```
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: alfresco-allinone-archetype:4.0.0-SNAPSHOT
+[INFO] Using following parameters for creating project from Archetype: alfresco-allinone-archetype:4.1.0-SNAPSHOT
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.acme
 [INFO] Parameter: artifactId, Value: my-all-in-one
@@ -188,7 +189,7 @@ If everything has been configured correctly, you should see something similar to
 [INFO] ------------------------------------------------------------------------
 ```
 
-7. You have successfully generated your first SDK 4.0 project.
+7. You have successfully generated your first SDK 4.1 project.
 
 Inside the project, you will find the `run.bat` and `run.sh` scripts. These are convenience scripts for you to quickly compile / test / run your project.
 
