@@ -1,7 +1,7 @@
 ---
 Title: All-In-One project structure
 Added: v3.0.0
-Last reviewed: 2019-01-15
+Last reviewed: 2019-10-18
 ---
 # All-In-One project structure
 
@@ -81,7 +81,8 @@ my-all-in-one-project
 │       │       │           │   ├── service-context.xml
 │       │       │           │   └── webscript-context.xml
 │       │       │           ├── messages
-│       │       │           │   └── content-model.properties
+│       │       │           │   ├── content-model.properties
+│       │       │           │   └── workflow-messages.properties
 │       │       │           ├── model
 │       │       │           │   ├── content-model.xml
 │       │       │           │   └── workflow-model.xml

@@ -1,3 +1,9 @@
+---
+Title: Working with an All-In-One project
+Added: v4.0.0
+Last reviewed: 2019-10-18
+---
+
 # Working with an All-In-One project
 
 Before you continue make sure that you have read and completed the tasks in the 
@@ -72,7 +78,7 @@ my-all-in-one-project mbergljung$ ./run.sh build_start
 [INFO] ------------------------------------------------------------------------
 [INFO] Reactor Build Order:
 [INFO] 
-[INFO] AIO - SDK 4.0
+[INFO] AIO - SDK 4.1
 [INFO] Alfresco Platform/Repository JAR Module
 [INFO] Alfresco Share JAR Module
 [INFO] Integration Tests Module
@@ -82,7 +88,7 @@ my-all-in-one-project mbergljung$ ./run.sh build_start
 [INFO] ------------------------------------------------------------------------
 [INFO] Reactor Summary:
 [INFO] 
-[INFO] AIO - SDK 4.0 ...................................... SUCCESS [  0.680 s]
+[INFO] AIO - SDK 4.1 ...................................... SUCCESS [  0.680 s]
 [INFO] Alfresco Platform/Repository JAR Module ............ SUCCESS [  5.461 s]
 [INFO] Alfresco Share JAR Module .......................... SUCCESS [  0.557 s]
 [INFO] Integration Tests Module ........................... SUCCESS [  0.900 s]

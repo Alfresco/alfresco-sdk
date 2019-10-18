@@ -1,7 +1,7 @@
 ---
 Title: Setting up your development environment
 Added: v3.0.0
-Last reviewed: 2019-01-17
+Last reviewed: 2019-10-18
 ---
 # Setting up your development environment
 

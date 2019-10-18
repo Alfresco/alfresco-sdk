@@ -1,11 +1,11 @@
 ---
 Title: How to run SDK's integration tests
 Added: v3.0.0
-Last reviewed: 2019-01-16
+Last reviewed: 2019-10-18
 ---
 # How to run SDK's integration tests
 
-Running the integration tests of a project generated from the Alfresco SDK 4.0 archetypes is pretty easy. Let's distinguish different cases of executing the
+Running the integration tests of a project generated from the Alfresco SDK 4.1 archetypes is pretty easy. Let's distinguish different cases of executing the
 integration tests. 
 
 ## Command line

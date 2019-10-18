@@ -1,7 +1,7 @@
 ---
 Title: What's new?
 Added: v2.1.1
-Last reviewed: 2019-01-17
+Last reviewed: 2019-10-18
 ---
 # What's new?
 
@@ -56,3 +56,7 @@ The integration tests and the mechanisms to execute them in an Alfresco Content 
 However, the inclusion of Docker and the utility scripts provides a different perspective about the environment on which the integration tests are executed.
 In this version, the integration tests are run against the dockerised environment defined using Docker and Docker compose. By doing so, the integration test
 environment can be more similar to a real one, including whatever other service is required for a full featured integration test execution. 
+
+## Support for Alfresco 6.2.x
+
+Alfresco SDK 4.1 provides support for Alfresco 6.2.x.
