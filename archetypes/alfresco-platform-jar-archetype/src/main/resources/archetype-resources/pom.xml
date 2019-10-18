@@ -239,7 +239,7 @@
                                 <resource>
                                     <directory>target</directory>
                                     <includes>
-                                        <include>${build.finalName}.jar</include>
+                                        <include>${project.build.finalName}.jar</include>
                                     </includes>
                                     <filtering>false</filtering>
                                 </resource>
@@ -258,7 +258,7 @@
                                 <resource>
                                     <directory>target</directory>
                                     <includes>
-                                        <include>${build.finalName}-tests.jar</include>
+                                        <include>${project.build.finalName}-tests.jar</include>
                                     </includes>
                                     <filtering>false</filtering>
                                 </resource>
