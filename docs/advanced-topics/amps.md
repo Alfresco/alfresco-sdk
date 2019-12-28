@@ -1,11 +1,11 @@
 ---
 Title: Working with AMPs
 Added: v3.0.0
-Last reviewed: 2019-01-14
+Last reviewed: 2019-10-18
 ---
 # Working with AMPs
 
-Since the early days of the Alfresco SDK, the Alfresco Module Packages (AMP) have been the way customizations were packaged. In Alfresco SDK 4.0 everything 
+Since the early days of the Alfresco SDK, the Alfresco Module Packages (AMP) have been the way customizations were packaged. In Alfresco SDK 4.1 everything 
 is packaged as a JAR by default, while the AMPs are still available as an optional assembly. This gives you much more control over packaging, and simple 
 modules can easily be deployed as JARs.
 
@@ -55,7 +55,7 @@ to your needs.
 
 ## Installing AMPs with the SDK
 
-The projects created from the Alfresco SDK 4.0 archetypes are configured to deploy either JARs or AMPs to the ACS / Share docker container. The only thing to
+The projects created from the Alfresco SDK 4.1 archetypes are configured to deploy either JARs or AMPs to the ACS / Share docker container. The only thing to
 do is modify the `pom.xml` file of the corresponding docker module / project in order to properly configure the dependencies and the Maven dependency plugin.
 
 ### All-In-One project
@@ -110,7 +110,7 @@ do is modify the `pom.xml` file of the corresponding docker module / project in 
             <resource>
                 <directory>target</directory>
                 <includes>
-                    <include>${build.finalName}.amp</include>
+                    <include>${project.build.finalName}.amp</include>
                 </includes>
                 <filtering>false</filtering>
             </resource>
@@ -172,7 +172,7 @@ Here is an example of how to install Florian Maul's Javascript Console.
 ## Controlling the order AMPs are applied
 
 Under some specific circumstances it is necessary to apply different AMPs in a development project in a precise order. The default configuration of the 
-projects generated using the Alfresco SDK 4.0 archetypes doesn't specify any concrete order applying the AMPs to the ACS/Share installation.
+projects generated using the Alfresco SDK 4.1 archetypes doesn't specify any concrete order applying the AMPs to the ACS/Share installation.
 
 Anyway, that order can be controlled modifying slightly the configuration of the custom Docker images in the project. For instance, let's say we have three
 third party AMPs that we want to apply in the next order `third-party-amp-01.amp -> third-party-amp-02.amp -> third-party-amp-03.amp`. In this example, we're

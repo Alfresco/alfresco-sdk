@@ -1,3 +1,9 @@
+---
+Title: Working with a Share project
+Added: v4.0.0
+Last reviewed: 2019-10-18
+---
+
 # Working with a Share project
 
 Before you continue make sure that you have read and completed the tasks in the 

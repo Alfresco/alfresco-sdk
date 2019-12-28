@@ -36,5 +36,10 @@
                 </props>
             </list>
         </property>
+        <property name="labels">
+            <list>
+                <value>alfresco/module/${project.artifactId}/messages/workflow-messages</value>
+            </list>
+        </property>
     </bean>
 </beans>

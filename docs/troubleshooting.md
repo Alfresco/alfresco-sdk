@@ -1,15 +1,16 @@
 ---
 Title: Troubleshooting
 Added: v3.0.0
-Last reviewed: 2019-01-14
+Last reviewed: 2019-10-18
 ---
 # Troubleshooting
 
-This article describes a list of common issues with the projects generated from the Alfresco SDK 4.0 archetypes and the way to troubleshoot them.
+This article describes a list of common issues with the projects generated from the Alfresco SDK 4.1 archetypes and the way to troubleshoot them.
 
 * [Incorrect JDK version](#incorrect-jdk-version)
 * [Containers synchronization](#containers-synchronization)
 * [Ports conflict](#ports-conflict)
+* [Transformations not working](#transformations-not-working)
 
 ## Incorrect JDK version
 
@@ -146,3 +147,17 @@ That allows you to modify the number of the exposed ports through maven properti
 ```
 
 That way, if you face a port conflict, you only need to change the port in the corresponding maven property and rebuilt and restart the project.
+
+## Alfresco Share previews / Transformations not working
+
+### Problem
+
+Some files with different formats like _doc_, _docx_ or _xls_ can't be previewed in Alfresco Share. The source reason of this problem is that the Alfresco 
+Transformation Service (ATS) is not working. ATS is required to generate the content renditions that will be used by Alfresco Share to show the content preview.
+
+### Solution
+
+By default, ATS is not included in the basic configuration of the projects generated making use of the Alfresco SDK 4 archetypes.
+
+To enable it, you simply need to follow the steps described in the article [How to set up Alfresco Transform Service](advanced-topics/alfresco-transform-service.md).
+If you're working with Alfresco Enterprise you must follow [this guide](advanced-topics/working-with-enterprise/alfresco-transform-service.md). 

@@ -1,9 +1,9 @@
 ---
-Title: How to set up Alfresco Transform Service
+Title: How to set up Alfresco Transform Service (Enterprise)
 Added: v4.0.0
-Last reviewed: 2019-01-14
+Last reviewed: 2019-10-18
 ---
-# How to set up Alfresco Transform Service
+# How to set up Alfresco Transform Service (Enterprise)
 
 By default, the _Alfresco Transform Service_ (from now ATS) is not included in the basic configuration of the projects generated making use of the Alfresco 
 SDK archetypes. 
@@ -18,53 +18,78 @@ In order to properly configure ATS in a project generated using the Alfresco SDK
 ## Adding the new containers
 
 * Locate the Docker compose file (usually at `PROJECT_ROOT_PATH/docker/docker-compose.yml`) and add the containers that conform ATS (`transform-router`, 
-`alfresco-pdf-renderer`, `imagemagick`, `libreoffice`, `tika`, `shared-file-store` and `activemq`):
+`alfresco-pdf-renderer`, `imagemagick`, `libreoffice`, `tika`, `transform-misc`, `shared-file-store` and `activemq`):
 
 ```
 services:
 ...
   transform-router:
-    image: quay.io/alfresco/alfresco-transform-router:0.5.0
+    image: quay.io/alfresco/alfresco-transform-router:1.1.0-RC3
     environment:
       JAVA_OPTS: " -Xms256m -Xmx512m"
       ACTIVEMQ_URL: "nio://activemq:61616"
       IMAGEMAGICK_URL: "http://imagemagick:8090"
-      PDF_RENDERER_URL: "http://alfresco-pdf-renderer:8090"
-      LIBREOFFICE_URL: "http://libreoffice:8090"
-      TIKA_URL: "http://tika:8090"
+      PDF_RENDERER_URL : "http://alfresco-pdf-renderer:8090"
+      LIBREOFFICE_URL : "http://libreoffice:8090"
+      TIKA_URL : "http://tika:8090"
+      TRANSFORM_MISC_URL : "http://transform-misc:8090"
       FILE_STORE_URL: "http://shared-file-store:8099/alfresco/api/-default-/private/sfs/versions/1/file"
+    ports:
+      - 8095:8095
     links:
       - activemq
   alfresco-pdf-renderer:
-    image: quay.io/alfresco/alfresco-pdf-renderer:2.0.8
+    image: alfresco/alfresco-pdf-renderer:2.1.0-RC2
     environment:
       JAVA_OPTS: " -Xms256m -Xmx512m"
+      ACTIVEMQ_URL: "nio://activemq:61616"
       FILE_STORE_URL: "http://shared-file-store:8099/alfresco/api/-default-/private/sfs/versions/1/file"
     ports:
       - 8090:8090
+    links:
+      - activemq
   imagemagick:
-    image: quay.io/alfresco/alfresco-imagemagick:2.0.8
+    image: alfresco/alfresco-imagemagick:2.1.0-RC2
     environment:
       JAVA_OPTS: " -Xms256m -Xmx512m"
+      ACTIVEMQ_URL: "nio://activemq:61616"
       FILE_STORE_URL: "http://shared-file-store:8099/alfresco/api/-default-/private/sfs/versions/1/file"
     ports:
       - 8091:8090
+    links:
+      - activemq
   libreoffice:
-    image: quay.io/alfresco/alfresco-libreoffice:2.0.8
+    image: alfresco/alfresco-libreoffice:2.1.0-RC2
     environment:
       JAVA_OPTS: " -Xms256m -Xmx512m"
+      ACTIVEMQ_URL: "nio://activemq:61616"
       FILE_STORE_URL: "http://shared-file-store:8099/alfresco/api/-default-/private/sfs/versions/1/file"
     ports:
       - 8092:8090
+    links:
+      - activemq
   tika:
-    image: quay.io/alfresco/alfresco-tika:2.0.8
+    image: alfresco/alfresco-tika:2.1.0-RC2
     environment:
       JAVA_OPTS: " -Xms256m -Xmx512m"
+      ACTIVEMQ_URL: "nio://activemq:61616"
       FILE_STORE_URL: "http://shared-file-store:8099/alfresco/api/-default-/private/sfs/versions/1/file"
     ports:
       - 8093:8090
+    links:
+      - activemq
+  transform-misc:
+    image: alfresco/alfresco-transform-misc:2.1.0-RC2
+    environment:
+      JAVA_OPTS: " -Xms256m -Xmx512m"
+      ACTIVEMQ_URL: "nio://activemq:61616"
+      FILE_STORE_URL: "http://shared-file-store:8099/alfresco/api/-default-/private/sfs/versions/1/file"
+    ports:
+      - 8094:8090
+    links:
+      - activemq    
   shared-file-store:
-    image: alfresco/alfresco-shared-file-store:0.5.1
+    image: alfresco/alfresco-shared-file-store:0.5.3
     environment:
       JAVA_OPTS: " -Xms256m -Xmx512m"
       scheduler.content.age.millis: 86400000
@@ -74,7 +99,7 @@ services:
     volumes:
       - shared-file-store-volume:/tmp/Alfresco/sfs
   activemq:
-    image: alfresco/alfresco-activemq:5.15.6
+    image: alfresco/alfresco-activemq:5.15.8
     ports:
       - 8161:8161 # Web Console
       - 5672:5672 # AMQP
@@ -102,13 +127,24 @@ and add the ATS configuration properties:
 
 ```
 # Alfresco Transform Service
+transform.service.enabled=true
+transform.service.url=http://transform-router:8095
+sfs.url=http://shared-file-store:8099/
+
+local.transform.service.enabled=true
+localTransform.pdfrenderer.url=http://alfresco-pdf-renderer:8090/
+localTransform.imagemagick.url=http://imagemagick:8090/
+localTransform.libreoffice.url=http://libreoffice:8090/
+localTransform.tika.url=http://tika:8090/
+localTransform.misc.url=http://transform-misc:8090/
+
+legacy.transform.service.enabled=true
 alfresco-pdf-renderer.url=http://alfresco-pdf-renderer:8090/
 jodconverter.url=http://libreoffice:8090/
 img.url=http://imagemagick:8090/
 tika.url=http://tika:8090/
-sfs.url=http://shared-file-store:8099/
-local.transform.service.enabled=true
-transform.service.enabled=true
+transform.misc.url=http://transform-misc:8090/
+
 messaging.broker.url=failover:(nio://activemq:61616)?timeout=3000&jms.useCompression=true
 ```
 

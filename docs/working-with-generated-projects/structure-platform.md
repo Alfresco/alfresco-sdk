@@ -1,7 +1,7 @@
 ---
 Title: Platform JAR project structure
 Added: v3.0.0
-Last reviewed: 2019-03-26
+Last reviewed: 2019-10-18
 ---
 # Platform JAR project structure
 
@@ -64,7 +64,8 @@ my-platform-jar-project
     │                   │   └── webscript-context.xml
     │                   ├── log4j.properties
     │                   ├── messages
-    │                   │   └── content-model.properties
+    │                   │   ├── content-model.properties
+    │                   │   └── workflow-messages.properties
     │                   ├── model
     │                   │   ├── content-model.xml
     │                   │   └── workflow-model.xml
