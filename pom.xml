@@ -135,10 +135,14 @@
         <alfresco.sdk.tests.exclude>*/*-enterprise*/*</alfresco.sdk.tests.exclude>
 
         <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-        <alfresco.platform.version>6.2.0-ea</alfresco.platform.version>
-        <alfresco.share.version>6.2.0</alfresco.share.version>
         <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
         <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+        <alfresco.solr.docker.image>alfresco/alfresco-search-services</alfresco.solr.docker.image>
+        <alfresco.db.docker.image>postgres</alfresco.db.docker.image>
+        <alfresco.platform.version>6.2.0-ga</alfresco.platform.version>
+        <alfresco.share.version>6.2.0</alfresco.share.version>
+        <alfresco.solr.version>1.4.0</alfresco.solr.version>
+        <alfresco.db.version>11.4</alfresco.db.version>
 
         <test.acs.endpoint.path />
 
@@ -300,8 +304,12 @@
                 <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
                 <alfresco.platform.version>6.0.7-ga</alfresco.platform.version>
                 <alfresco.share.version>6.0.b</alfresco.share.version>
+                <alfresco.solr.version>1.4.0</alfresco.solr.version>
+                <alfresco.db.version>10.1</alfresco.db.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.solr.docker.image>alfresco/alfresco-search-services</alfresco.solr.docker.image>
+                <alfresco.db.docker.image>postgres</alfresco.db.docker.image>
             </properties>
         </profile>
 
@@ -311,8 +319,12 @@
                 <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
                 <alfresco.platform.version>6.0.0.2</alfresco.platform.version>
                 <alfresco.share.version>6.0</alfresco.share.version>
+                <alfresco.solr.version>1.4.0</alfresco.solr.version>
+                <alfresco.db.version>10.1</alfresco.db.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.solr.docker.image>alfresco/alfresco-search-services</alfresco.solr.docker.image>
+                <alfresco.db.docker.image>postgres</alfresco.db.docker.image>
             </properties>
         </profile>
 
@@ -324,8 +336,12 @@
                 <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
                 <alfresco.platform.version>6.1.2-ga</alfresco.platform.version>
                 <alfresco.share.version>6.1.0-RC3</alfresco.share.version>
+                <alfresco.solr.version>1.4.0</alfresco.solr.version>
+                <alfresco.db.version>11.4</alfresco.db.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.solr.docker.image>alfresco/alfresco-search-services</alfresco.solr.docker.image>
+                <alfresco.db.docker.image>postgres</alfresco.db.docker.image>
             </properties>
         </profile>
 
@@ -333,10 +349,14 @@
             <id>enterprise-61-tests</id>
             <properties>
                 <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>6.1.0</alfresco.platform.version>
+                <alfresco.platform.version>6.1.1</alfresco.platform.version>
                 <alfresco.share.version>6.1.0</alfresco.share.version>
+                <alfresco.solr.version>1.4.0</alfresco.solr.version>
+                <alfresco.db.version>11.4</alfresco.db.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.solr.docker.image>alfresco/alfresco-search-services</alfresco.solr.docker.image>
+                <alfresco.db.docker.image>postgres</alfresco.db.docker.image>
             </properties>
         </profile>
 
@@ -346,10 +366,14 @@
             <id>community-62-tests</id>
             <properties>
                 <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>6.2.0-ea</alfresco.platform.version>
+                <alfresco.platform.version>6.2.0-ga</alfresco.platform.version>
                 <alfresco.share.version>6.2.0</alfresco.share.version>
+                <alfresco.solr.version>1.4.0</alfresco.solr.version>
+                <alfresco.db.version>11.4</alfresco.db.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.solr.docker.image>alfresco/alfresco-search-services</alfresco.solr.docker.image>
+                <alfresco.db.docker.image>postgres</alfresco.db.docker.image>
             </properties>
         </profile>
 
@@ -359,8 +383,12 @@
                 <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
                 <alfresco.platform.version>6.2.0</alfresco.platform.version>
                 <alfresco.share.version>6.2.0</alfresco.share.version>
+                <alfresco.solr.version>1.4.0</alfresco.solr.version>
+                <alfresco.db.version>11.4</alfresco.db.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.solr.docker.image>alfresco/alfresco-search-services</alfresco.solr.docker.image>
+                <alfresco.db.docker.image>postgres</alfresco.db.docker.image>
             </properties>
         </profile>
 

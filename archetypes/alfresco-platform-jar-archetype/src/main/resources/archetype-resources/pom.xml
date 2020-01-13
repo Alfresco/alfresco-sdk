@@ -20,10 +20,14 @@
         <alfresco.bomDependencyArtifactId>@@alfresco.bomDependency.artifactId@@</alfresco.bomDependencyArtifactId>
         <alfresco.platform.version>@@alfresco.platform.version@@</alfresco.platform.version>
         <alfresco.share.version>@@alfresco.share.version@@</alfresco.share.version>
+        <alfresco.solr.version>@@alfresco.solr.version@@</alfresco.solr.version>
+        <alfresco.db.version>@@alfresco.db.version@@</alfresco.db.version>
 
         <!-- Docker images -->
         <docker.acs.image>@@alfresco.platform.docker.image@@</docker.acs.image>
         <docker.share.image>@@alfresco.share.docker.image@@</docker.share.image>
+        <docker.solr.image>@@alfresco.solr.docker.image@@</docker.solr.image>
+        <docker.db.image>@@alfresco.db.docker.image@@</docker.db.image>
 
         <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
         <jrebel.version>1.1.8</jrebel.version>

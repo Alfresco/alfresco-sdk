@@ -28,7 +28,7 @@ services:
     depends_on:
       - ${rootArtifactId}-postgres
   ${rootArtifactId}-postgres:
-    image: postgres:9.6
+    image: ${docker.db.image}:${alfresco.db.version}
     environment:
       POSTGRES_DB: alfresco
       POSTGRES_USER: alfresco
@@ -39,7 +39,7 @@ services:
     volumes:
       - ${rootArtifactId}-db-volume:/var/lib/postgresql/data
   ${rootArtifactId}-ass:
-    image: alfresco/alfresco-search-services:1.2.0
+    image: ${docker.solr.image}:${alfresco.solr.version}
     environment:
       SOLR_ALFRESCO_HOST: ${rootArtifactId}-acs
       SOLR_ALFRESCO_PORT: 8080
