@@ -45,6 +45,12 @@ import com.tradeshift.test.remote.RemoteTestRunner;
 
 import ${package}.platformsample.BackupAction;
 
+/**
+ * Unit testing the mock system 
+ * through the backup action
+ *
+ * @author Luca Stancapiano
+ */
 @RunWith(RemoteTestRunner.class)
 @Remote(runnerClass = SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:test-module-context.xml")

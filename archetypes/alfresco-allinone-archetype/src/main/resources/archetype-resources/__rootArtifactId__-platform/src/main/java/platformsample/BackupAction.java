@@ -30,6 +30,13 @@ import org.alfresco.service.cmr.model.FileFolderService;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * A basic component that will create a backup of a content.
+ * Only choose the extension for the backup in your 
+ * alfresco-global.properties
+ *
+ * @author Luca Stancapiano
+ */
 public class BackupAction extends ActionExecuterAbstractBase {
 
 	public static String DOCUMENT_NAME = "documentName";
