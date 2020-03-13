@@ -98,6 +98,7 @@ my-all-in-one-project
 │               └── com
 │                   └── example
 │                       └── platformsample
+│       │       │           ├── SimpleMockTest.java
 │                           └── HelloWorldWebScriptControllerTest.java
 ├── my-all-in-one-project-share-docker
 |   ├── pom.xml

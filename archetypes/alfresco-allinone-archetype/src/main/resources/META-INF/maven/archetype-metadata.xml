@@ -47,6 +47,12 @@
                         <include>**/*-context.xml</include>
                     </includes>
                 </fileSet>
+                <fileSet filtered="true" packaged="false" encoding="UTF-8">
+                    <directory>src/test/resources</directory>
+                    <includes>
+                        <include>**/*</include>
+                    </includes>
+                </fileSet>
             </fileSets>
         </module>
 
