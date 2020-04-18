@@ -67,8 +67,8 @@ public class SimpleMockTest extends AbstractForm {
 		insertDocument(workspace, documentName, content, properties);
 
 		// verify the document is created
-		ResultSet docs = searchService.query(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE,
-				SearchService.LANGUAGE_FTS_ALFRESCO, "\"/" + documentName + "\"");
+		ResultSet docs = serviceRegistry.getSearchService().getSearchService().query(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE,
+				SearchService.LANGUAGE_FTS_ALFRESCO, "PATH:\"/" + documentName + "\"");
 		Assert.assertEquals("A document is created", 1, docs.length());
 		Assert.assertTrue("VALID.pdf is created", docs.getNodeRefs().get(0).getId().equals(documentName));
 	}
@@ -83,8 +83,8 @@ public class SimpleMockTest extends AbstractForm {
 		myAction.executeImpl(action, workspace);
 
 		// verify the document is created
-		ResultSet docs = searchService.query(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE,
-				SearchService.LANGUAGE_FTS_ALFRESCO, "\"/" + documentName + ".bak\"");
+		ResultSet docs = serviceRegistry.getSearchService().getSearchService().query(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE,
+				SearchService.LANGUAGE_FTS_ALFRESCO, "PATH:\"/" + documentName + ".bak\"");
 		Assert.assertEquals("A backup document is created", 1, docs.length());
 		Assert.assertTrue("VALID.pdf.bak is created", docs.getNodeRefs().get(0).getId().equals(documentName + ".bak"));
 
