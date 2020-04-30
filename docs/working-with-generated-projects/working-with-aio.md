@@ -100,7 +100,7 @@ my-all-in-one-project mbergljung$ ./run.sh build_start
 ...
 my-all-in-one-project-acs-volume
 my-all-in-one-project-db-volume
-my-all-in-one-project-ass-volume
+my-all-in-one-project-search-volume
 ...
 Building my-all-in-one-project-share
 Step 1/8 : FROM alfresco/alfresco-share:6.1.0-RC3
@@ -176,7 +176,7 @@ Then check the name of the ACS Repository container:
 $ docker container ls
 CONTAINER ID        IMAGE                                                         COMMAND                  CREATED             STATUS              PORTS                                                      NAMES
 733867a70117        alfresco-content-services-my-all-in-one-project:development   "catalina.sh run -se…"   5 minutes ago       Up 5 minutes        0.0.0.0:8080->8080/tcp, 0.0.0.0:8888->8888/tcp             docker_my-all-in-one-project-acs_1
-1f197e52b4f2        alfresco/alfresco-search-services:1.2.0                       "/bin/sh -c '$DIST_D…"   5 minutes ago       Up 5 minutes        0.0.0.0:8983->8983/tcp                                     docker_my-all-in-one-project-ass_1
+1f197e52b4f2        alfresco/alfresco-search-services:1.2.0                       "/bin/sh -c '$DIST_D…"   5 minutes ago       Up 5 minutes        0.0.0.0:8983->8983/tcp                                     docker_my-all-in-one-project-search_1
 4eff0cc9cc25        alfresco-share-my-all-in-one-project:development              "/usr/local/tomcat/s…"   5 minutes ago       Up 5 minutes        8000/tcp, 0.0.0.0:8180->8080/tcp, 0.0.0.0:9898->8888/tcp   docker_my-all-in-one-project-share_1
 a7854ff16d72        postgres:9.6                                                  "docker-entrypoint.s…"   5 minutes ago       Up 5 minutes        0.0.0.0:5555->5432/tcp                                     docker_my-all-in-one-project-postgres_1
 ``` 
@@ -233,7 +233,7 @@ $ docker container ls
 CONTAINER ID        IMAGE                                                         COMMAND                  CREATED             STATUS              PORTS                                                      NAMES
 49015432f1b2        alfresco-content-services-my-all-in-one-project:development   "catalina.sh run -se…"   20 minutes ago      Up 20 minutes       0.0.0.0:8080->8080/tcp, 0.0.0.0:8888->8888/tcp             docker_my-all-in-one-project-acs_1
 edb9ea129a5d        postgres:9.6                                                  "docker-entrypoint.s…"   20 minutes ago      Up 20 minutes       0.0.0.0:5555->5432/tcp                                     docker_my-all-in-one-project-postgres_1
-6992d183986f        alfresco/alfresco-search-services:1.2.0                       "/bin/sh -c '$DIST_D…"   20 minutes ago      Up 20 minutes       0.0.0.0:8983->8983/tcp                                     docker_my-all-in-one-project-ass_1
+6992d183986f        alfresco/alfresco-search-services:1.2.0                       "/bin/sh -c '$DIST_D…"   20 minutes ago      Up 20 minutes       0.0.0.0:8983->8983/tcp                                     docker_my-all-in-one-project-search_1
 107d00733efd        alfresco-share-my-all-in-one-project:development              "/usr/local/tomcat/s…"   20 minutes ago      Up 20 minutes       8000/tcp, 0.0.0.0:8180->8080/tcp, 0.0.0.0:9898->8888/tcp   docker_my-all-in-one-project-share_1
 ``` 
 
@@ -243,11 +243,11 @@ Now, standing in the directory where the `run.sh` script is located execute the 
 my-all-in-one-project mbergljung$ ./run.sh stop
 Stopping docker_my-all-in-one-project-acs_1      ... done
 Stopping docker_my-all-in-one-project-postgres_1 ... done
-Stopping docker_my-all-in-one-project-ass_1      ... done
+Stopping docker_my-all-in-one-project-search_1   ... done
 Stopping docker_my-all-in-one-project-share_1    ... done
 Removing docker_my-all-in-one-project-acs_1      ... done
 Removing docker_my-all-in-one-project-postgres_1 ... done
-Removing docker_my-all-in-one-project-ass_1      ... done
+Removing docker_my-all-in-one-project-search_1   ... done
 Removing docker_my-all-in-one-project-share_1    ... done
 Removing network docker_default
 ``` 

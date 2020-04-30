@@ -12,7 +12,7 @@ fi
 start() {
     docker volume create ${rootArtifactId}-acs-volume
     docker volume create ${rootArtifactId}-db-volume
-    docker volume create ${rootArtifactId}-ass-volume
+    docker volume create ${rootArtifactId}-search-volume
     docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" up --build -d
 }
 
@@ -29,7 +29,7 @@ down() {
 purge() {
     docker volume rm -f ${rootArtifactId}-acs-volume
     docker volume rm -f ${rootArtifactId}-db-volume
-    docker volume rm -f ${rootArtifactId}-ass-volume
+    docker volume rm -f ${rootArtifactId}-search-volume
 }
 
 build() {
