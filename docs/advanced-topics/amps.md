@@ -171,7 +171,10 @@ Here is an example of how to install Florian Maul's Javascript Console.
 
 Another option for installing 3rd party AMPs to the projects is to have the amps local to the project. In this approach the amp file, the amp local to the project will be copied and applied from the Docker file. To use local amp you need to:
     1. Modify the <project>-platform-docker/pom.xml
-    2. Copy the amp file into <project>-platform-docker/src/main/docker
+    2. Create directory: <project>-platform-docker/src/main/docker/extensions
+    3. Copy the amp file into <project>-platform-docker/src/main/docker/extensions
+
+The project Dockerfile contains directives to apply amp to Alfresco image  
 
 
 in the build element of ./workshop-sdk4-platform-docker/pom.xml,
