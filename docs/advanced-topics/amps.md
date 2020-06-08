@@ -169,6 +169,71 @@ Here is an example of how to install Florian Maul's Javascript Console.
 </project>
 ```
 
+Another option for installing 3rd party AMPs to the projects is to have the amps local to the project. In this approach the amp file, the amp local to the project will be copied and applied from the Docker file. To use local amp you need to:
+    1. Modify the <project>-platform-docker/pom.xml
+    2. Create directory: <project>-platform-docker/src/main/docker/extensions
+    3. Copy the amp file into <project>-platform-docker/src/main/docker/extensions
+
+The project Dockerfile contains directives to apply amp to Alfresco image  
+
+
+in the build element of ./workshop-sdk4-platform-docker/pom.xml,
+exclude *.amp in the copy-and-filter-docker-resources execution step:
+```
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-and-filter-docker-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/docker</directory>
+                                    <filtering>true</filtering>
+                                    <excludes>
+                                        <exclude>**/*.jar</exclude>
+                                        <exclude>**/*.so</exclude>
+                                        <exclude>**/*.gz</exclude>
+                                        <exclude>**/*.amp</exclude>            
+                                    </excludes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+```
+
+include *.amp in the copy-and-filter-docker-resources-non-filtered
+
+```
+                    <execution>
+                        <id>copy-and-filter-docker-resources-non-filtered</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/docker</directory>
+                                    <filtering>false</filtering>
+                                    <includes>
+                                        <include>**/*.jar</include>
+                                        <include>**/*.so</include>
+                                        <include>**/*.gz</include>
+                                        <include>**/*.amp</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+```
+
+
 ## Controlling the order AMPs are applied
 
 Under some specific circumstances it is necessary to apply different AMPs in a development project in a precise order. The default configuration of the 
