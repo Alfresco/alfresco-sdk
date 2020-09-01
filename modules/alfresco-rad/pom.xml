@@ -44,7 +44,7 @@
         <dependency>
             <groupId>it.vige</groupId>
             <artifactId>alfresco-tests</artifactId>
-            <version>${alfresco.platform.version}.3</version>
+            <version>${alfresco.platform.version}.4</version>
         </dependency>
 
         <!-- Access to JUnit runner classes -->
