@@ -88,7 +88,7 @@ my-share-project mbergljung$ ./run.sh build_start
 [INFO] ------------------------------------------------------------------------
 my-share-project-acs-volume
 my-share-project-db-volume
-my-share-project-ass-volume
+my-share-project-search-volume
 Creating network "docker_default" with the default driver
 Building my-share-project-share
 ...
@@ -153,7 +153,7 @@ CONTAINER ID        IMAGE                                                     CO
 dda89172506c        alfresco/alfresco-content-repository-community:6.1.2-ga   "catalina.sh run -se…"   6 minutes ago       Up 6 minutes        0.0.0.0:8080->8080/tcp                                     docker_my-share-project-acs_1
 2b4fa4b4a3f6        alfresco-share-my-share-project:development               "/usr/local/tomcat/s…"   6 minutes ago       Up 6 minutes        8000/tcp, 0.0.0.0:8180->8080/tcp, 0.0.0.0:9898->8888/tcp   docker_my-share-project-share_1
 ad8857f3574b        postgres:9.6                                              "docker-entrypoint.s…"   6 minutes ago       Up 6 minutes        0.0.0.0:5555->5432/tcp                                     docker_my-share-project-postgres_1
-92902d7ae624        alfresco/alfresco-search-services:1.2.0                   "/bin/sh -c '$DIST_D…"   6 minutes ago       Up 6 minutes        0.0.0.0:8983->8983/tcp                                     docker_my-share-project-ass_1
+92902d7ae624        alfresco/alfresco-search-services:1.2.0                   "/bin/sh -c '$DIST_D…"   6 minutes ago       Up 6 minutes        0.0.0.0:8983->8983/tcp                                     docker_my-share-project-search_1
 ``` 
 
 Then open up a shell into the Alfresco Share container:
@@ -237,7 +237,7 @@ CONTAINER ID        IMAGE                                                     CO
 59f02060955a        alfresco-share-my-share-project:development               "/usr/local/tomcat/s…"   4 minutes ago       Up 4 minutes        8000/tcp, 0.0.0.0:8180->8080/tcp, 0.0.0.0:9898->8888/tcp   docker_my-share-project-share_1
 dda89172506c        alfresco/alfresco-content-repository-community:6.1.2-ga   "catalina.sh run -se…"   16 minutes ago      Up 16 minutes       0.0.0.0:8080->8080/tcp                                     docker_my-share-project-acs_1
 ad8857f3574b        postgres:9.6                                              "docker-entrypoint.s…"   16 minutes ago      Up 16 minutes       0.0.0.0:5555->5432/tcp                                     docker_my-share-project-postgres_1
-92902d7ae624        alfresco/alfresco-search-services:1.2.0                   "/bin/sh -c '$DIST_D…"   16 minutes ago      Up 16 minutes       0.0.0.0:8983->8983/tcp                                     docker_my-share-project-ass_1
+92902d7ae624        alfresco/alfresco-search-services:1.2.0                   "/bin/sh -c '$DIST_D…"   16 minutes ago      Up 16 minutes       0.0.0.0:8983->8983/tcp                                     docker_my-share-project-search_1
 ``` 
 
 Now, standing in the directory where the `run.sh` script is located execute the following command to stop and remove the containers:
@@ -247,11 +247,11 @@ my-share-project mbergljung$ ./run.sh stop
 Stopping docker_my-share-project-share_1    ... done
 Stopping docker_my-share-project-acs_1      ... done
 Stopping docker_my-share-project-postgres_1 ... done
-Stopping docker_my-share-project-ass_1      ... done
+Stopping docker_my-share-project-search_1   ... done
 Removing docker_my-share-project-share_1    ... done
 Removing docker_my-share-project-acs_1      ... done
 Removing docker_my-share-project-postgres_1 ... done
-Removing docker_my-share-project-ass_1      ... done
+Removing docker_my-share-project-search_1   ... done
 Removing network docker_default
 ``` 
 

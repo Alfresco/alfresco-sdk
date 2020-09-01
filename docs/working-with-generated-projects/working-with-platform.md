@@ -83,15 +83,15 @@ MBP512-MBERGLJUNG-0917:my-platform-project mbergljung$ ./run.sh build_start
 [INFO] ------------------------------------------------------------------------
 my-platform-project-acs-volume
 my-platform-project-db-volume
-my-platform-project-ass-volume
+my-platform-project-search-volume
 Creating network "docker_default" with the default driver
 Building my-platform-project-acs
 ...
 Successfully tagged alfresco-content-services-my-platform-project:development
 Creating docker_my-platform-project-postgres_1 ... done
-Creating docker_my-platform-project-ass_1      ... done
+Creating docker_my-platform-project-search_1   ... done
 Creating docker_my-platform-project-acs_1      ... done
-Attaching to docker_my-platform-project-acs_1, docker_my-platform-project-ass_1, docker_my-platform-project-postgres_1
+Attaching to docker_my-platform-project-acs_1, docker_my-platform-project-search_1, docker_my-platform-project-postgres_1
 ...
 my-platform-project-acs_1       | 27-Mar-2019 09:25:12.923 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
 my-platform-project-acs_1       | 27-Mar-2019 09:25:12.947 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
@@ -150,7 +150,7 @@ Then check the name of the ACS Repository container:
 $ docker container ls
 CONTAINER ID        IMAGE                                                       COMMAND                  CREATED             STATUS              PORTS                                            NAMES
 ba90b1648470        alfresco-content-services-my-platform-project:development   "catalina.sh run -se…"   8 minutes ago       Up 8 minutes        0.0.0.0:8080->8080/tcp, 0.0.0.0:8888->8888/tcp   docker_my-platform-project-acs_1
-0435b09e687c        alfresco/alfresco-search-services:1.2.0                     "/bin/sh -c '$DIST_D…"   8 minutes ago       Up 8 minutes        0.0.0.0:8983->8983/tcp                           docker_my-platform-project-ass_1
+0435b09e687c        alfresco/alfresco-search-services:1.2.0                     "/bin/sh -c '$DIST_D…"   8 minutes ago       Up 8 minutes        0.0.0.0:8983->8983/tcp                           docker_my-platform-project-search_1
 c9145e7cdb20        postgres:9.6                                                "docker-entrypoint.s…"   8 minutes ago       Up 8 minutes        0.0.0.0:5555->5432/tcp                           docker_my-platform-project-postgres_1
 ``` 
 
@@ -186,10 +186,10 @@ Then stop the project:
 ``` 
 my-platform-project mbergljung$ ./run.sh stop
 Stopping docker_my-platform-project-acs_1      ... done
-Stopping docker_my-platform-project-ass_1      ... done
+Stopping docker_my-platform-project-search_1   ... done
 Stopping docker_my-platform-project-postgres_1 ... done
 Removing docker_my-platform-project-acs_1      ... done
-Removing docker_my-platform-project-ass_1      ... done
+Removing docker_my-platform-project-search_1   ... done
 Removing docker_my-platform-project-postgres_1 ... done
 Removing network docker_default
 ``` 
@@ -220,7 +220,7 @@ as they run in daemon mode in the background. Check this by executing the follow
 $ docker container ls
 CONTAINER ID        IMAGE                                                       COMMAND                  CREATED             STATUS              PORTS                                            NAMES
 61de829092f3        alfresco-content-services-my-platform-project:development   "catalina.sh run -se…"   3 minutes ago       Up 3 minutes        0.0.0.0:8080->8080/tcp, 0.0.0.0:8888->8888/tcp   docker_my-platform-project-acs_1
-07300ddb6714        alfresco/alfresco-search-services:1.2.0                     "/bin/sh -c '$DIST_D…"   3 minutes ago       Up 3 minutes        0.0.0.0:8983->8983/tcp                           docker_my-platform-project-ass_1
+07300ddb6714        alfresco/alfresco-search-services:1.2.0                     "/bin/sh -c '$DIST_D…"   3 minutes ago       Up 3 minutes        0.0.0.0:8983->8983/tcp                           docker_my-platform-project-search_1
 09922ce36d90        postgres:9.6                                                "docker-entrypoint.s…"   3 minutes ago       Up 3 minutes        0.0.0.0:5555->5432/tcp                           docker_my-platform-project-postgres_1
 ``` 
 
@@ -229,10 +229,10 @@ Now, standing in the directory where the `run.sh` script is located execute the 
 ``` 
 my-platform-project mbergljung$ ./run.sh stop
 Stopping docker_my-platform-project-acs_1      ... done
-Stopping docker_my-platform-project-ass_1      ... done
+Stopping docker_my-platform-project-search_1   ... done
 Stopping docker_my-platform-project-postgres_1 ... done
 Removing docker_my-platform-project-acs_1      ... done
-Removing docker_my-platform-project-ass_1      ... done
+Removing docker_my-platform-project-search_1   ... done
 Removing docker_my-platform-project-postgres_1 ... done
 Removing network docker_default
 ``` 
