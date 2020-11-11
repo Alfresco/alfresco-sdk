@@ -29,14 +29,19 @@ jobs:
         # Build with default properties (6.1 community)
         - MAVEN_OPTS="-Xmx1024m" HOME=/var/lib/bamboo-agent mvn --batch-mode -U clean install -Pinternal-staging
         # Build 6.2 Enterprise
+        - jdk_switcher use oraclejdk11
         - MAVEN_OPTS="-Xmx1024m" HOME=/var/lib/bamboo-agent mvn --batch-mode -U clean install -Pinternal-staging -Penterprise-62-tests
         # Build 6.1 Enterprise
+        - jdk_switcher use oraclejdk11
         - MAVEN_OPTS="-Xmx1024m" HOME=/var/lib/bamboo-agent mvn --batch-mode -U clean install -Pinternal-staging -Penterprise-61-tests
         # Build 6.0.x Enterprise
+        - jdk_switcher use oraclejdk8
         - MAVEN_OPTS="-Xmx1024m" HOME=/var/lib/bamboo-agent mvn --batch-mode -U clean install -Pinternal-staging -Penterprise-60-tests
         # Build 6.0.x Community
+        - jdk_switcher use oraclejdk8
         - MAVEN_OPTS="-Xmx1024m" HOME=/var/lib/bamboo-agent mvn --batch-mode -U clean install -Pinternal-staging -Pcommunity-60-tests
         # Build 6.2 Community
+        - jdk_switcher use oraclejdk11
         - mvn --batch-mode -U clean install -Pinternal-staging -Pcommunity-62-tests
     - stage: "Release"
       name: "Release"
