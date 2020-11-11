@@ -1,0 +1,49 @@
+# Auto-generated .travis.yml file
+# Generated 2020-11-11 06:59:01 from Bamboo build plan DEV-MAVENARCHETYPE
+
+language: java
+
+jvm:
+  - openjdk11
+
+dist: xenial
+
+addons:
+  artifacts: true
+
+stages:
+  - name: Default Stage
+  - name: Release
+    if: fork = false AND (branch = master OR branch =~ /support\/.*/) AND type != pull_request AND commit_message !~ /\[no-release\]/
+
+jobs:
+  include:
+    - stage: "Default Stage"
+      name: "Build 3.X"
+      # script:
+        # Build with default properties (5.2 community)
+        # - MAVEN_OPTS="-Xmx1024m" HOME=/var/lib/bamboo-agent mvn --batch-mode -U clean install -Pinternal-release,enterprise-tests
+    - stage: "Default Stage"
+      name: "Build and test"
+      script:
+        # Build with default properties (6.1 community)
+        - MAVEN_OPTS="-Xmx1024m" HOME=/var/lib/bamboo-agent mvn --batch-mode -U clean install -Pinternal-staging
+        # Build 6.2 Enterprise
+        - MAVEN_OPTS="-Xmx1024m" HOME=/var/lib/bamboo-agent mvn --batch-mode -U clean install -Pinternal-staging -Penterprise-62-tests
+        # Build 6.1 Enterprise
+        - MAVEN_OPTS="-Xmx1024m" HOME=/var/lib/bamboo-agent mvn --batch-mode -U clean install -Pinternal-staging -Penterprise-61-tests
+        # Build 6.0.x Enterprise
+        - MAVEN_OPTS="-Xmx1024m" HOME=/var/lib/bamboo-agent mvn --batch-mode -U clean install -Pinternal-staging -Penterprise-60-tests
+        # Build 6.0.x Community
+        - MAVEN_OPTS="-Xmx1024m" HOME=/var/lib/bamboo-agent mvn --batch-mode -U clean install -Pinternal-staging -Pcommunity-60-tests
+        # Build 6.2 Community
+        - mvn --batch-mode -U clean install -Pinternal-staging -Pcommunity-62-tests
+    - stage: "Release"
+      name: "Release"
+      script:
+        # Release
+        - GIT_AUTHOR_NAME=alfresco-build GIT_AUTHOR_EMAIL=build@alfresco.com GIT_COMMITTER_NAME=alfresco-build GIT_COMMITTER_EMAIL=build@alfresco.com MAVEN_OPTS="-Xmx2G -Xms1G -XX:MaxPermSize=256m" HOME=/var/lib/bamboo-agent mvn --batch-mode -DreleaseVersion=${ALFRESCOSDK_RELEASE_VERSION} -DdevelopmentVersion=${ALFRESCOSDK_NEXT_VERSION} release:prepare release:perform -Dusername=alfresco-build -Dpassword=${GITHUB_PASSWORD} -DpreparationGoals=install -Psdk-release "-Darguments=-Dgpg.passphrase=${GPG_PASSPHRASE} -Dmaven.site.skip=true -Dmaven.site.deploy.skip=true -DskipTests -Dinternal.release=${INTERNAL_RELEASE}"
+      after_script:
+        - artifacts upload target/*
+        - artifacts upload poms/alfresco-sdk-parent/target//*
+        - artifacts upload plugins/alfresco-maven-plugin/target//*.jar
