@@ -3,13 +3,14 @@
 
 language: java
 
-jvm:
+jdk:
   - openjdk11
 
 dist: xenial
 
 addons:
-  artifacts: true
+  artifacts:
+    paths: []
 
 stages:
   - name: Default Stage
