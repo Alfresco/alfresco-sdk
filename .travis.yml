@@ -8,9 +8,9 @@ jdk:
 
 dist: xenial
 
-addons:
-  artifacts:
-    paths: []
+# addons:
+#   artifacts:
+#     paths: []
 
 stages:
   - name: Default Stage
