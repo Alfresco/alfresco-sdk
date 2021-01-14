@@ -135,8 +135,8 @@
         <alfresco.sdk.tests.exclude>*/*-enterprise*/*</alfresco.sdk.tests.exclude>
 
         <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-        <alfresco.platform.version>6.2.0-ea</alfresco.platform.version>
-        <alfresco.share.version>6.2.0</alfresco.share.version>
+        <alfresco.platform.version>7.0.0-A20</alfresco.platform.version>
+        <alfresco.share.version>7.0.0-M3</alfresco.share.version>
         <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
         <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
 
@@ -373,6 +373,30 @@
                 <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
                 <alfresco.platform.version>6.2.0</alfresco.platform.version>
                 <alfresco.share.version>6.2.0</alfresco.share.version>
+                <alfresco.platform.docker.image>alfresco/alfresco-content-repository</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+            </properties>
+        </profile>
+
+        <!-- 7.0 -->
+        <!-- This profiles requires to be executed using Java 11 -->
+        <profile>
+            <id>community-70-tests</id>
+            <properties>
+                <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>7.0.0-A20</alfresco.platform.version>
+                <alfresco.share.version>7.0.0-M3</alfresco.share.version>
+                <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>enterprise-70-tests</id>
+            <properties>
+                <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>7.0.0-A20</alfresco.platform.version>
+                <alfresco.share.version>7.0.0-M3</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
             </properties>
