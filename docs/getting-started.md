@@ -1,15 +1,15 @@
 ---
-Title: Getting started with Alfresco SDK 4.1
+Title: Getting started with Alfresco SDK 4.2
 Added: v2.1.1
 Last reviewed: 2019-10-18
 ---
-# Getting started with Alfresco SDK 4.1
+# Getting started with Alfresco SDK 4.2
 
-Use these instructions to get started with using Alfresco SDK 4.1.
+Use these instructions to get started with using Alfresco SDK 4.2.
 
 ## Prerequisites
    
-There are a number of software requirements for using Alfresco SDK 4.1.
+There are a number of software requirements for using Alfresco SDK 4.2.
 * Java Development Kit (JDK) - Version 11
 * Maven - Version 3.3
 * Docker - Latest stable version
@@ -46,7 +46,7 @@ JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home
 Alfresco recommends that you keep up-to-date with all the Maven releases. Linux distributions and package managers tend to bundle older releases and this is 
 the most common pitfall.
 
-Alfresco SDK 4.1 requires Maven 3.3.0+, but you are recommended to download the latest version.
+Alfresco SDK 4.2 requires Maven 3.3.0+, but you are recommended to download the latest version.
 
 1. Download and install [Apache Maven](https://maven.apache.org/download.cgi) and make sure it is configured correctly on your path.
 
@@ -95,7 +95,7 @@ mvn archetype:generate -Dfilter=org.alfresco:
 ```
 
 You'll be prompted to select the archetype you want. The previously available archetypes, alfresco-amp-archetype and share-amp-archetype will still show up 
-as an option, however these archetypes are not part of Alfresco SDK 4.1.
+as an option, however these archetypes are not part of Alfresco SDK 4.2.
 
 Attention: You'll need double quotes around the filter part if you are using Windows Powershell: mvn archetype:generate "-Dfilter=org.alfresco:".
 
@@ -132,9 +132,11 @@ Choose org.alfresco.maven.archetype:alfresco-allinone-archetype version:
 8: 2.2.0
 9: 3.0.0
 10: 3.0.1
-11: 4.0.0
-12: 4.1.0
-13: 4.2.0
+11: 3.1.0
+12: 4.0.0-beta-1
+13: 4.0.0
+14: 4.1.0
+15: 4.2.0
 ```
 
 4. Next you will be prompted for additional values, like groupId, artifactId, and package, as shown below:
@@ -190,7 +192,7 @@ If everything has been configured correctly, you should see something similar to
 [INFO] ------------------------------------------------------------------------
 ```
 
-7. You have successfully generated your first SDK 4.1 project.
+7. You have successfully generated your first SDK 4.2 project.
 
 Inside the project, you will find the `run.bat` and `run.sh` scripts. These are convenience scripts for you to quickly compile / test / run your project.
 

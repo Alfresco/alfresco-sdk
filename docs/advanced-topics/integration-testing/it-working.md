@@ -36,7 +36,7 @@ or set the Java system property `acs.endpoint.path`.
 
 ## Integration tests configuration in the All-In-One project
 
-So, taking into account the previous section, let's see how the integration tests are configured in a project generated from the SDK 4.1 All-In-One archetype.
+So, taking into account the previous section, let's see how the integration tests are configured in a project generated from the SDK 4.2 All-In-One archetype.
 
 * The maven dependencies required to execute the integration tests are deployed to the ACS Docker image in the `PROJECT_ARTEFACTID-platform-docker` maven 
 module using the `maven-dependency-plugin`. The configuration is done in the file `PROJECT_ARTEFACTID-platform-docker/pom.xml`: 

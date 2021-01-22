@@ -5,10 +5,10 @@ Last reviewed: 2019-10-18
 ---
 # Working with generated projects
 
-After generating a project using one of the Alfresco SDK 4.1 Maven archetypes, it is important to know how to build / run / test these projects.
+After generating a project using one of the Alfresco SDK 4.2 Maven archetypes, it is important to know how to build / run / test these projects.
 
 The Alfresco Platform 6 deployment architecture is highly based on container technologies, specifically in [Docker](http://docs.alfresco.com/6.0/concepts/master-deploy.html). 
-Due to that, the projects generated using the Alfresco SDK 4.1 archetypes set up their local environment making an intensive use of Docker and Docker compose 
+Due to that, the projects generated using the Alfresco SDK 4.2 archetypes set up their local environment making an intensive use of Docker and Docker compose 
 technologies.
 
 If you're not familiar with these technologies, it is highly recommended visiting the [Docker documentation website](https://docs.docker.com). This site offers
@@ -21,7 +21,7 @@ a great quantity of training resources about [Docker](https://docs.docker.com/ge
 ## Project structures
 
 After generating your project, using one of the Maven archetypes, review the project structure. The directory structure and content of each folder and file 
-can help you to understand how to start developing with the Alfresco SDK 4.1. Before continuing, make sure that you have read and completed the tasks in the 
+can help you to understand how to start developing with the Alfresco SDK 4.2. Before continuing, make sure that you have read and completed the tasks in the 
 [Getting started](../getting-started.md) tutorial.
 
 The structure of the project and the purpose of the files it contains vary according to the [Maven archetype](../mvn-archetypes.md) used to generate the project 
@@ -33,7 +33,7 @@ itself. The following links provide detailed descriptions of the different proje
 
 ## Run script
 
-All the projects generated using the Alfresco SDK 4.1 archetypes provide a utility script to work with the project. This script is `run.sh` for Unix systems
+All the projects generated using the Alfresco SDK 4.2 archetypes provide a utility script to work with the project. This script is `run.sh` for Unix systems
 and `run.bat` for Windows systems.
 
 The execution of this script must be followed by a parameter that dictates the task to be executed in the project. The list of available tasks is:
