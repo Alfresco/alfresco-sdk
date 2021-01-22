@@ -55,7 +55,7 @@ Please note that the numbering is not sequential and some numbers may be skipped
 ### org.alfresco.maven.archetype:alfresco-allinone-archetype
 
 This archetype allows a developer to implement the All-In-One project on Alfresco Content Services. The All-In-One project (also called AIO) is provided in 
-this and previous versions of Alfresco SDK, but in SDK 4.1 it has been reshaped to leverage on Docker.
+this and previous versions of Alfresco SDK, but in SDK 4.2 it has been reshaped to leverage on Docker.
 
 The All-In-One archetype allows a developer to create a multi-module project on Alfresco Content Services. The All-In-One project mainly includes a module for 
 the core repository in ACS and a module for the Share client. This includes:
