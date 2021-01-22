@@ -8,7 +8,7 @@ Last reviewed: 2019-10-18
 [HotSwapAgent](http://hotswapagent.org/index.html) is the agent that enables you to do hot reloading. This allows you to modify the application code, and 
 view the changes without having to restart Alfresco Tomcat (or the ACS Docker container).
 
-A prerequisite for this tutorial is to have a project created with the Alfresco SDK 4.1, using the All-In-One archetype or the Platform JAR archetype. It's 
+A prerequisite for this tutorial is to have a project created with the Alfresco SDK 4.2, using the All-In-One archetype or the Platform JAR archetype. It's 
 worth noting that hot reloading is only supported on the platform, and not in Alfresco Share.
 
 As an alternative to the HotSwapAgent you can also try out JRebel. It has more features but isn't free.
@@ -112,7 +112,7 @@ For more information about HotSwapAgent configuration for Java 8, please check t
 Using Java 11 and HotSwapAgent, it isn't necessary to configure the java agent and the alternative JVM as in previous versions. Instead, it is required 
 to use an alternative pre-built JDK distribution. That JDK is based on OpenJDK and includes all the required modifications to run the HotSwapAgent properly.
 
-In the context of the Alfresco SDK 4.1, this change is an issue because the JDK installation is inherited from the [Alfresco java docker image](https://github.com/Alfresco/alfresco-docker-base-java). 
+In the context of the Alfresco SDK 4.2, this change is an issue because the JDK installation is inherited from the [Alfresco java docker image](https://github.com/Alfresco/alfresco-docker-base-java). 
 It is necessary to modify the project ACS docker image to change the default java installation of the container's OS to the one provided by HotSwapAgent.
 
 A way to implement the required modifications would be:
@@ -250,7 +250,7 @@ You'll recognize HotSwapAgent is working when you see similar log messages:
 
 2. Before making any changes, let's run the sample webscript by opening your browser and typing `http://localhost:8080/alfresco/s/sample/helloworld`.
 
-This is a sample webscript generated in every project created using SDK 4.1 and the platform artifact.
+This is a sample webscript generated in every project created using SDK 4.2 and the platform artifact.
 
 ![Alt text](../../docassets/images/sdk-hellofromjava.png "Hello World webscript original result")
 

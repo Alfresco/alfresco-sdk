@@ -28,7 +28,7 @@ The supported versions are explained in the next sections of this article.
 
 ## Switch to Alfresco version 6.0.x
 
-Starting from a newly created Alfresco SDK 4.1 project (All-In-One, Platform JAR, or Share JAR), let’s replace the two properties with the following ones.
+Starting from a newly created Alfresco SDK 4.2 project (All-In-One, Platform JAR, or Share JAR), let’s replace the two properties with the following ones.
 
 1. Open the pom.xml in your generated project.
 
@@ -60,7 +60,7 @@ about wrong JDK versions.
 
 ## Switch to Alfresco version 6.1.x
 
-Starting from a newly created Alfresco SDK 4.1 project (All-In-One, Platform JAR, or Share JAR), let’s replace the two properties with the following ones.
+Starting from a newly created Alfresco SDK 4.2 project (All-In-One, Platform JAR, or Share JAR), let’s replace the two properties with the following ones.
 
 1. Open the pom.xml in your generated project.
 

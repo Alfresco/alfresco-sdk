@@ -26,7 +26,7 @@ If you are an Enterprise customer check the [Support](#alfresco-enterprise-custo
 ## User Getting Started
 
 ### Latest Documentation
-To get started with **Alfresco SDK 4.1.x** (latest) visit the [Alfresco Documentation](docs/README.md).
+To get started with **Alfresco SDK 4.2.x** (latest) visit the [Alfresco Documentation](docs/README.md).
 
 #### Documentation about Previous Versions
 | SDK Version  | Alfresco Enterprise Version       |  Alfresco Community Version       | Documentation  |

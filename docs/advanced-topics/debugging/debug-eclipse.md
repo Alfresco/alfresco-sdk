@@ -5,7 +5,7 @@ Last reviewed: 2019-10-18
 ---
 # Remote debugging using Eclipse
 
-All the projects generated using the Alfresco SDK 4.1 are pre-configured to listen for remote debug connections. Depending on the selected archetypes you'll 
+All the projects generated using the Alfresco SDK 4.2 are pre-configured to listen for remote debug connections. Depending on the selected archetypes you'll 
 have a port for remotely debugging ACS, share or both of them.
 
 By default, the remote debug port for ACS is **8888** and for share is **9898**. This configuration can be changed through the maven properties `acs.debug.port` 
@@ -79,7 +79,7 @@ application. In our case, we are going to test the behaviour of debugging by run
 
 8. Open your browser and type `http://localhost:8080/alfresco/s/sample/helloworld`.
 
-This is a sample webscript generated in every project created using SDK 4.1 and the platform artifact.
+This is a sample webscript generated in every project created using SDK 4.2 and the platform artifact.
 
 ![Alt text](../../docassets/images/sdk-hellofromjava.png "Hello World webscript original result")
 
