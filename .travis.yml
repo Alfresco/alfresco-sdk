@@ -1,0 +1,60 @@
+import:
+  - source: Alfresco/alfresco-build-tools:.travis.java.yml@v1.0.1
+
+dist: focal
+
+git:
+  depth: false
+  quiet: true
+
+branches:
+  only:
+    - master
+    - /feature\/.*/
+    - /fix\/.*/
+
+stages:
+  - name: test
+    if: commit_message !~ /\[skip tests\]/
+  - name: release
+    if: commit_message ~= /\[release\]/ AND (branch = master OR branch =~ /support\/.*/) AND type != push AND type != pull_request AND fork = false
+    
+env:
+  global:
+    - MAVEN_VERIFY_CMD="mvn-U clean verify"
+    
+jobs:
+  include:
+    - name: "Test default version"
+      stage: test
+      script: ${MAVEN_VERIFY_CMD}
+    - name: "Test Enterprise 6.2"
+      stage: test
+      script:
+        - jdk_switcher use oraclejdk11
+        - ${MAVEN_VERIFY_CMD} -Penterprise-62-tests
+    - name: "Test Community 6.2"
+      stage: test
+      script:
+        - jdk_switcher use oraclejdk11
+        - ${MAVEN_VERIFY_CMD} -Pcommunity-62-tests
+    - name: "Test Enterprise 6.1"
+      stage: test
+      script:
+        - jdk_switcher use oraclejdk11
+        - ${MAVEN_VERIFY_CMD} -Penterprise-61-tests
+    - name: "Test Community 6.1"
+      stage: test
+      script:
+        - jdk_switcher use oraclejdk11
+        - ${MAVEN_VERIFY_CMD} -Pcommunity-61-tests
+    - name: "Test Community 6.0"
+      stage: test
+      script:
+        - jdk_switcher use oraclejdk8
+        - ${MAVEN_VERIFY_CMD} -Pcommunity-60-tests
+    - name: "Test Enterprise 6.0"
+      stage: test
+      script:
+        - jdk_switcher use oraclejdk8
+        - ${MAVEN_VERIFY_CMD} -Penterprise-60-tests
