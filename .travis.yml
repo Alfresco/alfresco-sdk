@@ -21,7 +21,7 @@ stages:
     
 env:
   global:
-    - MAVEN_VERIFY_CMD="mvn-U clean verify"
+    - MAVEN_VERIFY_CMD="mvn -U clean verify"
     
 jobs:
   include:
