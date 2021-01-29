@@ -1,5 +1,4 @@
 import:
-  - source: Alfresco/alfresco-build-tools:.travis.pre-commit.yml@v1.0.1
   - source: Alfresco/alfresco-build-tools:.travis.java.yml@v1.0.1
 
 dist: trusty
@@ -15,7 +14,6 @@ branches:
     - /fix\/.*/
 
 stages:
-  - name: lint
   - name: test
     if: commit_message !~ /\[skip tests\]/
   - name: release
