@@ -1,7 +1,7 @@
 import:
   - source: Alfresco/alfresco-build-tools:.travis.java.yml@v1.0.1
 
-dist: focal
+dist: trusty
 
 git:
   depth: false
