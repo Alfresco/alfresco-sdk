@@ -254,6 +254,11 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>alfresco-private-repository</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
+        </repository>
+        
         <!-- Activiti Enterprise Edition Artifacts, put username/pwd for server in settings.xml -->
         <repository>
             <id>activiti-private-repository</id>
