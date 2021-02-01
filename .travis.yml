@@ -20,8 +20,7 @@ stages:
   - name: release
     if: commit_message ~= /\[release\]/ AND branch = master AND type != push AND type != pull_request AND fork = false
 
-install: 
-  - mvn dependency:resolve -B
+script: mvn dependency:resolve
 
 env:
   global:
