@@ -1,7 +1,7 @@
 import:
   - source: Alfresco/alfresco-build-tools:.travis.java.yml@v1.0.1
 
-dist: trusty
+dist: focal
 
 git:
   depth: false
@@ -22,7 +22,7 @@ stages:
     
 env:
   global:
-    - MAVEN_INSTALL_CMD="mvn clean install"
+    - MAVEN_INSTALL_CMD="mvn clean install -B"
     
 jobs:
   include:
