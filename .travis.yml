@@ -15,19 +15,23 @@ branches:
     - dev-gfertuso-travis_migration
 
 stages:
+  - name: setup
   - name: test
     if: commit_message !~ /\[skip tests\]/
   - name: release
     if: commit_message ~= /\[release\]/ AND branch = master AND type != push AND type != pull_request AND fork = false
 
-script: mvn dependency:resolve
-
 env:
   global:
-    - MAVEN_INSTALL_CMD="mvn clean install -B"
+    - MAVEN_INSTALL_CMD="mvn clean install $MAVEN_CLI_OPTS"
     
 jobs:
   include:
+    - name: "Setup needed dependencies"
+      stage: setup
+      script: 
+        - travis_wait $TRAVIS_WAIT_TIMEOUT mvn $MAVEN_CLI_OPTS dependency:resolve dependency:resolve-plugins || true
+  
     - name: "Test default version"
       stage: test
       script: 
