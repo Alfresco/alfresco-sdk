@@ -15,7 +15,7 @@ branches:
     - dev-gfertuso-travis_migration
 
 stages:
-  - name: setup
+  - name: pre-test
   - name: test
     if: commit_message !~ /\[skip tests\]/
   - name: release
@@ -28,7 +28,7 @@ env:
 jobs:
   include:
     - name: "Setup needed dependencies"
-      stage: setup
+      stage: pre-test
       script: 
         - travis_wait $TRAVIS_WAIT_TIMEOUT mvn $MAVEN_CLI_OPTS dependency:resolve dependency:resolve-plugins || true
   
