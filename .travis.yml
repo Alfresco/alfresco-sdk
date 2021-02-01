@@ -19,7 +19,10 @@ stages:
     if: commit_message !~ /\[skip tests\]/
   - name: release
     if: commit_message ~= /\[release\]/ AND branch = master AND type != push AND type != pull_request AND fork = false
-    
+
+install: 
+  - mvn dependency:resolve -B
+
 env:
   global:
     - MAVEN_INSTALL_CMD="mvn clean install -B"
@@ -28,30 +31,25 @@ jobs:
   include:
     - name: "Test default version"
       stage: test
-      script: ${MAVEN_INSTALL_CMD}
+      script: 
+        - ${MAVEN_INSTALL_CMD}
+    
     - name: "Test Enterprise 6.2"
       stage: test
       script:
         - ${MAVEN_INSTALL_CMD} -Penterprise-62-tests
+    
     - name: "Test Community 6.2"
       stage: test
       script:
         - ${MAVEN_INSTALL_CMD} -Pcommunity-62-tests
+    
     - name: "Test Enterprise 6.1"
       stage: test
       script:
         - ${MAVEN_INSTALL_CMD} -Penterprise-61-tests
+    
     - name: "Test Community 6.1"
       stage: test
       script:
         - ${MAVEN_INSTALL_CMD} -Pcommunity-61-tests
-    - name: "Test Community 6.0"
-      stage: test
-      script:
-        - jdk_switcher use oraclejdk8
-        - ${MAVEN_INSTALL_CMD} -Pcommunity-60-tests
-    - name: "Test Enterprise 6.0"
-      stage: test
-      script:
-        - jdk_switcher use oraclejdk8
-        - ${MAVEN_INSTALL_CMD} -Penterprise-60-tests
