@@ -12,6 +12,7 @@ branches:
     - master
     - /feature\/.*/
     - /fix\/.*/
+    - sdk-4.2
 
 stages:
   - name: test
