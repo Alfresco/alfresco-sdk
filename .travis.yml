@@ -15,7 +15,6 @@ branches:
     - dev-gfertuso-travis_migration
 
 stages:
-  - name: pre-test
   - name: test
     if: commit_message !~ /\[skip tests\]/
   - name: release
@@ -23,36 +22,32 @@ stages:
 
 env:
   global:
-    - MAVEN_INSTALL_CMD="mvn clean install $MAVEN_CLI_OPTS"
+    - MAVEN_INSTALL_CMD="mvn clean install -B"
     
 jobs:
   include:
-    - name: "Setup needed dependencies"
-      stage: pre-test
-      script: 
-        - travis_wait $TRAVIS_WAIT_TIMEOUT mvn $MAVEN_CLI_OPTS dependency:resolve dependency:resolve-plugins || true
   
-    - name: "Test default version"
+    - name: "default version"
       stage: test
       script: 
         - ${MAVEN_INSTALL_CMD}
     
-    - name: "Test Enterprise 6.2"
+    - name: "6.2 Enterprise"
       stage: test
       script:
         - ${MAVEN_INSTALL_CMD} -Penterprise-62-tests
     
-    - name: "Test Community 6.2"
+    - name: "6.2 Community"
       stage: test
       script:
         - ${MAVEN_INSTALL_CMD} -Pcommunity-62-tests
     
-    - name: "Test Enterprise 6.1"
+    - name: "6.1 Enterprise"
       stage: test
       script:
         - ${MAVEN_INSTALL_CMD} -Penterprise-61-tests
     
-    - name: "Test Community 6.1"
+    - name: "6.1 Community"
       stage: test
       script:
         - ${MAVEN_INSTALL_CMD} -Pcommunity-61-tests
