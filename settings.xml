@@ -1,9 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <profiles>
+    <profile>
+      <id>alfresco-internal</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>alfresco-internal</id>
+          <name>Alfresco Internal Repository</name>
+          <url>https://artifacts.alfresco.com/nexus/content/groups/internal/</url>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>alfresco-internal</id>
+          <name>Alfresco Internal Repository</name>
+          <url>https://artifacts.alfresco.com/nexus/content/groups/internal/</url>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+  
   <servers>
     <server>
       <id>alfresco-private-repository</id>
+      <username>${env.MAVEN_USERNAME}</username>
+      <password>${env.MAVEN_PASSWORD}</password>
+    </server>
+    <server>
+      <id>activiti-private-repository</id>
+      <username>${env.MAVEN_USERNAME}</username>
+      <password>${env.MAVEN_PASSWORD}</password>
+    </server>
+    <server>
+      <id>alfresco-public-snapshots</id>
+      <username>${env.MAVEN_USERNAME}</username>
+      <password>${env.MAVEN_PASSWORD}</password>
+    </server>
+    <server>
+      <id>alfresco-public</id>
+      <username>${env.MAVEN_USERNAME}</username>
+      <password>${env.MAVEN_PASSWORD}</password>
+    </server>
+    <server>
+      <id>alfresco-plugin-public</id>
+      <username>${env.MAVEN_USERNAME}</username>
+      <password>${env.MAVEN_PASSWORD}</password>
+    </server>
+    <server>
+      <id>alfresco-plugin-public-snapshots</id>
+      <username>${env.MAVEN_USERNAME}</username>
+      <password>${env.MAVEN_PASSWORD}</password>
+    </server>
+    <server>
+      <id>alfresco-internal-snapshots</id>
       <username>${env.MAVEN_USERNAME}</username>
       <password>${env.MAVEN_PASSWORD}</password>
     </server>
