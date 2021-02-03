@@ -1,5 +1,7 @@
 import:
+  - source: Alfresco/alfresco-build-tools:.travis.docker_login.yml@v1.0.1
   - source: Alfresco/alfresco-build-tools:.travis.java.yml@v1.0.1
+  - source: Alfresco/alfresco-build-tools:.travis.pre-commit.yml@v1.0.1
 
 dist: focal
 
@@ -24,7 +26,7 @@ stages:
 env:
   global:
     - MAVEN_INSTALL_CMD="mvn clean install -B"
-    
+
 jobs:
   include:
   
