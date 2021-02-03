@@ -15,7 +15,7 @@ services:
       dockerfile: ./Dockerfile
       context: ../../../target
     environment:
-      JAVA_TOOL_OPTIONS:
+      JAVA_TOOL_OPTIONS: "
         -Dencryption.keystore.type=JCEKS
         -Dencryption.cipherAlgorithm=AES/CBC/PKCS5Padding
         -Dencryption.keyAlgorithm=AES
@@ -23,7 +23,7 @@ services:
         -Dmetadata-keystore.password=mp6yc0UD9e
         -Dmetadata-keystore.aliases=metadata
         -Dmetadata-keystore.metadata.password=oKIWzVdEdA
-        -Dmetadata-keystore.metadata.algorithm=AES
+        -Dmetadata-keystore.metadata.algorithm=AES"
       CATALINA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8888"
     ports:
       - "${symbol_dollar}{acs.port}:8080"
