@@ -15,7 +15,6 @@ branches:
     - /feature\/.*/
     - /fix\/.*/
     - sdk-4.2
-    - /dev\/sdk-4.2-keystore/
 
 stages:
   - name: test
@@ -30,7 +29,7 @@ env:
 jobs:
   include:
   
-    - name: "default version"
+    - name: "current version"
       stage: test
       script: 
         - ${MAVEN_INSTALL_CMD}
