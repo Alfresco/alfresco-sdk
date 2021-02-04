@@ -16,8 +16,8 @@
 
     <licenses>
         <license>
-            <name>GNU Lesser General Public License v3.0 or later</name>
-            <url>http://www.gnu.org/licenses/lgpl-3.0-standalone.html</url>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
 
@@ -33,85 +33,6 @@
         <tag>alfresco-sdk-aggregator-4.2.0-SNAPSHOT</tag>
     </scm>
 
-    <developers>
-
-        <developer>
-            <id>ohej</id>
-            <name>Ole Hejlskov</name>
-            <email>ole@phpfreak.dk</email>
-            <url>http://ohej.dk/</url>
-            <organization>Alfresco</organization>
-            <organizationUrl>http://www.alfresco.com</organizationUrl>
-            <timezone>+1</timezone>
-            <roles>
-                <role>Developer</role>
-            </roles>
-        </developer>
-        <developer>
-            <id>gravitonian</id>
-            <name>Martin Bergljung</name>
-            <email>martin.bergljung@alfresco.com</email>
-            <url>https://sites.google.com/site/gravitonian/</url>
-            <organization>Alfresco Software</organization>
-            <organizationUrl>http://www.alfresco.com</organizationUrl>
-            <timezone>+0</timezone>
-            <roles>
-                <role>Architect</role>
-                <role>Developer</role>
-            </roles>
-        </developer>
-    </developers>
-
-    <contributors>
-        <contributor>
-            <name>Gabriele Columbro</name>
-            <email>gabriele.columbro@alfresco.com</email>
-            <url>http://mindthegab.com</url>
-            <organization>Alfresco Software</organization>
-            <organizationUrl>http://www.alfresco.com</organizationUrl>
-            <timezone>-5</timezone>
-        </contributor>
-        <contributor>
-            <name>Maurizio Pillitu</name>
-            <email>maurizio.pillitu@alfresco.com</email>
-            <url>http://session.it</url>
-            <organization>Alfresco Software</organization>
-            <organizationUrl>http://www.alfresco.com</organizationUrl>
-            <timezone>+1</timezone>
-        </contributor>
-        <contributor>
-            <name>Carlo Sciolla</name>
-            <email>carlo@backbase.com</email>
-            <organization>Backbase</organization>
-            <organizationUrl>http://www.backbase.com</organizationUrl>
-            <timezone>+1</timezone>
-            <url>http://skuro.tk</url>
-        </contributor>
-        <contributor>
-            <name>Samuel Langlois</name>
-            <email>samuel.langlois@alfresco.com</email>
-            <organization>Alfresco Software</organization>
-            <organizationUrl>http://www.alfresco.com</organizationUrl>
-            <timezone>+0</timezone>
-            <url>https://twitter.com/samuel_langlois</url>
-        </contributor>
-        <contributor>
-            <name>Ray Gauss II</name>
-            <email>ray.gauss@alfresco.com</email>
-            <organization>Alfresco Software</organization>
-            <organizationUrl>http://www.alfresco.com</organizationUrl>
-            <timezone>-5</timezone>
-            <url>http://rgauss.com/</url>
-        </contributor>
-        <contributor>
-            <name>Jose Luis Osorno Gil</name>
-            <email>joseluis.osorno@ixxus.com</email>
-            <organization>Ixxus</organization>
-            <organizationUrl>http://www.ixxus.com</organizationUrl>
-            <timezone>+1</timezone>
-        </contributor>
-    </contributors>
-
     <!-- All the modules of the Alfresco SDK -->
     <modules>
         <!-- Modules -->
@@ -123,7 +44,6 @@
         <module>archetypes/alfresco-share-jar-archetype</module>
         <module>archetypes/alfresco-allinone-archetype</module>
         <module>archetypes/archetypes-it</module>
-
   </modules>
 
     <properties>
@@ -139,8 +59,17 @@
         <alfresco.share.version>7.0.0-M3</alfresco.share.version>
         <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
         <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
-
-        <test.acs.endpoint.path />
+        <keystore.settings>
+            -Dencryption.keystore.type=JCEKS
+            -Dencryption.cipherAlgorithm=AES/CBC/PKCS5Padding
+            -Dencryption.keyAlgorithm=AES
+            -Dencryption.keystore.location=/usr/local/tomcat/shared/classes/alfresco/extension/keystore/keystore
+            -Dmetadata-keystore.password=mp6yc0UD9e
+            -Dmetadata-keystore.aliases=metadata
+            -Dmetadata-keystore.metadata.password=oKIWzVdEdA
+            -Dmetadata-keystore.metadata.algorithm=AES
+        </keystore.settings>
+        <test.acs.endpoint.path/>
 
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
     </properties>
@@ -316,6 +245,7 @@
                 <alfresco.share.version>6.0.b</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+                <keystore.settings></keystore.settings>
             </properties>
         </profile>
 
@@ -327,6 +257,7 @@
                 <alfresco.share.version>6.0</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+                <keystore.settings></keystore.settings>
             </properties>
         </profile>
 
@@ -340,6 +271,7 @@
                 <alfresco.share.version>6.1.0-RC3</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+                <keystore.settings></keystore.settings>
             </properties>
         </profile>
 
@@ -351,6 +283,7 @@
                 <alfresco.share.version>6.1.0</alfresco.share.version>
                 <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
+                <keystore.settings></keystore.settings>
             </properties>
         </profile>
 
@@ -364,6 +297,7 @@
                 <alfresco.share.version>6.2.0</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+                <keystore.settings></keystore.settings>
             </properties>
         </profile>
 
@@ -375,6 +309,7 @@
                 <alfresco.share.version>6.2.0</alfresco.share.version>
                 <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
+                <keystore.settings></keystore.settings>
             </properties>
         </profile>
 
@@ -516,5 +451,84 @@
         </profile>
          -->
     </profiles>
+
+    <developers>
+
+        <developer>
+            <id>ohej</id>
+            <name>Ole Hejlskov</name>
+            <email>ole@phpfreak.dk</email>
+            <url>http://ohej.dk/</url>
+            <organization>Alfresco</organization>
+            <organizationUrl>http://www.alfresco.com</organizationUrl>
+            <timezone>+1</timezone>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>gravitonian</id>
+            <name>Martin Bergljung</name>
+            <email>martin.bergljung@alfresco.com</email>
+            <url>https://sites.google.com/site/gravitonian/</url>
+            <organization>Alfresco Software</organization>
+            <organizationUrl>http://www.alfresco.com</organizationUrl>
+            <timezone>+0</timezone>
+            <roles>
+                <role>Architect</role>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <contributors>
+        <contributor>
+            <name>Gabriele Columbro</name>
+            <email>gabriele.columbro@alfresco.com</email>
+            <url>http://mindthegab.com</url>
+            <organization>Alfresco Software</organization>
+            <organizationUrl>http://www.alfresco.com</organizationUrl>
+            <timezone>-5</timezone>
+        </contributor>
+        <contributor>
+            <name>Maurizio Pillitu</name>
+            <email>maurizio.pillitu@alfresco.com</email>
+            <url>http://session.it</url>
+            <organization>Alfresco Software</organization>
+            <organizationUrl>http://www.alfresco.com</organizationUrl>
+            <timezone>+1</timezone>
+        </contributor>
+        <contributor>
+            <name>Carlo Sciolla</name>
+            <email>carlo@backbase.com</email>
+            <organization>Backbase</organization>
+            <organizationUrl>http://www.backbase.com</organizationUrl>
+            <timezone>+1</timezone>
+            <url>http://skuro.tk</url>
+        </contributor>
+        <contributor>
+            <name>Samuel Langlois</name>
+            <email>samuel.langlois@alfresco.com</email>
+            <organization>Alfresco Software</organization>
+            <organizationUrl>http://www.alfresco.com</organizationUrl>
+            <timezone>+0</timezone>
+            <url>https://twitter.com/samuel_langlois</url>
+        </contributor>
+        <contributor>
+            <name>Ray Gauss II</name>
+            <email>ray.gauss@alfresco.com</email>
+            <organization>Alfresco Software</organization>
+            <organizationUrl>http://www.alfresco.com</organizationUrl>
+            <timezone>-5</timezone>
+            <url>http://rgauss.com/</url>
+        </contributor>
+        <contributor>
+            <name>Jose Luis Osorno Gil</name>
+            <email>joseluis.osorno@ixxus.com</email>
+            <organization>Ixxus</organization>
+            <organizationUrl>http://www.ixxus.com</organizationUrl>
+            <timezone>+1</timezone>
+        </contributor>
+    </contributors>
 
 </project>

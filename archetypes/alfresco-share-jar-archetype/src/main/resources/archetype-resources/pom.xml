@@ -25,6 +25,8 @@
         <docker.acs.image>@@alfresco.platform.docker.image@@</docker.acs.image>
         <docker.share.image>@@alfresco.share.docker.image@@</docker.share.image>
 
+        <keystore.settings>@@keystore.settings@@</keystore.settings>
+
         <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
         <jrebel.version>1.1.8</jrebel.version>
 
