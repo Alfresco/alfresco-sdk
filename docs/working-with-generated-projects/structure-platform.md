@@ -80,6 +80,7 @@ my-platform-jar-project
                     └── platformsample
                         ├── CustomContentModelIT.java
                         ├── DemoComponentIT.java
+                        ├── SimpleMockTest.java
                         ├── HelloWorldWebScriptControllerTest.java
                         └── HelloWorldWebScriptIT.java
 ```

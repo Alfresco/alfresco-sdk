@@ -70,7 +70,7 @@ EXIT /B %ERRORLEVEL%
 :start
     docker volume create ${rootArtifactId}-acs-volume
     docker volume create ${rootArtifactId}-db-volume
-    docker volume create ${rootArtifactId}-ass-volume
+    docker volume create ${rootArtifactId}-search-volume
     docker-compose -f "%COMPOSE_FILE_PATH%" up --build -d
 EXIT /B 0
 :down
@@ -96,5 +96,5 @@ EXIT /B 0
 :purge
     docker volume rm -f ${rootArtifactId}-acs-volume
     docker volume rm -f ${rootArtifactId}-db-volume
-    docker volume rm -f ${rootArtifactId}-ass-volume
+    docker volume rm -f ${rootArtifactId}-search-volume
 EXIT /B 0
