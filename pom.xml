@@ -210,9 +210,13 @@
             <id>central-releases-staging</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
+<!--        <snapshotRepository>-->
+<!--            <id>central-snapshots</id>-->
+<!--            <url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
+<!--        </snapshotRepository>-->
         <snapshotRepository>
-            <id>central-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <id>alfresco-public-snapshots</id>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
         <site>
             <id>alfresco-docs</id>
@@ -294,7 +298,7 @@
             <id>community-62-tests</id>
             <properties>
                 <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>6.2.2-RC1</alfresco.platform.version>
+                <alfresco.platform.version>6.2.0-ea</alfresco.platform.version>
                 <alfresco.share.version>6.2.2</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
