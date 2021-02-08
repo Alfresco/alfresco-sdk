@@ -31,13 +31,32 @@ If you are an Enterprise customer check the [Support](#alfresco-enterprise-custo
 
 ## User Getting Started
 
+### Important Notice about Version Numbers
+
+In Q4 2020, Alfresco Platform has undergone a major structural refactoring.
+
+Depending on the Platform version desired, you might need to use SDK 4.1 instead of SDK 4.2.
+
+- For Enterprise and Community versions of 7.x, SDK 4.2 must be used
+- For Enterprise versions of 6.0.x, 6.1.x, 6.2.x newer than November 2020, SDK 4.2 must be used
+- For Enterprise and Community versions of 6.0.x, 6.1.x, 6.2.x older than November 2020, SDK 4.1 must be used
+
+A more precise compatibility matrix, with specific version numbers, is expected to be provided soon.
+
+It's also important to remember that:
+
+- Community Platform versions are built by [acs-community-packaging](https://github.com/Alfresco/acs-community-packaging)
+- Community Docker images are published on [Docker Hub](https://hub.docker.com/r/alfresco/alfresco-content-repository-community/tags?page=1&ordering=last_updated)
+- Enterprise Platform versions are built by [acs-packaging](https://github.com/Alfresco/acs-packaging)
+- Enterprise Docker images are published on *Quay.io*
+
 ### Latest Documentation
 To get started with **Alfresco SDK 4.2.x** (latest) visit the [Alfresco Documentation](docs/README.md).
 
 #### Documentation about Previous Versions
 | SDK Version  | Alfresco Enterprise Version       |  Alfresco Community Version       | Documentation  |
 | ------------- |:-------------:| :-----:|:-----|
-| SDK 4.2   | Alfresco 6.0.x / 6.1.x / 6.2.x / 7.0.x | Alfresco 6.0.x / 6.1.x / 6.2.x / 7.0.x | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md |
+| SDK 4.2   | Alfresco 6.0.x / 6.1.x / 6.2.x / 7.0.x | Alfresco 7.0.x | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md |
 | SDK 4.1   | Alfresco 6.0.x / 6.1.x / 6.2.x | Alfresco 6.0.x / 6.1.x / 6.2.x | https://github.com/Alfresco/alfresco-sdk/blob/sdk-4.1/docs/README.md |
 | SDK 4.0   | Alfresco 6.0.x / 6.1.x | Alfresco 6.0.x / 6.1.x | https://github.com/Alfresco/alfresco-sdk/blob/sdk-4.0/docs/README.md |
 | SDK 3.1   | Alfresco 5.2.x | Alfresco 5.2.x | http://docs.alfresco.com/5.2/concepts/sdk-intro.html |
