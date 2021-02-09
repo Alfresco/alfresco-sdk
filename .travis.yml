@@ -1,5 +1,7 @@
 import:
+  - source: Alfresco/alfresco-build-tools:.travis.docker_login.yml@v1.0.1
   - source: Alfresco/alfresco-build-tools:.travis.java.yml@v1.0.1
+  - source: Alfresco/alfresco-build-tools:.travis.pre-commit.yml@v1.0.1
 
 dist: focal
 
@@ -12,6 +14,7 @@ branches:
     - master
     - /feature\/.*/
     - /fix\/.*/
+    - sdk-4.2
 
 stages:
   - name: test
@@ -22,15 +25,25 @@ stages:
 env:
   global:
     - MAVEN_INSTALL_CMD="mvn clean install -B"
-    
+
 jobs:
   include:
   
-    - name: "default version"
+    - name: "current version"
       stage: test
       script: 
         - ${MAVEN_INSTALL_CMD}
     
+    - name: "7.0 Enterprise"
+      stage: test
+      script:
+        - ${MAVEN_INSTALL_CMD} -Penterprise-70-tests
+    
+    - name: "7.0 Community"
+      stage: test
+      script:
+        - ${MAVEN_INSTALL_CMD} -Pcommunity-70-tests
+
     - name: "6.2 Enterprise"
       stage: test
       script:

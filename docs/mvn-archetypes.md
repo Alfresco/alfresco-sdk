@@ -1,21 +1,21 @@
 ---
 Title: Alfresco SDK Maven archetypes
 Added: v2.1.1
-Last reviewed: 2019-10-18
+Last reviewed: 2021-02-09
 ---
 # Alfresco SDK Maven archetypes
 
-The Alfresco SDK 4.1 comes with a number of Maven archetypes that can be used to generate Alfresco extension projects.
+The Alfresco SDK 4.2 comes with a number of Maven archetypes that can be used to generate Alfresco extension projects.
 
-For more details, see [Getting started with Alfresco SDK 4.1](getting-started.md).
+For more details, see [Getting started with Alfresco SDK 4.2](getting-started.md).
 
 These archetypes are available during the creation of a brand new project. In short, a [Maven archetype](https://maven.apache.org/guides/introduction/introduction-to-archetypes.html) 
 is a project templating toolkit. It's defined as an original pattern or model from which all other things of the same kind are made. Using archetypes 
 provides a great way to enable developers to quickly follow best practice in a consistent way. This is valid for every project built with Apache Maven and 
-it's valid in particular when using Alfresco SDK 4.1.
+it's valid in particular when using Alfresco SDK 4.2.
 
-In this section we are going to introduce all the available archetypes in Alfresco SDK 4.1, with a brief description of their purpose and main use. 
-After reading this information, you should be able to understand the various possibilities that Alfresco SDK 4.1 can offer to developers, in terms of 
+In this section we are going to introduce all the available archetypes in Alfresco SDK 4.2, with a brief description of their purpose and main use. 
+After reading this information, you should be able to understand the various possibilities that Alfresco SDK 4.2 can offer to developers, in terms of 
 projects.
 
 When generating your project, you'll be prompted to select the Maven archetype you want to use through an interactive menu, similar to what you can see below.

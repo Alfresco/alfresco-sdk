@@ -1,7 +1,7 @@
 ---
 Title: Integration testing
 Added: v3.0.0
-Last reviewed: 2019-10-18
+Last reviewed: 2021-02-09
 ---
 # Integration testing
 
@@ -11,11 +11,11 @@ in an integration test plan to those aggregates, and delivers as its output the 
 
 Even if the definition of integration testing is a general description, the concept is also valid for Alfresco projects. 
 
-The Alfresco SDK 4.1 keeps the same general idea of integration testing provided by SDK 3.0, but this new version reshapes it slightly to leverage on a 
+The Alfresco SDK 4.2 keeps the same general idea of integration testing provided by SDK 3.0, but this new version reshapes it slightly to leverage on a 
 Docker-oriented environment.
 
 Here are the basics to understanding and using integration testing in the context of projects created with the SDK, from a technical perspective:
-* SDK 4.1 develops integration tests for the platform only. Currently, the integration tests that the SDK is able to manage by default is related to 
+* SDK 4.2 develops integration tests for the platform only. Currently, the integration tests that the SDK is able to manage by default is related to 
 Alfresco Content Services (ACS) only.
 * Integration tests require an ACS instance to be up and running. You will see that all the scripts and commands are designed to easily manage this 
 requirement, but the prerequisite for the SDK is that an ACS instance is available.

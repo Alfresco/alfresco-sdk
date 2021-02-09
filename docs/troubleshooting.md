@@ -1,11 +1,11 @@
 ---
 Title: Troubleshooting
 Added: v3.0.0
-Last reviewed: 2019-10-18
+Last reviewed: 2021-02-09
 ---
 # Troubleshooting
 
-This article describes a list of common issues with the projects generated from the Alfresco SDK 4.1 archetypes and the way to troubleshoot them.
+This article describes a list of common issues with the projects generated from the Alfresco SDK 4.2 archetypes and the way to troubleshoot them.
 
 * [Incorrect JDK version](#incorrect-jdk-version)
 * [Containers synchronization](#containers-synchronization)

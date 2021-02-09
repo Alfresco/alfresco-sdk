@@ -19,6 +19,7 @@ services:
       dockerfile: ./Dockerfile
       context: ../../../${rootArtifactId}-platform-docker/target
     environment:
+      JAVA_TOOL_OPTIONS: "${symbol_dollar}{keystore.settings}"
       CATALINA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8888"
     ports:
       - "${symbol_dollar}{acs.port}:8080"

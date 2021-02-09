@@ -1,7 +1,7 @@
 ---
 Title: Debugging
 Added: v3.0.0
-Last reviewed: 2019-10-18
+Last reviewed: 2021-02-09
 ---
 # Debugging
 
@@ -10,4 +10,4 @@ application server. This section outlines the steps needed to configure Alfresco
 and to troubleshoot issues by stepping through the code line by line.
 
 Here we assume you have already generated an Alfresco project using the Alfresco SDK. If you don't have a project already, follow the steps in 
-[Getting started with Alfresco SDK 4.1](../../getting-started.md) to learn how to generate it in a few easy steps.
+[Getting started with Alfresco SDK 4.2](../../getting-started.md) to learn how to generate it in a few easy steps.

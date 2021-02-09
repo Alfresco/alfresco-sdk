@@ -3,13 +3,13 @@ Title: Upgrading
 Added: v4.0.0
 Last reviewed: 2019-01-29
 ---
-# Upgrading an SDK 3.0 project to SDK 4.1
+# Upgrading an SDK 3.0 project to SDK 4.2
 
-In these instructions, "base" refers to a freshly instantiated SDK 4.1 and "target" refers to the SDK 3.0.1 project that is being upgraded.
+In these instructions, "base" refers to a freshly instantiated SDK 4.2 and "target" refers to the SDK 3.0.1 project that is being upgraded.
 
 ## Download a base
 
-Download or instantiate an SDK 4.1 project to use as a base for copying files.
+Download or instantiate an SDK 4.2 project to use as a base for copying files.
 
 For example, you might create a new project called `test-aio-400` to use as a base from which to copy files into the target project that is to be upgraded.
 
@@ -65,7 +65,7 @@ Similar to previous step, the directory should follow the same pattern as the ex
 
 Need to smartly do this merge so that target project maintains its dependencies, name, version, description, etc.
 
-1. Copy the entire `<properties>` element from the base 4.1 pom.xml into the target 3.0 pom.xml, replacing the existing one completely.
+1. Copy the entire `<properties>` element from the base 4.2 pom.xml into the target 3.0 pom.xml, replacing the existing one completely.
 
 2. Change the `acs.host` property to match the target project name.
 
@@ -220,7 +220,7 @@ Then that would need to be moved into the share docker module's pom.xml file in 
 
 ## Changes to the integration-tests module
 
-1. Completely replace the pom.xml file with the pom.xml file from the 4.1 pom.xml file under integration-tests.
+1. Completely replace the pom.xml file with the pom.xml file from the 4.2 pom.xml file under integration-tests.
 
 2. Edit the integration-tests pom.xml to replace references to the base project name with references to the target project name.
 
@@ -230,7 +230,7 @@ Then that would need to be moved into the share docker module's pom.xml file in 
 
 ## Changes to the platform-jar module
 
-Smartly merge the pom.xml file from the 4.1 platform-jar module into the existing platform-jar module pom.xml file.
+Smartly merge the pom.xml file from the 4.2 platform-jar module into the existing platform-jar module pom.xml file.
 
 Maintain the dependencies from the 3.0 platform-jar module pom.xml.
 
@@ -238,13 +238,13 @@ Any old "platformModule" dependencies, which are typically AMPs or JARs that nee
 
 ## Changes to the share-jar module
 
-Smartly merge the pom.xml file from the 4.1 share-jar module into the existing share-jar module pom.xml file.
+Smartly merge the pom.xml file from the 4.2 share-jar module into the existing share-jar module pom.xml file.
 
 Maintain the dependencies from the 3.0 share-jar module pom.xml.
 
 Any old "shareModule" dependencies, which are typically AMPs or JARs that need to be installed in the Share tier need to be copied into this pom.xml's depdencies.
 
-Remove the spring-surf-api dependency from the 4.1 share-jar module. Remove:
+Remove the spring-surf-api dependency from the 4.2 share-jar module. Remove:
 
 ```
 <dependency>

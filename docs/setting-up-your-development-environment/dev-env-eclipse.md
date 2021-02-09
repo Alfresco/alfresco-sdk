@@ -1,7 +1,7 @@
 ---
 Title: Setting up your development environment using Eclipse
 Added: v3.0.0
-Last reviewed: 2019-10-18
+Last reviewed: 2021-02-09
 ---
 # Setting up your development environment using Eclipse
 
@@ -9,7 +9,7 @@ The Maven Alfresco SDK is designed to work well with Eclipse. This support inclu
 Alfresco SDK.
 
 Here we assume you already have an Eclipse installation up and running, together with an available Alfresco project created using the Alfresco SDK. If you 
-don't have a project already, follow the steps in [Getting started with Alfresco SDK 4.1](../getting-started.md) to learn how to quickly generate it in a few 
+don't have a project already, follow the steps in [Getting started with Alfresco SDK 4.2](../getting-started.md) to learn how to quickly generate it in a few 
 easy steps.
 
 ## Importing the Alfresco project into Eclipse

@@ -5,8 +5,8 @@
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
-    <name>AIO - SDK 4.0</name>
-    <description>All-In-One (AIO) project for SDK 4.0</description>
+    <name>AIO - SDK 4.2</name>
+    <description>All-In-One (AIO) project for SDK 4.2</description>
     <packaging>pom</packaging>
 
     <prerequisites>
@@ -28,6 +28,8 @@
         <!-- Docker images -->
         <docker.acs.image>@@alfresco.platform.docker.image@@</docker.acs.image>
         <docker.share.image>@@alfresco.share.docker.image@@</docker.share.image>
+
+        <keystore.settings>@@keystore.settings@@</keystore.settings>
 
         <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
         <jrebel.version>1.1.8</jrebel.version>
