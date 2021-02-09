@@ -1,7 +1,7 @@
 ---
 Title: Working with a Share project
 Added: v4.0.0
-Last reviewed: 2019-10-18
+Last reviewed: 2021-02-09
 ---
 
 # Working with a Share project
@@ -21,7 +21,7 @@ the Share project was generated with the name `my-share-project`.
 -   [Stopping the project](#stopping-the-project)
 
 ## Introduction
-An Alfresco Sharte project is used to build extensions for [Alfresco Share UI](https://docs.alfresco.com/6.1/concepts/dev-extensions-share.html). 
+An Alfresco Sharte project is used to build extensions for [Alfresco Share UI](https://docs.alfresco.com/6.2/concepts/dev-extensions-share.html). 
 The runtime environment for ACS is Docker so not only is this project building the source code for your extensions but also the 
 custom Docker image for Alfresco Share. The custom Docker images includes the 
 JARs, or AMPs, with your extension code. 
@@ -39,8 +39,8 @@ The following table explains some of these properties:
 
 | Name | Type | Default value | Description |
 | ---- | ---- | ------------- | ----------- |
-| alfresco.platform.version | `string` | 6.1.2-ga | The version of the ACS Repository (i.e. alfresco.war) that the Repository Extension should be applied to. This also specifies the version of the ACS Repository Docker Image that the custom built Repository image should be based on. See **my-share-project-platform-docker/src/main/docker/Dockerfile** |
-| alfresco.share.version | `string` | 6.1.0-RC3 | The version of Alfresco Share (i.e. share.war) that the Share Extension should be applied to. This also specifies the version of the Alfresco Share Docker Image that the custom built Share image should be based on. See **my-share-project-share-docker/src/main/docker/Dockerfile**|
+| alfresco.platform.version | `string` | 7.0.0-A20 | The version of the ACS Repository (i.e. alfresco.war) that the Repository Extension should be applied to. This also specifies the version of the ACS Repository Docker Image that the custom built Repository image should be based on. See **my-share-project-platform-docker/src/main/docker/Dockerfile** |
+| alfresco.share.version | `string` | 7.0.0-M3 | The version of Alfresco Share (i.e. share.war) that the Share Extension should be applied to. This also specifies the version of the Alfresco Share Docker Image that the custom built Share image should be based on. See **my-share-project-share-docker/src/main/docker/Dockerfile**|
 | docker.acs.image | `string` | alfresco/alfresco-content-repository-community | The name of the ACS Repository Docker image in Docker Hub. This changes if you switch to Enterprise Edition.|
 | docker.share.image | `string` | alfresco/alfresco-share | The name of the Alfresco Share Docker image in Docker Hub. This changes if you switch to Enterprise Edition.|
 | share.port | `number` | 8180 | The external port (i.e. outside container) for the Alfresco Share webapp.|

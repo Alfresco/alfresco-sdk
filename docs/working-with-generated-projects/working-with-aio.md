@@ -1,7 +1,7 @@
 ---
 Title: Working with an All-In-One project
 Added: v4.0.0
-Last reviewed: 2019-10-18
+Last reviewed: 2021-02-09
 ---
 
 # Working with an All-In-One project
@@ -21,8 +21,8 @@ the AIO project was generated with the name `my-all-in-one-project`.
 -   [Stopping the project](#stopping-the-project)
 
 ## Introduction
-An AIO SDK project is used to build extensions for both [Alfresco Content Services (ACS) Repository](https://docs.alfresco.com/6.1/concepts/dev-platform-extensions.html) 
-and [Alfresco Share UI](https://docs.alfresco.com/6.1/concepts/dev-extensions-share.html). The runtime environment
+An AIO SDK project is used to build extensions for both [Alfresco Content Services (ACS) Repository](https://docs.alfresco.com/6.2/concepts/dev-platform-extensions.html) 
+and [Alfresco Share UI](https://docs.alfresco.com/6.2/concepts/dev-extensions-share.html). The runtime environment
 for ACS is Docker so not only is this project building the source code for your extensions but also the 
 custom Docker images for the Alfresco Repository and Alfresco Share. The custom Docker images includes the 
 JARs, or AMPs, with your extension code. 
@@ -47,8 +47,8 @@ The following table explains some of these properties:
 
 | Name | Type | Default value | Description |
 | ---- | ---- | ------------- | ----------- |
-| alfresco.platform.version | `string` | 6.1.2-ga | The version of the ACS Repository (i.e. alfresco.war) that the Repository Extension should be applied to. This also specifies the version of the ACS Repository Docker Image that the custom built Repository image should be based on. See **my-all-in-one-project-platform-docker/src/main/docker/Dockerfile** |
-| alfresco.share.version | `string` | 6.1.0-RC3 | The version of Alfresco Share (i.e. share.war) that the Share Extension should be applied to. This also specifies the version of the Alfresco Share Docker Image that the custom built Share image should be based on. See **my-all-in-one-project-share-docker/src/main/docker/Dockerfile**|
+| alfresco.platform.version | `string` | 7.0.0-A20 | The version of the ACS Repository (i.e. alfresco.war) that the Repository Extension should be applied to. This also specifies the version of the ACS Repository Docker Image that the custom built Repository image should be based on. See **my-all-in-one-project-platform-docker/src/main/docker/Dockerfile** |
+| alfresco.share.version | `string` | 7.0.0-M3 | The version of Alfresco Share (i.e. share.war) that the Share Extension should be applied to. This also specifies the version of the Alfresco Share Docker Image that the custom built Share image should be based on. See **my-all-in-one-project-share-docker/src/main/docker/Dockerfile**|
 | docker.acs.image | `string` | alfresco/alfresco-content-repository-community | The name of the ACS Repository Docker image in Docker Hub. This changes if you switch to Enterprise Edition.|
 | docker.share.image | `string` | alfresco/alfresco-share | The name of the Alfresco Share Docker image in Docker Hub. This changes if you switch to Enterprise Edition.|
 | share.port | `number` | 8180 | The external port (i.e. outside container) for the Alfresco Share webapp.|
@@ -103,11 +103,11 @@ my-all-in-one-project-db-volume
 my-all-in-one-project-ass-volume
 ...
 Building my-all-in-one-project-share
-Step 1/8 : FROM alfresco/alfresco-share:6.1.0-RC3
+Step 1/8 : FROM alfresco/alfresco-share:7.0.0-M3
 ...
 Successfully tagged alfresco-share-my-all-in-one-project:development
 Building my-all-in-one-project-acs
-Step 1/9 : FROM alfresco/alfresco-content-repository-community:6.1.2-ga
+Step 1/9 : FROM alfresco/alfresco-content-repository-community:7.0.0-A20
 ...
 Successfully tagged alfresco-content-services-my-all-in-one-project:development
 ...

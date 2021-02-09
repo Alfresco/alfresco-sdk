@@ -1,7 +1,7 @@
 ---
 Title: Switching Alfresco Content Services and Share versions
 Added: v3.0.0
-Last reviewed: 2019-10-18
+Last reviewed: 2021-02-09
 ---
 # Switching Alfresco Content Services and Share versions
 
@@ -15,8 +15,8 @@ to use.
 When editing `pom.xml` you will see a number of properties that define the Alfresco Content Services platform version and the Alfresco Share version, such as:
 
 ```
-<alfresco.platform.version>6.1.2-ga</alfresco.platform.version>
-<alfresco.share.version>6.1.0-RC3</alfresco.share.version>
+<alfresco.platform.version>7.0.0-A20</alfresco.platform.version>
+<alfresco.share.version>7.0.0-M3</alfresco.share.version>
 ```
 
 Before continuing, always remember to start from a newly generated SDK project before changing the version numbers. We do not recommend changing the versions 
@@ -58,7 +58,7 @@ $ ./run.sh build_start
 switch from version 6.1+ to 6.0.x. If you compile Alfresco 6.0.x with JDK 11 you'll experience the issue described in the [Troubleshooting page](../troubleshooting.md) 
 about wrong JDK versions.
 
-## Switch to Alfresco version 6.1.x
+## Switch to Alfresco version 6.1.x or 6.2.x
 
 Starting from a newly created Alfresco SDK 4.2 project (All-In-One, Platform JAR, or Share JAR), let’s replace the two properties with the following ones.
 

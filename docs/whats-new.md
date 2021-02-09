@@ -1,14 +1,17 @@
 ---
 Title: What's new?
 Added: v2.1.1
-Last reviewed: 2019-10-18
+Last reviewed: 2021-02-09
 ---
 # What's new?
 
-Alfresco SDK 4.0 brings some changes oriented to assist the way the customizations are built, packaged, run and tested for Alfresco Content Services 6 and 
+Alfresco SDK 4.0 brought some changes oriented to assist the way the customizations are built, packaged, run and tested for Alfresco Content Services 6 and 
 Alfresco Share 6.
 
-This is a mayor release oriented to support Alfresco 6, so it is not compatible with previous versions of the SDK.
+This was a mayor release oriented to support Alfresco 6, so it is not compatible with previous versions of the SDK.
+
+Alfresco SDK 4.2 extends the support to Alfresco 7, while still being compatible with Alfresco 6 Enterprise. 
+Alfresco 6 Community is not officially supported in SDK 4.2, but is also likely to work. SDK 4.1 can be used for that, though. 
 
 ## Embracing containers and Docker
 
@@ -60,3 +63,7 @@ environment can be more similar to a real one, including whatever other service 
 ## Support for Alfresco 6.2.x
 
 Alfresco SDK 4.1 provides support for Alfresco 6.2.x.
+
+## Support for Alfresco 7.0.x
+
+Alfresco SDK 4.2 provides support for Alfresco 7.0.x.
