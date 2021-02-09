@@ -15,7 +15,7 @@ If you are an Enterprise customer check the [Support](#alfresco-enterprise-custo
 
 ## News
 
-- 2020-02: Alfresco SDK 4.2.0 released
+- 2021-02: Alfresco SDK 4.2.0 released
 - 2019-10: Alfresco SDK 4.1.0 released
 - 2019-03: Alfresco SDK 4.0.0 released
 - 2019-03: Alfresco SDK 3.1.0 released
