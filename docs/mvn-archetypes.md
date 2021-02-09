@@ -1,7 +1,7 @@
 ---
 Title: Alfresco SDK Maven archetypes
 Added: v2.1.1
-Last reviewed: 2019-10-18
+Last reviewed: 2021-02-09
 ---
 # Alfresco SDK Maven archetypes
 

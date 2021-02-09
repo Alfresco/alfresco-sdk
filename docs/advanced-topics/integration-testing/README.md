@@ -1,7 +1,7 @@
 ---
 Title: Integration testing
 Added: v3.0.0
-Last reviewed: 2019-10-18
+Last reviewed: 2021-02-09
 ---
 # Integration testing
 

@@ -1,7 +1,7 @@
 ---
 Title: Getting started with Alfresco SDK 4.2
 Added: v2.1.1
-Last reviewed: 2019-10-18
+Last reviewed: 2021-02-09
 ---
 # Getting started with Alfresco SDK 4.2
 

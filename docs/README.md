@@ -1,7 +1,7 @@
 ---
 Title: Alfresco SDK 4.2
 Added: v3.0.0
-Last reviewed: 2019-10-18
+Last reviewed: 2021-02-09
 ---
 # Alfresco SDK 4.2
 
