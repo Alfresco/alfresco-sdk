@@ -35,10 +35,32 @@ You'll need to update the following settings in the `pom.xml` file:
 <alfresco.bomDependencyArtifactId>acs-packaging</alfresco.bomDependencyArtifactId>
 ```
 
-* Change the Docker ACS image name:
+* Change the Docker ACS image name (by also prepending the Enterprise Docker Registry, Quay.io):
 
 ```
-<docker.acs.image>alfresco/alfresco-content-repository</docker.acs.image>
+<docker.acs.image>quay.io/alfresco/alfresco-content-repository</docker.acs.image>
+```
+
+In case the desired Platform version is 6.x, you'll also need to deal with the Keystore settings, by either:
+
+* Removing the keystore settings:
+
+```
+<keystore.settings></keystore.settings>
+```
+
+or
+
+* Adding the Keystore creation to the existing Dockerfile:
+
+```
+#Add Keystore
+ARG CERT_DNAME="CN=Alfresco Repository, OU=Unknown, O=Alfresco Software Ltd., L=Maidenhead, ST=UK, C=GB"
+ARG CERT_VALIDITY=36525
+ARG KEYSTORE_PASSWORD=mp6yc0UD9e
+ARG KEYSTORE_METADATA_PASSWORD=oKIWzVdEdA
+RUN mkdir -p $TOMCAT_DIR/shared/classes/alfresco/extension/keystore
+RUN keytool -genseckey -dname "$CERT_DNAME" -validity ${CERT_VALIDITY} -alias metadata -keypass ${KEYSTORE_METADATA_PASSWORD} -keyalg AES -keysize 256 -keystore ${TOMCAT_DIR}/shared/classes/alfresco/extension/keystore/keystore -storetype JCEKS -storepass ${KEYSTORE_PASSWORD}
 ```
 
 Changing these parameters instructs the project to use the proper maven dependencies and Docker images.

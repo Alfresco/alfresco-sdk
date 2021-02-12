@@ -327,6 +327,8 @@
             </properties>
         </profile>
 
+        <!-- 7.0 -->
+        <!-- This profiles requires to be executed using Java 11 -->
         <profile>
             <id>enterprise-70-tests</id>
             <properties>
