@@ -35,10 +35,10 @@ You'll need to update the following settings in the `pom.xml` file:
 <alfresco.bomDependencyArtifactId>acs-packaging</alfresco.bomDependencyArtifactId>
 ```
 
-* Change the Docker ACS image name:
+* Change the Docker ACS image name (by also prepending the Enterprise Docker Registry, Quay.io):
 
 ```
-<docker.acs.image>alfresco/alfresco-content-repository</docker.acs.image>
+<docker.acs.image>quay.io/alfresco/alfresco-content-repository</docker.acs.image>
 ```
 
 Changing these parameters instructs the project to use the proper maven dependencies and Docker images.
