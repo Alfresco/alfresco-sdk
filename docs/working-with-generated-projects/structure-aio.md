@@ -60,6 +60,7 @@ my-all-in-one-project
 │       │   │   └── com
 │       │   │       └── example
 │       │   │           └── platformsample
+│       │   │               ├── BackupAction.java
 │       │   │               ├── DemoComponent.java
 │       │   │               ├── Demo.java
 │       │   │               └── HelloWorldWebScript.java
@@ -98,6 +99,7 @@ my-all-in-one-project
 │               └── com
 │                   └── example
 │                       └── platformsample
+│                           ├── SimpleMockTest.java
 │                           └── HelloWorldWebScriptControllerTest.java
 ├── my-all-in-one-project-share-docker
 |   ├── pom.xml

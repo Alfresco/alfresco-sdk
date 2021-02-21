@@ -39,6 +39,7 @@ my-platform-jar-project
     │   │   └── com
     │   │       └── example
     │   │           └── platformsample
+    │   │               ├── BackupAction.java
     │   │               ├── Demo.java
     │   │               ├── DemoComponent.java
     │   │               └── HelloWorldWebScript.java
@@ -78,6 +79,7 @@ my-platform-jar-project
             └── com
                 └── example
                     └── platformsample
+                        ├── SimpleMockTest.java
                         ├── CustomContentModelIT.java
                         ├── DemoComponentIT.java
                         ├── HelloWorldWebScriptControllerTest.java
