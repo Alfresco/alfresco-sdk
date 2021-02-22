@@ -76,14 +76,16 @@ my-platform-jar-project
     │                       └── sample-process.bpmn20.xml
     └── test
         └── java
-            └── com
-                └── example
-                    └── platformsample
-                        ├── SimpleMockTest.java
-                        ├── CustomContentModelIT.java
-                        ├── DemoComponentIT.java
-                        ├── HelloWorldWebScriptControllerTest.java
-                        └── HelloWorldWebScriptIT.java
+            ├── com
+            │   └── example
+            │        └── platformsample
+            │            ├── SimpleMockTest.java
+            │            ├── CustomContentModelIT.java
+            │            ├── DemoComponentIT.java
+            │            ├── HelloWorldWebScriptControllerTest.java
+            │            └── HelloWorldWebScriptIT.java
+            └── resources
+                └── test-module-context.xml
 ```
 
 From a high level standpoint, we can describe the content of the project as follows:
