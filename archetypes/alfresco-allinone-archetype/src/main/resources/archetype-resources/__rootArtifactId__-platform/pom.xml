@@ -17,6 +17,15 @@
     </properties>
 
     <dependencies>
+		<dependency>
+	    	<groupId>org.springframework</groupId>
+	    	<artifactId>spring-test</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>it.vige</groupId>
+            <artifactId>alfresco-tests</artifactId>
+            <version>${alfresco.platform.version}.0</version>
+        </dependency>
     </dependencies>
 
     <build>

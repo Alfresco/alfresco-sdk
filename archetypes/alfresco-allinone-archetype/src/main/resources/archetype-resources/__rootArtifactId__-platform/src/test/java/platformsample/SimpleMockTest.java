@@ -43,11 +43,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.tradeshift.test.remote.Remote;
 import com.tradeshift.test.remote.RemoteTestRunner;
 
-import ${package}.platformsample.BackupAction;
-
 /**
- * Unit testing the mock system 
- * through the backup action
+ * Unit testing the mock system through the backup action
  *
  * @author Luca Stancapiano
  */
@@ -76,7 +73,9 @@ public class SimpleMockTest extends AbstractForm {
 		ResultSet docs = serviceRegistry.getSearchService().query(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE,
 				SearchService.LANGUAGE_FTS_ALFRESCO, "PATH:\"/" + documentName + "\"");
 		Assert.assertEquals("A document is created", 1, docs.length());
-		Assert.assertTrue("VALID.pdf is created", docs.getNodeRefs().get(0).getId().equals(documentName));
+		String name = (String) serviceRegistry.getNodeService().getProperty(docs.getNodeRefs().get(0),
+				ContentModel.PROP_NAME);
+		Assert.assertTrue("VALID.pdf is created", name.equals(documentName));
 	}
 
 	@Test
@@ -92,7 +91,9 @@ public class SimpleMockTest extends AbstractForm {
 		ResultSet docs = serviceRegistry.getSearchService().query(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE,
 				SearchService.LANGUAGE_FTS_ALFRESCO, "PATH:\"/" + documentName + ".bak\"");
 		Assert.assertEquals("A backup document is created", 1, docs.length());
-		Assert.assertTrue("VALID.pdf.bak is created", docs.getNodeRefs().get(0).getId().equals(documentName + ".bak"));
+		String name = (String) serviceRegistry.getNodeService().getProperty(docs.getNodeRefs().get(0),
+				ContentModel.PROP_NAME);
+		Assert.assertTrue("VALID.pdf.bak is created", name.equals(documentName + ".bak"));
 
 	}
 }
