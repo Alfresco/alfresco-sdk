@@ -56,8 +56,8 @@
         <alfresco.sdk.tests.exclude>*/*-enterprise*/*</alfresco.sdk.tests.exclude>
 
         <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-        <alfresco.platform.version>7.0.0-A20</alfresco.platform.version>
-        <alfresco.share.version>7.0.0-M3</alfresco.share.version>
+        <alfresco.platform.version>7.0.0</alfresco.platform.version>
+        <alfresco.share.version>7.0.0</alfresco.share.version>
         <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
         <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
         <keystore.settings>
@@ -320,8 +320,8 @@
             <id>community-70-tests</id>
             <properties>
                 <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>7.0.0-A20</alfresco.platform.version>
-                <alfresco.share.version>7.0.0-M3</alfresco.share.version>
+                <alfresco.platform.version>7.0.0</alfresco.platform.version>
+                <alfresco.share.version>7.0.0</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
             </properties>
@@ -333,8 +333,8 @@
             <id>enterprise-70-tests</id>
             <properties>
                 <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>repo-5439-M3v2</alfresco.platform.version>
-                <alfresco.share.version>7.0.0-M3</alfresco.share.version>
+                <alfresco.platform.version>7.0.0</alfresco.platform.version>
+                <alfresco.share.version>7.0.0</alfresco.share.version>
                 <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
             </properties>
