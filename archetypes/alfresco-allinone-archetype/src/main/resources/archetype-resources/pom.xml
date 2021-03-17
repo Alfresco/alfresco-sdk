@@ -31,6 +31,8 @@
 
         <keystore.settings>@@keystore.settings@@</keystore.settings>
 
+        <activemq.version>@@activemq.version</activemq.version>
+
         <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
         <jrebel.version>1.1.8</jrebel.version>
 
@@ -81,6 +83,14 @@
             <version>${alfresco.sdk.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-all</artifactId>
+            <version>${activemq.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
