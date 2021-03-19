@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.alfresco.maven</groupId>
     <artifactId>alfresco-sdk-aggregator</artifactId>
-    <version>4.2.0-SNAPSHOT</version>
+    <version>4.2.0</version>
     <name>Alfresco SDK</name>
     <description>This aggregator Project builds all modules required for the Alfresco SDK</description>
     <packaging>pom</packaging>
@@ -30,7 +30,7 @@
         <connection>scm:git:${scm.url.base}.git</connection>
         <developerConnection>scm:git:${scm.url.base}</developerConnection>
         <url>${scm.url.base}</url>
-        <tag>alfresco-sdk-aggregator-4.2.0-SNAPSHOT</tag>
+        <tag>alfresco-sdk-aggregator-4.2.0</tag>
     </scm>
 
     <!-- All the modules of the Alfresco SDK -->
@@ -73,7 +73,7 @@
 
         <activemq.version>5.16.1</activemq.version>
 
-        <test.acs.endpoint.path/>
+        <test.acs.endpoint.path />
 
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
     </properties>
@@ -249,7 +249,7 @@
                 <alfresco.share.version>6.0.b</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
-                <keystore.settings/>
+                <keystore.settings />
             </properties>
         </profile>
 
@@ -261,7 +261,7 @@
                 <alfresco.share.version>6.0</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
-                <keystore.settings/>
+                <keystore.settings />
             </properties>
         </profile>
 
@@ -275,7 +275,7 @@
                 <alfresco.share.version>6.1.1</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
-                <keystore.settings/>
+                <keystore.settings />
             </properties>
         </profile>
 
@@ -287,7 +287,7 @@
                 <alfresco.share.version>6.1.0</alfresco.share.version>
                 <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
-                <keystore.settings/>
+                <keystore.settings />
             </properties>
         </profile>
 
@@ -301,7 +301,7 @@
                 <alfresco.share.version>6.2.2</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
-                <keystore.settings/>
+                <keystore.settings />
             </properties>
         </profile>
 
@@ -313,7 +313,7 @@
                 <alfresco.share.version>6.2.2.2</alfresco.share.version>
                 <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
-                <keystore.settings/>
+                <keystore.settings />
             </properties>
         </profile>
 
