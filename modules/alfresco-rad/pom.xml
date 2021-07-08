@@ -49,6 +49,11 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>
