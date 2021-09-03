@@ -157,11 +157,4 @@
         </plugins>
     </reporting>
 
-    <repositories>
-        <!-- Used for the ATV donwload -->
-        <repository>
-            <id>clojars.org</id>
-            <url>http://clojars.org/repo</url>
-        </repository>
-    </repositories>
 </project>
