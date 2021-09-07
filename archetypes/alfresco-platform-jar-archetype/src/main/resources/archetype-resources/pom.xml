@@ -84,7 +84,6 @@
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-all</artifactId>
             <version>${activemq.version}</version>
-            <scope>test</scope>
         </dependency>
 
     </dependencies>
