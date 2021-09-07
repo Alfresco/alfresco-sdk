@@ -4,6 +4,9 @@ ARG TOMCAT_DIR=/usr/local/tomcat
 
 USER root
 
+# Allows localised file names as per GitHub issue #618
+RUN yum -y install glibc-locale-source glibc-langpack-en
+
 # Copy Dockerfile to avoid an error if no JARs exist
 COPY Dockerfile extensions/*.jar $TOMCAT_DIR/webapps/alfresco/WEB-INF/lib/
 
