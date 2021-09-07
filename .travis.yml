@@ -1,7 +1,8 @@
 import:
-  - source: Alfresco/alfresco-build-tools:.travis.docker_login.yml@v1.0.1
-  - source: Alfresco/alfresco-build-tools:.travis.java.yml@v1.0.1
-  - source: Alfresco/alfresco-build-tools:.travis.pre-commit.yml@v1.0.1
+  - source: Alfresco/alfresco-build-tools:.travis.docker_login.yml@v1.1.5
+  - source: Alfresco/alfresco-build-tools:.travis.docker_hub_login.yml@v1.1.5
+  - source: Alfresco/alfresco-build-tools:.travis.java.yml@v1.1.5
+  - source: Alfresco/alfresco-build-tools:.travis.pre-commit.yml@v1.1.5
 
 dist: focal
 
@@ -38,7 +39,7 @@ jobs:
       stage: test
       script:
         - ${MAVEN_INSTALL_CMD} -Penterprise-70-tests
-    
+
     - name: "7.0 Community"
       stage: test
       script:
