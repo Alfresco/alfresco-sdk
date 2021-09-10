@@ -72,156 +72,9 @@
         </keystore.settings>
 
         <activemq.version>5.16.1</activemq.version>
-
         <test.acs.endpoint.path />
-
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
     </properties>
-
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.0.2</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-archetype-plugin</artifactId>
-                    <version>${maven.archetype.version}</version>
-                    <configuration>
-                        <skip>${skipTests}</skip>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <configuration>
-                        <tags>
-                            <tag>
-                                <name>goal</name>
-                                <placement>a</placement>
-                                <head>Goal:</head>
-                            </tag>
-                            <tag>
-                                <name>requiresDependencyResolution</name>
-                                <placement>a</placement>
-                                <head>Requires Dependency Resolution:</head>
-                            </tag>
-                            <tag>
-                                <name>description</name>
-                                <placement>a</placement>
-                                <head>Description:</head>
-                            </tag>
-                            <tag>
-                                <name>phase</name>
-                                <placement>a</placement>
-                                <head>Phase:</head>
-                            </tag>
-                            <tag>
-                                <name>requiresProject</name>
-                                <placement>a</placement>
-                                <head>Requires Project:</head>
-                            </tag>
-                            <tag>
-                                <name>threadSafe</name>
-                                <placement>a</placement>
-                                <head>Thread-Safe:</head>
-                            </tag>
-                            <tag>
-                                <name>required</name>
-                                <placement>a</placement>
-                                <head>Required:</head>
-                            </tag>
-                            <tag>
-                                <name>readonly</name>
-                                <placement>a</placement>
-                                <head>Read only:</head>
-                            </tag>
-                            <tag>
-                                <name>parameter</name>
-                                <placement>a</placement>
-                                <head>Parameter:</head>
-                            </tag>
-                        </tags>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-        <extensions>
-            <extension>
-                <groupId>org.apache.maven.archetype</groupId>
-                <artifactId>archetype-packaging</artifactId>
-                <version>${maven.archetype.version}</version>
-            </extension>
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-webdav-jackrabbit</artifactId>
-                <version>2.10</version>
-            </extension>
-        </extensions>
-        <testResources>
-            <testResource>
-                <filtering>true</filtering>
-                <directory>src/test/resources</directory>
-                <excludes>
-                    <exclude>${alfresco.sdk.tests.exclude}</exclude>
-                </excludes>
-            </testResource>
-        </testResources>
-
-    </build>
-
-    <repositories>
-        <repository>
-            <id>central</id>
-            <name>Central Repository</name>
-            <url>https://repo.maven.apache.org/maven2</url>
-            <layout>default</layout>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>alfresco-public</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/public
-            </url>
-        </repository>
-        <repository>
-            <id>alfresco-public-snapshots</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots
-            </url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>alfresco-private-repository</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
-        </repository>
-
-        <!-- Activiti Enterprise Edition Artifacts, put username/pwd for server in settings.xml -->
-        <repository>
-            <id>activiti-private-repository</id>
-            <url>https://artifacts.alfresco.com/nexus/content/repositories/activiti-enterprise-releases</url>
-        </repository>
-    </repositories>
-
-    <distributionManagement>
-        <repository>
-            <id>central-releases-staging</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-        </repository>
-        <snapshotRepository>
-            <id>alfresco-public-snapshots</id>
-            <url>https://artifacts.alfresco.com/nexus/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <site>
-            <id>alfresco-docs</id>
-            <url>dav:${maven.site.url}</url>
-        </site>
-    </distributionManagement>
 
     <profiles>
         <profile>
@@ -414,7 +267,6 @@
                         <configuration>
                             <onlyCurrentVersion>true</onlyCurrentVersion>
                             <includeOpenIssues>false</includeOpenIssues>
-
                         </configuration>
                     </plugin>
                 </plugins>
@@ -428,44 +280,152 @@
                 <test.acs.endpoint.path>http://192.168.99.100:8080/alfresco</test.acs.endpoint.path>
             </properties>
         </profile>
-
-        <!-- Attempt (failed) to retain run.sh permissions. Zip files are bad at this, full stop.
-        <profile>
-            <id>set-executables-permissions</id>
-            <activation>
-                <file>
-                    <exists>src/main/resources/archetype-resources/run.sh</exists>
-                </file>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.6</version>
-                        <executions>
-                            <execution>
-                                <id>set-executable-resources</id>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <phase>process-resources</phase>
-                                <configuration>
-                                    <target>
-                                        <chmod file="${project.build.outputDirectory}/archetype-resources/run.sh" perm="755" />
-                                    </target>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-         -->
     </profiles>
 
-    <developers>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.0.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-archetype-plugin</artifactId>
+                    <version>${maven.archetype.version}</version>
+                    <configuration>
+                        <skip>${skipTests}</skip>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <configuration>
+                        <tags>
+                            <tag>
+                                <name>goal</name>
+                                <placement>a</placement>
+                                <head>Goal:</head>
+                            </tag>
+                            <tag>
+                                <name>requiresDependencyResolution</name>
+                                <placement>a</placement>
+                                <head>Requires Dependency Resolution:</head>
+                            </tag>
+                            <tag>
+                                <name>description</name>
+                                <placement>a</placement>
+                                <head>Description:</head>
+                            </tag>
+                            <tag>
+                                <name>phase</name>
+                                <placement>a</placement>
+                                <head>Phase:</head>
+                            </tag>
+                            <tag>
+                                <name>requiresProject</name>
+                                <placement>a</placement>
+                                <head>Requires Project:</head>
+                            </tag>
+                            <tag>
+                                <name>threadSafe</name>
+                                <placement>a</placement>
+                                <head>Thread-Safe:</head>
+                            </tag>
+                            <tag>
+                                <name>required</name>
+                                <placement>a</placement>
+                                <head>Required:</head>
+                            </tag>
+                            <tag>
+                                <name>readonly</name>
+                                <placement>a</placement>
+                                <head>Read only:</head>
+                            </tag>
+                            <tag>
+                                <name>parameter</name>
+                                <placement>a</placement>
+                                <head>Parameter:</head>
+                            </tag>
+                        </tags>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.archetype</groupId>
+                <artifactId>archetype-packaging</artifactId>
+                <version>${maven.archetype.version}</version>
+            </extension>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav-jackrabbit</artifactId>
+                <version>2.10</version>
+            </extension>
+        </extensions>
+        <testResources>
+            <testResource>
+                <filtering>true</filtering>
+                <directory>src/test/resources</directory>
+                <excludes>
+                    <exclude>${alfresco.sdk.tests.exclude}</exclude>
+                </excludes>
+            </testResource>
+        </testResources>
+    </build>
 
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>alfresco-public</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/public
+            </url>
+        </repository>
+        <repository>
+            <id>alfresco-public-snapshots</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots
+            </url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>alfresco-private-repository</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
+        </repository>
+        <!-- Activiti Enterprise Edition Artifacts, put username/pwd for server in settings.xml -->
+        <repository>
+            <id>activiti-private-repository</id>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/activiti-enterprise-releases</url>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>central-releases-staging</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+        <snapshotRepository>
+            <id>alfresco-public-snapshots</id>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <site>
+            <id>alfresco-docs</id>
+            <url>dav:${maven.site.url}</url>
+        </site>
+    </distributionManagement>
+
+    <developers>
         <developer>
             <id>ohej</id>
             <name>Ole Hejlskov</name>
@@ -542,5 +502,4 @@
             <timezone>+1</timezone>
         </contributor>
     </contributors>
-
 </project>
