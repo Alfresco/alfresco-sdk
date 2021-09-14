@@ -20,6 +20,7 @@
         <alfresco.bomDependencyArtifactId>@@alfresco.bomDependency.artifactId@@</alfresco.bomDependencyArtifactId>
         <alfresco.platform.version>@@alfresco.platform.version@@</alfresco.platform.version>
         <alfresco.share.version>@@alfresco.share.version@@</alfresco.share.version>
+        <alfresco.share.docker.version>@@alfresco.share.docker.version@@</alfresco.share.docker.version>
 
         <!-- Docker images -->
         <docker.acs.image>@@alfresco.platform.docker.image@@</docker.acs.image>
