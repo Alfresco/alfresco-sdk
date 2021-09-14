@@ -57,11 +57,11 @@
 
         <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
         <alfresco.platform.version>7.1.0-A14</alfresco.platform.version>
-        <alfresco.share.docker.version>7.1.0-M2</alfresco.share.docker.version>
+        <alfresco.share.docker.version>7.1.0-M1</alfresco.share.docker.version>
         <!-- The following value is obtained by looking at the Share Services version
              for the GitHub Tag related to the above Docker version, for example:
              https://github.com/Alfresco/acs-community-packaging/blob/7.1.0-M1/pom.xml#L19 -->
-        <alfresco.share.version>7.1.0-M2</alfresco.share.version>
+        <alfresco.share.version>7.1.0-M1</alfresco.share.version>
         <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
         <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
         <keystore.settings>
