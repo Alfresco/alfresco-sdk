@@ -23,6 +23,7 @@
         <alfresco.groupId>org.alfresco</alfresco.groupId>
         <alfresco.bomDependencyArtifactId>@@alfresco.bomDependency.artifactId@@</alfresco.bomDependencyArtifactId>
         <alfresco.platform.version>@@alfresco.platform.version@@</alfresco.platform.version>
+        <alfresco.platform.docker.user>@@alfresco.platform.docker.user@@</alfresco.platform.docker.user>
         <alfresco.share.version>@@alfresco.share.version@@</alfresco.share.version>
         <alfresco.share.docker.version>@@alfresco.share.docker.version@@</alfresco.share.docker.version>
 
