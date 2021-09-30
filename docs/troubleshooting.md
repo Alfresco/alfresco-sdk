@@ -5,7 +5,7 @@ Last reviewed: 2021-02-09
 ---
 # Troubleshooting
 
-This article describes a list of common issues with the projects generated from the Alfresco SDK 4.2 archetypes and the way to troubleshoot them.
+This article describes a list of common issues with the projects generated from the Alfresco SDK 4.x archetypes and the way to troubleshoot them.
 
 * [Incorrect JDK version](#incorrect-jdk-version)
 * [Containers synchronization](#containers-synchronization)
@@ -157,7 +157,7 @@ Transformation Service (ATS) is not working. ATS is required to generate the con
 
 ### Solution
 
-By default, ATS is not included in the basic configuration of the projects generated making use of the Alfresco SDK 4 archetypes.
+By default, ATS is not included in the basic configuration of the projects generated making use of the Alfresco SDK 4.x archetypes.
 
 To enable it, you simply need to follow the steps described in the article [How to set up Alfresco Transform Service](advanced-topics/alfresco-transform-service.md).
 If you're working with Alfresco Enterprise you must follow [this guide](advanced-topics/working-with-enterprise/alfresco-transform-service.md). 
