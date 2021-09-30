@@ -32,11 +32,11 @@ If you are an Enterprise customer check the [Support](#alfresco-enterprise-custo
 
 ## User Getting Started
 
-### Important Notice about 7.1.x 
+### Important Notice about ACS 7.1 
 
 #### Share Version Number
 
-Since 7.1.x, Share build pipeline has been refactored, and you now have to specify the internal 
+Since ACS 7.1, Share build pipeline has been refactored, and you now have to specify the internal 
 Share version number, in addition to the version of the image, because they are not the same anymore.
 
 This number can be located in the main pom.xml of the project used to build Share, hence: 
@@ -55,7 +55,7 @@ You'll then need to paste this value inside the SDK property `<alfresco.share.ve
 - ACS 6 used to run everything as `root`.
 - ACS 7 introduced an `alfresco` user, that should've been used after the `root` user completed its configurations in the Dockerfile.
 
-Due to a bug, this wasn't working in 7.0, but it's been fixed in 7.1.
+Due to a bug, this wasn't working in earlier SDKs, and has been fixed in SDK 4.3.
 
 In order to be retro-compatible with ACS 6, however, the user is specified in the SDK property `<alfresco.platform.docker.user>`.
 
