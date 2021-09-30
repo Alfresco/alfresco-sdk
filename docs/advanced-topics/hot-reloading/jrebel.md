@@ -8,7 +8,7 @@ Last reviewed: 2019-10-18
 [JRebel](https://zeroturnaround.com/software/jrebel/) is the agent that enables you to do hot reloading. This allows you to modify the application code, 
 and view the changes without having to restart Alfresco Tomcat (or the ACS Docker container).
 
-A prerequisite to this tutorial is having an Alfresco project created with Alfresco SDK 4.2, using the All-In-One archetype, or the Platform JAR archetype. 
+A prerequisite to this tutorial is having an Alfresco project created with Alfresco SDK 4, using the All-In-One archetype, or the Platform JAR archetype. 
 It's worth noting that hot reloading is only supported on the platform, and not in Alfresco Share.
 
 An open source and free of charge alternative to JRebel is HotSwapAgent. For more details, see the [HotSwapAgent website](http://hotswapagent.org/index.html).

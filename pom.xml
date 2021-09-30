@@ -30,7 +30,7 @@
         <connection>scm:git:${scm.url.base}.git</connection>
         <developerConnection>scm:git:${scm.url.base}</developerConnection>
         <url>${scm.url.base}</url>
-        <tag>alfresco-sdk-aggregator-4.3.0-SNAPSHOT</tag>
+        <tag>alfresco-sdk-aggregator-4.3.0</tag>
     </scm>
 
     <!-- All the modules of the Alfresco SDK -->
@@ -56,8 +56,17 @@
         <alfresco.sdk.tests.exclude>*/*-enterprise*/*</alfresco.sdk.tests.exclude>
 
         <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-        <alfresco.platform.version>7.0.0</alfresco.platform.version>
-        <alfresco.share.version>7.0.0</alfresco.share.version>
+        <alfresco.platform.version>7.1.0</alfresco.platform.version>
+        <alfresco.platform.docker.user>alfresco</alfresco.platform.docker.user>
+        <alfresco.share.docker.version>7.1.0.1</alfresco.share.docker.version>
+        <!--
+             The following value is now obtained by looking at the
+             - alfresco-community-share.version (eg. https://github.com/Alfresco/acs-community-packaging/blob/7.1.0/pom.xml#L17)
+             or
+             - alfresco-enterprise-share.version (eg. https://github.com/Alfresco/acs-packaging/blob/7.1.0.1/pom.xml#L18)
+             for the GitHub Tag related to the above Docker version.
+         -->
+        <alfresco.share.version>11.77</alfresco.share.version>
         <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
         <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
         <keystore.settings>
@@ -71,12 +80,251 @@
             -Dmetadata-keystore.metadata.algorithm=AES
         </keystore.settings>
 
-        <activemq.version>5.16.1</activemq.version>
-
+        <activemq.version>5.16.3</activemq.version>
         <test.acs.endpoint.path />
-
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>internal-release</id>
+            <activation>
+                <property>
+                    <name>internal.release</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <distributionManagement>
+                <repository>
+                    <id>alfresco-releases</id>
+                    <url>https://artifacts.alfresco.com/nexus/content/repositories/releases/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+
+        <!-- 6.0 -->
+        <profile>
+            <id>community-60-tests</id>
+            <properties>
+                <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>6.0.7-ga</alfresco.platform.version>
+                <alfresco.share.docker.version>6.0.1.3</alfresco.share.docker.version>
+                <alfresco.share.version>6.0.1.3</alfresco.share.version>
+                <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.platform.docker.user>root</alfresco.platform.docker.user>
+                <keystore.settings />
+            </properties>
+        </profile>
+
+        <profile>
+            <id>enterprise-60-tests</id>
+            <properties>
+                <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>6.0.1.10</alfresco.platform.version>
+                <alfresco.share.docker.version>6.0.1.3</alfresco.share.docker.version>
+                <alfresco.share.version>6.0.1.3</alfresco.share.version>
+                <alfresco.platform.docker.image>alfresco/alfresco-content-repository</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.platform.docker.user>root</alfresco.platform.docker.user>
+                <keystore.settings />
+            </properties>
+        </profile>
+
+        <!-- The profiles below require to be executed using Java 11 -->
+        <!-- 6.1 -->
+        <profile>
+            <id>community-61-tests</id>
+            <properties>
+                <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>6.1.2-ga</alfresco.platform.version>
+                <alfresco.share.docker.version>6.1.1.3</alfresco.share.docker.version>
+                <alfresco.share.version>6.1.1.3</alfresco.share.version>
+                <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.platform.docker.user>root</alfresco.platform.docker.user>
+                <keystore.settings />
+            </properties>
+        </profile>
+        <profile>
+            <id>enterprise-61-tests</id>
+            <properties>
+                <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>6.1.1.11</alfresco.platform.version>
+                <alfresco.share.docker.version>6.1.1.3</alfresco.share.docker.version>
+                <alfresco.share.version>6.1.1.3</alfresco.share.version>
+                <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.platform.docker.user>root</alfresco.platform.docker.user>
+                <keystore.settings />
+            </properties>
+        </profile>
+
+        <!-- 6.2 -->
+        <profile>
+            <id>community-62-tests</id>
+            <properties>
+                <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>6.2.0-ea</alfresco.platform.version>
+                <alfresco.share.docker.version>6.2.2.6</alfresco.share.docker.version>
+                <alfresco.share.version>6.2.2.6</alfresco.share.version>
+                <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.platform.docker.user>alfresco</alfresco.platform.docker.user>
+                <keystore.settings />
+            </properties>
+        </profile>
+        <profile>
+            <id>enterprise-62-tests</id>
+            <properties>
+                <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>6.2.2.21</alfresco.platform.version>
+                <alfresco.share.docker.version>6.2.2.6</alfresco.share.docker.version>
+                <alfresco.share.version>6.2.2.6</alfresco.share.version>
+                <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.platform.docker.user>alfresco</alfresco.platform.docker.user>
+                <keystore.settings />
+            </properties>
+        </profile>
+
+        <!-- 7.0 -->
+        <profile>
+            <id>community-70-tests</id>
+            <properties>
+                <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>7.0.1-A7</alfresco.platform.version>
+                <alfresco.share.docker.version>7.0.1.2</alfresco.share.docker.version>
+                <alfresco.share.version>7.0.1.2</alfresco.share.version>
+                <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.platform.docker.user>alfresco</alfresco.platform.docker.user>
+            </properties>
+        </profile>
+        <profile>
+            <id>enterprise-70-tests</id>
+            <properties>
+                <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>7.0.1.4</alfresco.platform.version>
+                <alfresco.share.docker.version>7.0.1.2</alfresco.share.docker.version>
+                <alfresco.share.version>7.0.1.2</alfresco.share.version>
+                <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.platform.docker.user>alfresco</alfresco.platform.docker.user>
+            </properties>
+        </profile>
+
+        <!-- 7.1 -->
+        <profile>
+            <id>community-71-tests</id>
+            <properties>
+                <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>7.1.0</alfresco.platform.version>
+                <alfresco.share.docker.version>7.1.0.1</alfresco.share.docker.version>
+                <alfresco.share.version>11.77</alfresco.share.version>
+                <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.platform.docker.user>alfresco</alfresco.platform.docker.user>
+            </properties>
+        </profile>
+        <profile>
+            <id>enterprise-71-tests</id>
+            <properties>
+                <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>7.1.0.1</alfresco.platform.version>
+                <alfresco.share.docker.version>7.1.0.1</alfresco.share.docker.version>
+                <alfresco.share.version>11.77</alfresco.share.version>
+                <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.platform.docker.user>alfresco</alfresco.platform.docker.user>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>sdk-release</id>
+            <properties>
+                <maven.site.url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-sdk-aggregator/latest</maven.site.url>
+                <maven.release.goals>deploy site-deploy</maven.release.goals>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-release-plugin</artifactId>
+                        <version>2.5.3</version>
+                        <configuration>
+                            <preparationGoals>clean install</preparationGoals>
+                            <goals>${maven.release.goals}</goals>
+                            <autoVersionSubmodules>true</autoVersionSubmodules>
+                            <releaseProfiles>sdk-release,enterprise-tests</releaseProfiles>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-project-info-reports-plugin</artifactId>
+                        <version>2.9</version>
+                    </plugin>
+                </plugins>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-site-plugin</artifactId>
+                            <version>3.6</version>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+            <reporting>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-changes-plugin</artifactId>
+                        <version>2.12.1</version>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>github-report</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                        <configuration>
+                            <onlyCurrentVersion>true</onlyCurrentVersion>
+                            <includeOpenIssues>false</includeOpenIssues>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </reporting>
+        </profile>
+
+        <profile>
+            <id>docker-toolbox</id>
+            <properties>
+                <!-- Define the ACS endpoint path when docker toolbox is used (docker container are not exposed through localhost) -->
+                <test.acs.endpoint.path>http://192.168.99.100:8080/alfresco</test.acs.endpoint.path>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
         <pluginManagement>
@@ -170,7 +418,6 @@
                 </excludes>
             </testResource>
         </testResources>
-
     </build>
 
     <repositories>
@@ -200,7 +447,6 @@
             <id>alfresco-private-repository</id>
             <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
         </repository>
-
         <!-- Activiti Enterprise Edition Artifacts, put username/pwd for server in settings.xml -->
         <repository>
             <id>activiti-private-repository</id>
@@ -223,249 +469,7 @@
         </site>
     </distributionManagement>
 
-    <profiles>
-        <profile>
-            <id>internal-release</id>
-            <activation>
-                <property>
-                    <name>internal.release</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <distributionManagement>
-                <repository>
-                    <id>alfresco-releases</id>
-                    <url>https://artifacts.alfresco.com/nexus/content/repositories/releases/</url>
-                </repository>
-            </distributionManagement>
-        </profile>
-
-        <!-- 6.0 -->
-        <profile>
-            <id>community-60-tests</id>
-            <properties>
-                <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>6.0.7-ga</alfresco.platform.version>
-                <alfresco.share.version>6.0.b</alfresco.share.version>
-                <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
-                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
-                <keystore.settings />
-            </properties>
-        </profile>
-
-        <profile>
-            <id>enterprise-60-tests</id>
-            <properties>
-                <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>6.0.0.2</alfresco.platform.version>
-                <alfresco.share.version>6.0</alfresco.share.version>
-                <alfresco.platform.docker.image>alfresco/alfresco-content-repository</alfresco.platform.docker.image>
-                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
-                <keystore.settings />
-            </properties>
-        </profile>
-
-        <!-- 6.1 -->
-        <!-- This profiles requires to be executed using Java 11 -->
-        <profile>
-            <id>community-61-tests</id>
-            <properties>
-                <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>6.1.2-ga</alfresco.platform.version>
-                <alfresco.share.version>6.1.1</alfresco.share.version>
-                <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
-                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
-                <keystore.settings />
-            </properties>
-        </profile>
-
-        <profile>
-            <id>enterprise-61-tests</id>
-            <properties>
-                <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>6.1.0</alfresco.platform.version>
-                <alfresco.share.version>6.1.0</alfresco.share.version>
-                <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
-                <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
-                <keystore.settings />
-            </properties>
-        </profile>
-
-        <!-- 6.2 -->
-        <!-- This profiles requires to be executed using Java 11 -->
-        <profile>
-            <id>community-62-tests</id>
-            <properties>
-                <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>6.2.0-ea</alfresco.platform.version>
-                <alfresco.share.version>6.2.2</alfresco.share.version>
-                <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
-                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
-                <keystore.settings />
-            </properties>
-        </profile>
-
-        <profile>
-            <id>enterprise-62-tests</id>
-            <properties>
-                <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>6.2.2.12</alfresco.platform.version>
-                <alfresco.share.version>6.2.2.2</alfresco.share.version>
-                <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
-                <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
-                <keystore.settings />
-            </properties>
-        </profile>
-
-        <!-- 7.0 -->
-        <!-- This profiles requires to be executed using Java 11 -->
-        <profile>
-            <id>community-70-tests</id>
-            <properties>
-                <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>7.0.0</alfresco.platform.version>
-                <alfresco.share.version>7.0.0</alfresco.share.version>
-                <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
-                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
-            </properties>
-        </profile>
-
-        <!-- 7.0 -->
-        <!-- This profiles requires to be executed using Java 11 -->
-        <profile>
-            <id>enterprise-70-tests</id>
-            <properties>
-                <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>7.0.0</alfresco.platform.version>
-                <alfresco.share.version>7.0.0</alfresco.share.version>
-                <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
-                <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>sdk-release</id>
-            <properties>
-                <maven.site.url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-sdk-aggregator/latest</maven.site.url>
-                <maven.release.goals>deploy site-deploy</maven.release.goals>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                                <configuration>
-                                    <gpgArguments>
-                                        <arg>--pinentry-mode</arg>
-                                        <arg>loopback</arg>
-                                    </gpgArguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-release-plugin</artifactId>
-                        <version>2.5.3</version>
-                        <configuration>
-                            <preparationGoals>clean install</preparationGoals>
-                            <goals>${maven.release.goals}</goals>
-                            <autoVersionSubmodules>true</autoVersionSubmodules>
-                            <releaseProfiles>sdk-release,enterprise-tests</releaseProfiles>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-project-info-reports-plugin</artifactId>
-                        <version>2.9</version>
-                    </plugin>
-                </plugins>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-site-plugin</artifactId>
-                            <version>3.6</version>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
-            </build>
-            <reporting>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-changes-plugin</artifactId>
-                        <version>2.12.1</version>
-                        <reportSets>
-                            <reportSet>
-                                <reports>
-                                    <report>github-report</report>
-                                </reports>
-                            </reportSet>
-                        </reportSets>
-                        <configuration>
-                            <onlyCurrentVersion>true</onlyCurrentVersion>
-                            <includeOpenIssues>false</includeOpenIssues>
-
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </reporting>
-        </profile>
-
-        <profile>
-            <id>docker-toolbox</id>
-            <properties>
-                <!-- Define the ACS endpoint path when docker toolbox is used (docker container are not exposed through localhost) -->
-                <test.acs.endpoint.path>http://192.168.99.100:8080/alfresco</test.acs.endpoint.path>
-            </properties>
-        </profile>
-
-        <!-- Attempt (failed) to retain run.sh permissions. Zip files are bad at this, full stop.
-        <profile>
-            <id>set-executables-permissions</id>
-            <activation>
-                <file>
-                    <exists>src/main/resources/archetype-resources/run.sh</exists>
-                </file>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.6</version>
-                        <executions>
-                            <execution>
-                                <id>set-executable-resources</id>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <phase>process-resources</phase>
-                                <configuration>
-                                    <target>
-                                        <chmod file="${project.build.outputDirectory}/archetype-resources/run.sh" perm="755" />
-                                    </target>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-         -->
-    </profiles>
-
     <developers>
-
         <developer>
             <id>ohej</id>
             <name>Ole Hejlskov</name>
@@ -542,5 +546,4 @@
             <timezone>+1</timezone>
         </contributor>
     </contributors>
-
 </project>

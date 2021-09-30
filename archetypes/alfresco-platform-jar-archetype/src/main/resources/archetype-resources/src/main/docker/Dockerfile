@@ -1,6 +1,7 @@
 FROM ${docker.acs.image}:${alfresco.platform.version}
 
 ARG TOMCAT_DIR=/usr/local/tomcat
+ARG USERNAME=${alfresco.platform.docker.user}
 
 USER root
 

@@ -20,7 +20,7 @@ Alfresco SDK\x99 Pre-Requisites
      Alfresco platform is retrieved automatically from {{{https://artifacts.alfresco.com} the Alfresco Artifacts Repository}}
      based on the <<<alfresco.groupId>>> and <<<alfresco.version>>> POM properties 
 
-    * If you're an Alfresco customer, you can setup a ~/.m2/settings.xml as documented on {{{http://docs.alfresco.com/4.2/tasks/dev-extensions-maven-sdk-tutorials-configure-maven-enterprise.html} Alfresco Docs page}} and specify <<<-Penterprise>>> on your Maven build command to use the latest Alfresco Enterprise version
+    * If you're an Alfresco customer, you can setup a ~/.m2/settings.xml as documented on {{{https://docs.alfresco.com/content-services/latest/develop/sdk/#how-to-configure-private-alfresco-nexus-repository-enterprisemvnrepo} Alfresco Docs page}} and specify <<<-Penterprise>>> on your Maven build command to use the latest Alfresco Enterprise version
 
 
 Enable hot class reload with spring-loaded

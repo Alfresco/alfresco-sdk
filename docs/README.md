@@ -1,11 +1,11 @@
 ---
-Title: Alfresco SDK 4.2
+Title: Alfresco SDK 4.3
 Added: v3.0.0
 Last reviewed: 2021-02-09
 ---
-# Alfresco SDK 4.2
+# Alfresco SDK 4
 
-Alfresco SDK 4.2 is a Maven based development kit that provides an easy to use approach to developing applications and extensions for Alfresco. With this 
+Alfresco SDK 4.x is a Maven based development kit that provides an easy to use approach to developing applications and extensions for Alfresco. With this 
 SDK you can develop, package, test, run, document and release your Alfresco extension project.
 
 For earlier releases of the Alfresco SDK, see the Previous versions of [http://docs.alfresco.com](http://docs.alfresco.com).
@@ -14,22 +14,22 @@ The Alfresco Software Development Kit (Alfresco SDK) is a fundamental tool provi
 the Alfresco Digital Business Platform. It is based on [Apache Maven](http://maven.apache.org/) and [Docker](https://www.docker.com/) and is compatible with 
 major IDEs. This enables Rapid Application Development (RAD) and Test Driven Development (TDD).
 
-Alfresco SDK 4.2 is released under [Apache License version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html) and supports Alfresco Content Services both 
+Alfresco SDK 4.x is released under [Apache License version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html) and supports Alfresco Content Services both 
 in Community Edition and Enterprise Edition. If you're an Enterprise customer, please check the [Alfresco SDK Support status](https://www.alfresco.com/alfresco-product-support-status) 
 for the version you're using. If your version is in Limited or Full Support and you need help, contact our Support team [http://support.alfresco.com](http://support.alfresco.com/).
 
-Alfresco SDK 4.2 is a minor update to the SDK and provides support for Alfresco 7.0.x.
+Alfresco SDK 4.3 is a minor update to the SDK and provides support for Alfresco 7.1.x.
 
 The 4.0 release takes advantage of Semantic Versioning ([SEMVER](http://semver.org/)), which means that this new release is not directly compatible with the 
 previous releases of the SDK.
 
-If you have existing projects that you wish to upgrade to SDK 4.2.x, the recommended approach is to generate a new project from our archetypes and move your 
+If you have existing projects that you wish to upgrade to SDK 4.x, the recommended approach is to generate a new project from our archetypes and move your 
 code into place.
 
 ## Documentation Content
 
 * [What's new?](whats-new.md)
-* [Getting started with Alfresco SDK 4.2](getting-started.md)
+* [Getting started with Alfresco SDK 4](getting-started.md)
 * [Alfresco SDK Maven archetypes](mvn-archetypes.md)
 * [Working with generated projects](working-with-generated-projects/README.md)
     * [All-In-One project structure](working-with-generated-projects/structure-aio.md)

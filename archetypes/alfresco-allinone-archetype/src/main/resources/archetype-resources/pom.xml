@@ -5,8 +5,8 @@
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
-    <name>AIO - SDK 4.2</name>
-    <description>All-In-One (AIO) project for SDK 4.2</description>
+    <name>AIO - SDK 4.3</name>
+    <description>All-In-One (AIO) project for SDK 4.3</description>
     <packaging>pom</packaging>
 
     <prerequisites>
@@ -23,7 +23,9 @@
         <alfresco.groupId>org.alfresco</alfresco.groupId>
         <alfresco.bomDependencyArtifactId>@@alfresco.bomDependency.artifactId@@</alfresco.bomDependencyArtifactId>
         <alfresco.platform.version>@@alfresco.platform.version@@</alfresco.platform.version>
+        <alfresco.platform.docker.user>@@alfresco.platform.docker.user@@</alfresco.platform.docker.user>
         <alfresco.share.version>@@alfresco.share.version@@</alfresco.share.version>
+        <alfresco.share.docker.version>@@alfresco.share.docker.version@@</alfresco.share.docker.version>
 
         <!-- Docker images -->
         <docker.acs.image>@@alfresco.platform.docker.image@@</docker.acs.image>

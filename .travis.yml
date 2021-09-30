@@ -34,7 +34,17 @@ jobs:
       stage: test
       script: 
         - ${MAVEN_INSTALL_CMD}
-    
+
+    - name: "7.1 Enterprise"
+      stage: test
+      script:
+        - ${MAVEN_INSTALL_CMD} -Penterprise-71-tests
+
+    - name: "7.1 Community"
+      stage: test
+      script:
+        - ${MAVEN_INSTALL_CMD} -Pcommunity-71-tests
+
     - name: "7.0 Enterprise"
       stage: test
       script:

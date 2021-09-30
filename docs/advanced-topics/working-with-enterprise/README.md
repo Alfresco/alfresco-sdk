@@ -80,7 +80,7 @@ You'll need to update the following settings in the `pom.xml` file:
 <alfresco.share.version>6.2.0</alfresco.share.version>
 ```
 
-Making use of the Alfresco SDK 4 it is no longer required the configuration of the Alfresco Surf versions. The inclusion of the BOM and the custom Docker
+Making use of the Alfresco SDK 4.x it is no longer required the configuration of the Alfresco Surf versions. The inclusion of the BOM and the custom Docker
 images will take care of that task automatically for you.
 
 ## Purging the project data and running the project

@@ -8,7 +8,7 @@ Last reviewed: 2021-02-09
 The latest version of the Alfresco SDK supports different versions for Alfresco Content Services and Alfresco Share. Since each product is no longer 
 released under one common version number, ACS (i.e. alfresco.war) and the Share UI (share.war) are now released with individual version numbers.
 
-By default, SDK 4 is configured to generate projects using the most recent version of ACS and Share. You can easily change one (or both) versions by 
+By default, SDK 4.x is configured to generate projects using the most recent version of ACS and Share. You can easily change one (or both) versions by 
 simply updating the `pom.xml` file in your project. The compatibility of these versions is up to you, however you should check in advance the right versions 
 to use.
 
@@ -28,7 +28,7 @@ The supported versions are explained in the next sections of this article.
 
 ## Switch to Alfresco version 6.0.x
 
-Starting from a newly created Alfresco SDK 4.2 project (All-In-One, Platform JAR, or Share JAR), let’s replace the two properties with the following ones.
+Starting from a newly created Alfresco SDK 4.x project (All-In-One, Platform JAR, or Share JAR), let’s replace the two properties with the following ones.
 
 1. Open the pom.xml in your generated project.
 
@@ -60,7 +60,7 @@ about wrong JDK versions.
 
 ## Switch to Alfresco version 6.1.x or 6.2.x
 
-Starting from a newly created Alfresco SDK 4.2 project (All-In-One, Platform JAR, or Share JAR), let’s replace the two properties with the following ones.
+Starting from a newly created Alfresco SDK 4.x project (All-In-One, Platform JAR, or Share JAR), let’s replace the two properties with the following ones.
 
 1. Open the pom.xml in your generated project.
 

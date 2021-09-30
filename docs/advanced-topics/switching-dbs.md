@@ -5,7 +5,7 @@ Last reviewed: 2019-10-18
 ---
 # Switching Alfresco Content Services database
 
-By default, the projects generated making use of the archetypes provided by the Alfresco SDK 4 are pre-configured to work with a specific database, which is 
+By default, the projects generated making use of the archetypes provided by the Alfresco SDK 4.x are pre-configured to work with a specific database, which is 
 PostgreSQL. 
 
 Anyway, ACS is developed and tested to [support a wide range of platforms and languages](https://www.alfresco.com/services/subscription/supported-platforms). 
