@@ -56,8 +56,8 @@
         <alfresco.sdk.tests.exclude>*/*-enterprise*/*</alfresco.sdk.tests.exclude>
 
         <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-        <alfresco.platform.version>7.0.0-A20</alfresco.platform.version>
-        <alfresco.share.version>7.0.0-M3</alfresco.share.version>
+        <alfresco.platform.version>7.0.0</alfresco.platform.version>
+        <alfresco.share.version>7.0.0</alfresco.share.version>
         <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
         <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
         <keystore.settings>
@@ -70,6 +70,9 @@
             -Dmetadata-keystore.metadata.password=oKIWzVdEdA
             -Dmetadata-keystore.metadata.algorithm=AES
         </keystore.settings>
+
+        <activemq.version>5.16.1</activemq.version>
+
         <test.acs.endpoint.path/>
 
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
@@ -246,7 +249,7 @@
                 <alfresco.share.version>6.0.b</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
-                <keystore.settings></keystore.settings>
+                <keystore.settings/>
             </properties>
         </profile>
 
@@ -258,7 +261,7 @@
                 <alfresco.share.version>6.0</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
-                <keystore.settings></keystore.settings>
+                <keystore.settings/>
             </properties>
         </profile>
 
@@ -272,7 +275,7 @@
                 <alfresco.share.version>6.1.1</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
-                <keystore.settings></keystore.settings>
+                <keystore.settings/>
             </properties>
         </profile>
 
@@ -284,7 +287,7 @@
                 <alfresco.share.version>6.1.0</alfresco.share.version>
                 <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
-                <keystore.settings></keystore.settings>
+                <keystore.settings/>
             </properties>
         </profile>
 
@@ -298,7 +301,7 @@
                 <alfresco.share.version>6.2.2</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
-                <keystore.settings></keystore.settings>
+                <keystore.settings/>
             </properties>
         </profile>
 
@@ -306,11 +309,11 @@
             <id>enterprise-62-tests</id>
             <properties>
                 <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>6.2.2.10</alfresco.platform.version>
+                <alfresco.platform.version>6.2.2.12</alfresco.platform.version>
                 <alfresco.share.version>6.2.2.2</alfresco.share.version>
                 <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
-                <keystore.settings></keystore.settings>
+                <keystore.settings/>
             </properties>
         </profile>
 
@@ -320,8 +323,8 @@
             <id>community-70-tests</id>
             <properties>
                 <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>7.0.0-A20</alfresco.platform.version>
-                <alfresco.share.version>7.0.0-M3</alfresco.share.version>
+                <alfresco.platform.version>7.0.0</alfresco.platform.version>
+                <alfresco.share.version>7.0.0</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
             </properties>
@@ -333,8 +336,8 @@
             <id>enterprise-70-tests</id>
             <properties>
                 <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>repo-5439-M3v2</alfresco.platform.version>
-                <alfresco.share.version>7.0.0-M3</alfresco.share.version>
+                <alfresco.platform.version>7.0.0</alfresco.platform.version>
+                <alfresco.share.version>7.0.0</alfresco.share.version>
                 <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
             </properties>
