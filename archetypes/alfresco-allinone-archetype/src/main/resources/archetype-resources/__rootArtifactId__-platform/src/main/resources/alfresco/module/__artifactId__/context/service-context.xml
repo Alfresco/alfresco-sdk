@@ -40,5 +40,12 @@
         <property name="nodeLocatorService" ref="nodeLocatorService" />
     </bean>
 
+	<bean id="${package}.BackupAction" class="${package}.platformsample.BackupAction"
+		parent="action-executer">
+		<property name="extension">
+			<value>${backup.extension}</value>
+		</property>
+	</bean>
+
 
 </beans>
