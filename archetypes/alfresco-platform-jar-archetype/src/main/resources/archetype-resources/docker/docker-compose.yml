@@ -3,7 +3,7 @@ version: '3.4'
 services:
 #  Optional
 #  ${rootArtifactId}-share:
-#    image: ${symbol_dollar}{docker.share.image}:${symbol_dollar}{alfresco.share.version}
+#    image: ${symbol_dollar}{docker.share.image}:${symbol_dollar}{alfresco.share.docker.version}
 #    environment:
 #      REPO_HOST: ${rootArtifactId}-acs
 #      REPO_PORT: 8080
