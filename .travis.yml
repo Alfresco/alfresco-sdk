@@ -15,7 +15,7 @@ branches:
     - master
     - /feature\/.*/
     - /fix\/.*/
-    - sdk-4.3
+    - sdk-4.4
 
 stages:
   - name: test
@@ -34,6 +34,16 @@ jobs:
       stage: test
       script: 
         - ${MAVEN_INSTALL_CMD}
+
+    - name: "7.2 Enterprise"
+      stage: test
+      script:
+        - ${MAVEN_INSTALL_CMD} -Penterprise-72-tests
+
+    - name: "7.2 Community"
+      stage: test
+      script:
+        - ${MAVEN_INSTALL_CMD} -Pcommunity-72-tests
 
     - name: "7.1 Enterprise"
       stage: test
@@ -64,13 +74,3 @@ jobs:
       stage: test
       script:
         - ${MAVEN_INSTALL_CMD} -Pcommunity-62-tests
-    
-    - name: "6.1 Enterprise"
-      stage: test
-      script:
-        - ${MAVEN_INSTALL_CMD} -Penterprise-61-tests
-    
-    - name: "6.1 Community"
-      stage: test
-      script:
-        - ${MAVEN_INSTALL_CMD} -Pcommunity-61-tests
