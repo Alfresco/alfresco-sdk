@@ -80,7 +80,6 @@
             -Dmetadata-keystore.metadata.algorithm=AES
         </keystore.settings>
 
-        <activemq.version>5.16.3</activemq.version>
         <test.acs.endpoint.path />
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
     </properties>
