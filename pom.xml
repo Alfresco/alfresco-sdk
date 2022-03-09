@@ -66,7 +66,7 @@
              - alfresco-enterprise-share.version (eg. https://github.com/Alfresco/acs-packaging/blob/7.1.0.1/pom.xml#L18)
              for the GitHub Tag related to the above Docker version.
          -->
-        <alfresco.share.version>11.77</alfresco.share.version>
+        <alfresco.share.version>14.80</alfresco.share.version>
         <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
         <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
         <keystore.settings>
