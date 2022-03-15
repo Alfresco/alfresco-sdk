@@ -479,7 +479,7 @@
         </repository>
         <repository>
             <id>alfresco-internal</id>
-            <url>https://artifacts.alfresco.com/nexus/content/repositories/enterprise-releases</url>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/internal-releases</url>
         </repository>
     </repositories>
 
