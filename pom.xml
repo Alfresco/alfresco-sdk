@@ -477,6 +477,10 @@
             <id>activiti-private-repository</id>
             <url>https://artifacts.alfresco.com/nexus/content/repositories/activiti-enterprise-releases</url>
         </repository>
+        <repository>
+            <id>alfresco-internal</id>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/enterprise-releases</url>
+        </repository>
     </repositories>
 
     <distributionManagement>
