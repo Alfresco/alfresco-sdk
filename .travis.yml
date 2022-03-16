@@ -64,13 +64,3 @@ jobs:
       stage: test
       script:
         - ${MAVEN_INSTALL_CMD} -Pcommunity-70-tests
-
-    - name: "6.2 Enterprise"
-      stage: test
-      script:
-        - ${MAVEN_INSTALL_CMD} -Penterprise-62-tests
-    
-    - name: "6.2 Community"
-      stage: test
-      script:
-        - ${MAVEN_INSTALL_CMD} -Pcommunity-62-tests
