@@ -406,6 +406,10 @@
             <id>alfresco-private-repository</id>
             <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
         </repository>
+        <repository>
+            <id>alfresco-internal</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/internal</url>
+        </repository>
     </repositories>
 
     <pluginRepositories>

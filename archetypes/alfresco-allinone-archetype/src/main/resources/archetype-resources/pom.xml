@@ -5,8 +5,8 @@
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
-    <name>AIO - SDK 4.3</name>
-    <description>All-In-One (AIO) project for SDK 4.3</description>
+    <name>AIO - SDK 4.4</name>
+    <description>All-In-One (AIO) project for SDK 4.4</description>
     <packaging>pom</packaging>
 
     <prerequisites>
@@ -434,6 +434,10 @@
         <repository>
             <id>alfresco-private-repository</id>
             <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
+        </repository>
+        <repository>
+            <id>alfresco-internal</id>
+            <url>https://artifacts.alfresco.com/nexus/content/groups/internal</url>
         </repository>
     </repositories>
 
