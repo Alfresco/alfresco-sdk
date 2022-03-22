@@ -71,7 +71,7 @@ the `alfresco.log` file has also been moved to a more appropriate location (Tomc
 
 In Q4 2020, Alfresco Platform has undergone a major structural refactoring.
 
-Depending on the Platform version desired, you might need to use SDK 4.1 instead of SDK 4.3.
+Depending on the Platform version desired, you might need to use SDK 4.1 or SDK 4.3 instead of SDK 4.4.
 
 - For Enterprise and Community versions of 7.x, SDK 4.4 must be used
 - For Enterprise versions of 6.0.x, 6.1.x, 6.2.x newer than November 2020, SDK 4.3 must be used
@@ -85,7 +85,7 @@ It's also important to remember that:
 - Enterprise Docker images are published on *Quay.io*
 
 ### Latest Documentation
-To get started with **Alfresco SDK 4.3.x** (latest) visit the [Alfresco Documentation](docs/README.md).
+To get started with **Alfresco SDK 4.4.x** (latest) visit the [Alfresco Documentation](docs/README.md).
 
 #### Documentation about Previous Versions
 | SDK Version  | Alfresco Enterprise Version       |  Alfresco Community Version       | Documentation  |
