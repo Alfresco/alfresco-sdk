@@ -13,6 +13,8 @@ and [Test Driven Development (TDD)](https://en.wikipedia.org/wiki/Test-driven_de
 This project is released under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html) license.
 If you are an Enterprise customer check the [Support](#alfresco-enterprise-customers-and-partners-support) section.
 
+
+
 ## News
 
 - 2022-03: Alfresco SDK 4.4.0 released
@@ -32,6 +34,10 @@ If you are an Enterprise customer check the [Support](#alfresco-enterprise-custo
 - 2014-07: Project fully migrated from [Google Code](https://code.google.com/p/maven-alfresco-archetypes).
 
 ## User Getting Started
+
+### Important Notice about ACS 7.2
+
+Please refer to https://github.com/Alfresco/alfresco-sdk/issues/635 to fix the Search Services 403 problem.
 
 ### Important Notice about ACS 7.1 
 
