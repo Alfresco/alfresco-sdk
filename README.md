@@ -33,6 +33,10 @@ If you are an Enterprise customer check the [Support](#alfresco-enterprise-custo
 
 ## User Getting Started
 
+### Important Notice about ACS 7.2
+
+Please refer to https://github.com/Alfresco/alfresco-sdk/issues/635 to fix the Search Services 403 problem.
+
 ### Important Notice about ACS 7.1 
 
 #### Share Version Number
