@@ -106,7 +106,7 @@
             <id>community-70-tests</id>
             <properties>
                 <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>7.0.1</alfresco.platform.version>
+                <alfresco.platform.version>7.0.1-A7</alfresco.platform.version>
                 <alfresco.share.docker.version>7.0.1.2</alfresco.share.docker.version>
                 <alfresco.share.version>7.0.1.2</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
