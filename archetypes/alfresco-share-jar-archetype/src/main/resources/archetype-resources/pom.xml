@@ -368,7 +368,7 @@
         <profile>
             <id>java11</id>
             <activation>
-                <jdk>[11.0,)</jdk>
+                <jdk>[11.0,17)</jdk>
             </activation>
             <build>
                 <plugins>
