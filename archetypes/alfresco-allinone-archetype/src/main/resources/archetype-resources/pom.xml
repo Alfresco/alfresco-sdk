@@ -397,7 +397,7 @@
         <profile>
             <id>java11</id>
             <activation>
-                <jdk>[11.0,)</jdk>
+                <jdk>[11.0,17)</jdk>
             </activation>
             <build>
                 <plugins>
@@ -407,6 +407,24 @@
                         <version>3.8.0</version>
                         <configuration>
                             <release>11</release>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>java17</id>
+            <activation>
+                <jdk>[17,)</jdk>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.8.0</version>
+                        <configuration>
+                            <release>17</release>
                         </configuration>
                     </plugin>
                 </plugins>
