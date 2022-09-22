@@ -14,7 +14,7 @@ before_install:
     if [[ "$TRAVIS_JDK_VERSION" == "openjdk17" ]]
     then
       echo "using latest OS provided openjdk17"
-      export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+      export JAVA_HOME=/usr/lib/jvm/bellsoft-java17-amd64
       export PATH=$JAVA_HOME/bin:$PATH
     else
       echo "using Travis provided jdk"
