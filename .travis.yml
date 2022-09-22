@@ -32,6 +32,7 @@ branches:
     - /feature\/.*/
     - /fix\/.*/
     - sdk-4.5
+    - ACS-3568-Add_support_for_ACS_7.3_jdk17
 
 stages:
   - name: build
