@@ -1,6 +1,6 @@
-# Alfresco Share JAR Module - SDK 4.4
+# Alfresco Share JAR Module - SDK 4.5
 
-This is a Share project for Alfresco SDK 4.4.
+This is a Share project for Alfresco SDK 4.5.
 
 Run with `./run.sh build_start` or `./run.bat build_start` and verify that it
 
