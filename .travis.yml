@@ -1,7 +1,7 @@
 import:
   - source: Alfresco/alfresco-build-tools:.travis.docker_login.yml@v1.1.5
   - source: Alfresco/alfresco-build-tools:.travis.docker_hub_login.yml@v1.1.5
-  - source: Alfresco/alfresco-build-tools:.travis.maven_config.yml@v1.15.0
+  - source: Alfresco/alfresco-build-tools:.travis.maven_config.yml@v1.1.5
   - source: Alfresco/alfresco-build-tools:.travis.pre-commit.yml@v1.1.5
 
 os: linux
@@ -9,18 +9,18 @@ dist: focal
 language: java
 jdk:
   - openjdk17
-before_install:
-  - |-
-    if [[ "$TRAVIS_JDK_VERSION" == "openjdk17" ]]
-    then
-      echo "using latest OS provided openjdk17"
-      export JAVA_HOME=/usr/lib/jvm/bellsoft-java17-amd64
-      export PATH=$JAVA_HOME/bin:$PATH
-    else
-      echo "using Travis provided jdk"
-    fi
-    which java
-    java --version
+#before_install:
+#  - |-
+#    if [[ "$TRAVIS_JDK_VERSION" == "openjdk17" ]]
+#    then
+#      echo "using latest OS provided openjdk17"
+#      export JAVA_HOME=/usr/lib/jvm/bellsoft-java17-amd64
+#      export PATH=$JAVA_HOME/bin:$PATH
+#    else
+#      echo "using Travis provided jdk"
+#    fi
+#    which java
+#    java --version
 
 git:
   depth: false
