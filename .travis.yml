@@ -9,18 +9,7 @@ dist: focal
 language: java
 jdk:
   - openjdk17
-#before_install:
-#  - |-
-#    if [[ "$TRAVIS_JDK_VERSION" == "openjdk17" ]]
-#    then
-#      echo "using latest OS provided openjdk17"
-#      export JAVA_HOME=/usr/lib/jvm/bellsoft-java17-amd64
-#      export PATH=$JAVA_HOME/bin:$PATH
-#    else
-#      echo "using Travis provided jdk"
-#    fi
-#    which java
-#    java --version
+  - openjdk11
 
 git:
   depth: false
@@ -53,45 +42,54 @@ jobs:
 
     - name: "current version"
       stage: test
+      jdk: openjdk17
       script: 
         - ${MAVEN_INSTALL_CMD}
 
     - name: "7.3 Enterprise"
       stage: test
+      jdk: openjdk17
       script:
         - ${MAVEN_INSTALL_CMD} -Penterprise-73-tests
 
     - name: "7.3 Community"
       stage: test
+      jdk: openjdk17
       script:
         - ${MAVEN_INSTALL_CMD} -Pcommunity-73-tests
 
     - name: "7.2 Enterprise"
       stage: test
+      jdk: openjdk11
       script:
         - ${MAVEN_INSTALL_CMD} -Penterprise-72-tests
 
     - name: "7.2 Community"
       stage: test
+      jdk: openjdk11
       script:
         - ${MAVEN_INSTALL_CMD} -Pcommunity-72-tests
 
     - name: "7.1 Enterprise"
       stage: test
+      jdk: openjdk11
       script:
         - ${MAVEN_INSTALL_CMD} -Penterprise-71-tests
 
     - name: "7.1 Community"
       stage: test
+      jdk: openjdk11
       script:
         - ${MAVEN_INSTALL_CMD} -Pcommunity-71-tests
 
     - name: "7.0 Enterprise"
       stage: test
+      jdk: openjdk11
       script:
         - ${MAVEN_INSTALL_CMD} -Penterprise-70-tests
 
     - name: "7.0 Community"
       stage: test
+      jdk: openjdk11
       script:
         - ${MAVEN_INSTALL_CMD} -Pcommunity-70-tests
