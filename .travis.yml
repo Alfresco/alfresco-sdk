@@ -40,21 +40,39 @@ jobs:
       stage: build
       script: travis_wait $TRAVIS_WAIT_TIMEOUT mvn $MAVEN_CLI_OPTS verify -Dlogging.root.level=off -Dspring.main.banner-mode=off
 
-    - name: "current version"
+    - name: "current version Java 17"
       stage: test
       jdk: openjdk17
       script: 
         - ${MAVEN_INSTALL_CMD}
 
-    - name: "7.3 Enterprise"
+    - name: "current version Java 11"
+      stage: test
+      jdk: openjdk11
+      script:
+        - ${MAVEN_INSTALL_CMD}
+
+    - name: "7.3 Enterprise Java 17"
       stage: test
       jdk: openjdk17
       script:
         - ${MAVEN_INSTALL_CMD} -Penterprise-73-tests
 
-    - name: "7.3 Community"
+    - name: "7.3 Community Java 17"
       stage: test
       jdk: openjdk17
+      script:
+        - ${MAVEN_INSTALL_CMD} -Pcommunity-73-tests
+
+    - name: "7.3 Enterprise Java 11"
+      stage: test
+      jdk: openjdk11
+      script:
+        - ${MAVEN_INSTALL_CMD} -Penterprise-73-tests
+
+    - name: "7.3 Community Java 11"
+      stage: test
+      jdk: openjdk11
       script:
         - ${MAVEN_INSTALL_CMD} -Pcommunity-73-tests
 
