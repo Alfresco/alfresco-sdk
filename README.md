@@ -93,20 +93,20 @@ It's also important to remember that:
 To get started with **Alfresco SDK 4.5.x** (latest) visit the [Alfresco Documentation](docs/README.md).
 
 #### Documentation about Previous Versions
-| SDK Version | Alfresco Enterprise Version       |       Alfresco Community Version       | Documentation  |
-|-------------|:-------------:|:--------------------------------------:|:-----|
-| SDK 4.5     | Alfresco 7.0.x / 7.1.x / 7.2.x | Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md |
-| SDK 4.4     | Alfresco 7.0.x / 7.1.x / 7.2.x |     Alfresco 7.0.x / 7.1.x / 7.2.x     | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md |
+| SDK Version |          Alfresco Enterprise Version           |       Alfresco Community Version       | Documentation  |
+|-------------|:----------------------------------------------:|:--------------------------------------:|:-----|
+| SDK 4.5     |     Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x     | Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md |
+| SDK 4.4     |         Alfresco 7.0.x / 7.1.x / 7.2.x         |     Alfresco 7.0.x / 7.1.x / 7.2.x     | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md |
 | SDK 4.3     | Alfresco 6.0.x / 6.1.x / 6.2.x / 7.0.x / 7.1.x |         Alfresco 7.0.x / 7.1.x         | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md |
-| SDK 4.2     | Alfresco 6.0.x / 6.1.x / 6.2.x / 7.0.x |             Alfresco 7.0.x             | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md |
-| SDK 4.1     | Alfresco 6.0.x / 6.1.x / 6.2.x |     Alfresco 6.0.x / 6.1.x / 6.2.x     | https://github.com/Alfresco/alfresco-sdk/blob/sdk-4.1/docs/README.md |
-| SDK 4.0     | Alfresco 6.0.x / 6.1.x |         Alfresco 6.0.x / 6.1.x         | https://github.com/Alfresco/alfresco-sdk/blob/sdk-4.0/docs/README.md |
-| SDK 3.1     | Alfresco 5.2.x |             Alfresco 5.2.x             | http://docs.alfresco.com/5.2/concepts/sdk-intro.html |
-| SDK 3.0     | Alfresco 5.2.x |             Alfresco 5.2.x             | http://docs.alfresco.com/5.2/concepts/sdk-intro.html |
-| SDK 2.2     | Alfresco 5.1.x |             Alfresco 5.1.x             | https://docs.alfresco.com/5.1/concepts/alfresco-sdk-intro.html |
-| SDK 2.1     | Alfresco 5.0.1 |             Alfresco 5.0.d             | https://docs.alfresco.com/sdk2.1/concepts/alfresco-sdk-intro.html |
-| SDK 2.0     | Alfresco 5.0.0 |             Alfresco 5.0.c             | https://docs.alfresco.com/sdk2.0/concepts/alfresco-sdk-intro.html |
-| SDK 1.1.1   | Alfresco 4.2.x |             Alfresco 4.2.x             | https://docs.alfresco.com/4.2/concepts/dev-extensions-maven-sdk-intro.html |
+| SDK 4.2     |     Alfresco 6.0.x / 6.1.x / 6.2.x / 7.0.x     |             Alfresco 7.0.x             | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md |
+| SDK 4.1     |         Alfresco 6.0.x / 6.1.x / 6.2.x         |     Alfresco 6.0.x / 6.1.x / 6.2.x     | https://github.com/Alfresco/alfresco-sdk/blob/sdk-4.1/docs/README.md |
+| SDK 4.0     |             Alfresco 6.0.x / 6.1.x             |         Alfresco 6.0.x / 6.1.x         | https://github.com/Alfresco/alfresco-sdk/blob/sdk-4.0/docs/README.md |
+| SDK 3.1     |                 Alfresco 5.2.x                 |             Alfresco 5.2.x             | http://docs.alfresco.com/5.2/concepts/sdk-intro.html |
+| SDK 3.0     |                 Alfresco 5.2.x                 |             Alfresco 5.2.x             | http://docs.alfresco.com/5.2/concepts/sdk-intro.html |
+| SDK 2.2     |                 Alfresco 5.1.x                 |             Alfresco 5.1.x             | https://docs.alfresco.com/5.1/concepts/alfresco-sdk-intro.html |
+| SDK 2.1     |                 Alfresco 5.0.1                 |             Alfresco 5.0.d             | https://docs.alfresco.com/sdk2.1/concepts/alfresco-sdk-intro.html |
+| SDK 2.0     |                 Alfresco 5.0.0                 |             Alfresco 5.0.c             | https://docs.alfresco.com/sdk2.0/concepts/alfresco-sdk-intro.html |
+| SDK 1.1.1   |                 Alfresco 4.2.x                 |             Alfresco 4.2.x             | https://docs.alfresco.com/4.2/concepts/dev-extensions-maven-sdk-intro.html |
 
 ## Reporting Issues and Community Support
 Report issues (and contribute!) [here](https://github.com/Alfresco/alfresco-sdk/issues?milestone=1&state=open) or join us on the [IRC Channel](http://chat.alfresco.com/).
