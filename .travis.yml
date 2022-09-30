@@ -1,12 +1,9 @@
 import:
   - source: Alfresco/alfresco-build-tools:.travis.docker_login.yml@v1.1.5
   - source: Alfresco/alfresco-build-tools:.travis.docker_hub_login.yml@v1.1.5
-  - source: Alfresco/alfresco-build-tools:.travis.maven_config.yml@v1.1.5
+  - source: Alfresco/alfresco-build-tools:.travis.java.yml@v1.1.5
   - source: Alfresco/alfresco-build-tools:.travis.pre-commit.yml@v1.1.5
 
-os: linux
-dist: focal
-language: java
 jdk:
   - openjdk17
   - openjdk11
@@ -36,10 +33,6 @@ env:
 
 jobs:
   include:
-    - name: "build application"
-      stage: build
-      script: travis_wait $TRAVIS_WAIT_TIMEOUT mvn $MAVEN_CLI_OPTS verify -Dlogging.root.level=off -Dspring.main.banner-mode=off
-
     - name: "current version Java 17"
       stage: test
       jdk: openjdk17
