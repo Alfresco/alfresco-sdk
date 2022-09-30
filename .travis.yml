@@ -4,6 +4,8 @@ import:
   - source: Alfresco/alfresco-build-tools:.travis.java.yml@v1.1.5
   - source: Alfresco/alfresco-build-tools:.travis.pre-commit.yml@v1.1.5
 
+dist: focal
+
 jdk:
   - openjdk17
   - openjdk11
@@ -18,9 +20,9 @@ branches:
     - /feature\/.*/
     - /fix\/.*/
     - sdk-4.5
+    - ACS-3568-Add_support_for_ACS_7.3_jdk17
 
 stages:
-  - name: build
   - name: test
     if: commit_message !~ /\[skip tests\]/
   - name: release
