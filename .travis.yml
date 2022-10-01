@@ -39,7 +39,9 @@ jobs:
     - name: "current version Java 17"
       stage: test
       jdk: openjdk17
-      script: 
+      script:
+        - echo "$TRAVIS_BRANCH"
+        - echo "$TRAVIS_EVENT_TYPE"
         - ${MAVEN_INSTALL_CMD}
 
     - name: "current version Java 11"
