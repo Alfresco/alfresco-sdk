@@ -28,7 +28,7 @@ stages:
   - name: release
     if: commit_message ~= /\[release\]/ AND branch = master AND type != push AND type != pull_request AND fork = false
   - name: publish
-    if: (branch = master OR branch =~ /sdk-.*/) AND type != pull_request AND fork = false
+    if: false
 
 env:
   global:
@@ -40,8 +40,6 @@ jobs:
       stage: test
       jdk: openjdk17
       script:
-        - echo "$TRAVIS_BRANCH"
-        - echo "$TRAVIS_EVENT_TYPE"
         - ${MAVEN_INSTALL_CMD}
 
     - name: "current version Java 11"
