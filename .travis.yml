@@ -27,8 +27,6 @@ stages:
     if: commit_message !~ /\[skip tests\]/
   - name: release
     if: commit_message ~= /\[release\]/ AND branch = master AND type != push AND type != pull_request AND fork = false
-  - name: publish
-    if: false
 
 env:
   global:
