@@ -72,5 +72,5 @@ Alfresco SDK 4.4 provides support for Alfresco 7.0.x, 7.1.x, and 7.2.x.
 [Java 17](https://openjdk.java.net/projects/jdk/17/) is the latest stable long term (8 year support) version after Java 11. Alfresco 7.3.x already offers
 support for this version of the Java platform.
 
-Alfresco SDK 4.5 has been modified to add support for Java 17 as well. This way, if you're working as a developer in customisations for Alfresco 7.3.x you must
+Alfresco SDK 4.5 has been modified to add support for Java 17 as well. This way, if you're working as a developer in customisations for Alfresco 7.3.x you can
 now use SDK 4.5 + JDK 17 to work on them. The Apache Maven plugins included in the archetypes has been updated to avoid any issue with Java 17.
