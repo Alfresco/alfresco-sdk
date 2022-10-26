@@ -15,7 +15,7 @@ If you are an Enterprise customer check the [Support](#alfresco-enterprise-custo
 
 ## News
 
-- 2022-09: Alfresco SDK 4.5.0 released
+- 2022-10: Alfresco SDK 4.5.0 released
 - 2022-03: Alfresco SDK 4.4.0 released
 - 2021-10: Alfresco SDK 4.3.0 released
 - 2021-02: Alfresco SDK 4.2.0 released
@@ -78,7 +78,7 @@ In Q4 2020, Alfresco Platform has undergone a major structural refactoring.
 
 Depending on the Platform version desired, you might need to use SDK 4.1, 4.3 or SDK 4.4 instead of SDK 4.5.
 
-- For Enterprise and Community versions of 7.x, SDK 4.4 must be used
+- For Enterprise and Community versions of 7.x, SDK 4.4 or higher must be used
 - For Enterprise versions of 6.0.x, 6.1.x, 6.2.x newer than November 2020, SDK 4.3 must be used
 - For Enterprise and Community versions of 6.0.x, 6.1.x, 6.2.x older than November 2020, SDK 4.1 must be used
 
