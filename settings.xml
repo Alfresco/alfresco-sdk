@@ -43,10 +43,10 @@
       <username>${env.MAVEN_USERNAME}</username>
       <password>${env.MAVEN_PASSWORD}</password>
     </server>
-    <repository>
+    <server>
       <id>central-releases-staging</id>
       <username>${env.MAVEN_CENTRAL_USERNAME}</username>
       <password>${env.MAVEN_CENTRAL_PASSWORD}</password>
-    </repository>
+    </server>
   </servers>
 </settings>
