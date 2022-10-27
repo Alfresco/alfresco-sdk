@@ -5,8 +5,8 @@
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
-    <name>AIO - SDK 4.4</name>
-    <description>All-In-One (AIO) project for SDK 4.4</description>
+    <name>AIO - SDK 4.5</name>
+    <description>All-In-One (AIO) project for SDK 4.5</description>
     <packaging>pom</packaging>
 
     <prerequisites>
@@ -59,8 +59,8 @@
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>1.9.5</version>
+            <artifactId>mockito-core</artifactId>
+            <version>4.2.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
