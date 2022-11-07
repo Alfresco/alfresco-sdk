@@ -70,14 +70,7 @@
         <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
         <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
         <keystore.settings>
-            -Dencryption.keystore.type=JCEKS
-            -Dencryption.cipherAlgorithm=AES/CBC/PKCS5Padding
-            -Dencryption.keyAlgorithm=AES
-            -Dencryption.keystore.location=/usr/local/tomcat/shared/classes/alfresco/extension/keystore/keystore
-            -Dmetadata-keystore.password=mp6yc0UD9e
-            -Dmetadata-keystore.aliases=metadata
-            -Dmetadata-keystore.metadata.password=oKIWzVdEdA
-            -Dmetadata-keystore.metadata.algorithm=AES
+            -Dencryption.keystore.type=JCEKS -Dencryption.cipherAlgorithm=AES/CBC/PKCS5Padding -Dencryption.keyAlgorithm=AES -Dencryption.keystore.location=/usr/local/tomcat/shared/classes/alfresco/extension/keystore/keystore -Dmetadata-keystore.password=mp6yc0UD9e -Dmetadata-keystore.aliases=metadata -Dmetadata-keystore.metadata.password=oKIWzVdEdA -Dmetadata-keystore.metadata.algorithm=AES
         </keystore.settings>
 
         <test.acs.endpoint.path/>
