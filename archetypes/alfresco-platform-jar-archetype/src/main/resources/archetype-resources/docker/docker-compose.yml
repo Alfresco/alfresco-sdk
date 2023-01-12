@@ -53,11 +53,13 @@ services:
     ports:
       - "8983:8983"
     volumes:
-      - ${rootArtifactId}-ass-volume:/opt/alfresco-search-services/contentstore
       - ${rootArtifactId}-ass-volume:/opt/alfresco-search-services/data
   ${rootArtifactId}-activemq:
       image: alfresco/alfresco-activemq:5.16.1
-      mem_limit: 1g
+      deploy:
+        resources:
+          limits:
+            memory: 1g
       ports:
         - 8161:8161 # Web Console
         - 5672:5672 # AMQP
