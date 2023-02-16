@@ -16,10 +16,7 @@ git:
 
 branches:
   only:
-    - master
-    - /feature\/.*/
-    - /fix\/.*/
-    - sdk-4.5
+    - none
 
 stages:
   - name: test
