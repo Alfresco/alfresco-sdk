@@ -4,13 +4,15 @@ on:
   pull_request:
     branches:
       - master
-      - support/**
-      - release/**
+      - fix/**
+      - feature/**
+      - sdk-4.5
   push:
     branches:
       - master
+      - fix/**
       - feature/**
-      - release/**
+      - sdk-4.5
   workflow_dispatch:
 
 env:
