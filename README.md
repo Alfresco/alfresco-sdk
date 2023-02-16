@@ -1,7 +1,7 @@
 # [![Alfresco SDK logo](https://github.com/Alfresco/alfresco-sdk/raw/master/src/site/resources/img/alfresco-maven-logo.jpg)](#features) Alfresco SDK
 
 
-[![Build Status](https://travis-ci.com/Alfresco/alfresco-sdk.svg?branch=master)](https://travis-ci.com/Alfresco/alfresco-sdk)
+[![Build Status](https://github.com/Alfresco/alfresco-sdk/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/Alfresco/alfresco-sdk/actions/workflows/ci.yml)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 ![GitHub](https://img.shields.io/github/license/Alfresco/alfresco-sdk?color=brightgreen)
 
