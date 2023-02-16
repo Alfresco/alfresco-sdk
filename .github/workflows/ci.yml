@@ -34,6 +34,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v1.35.0
+        with:
+          java-version: 11
       - name: "Build"
         run: mvn $MAVEN_CLI_OPTS verify -Dlogging.root.level=off -Dspring.main.banner-mode=off
   tests:
