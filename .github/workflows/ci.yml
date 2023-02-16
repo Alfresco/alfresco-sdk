@@ -37,7 +37,9 @@ jobs:
         with:
           java-version: 11
       - name: "Build"
-        run: mvn $MAVEN_CLI_OPTS verify -Dlogging.root.level=off -Dspring.main.banner-mode=off
+        run: |
+          mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+          mvn $MAVEN_CLI_OPTS verify -Dlogging.root.level=off -Dspring.main.banner-mode=off
   tests:
     name: ${{ matrix.name }}
     runs-on: ubuntu-latest
