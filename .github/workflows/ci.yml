@@ -20,7 +20,6 @@ env:
   MAVEN_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
   MAVEN_CLI_OPTS: "-B -q -e -fae -V -DinstallAtEnd=true -U"
   MAVEN_INSTALL_CMD: "mvn clean install -B"
-  JAVA_VERSION: "11"
 
 jobs:
   pre_commit:
