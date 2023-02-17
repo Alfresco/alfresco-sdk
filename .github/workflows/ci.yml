@@ -18,6 +18,8 @@ on:
 env:
   MAVEN_USERNAME: ${{ secrets.NEXUS_USERNAME }}
   MAVEN_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+  MAVEN_CENTRAL_USERNAME: ${{ secrets.OSS_SONATYPE_USERNAME }}
+  MAVEN_CENTRAL_PASSWORD: ${{ secrets.OSS_SONATYPE_PASSWORD }}
   MAVEN_CLI_OPTS: "-B -q -e -fae -V -DinstallAtEnd=true -U"
   MAVEN_INSTALL_CMD: "mvn clean install -B"
 
