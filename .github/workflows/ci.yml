@@ -21,7 +21,6 @@ env:
   MAVEN_CENTRAL_USERNAME: ${{ secrets.OSS_SONATYPE_USERNAME }}
   MAVEN_CENTRAL_PASSWORD: ${{ secrets.OSS_SONATYPE_PASSWORD }}
   MAVEN_CLI_OPTS: "-B -q -e -fae -V -DinstallAtEnd=true -U"
-  MAVEN_INSTALL_CMD: "mvn clean install -B"
 
 jobs:
   pre_commit:
@@ -103,7 +102,7 @@ jobs:
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
       - name: "Build"
-        run: ${MAVEN_INSTALL_CMD} ${{ matrix.suite }}
+        run: mvn clean install -B ${{ matrix.suite }}
 
   publish:
     name: "Publish artifacts"
