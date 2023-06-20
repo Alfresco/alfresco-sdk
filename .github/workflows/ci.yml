@@ -56,6 +56,18 @@ jobs:
             java-version: 17
           - name: "current version Java 11"
             java-version: 11
+          - name: "7.4 Enterprise Java 17"
+            java-version: 17
+            suite: -Penterprise-74-tests
+          - name: "7.4 Community Java 17"
+            java-version: 17
+            suite: -Pcommunity-74-tests
+          - name: "7.4 Enterprise Java 11"
+            java-version: 11
+            suite: -Penterprise-74-tests
+          - name: "7.4 Community Java 11"
+            java-version: 11
+            suite: -Pcommunity-74-tests
           - name: "7.3 Enterprise Java 17"
             java-version: 17
             suite: -Penterprise-73-tests
