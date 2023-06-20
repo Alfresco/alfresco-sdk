@@ -30,7 +30,7 @@
         <connection>scm:git:${scm.url.base}.git</connection>
         <developerConnection>scm:git:${scm.url.base}</developerConnection>
         <url>${scm.url.base}</url>
-        <tag>alfresco-sdk-aggregator-4.4.0</tag>
+        <tag>alfresco-sdk-aggregator-4.6.0-SNAPSHOT</tag>
     </scm>
 
     <!-- All the modules of the Alfresco SDK -->
@@ -49,24 +49,24 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <maven.archetype.version>3.0.0</maven.archetype.version>
         <alfresco.sdk.parent.version>${project.version}</alfresco.sdk.parent.version>
         <alfresco.sdk.tests.exclude>*/*-enterprise*/*</alfresco.sdk.tests.exclude>
 
         <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-        <alfresco.platform.version>7.3.0</alfresco.platform.version>
+        <alfresco.platform.version>7.4.0.1</alfresco.platform.version>
         <alfresco.platform.docker.user>alfresco</alfresco.platform.docker.user>
-        <alfresco.share.docker.version>7.3.0</alfresco.share.docker.version>
+        <alfresco.share.docker.version>7.4.0.1</alfresco.share.docker.version>
         <!--
              The following value is now obtained by looking at the
-             - alfresco-community-share.version (eg. https://github.com/Alfresco/acs-community-packaging/blob/7.2.1/pom.xml#L17)
+             - alfresco-community-share.version (eg. https://github.com/Alfresco/acs-community-packaging/blob/7.4.0.1/pom.xml#L17)
              or
-             - alfresco-enterprise-share.version (eg. https://github.com/Alfresco/acs-packaging/blob/7.2.1/pom.xml#L18)
+             - alfresco-enterprise-share.version (eg. https://github.com/Alfresco/acs-packaging/blob/7.4.0.1/pom.xml#L18)
              for the GitHub Tag related to the above Docker version.
          -->
-        <alfresco.share.version>17.137</alfresco.share.version>
+        <alfresco.share.version>20.165</alfresco.share.version>
         <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
         <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
         <keystore.settings>
@@ -192,6 +192,32 @@
                 <alfresco.platform.version>7.3.0</alfresco.platform.version>
                 <alfresco.share.docker.version>7.3.0</alfresco.share.docker.version>
                 <alfresco.share.version>17.137</alfresco.share.version>
+                <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.platform.docker.user>alfresco</alfresco.platform.docker.user>
+            </properties>
+        </profile>
+
+        <!-- 7.4 -->
+        <profile>
+            <id>community-74-tests</id>
+            <properties>
+                <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>7.4.0.1</alfresco.platform.version>
+                <alfresco.share.docker.version>7.4.0.1</alfresco.share.docker.version>
+                <alfresco.share.version>17.137</alfresco.share.version>
+                <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.platform.docker.user>alfresco</alfresco.platform.docker.user>
+            </properties>
+        </profile>
+        <profile>
+            <id>enterprise-74-tests</id>
+            <properties>
+                <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>7.4.0.1</alfresco.platform.version>
+                <alfresco.share.docker.version>7.4.0.1</alfresco.share.docker.version>
+                <alfresco.share.version>20.165</alfresco.share.version>
                 <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
                 <alfresco.platform.docker.user>alfresco</alfresco.platform.docker.user>
