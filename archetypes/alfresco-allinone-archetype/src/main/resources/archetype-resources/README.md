@@ -1,6 +1,6 @@
-# Alfresco AIO Project - SDK 4.5
+# Alfresco AIO Project - SDK 4.6
 
-This is an All-In-One (AIO) project for Alfresco SDK 4.5.
+This is an All-In-One (AIO) project for Alfresco SDK 4.6.
 
 Run with `./run.sh build_start` or `./run.bat build_start` and verify that it
 
