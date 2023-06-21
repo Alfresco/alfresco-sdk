@@ -96,7 +96,7 @@ To get started with **Alfresco SDK 4.6.x** (latest) visit the [Alfresco Document
 #### Documentation about Previous Versions
 | SDK Version |          Alfresco Enterprise Version           |           Alfresco Community Version           | Documentation                                                              |
 |-------------|:----------------------------------------------:|:----------------------------------------------:|:---------------------------------------------------------------------------|
-| SDK 4.5     | Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x | Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md        |
+| SDK 4.6     | Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x | Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md        |
 | SDK 4.5     |     Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x     |     Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x     | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md        |
 | SDK 4.4     |         Alfresco 7.0.x / 7.1.x / 7.2.x         |         Alfresco 7.0.x / 7.1.x / 7.2.x         | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md        |
 | SDK 4.3     | Alfresco 6.0.x / 6.1.x / 6.2.x / 7.0.x / 7.1.x |             Alfresco 7.0.x / 7.1.x             | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md        |
