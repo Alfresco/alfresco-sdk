@@ -235,8 +235,8 @@
                             <goal>minify</goal>
                         </goals>
                         <configuration>
-                            <baseSourceDir>src/main/assembly</baseSourceDir>
-                            <baseTargetDir>src/main/assembly</baseTargetDir>
+                            <baseSourceDir>${project.basedir}/src/main/assembly</baseSourceDir>
+                            <baseTargetDir>${project.basedir}/src/main/assembly</baseTargetDir>
                             <sourceDir>web</sourceDir>
                             <targetDir>web</targetDir>
                             <skipMerge>true</skipMerge>
@@ -263,8 +263,8 @@
                             <goal>minify</goal>
                         </goals>
                         <configuration>
-                            <baseSourceDir>src/main/assembly</baseSourceDir>
-                            <baseTargetDir>src/main/assembly</baseTargetDir>
+                            <baseSourceDir>${project.basedir}/src/main/assembly</baseSourceDir>
+                            <baseTargetDir>${project.basedir}/src/main/assembly</baseTargetDir>
                             <sourceDir>web</sourceDir>
                             <targetDir>web</targetDir>
                             <skipMerge>true</skipMerge>
