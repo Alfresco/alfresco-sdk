@@ -263,10 +263,6 @@
                             <goal>minify</goal>
                         </goals>
                         <configuration>
-                            <skipMerge>true</skipMerge>
-                            <includes>
-                                <include>**/*.js</include>
-                            </includes>
                             <excludes>
                                 <exclude>**/webscripts/**</exclude>
                                 <exclude>**/site-webscripts/**</exclude>
