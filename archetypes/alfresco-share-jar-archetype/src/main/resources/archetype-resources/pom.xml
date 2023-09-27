@@ -263,10 +263,6 @@
                             <goal>minify</goal>
                         </goals>
                         <configuration>
-                            <baseSourceDir>${project.basedir}/src/main/assembly</baseSourceDir>
-                            <baseTargetDir>${project.basedir}/src/main/assembly</baseTargetDir>
-                            <sourceDir>web</sourceDir>
-                            <targetDir>web</targetDir>
                             <skipMerge>true</skipMerge>
                             <includes>
                                 <include>**/*.js</include>
