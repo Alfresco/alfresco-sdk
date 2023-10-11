@@ -355,55 +355,190 @@
                 </dependencies>
             </plugin>
 
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>gmaven-plugin</artifactId>
+                <version>1.5</version> <!-- Use the latest version available -->
+                <executions>
+                    <execution>
+                        <id>check-js-files-inside-assembly</id>
+                        <phase>generate-resources</phase> <!-- Choose a suitable phase -->
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <source>
+                                def dirPath = "${project.basedir}/src/main/assembly/web" // Replace with your directory path
+                                def dirExists = new File(dirPath).isDirectory()
+
+                                if (dirExists)
+                                {
+                                    def jsFilesExist = checkForJsFiles(new File(dirPath))
+
+                                    if (jsFilesExist) {
+                                        // Execute the minify step here or set a property to control it.
+                                        // For example, you can set a property to true to indicate that minification is required.
+                                        project.properties['minifyRequiredInAssembly'] = 'false'
+                                        println "JavaScript files found. Minification is required."
+                                    } else {
+                                        project.properties['minifyRequiredInAssembly'] = 'true'
+                                        println "No JavaScript files found. Skipping minification."
+                                    }
+
+                                }
+                                else{
+                                    project.properties['minifyRequiredInAssembly'] = 'true'
+                                }
+
+                                def checkForJsFiles(File directory) {
+                                    def jsFilesExist = false
+                                    directory.eachFileRecurse { file ->
+                                        if (file.name.endsWith('.js') &amp;&amp; !matchesExclusionPatterns(file.path)) {
+                                            jsFilesExist = true
+                                        }
+                                    }
+                                    jsFilesExist
+                                }
+
+                                def matchesExclusionPatterns(filePath) {
+                                    def exclusionPatterns = [
+                                       'webscripts',
+                                       'site-webscripts',
+                                       'META-INF',
+                                       '.*/.lib/.js',
+                                       '.*/.css',
+                                       '.*/.min/js',
+                                       '.*/.min/.css'
+                                    ]
+                                    return exclusionPatterns.any { pattern -> filePath =~ /.*\/$pattern\/.*/ }
+                                }
+                            </source>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>check-js-files-inside-resources</id>
+                        <phase>generate-resources</phase> <!-- Choose a suitable phase -->
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <source>
+                                def dirPath = "${project.basedir}/src/main/resources" // Replace with your directory path
+                                def dirExists = new File(dirPath).isDirectory()
+
+                                if (dirExists)
+                                {
+                                    def jsFilesExist = checkForJsFiles(new File(dirPath))
+
+                                    if (jsFilesExist) {
+                                        // Execute the minify step here or set a property to control it.
+                                        // For example, you can set a property to true to indicate that minification is required.
+                                        project.properties['minifyRequiredInResources'] = 'false'
+                                        println "JavaScript files found. Minification is required."
+                                    } else {
+                                        project.properties['minifyRequiredInResources'] = 'true'
+                                        println "No JavaScript files found. Skipping minification."
+                                    }
+
+                                }
+                                else{
+                                    project.properties['minifyRequiredInResources'] = 'true'
+                                }
+
+                                def checkForJsFiles(File directory) {
+                                    def jsFilesExist = false
+                                    directory.eachFileRecurse { file ->
+                                        if (file.name.endsWith('.js') &amp;&amp; !matchesExclusionPatterns(file.path)) {
+                                            jsFilesExist = true
+                                        }
+                                    }
+                                    jsFilesExist
+                                }
+
+                                def matchesExclusionPatterns(filePath) {
+                                    def exclusionPatterns = [
+                                       'webscripts',
+                                       'META-INF',
+                                       '.*/.lib/.js',
+                                       '.*/.css',
+                                       '.*/.min/js',
+                                       '.*/.min/.css'
+                                    ]
+                                    return exclusionPatterns.any { pattern -> filePath =~ /.*\/$pattern\/.*/ }
+                                }
+                            </source>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
             <!-- Compress JavaScript files and store as *-min.js -->
             <plugin>
-                <groupId>net.alchim31.maven</groupId>
-                <artifactId>yuicompressor-maven-plugin</artifactId>
-                <version>1.5.1</version>
+                <groupId>com.github.blutorange</groupId>
+                <artifactId>closure-compiler-maven-plugin</artifactId>
+                <version>2.27.0</version>
                 <executions>
                     <!-- Compress the JS files under the assembly folder -->
                     <execution>
                         <id>compress-assembly</id>
+                        <phase>generate-resources</phase>
                         <goals>
-                            <goal>compress</goal>
+                            <goal>minify</goal>
                         </goals>
                         <configuration>
-                            <sourceDirectory>${project.basedir}/src/main/assembly/web</sourceDirectory>
-                            <outputDirectory>${project.basedir}/src/main/assembly/web</outputDirectory>
+                            <baseSourceDir>${project.basedir}/src/main/assembly</baseSourceDir>
+                            <baseTargetDir>${project.basedir}/src/main/assembly</baseTargetDir>
+                            <sourceDir>web</sourceDir>
+                            <targetDir>web</targetDir>
+                            <skipMerge>true</skipMerge>
+                            <skip>${minifyRequiredInAssembly}</skip>
+                            <includes>
+                                <include>**/*.js</include>
+                            </includes>
                             <excludes>
                                 <exclude>**/webscripts/**</exclude>
                                 <exclude>**/site-webscripts/**</exclude>
                                 <exclude>**/META-INF/**</exclude>
                                 <exclude>**/*.lib.js</exclude>
                                 <exclude>**/*.css</exclude>
-                                <exclude>**/*-min.js</exclude>
-                                <exclude>**/*-min.css</exclude>
+                                <exclude>**/*.min.js</exclude>
+                                <exclude>**/*.min.css</exclude>
                             </excludes>
                             <force>true</force>
-                            <jswarn>false</jswarn>
                         </configuration>
                     </execution>
                     <!-- Compress the JS files under the resources folder -->
                     <execution>
                         <id>compress-resources</id>
+                        <phase>generate-resources</phase>
                         <goals>
-                            <goal>compress</goal>
+                            <goal>minify</goal>
                         </goals>
                         <configuration>
+                            <baseSourceDir>${project.basedir}/src/main</baseSourceDir>
+                            <baseTargetDir>${project.basedir}/src/main</baseTargetDir>
+                            <sourceDir>resources</sourceDir>
+                            <targetDir>resources</targetDir>
+                            <skipMerge>true</skipMerge>
+                            <skip>${minifyRequiredInResources}</skip>
+                            <includes>
+                                <include>**/*.js</include>
+                            </includes>
                             <excludes>
                                 <exclude>**/webscripts/**</exclude>
                                 <exclude>**/site-webscripts/**</exclude>
                                 <exclude>**/*.lib.js</exclude>
                                 <exclude>**/*.css</exclude>
-                                <exclude>**/*-min.js</exclude>
-                                <exclude>**/*-min.css</exclude>
+                                <exclude>**/*.min.js</exclude>
+                                <exclude>**/*.min.css</exclude>
                             </excludes>
                             <force>true</force>
-                            <jswarn>false</jswarn>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+
 
             <!-- Hot reloading with JRebel -->
             <plugin>
