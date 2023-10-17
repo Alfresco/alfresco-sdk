@@ -223,49 +223,63 @@
 
             <!-- Compress JavaScript files and store as *-min.js -->
             <plugin>
-                <groupId>net.alchim31.maven</groupId>
-                <artifactId>yuicompressor-maven-plugin</artifactId>
-                <version>1.5.1</version>
+                <groupId>com.github.blutorange</groupId>
+                <artifactId>closure-compiler-maven-plugin</artifactId>
+                <version>2.28.0</version>
                 <executions>
                     <!-- Compress the JS files under the assembly folder -->
                     <execution>
                         <id>compress-assembly</id>
+                        <phase>generate-resources</phase>
                         <goals>
-                            <goal>compress</goal>
+                            <goal>minify</goal>
                         </goals>
                         <configuration>
-                            <sourceDirectory>${project.basedir}/src/main/assembly/web</sourceDirectory>
-                            <outputDirectory>${project.basedir}/src/main/assembly/web</outputDirectory>
+                            <baseSourceDir>${project.basedir}/src/main/assembly</baseSourceDir>
+                            <baseTargetDir>${project.basedir}/src/main/assembly</baseTargetDir>
+                            <sourceDir>web</sourceDir>
+                            <targetDir>web</targetDir>
+                            <skipMerge>true</skipMerge>
+                            <includes>
+                                <include>**/*.js</include>
+                            </includes>
                             <excludes>
                                 <exclude>**/webscripts/**</exclude>
                                 <exclude>**/site-webscripts/**</exclude>
                                 <exclude>**/META-INF/**</exclude>
                                 <exclude>**/*.lib.js</exclude>
                                 <exclude>**/*.css</exclude>
-                                <exclude>**/*-min.js</exclude>
-                                <exclude>**/*-min.css</exclude>
+                                <exclude>**/*.min.js</exclude>
+                                <exclude>**/*.min.css</exclude>
                             </excludes>
                             <force>true</force>
-                            <jswarn>false</jswarn>
                         </configuration>
                     </execution>
                     <!-- Compress the JS files under the resources folder -->
                     <execution>
                         <id>compress-resources</id>
+                        <phase>generate-resources</phase>
                         <goals>
-                            <goal>compress</goal>
+                            <goal>minify</goal>
                         </goals>
                         <configuration>
+                            <baseSourceDir>${project.basedir}/src/main</baseSourceDir>
+                            <baseTargetDir>${project.basedir}/src/main</baseTargetDir>
+                            <sourceDir>resources</sourceDir>
+                            <targetDir>resources</targetDir>
+                            <skipMerge>true</skipMerge>
+                            <includes>
+                                <include>**/*.js</include>
+                            </includes>
                             <excludes>
                                 <exclude>**/webscripts/**</exclude>
                                 <exclude>**/site-webscripts/**</exclude>
                                 <exclude>**/*.lib.js</exclude>
                                 <exclude>**/*.css</exclude>
-                                <exclude>**/*-min.js</exclude>
-                                <exclude>**/*-min.css</exclude>
+                                <exclude>**/*.min.js</exclude>
+                                <exclude>**/*.min.css</exclude>
                             </excludes>
                             <force>true</force>
-                            <jswarn>false</jswarn>
                         </configuration>
                     </execution>
                 </executions>
