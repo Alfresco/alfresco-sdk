@@ -287,7 +287,7 @@
                 </executions>
             </plugin>
 
-            <!-- Compress JavaScript files and store as *-min.js -->
+            <!-- Compress JavaScript files and store as *.min.js -->
             <plugin>
                 <groupId>com.github.blutorange</groupId>
                 <artifactId>closure-compiler-maven-plugin</artifactId>
