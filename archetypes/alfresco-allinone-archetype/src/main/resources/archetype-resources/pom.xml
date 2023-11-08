@@ -5,8 +5,8 @@
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
-    <name>AIO - SDK 4.6</name>
-    <description>All-In-One (AIO) project for SDK 4.6</description>
+    <name>AIO - SDK 4.7</name>
+    <description>All-In-One (AIO) project for SDK 4.7</description>
     <packaging>pom</packaging>
 
     <prerequisites>
