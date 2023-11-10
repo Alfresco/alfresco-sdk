@@ -61,7 +61,7 @@
         <alfresco.share.docker.version>23.1.0</alfresco.share.docker.version>
         <!--
              The following value is now obtained by looking at the
-             - alfresco-community-share.version (eg. https://github.com/Alfresco/acs-community-packaging/blob/23.0.1/pom.xml#L17)
+             - alfresco-community-share.version (eg. https://github.com/Alfresco/acs-community-packaging/blob/23.1.0/pom.xml#L17)
              or
              - alfresco-enterprise-share.version (eg. https://github.com/Alfresco/acs-packaging/blob/23.1.0/pom.xml#L18)
              for the GitHub Tag related to the above Docker version.
