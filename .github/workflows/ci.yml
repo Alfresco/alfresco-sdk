@@ -54,19 +54,11 @@ jobs:
         include:
           - name: "current version Java 17"
             java-version: 17
-          - name: "current version Java 11"
-            java-version: 11
           - name: "23.1 Enterprise Java 17"
             java-version: 17
             suite: -Penterprise-231-tests
           - name: "23.1 Community Java 17"
             java-version: 17
-            suite: -Pcommunity-231-tests
-          - name: "23.1 Enterprise Java 11"
-            java-version: 11
-            suite: -Penterprise-231-tests
-          - name: "23.1 Community Java 11"
-            java-version: 11
             suite: -Pcommunity-231-tests
           - name: "7.4 Enterprise Java 17"
             java-version: 17
