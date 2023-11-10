@@ -10,7 +10,7 @@ Alfresco Share 6.
 
 This was a mayor release oriented to support Alfresco 6, so it is not compatible with previous versions of the SDK.
 
-Alfresco SDK 4.6 extends the support to Alfresco 7.4. 
+Alfresco SDK 4.7 extends the support to Alfresco 23.1. 
 Use an older SDK version for Alfresco 6. 
 
 ## Embracing containers and Docker
@@ -64,13 +64,13 @@ environment can be more similar to a real one, including whatever other service 
 
 Alfresco SDK 4.1 provides support for Alfresco 6.2.x.
 
-## Support for Alfresco 7.0.x, 7.1.x, 7.2.x, 7.3.x and 7.4.x
+## Support for Alfresco 7.0.x, 7.1.x, 7.2.x, 7.3.x, 7.4.x and 23.1.x
 
-Alfresco SDK 4.6 provides support for Alfresco 7.0.x, 7.1.x, 7.2.x, 7.3.x and 7.4.x.
+Alfresco SDK 4.7 provides support for Alfresco 7.0.x, 7.1.x, 7.2.x, 7.3.x, 7.4.x and 23.1.x.
 
 ## Support for Java 17
 [Java 17](https://openjdk.java.net/projects/jdk/17/) is the latest stable long term (8 year support) version after Java 11. Alfresco 7.3.x already offers
 support for this version of the Java platform.
 
-Alfresco SDK 4.5 has been modified to add support for Java 17 as well. This way, if you're working as a developer in customisations for Alfresco 7.3.x or 7.4.x you can
+Alfresco SDK 4.5 has been modified to add support for Java 17 as well. This way, if you're working as a developer in customisations for Alfresco 7.3.x or 7.4.x or 23.1.x you can
 now use SDK 4.5 (or greater) + JDK 17 to work on them. The Apache Maven plugins included in the archetypes has been updated to avoid any issue with Java 17.
