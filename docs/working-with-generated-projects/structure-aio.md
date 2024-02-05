@@ -41,7 +41,7 @@ my-all-in-one-project
 │       └── main
 │           └── docker
 │               ├── alfresco-global.properties
-│               ├── dev-log4j.properties
+│               ├── dev-log4j2.properties
 │               ├── disable-webscript-caching-context.xml
 │               ├── Dockerfile
 │               ├── hotswap-agent.properties
@@ -106,7 +106,7 @@ my-all-in-one-project
 │           └── docker
 │               ├── Dockerfile
 │               ├── hotswap-agent.properties
-│               ├── log4j.properties
+│               ├── log4j2.properties
 │               └── share-config-custom.xml
 └── my-all-in-one-project-share
     ├── pom.xml
