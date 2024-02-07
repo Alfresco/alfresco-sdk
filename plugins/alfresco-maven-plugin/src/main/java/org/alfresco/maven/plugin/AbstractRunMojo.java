@@ -131,12 +131,12 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     protected String shareContextPath;
 
     /**
-     * Share Log4j.properties configuration cannot be customized via extension
+     * Share Log4j2.properties configuration cannot be customized via extension
      * put on the classpath, like on the platform side.
-     * So we need to override the log4j.properties in share/WEB-INF/classes
+     * So we need to override the log4j2.properties in share/WEB-INF/classes
      * to be able to log from custom code.
      * This property can be used to turn off this overriding, to produce a WAR with
-     * the standard Share log4j.properties file.
+     * the standard Share log4j2.properties file.
      */
     @Parameter(property = "maven.alfresco.useCustomShareLog4jConfig", defaultValue = "true")
     protected boolean useCustomShareLog4jConfig;
@@ -452,22 +452,22 @@ public abstract class AbstractRunMojo extends AbstractMojo {
 
 
     /**
-     * Copy a custom Share Log4J config into the share-war/WEB-INF/classes dir.
-     * There is no custom classpath resolve mechanism for Share log4j,
-     * to log custom stuff overriding standard log4j.properties is needed.
+     * Copy a custom Share Log4J2 config into the share-war/WEB-INF/classes dir.
+     * There is no custom classpath resolve mechanism for Share log4j2,
+     * to log custom stuff overriding standard log4j2.properties is needed.
      *
      * @throws MojoExecutionException when any problem appears copying the share log4j configuration
      */
     protected void copyShareLog4jConfig() throws MojoExecutionException {
         if (!useCustomShareLog4jConfig) {
-            getLog().info("NOT overriding share/WEB-INF/classes/log4j.properties");
+            getLog().info("NOT overriding share/WEB-INF/classes/log4j2.properties");
             return;
         }
 
         final String warOutputDir = getWarOutputDir(SHARE_WAR_PREFIX_NAME);
         final String logConfDestDir = warOutputDir + "/WEB-INF/classes";
 
-        getLog().info("Copying Share log4j.properties to: " + logConfDestDir);
+        getLog().info("Copying Share log4j2.properties to: " + logConfDestDir);
 
         executeMojo(
                 plugin(
@@ -482,7 +482,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                                 element(name("resource"),
                                         element(name("directory"), "src/test/resources/share"),
                                         element(name("includes"),
-                                                element(name("include"), "log4j.properties")
+                                                element(name("include"), "log4j2.properties")
                                         ),
                                         element(name("filtering"), "true")
                                 )
@@ -886,7 +886,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
                             own repositories (i.e. the usual Java2 delegation model).
                             Prevent parent classloader delegation, each webapp loads.
                             If set to true then you will get a truckload of Solr logging as
-                            the alf_data_dev/solr4/config/log4j-solr.properties file is not picked up.
+                            the alf_data_dev/solr4/config/log4j2-solr.properties file is not picked up.
                             This also fixes issues with the Google Guava Library, which this tomcat plugin uses
                             version 10.0.1 of but Solr uses 14.0.1 */
                         element(name("delegate"), "false"),
