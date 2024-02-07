@@ -30,7 +30,7 @@ my-platform-jar-project
     │   ├── docker
     │   │   ├── Dockerfile
     │   │   ├── alfresco-global.properties
-    │   │   ├── dev-log4j.properties
+    │   │   ├── dev-log4j2.properties
     │   │   ├── disable-webscript-caching-context.xml
     │   │   ├── hotswap-agent.properties
     │   │   └── license
@@ -62,7 +62,7 @@ my-platform-jar-project
     │                   │   ├── bootstrap-context.xml
     │                   │   ├── service-context.xml
     │                   │   └── webscript-context.xml
-    │                   ├── log4j.properties
+    │                   ├── log4j2.properties
     │                   ├── messages
     │                   │   ├── content-model.properties
     │                   │   └── workflow-messages.properties

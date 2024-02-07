@@ -35,9 +35,9 @@
             <source>src/main/assembly/file-mapping.properties</source>
             <filtered>false</filtered>
         </file>
-        <!-- Add module-specific log4j.properties configuration at top level in the AMP -->
+        <!-- Add module-specific log4j2.properties configuration at top level in the AMP -->
         <file>
-            <source>src/main/resources/alfresco/module/${project.artifactId}/log4j.properties</source>
+            <source>src/main/resources/alfresco/module/${project.artifactId}/log4j2.properties</source>
             <filtered>false</filtered>
         </file>
     </files>

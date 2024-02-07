@@ -28,7 +28,7 @@ my-share-jar-project
     │   ├── docker
     │   │   ├── Dockerfile
     │   │   ├── hotswap-agent.properties
-    │   │   ├── log4j.properties
+    │   │   ├── log4j2.properties
     │   │   └── share-config-custom.xml
     │   ├── java
     │   │   └── com
