@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.alfresco.maven</groupId>
     <artifactId>alfresco-sdk-aggregator</artifactId>
-    <version>4.7.1-SNAPSHOT</version>
+    <version>4.8.0</version>
     <name>Alfresco SDK</name>
     <description>This aggregator Project builds all modules required for the Alfresco SDK</description>
     <packaging>pom</packaging>
@@ -30,7 +30,7 @@
         <connection>scm:git:${scm.url.base}.git</connection>
         <developerConnection>scm:git:${scm.url.base}</developerConnection>
         <url>${scm.url.base}</url>
-        <tag>alfresco-sdk-aggregator-4.7.1-SNAPSHOT</tag>
+        <tag>alfresco-sdk-aggregator-4.8.0</tag>
     </scm>
 
     <!-- All the modules of the Alfresco SDK -->
@@ -61,9 +61,9 @@
         <alfresco.share.docker.version>23.2.1</alfresco.share.docker.version>
         <!--
              The following value is now obtained by looking at the
-             - alfresco-community-share.version (eg. https://github.com/Alfresco/acs-community-packaging/blob/23.1.0/pom.xml#L17)
+             - alfresco-community-share.version (eg. https://github.com/Alfresco/acs-community-packaging/blob/23.2.1/pom.xml#L17)
              or
-             - alfresco-enterprise-share.version (eg. https://github.com/Alfresco/acs-packaging/blob/23.1.0/pom.xml#L18)
+             - alfresco-enterprise-share.version (eg. https://github.com/Alfresco/acs-packaging/blob/23.2.1/pom.xml#L18)
              for the GitHub Tag related to the above Docker version.
          -->
         <alfresco.share.version>23.2.0.72</alfresco.share.version>
