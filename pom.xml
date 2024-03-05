@@ -255,7 +255,7 @@
             <id>community-232-tests</id>
             <properties>
                 <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>23.2.0.60</alfresco.platform.version>
+                <alfresco.platform.version>23.2.0</alfresco.platform.version>
                 <alfresco.share.docker.version>23.2.0</alfresco.share.docker.version>
                 <alfresco.share.version>23.2.0.72</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
@@ -267,7 +267,7 @@
             <id>enterprise-232-tests</id>
             <properties>
                 <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>23.2.0.63</alfresco.platform.version>
+                <alfresco.platform.version>23.2.0</alfresco.platform.version>
                 <alfresco.share.docker.version>23.2.0</alfresco.share.docker.version>
                 <alfresco.share.version>23.2.0.72</alfresco.share.version>
                 <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
