@@ -1,0 +1,3 @@
+# To avoid the provided dependencies we set the scope to runtime. See: https://docs.veracode.com/r/c_sc_scan_directives
+# runtime: to restrict the scan to compile and runtime dependencies.
+scope: runtime
