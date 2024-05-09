@@ -24,8 +24,11 @@ import org.springframework.extensions.webscripts.Cache;
 import org.springframework.extensions.webscripts.DeclarativeWebScript;
 import org.springframework.extensions.webscripts.Status;
 import org.springframework.extensions.webscripts.WebScriptRequest;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.logging.log4j.Level;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,13 +40,14 @@ import java.util.Map;
  * @since 2.1.0
  */
 public class HelloWorldWebScript extends DeclarativeWebScript {
-    private static Log logger = LogFactory.getLog(HelloWorldWebScript.class);
+    private static Logger logger = LogManager.getLogger(HelloWorldWebScript.class);
 
     protected Map<String, Object> executeImpl(
             WebScriptRequest req, Status status, Cache cache) {
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("fromJava", "HelloFromJava");
 
+        Configurator.setLevel(logger.getName(), Level.DEBUG);
         logger.debug("Your 'Hello World' Web Script was called!");
 
         return model;

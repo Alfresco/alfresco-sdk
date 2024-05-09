@@ -24,8 +24,10 @@ import org.alfresco.repo.module.AbstractModuleComponent;
 import org.alfresco.repo.nodelocator.NodeLocatorService;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.logging.log4j.Level;
 
 /**
  * A basic component that will be started for this module.
@@ -36,7 +38,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Maurizio Pillitu
  */
 public class DemoComponent extends AbstractModuleComponent {
-    private static Log logger = LogFactory.getLog(DemoComponent.class);
+    private static Logger logger = LogManager.getLogger(DemoComponent.class);
 
     private NodeService nodeService;
 
@@ -55,6 +57,7 @@ public class DemoComponent extends AbstractModuleComponent {
      */
     @Override
     protected void executeInternal() throws Throwable {
+        Configurator.setLevel(logger.getName(), Level.DEBUG);
         System.out.println("DemoComponent has been executed");
         logger.debug("Test debug logging. Congratulation your JAR Module is working");
         logger.info("This is only for information purposes. Better remove me from the log in Production");
