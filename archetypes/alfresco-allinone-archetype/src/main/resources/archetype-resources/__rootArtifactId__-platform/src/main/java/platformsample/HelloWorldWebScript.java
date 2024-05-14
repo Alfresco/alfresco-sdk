@@ -45,6 +45,7 @@ public class HelloWorldWebScript extends DeclarativeWebScript {
         model.put("fromJava", "HelloFromJava");
 
         logger.debug("Your 'Hello World' Web Script was called!");
+        logger.error("Your 'Hello World' Web Script was called!");
 
         return model;
     }
