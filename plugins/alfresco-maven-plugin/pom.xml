@@ -17,7 +17,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.5</version>
+                <version>3.9.0</version>
                 <executions>
                     <execution>
                         <id>generated-helpmojo</id>
@@ -128,6 +128,17 @@
             <groupId>org.alfrescolabs.alfresco-technical-validation</groupId>
             <artifactId>org.alfrescolabs.alfresco-technical-validation</artifactId>
             <version>0.4.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.5.6</version>
         </dependency>
         <dependency>
             <groupId>org.twdata.maven</groupId>
@@ -152,7 +163,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.5</version>
+                <version>3.9.0</version>
             </plugin>
         </plugins>
     </reporting>
