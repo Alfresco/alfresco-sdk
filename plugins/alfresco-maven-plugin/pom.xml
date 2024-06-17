@@ -93,6 +93,17 @@
             <groupId>org.codehaus.plexus</groupId>
             <artifactId>plexus-archiver</artifactId>
             <version>4.9.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.iq80.snappy</groupId>
+                    <artifactId>snappy</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.iq80.snappy</groupId>
+            <artifactId>snappy</artifactId>
+            <version>0.5</version>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
