@@ -13,12 +13,12 @@ start() {
     docker volume create ${rootArtifactId}-acs-volume
     docker volume create ${rootArtifactId}-db-volume
     docker volume create ${rootArtifactId}-ass-volume
-    docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" up --build -d
+    docker compose -f "${symbol_dollar}COMPOSE_FILE_PATH" up --build -d
 }
 
 down() {
     if [ -f "${symbol_dollar}COMPOSE_FILE_PATH" ]; then
-        docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" down
+        docker compose -f "${symbol_dollar}COMPOSE_FILE_PATH" down
     fi
 }
 
@@ -33,11 +33,11 @@ build() {
 }
 
 tail() {
-    docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" logs -f
+    docker compose -f "${symbol_dollar}COMPOSE_FILE_PATH" logs -f
 }
 
 tail_all() {
-    docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" logs --tail="all"
+    docker compose -f "${symbol_dollar}COMPOSE_FILE_PATH" logs --tail="all"
 }
 
 prepare_test() {

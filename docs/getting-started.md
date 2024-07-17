@@ -82,8 +82,8 @@ install it separately after you've installed Docker.
 4. Verify the installation of Docker Compose.
 
 ```
-$ docker-compose -v
-docker-compose version 1.22.0, build f46880f
+$ docker compose version
+Docker Compose version v2.28.1-desktop.1
 ```
 
 ## Generate your project from the archetypes
