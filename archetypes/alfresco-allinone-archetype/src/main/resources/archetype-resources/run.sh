@@ -13,20 +13,20 @@ start() {
     docker volume create ${rootArtifactId}-acs-volume
     docker volume create ${rootArtifactId}-db-volume
     docker volume create ${rootArtifactId}-ass-volume
-    docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" up --build -d
+    docker compose -f "${symbol_dollar}COMPOSE_FILE_PATH" up --build -d
 }
 
 start_share() {
-    docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" up --build -d ${rootArtifactId}-share
+    docker compose -f "${symbol_dollar}COMPOSE_FILE_PATH" up --build -d ${rootArtifactId}-share
 }
 
 start_acs() {
-    docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" up --build -d ${rootArtifactId}-acs
+    docker compose -f "${symbol_dollar}COMPOSE_FILE_PATH" up --build -d ${rootArtifactId}-acs
 }
 
 down() {
     if [ -f "${symbol_dollar}COMPOSE_FILE_PATH" ]; then
-        docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" down
+        docker compose -f "${symbol_dollar}COMPOSE_FILE_PATH" down
     fi
 }
 
@@ -41,23 +41,23 @@ build() {
 }
 
 build_share() {
-    docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" kill ${rootArtifactId}-share
-    yes | docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" rm -f ${rootArtifactId}-share
+    docker compose -f "${symbol_dollar}COMPOSE_FILE_PATH" kill ${rootArtifactId}-share
+    yes | docker compose -f "${symbol_dollar}COMPOSE_FILE_PATH" rm -f ${rootArtifactId}-share
     ${symbol_dollar}MVN_EXEC clean package -pl ${rootArtifactId}-share,${rootArtifactId}-share-docker
 }
 
 build_acs() {
-    docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" kill ${rootArtifactId}-acs
-    yes | docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" rm -f ${rootArtifactId}-acs
+    docker compose -f "${symbol_dollar}COMPOSE_FILE_PATH" kill ${rootArtifactId}-acs
+    yes | docker compose -f "${symbol_dollar}COMPOSE_FILE_PATH" rm -f ${rootArtifactId}-acs
     ${symbol_dollar}MVN_EXEC clean package -pl ${rootArtifactId}-integration-tests,${rootArtifactId}-platform,${rootArtifactId}-platform-docker
 }
 
 tail() {
-    docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" logs -f
+    docker compose -f "${symbol_dollar}COMPOSE_FILE_PATH" logs -f
 }
 
 tail_all() {
-    docker-compose -f "${symbol_dollar}COMPOSE_FILE_PATH" logs --tail="all"
+    docker compose -f "${symbol_dollar}COMPOSE_FILE_PATH" logs --tail="all"
 }
 
 prepare_test() {

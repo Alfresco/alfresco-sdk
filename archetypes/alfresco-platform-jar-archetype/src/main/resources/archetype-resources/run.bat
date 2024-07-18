@@ -71,21 +71,21 @@ EXIT /B %ERRORLEVEL%
     docker volume create ${rootArtifactId}-acs-volume
     docker volume create ${rootArtifactId}-db-volume
     docker volume create ${rootArtifactId}-ass-volume
-    docker-compose -f "%COMPOSE_FILE_PATH%" up --build -d
+    docker compose -f "%COMPOSE_FILE_PATH%" up --build -d
 EXIT /B 0
 :down
     if exist "%COMPOSE_FILE_PATH%" (
-        docker-compose -f "%COMPOSE_FILE_PATH%" down
+        docker compose -f "%COMPOSE_FILE_PATH%" down
     )
 EXIT /B 0
 :build
 	call %MVN_EXEC% clean package
 EXIT /B 0
 :tail
-    docker-compose -f "%COMPOSE_FILE_PATH%" logs -f
+    docker compose -f "%COMPOSE_FILE_PATH%" logs -f
 EXIT /B 0
 :tail_all
-    docker-compose -f "%COMPOSE_FILE_PATH%" logs --tail="all"
+    docker compose -f "%COMPOSE_FILE_PATH%" logs --tail="all"
 EXIT /B 0
 :prepare_test
     call %MVN_EXEC% verify -DskipTests=true
