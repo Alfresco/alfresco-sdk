@@ -31,7 +31,30 @@
         <dependency>
             <groupId>org.alfresco</groupId>
             <artifactId>alfresco-repository</artifactId>
+            <version>23.3.0.80</version>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bouncycastle</groupId>
+                    <artifactId>bcprov-jdk18on</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-web</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk18on</artifactId>
+            <version>1.78.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>6.1.11</version>
         </dependency>
 
         <!-- Bring in ApplicationContextAware, ApplicationContext etc -->
