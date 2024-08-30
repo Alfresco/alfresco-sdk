@@ -71,6 +71,12 @@ jobs:
         include:
           - name: "current version Java 17"
             java-version: 17
+          - name: "23.3 Enterprise Java 17"
+            java-version: 17
+            suite: -Penterprise-233-tests
+          - name: "23.3 Community Java 17"
+            java-version: 17
+            suite: -Pcommunity-233-tests
           - name: "23.2 Enterprise Java 17"
             java-version: 17
             suite: -Penterprise-232-tests

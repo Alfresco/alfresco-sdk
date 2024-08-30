@@ -1,7 +1,7 @@
 ---
-Title: Alfresco SDK 4.8
+Title: Alfresco SDK 4.9
 Added: v3.0.0
-Last reviewed: 2024-03-05
+Last reviewed: 2024-08-30
 ---
 # Alfresco SDK 4
 
@@ -18,7 +18,7 @@ Alfresco SDK 4.x is released under [Apache License version 2.0](http://www.apach
 in Community Edition and Enterprise Edition. If you're an Enterprise customer, please check the [Alfresco SDK Support status](https://www.alfresco.com/alfresco-product-support-status) 
 for the version you're using. If your version is in Limited or Full Support and you need help, contact our Support team [http://support.alfresco.com](http://support.alfresco.com/).
 
-Alfresco SDK 4.8 is a minor update to the SDK and provides support for Alfresco 23.2.x.
+Alfresco SDK 4.9 is a minor update to the SDK and provides support for Alfresco 23.3.x.
 
 The 4.0 release takes advantage of Semantic Versioning ([SEMVER](http://semver.org/)), which means that this new release is not directly compatible with the 
 previous releases of the SDK.
