@@ -1,6 +1,6 @@
-# Alfresco ACS JAR Module - SDK 4.8
+# Alfresco ACS JAR Module - SDK 4.9
 
-This is an ACS project for Alfresco SDK 4.8.
+This is an ACS project for Alfresco SDK 4.9.
 
 Run with `./run.sh build_start` or `./run.bat build_start` and verify that it
 

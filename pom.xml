@@ -30,7 +30,7 @@
         <connection>scm:git:${scm.url.base}.git</connection>
         <developerConnection>scm:git:${scm.url.base}</developerConnection>
         <url>${scm.url.base}</url>
-        <tag>alfresco-sdk-aggregator-4.8.0</tag>
+        <tag>alfresco-sdk-aggregator-4.9.0</tag>
     </scm>
 
     <!-- All the modules of the Alfresco SDK -->
