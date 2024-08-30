@@ -79,7 +79,7 @@ the `alfresco.log` file has also been moved to a more appropriate location (Tomc
 
 In Q4 2020, Alfresco Platform has undergone a major structural refactoring.
 
-Depending on the Platform version desired, you might need to use SDK 4.1, 4.3, 4.4, 4.5, 4.6, 4.7 SDK 4.8 instead of SDK 4.9.
+Depending on the Platform version desired, you might need to use SDK 4.1, 4.3, 4.4, 4.5, 4.6, 4.7 or SDK 4.8 instead of SDK 4.9.
 
 - For Enterprise and Community versions of 7.x, SDK 4.4 or higher must be used
 - For Enterprise versions of 6.0.x, 6.1.x, 6.2.x newer than November 2020, SDK 4.3 must be used
