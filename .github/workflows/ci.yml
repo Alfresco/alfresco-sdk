@@ -157,7 +157,12 @@ jobs:
     needs: [tests]
     if: >
       !(failure() || cancelled()) &&
-      github.event_name != 'pull_request'
+            github.event_name != 'pull_request'
+    env:
+      MAVEN_CLI_OPTS: >
+        source:jar -B -q -e -fae -V -DinstallAtEnd=true -U -Ddoclint=none
+        -DaltReleaseDeploymentRepository=alfresco-public::default::https://artifacts.alfresco.com/nexus/content/repositories/releases
+        -DaltSnapshotDeploymentRepository=alfresco-public-snapshots::default::https://artifacts.alfresco.com/nexus/content/repositories/snapshots
     steps:
       - uses: actions/checkout@v3
       - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v1.35.0
