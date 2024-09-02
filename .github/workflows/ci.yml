@@ -20,7 +20,6 @@ env:
   MAVEN_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
   MAVEN_CENTRAL_USERNAME: ${{ secrets.OSS_SONATYPE_USERNAME }}
   MAVEN_CENTRAL_PASSWORD: ${{ secrets.OSS_SONATYPE_PASSWORD }}
-  MAVEN_CLI_OPTS: "-B -q -e -fae -V -DinstallAtEnd=true -U"
 
 jobs:
   pre_commit:
@@ -50,6 +49,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: [pre_commit]
     if: "!contains(github.event.head_commit.message, '[skip tests]')"
+    env:
+      MAVEN_CLI_OPTS: >
+        -B -q -e -fae -V -DinstallAtEnd=true -U
     steps:
       - uses: actions/checkout@v3
       - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v1.35.0
@@ -165,8 +167,10 @@ jobs:
         -DaltSnapshotDeploymentRepository=alfresco-public-snapshots::default::https://artifacts.alfresco.com/nexus/content/repositories/snapshots
     steps:
       - uses: actions/checkout@v3
+      - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v1.35.0
       - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v1.35.0
       - name: "Build"
         run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
       - name: "Publish"
-        run: mvn $MAVEN_CLI_OPTS deploy -DskipTests
+        timeout-minutes: ${{ fromJSON(env.GITHUB_ACTIONS_DEPLOY_TIMEOUT) }}
+        run: mvn deploy $MAVEN_CLI_OPTS -DskipTests
