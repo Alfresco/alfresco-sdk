@@ -522,8 +522,8 @@
 
     <distributionManagement>
         <repository>
-            <id>central-releases-staging</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+            <id>alfresco-public</id>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/releases</url>
         </repository>
         <snapshotRepository>
             <id>alfresco-public-snapshots</id>
