@@ -56,7 +56,7 @@
         <alfresco.sdk.tests.exclude>*/*-enterprise*/*</alfresco.sdk.tests.exclude>
 
         <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-        <alfresco.platform.version>23.3.0</alfresco.platform.version>
+        <alfresco.platform.version>23.4.0-A12</alfresco.platform.version>
         <alfresco.platform.docker.user>alfresco</alfresco.platform.docker.user>
         <alfresco.share.docker.version>23.3.0</alfresco.share.docker.version>
         <!--
