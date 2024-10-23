@@ -56,9 +56,9 @@
         <alfresco.sdk.tests.exclude>*/*-enterprise*/*</alfresco.sdk.tests.exclude>
 
         <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-        <alfresco.platform.version>23.3.0</alfresco.platform.version>
+        <alfresco.platform.version>23.4.0-A12</alfresco.platform.version>
         <alfresco.platform.docker.user>alfresco</alfresco.platform.docker.user>
-        <alfresco.share.docker.version>23.3.0</alfresco.share.docker.version>
+        <alfresco.share.docker.version>23.4.0-A12</alfresco.share.docker.version>
         <!--
              The following value is now obtained by looking at the
              - alfresco-community-share.version (eg. https://github.com/Alfresco/acs-community-packaging/blob/23.2.1/pom.xml#L17)

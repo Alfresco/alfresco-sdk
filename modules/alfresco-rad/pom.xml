@@ -38,7 +38,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>5.3.37</version>
         </dependency>
 
         <!-- Access to JUnit runner classes -->
