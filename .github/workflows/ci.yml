@@ -127,12 +127,6 @@ jobs:
           - name: "7.1 Community"
             java-version: 11
             suite: -Pcommunity-71-tests
-          - name: "7.0 Enterprise"
-            java-version: 11
-            suite: -Penterprise-70-tests
-          - name: "7.0 Community"
-            java-version: 11
-            suite: -Pcommunity-70-tests
     steps:
       - uses: actions/checkout@v4
       - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v7.0.0
