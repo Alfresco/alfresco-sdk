@@ -6,13 +6,11 @@ on:
       - master
       - fix/**
       - feature/**
-      - sdk-4.5
   push:
     branches:
       - master
       - fix/**
       - feature/**
-      - sdk-4.5
   workflow_dispatch:
 
 env:
