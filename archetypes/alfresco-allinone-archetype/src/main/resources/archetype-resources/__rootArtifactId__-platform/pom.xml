@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>${artifactId}</artifactId>
     <name>Alfresco Platform/Repository JAR Module</name>
-    <description>Platform/Repo JAR Module (to be included in the alfresco.war) - part of AIO - SDK 4.9</description>
+    <description>Platform/Repo JAR Module (to be included in the alfresco.war) - part of AIO - SDK 4.10</description>
     <packaging>jar</packaging>
 
     <parent>
