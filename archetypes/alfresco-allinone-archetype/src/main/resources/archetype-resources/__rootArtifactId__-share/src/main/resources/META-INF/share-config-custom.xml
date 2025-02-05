@@ -415,6 +415,13 @@
             </form>
         </forms>
     </config>
-
+    <config evaluator="string-compare" condition="Users" replace="true">
+        <users>
+            <username-min-length>2</username-min-length>
+            <password-min-length>3</password-min-length>
+            <show-authorization-status>false</show-authorization-status>
+        </users>
+        <enable-external-users-panel>false</enable-external-users-panel>
+    </config>
 
 </alfresco-config>
