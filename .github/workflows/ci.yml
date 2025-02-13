@@ -120,18 +120,18 @@ jobs:
           - name: "7.3 Community Java 11"
             java-version: 11
             suite: -Pcommunity-73-tests
-          - name: "732 Enterprise"
+          - name: "7.2 Enterprise"
             java-version: 11
-            suite: -Penterprise-732-tests
-          - name: "732 Community"
+            suite: -Penterprise-72-tests
+          - name: "7.2 Community"
             java-version: 11
-            suite: -Pcommunity-732-tests
-          - name: "742 Enterprise"
+            suite: -Pcommunity-72-tests
+          - name: "7.1 Enterprise"
             java-version: 11
-            suite: -Penterprise-742-tests
-          - name: "742 Community"
+            suite: -Penterprise-71-tests
+          - name: "7.1 Community"
             java-version: 11
-            suite: -Pcommunity-742-tests
+            suite: -Pcommunity-71-tests
     steps:
       - uses: actions/checkout@v4
       - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v7.0.0
