@@ -72,7 +72,13 @@ jobs:
         include:
           - name: "current version Java 17"
             java-version: 17
-          - name: "23.4 Enterprise Java 17"
+          - name: "25.1 Enterprise Java 17"
+            java-version: 17
+            suite: -Penterprise-251-tests
+          - name: "25.1 Community Java 17"
+            java-version: 17
+            suite: -Pcommunity-251-tests
+          - name: "25.1 Enterprise Java 17"
             java-version: 17
             suite: -Penterprise-234-tests
           - name: "23.4 Community Java 17"
@@ -120,18 +126,18 @@ jobs:
           - name: "7.3 Community Java 11"
             java-version: 11
             suite: -Pcommunity-73-tests
-          - name: "7.2 Enterprise"
+          - name: "732 Enterprise"
             java-version: 11
-            suite: -Penterprise-72-tests
-          - name: "7.2 Community"
+            suite: -Penterprise-732-tests
+          - name: "732 Community"
             java-version: 11
-            suite: -Pcommunity-72-tests
-          - name: "7.1 Enterprise"
+            suite: -Pcommunity-732-tests
+          - name: "742 Enterprise"
             java-version: 11
-            suite: -Penterprise-71-tests
-          - name: "7.1 Community"
+            suite: -Penterprise-742-tests
+          - name: "742 Community"
             java-version: 11
-            suite: -Pcommunity-71-tests
+            suite: -Pcommunity-742-tests
     steps:
       - uses: actions/checkout@v4
       - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v7.0.0
