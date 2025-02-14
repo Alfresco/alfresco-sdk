@@ -118,7 +118,7 @@ Choose archetype:
 * `org.alfresco.maven.archetype:alfresco-platform-jar-archetype`
 * `org.alfresco.maven.archetype:alfresco-share-jar-archetype`
 
-3. Choose the latest version, such as 4.10.0.
+3. Choose the latest version, such as 4.11.0-A1.
 
 ```
 Choose org.alfresco.maven.archetype:alfresco-allinone-archetype version:
@@ -145,6 +145,7 @@ Choose org.alfresco.maven.archetype:alfresco-allinone-archetype version:
 21: 4.8.0
 22: 4.9.0
 23: 4.10.0
+24: 4.11.0-A1
 ```
 
 4. Next you will be prompted for additional values, like groupId, artifactId, and package, as shown below:
@@ -173,7 +174,7 @@ If everything has been configured correctly, you should see something similar to
 
 ```
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: alfresco-allinone-archetype:4.10.0
+[INFO] Using following parameters for creating project from Archetype: alfresco-allinone-archetype:4.11.0-A1
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.acme
 [INFO] Parameter: artifactId, Value: my-all-in-one
