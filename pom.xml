@@ -523,7 +523,7 @@
     <distributionManagement>
         <repository>
             <id>alfresco-public</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+            <url>https://nexus.alfresco.com/nexus/repository/releases</url>
         </repository>
         <snapshotRepository>
             <id>alfresco-public-snapshots</id>
