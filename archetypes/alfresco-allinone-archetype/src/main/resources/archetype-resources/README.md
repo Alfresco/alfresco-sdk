@@ -1,6 +1,6 @@
-# Alfresco AIO Project - SDK 4.11.0-A1
+# Alfresco AIO Project - SDK 4.11.0
 
-This is an All-In-One (AIO) project for Alfresco SDK 4.11.0-A1.
+This is an All-In-One (AIO) project for Alfresco SDK 4.11.0.
 
 Run with `./run.sh build_start` or `./run.bat build_start` and verify that it
 
