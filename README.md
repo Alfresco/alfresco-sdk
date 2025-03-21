@@ -14,7 +14,6 @@ This project is released under the [Apache License, Version 2.0](http://www.apac
 If you are an Enterprise customer check the [Support](#alfresco-enterprise-customers-and-partners-support) section.
 
 ## News
-- 2025-02: Alfresco SDK 4.11.0-A1 released
 - 2024-11: Alfresco SDK 4.10.0 released
 - 2024-08: Alfresco SDK 4.9.0 released
 - 2024-03: Alfresco SDK 4.8.0 released
