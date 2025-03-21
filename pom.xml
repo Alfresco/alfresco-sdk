@@ -519,8 +519,8 @@
             </snapshots>
         </repository>
         <repository>
-            <id>alfresco-public</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/public
+            <id>central-releases-staging</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2
             </url>
         </repository>
         <repository>
