@@ -15,7 +15,6 @@ If you are an Enterprise customer check the [Support](#alfresco-enterprise-custo
 
 ## News
 - 2025-03: Alfresco SDK 4.11.0 released
-- 2025-02: Alfresco SDK 4.11.0-A1 released
 - 2024-11: Alfresco SDK 4.10.0 released
 - 2024-08: Alfresco SDK 4.9.0 released
 - 2024-03: Alfresco SDK 4.8.0 released
@@ -82,7 +81,7 @@ the `alfresco.log` file has also been moved to a more appropriate location (Tomc
 
 In Q4 2020, Alfresco Platform has undergone a major structural refactoring.
 
-Depending on the Platform version desired, you might need to use SDK 4.1, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, SDK 4.10 or SDK 4.11.0-A1 instead of SDK 4.11.0.
+Depending on the Platform version desired, you might need to use SDK 4.1, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9 or SDK 4.10 instead of SDK 4.11.0.
 
 - For Enterprise and Community versions of 7.x, SDK 4.4 or higher must be used
 - For Enterprise versions of 6.0.x, 6.1.x, 6.2.x newer than November 2020, SDK 4.3 must be used
@@ -102,7 +101,6 @@ To get started with **Alfresco SDK 4.9.x** (latest) visit the [Alfresco Document
 | SDK Version   |                                Alfresco Enterprise Version                                 |                             Alfresco Community Version                             | Documentation                                                                                                                                                                                                   |
 |---------------|:------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | SDK 4.11.0    | Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x / 23.1.x/ 23.2.x / 23.3.x / 23.4.x / 25.1.x | Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x / 23.2.x / 23.3.x / 23.4.x / 25.1.x | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md                                                                                                                                             |
-| SDK 4.11.0-A1 |     Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x / 23.1.x/ 23.2.x / 23.3.x / 23.4.x      |     Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x / 23.2.x / 23.3.x / 23.4.x      | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md                                                                                                                                             |
 | SDK 4.10      |     Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x / 23.1.x/ 23.2.x / 23.3.x / 23.4.x      |     Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x / 23.2.x / 23.3.x / 23.4.x      | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md                                                                                                                                             |
 | SDK 4.9       |          Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x / 23.1.x/ 23.2.x / 23.3.x          |          Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x / 23.2.x / 23.3.x          | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md                                                                                                                                             |
 | SDK 4.8       |              Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x / 23.1.x/ 23.2.x               |              Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x / 23.2.x               | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md                                                                                                                                             |

@@ -145,8 +145,7 @@ Choose org.alfresco.maven.archetype:alfresco-allinone-archetype version:
 21: 4.8.0
 22: 4.9.0
 23: 4.10.0
-24: 4.11.0-A1
-25: 4.11.0
+24: 4.11.0
 ```
 
 4. Next you will be prompted for additional values, like groupId, artifactId, and package, as shown below:
