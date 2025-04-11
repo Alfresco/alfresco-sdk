@@ -89,7 +89,7 @@
             <distributionManagement>
                 <repository>
                     <id>alfresco-releases</id>
-                    <url>https://artifacts.alfresco.com/nexus/content/repositories/releases/</url>
+                    <url>https://nexus.alfresco.com/nexus/content/repositories/releases/</url>
                 </repository>
             </distributionManagement>
         </profile>
@@ -331,7 +331,7 @@
         <profile>
             <id>sdk-release</id>
             <properties>
-                <maven.site.url>https://artifacts.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-sdk-aggregator/latest</maven.site.url>
+                <maven.site.url>https://nexus.alfresco.com/nexus/content/repositories/alfresco-docs/alfresco-sdk-aggregator/latest</maven.site.url>
                 <maven.release.goals>deploy site-deploy</maven.release.goals>
             </properties>
             <build>
@@ -520,12 +520,12 @@
         </repository>
         <repository>
             <id>alfresco-public</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/public
+            <url>https://nexus.alfresco.com/nexus/content/groups/public
             </url>
         </repository>
         <repository>
             <id>alfresco-public-snapshots</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots
+            <url>https://nexus.alfresco.com/nexus/content/groups/public-snapshots
             </url>
             <snapshots>
                 <enabled>true</enabled>
@@ -533,16 +533,16 @@
         </repository>
         <repository>
             <id>alfresco-private-repository</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
+            <url>https://nexus.alfresco.com/nexus/content/groups/private</url>
         </repository>
         <!-- Activiti Enterprise Edition Artifacts, put username/pwd for server in .ci.settings.xml -->
         <repository>
             <id>activiti-private-repository</id>
-            <url>https://artifacts.alfresco.com/nexus/content/repositories/activiti-enterprise-releases</url>
+            <url>https://nexus.alfresco.com/nexus/content/repositories/activiti-enterprise-releases</url>
         </repository>
         <repository>
             <id>alfresco-internal</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/internal</url>
+            <url>https://nexus.alfresco.com/nexus/content/groups/internal</url>
         </repository>
     </repositories>
 
@@ -553,7 +553,7 @@
         </repository>
         <snapshotRepository>
             <id>alfresco-public-snapshots</id>
-            <url>https://artifacts.alfresco.com/nexus/content/repositories/snapshots</url>
+            <url>https://nexus.alfresco.com/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
         <site>
             <id>alfresco-docs</id>
