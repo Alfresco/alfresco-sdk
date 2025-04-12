@@ -162,6 +162,7 @@ jobs:
   publish:
     name: "Publish artifacts"
     runs-on: ubuntu-latest
+    needs: [tests]
     if: >
       contains(github.event.head_commit.message, '[publish]')
     steps:
@@ -179,3 +180,6 @@ jobs:
           echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
           echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
           gpg --batch --yes --pinentry-mode loopback --passphrase $GPG_SIGNING_PASSPHRASE --list-keys
+      - name: "Publish"
+        timeout-minutes: ${{ fromJSON(env.GITHUB_ACTIONS_DEPLOY_TIMEOUT) }}
+        run: mvn clean package javadoc:jar source:jar gpg:sign deploy:deploy -DskipTests -Dgpg.passphrase=${GPG_SIGNING_PASSPHRASE}
