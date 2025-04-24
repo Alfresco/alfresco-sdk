@@ -164,3 +164,16 @@ To test new unreleased (unsupported) features, you can use the following snippet
 
 ## For Developers that want to contribute to the SDK
 See the [Developers Wiki page](https://github.com/Alfresco/alfresco-sdk/wiki/Developer-Wiki).
+
+## Publishing the release on Maven Central
+- Manually change the version from SNAPSHOT to final (eg. when releasing SDK 4.11.0, replacing all the occurrences of 4.11.0-SNAPSHOT with 4.11.0)
+
+- Commit and push changes to GitHub with the commit message [publish], then it will automatically publish your artifacts to maven central
+
+At this point, we need to manually proceed with the remaining steps:
+
+1- Manually create a release tag on GitHub
+
+2- Manually change the version from final to next SNAPSHOT (eg. replacing all the occurrences of 4.11.0 with 4.12.0-SNAPSHOT (in pom.xml, not in READMEs - if not needed)
+
+3- Commit and push on GitHub
