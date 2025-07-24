@@ -191,4 +191,4 @@ jobs:
           gpg --batch --yes --pinentry-mode loopback --passphrase $GPG_SIGNING_PASSPHRASE --list-keys
       - name: "Publish"
         timeout-minutes: ${{ fromJSON(env.GITHUB_ACTIONS_DEPLOY_TIMEOUT) }}
-        run: mvn --batch-mode clean deploy -P sdk-release -DskipTests=true -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE
+        run: mvn --batch-mode clean central-publishing:publish -P sdk-release -DskipTests=true -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE
