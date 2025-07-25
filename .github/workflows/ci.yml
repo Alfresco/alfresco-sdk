@@ -207,4 +207,4 @@ jobs:
         timeout-minutes: ${{ fromJSON(env.GITHUB_ACTIONS_DEPLOY_TIMEOUT) }}
         run: |
             mvn --batch-mode clean verify gpg:sign -P sdk-release -DskipTests=true -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE
-            mvn --batch-mode central-publishing:publish -P sdk-release -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE
+            mvn --batch-mode package central-publishing:publish -P sdk-release -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE
