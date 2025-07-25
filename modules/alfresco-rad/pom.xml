@@ -49,22 +49,4 @@
         </dependency>
 
     </dependencies>
-
-    <build>
-        <plugins>
-            <!-- Skip central publishing for parent module -->
-            <plugin>
-                <groupId>org.sonatype.central</groupId>
-                <artifactId>central-publishing-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>default-cli</id>
-                        <phase>none</phase>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
-
 </project>
