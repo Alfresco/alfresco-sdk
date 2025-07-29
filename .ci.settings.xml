@@ -5,8 +5,8 @@
   <servers>
     <server>
       <id>central</id>
-      <username>${{ secrets.MAVEN_CENTRAL_USERNAME }}</username>
-      <password>${{ secrets.MAVEN_CENTRAL_PASSWORD }}</password>
+      <username>${MAVEN_CENTRAL_USERNAME}</username>
+      <password>${MAVEN_CENTRAL_PASSWORD}</password>
     </server>
     <server>
       <id>alfresco-private-repository</id>

@@ -181,7 +181,12 @@ jobs:
       - name: "Build"
         run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
       - name: Set up Maven Central credentials
-        run:  cp ${{ github.workspace }}/.ci.settings.xml ~/.m2/settings.xml
+        run:  |
+          mkdir -p ~/.m2
+          envsubst < ${{ github.workspace }}/.ci.settings.xml > ~/.m2/settings.xml
+        env:
+          MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
       - name: Import GPG key
         env:
           GPG_TTY: $(tty)
