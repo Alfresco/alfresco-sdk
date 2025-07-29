@@ -181,7 +181,7 @@ jobs:
       - name: "Build"
         run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
       - name: Set up Maven Central credentials
-        run:  cp ./alfresco-sdk/.ci.settings.xml ~/.m2/settings.xml
+        run:  cp ${{ github.workspace }}/alfresco-sdk/.ci.settings.xml ~/.m2/settings.xml
       - name: Import GPG key
         env:
           GPG_TTY: $(tty)
