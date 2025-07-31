@@ -12,7 +12,7 @@
   <parent>
     <groupId>org.alfresco.maven</groupId>
     <artifactId>alfresco-sdk-aggregator</artifactId>
-    <version>4.13.0-A2</version>
+    <version>4.13.0-A3</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
