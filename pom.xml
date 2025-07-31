@@ -30,7 +30,6 @@
         <connection>scm:git:${scm.url.base}.git</connection>
         <developerConnection>scm:git:${scm.url.base}</developerConnection>
         <url>${scm.url.base}</url>
-        <tag>HEAD</tag>
     </scm>
 
     <!-- All the modules of the Alfresco SDK -->
