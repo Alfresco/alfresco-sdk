@@ -205,5 +205,5 @@ jobs:
           -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE \
           -DautoVersionSubmodules=true \
           -DtagNameFormat=@{project.version} \
-          -Prelease \
+          -Psdk-release \
           -B
