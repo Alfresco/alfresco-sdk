@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.alfresco.maven</groupId>
     <artifactId>alfresco-sdk-aggregator</artifactId>
-    <version>4.13.0-A7-SNAPSHOT</version>
+    <version>4.13.0-A7</version>
     <name>Alfresco SDK</name>
     <description>This aggregator Project builds all modules required for the Alfresco SDK</description>
     <packaging>pom</packaging>
@@ -30,7 +30,7 @@
         <connection>scm:git:${scm.url.base}.git</connection>
         <developerConnection>scm:git:${scm.url.base}</developerConnection>
         <url>${scm.url.base}</url>
-        <tag>alfresco-sdk-aggregator-${project.version}</tag>
+        <tag>4.13.0-A7</tag>
     </scm>
 
     <!-- All the modules of the Alfresco SDK -->
@@ -73,7 +73,7 @@
             -Dencryption.keystore.type=JCEKS -Dencryption.cipherAlgorithm=AES/CBC/PKCS5Padding -Dencryption.keyAlgorithm=AES -Dencryption.keystore.location=/usr/local/tomcat/shared/classes/alfresco/extension/keystore/keystore -Dmetadata-keystore.password=mp6yc0UD9e -Dmetadata-keystore.aliases=metadata -Dmetadata-keystore.metadata.password=oKIWzVdEdA -Dmetadata-keystore.metadata.algorithm=AES
         </keystore.settings>
 
-        <test.acs.endpoint.path/>
+        <test.acs.endpoint.path />
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
     </properties>
 
