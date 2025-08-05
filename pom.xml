@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.alfresco.maven</groupId>
     <artifactId>alfresco-sdk-aggregator</artifactId>
-    <version>4.13.0-A8</version>
+    <version>4.13.0-A9-SNAPSHOT</version>
     <name>Alfresco SDK</name>
     <description>This aggregator Project builds all modules required for the Alfresco SDK</description>
     <packaging>pom</packaging>
@@ -30,7 +30,7 @@
         <connection>scm:git:${scm.url.base}.git</connection>
         <developerConnection>scm:git:${scm.url.base}</developerConnection>
         <url>${scm.url.base}</url>
-        <tag>4.13.0-A8</tag>
+        <tag>alfresco-sdk-aggregator-${project.version}</tag>
     </scm>
 
     <!-- All the modules of the Alfresco SDK -->
