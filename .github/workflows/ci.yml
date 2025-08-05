@@ -19,6 +19,8 @@ env:
   MAVEN_CENTRAL_USERNAME: ${{ secrets.OSS_SONATYPE_USERNAME }}
   MAVEN_CENTRAL_PASSWORD: ${{ secrets.OSS_SONATYPE_PASSWORD }}
   GPG_SIGNING_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSPHRASE }}
+  GIT_USERNAME: ${{ secrets.BOT_GITHUB_USERNAME }}
+  GIT_PASSWORD: ${{ secrets.BOT_GITHUB_TOKEN }}
   GITHUB_ACTIONS_DEPLOY_TIMEOUT: 90
 
 jobs:
@@ -201,8 +203,8 @@ jobs:
         run: |
           mvn --batch-mode clean package gpg:sign central-publishing:publish release:prepare release:perform \
           -DscmCommentPrefix="[maven-release-plugin][skip ci] " \
-          -Dusername="${GIT_USERNAME}" \
-          -Dpassword="${GIT_PASSWORD}" \
+          -Dusername=$GIT_USERNAME \
+          -Dpassword=$GIT_PASSWORD \
           -Psdk-release \
           -DskipTests=true \
           -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE \
