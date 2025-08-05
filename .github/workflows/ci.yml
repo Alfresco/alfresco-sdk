@@ -202,7 +202,7 @@ jobs:
           mvn --batch-mode clean package gpg:sign central-publishing:publish release:prepare release:perform \
           -DscmCommentPrefix="[maven-release-plugin][skip ci] " \
           -Dusername="${GIT_USERNAME}" \
-          -Dpassword="${GIT_PASSWORD}"
+          -Dpassword="${GIT_PASSWORD}" \
           -Psdk-release \
           -DskipTests=true \
           -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE \
