@@ -206,22 +206,11 @@ jobs:
       - name: "Publish"
         timeout-minutes: ${{ fromJSON(env.GITHUB_ACTIONS_DEPLOY_TIMEOUT) }}
         run: |
-          mvn --batch-mode clean package gpg:sign central-publishing:publish \
+          mvn --batch-mode clean package gpg:sign central-publishing:publish -P sdk-release -DskipTests=true -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE \
+           release:prepare \
           -DscmCommentPrefix="[maven-release-plugin][skip ci] " \
           -Dusername=$GIT_USERNAME \
           -Dpassword=$GIT_PASSWORD \
-          -Psdk-release \
-          -DskipTests=true \
-          -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE \
           -DautoVersionSubmodules=true \
           -DtagNameFormat=@{project.version} \
           -B
-      - name: Create and push tag
-        if: success()
-        env:
-          GIT_USERNAME: ${{ secrets.BOT_GITHUB_USERNAME }}
-          GIT_PASSWORD: ${{ secrets.BOT_GITHUB_TOKEN }}
-        run: |
-          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/-SNAPSHOT//')
-          git tag "${{ github.repository }}-$VERSION"
-          git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/${{ github.repository }}
