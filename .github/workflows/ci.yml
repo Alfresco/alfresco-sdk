@@ -205,7 +205,7 @@ jobs:
           git config --global user.email "${GIT_EMAIL:-github-actions[bot]@users.noreply.github.com}"
       - name: "Create release tag"
         run: |
-          mvn --batch-mode \
+          mvn --batch-mode clean package gpg:sign \
             release:prepare \
             -DskipTests=true \
             -DscmCommentPrefix="[maven-release-plugin][skip ci] " \
