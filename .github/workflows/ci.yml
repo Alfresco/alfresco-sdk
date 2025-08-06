@@ -205,15 +205,14 @@ jobs:
           git config --global user.email "${GIT_EMAIL:-github-actions[bot]@users.noreply.github.com}"
       - name: "Create release tag"
         run: |
-          mvn --batch-mode clean package gpg:sign \
+          mvn --batch-mode clean package gpg:sign -P sdk-release -DskipTests=true -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE \
             release:prepare \
-            -DskipTests=true \
-            -DscmCommentPrefix="[maven-release-plugin][skip ci] " \
-            -Dusername=$GIT_USERNAME \
-            -Dpassword=$GIT_PASSWORD \
-            -DautoVersionSubmodules=true \
-            -DtagNameFormat=@{project.version} \
-            -B
+           -DscmCommentPrefix="[maven-release-plugin][skip ci] " \
+           -Dusername=$GIT_USERNAME \
+           -Dpassword=$GIT_PASSWORD \
+           -DautoVersionSubmodules=true \
+           -DtagNameFormat=@{project.version} \
+           -B
       - name: "Publish"
         timeout-minutes: ${{ fromJSON(env.GITHUB_ACTIONS_DEPLOY_TIMEOUT) }}
         run: |
