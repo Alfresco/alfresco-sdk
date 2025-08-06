@@ -216,3 +216,12 @@ jobs:
           -DautoVersionSubmodules=true \
           -DtagNameFormat=@{project.version} \
           -B
+      - name: Create and push tag
+        if: success()
+        env:
+          GIT_USERNAME: ${{ secrets.BOT_GITHUB_USERNAME }}
+          GIT_PASSWORD: ${{ secrets.BOT_GITHUB_TOKEN }}
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/-SNAPSHOT//')
+          git tag "${{ github.repository }}-$VERSION"
+          git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/${{ github.repository }}-$VERSION
