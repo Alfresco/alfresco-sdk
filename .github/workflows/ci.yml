@@ -214,4 +214,5 @@ jobs:
           -Dpassword=$GIT_PASSWORD \
           -DautoVersionSubmodules=true \
           -DtagNameFormat=@{project.version} \
+          -Dtag=$VERSION \
           -B
