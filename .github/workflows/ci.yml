@@ -215,4 +215,4 @@ jobs:
             -DautoVersionSubmodules=true \
             -DtagNameFormat=@{project.version} \
             -Dtag=$VERSION -B
-          mvn --batch-mode clean package gpg:sign central-publishing:publish -P sdk-release -DskipTests=true -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE
+           mvn --batch-mode clean package gpg:sign central-publishing:publish -P sdk-release -DskipTests=true -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE
