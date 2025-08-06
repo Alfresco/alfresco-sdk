@@ -75,6 +75,18 @@
 
         <test.acs.endpoint.path />
         <scm.url.base>https://github.com/Alfresco/alfresco-sdk</scm.url.base>
+        <release.profiles.tests>
+            sdk-release,
+            community-71-tests,enterprise-71-tests,
+            community-72-tests,enterprise-72-tests,
+            community-73-tests,enterprise-73-tests,
+            community-74-tests,enterprise-74-tests,
+            community-231-tests,enterprise-231-tests,
+            community-232-tests,enterprise-232-tests,
+            community-233-tests,enterprise-233-tests,
+            community-234-tests,enterprise-234-tests,
+            enterprise-235-tests
+        </release.profiles.tests>
     </properties>
 
     <profiles>
@@ -437,7 +449,8 @@
                             <preparationGoals>clean install</preparationGoals>
                             <goals>${maven.release.goals}</goals>
                             <autoVersionSubmodules>true</autoVersionSubmodules>
-                            <releaseProfiles>sdk-release,enterprise-tests</releaseProfiles>
+                            <tagNameFormat>alfresco-sdk-aggregator-@{project.version}</tagNameFormat>
+                            <releaseProfiles>${release.profiles.tests}</releaseProfiles>
                         </configuration>
                     </plugin>
                     <plugin>
