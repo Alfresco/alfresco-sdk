@@ -207,7 +207,7 @@ jobs:
         timeout-minutes: ${{ fromJSON(env.GITHUB_ACTIONS_DEPLOY_TIMEOUT) }}
         run: |
            VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/-SNAPSHOT//')
-           mvn release:prepare \
+           mvn release:clean release:prepare \
             -DskipTests=true \
             -DscmCommentPrefix="[maven-release-plugin][skip ci] " \
             -Dusername=$GIT_USERNAME \
