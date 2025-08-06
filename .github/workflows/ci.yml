@@ -206,7 +206,7 @@ jobs:
       - name: "Publish"
         timeout-minutes: ${{ fromJSON(env.GITHUB_ACTIONS_DEPLOY_TIMEOUT) }}
         run: |
-          mvn --batch-mode clean package gpg:sign central-publishing:publish release:prepare release:perform \
+          mvn --batch-mode clean package gpg:sign central-publishing:publish \
           -DscmCommentPrefix="[maven-release-plugin][skip ci] " \
           -Dusername=$GIT_USERNAME \
           -Dpassword=$GIT_PASSWORD \
