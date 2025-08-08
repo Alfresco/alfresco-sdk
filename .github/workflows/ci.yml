@@ -211,8 +211,9 @@ jobs:
       - name: "Create release tag"
         if: success() && steps.publish.outcome == 'success'
         run: |
-          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/-SNAPSHOT//')
+          ARTIFACT_ID=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)
           git config --global user.name "${GIT_USERNAME:-github-actions[bot]}"
           git config --global user.email "${GIT_EMAIL:-github-actions[bot]@users.noreply.github.com}"
-          git tag "$VERSION"
-          git push origin "$VERSION"
+          git tag "$ARTIFACT_ID"-"$VERSION"
+          git push origin "$ARTIFACT_ID"-"$VERSION"
