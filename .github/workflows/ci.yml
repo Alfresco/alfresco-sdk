@@ -199,10 +199,6 @@ jobs:
           echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
           echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
           gpg --batch --yes --pinentry-mode loopback --passphrase $GPG_SIGNING_PASSPHRASE --list-keys
-      - name: Configure Git user
-        run: |
-          git config --global user.name "${GIT_USERNAME:-github-actions[bot]}"
-          git config --global user.email "${GIT_EMAIL:-github-actions[bot]@users.noreply.github.com}"
       - name: "Publish"
         id: publish
         timeout-minutes: ${{ fromJSON(env.GITHUB_ACTIONS_DEPLOY_TIMEOUT) }}
