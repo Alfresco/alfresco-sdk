@@ -206,14 +206,13 @@ jobs:
       - name: "Publish"
         timeout-minutes: ${{ fromJSON(env.GITHUB_ACTIONS_DEPLOY_TIMEOUT) }}
         run: |
-          mvn --batch-mode clean package gpg:sign central-publishing:publish -P sdk-release -DskipTests=true -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE
-      - name: "Create release tag"
-        run: |
-          mvn --batch-mode clean package gpg:sign -P sdk-release -DskipTests=true -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE \
-            release:prepare \
-           -DscmCommentPrefix="[maven-release-plugin][skip ci] " \
-           -Dusername=$GIT_USERNAME \
-           -Dpassword=$GIT_PASSWORD \
-           -DautoVersionSubmodules=true \
-           -DtagNameFormat=@{project.version} \
-           -B
+          mvn --batch-mode clean package gpg:sign central-publishing:publish release:prepare \
+          -DscmCommentPrefix="[maven-release-plugin][skip ci] " \
+          -Dusername=$GIT_USERNAME \
+          -Dpassword=$GIT_PASSWORD \
+          -Psdk-release \
+          -DskipTests=true \
+          -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE \
+          -DautoVersionSubmodules=true \
+          -DtagNameFormat=@{project.version} \
+          -B
