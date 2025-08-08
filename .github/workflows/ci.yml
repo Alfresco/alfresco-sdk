@@ -203,16 +203,28 @@ jobs:
         run: |
           git config --global user.name "${GIT_USERNAME:-github-actions[bot]}"
           git config --global user.email "${GIT_EMAIL:-github-actions[bot]@users.noreply.github.com}"
-      - name: "Publish"
+      - name: "Create release tag"
+        run: |
+          mvn --batch-mode release:prepare \
+            -DscmCommentPrefix="[maven-release-plugin][skip ci] " \
+            -Dusername=$GIT_USERNAME \
+            -Dpassword=$GIT_PASSWORD \
+            -Psdk-release \
+            -DskipTests=true \
+            -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE \
+            -DautoVersionSubmodules=true \
+            -DtagNameFormat=@{project.version} \
+            -B
+
+      - name: "Checkout release tag"
+        run: |
+          git fetch --tags
+          git checkout $(git describe --tags --abbrev=0)
+
+      - name: "Build & Publish"
         timeout-minutes: ${{ fromJSON(env.GITHUB_ACTIONS_DEPLOY_TIMEOUT) }}
         run: |
-          mvn --batch-mode clean package gpg:sign central-publishing:publish release:prepare \
-          -DscmCommentPrefix="[maven-release-plugin][skip ci] " \
-          -Dusername=$GIT_USERNAME \
-          -Dpassword=$GIT_PASSWORD \
-          -Psdk-release \
-          -DskipTests=true \
-          -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE \
-          -DautoVersionSubmodules=true \
-          -DtagNameFormat=@{project.version} \
-          -B
+          mvn --batch-mode clean verify gpg:sign central-publishing:publish \
+            -P sdk-release \
+            -DskipTests=true \
+            -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE
