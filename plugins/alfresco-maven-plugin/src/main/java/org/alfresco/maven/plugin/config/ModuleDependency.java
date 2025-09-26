@@ -18,7 +18,7 @@
 
 package org.alfresco.maven.plugin.config;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * <p>
