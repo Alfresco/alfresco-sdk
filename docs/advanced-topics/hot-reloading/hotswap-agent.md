@@ -1,7 +1,7 @@
 ---
 Title: How to configure and use Hotswap Agent
 Added: v3.0.0
-Last reviewed: 2021-02-09
+Last reviewed: 2024-08-30
 ---
 # How to configure and use Hotswap Agent
 
@@ -13,7 +13,7 @@ worth noting that hot reloading is only supported on the platform, and not in Al
 
 As an alternative to the HotSwapAgent you can also try out JRebel. It has more features but isn't free.
 
-The way to configure HotSwapAgent in case of using Java 8 or Java 11 is pretty different. By default, ACS 6.0 uses Java 8 and ACS 6.1+ uses Java 11.
+The way to configure HotSwapAgent in case of using Java 8, Java 11 or Java 17 is pretty different. By default, ACS 6.0 uses Java 8, ACS 6.1+ uses Java 11 and ACS 23.2+ uses Java 17.
 
 ## Issue with Docker Toolbox
 
@@ -185,7 +185,122 @@ the hot reloading tools fail):
 Instead of downloading the Trava OpenJDK distribution file and copying it to the container, the Dockerfile script could include directly the download of the 
 file (via `curl` for instance), but that would slow down the creation of the ACS image each time it is rebuilt.
 
-### Creating a custom HotSwapAgent ACS docker image
+## Configuring HotSwapAgent in the project (Java 17)
+
+Using Java 17 and HotSwapAgent, it isn't necessary to configure the java agent and the alternative JVM as in previous versions. Instead, it is required
+to use an alternative pre-built JDK distribution. That JDK is based on OpenJDK and includes all the required modifications to run the HotSwapAgent properly.
+
+In the context of the Alfresco SDK 4, this change is an issue because the JDK installation is inherited from the [Alfresco java docker image](https://github.com/Alfresco/alfresco-docker-base-java). 
+It is necessary to modify the project ACS docker image to change the default java installation of the container's OS to the one provided by HotSwapAgent.
+
+A way to implement the required modifications would be:
+
+1. Download the last release of the Jetbrains Runtime OpenJDK (Linux distribution) from [here](https://github.com/JetBrains/JetBrainsRuntime/releases) and save it 
+into the folder `PROJECT_ARTIFACT_ID-platform-docker/src/main/docker`.
+
+```
+curl 'https://cache-redirector.jetbrains.com/intellij-jbr/jbr_jcef-17.0.11-linux-x64-b1207.30.tar.gz' \
+    -Lo "src/main/docker/jbr_jcef-17.0.11-linux-x64-b1207.30.tar.gz"
+```
+
+2. Download the last release of the HotSwapAgent from [here](https://github.com/HotswapProjects/HotswapAgent/releases) and save it into the folder 
+`PROJECT_ARTIFACT_ID-platform-docker/src/main/docker`. You must download version 1.4.2-SNAPSHOT (2024-08-22) or later, as this version fixes the issue with Tomcat 10.x
+
+```
+curl 'https://github.com/HotswapProjects/HotswapAgent/releases/download/1.4.2-SNAPSHOT/hotswap-agent-1.4.2-SNAPSHOT.jar' -Lo "src/main/docker/hotswap-agent-1.4.2-SNAPSHOT.jar"
+```
+
+3. Modify the file `PROJECT_ARTIFACT_ID-platform-docker/src/main/docker/Dockerfile` to append the commands required to install and configure the custom JDK 
+for the HotSwapAgent:
+
+```
+# HOTSWAP AGENT
+# Install and configure Jetbrains Runtime OpenJDK (OpenJDK pre-built with DCEVM for Java 17)
+COPY jbr_jcef-17.0.11-linux-x64-b1207.30.tar.gz $TOMCAT_DIR
+RUN tar -xvf $TOMCAT_DIR/jbr_jcef-17.0.11-linux-x64-b1207.30.tar.gz -C /usr/lib/jvm/ && \
+    rm $TOMCAT_DIR/jbr_jcef-17.0.11-linux-x64-b1207.30.tar.gz && \
+    alternatives --install /usr/bin/java java /usr/lib/jvm/jbr_jcef-17.0.11-linux-x64-b1207.30/bin/java 40000 && \
+    alternatives --install /usr/bin/javac javac /usr/lib/jvm/jbr_jcef-17.0.11-linux-x64-b1207.30/bin/javac 40000 && \
+    alternatives --install /usr/bin/jar jar /usr/lib/jvm/jbr_jcef-17.0.11-linux-x64-b1207.30/bin/jar 40000 && \
+    alternatives --set java /usr/lib/jvm/jbr_jcef-17.0.11-linux-x64-b1207.30/bin/java && \
+    alternatives --set javac /usr/lib/jvm/jbr_jcef-17.0.11-linux-x64-b1207.30/bin/javac && \
+    alternatives --set jar /usr/lib/jvm/jbr_jcef-17.0.11-linux-x64-b1207.30/bin/jar && \
+    ln -sfn /usr/lib/jvm/jbr_jcef-17.0.11-linux-x64-b1207.30 /etc/alternatives/jre && \
+    ln -sfn /usr/lib/jvm/jbr_jcef-17.0.11-linux-x64-b1207.30 /usr/lib/jvm/latest && \
+    ln -sfn /usr/lib/jvm/jbr_jcef-17.0.11-linux-x64-b1207.30 /usr/lib/jvm/default
+```
+
+4. Modify the file `PROJECT_ARTIFACT_ID-platform-docker/src/main/docker/Dockerfile` to copy the HotSwapAgent library into the ACS container:
+
+```
+COPY hotswap-agent-1.4.2-SNAPSHOT.jar /usr/lib/jvm/jbr_jcef-17.0.11-linux-x64-b1207.30/lib/hotswap/hotswap-agent.jar
+```
+
+5. Modify the file `PROJECT_ARTIFACT_ID-platform-docker/src/main/docker/Dockerfile` to copy the HotSwapAgent configuration file into the ACS container 
+classpath:
+
+```
+# Copy the configuration properties file in the classpath
+COPY hotswap-agent.properties $TOMCAT_DIR/webapps/alfresco/WEB-INF/classes
+```
+
+6. Modify the file `docker/docker-compose.yml` to change the ACS container command to avoid the execution of Tomcat with the Security Manager enabled (it makes 
+the hot reloading tools fail):
+
+```
+  sample-project-acs:
+    image: alfresco-content-services-sample-project:development
+    build:
+      dockerfile: ./Dockerfile
+      context: ../../../sample-project-platform-docker/target
+    environment:
+      CATALINA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8888"
+    command: ["catalina.sh", "run"]
+...
+```
+
+7. Modify the file `docker/docker-compose.yml` to add the HotSwapAgent to CATALINA_OPTS property `-XX:HotswapAgent=fatjar`
+
+```
+  sample-project-acs:
+    image: alfresco-content-services-sample-project:development
+    build:
+      dockerfile: ./Dockerfile
+      context: ../../../sample-project-platform-docker/target
+    environment:
+      CATALINA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8888 -XX:HotswapAgent=fatjar"
+    command: ["catalina.sh", "run"]
+...
+```
+
+8. Modify the file `docker/docker-compose.yml` to mount the target folders into the folder `/usr/local/tomcat/hotswap-agent` inside the ACS container:
+
+```
+  sample-project-acs:
+    image: alfresco-content-services-sample-project:development
+    build:
+      dockerfile: ./Dockerfile
+      context: ../../../sample-project-platform-docker/target
+    environment:
+      CATALINA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8888 -XX:HotswapAgent=fatjar"
+    command: ["catalina.sh", "run"]
+    ports:
+      - "${acs.port}:8080"
+      - "${acs.debug.port}:8888"
+    volumes:
+      - alf-acs-volume:/usr/local/tomcat/alf_data
+      - ../../../sample-project-platform/target/classes:/usr/local/tomcat/hotswap-agent/sample-project-platform/target/classes
+      - ../../../sample-project-integration-tests/target/test-classes:/usr/local/tomcat/hotswap-agent/sample-project-integration-tests/target/test-classes
+...
+```
+
+9. Modify Tomcat `catalina.properties` file to add to the `shared.loader` the path `/usr/local/tomcat/hotswap-agent/sample-project-platform/target/classes` in order to allow the HotSwapAgent find the classes to reload in the `ParallelWebappClassLoader`.
+
+```
+RUN sed -i '/^shared.loader=/ s|$|,${catalina.base}/hotswap-agent/sample-project-platform/target/classes|' catalina.properties
+```
+
+### Creating a custom HotSwapAgent ACS docker image (Java 11)
 
 Another alternative to avoid this time overhead, due to the installation of the Trava OpenJDK distribution, is to create a custom docker image that installs 
 and sets that custom JDK up.
