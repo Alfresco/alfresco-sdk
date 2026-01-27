@@ -173,6 +173,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [tests]
     if: >
+      contains(github.event.pull_request.title, '[publish]') ||
       contains(github.event.head_commit.message, '[publish]')
     outputs:
         is_ga: ${{ steps.publish_version.outputs.is_ga }}
