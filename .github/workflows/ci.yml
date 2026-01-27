@@ -171,8 +171,8 @@ jobs:
   check_version:
     name: "Check version"
     runs-on: ubuntu-latest
+    needs: [tests]
     if: >
-      !(failure() || cancelled()) &&
       contains(github.event.head_commit.message, '[publish]')
     outputs:
         is_ga: ${{ steps.publish_version.outputs.is_ga }}
