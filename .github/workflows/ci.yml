@@ -168,23 +168,38 @@ jobs:
       - name: "Build"
         run: mvn clean install -B ${{ matrix.suite }}
 
-  publish:
-    name: "Publish artifacts"
+  check_version:
+    name: "Check version"
     runs-on: ubuntu-latest
     needs: [tests]
     if: >
+      !(failure() || cancelled()) &&
       contains(github.event.head_commit.message, '[publish]')
+    outputs:
+        is_ga: ${{ steps.publish_version.outputs.is_ga }}
     steps:
-      - run: |
+      - uses: actions/checkout@v4
+      - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v8.16.0
+      - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v8.16.0
+      - name: "Check version"
+        id: publish_version
+        run: |
           VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           if [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "GA version detected: $VERSION"
             echo "is_ga=true" >> $GITHUB_OUTPUT
+            echo "GA version detected: $VERSION"
           else
-            echo "Non GA version detected: $VERSION"
-            echo "Skipping publishing artifacts to Maven Central."
             echo "is_ga=false" >> $GITHUB_OUTPUT
+            echo "Non GA version detected: $VERSION"
           fi
+
+  publish:
+    name: "Publish artifacts"
+    runs-on: ubuntu-latest
+    needs: [tests, check_version]
+    if: >
+      contains(github.event.head_commit.message, '[publish]') && needs.check_version.outputs.is_ga == 'true'
+    steps:
       - uses: actions/checkout@v4
       - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v8.16.0
       - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v8.16.0
@@ -207,7 +222,6 @@ jobs:
           echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
           gpg --batch --yes --pinentry-mode loopback --passphrase $GPG_SIGNING_PASSPHRASE --list-keys
       - name: "Publish"
-        if: steps.publish.outputs.is_ga == 'true'
         timeout-minutes: ${{ fromJSON(env.GITHUB_ACTIONS_DEPLOY_TIMEOUT) }}
         run: |
           mvn --batch-mode clean package gpg:sign central-publishing:publish -P sdk-release -DskipTests=true -Dgpg.passphrase=$GPG_SIGNING_PASSPHRASE
