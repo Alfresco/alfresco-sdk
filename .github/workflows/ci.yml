@@ -25,7 +25,7 @@ jobs:
   pre_commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: Alfresco/alfresco-build-tools/.github/actions/pre-commit@v8.16.0
+      - uses: Alfresco/alfresco-build-tools/.github/actions/pre-commit@v12.11.0
 
   veracode_sca:
     name: "Veracode - Source Clear Scan (SCA)"
@@ -35,11 +35,11 @@ jobs:
       github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v4
-      - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v8.16.0
-      - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v8.16.0
+      - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v12.11.0
+      - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v12.11.0
       - name: "Clean-up SNAPSHOT artifacts"
         run: find "${HOME}/.m2/repository/" -type d -name "*-SNAPSHOT*" | xargs -r -l rm -rf
-      - uses: Alfresco/alfresco-build-tools/.github/actions/veracode@v8.16.0
+      - uses: Alfresco/alfresco-build-tools/.github/actions/veracode@v12.11.0
         continue-on-error: true
         with:
           srcclr-api-token: ${{ secrets.SRCCLR_API_TOKEN }}
@@ -54,7 +54,7 @@ jobs:
         -B -q -e -fae -V -DinstallAtEnd=true -U
     steps:
       - uses: actions/checkout@v4
-      - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v8.16.0
+      - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v12.11.0
       - name: "Build"
         run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
       - name: "Verify"
@@ -150,8 +150,8 @@ jobs:
             suite: -Pcommunity-71-tests
     steps:
       - uses: actions/checkout@v4
-      - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v8.16.0
-      - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v8.16.0
+      - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v12.11.0
+      - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v12.11.0
         with:
           java-version: ${{ matrix.java-version }}
       - name: "Login to Docker Hub"
@@ -178,8 +178,8 @@ jobs:
         is_ga: ${{ steps.publish_version.outputs.is_ga }}
     steps:
       - uses: actions/checkout@v4
-      - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v8.16.0
-      - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v8.16.0
+      - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v12.11.0
+      - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v12.11.0
       - name: "Check version"
         id: publish_version
         run: |
@@ -200,8 +200,8 @@ jobs:
       contains(github.event.head_commit.message, '[publish]') && needs.check_version.outputs.is_ga == 'true'
     steps:
       - uses: actions/checkout@v4
-      - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v8.16.0
-      - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v8.16.0
+      - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v12.11.0
+      - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v12.11.0
       - name: "Build"
         run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
       - name: Set up Maven Central credentials
