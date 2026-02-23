@@ -56,9 +56,9 @@
         <alfresco.sdk.tests.exclude>*/*-enterprise*/*</alfresco.sdk.tests.exclude>
 
         <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-        <alfresco.platform.version>26.1.0-A.15-SNAPSHOT</alfresco.platform.version>
+        <alfresco.platform.version>26.1.0-A.15</alfresco.platform.version>
         <alfresco.platform.docker.user>alfresco</alfresco.platform.docker.user>
-        <alfresco.share.docker.version>26.1.0-A.15-SNAPSHOT</alfresco.share.docker.version>
+        <alfresco.share.docker.version>26.1.0-A.15</alfresco.share.docker.version>
         <!--
              The following value is now obtained by looking at the
              - alfresco-community-share.version (eg. https://github.com/Alfresco/acs-community-packaging/blob/25.1.0/pom.xml#L17)
@@ -66,7 +66,7 @@
              - alfresco-enterprise-share.version (eg. https://github.com/Alfresco/acs-packaging/blob/25.1.0/pom.xml#L18)
              for the GitHub Tag related to the above Docker version.
          -->
-        <alfresco.share.version>26.1.0.30</alfresco.share.version>
+        <alfresco.share.version>26.1.0.28</alfresco.share.version>
         <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
         <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
         <keystore.settings>
@@ -373,8 +373,8 @@
             <id>community-261-tests</id>
             <properties>
                 <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>26.1.0-A.15-SNAPSHOT</alfresco.platform.version>
-                <alfresco.share.docker.version>26.1.0-A.15-SNAPSHOT</alfresco.share.docker.version>
+                <alfresco.platform.version>26.1.0-A.14</alfresco.platform.version>
+                <alfresco.share.docker.version>26.1.0-A.14</alfresco.share.docker.version>
                 <alfresco.share.version>26.1.0.30</alfresco.share.version>
                 <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
@@ -385,8 +385,8 @@
             <id>enterprise-261-tests</id>
             <properties>
                 <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>26.1.0-A.17-SNAPSHOT</alfresco.platform.version>
-                <alfresco.share.docker.version>26.1.0-A.17-SNAPSHOT</alfresco.share.docker.version>
+                <alfresco.platform.version>26.1.0-A.16</alfresco.platform.version>
+                <alfresco.share.docker.version>26.1.0-A.16</alfresco.share.docker.version>
                 <alfresco.share.version>26.1.0.30</alfresco.share.version>
                 <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
                 <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
