@@ -71,6 +71,14 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - name: "current version Java 21"
+            java-version: 21
+          - name: "26.1 Enterprise Java 21"
+            java-version: 21
+            suite: -Penterprise-261-tests
+          - name: "26.1 Community Java 21"
+            java-version: 21
+            suite: -Pcommunity-261-tests
           - name: "current version Java 17"
             java-version: 17
           - name: "25.2 Enterprise Java 17"
