@@ -5,8 +5,8 @@
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
-    <name>AIO - SDK 4.14.0-A1</name>
-    <description>All-In-One (AIO) project for SDK 4.14.0-A1</description>
+    <name>AIO - SDK 4.14.0-A2</name>
+    <description>All-In-One (AIO) project for SDK 4.14.0-A2</description>
     <packaging>pom</packaging>
 
     <prerequisites>
@@ -217,7 +217,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.0.0-M1</version>
+                    <version>3.5.5</version>
                     <executions>
                         <execution>
                             <id>integration-test</id>
