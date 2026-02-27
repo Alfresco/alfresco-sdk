@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.alfresco.maven</groupId>
     <artifactId>alfresco-sdk-aggregator</artifactId>
-    <version>4.14.0-A1</version>
+    <version>4.14.0-A1-SNAPSHOT</version>
     <name>Alfresco SDK</name>
     <description>This aggregator Project builds all modules required for the Alfresco SDK</description>
     <packaging>pom</packaging>
@@ -49,16 +49,16 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <maven.archetype.version>3.0.0</maven.archetype.version>
         <alfresco.sdk.parent.version>${project.version}</alfresco.sdk.parent.version>
         <alfresco.sdk.tests.exclude>*/*-enterprise*/*</alfresco.sdk.tests.exclude>
 
         <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-        <alfresco.platform.version>25.3.0-A.15</alfresco.platform.version>
+        <alfresco.platform.version>26.1.0-A.14</alfresco.platform.version>
         <alfresco.platform.docker.user>alfresco</alfresco.platform.docker.user>
-        <alfresco.share.docker.version>25.3.0-A.15</alfresco.share.docker.version>
+        <alfresco.share.docker.version>26.1.0-A.14</alfresco.share.docker.version>
         <!--
              The following value is now obtained by looking at the
              - alfresco-community-share.version (eg. https://github.com/Alfresco/acs-community-packaging/blob/25.1.0/pom.xml#L17)
@@ -66,7 +66,7 @@
              - alfresco-enterprise-share.version (eg. https://github.com/Alfresco/acs-packaging/blob/25.1.0/pom.xml#L18)
              for the GitHub Tag related to the above Docker version.
          -->
-        <alfresco.share.version>25.3.0.36</alfresco.share.version>
+        <alfresco.share.version>26.1.0.30</alfresco.share.version>
         <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
         <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
         <keystore.settings>
@@ -368,6 +368,32 @@
             </properties>
         </profile>
 
+        <!-- 26.1 -->
+        <profile>
+            <id>community-261-tests</id>
+            <properties>
+                <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>26.1.0-A.14</alfresco.platform.version>
+                <alfresco.share.docker.version>26.1.0-A.14</alfresco.share.docker.version>
+                <alfresco.share.version>26.1.0.30</alfresco.share.version>
+                <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.platform.docker.user>alfresco</alfresco.platform.docker.user>
+            </properties>
+        </profile>
+        <profile>
+            <id>enterprise-261-tests</id>
+            <properties>
+                <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
+                <alfresco.platform.version>26.1.0-A.16</alfresco.platform.version>
+                <alfresco.share.docker.version>26.1.0-A.16</alfresco.share.docker.version>
+                <alfresco.share.version>26.1.0.30</alfresco.share.version>
+                <alfresco.platform.docker.image>quay.io/alfresco/alfresco-content-repository</alfresco.platform.docker.image>
+                <alfresco.share.docker.image>quay.io/alfresco/alfresco-share</alfresco.share.docker.image>
+                <alfresco.platform.docker.user>alfresco</alfresco.platform.docker.user>
+            </properties>
+        </profile>
+
         <profile>
             <id>sdk-release</id>
             <build>
@@ -375,7 +401,7 @@
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
-                        <version>0.8.0</version>
+                        <version>0.10.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>
@@ -385,7 +411,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>3.3.1</version>
+                        <version>3.4.0</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
@@ -411,7 +437,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
+                        <version>3.2.8</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
