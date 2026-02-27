@@ -66,6 +66,7 @@ public class HelloWorldWebScriptIT {
 
         // Execute Web Script call
         try {
+            System.out.println("[Debug Purpose]: Executing HTTP GET request to: " + webscriptURL);
             HttpGet httpget = new HttpGet(webscriptURL);
             HttpResponse httpResponse = httpclient.execute(httpget);
             assertEquals("Incorrect HTTP Response Status",
