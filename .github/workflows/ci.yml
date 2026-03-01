@@ -47,6 +47,25 @@ jobs:
         with:
           srcclr-api-token: ${{ secrets.SRCCLR_API_TOKEN }}
 
+  veracode_sca:
+    name: "Veracode - Source Clear Scan (SCA)"
+    runs-on: ubuntu-latest
+    if: >
+      github.ref_name == 'master' ||
+      github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v1.34.0
+      - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v1.34.0
+        with:
+          java-version: '17'
+      - name: "Clean-up SNAPSHOT artifacts"
+        run: find "${HOME}/.m2/repository/" -type d -name "*-SNAPSHOT*" | xargs -r -l rm -rf
+      - uses: Alfresco/alfresco-build-tools/.github/actions/veracode@v1.34.0
+        continue-on-error: true
+        with:
+          srcclr-api-token: ${{ secrets.SRCCLR_API_TOKEN }}
+
   build:
     name: "Build application"
     runs-on: ubuntu-latest
