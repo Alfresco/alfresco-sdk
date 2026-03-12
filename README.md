@@ -14,6 +14,7 @@ This project is released under the [Apache License, Version 2.0](http://www.apac
 If you are an Enterprise customer check the [Support](#alfresco-enterprise-customers-and-partners-support) section.
 
 ## News
+- 2026-03: Alfresco SDK 4.15.0 released
 - 2026-03: Alfresco SDK 4.14.0 released
 - 2026-01: Alfresco SDK 4.13.0 released
 - 2025-07: Alfresco SDK 4.12.0 released
@@ -84,7 +85,7 @@ the `alfresco.log` file has also been moved to a more appropriate location (Tomc
 
 In Q4 2020, Alfresco Platform has undergone a major structural refactoring.
 
-Depending on the Platform version desired, you might need to use SDK 4.1, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 4.10, 4.11, 4.12, 4.13 instead of SDK 4.14.0.
+Depending on the Platform version desired, you might need to use SDK 4.1, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 4.10, 4.11, 4.12, 4.13, 4.14 instead of SDK 4.15.0.
 
 - For Enterprise and Community versions of 7.x, SDK 4.4 or higher must be used
 - For Enterprise versions of 6.0.x, 6.1.x, 6.2.x newer than November 2020, SDK 4.3 must be used
@@ -105,6 +106,7 @@ To get started with **Alfresco SDK 4.14.x** (latest) visit the [Alfresco Documen
 #### Documentation about Previous Versions
 | SDK Version |                                         Alfresco Enterprise Version                                          |                                          Alfresco Community Version                                          | Documentation                                                                                                                                                                                                     |
 |-------------|:------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| SDK 4.15.0  | Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x / 23.1.x/ 23.2.x / 23.3.x / 23.4.x / 25.1.x / 25.2.x / 26.1.x | Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x / 23.1.x/ 23.2.x / 23.3.x / 23.4.x / 25.1.x / 25.2.x / 26.1.x | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md                                                                                                                                               |
 | SDK 4.14.0  | Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x / 23.1.x/ 23.2.x / 23.3.x / 23.4.x / 25.1.x / 25.2.x / 26.1.x | Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x / 23.1.x/ 23.2.x / 23.3.x / 23.4.x / 25.1.x / 25.2.x / 26.1.x | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md                                                                                                                                               |
 | SDK 4.13.0  |     Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x / 23.1.x/ 23.2.x / 23.3.x / 23.4.x / 25.1.x / 25.2.x      |     Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x / 23.1.x/ 23.2.x / 23.3.x / 23.4.x / 25.1.x / 25.2.x      | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md                                                                                                                                               |
 | SDK 4.12.0  |     Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x / 23.1.x/ 23.2.x / 23.3.x / 23.4.x / 25.1.x / 25.2.x      |     Alfresco 7.0.x / 7.1.x / 7.2.x / 7.3.x / 7.4.x / 23.1.x/ 23.2.x / 23.3.x / 23.4.x / 25.1.x / 25.2.x      | https://github.com/Alfresco/alfresco-sdk/tree/master/docs/README.md                                                                                                                                               |
@@ -174,7 +176,7 @@ To test new unreleased (unsupported) features, you can use the following snippet
 See the [Developers Wiki page](https://github.com/Alfresco/alfresco-sdk/wiki/Developer-Wiki).
 
 ## Publishing the release on Maven Central
-- Manually change the version from SNAPSHOT to final (eg. when releasing SDK 4.15.0, replacing all the occurrences of 4.15.0-SNAPSHOT with 4.15.0)
+- Manually change the version from SNAPSHOT to final (eg. when releasing SDK 4.16.0, replacing all the occurrences of 4.16.0-SNAPSHOT with 4.16.0)
 
 - Commit and push changes to GitHub with the commit message [publish], then it will automatically publish your artifacts to maven central
 - Only GA versions is published to maven central, there is a check in the CI pipeline (called "check_version") to check if the version is non-GA or not, and if it's not, it will skip the "publish" step. Therefore, only "number.number.number" versions will be published to maven central, and any version with a suffix (eg. -Ax, -SNAPSHOT, -RC1, -beta-1) will not be published to maven central.
@@ -183,6 +185,6 @@ At this point, we need to manually proceed with the remaining steps:
 
 1- Manually create a release tag on GitHub
 
-2- Manually change the version from final to next SNAPSHOT (eg. replacing all the occurrences of 4.14.0-SNAPSHOT with 4.15.0 (in pom.xml, not in READMEs - if not needed)
+2- Manually change the version from final to next SNAPSHOT (eg. replacing all the occurrences of 4.15.0-SNAPSHOT with 4.16.0 (in pom.xml, not in READMEs - if not needed)
 
 3- Commit and push on GitHub
