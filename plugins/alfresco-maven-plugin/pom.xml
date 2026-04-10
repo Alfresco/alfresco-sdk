@@ -87,7 +87,17 @@
                     <artifactId>maven-core</artifactId>
                     <groupId>org.apache.maven</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>plexus-utils</artifactId>
+                    <groupId>org.codehaus.plexus</groupId>
+                </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-utils</artifactId>
+            <version>4.0.3</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.codehaus.plexus</groupId>
