@@ -18,7 +18,6 @@ updates:
     allow:
       - dependency-type: "direct"
     ignore:
-      # Ignore the SDK's own internal modules
       - dependency-name: "org.alfresco.maven:*"
       - dependency-name: "org.alfresco.maven.plugin:*"
       - dependency-name: "org.alfresco.maven.archetype:*"
