@@ -38,9 +38,6 @@ updates:
       slf4j:
         patterns:
           - "org.slf4j*"
-      sonatype:
-        patterns:
-          - "org.sonatype*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
