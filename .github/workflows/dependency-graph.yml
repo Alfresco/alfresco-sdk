@@ -3,7 +3,7 @@ name: "Load Dependency Graph"
 on:
   push:
     branches:
-      - "master"
+      - "feature/ACS-11627_test"
   schedule:
     - cron: '0 6 * * *'
   workflow_dispatch:
