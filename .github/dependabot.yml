@@ -1,0 +1,48 @@
+version: 2
+registries:
+  maven-alfresco-internal:
+    type: maven-repository
+    url: https://artifacts.alfresco.com/nexus/content/groups/internal
+    username: ${{secrets.NEXUS_USERNAME}}
+    password: ${{secrets.NEXUS_PASSWORD}}
+updates:
+  - package-ecosystem: "maven"
+    directory: "/"
+    registries:
+      - maven-alfresco-internal
+    schedule:
+      interval: "daily"
+      time: "22:00"
+      timezone: "Europe/London"
+    open-pull-requests-limit: 10
+    allow:
+      - dependency-type: "direct"
+    ignore:
+      - dependency-name: "org.alfresco.maven:*"
+      - dependency-name: "org.alfresco.maven.plugin:*"
+      - dependency-name: "org.alfresco.maven.archetype:*"
+    groups:
+      spring:
+        patterns:
+          - "org.springframework*"
+      alfresco:
+        patterns:
+          - "org.alfresco*"
+      apache-maven:
+        patterns:
+          - "org.apache.maven*"
+      commons:
+        patterns:
+          - "commons-*"
+          - "org.apache.commons*"
+      slf4j:
+        patterns:
+          - "org.slf4j*"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
