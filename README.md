@@ -102,7 +102,7 @@ It's also important to remember that:
 - Enterprise Docker images are published on *Quay.io*
 
 ### Latest Documentation
-To get started with **Alfresco SDK 4.14.x** (latest) visit the [Alfresco Documentation](docs/README.md).
+To get started with **Alfresco SDK 4.16.x** (latest) visit the [Alfresco Documentation](docs/README.md).
 
 #### Documentation about Previous Versions
 | SDK Version   |                                              Alfresco Enterprise Version                                              |                                              Alfresco Community Version                                               | Documentation                                                                                                                                                                                                     |
