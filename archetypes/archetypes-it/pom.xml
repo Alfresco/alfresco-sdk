@@ -9,7 +9,7 @@
     <description>Archetypes Integration Tests</description>
 
     <properties>
-        <slf4j.version>1.7.12</slf4j.version>
+        <slf4j.version>2.0.18</slf4j.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
