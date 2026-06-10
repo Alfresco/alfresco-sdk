@@ -86,9 +86,6 @@ jobs:
           - name: "25.4 Enterprise Java 17"
             java-version: 17
             suite: -Penterprise-254-tests
-          - name: "25.4 Community Java 17"
-            java-version: 17
-            suite: -Pcommunity-254-tests
           - name: "25.2 Enterprise Java 17"
             java-version: 17
             suite: -Penterprise-252-tests
