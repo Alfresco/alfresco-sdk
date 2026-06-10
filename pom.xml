@@ -292,18 +292,6 @@
 
         <!-- 25.4 -->
         <profile>
-            <id>community-254-tests</id>
-            <properties>
-                <alfresco.bomDependency.artifactId>acs-community-packaging</alfresco.bomDependency.artifactId>
-                <alfresco.platform.version>25.4.0</alfresco.platform.version>
-                <alfresco.share.docker.version>25.4.0</alfresco.share.docker.version>
-                <alfresco.share.version>25.4.0.61</alfresco.share.version>
-                <alfresco.platform.docker.image>alfresco/alfresco-content-repository-community</alfresco.platform.docker.image>
-                <alfresco.share.docker.image>alfresco/alfresco-share</alfresco.share.docker.image>
-                <alfresco.platform.docker.user>alfresco</alfresco.platform.docker.user>
-            </properties>
-        </profile>
-        <profile>
             <id>enterprise-254-tests</id>
             <properties>
                 <alfresco.bomDependency.artifactId>acs-packaging</alfresco.bomDependency.artifactId>
