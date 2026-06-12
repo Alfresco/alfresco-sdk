@@ -449,6 +449,21 @@
         </profile>
     </profiles>
 
+    <!--
+        Force transitive dependencies to safe versions (CVE fixes).
+        Any version declared here overrides versions brought in transitively
+        by other dependencies in this project and all child modules.
+    -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.codehaus.plexus</groupId>
+                <artifactId>plexus-utils</artifactId>
+                <version>3.6.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <build>
         <pluginManagement>
             <plugins>
