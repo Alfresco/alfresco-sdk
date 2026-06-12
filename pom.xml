@@ -450,9 +450,10 @@
     </profiles>
 
     <!--
-        Force transitive dependencies to safe versions (CVE fixes).
-        Any version declared here overrides versions brought in transitively
-        by other dependencies in this project and all child modules.
+        Date: 12-06-2026
+        Force transitive dependencies to safe versions.
+        Remove this when bumping the "alfresco-repository" 26.2 GA in the future,
+        as the fixed version of plexus-utils will be included in the dependency tree of the project.
     -->
     <dependencyManagement>
         <dependencies>
