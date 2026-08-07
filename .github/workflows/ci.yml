@@ -153,7 +153,7 @@ jobs:
       MAVEN_USERNAME: ${{ secrets.NEXUS_USERNAME }}
       MAVEN_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
     if: >
-      !(failure() || cancelled()) &&
+      needs.tests.result == 'success' &&
       (github.ref_name == 'master' || startsWith(github.ref_name, 'fix/') || startsWith(github.ref_name, 'feature/')) &&
       !contains(github.event.head_commit.message, '[no release]') &&
       github.event_name != 'pull_request' &&
@@ -192,8 +192,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [tests, release]
     if: >
+      needs.tests.result == 'success' &&
       contains(github.event.head_commit.message, '[publish]') &&
-      !cancelled() &&
       (needs.release.result == 'success' || needs.release.result == 'skipped')
     outputs:
         is_ga: ${{ steps.publish_version.outputs.is_ga }}
@@ -222,9 +222,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [tests, check_version, release]
     if: >
+      needs.tests.result == 'success' &&
       contains(github.event.head_commit.message, '[publish]') &&
+      needs.check_version.result == 'success' &&
       needs.check_version.outputs.is_ga == 'true' &&
-      !cancelled() &&
       (needs.release.result == 'success' || needs.release.result == 'skipped')
     env:
       GPG_SIGNING_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSPHRASE }}
