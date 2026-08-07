@@ -23,6 +23,11 @@ env:
   MAVEN_CENTRAL_USERNAME: ${{ secrets.OSS_SONATYPE_USERNAME }}
   MAVEN_CENTRAL_PASSWORD: ${{ secrets.OSS_SONATYPE_PASSWORD }}
   GITHUB_ACTIONS_DEPLOY_TIMEOUT: 90
+  # Both variables are required to be set before the release process starts.
+  # As the release is triggered by a commit message with "[release]" keyword,
+  # setting these variables to new values can be done in the same commit and will indicate the release and the dev versions in it.
+  RELEASE_VERSION: "4.17.0-A2" # The version of the release (tag).
+  DEVELOPMENT_VERSION: "4.17.0-A3" # The version that will be set in pom files after the release (next dev version).
 
 jobs:
   pre_commit:
@@ -148,7 +153,7 @@ jobs:
       contents: write
     needs: [tests]
     outputs:
-      release_tag: ${{ steps.versions.outputs['release-version'] }}
+      release_tag: ${{ env.RELEASE_VERSION }}
     env:
       MAVEN_USERNAME: ${{ secrets.NEXUS_USERNAME }}
       MAVEN_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
@@ -166,23 +171,21 @@ jobs:
           client-id: ${{ vars.GH_APP_ENGINEERING_CONTRIB_CLIENT_ID }}
           private-key: ${{ secrets.GH_APP_ENGINEERING_CONTRIB_PRIVATE_KEY }}
           permission-contents: write
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           token: ${{ steps.app-token.outputs.token }}
           persist-credentials: true
           fetch-depth: 0
-      - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v18.21.0
-      - uses: Alfresco/alfresco-build-tools/.github/actions/free-hosted-runner-disk-space@v18.21.0
-      - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v18.21.0
+      - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v18.21.2
+      - uses: Alfresco/alfresco-build-tools/.github/actions/free-hosted-runner-disk-space@v18.21.2
+      - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v18.21.2
         with:
           java-version: ${{ env.JAVA_VERSION }}
-      - uses: Alfresco/alfresco-build-tools/.github/actions/maven-compute-release-versions@v18.21.0
-        id: versions
-      - uses: Alfresco/alfresco-build-tools/.github/actions/maven-release-slim@v18.21.0
+      - uses: Alfresco/alfresco-build-tools/.github/actions/maven-release-slim@v18.21.2
         with:
           token: ${{ steps.app-token.outputs.token }}
-          release-version: ${{ steps.versions.outputs['release-version'] }}
-          development-version: ${{ steps.versions.outputs['next-development-version'] }}
+          release-version: ${{ env.RELEASE_VERSION }}
+          development-version: ${{ env.DEVELOPMENT_VERSION }}
           maven-args: >
             -DskipTests
             -DbuildNumber=${{ github.run_number }}
