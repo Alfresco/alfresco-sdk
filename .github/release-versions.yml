@@ -1,0 +1,7 @@
+env:
+  global:
+    # Both variables are required to be set before the release process starts.
+    # As the release is triggered by a commit message with "[release]" keyword,
+    # setting these variables to new values can be done in the same commit and will indicate the release and the dev versions in it.
+    - RELEASE_VERSION=4.17.0-A2
+    - DEVELOPMENT_VERSION=4.17.0-A3
