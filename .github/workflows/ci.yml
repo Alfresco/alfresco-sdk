@@ -13,6 +13,9 @@ on:
       - feature/**
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 env:
   JAVA_VERSION: '21'
   MAVEN_USERNAME: ${{ secrets.NEXUS_USERNAME }}
@@ -20,6 +23,7 @@ env:
   MAVEN_CENTRAL_USERNAME: ${{ secrets.OSS_SONATYPE_USERNAME }}
   MAVEN_CENTRAL_PASSWORD: ${{ secrets.OSS_SONATYPE_PASSWORD }}
   GITHUB_ACTIONS_DEPLOY_TIMEOUT: 90
+  # Note: RELEASE_VERSION and DEVELOPMENT_VERSION are loaded from .github/release-versions.yml
 
 jobs:
   pre_commit:
@@ -138,16 +142,69 @@ jobs:
       - name: "Build"
         run: mvn clean install -B ${{ matrix.suite }}
 
+  release:
+    name: "Release"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: [tests]
+    outputs:
+      release_tag: ${{ steps.release_meta.outputs.release_tag }}
+    env:
+      MAVEN_USERNAME: ${{ secrets.NEXUS_USERNAME }}
+      MAVEN_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+    if: >
+      needs.tests.result == 'success' &&
+      (github.ref_name == 'master' || startsWith(github.ref_name, 'fix/') || startsWith(github.ref_name, 'feature/')) &&
+      !contains(github.event.head_commit.message, '[no release]') &&
+      github.event_name != 'pull_request' &&
+      contains(github.event.head_commit.message, '[release]')
+    steps:
+      - name: "Generate GitHub App token"
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.GH_APP_ENGINEERING_CONTRIB_CLIENT_ID }}
+          private-key: ${{ secrets.GH_APP_ENGINEERING_CONTRIB_PRIVATE_KEY }}
+          permission-contents: write
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          fetch-depth: 0
+      - uses: Alfresco/alfresco-build-tools/.github/actions/env-load-from-yaml@v18.21.2
+        with:
+          yml_path: .github/release-versions.yml
+      - name: "Export release metadata"
+        id: release_meta
+        run: echo "release_tag=${RELEASE_VERSION}" >> "$GITHUB_OUTPUT"
+      - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v18.21.2
+      - uses: Alfresco/alfresco-build-tools/.github/actions/free-hosted-runner-disk-space@v18.21.2
+      - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v18.21.2
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+      - uses: Alfresco/alfresco-build-tools/.github/actions/maven-release-slim@v18.21.2
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          release-version: ${{ env.RELEASE_VERSION }}
+          development-version: ${{ env.DEVELOPMENT_VERSION }}
+          maven-args: >
+            -DskipTests
+            -DbuildNumber=${{ github.run_number }}
+
   check_version:
     name: "Check version"
     runs-on: ubuntu-latest
-    needs: [tests]
+    needs: [tests, release]
     if: >
-      contains(github.event.head_commit.message, '[publish]')
+      needs.tests.result == 'success' &&
+      contains(github.event.head_commit.message, '[publish]') &&
+      (needs.release.result == 'success' || needs.release.result == 'skipped')
     outputs:
         is_ga: ${{ steps.publish_version.outputs.is_ga }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ needs.release.outputs.release_tag || github.ref }}
       - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v15.7.1
       - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v15.7.1
         with:
@@ -167,13 +224,19 @@ jobs:
   publish:
     name: "Publish artifacts"
     runs-on: ubuntu-latest
-    needs: [tests, check_version]
+    needs: [tests, check_version, release]
     if: >
-      contains(github.event.head_commit.message, '[publish]') && needs.check_version.outputs.is_ga == 'true'
+      needs.tests.result == 'success' &&
+      contains(github.event.head_commit.message, '[publish]') &&
+      needs.check_version.result == 'success' &&
+      needs.check_version.outputs.is_ga == 'true' &&
+      (needs.release.result == 'success' || needs.release.result == 'skipped')
     env:
       GPG_SIGNING_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSPHRASE }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ needs.release.outputs.release_tag || github.ref }}
       - uses: Alfresco/alfresco-build-tools/.github/actions/get-build-info@v15.7.1
       - uses: Alfresco/alfresco-build-tools/.github/actions/setup-java-build@v15.7.1
         with:
