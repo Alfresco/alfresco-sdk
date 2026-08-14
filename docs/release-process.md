@@ -120,16 +120,15 @@ For a GA release (version matching `major.minor.patch` with no suffix):
    - DEVELOPMENT_VERSION=4.18.0-SNAPSHOT
    ```
 
-2. Push to **`master`** with both keywords in the commit message:
+2. Push to **`master`** with both keywords in the **same** commit message:
 
    ```text
    [release][publish] Alfresco SDK 4.17.0
    ```
 
-   Or run release and publish as separate commits on `master`:
+   To publish to Maven Central as part of the GA release, include `[publish]` in the **same** commit message as `[release]` so the workflow can publish the tagged `RELEASE_VERSION`.
 
-   - First: `[release]` — Nexus deploy, tag, and POM bump
-   - Then: `[publish]` — Maven Central (only if the released version is GA)
+   A standalone `[publish]` commit (without `[release]`) will publish only if the POM version on that commit is already GA. After a release run, `master` is typically bumped to `DEVELOPMENT_VERSION` (`-SNAPSHOT`), so a later `[publish]` commit will be skipped by `check_version`.
 
 The `check_version` job verifies the version matches `^\d+\.\d+\.\d+$` before Maven Central publish runs. Alpha, SNAPSHOT, RC, and other suffixed versions are skipped.
 
