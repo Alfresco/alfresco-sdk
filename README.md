@@ -177,16 +177,6 @@ To test new unreleased (unsupported) features, you can use the following snippet
 ## For Developers that want to contribute to the SDK
 See the [Developers Wiki page](https://github.com/Alfresco/alfresco-sdk/wiki/Developer-Wiki).
 
-## Publishing the release on Maven Central
-- Manually change the version from SNAPSHOT to final (eg. when releasing SDK 4.16.0, replacing all the occurrences of 4.16.0-SNAPSHOT with 4.16.0)
+## Releasing the SDK
 
-- Commit and push changes to GitHub with the commit message [publish], then it will automatically publish your artifacts to maven central
-- Only GA versions is published to maven central, there is a check in the CI pipeline (called "check_version") to check if the version is non-GA or not, and if it's not, it will skip the "publish" step. Therefore, only "number.number.number" versions will be published to maven central, and any version with a suffix (eg. -Ax, -SNAPSHOT, -RC1, -beta-1) will not be published to maven central.
-
-At this point, we need to manually proceed with the remaining steps:
-
-1- Manually create a release tag on GitHub
-
-2- Manually change the version from final to next SNAPSHOT (eg. replacing all the occurrences of 4.16.0-SNAPSHOT with 4.17.0 (in pom.xml, not in READMEs - if not needed)
-
-3- Commit and push on GitHub
+See [docs/release-process.md](docs/release-process.md) for the current automated release process (Nexus, verified commits, tags, and Maven Central publishing).
