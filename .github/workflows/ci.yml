@@ -68,6 +68,9 @@ jobs:
           - name: "26.1 Community Java 21"
             java-version: 21
             suite: -Pcommunity-261-tests
+          - name: "25.5 Enterprise Java 17"
+            java-version: 17
+            suite: -Penterprise-255-tests
           - name: "25.4 Enterprise Java 17"
             java-version: 17
             suite: -Penterprise-254-tests
