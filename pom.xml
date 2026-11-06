@@ -462,6 +462,15 @@
                 <artifactId>plexus-utils</artifactId>
                 <version>3.6.1</version>
             </dependency>
+            <!--
+                guava is pulled transitively by maven-core (3.9.7 brings 33.2.0-jre).
+                Remove this when maven-core brings guava 33.7.2-jre or later.
+            -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>33.7.2-jre</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
