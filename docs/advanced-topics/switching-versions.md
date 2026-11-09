@@ -15,8 +15,8 @@ to use.
 When editing `pom.xml` you will see a number of properties that define the Alfresco Content Services platform version and the Alfresco Share version, such as:
 
 ```
-<alfresco.platform.version>7.0.0-A20</alfresco.platform.version>
-<alfresco.share.version>7.0.0-M3</alfresco.share.version>
+<alfresco.acs.version>7.0.0-A20</alfresco.acs.version>
+<alfresco.share.artifact.version>7.0.0-M3</alfresco.share.artifact.version>
 ```
 
 Before continuing, always remember to start from a newly generated SDK project before changing the version numbers. We do not recommend changing the versions 
@@ -35,8 +35,8 @@ Starting from a newly created Alfresco SDK 4.x project (All-In-One, Platform JAR
 2. Replace the properties with the following:
 
 ```
-<alfresco.platform.version>6.0.7-ga</alfresco.platform.version>
-<alfresco.share.version>6.0.c</alfresco.share.version>
+<alfresco.acs.version>6.0.7-ga</alfresco.acs.version>
+<alfresco.share.artifact.version>6.0.c</alfresco.share.artifact.version>
 ```
 
 In this example we have shown the switch to version 6.0.7-ga. Feel free to use the correct version for your project, paying attention to the compatible versions 
@@ -67,8 +67,8 @@ Starting from a newly created Alfresco SDK 4.x project (All-In-One, Platform JAR
 2. Replace the properties with the following:
 
 ```
-<alfresco.platform.version>6.1.2-ga</alfresco.platform.version>
-<alfresco.share.version>6.1.0-RC3</alfresco.share.version>
+<alfresco.acs.version>6.1.2-ga</alfresco.acs.version>
+<alfresco.share.artifact.version>6.1.0-RC3</alfresco.share.artifact.version>
 ```
 
 In this example we have shown the switch to version 6.1.2-ga. Feel free to use the correct version for your project, paying attention to the compatible versions 

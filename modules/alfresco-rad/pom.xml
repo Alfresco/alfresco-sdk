@@ -19,7 +19,7 @@
             <dependency>
                 <groupId>org.alfresco</groupId>
                 <artifactId>${alfresco.bomDependency.artifactId}</artifactId>
-                <version>${alfresco.platform.version}</version>
+                <version>${alfresco.acs.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

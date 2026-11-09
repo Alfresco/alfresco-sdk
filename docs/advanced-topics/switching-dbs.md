@@ -20,7 +20,7 @@ So, the steps to configure a MySQL database in an All-In-One project are:
 library to the tomcat lib folder:
 
 ```
-FROM ${docker.acs.image}:${alfresco.platform.version}
+FROM ${docker.acs.image}:${alfresco.acs.version}
 ...
 # Copy MySQL driver to Tomcat lib folder
 RUN curl -L -o $TOMCAT_DIR/lib/mysql-db-connector.jar "https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar"
