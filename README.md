@@ -64,7 +64,8 @@ So, if for example you want to use the community version of `7.1.0.1`, you can g
 open the `7.1.0.1` release tag, browse its files, open the pom.xml in the root, 
 then copy the value of `<alfresco-community-share.version>`. 
 
-You'll then need to paste this value inside the SDK property `<alfresco.share.version>`.
+You'll then need to paste this value inside the SDK property `<alfresco.community.share.version>` (Community) or `<alfresco.enterprise.share.version>` (Enterprise).
+The archetypes consume it through `<alfresco.share.artifact.version>`, which the SDK sets from the edition-specific property.
 
 #### Alternate Docker User
 
