@@ -11,6 +11,7 @@ Alfresco Share 6.
 This was a mayor release oriented to support Alfresco 6, so it is not compatible with previous versions of the SDK.
 
 Alfresco SDK 4.14.0 extends the support to Alfresco 26.1. 
+Alfresco SDK 4.17.0 extends the support to Alfresco 26.3. 
 Use an older SDK version for Alfresco 6. 
 
 ## Embracing containers and Docker
