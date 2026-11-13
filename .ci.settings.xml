@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
-  
+
+  <mirrors>
+    <mirror>
+      <id>cic-ext-pull-through</id>
+      <name>Maven Central</name>
+      <url>https://artifacts.hyland.dev/basic/cic-ext-pull-through/maven/</url>
+      <mirrorOf>central</mirrorOf>
+    </mirror>
+  </mirrors>
+
   <servers>
+    <!-- Exported by the cloudsmith-auth action -->
     <server>
-      <id>central</id>
-      <username>${MAVEN_CENTRAL_USERNAME}</username>
-      <password>${MAVEN_CENTRAL_PASSWORD}</password>
+      <id>cic-ext-pull-through</id>
+      <username>${env.CLOUDSMITH_USERNAME}</username>
+      <password>${env.CLOUDSMITH_API_KEY}</password>
     </server>
     <server>
       <id>alfresco-private-repository</id>
-      <username>${env.MAVEN_USERNAME}</username>
-      <password>${env.MAVEN_PASSWORD}</password>
+      <username>${env.CLOUDSMITH_USERNAME}</username>
+      <password>${env.CLOUDSMITH_API_KEY}</password>
     </server>
     <server>
       <id>activiti-private-repository</id>
+      <username>${env.CLOUDSMITH_USERNAME}</username>
+      <password>${env.CLOUDSMITH_API_KEY}</password>
+    </server>
+    <!-- Keep the deploy servers that still use MAVEN_USERNAME / MAVEN_PASSWORD until Phase 2 -->
+    <server>
+      <id>alfresco-releases</id>
       <username>${env.MAVEN_USERNAME}</username>
       <password>${env.MAVEN_PASSWORD}</password>
     </server>
@@ -24,29 +40,9 @@
       <password>${env.MAVEN_PASSWORD}</password>
     </server>
     <server>
-      <id>alfresco-public</id>
-      <username>${env.MAVEN_USERNAME}</username>
-      <password>${env.MAVEN_PASSWORD}</password>
-    </server>
-    <server>
-      <id>alfresco-plugin-public</id>
-      <username>${env.MAVEN_USERNAME}</username>
-      <password>${env.MAVEN_PASSWORD}</password>
-    </server>
-    <server>
-      <id>alfresco-plugin-public-snapshots</id>
-      <username>${env.MAVEN_USERNAME}</username>
-      <password>${env.MAVEN_PASSWORD}</password>
-    </server>
-    <server>
-      <id>alfresco-internal-snapshots</id>
-      <username>${env.MAVEN_USERNAME}</username>
-      <password>${env.MAVEN_PASSWORD}</password>
-    </server>
-    <server>
-      <id>alfresco-internal</id>
-      <username>${env.MAVEN_USERNAME}</username>
-      <password>${env.MAVEN_PASSWORD}</password>
+      <id>central</id>
+      <username>${MAVEN_CENTRAL_USERNAME}</username>
+      <password>${MAVEN_CENTRAL_PASSWORD}</password>
     </server>
     <server>
       <id>central-releases-staging</id>

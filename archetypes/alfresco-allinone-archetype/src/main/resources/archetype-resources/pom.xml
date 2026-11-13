@@ -452,15 +452,7 @@
     <repositories>
         <repository>
             <id>alfresco-public</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
-        </repository>
-        <repository>
-            <id>alfresco-public-snapshots</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-            </snapshots>
+            <url>https://artifacts.hyland.dev/public/alfresco-public/maven/</url>
         </repository>
         <!-- Alfresco Enterprise Edition Artifacts, put username/pwd for server in settings.xml -->
         <repository>
@@ -476,15 +468,7 @@
     <pluginRepositories>
         <pluginRepository>
             <id>alfresco-plugin-public</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>alfresco-plugin-public-snapshots</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-            </snapshots>
+            <url>https://artifacts.hyland.dev/public/alfresco-public/maven/</url>
         </pluginRepository>
     </pluginRepositories>
 </project>

@@ -580,35 +580,49 @@
         </repository>
         <repository>
             <id>alfresco-public</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/public
-            </url>
-        </repository>
-        <repository>
-            <id>alfresco-public-snapshots</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots
-            </url>
-            <snapshots>
+            <name>Alfresco Public Repository</name>
+            <url>https://artifacts.hyland.dev/public/alfresco-public/maven/</url>
+            <releases>
                 <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
             </snapshots>
         </repository>
         <repository>
             <id>alfresco-private-repository</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
+            <url>https://artifacts.hyland.dev/basic/alfresco-enterprise-releases/maven/</url>
         </repository>
         <!-- Activiti Enterprise Edition Artifacts, put username/pwd for server in .ci.settings.xml -->
         <repository>
             <id>activiti-private-repository</id>
-            <url>https://artifacts.alfresco.com/nexus/content/repositories/activiti-enterprise-releases</url>
-        </repository>
-        <repository>
-            <id>alfresco-internal</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/internal</url>
+            <url>https://artifacts.hyland.dev/basic/activiti-enterprise-releases/maven/</url>
         </repository>
     </repositories>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>alfresco-public</id>
+            <name>Alfresco Public Repository</name>
+            <url>https://artifacts.hyland.dev/public/alfresco-public/maven/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
     <distributionManagement>
         <repository>
-            <id>alfresco-public</id>
+            <id>alfresco-releases</id>
             <url>https://nexus.alfresco.com/nexus/repository/releases</url>
         </repository>
         <snapshotRepository>

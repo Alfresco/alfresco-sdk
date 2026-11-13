@@ -141,22 +141,22 @@ for the version you are using.  If your version is in Limited or Full Support an
 
 ## Maven repositories
 - As of version 2.0-beta-1, The Alfresco SDK is released in [Maven Central](http://search.maven.org/#search|ga|1|alfresco-sdk). Previous versions are available 
-in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/).
-- Alfresco (Community and Enterprise) artifacts are  hosted in the [Alfresco Artifacts Repository](https://artifacts.alfresco.com/).
+in the Alfresco Maven repository.
+- Alfresco (Community and Enterprise) artifacts are hosted in the [Alfresco Maven repository](https://artifacts.hyland.dev/public/alfresco-public/maven/).
 - Alfresco Community artifacts (JARs, WARs, AMPs, poms) and SDK artifacts are publicly available.
 
 *NOTE:* By default the Alfresco SDK will use Community Edition releases but it can be configured to use Enterprise Edition releases. Enterprise and Premier 
 customers can use the SDK with Enterprise Edition releases by following the process described in [Working with Enterprise](docs/advanced-topics/working-with-enterprise/README.md).
 
-### Alfresco Artifacts Repository
+### Alfresco Maven Repository
 
 #### Alfresco Releases
-You can use the following snippet in your pom.xml to access releases from the Alfresco Artifact repository:
+You can use the following snippet in your pom.xml to access releases from the Alfresco Maven repository:
 
 ```xml
 <repository>
     <id>alfresco-public</id>
-    <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+    <url>https://artifacts.hyland.dev/public/alfresco-public/maven/</url>
 </repository>
 ```
 
@@ -179,4 +179,4 @@ See the [Developers Wiki page](https://github.com/Alfresco/alfresco-sdk/wiki/Dev
 
 ## Releasing the SDK
 
-See [docs/release-process.md](docs/release-process.md) for the current automated release process (Nexus, verified commits, tags, and Maven Central publishing).
+See [docs/release-process.md](docs/release-process.md) for the current automated release process (verified commits, tags, and Maven Central publishing).
