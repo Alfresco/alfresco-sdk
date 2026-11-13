@@ -457,7 +457,7 @@
         <!-- Alfresco Enterprise Edition Artifacts, put username/pwd for server in settings.xml -->
         <repository>
             <id>alfresco-private-repository</id>
-            <url>https://artifacts.hyland.dev/basic/alfresco-enterprise-releases/maven/</url>
+            <url>https://artifacts.hyland.dev/basic/alfresco-private/maven/</url>
         </repository>
     </repositories>
 
