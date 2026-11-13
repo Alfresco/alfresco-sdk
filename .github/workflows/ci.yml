@@ -34,6 +34,7 @@ jobs:
   build:
     name: "Build application"
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs: [pre_commit]
     permissions:
       id-token: write
@@ -58,6 +59,7 @@ jobs:
   tests:
     name: ${{ matrix.name }}
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     needs: [build]
     permissions:
       id-token: write
