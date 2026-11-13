@@ -41,7 +41,7 @@ code into place.
 * [Advanced topics](advanced-topics/README.md)
     * [Switching Alfresco Content Services and Share versions](advanced-topics/switching-versions.md)
     * [Working with Enterprise](advanced-topics/working-with-enterprise/README.md)
-        * [How to configure private Alfresco Nexus repository](advanced-topics/working-with-enterprise/enterprise-mvn-repo.md)
+        * [How to configure private Alfresco Maven repository](advanced-topics/working-with-enterprise/enterprise-mvn-repo.md)
         * [How to configure private Alfresco Docker registry](advanced-topics/working-with-enterprise/enterprise-docker-registry.md)
         * [How to set up Alfresco Transform Service](advanced-topics/working-with-enterprise/alfresco-transform-service.md)
     * [Working with AMPs](advanced-topics/amps.md)

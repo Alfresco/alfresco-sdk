@@ -15,13 +15,17 @@ jobs:
   scan-dependencies:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      id-token: write
+      contents: write
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - uses: Alfresco/alfresco-build-tools/.github/actions/maven-dependency-scan@v17.0.0
+      - uses: Alfresco/alfresco-build-tools/.github/actions/cloudsmith-auth@74d5f71b8cac71b5c056c8e53d51ba660b0f59fd # v19.14.1
+        with:
+          oidc-namespace: ${{ vars.CLOUDSMITH_NAMESPACE }}
+      - uses: Alfresco/alfresco-build-tools/.github/actions/maven-dependency-scan@74d5f71b8cac71b5c056c8e53d51ba660b0f59fd # v19.14.1
         with:
           java-version: '21'
           maven-version: '3.9.9'
           maven-args: -Dscopes=compile,runtime
-          maven-username: ${{ secrets.NEXUS_USERNAME }}
-          maven-password: ${{ secrets.NEXUS_PASSWORD }}
           maven-settings-path: ".ci.settings.xml"

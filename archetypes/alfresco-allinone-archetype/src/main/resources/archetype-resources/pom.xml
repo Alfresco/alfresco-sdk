@@ -451,40 +451,38 @@
         -->
     <repositories>
         <repository>
-            <id>alfresco-public</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
         <repository>
-            <id>alfresco-public-snapshots</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-            </snapshots>
+            <id>alfresco-public</id>
+            <url>https://artifacts.hyland.dev/public/alfresco-public/maven/</url>
         </repository>
         <!-- Alfresco Enterprise Edition Artifacts, put username/pwd for server in settings.xml -->
         <repository>
             <id>alfresco-private-repository</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
-        </repository>
-        <repository>
-            <id>alfresco-internal</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/internal</url>
+            <url>https://artifacts.hyland.dev/basic/alfresco-private/maven/</url>
         </repository>
     </repositories>
 
     <pluginRepositories>
         <pluginRepository>
-            <id>alfresco-plugin-public</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </pluginRepository>
         <pluginRepository>
-            <id>alfresco-plugin-public-snapshots</id>
-            <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-            </snapshots>
+            <id>alfresco-plugin-public</id>
+            <url>https://artifacts.hyland.dev/public/alfresco-public/maven/</url>
         </pluginRepository>
     </pluginRepositories>
 </project>
