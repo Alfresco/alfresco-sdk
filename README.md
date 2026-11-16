@@ -140,10 +140,10 @@ please check the [SDK Support status](http://www.alfresco.com/services/subscript
 for the version you are using.  If your version is in Limited or Full Support and you need help, visit the [Support Portal](http://support.alfresco.com).
 
 ## Maven repositories
-- As of version 2.0-beta-1, The Alfresco SDK is released in [Maven Central](http://search.maven.org/#search|ga|1|alfresco-sdk). Previous versions are available 
-in the Alfresco Maven repository.
-- Alfresco (Community and Enterprise) artifacts are hosted in the [Alfresco Maven repository](https://artifacts.hyland.dev/public/alfresco-public/maven/).
-- Alfresco Community artifacts (JARs, WARs, AMPs, poms) and SDK artifacts are publicly available.
+- As of version 2.0-beta-1, The Alfresco SDK is released in [Maven Central](http://search.maven.org/#search|ga|1|alfresco-sdk). Previous versions are only 
+available in the frozen, read-only [archive of the previous Alfresco artifacts repository](https://artifacts.alfresco.com/); they are not served by the Alfresco Maven repository below.
+- Alfresco Community artifacts (JARs, WARs, AMPs, poms) and SDK artifacts are hosted in the public [Alfresco Maven repository](https://artifacts.hyland.dev/public/alfresco-public/maven/) and are publicly available.
+- Alfresco Enterprise artifacts are not hosted in the public Alfresco Maven repository. They require access to the private Alfresco Maven repository, see [Working with Enterprise](docs/advanced-topics/working-with-enterprise/README.md).
 
 *NOTE:* By default the Alfresco SDK will use Community Edition releases but it can be configured to use Enterprise Edition releases. Enterprise and Premier 
 customers can use the SDK with Enterprise Edition releases by following the process described in [Working with Enterprise](docs/advanced-topics/working-with-enterprise/README.md).
