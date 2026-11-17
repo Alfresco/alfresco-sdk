@@ -89,7 +89,9 @@
             <distributionManagement>
                 <repository>
                     <id>alfresco-releases</id>
-                    <url>https://artifacts.alfresco.com/nexus/content/repositories/releases/</url>
+                    <name>Alfresco Community Releases</name>
+                    <!-- TODO: switch to maven.artifacts.hyland.dev once its DNS record exists -->
+                    <url>https://maven.cloudsmith.io/hyland/alfresco-community-releases/</url>
                 </repository>
             </distributionManagement>
         </profile>
@@ -623,12 +625,10 @@
     <distributionManagement>
         <repository>
             <id>alfresco-releases</id>
-            <url>https://nexus.alfresco.com/nexus/repository/releases</url>
+            <name>Alfresco Community Releases</name>
+            <!-- TODO: switch to maven.artifacts.hyland.dev once its DNS record exists -->
+            <url>https://maven.cloudsmith.io/hyland/alfresco-community-releases/</url>
         </repository>
-        <snapshotRepository>
-            <id>alfresco-public-snapshots</id>
-            <url>https://artifacts.alfresco.com/nexus/content/repositories/snapshots</url>
-        </snapshotRepository>
         <site>
             <id>alfresco-docs</id>
             <url>dav:${maven.site.url}</url>

@@ -28,16 +28,10 @@
       <username>${env.CLOUDSMITH_USERNAME}</username>
       <password>${env.CLOUDSMITH_API_KEY}</password>
     </server>
-    <!-- Keep the deploy servers that still use MAVEN_USERNAME / MAVEN_PASSWORD until Phase 2 -->
     <server>
       <id>alfresco-releases</id>
-      <username>${env.MAVEN_USERNAME}</username>
-      <password>${env.MAVEN_PASSWORD}</password>
-    </server>
-    <server>
-      <id>alfresco-public-snapshots</id>
-      <username>${env.MAVEN_USERNAME}</username>
-      <password>${env.MAVEN_PASSWORD}</password>
+      <username>${env.CLOUDSMITH_USERNAME}</username>
+      <password>${env.CLOUDSMITH_API_KEY}</password>
     </server>
     <server>
       <id>central</id>
