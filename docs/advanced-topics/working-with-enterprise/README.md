@@ -9,8 +9,8 @@ By default the Alfresco SDK will use Community Edition releases but it can be co
 set up a project to work with an Enterprise Edition release, highlighting the changes required to make it work.
 
 If you would like to work with the Alfresco Enterprise Edition, then this requires just a few property changes and a license installation. You also need 
-to have access to the private Alfresco Nexus repository and the private Alfresco Quay.io Docker registry. See:
-* [How to configure private Alfresco Nexus repository](enterprise-mvn-repo.md).
+to have access to the private Alfresco Maven repository and the private Alfresco Quay.io Docker registry. See:
+* [How to configure private Alfresco Maven repository](enterprise-mvn-repo.md).
 * [How to configure private Alfresco Docker registry](enterprise-docker-registry.md).
 
 ## Installing the license
