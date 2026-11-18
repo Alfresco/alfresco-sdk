@@ -161,9 +161,6 @@ jobs:
     needs: [tests]
     outputs:
       release_tag: ${{ steps.release_meta.outputs.release_tag }}
-    env:
-      MAVEN_USERNAME: ${{ secrets.NEXUS_USERNAME }}
-      MAVEN_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
     if: >
       needs.tests.result == 'success' &&
       (github.ref_name == 'master' || startsWith(github.ref_name, 'fix/') || startsWith(github.ref_name, 'feature/')) &&

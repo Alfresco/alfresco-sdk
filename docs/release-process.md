@@ -32,10 +32,10 @@ This applies to both alpha and GA release cycles.
 
 | Step | Trigger | CI job | Result |
 |------|---------|--------|--------|
-| Alpha / Nexus release | `[release]` in commit message | `release` | Deploy to Alfresco Nexus, Git tag, verified bot commits |
+| Alpha release | `[release]` in commit message | `release` | Deploy to the Maven repository, Git tag, verified bot commits |
 | GA Maven Central publish | `[publish]` in commit message | `publish` | Publish to Maven Central (GA versions only) |
 
-Alpha releases (for example `4.17.0-A.2`) are deployed to **Nexus only**. GA releases (for example `4.17.0`) can additionally be published to **Maven Central** using `[publish]`.
+Alpha releases (for example `4.17.0-A.2`) are deployed to the **Maven repository only**. GA releases (for example `4.17.0`) can additionally be published to **Maven Central** using `[publish]`.
 
 ## Prerequisites
 
@@ -64,7 +64,7 @@ Update both values in the **same commit** that triggers the release. The GitHub 
 
 > **Note:** Release versions are kept in `.github/release-versions.yml` (not in workflow files) so the GitHub App token does not require `workflows: write` permission.
 
-## Alpha release (Nexus)
+## Alpha release
 
 Example: release `4.17.0-A.3` when `master` is on `4.17.0-A.3-SNAPSHOT`.
 
@@ -92,7 +92,7 @@ Example: release `4.17.0-A.3` when `master` is on `4.17.0-A.3-SNAPSHOT`.
 When the `release` job succeeds, CI will:
 
 1. Set all POM versions to `RELEASE_VERSION`
-2. Deploy artifacts to Alfresco Nexus
+2. Deploy artifacts to the Maven repository
 3. Create a **verified** bot commit for the release version
 4. Create a Git tag named exactly `RELEASE_VERSION` (for example `4.17.0-A.3`)
 5. Set all POM versions to `DEVELOPMENT_VERSION`
@@ -107,7 +107,7 @@ On `master` you should see:
 - Git tag: `4.17.0-A.3` (plain version string from `RELEASE_VERSION`)
 - Two new **Verified** commits from the engineering-contrib bot
 - Root POM version: `4.17.0-A.4-SNAPSHOT`
-- Artifacts on Alfresco Nexus for `4.17.0-A.3`
+- Artifacts in the Maven repository for `4.17.0-A.3`
 
 ## GA release and Maven Central
 
@@ -136,7 +136,7 @@ The `check_version` job verifies the version matches `^\d+\.\d+\.\d+$` before Ma
 
 | Keyword | Effect |
 |---------|--------|
-| `[release]` | Run the automated Nexus release |
+| `[release]` | Run the automated release |
 | `[publish]` | Attempt Maven Central publish (GA only) |
 | `[no release]` | Skip the release job even if `[release]` would otherwise match |
 | `[skip tests]` | Skip tests (do **not** use on release commits) |
