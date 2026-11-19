@@ -74,6 +74,14 @@
             <groupId>${alfresco.groupId}</groupId>
             <artifactId>alfresco-remote-api</artifactId>
             <scope>provided</scope>
+            <exclusions>
+                <!-- MNT-25785: guessencoding:1.4 has invalid .sha1/.md5 files on Maven Central, which breaks
+                     builds with strict checksums (-C). Not needed for compilation; ACS ships its own copy. -->
+                <exclusion>
+                    <groupId>org.codehaus.guessencoding</groupId>
+                    <artifactId>guessencoding</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- Bring in Alfresco RAD so we get access to AlfrescoTestRunner classes -->
@@ -116,6 +124,14 @@
                 <version>${alfresco.share.version}</version>
                 <classifier>classes</classifier>
                 <scope>provided</scope>
+                <exclusions>
+                    <!-- MNT-25785: guessencoding:1.4 has invalid .sha1/.md5 files on Maven Central, which breaks
+                         builds with strict checksums (-C). Not needed for compilation; Share ships its own copy. -->
+                    <exclusion>
+                        <groupId>org.codehaus.guessencoding</groupId>
+                        <artifactId>guessencoding</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>${alfresco.groupId}</groupId>
