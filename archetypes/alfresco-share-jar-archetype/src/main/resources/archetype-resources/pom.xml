@@ -18,10 +18,9 @@
         <!-- Properties used in dependency declarations, you don't need to change these -->
         <alfresco.groupId>org.alfresco</alfresco.groupId>
         <alfresco.bomDependencyArtifactId>@@alfresco.bomDependency.artifactId@@</alfresco.bomDependencyArtifactId>
-        <alfresco.platform.version>@@alfresco.platform.version@@</alfresco.platform.version>
+        <alfresco.acs.version>@@alfresco.acs.version@@</alfresco.acs.version>
         <alfresco.platform.docker.user>@@alfresco.platform.docker.user@@</alfresco.platform.docker.user>
-        <alfresco.share.version>@@alfresco.share.version@@</alfresco.share.version>
-        <alfresco.share.docker.version>@@alfresco.share.docker.version@@</alfresco.share.docker.version>
+        <alfresco.share.artifact.version>@@alfresco.share.artifact.version@@</alfresco.share.artifact.version>
 
         <!-- Docker images -->
         <docker.acs.image>@@alfresco.platform.docker.image@@</docker.acs.image>
@@ -63,7 +62,7 @@
             <dependency>
                 <groupId>${alfresco.groupId}</groupId>
                 <artifactId>${alfresco.bomDependencyArtifactId}</artifactId>
-                <version>${alfresco.platform.version}</version>
+                <version>${alfresco.acs.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -72,21 +71,21 @@
             <dependency>
                 <groupId>${alfresco.groupId}</groupId>
                 <artifactId>share</artifactId>
-                <version>${alfresco.share.version}</version>
+                <version>${alfresco.share.artifact.version}</version>
                 <type>war</type>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>${alfresco.groupId}</groupId>
                 <artifactId>share</artifactId>
-                <version>${alfresco.share.version}</version>
+                <version>${alfresco.share.artifact.version}</version>
                 <classifier>classes</classifier>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>${alfresco.groupId}</groupId>
                 <artifactId>alfresco-web-framework-commons</artifactId>
-                <version>${alfresco.share.version}</version>
+                <version>${alfresco.share.artifact.version}</version>
                 <classifier>classes</classifier>
                 <scope>provided</scope>
             </dependency>

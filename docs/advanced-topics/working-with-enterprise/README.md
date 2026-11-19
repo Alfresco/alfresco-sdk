@@ -76,8 +76,8 @@ The configuration of the Enterprise version is straightforward when using the `p
 You'll need to update the following settings in the `pom.xml` file:
 
 ```
-<alfresco.platform.version>6.2.0</alfresco.platform.version>
-<alfresco.share.version>6.2.0</alfresco.share.version>
+<alfresco.acs.version>6.2.0</alfresco.acs.version>
+<alfresco.share.artifact.version>6.2.0</alfresco.share.artifact.version>
 ```
 
 Making use of the Alfresco SDK 4.x it is no longer required the configuration of the Alfresco Surf versions. The inclusion of the BOM and the custom Docker

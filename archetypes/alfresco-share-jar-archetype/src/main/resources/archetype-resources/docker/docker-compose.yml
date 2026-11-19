@@ -15,7 +15,7 @@ services:
       - "${symbol_dollar}{share.debug.port}:8888"
 # Optional
 #  ${rootArtifactId}-acs:
-#    image: ${symbol_dollar}{docker.acs.image}:${symbol_dollar}{alfresco.platform.version}
+#    image: ${symbol_dollar}{docker.acs.image}:${symbol_dollar}{alfresco.acs.version}
 #    environment:
 #      JAVA_OPTS: "
 #                -Ddb.driver=org.postgresql.Driver

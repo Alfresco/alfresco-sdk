@@ -40,7 +40,7 @@ import org.apache.commons.lang3.StringUtils;
  *      <moduleDependency>
  *          <groupId>${alfresco.groupId}</groupId>
  *          <artifactId>alfresco-share-services</artifactId>
- *          <version>${alfresco.share.version}</version>
+ *          <version>${alfresco.share.artifact.version}</version>
  *          <type>amp</type>
  *      </moduleDependency>
  *      <moduleDependency>

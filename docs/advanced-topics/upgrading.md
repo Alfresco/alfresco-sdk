@@ -105,7 +105,7 @@ Need to smartly do this merge so that target project maintains its dependencies,
     <dependency>
         <groupId>${alfresco.groupId}</groupId>
         <artifactId>alfresco-platform-distribution</artifactId>
-        <version>${alfresco.platform.version}</version>
+        <version>${alfresco.acs.version}</version>
         <type>pom</type>
         <scope>import</scope>
     </dependency>
@@ -117,7 +117,7 @@ Need to smartly do this merge so that target project maintains its dependencies,
     <dependency>
         <groupId>${alfresco.groupId}</groupId>
         <artifactId>${alfresco.bomDependencyArtifactId}</artifactId>
-        <version>${alfresco.platform.version}</version>
+        <version>${alfresco.acs.version}</version>
         <type>pom</type>
         <scope>import</scope>
     </dependency>

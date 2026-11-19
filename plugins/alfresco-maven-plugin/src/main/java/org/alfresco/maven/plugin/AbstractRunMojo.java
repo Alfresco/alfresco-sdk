@@ -91,7 +91,7 @@ public abstract class AbstractRunMojo extends AbstractMojo {
      *                  <moduleDependency>
      *                      <groupId>${alfresco.groupId}</groupId>
      *                      <artifactId>alfresco-share-services</artifactId>
-     *                      <version>${alfresco.share.version}</version>
+     *                      <version>${alfresco.share.artifact.version}</version>
      *                      <type>amp</type>
      *                  </moduleDependency>
      *              </platformModules>
@@ -240,10 +240,10 @@ public abstract class AbstractRunMojo extends AbstractMojo {
     protected String alfrescoApiExplorerArtifactId;
 
 
-    @Parameter(property = "alfresco.platform.version", defaultValue = "6.0.7-ga")
+    @Parameter(property = "alfresco.acs.version", defaultValue = "6.0.7-ga")
     protected String alfrescoPlatformVersion;
 
-    @Parameter(property = "alfresco.share.version", defaultValue = "6.0.7-ga")
+    @Parameter(property = "alfresco.share.artifact.version", defaultValue = "6.0.7-ga")
     protected String alfrescoShareVersion;
 
     @Parameter(property = "alfresco.api.explorer.version", defaultValue = "6.0.7-ga")
