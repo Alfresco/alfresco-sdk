@@ -470,7 +470,7 @@
             <dependency>
                 <groupId>org.codehaus.plexus</groupId>
                 <artifactId>plexus-utils</artifactId>
-                <version>3.6.1</version>
+                <version>4.1.0</version>
             </dependency>
             <!--
                 guava is pulled transitively by maven-core (3.9.7 brings 33.2.0-jre).
