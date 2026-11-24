@@ -43,5 +43,34 @@
       <username>${env.MAVEN_CENTRAL_USERNAME}</username>
       <password>${env.MAVEN_CENTRAL_PASSWORD}</password>
     </server>
+    <server>
+      <id>alfresco-internal</id>
+      <username>${env.CLOUDSMITH_USERNAME}</username>
+      <password>${env.CLOUDSMITH_API_KEY}</password>
+    </server>
   </servers>
+
+  <!-- CI only: ACS enterprise alpha artifacts (e.g. org.alfresco:acs-packaging:26.3.0-A.34) are published
+       to the internal repository, not to alfresco-private. Needed by the enterprise-*-tests profiles
+       when they target an ACS alpha. Kept out of pom.xml so published SDK POMs don't reference it. -->
+  <profiles>
+    <profile>
+      <id>alfresco-internal</id>
+      <repositories>
+        <repository>
+          <id>alfresco-internal</id>
+          <url>https://artifacts.hyland.dev/basic/alfresco-internal/maven/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>alfresco-internal</activeProfile>
+  </activeProfiles>
 </settings>
